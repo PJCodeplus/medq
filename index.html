@@ -2796,7 +2796,7 @@ function SupportBanner(){
   };
   return e("div",{style:{marginTop:22,borderTop:"1px solid #e8e3db",paddingTop:18,textAlign:"center"}},
     e("p",{style:{fontSize:".78rem",color:"#888",lineHeight:1.7,marginBottom:12}},
-      "MedQ is an open resource — your support helps keep it that way.",
+      "MedQ is currently a free resource — your support goes a long way.",
       e("br"),
       "If it's been useful, a small contribution means a lot."
     ),
@@ -2822,7 +2822,16 @@ function SupportBanner(){
           "Mikhail Abubakar · Opay"
         )
       ),
-      e("span",{style:{fontSize:"1rem",opacity:.7}}, copied?"✓":"📋")
+      e("span",{style:{flexShrink:0,opacity:copied?1:.5,transition:"opacity .2s"}},
+        copied
+          ? e("svg",{width:18,height:18,viewBox:"0 0 24 24",fill:"none",stroke:"#2e7d32",strokeWidth:2.5,strokeLinecap:"round",strokeLinejoin:"round"},
+              e("polyline",{points:"20 6 9 17 4 12"})
+            )
+          : e("svg",{width:18,height:18,viewBox:"0 0 20 20",fill:"none",stroke:"#888",strokeWidth:1.7,strokeLinecap:"round",strokeLinejoin:"round"},
+              e("rect",{x:1,y:5,width:12,height:12,rx:2}),
+              e("rect",{x:6,y:1,width:12,height:12,rx:2,fill:"#f7f3ed"})
+            )
+      )
     ),
     e("p",{style:{fontSize:".68rem",color:"#ccc",marginTop:9}},
       copied?"Account number copied 🙏":"Tap to copy account number"
@@ -3180,6 +3189,12 @@ function App(){
             )
           );
         })
+      )
+    ),
+
+    e("div",{style:{textAlign:"center",padding:"4px 20px 10px"}},
+      e("div",{style:{maxWidth:480,margin:"0 auto"}},
+        e(SupportBanner,null)
       )
     ),
 
@@ -4180,10 +4195,12 @@ function App(){
               e("button",{onClick:()=>setView("home"),style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
               e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Try Again")
             )
-          ),
-          /* Support banner */
-          e(SupportBanner,null)
+          )
         )
+      ),
+      /* Support banner — outside card so it renders on mobile too */
+      e("div",{style:{width:"100%",maxWidth:520}},
+        e(SupportBanner,null)
       )
     );
   }
