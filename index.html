@@ -733,6 +733,28 @@ const TYPHOID_Qs = [
   {q:"Which typhoid vaccine consists of 4 oral capsules taken on alternate days and is contraindicated in immunocompromised patients and those on antibiotics?",opts:["Vi capsular polysaccharide injectable vaccine (Typhim Vi)","Typbar-TCV conjugate vaccine given as a single IM injection","Live attenuated Ty21a oral vaccine (Vivotif)","BCG vaccine given at birth as part of the immunisation schedule","Oral cholera vaccine providing cross-protection against typhoid"],ans:2,exp:"LIVE ATTENUATED TY21A ORAL VACCINE (Vivotif): 4 CAPSULES on ALTERNATE DAYS. Booster: every 5 years. Licensed ≥6 years. CONTRAINDICATED in immunocompromised patients (including HIV), pregnant women, acute febrile illness, and acute gastroenteritis — it is a live vaccine. CRITICAL: antibiotics inhibit the live strain — delay vaccination >72 HOURS after antibiotics; no antibiotics ≤72 hours after the last dose. Atovaquone-proguanil only ≥10 days after the last Vivotif dose. VPCPS (Typhim Vi): single IM injection, booster every 2 years, safe in immunocompromised."}
 ];
 
+/* ═══════════ ANATOMY — GROSS ANATOMY OF THE STOMACH (ANA202a) ═══════════ */
+const ANA_STOMACH_Qs = [
+  { q:"Which of the following best describes the position of the stomach within the peritoneal cavity?", opts:["Retroperitoneal throughout","Intraperitoneal","Secondarily retroperitoneal","Extraperitoneal","Subperitoneal"], ans:1, exp:"The stomach is entirely INTRAPERITONEAL — it is covered by visceral peritoneum on all surfaces and suspended by mesenteric ligaments (omenta). Retroperitoneal organs (e.g. kidneys, duodenum, pancreas) lie behind the peritoneum. Secondarily retroperitoneal organs (e.g. ascending colon) were originally intraperitoneal but fused to the posterior wall during development. The stomach's intraperitoneal position allows it considerable mobility." },
+  { q:"The stomach is the widest and most distensible part of the gastrointestinal tract. Its capacity in an adult is approximately:", opts:["500 mL to 1 L","1.5 L to 2 L","2.5 L to 3 L","3 L to 4 L","300 mL to 500 mL"], ans:1, exp:"The adult stomach has a capacity of approximately 1.5 to 2 litres. At rest it is J-shaped and roughly 25 cm long. Its distensibility allows it to expand significantly after a meal. A capacity significantly below 1.5 L may suggest surgical resection or pathological contraction; well above 2 L is seen in gastroparesis or outlet obstruction." },
+  { q:"The cardia of the stomach, which surrounds the opening of the oesophagus, is situated at the level of which vertebra?", opts:["T9","T10","T11","T12","L1"], ans:2, exp:"The cardia of the stomach — the region surrounding the gastro-oesophageal junction — lies at the level of T11. The oesophageal hiatus in the diaphragm is at T10, but the actual gastric cardia is at T11. This distinction matters clinically: the diaphragmatic contribution to the lower oesophageal sphincter mechanism operates at T10, while the gastric cardia proper is at T11." },
+  { q:"Which part of the stomach is described as the dilated superior region that lies above the level of the cardial orifice?", opts:["Cardia","Body","Fundus","Pyloric antrum","Pyloric canal"], ans:2, exp:"The FUNDUS is the dilated superior part of the stomach that balloons superiorly and to the left above the level of the cardial orifice. On an erect chest X-ray, the fundus normally contains a gas bubble. The cardia merely surrounds the oesophageal opening. The body is the largest central region. The pyloric antrum and canal are the distal components of the pyloric part." },
+  { q:"The angular notch (incisura angularis) of the stomach is located at which site?", opts:["Superior angle where the oesophagus joins the stomach","Junction of the fundus and body on the greater curvature","Junction of the body and pyloric part on the lesser curvature","Junction of the pyloric canal and the first part of the duodenum","Midpoint of the greater curvature"], ans:2, exp:"The ANGULAR NOTCH is a distinct bend on the LESSER CURVATURE marking the junction between the body and the pyloric part of the stomach. It is an important radiological landmark on barium meal studies. The cardial notch is the superior angle at the oesophago-gastric junction. The pyloro-duodenal junction is at the distal end of the pyloric canal and is marked externally by the prepyloric vein of Mayo." },
+  { q:"The cardial notch of the stomach is formed at which anatomical location?", opts:["Junction of the body and pyloric antrum on the lesser curvature","Angle between the greater curvature and the duodenum","Superior angle created where the oesophagus enters the stomach","Bend on the lesser curvature between the body and pylorus","Junction of the pyloric canal and the duodenum"], ans:2, exp:"The CARDIAL NOTCH is the acute superior angle created between the left wall of the oesophagus and the fundus of the stomach where the oesophagus enters. It is on the left side of the gastro-oesophageal junction and helps maintain the flap-valve mechanism that contributes to prevention of reflux. The angular notch, in contrast, is on the lesser curvature." },
+  { q:"The greater curvature of the stomach is a point of attachment for which two structures?", opts:["Lesser omentum and falciform ligament","Gastrosplenic ligament and greater omentum","Hepatogastric ligament and hepatoduodenal ligament","Transverse mesocolon and lesser omentum","Coronary ligament and greater omentum"], ans:1, exp:"The GREATER CURVATURE — the long, convex, lateral border of the stomach — gives attachment to the GASTROSPLENIC LIGAMENT (connecting it to the spleen) and the GREATER OMENTUM (a large fatty apron that hangs down from it and attaches to the posterior abdominal wall). The lesser omentum, hepatogastric, and hepatoduodenal ligaments all attach to the LESSER curvature and the first part of the duodenum." },
+  { q:"The lesser omentum connects the lesser curvature and first part of the duodenum to which structure?", opts:["Anterior abdominal wall","Spleen","Diaphragm","Liver","Transverse colon"], ans:3, exp:"The LESSER OMENTUM runs from the LESSER CURVATURE of the stomach and the first part of the duodenum to the undersurface of the LIVER. It is composed of two ligaments: the hepatogastric ligament (liver to stomach) and the hepatoduodenal ligament (liver to duodenum). The hepatoduodenal ligament contains the portal triad: portal vein, hepatic artery, and bile duct. The greater omentum attaches to the posterior abdominal wall." },
+  { q:"Which two ligaments collectively constitute the lesser omentum?", opts:["Gastrosplenic and gastrocolic ligaments","Hepatogastric and hepatoduodenal ligaments","Gastrophrenic and falciform ligaments","Phrenicosplenic and hepatogastric ligaments","Coronary and triangular ligaments"], ans:1, exp:"The LESSER OMENTUM is formed by the HEPATOGASTRIC LIGAMENT (from the liver to the lesser curvature of the stomach) and the HEPATODUODENAL LIGAMENT (from the liver to the first part of the duodenum). The hepatoduodenal ligament is clinically significant as it forms the anterior boundary of the epiploic foramen (foramen of Winslow) and transmits the portal vein, hepatic artery proper, and common bile duct." },
+  { q:"The stomach has three muscular layers unique among gastrointestinal organs. Which layer is found in the stomach but absent in most other parts of the gut?", opts:["Outer longitudinal layer","Middle circular layer","Inner mucosal layer","Innermost oblique layer","Submucosal layer"], ans:3, exp:"The stomach possesses THREE muscular layers: outer longitudinal, middle circular, and an INNERMOST OBLIQUE layer. The oblique layer is UNIQUE TO THE STOMACH and is absent in other segments of the GI tract, which have only two layers (longitudinal and circular). The oblique fibres fan out from the cardia and help churn gastric contents. The middle circular layer thickens distally to form the PYLORIC SPHINCTER." },
+  { q:"Which of the following is NOT a recognised component of the stomach bed?", opts:["Pancreas","Left suprarenal gland","Left kidney","Gallbladder","Transverse mesocolon"], ans:3, exp:"The STOMACH BED consists of structures that form the posterior relation of the stomach, separated from it by the lesser sac. Its 8 components are: left crus of diaphragm, left suprarenal gland, left kidney, splenic artery, spleen (sometimes), pancreas, transverse mesocolon, and splenic flexure of colon. The GALLBLADDER is an ANTERIOR relation of the stomach, not posterior — it lies anterior-inferior to the stomach along with the abdominal wall, left costal margin, diaphragm, and left lobe of liver." },
+  { q:"The left gastric artery, the dominant supply to the lesser curvature, is a branch of which vessel?", opts:["Hepatic artery","Splenic artery","Gastroduodenal artery","Coeliac artery","Superior mesenteric artery"], ans:3, exp:"The LEFT GASTRIC ARTERY is a direct branch of the COELIAC ARTERY (coeliac trunk). It supplies the upper lesser curvature and also gives oesophageal branches. The right gastric artery is a branch of the hepatic artery and supplies the lower lesser curvature. Together, left and right gastric arteries form an anastomotic arcade along the lesser curvature. The coeliac trunk also gives the splenic and common hepatic arteries." },
+  { q:"The right gastroepiploic artery, supplying the greater curvature from the right side, is a branch of which vessel?", opts:["Coeliac artery","Splenic artery","Right gastric artery","Gastroduodenal artery","Superior mesenteric artery"], ans:3, exp:"The RIGHT GASTROEPIPLOIC ARTERY is a branch of the GASTRODUODENAL ARTERY, which itself arises from the common hepatic artery. It runs along the greater curvature from right to left. The LEFT GASTROEPIPLOIC ARTERY is a branch of the SPLENIC ARTERY and runs from left to right along the greater curvature. Together they form an anastomotic arcade along the greater curvature, though this arcade is often incomplete." },
+  { q:"Into which vessel do the right and left gastric veins drain?", opts:["Superior mesenteric vein","Inferior vena cava","Portal vein","Splenic vein","Azygos vein"], ans:2, exp:"The RIGHT and LEFT GASTRIC VEINS (which correspond to the right and left gastric arteries along the lesser curvature) drain directly into the PORTAL VEIN. This is clinically important: in portal hypertension, the left gastric vein develops collaterals with oesophageal veins, leading to oesophageal varices — a major complication. The right gastroepiploic vein drains to the superior mesenteric vein (SMV); the left gastroepiploic vein drains to the splenic vein." },
+  { q:"The sympathetic innervation of the stomach is derived from which spinal cord segments?", opts:["T1 to T5","T3 to T8","T5 to T10","T7 to T12","T10 to L2"], ans:2, exp:"Sympathetic innervation of the stomach is via the GREATER SPLANCHNIC NERVE, which arises from spinal segments T5 to T10. These fibres synapse in the coeliac ganglion, and post-ganglionic fibres travel along blood vessels to reach the stomach. Sympathetic stimulation inhibits gastric motility and secretion. The vagus nerve (CN X) provides PARASYMPATHETIC innervation, and approximately 90% of its fibres in the vagal trunk are AFFERENT (carrying sensory information from the stomach to the CNS)." },
+  { q:"Lymph draining from the proximal portion of the lesser curvature of the stomach drains first into which lymph node group?", opts:["Suprapyloric nodes","Pancreaticosplenic nodes","Subpyloric nodes","Superior gastric nodes","Paraaortic nodes"], ans:3, exp:"Lymph from the PROXIMAL LESSER CURVATURE drains along the left gastric vessels to the SUPERIOR GASTRIC LYMPH NODES, which surround the left gastric artery. The DISTAL lesser curvature drains to SUPRAPYLORIC NODES. The proximal GREATER CURVATURE drains to PANCREATICOSPLENIC NODES. The ANTRAL greater curvature drains to SUBPYLORIC and OMENTAL nodes. All gastric lymphatics ultimately drain to coeliac lymph nodes and then to the cisterna chyli." },
+  { q:"A patient is found to have a hiatus hernia in which the lower oesophageal sphincter remains in its normal position below the diaphragm, but a portion of the gastric fundus herniates into the chest alongside the oesophagus. Which type of hiatus hernia does this describe?", opts:["Sliding hiatus hernia","Congenital hiatus hernia","Para-oesophageal (rolling) hiatus hernia","Mixed type hiatus hernia","Traumatic diaphragmatic hernia"], ans:2, exp:"This describes a PARA-OESOPHAGEAL (ROLLING) HIATUS HERNIA, in which the LOWER OESOPHAGEAL SPHINCTER REMAINS IN PLACE below the diaphragm while a portion of the STOMACH (usually the fundus) herniates alongside the oesophagus through the hiatus. This type is less common but more dangerous — it is more likely to require surgery due to risk of gastric volvulus and strangulation. In a SLIDING hiatus hernia, the gastro-oesophageal junction slides superiorly through the hiatus, which is the more common type and is associated with reflux." },
+  { q:"Which of the following is NOT among the three main causes of gastro-oesophageal reflux disease?", opts:["Dysfunction of the lower oesophageal sphincter","Delayed gastric emptying","Hiatal hernia","H. pylori infection of the gastric mucosa","All three options A, B and C are recognised causes"], ans:3, exp:"The three main recognised causes of GORD are: (1) DYSFUNCTION OF THE LOWER OESOPHAGEAL SPHINCTER — loss of the high-pressure zone preventing reflux; (2) DELAYED GASTRIC EMPTYING — prolonged gastric distension increases pressure and promotes reflux; (3) HIATAL HERNIA — particularly sliding type, where the LES migrates above the diaphragm, losing the diaphragmatic contribution to sphincter competence. H. PYLORI infection primarily causes gastritis and peptic ulcer disease — it does not directly cause GORD and may actually be inversely associated with it in some studies." },
+];
+
 const PAEDS_NEPHROLOGY_Qs = [
   { q:"Nephrotic syndrome is defined by a tetrad of features. Which of the following correctly completes this tetrad: heavy proteinuria, hypoproteinaemia, generalized edema, and ___?", opts:["Haematuria","Hypertension","Hyperlipidaemia","Hyponatraemia","Hyperkalemia"], ans:2, exp:"The four defining features of nephrotic syndrome are heavy proteinuria, hypoproteinaemia, generalized edema, and hyperlipidaemia. Blood pressure is characteristically normal in uncomplicated nephrotic syndrome, and haematuria is not a defining feature." },
   { q:"The commonest histological variant of primary nephrotic syndrome in temperate countries is:", opts:["Focal glomerulosclerosis","Membranous nephropathy","Membranoproliferative glomerulonephritis","Minimal change lesion","Mesangial proliferative glomerulonephritis"], ans:3, exp:"Minimal change lesion (MCL) is the commonest variant in temperate regions. It shows normal histology on light microscopy but fusion of foot processes on electron microscopy. It also carries the best prognosis among all five histological variants." },
@@ -2632,14 +2654,25 @@ const COURSES = [
   },
   { id:"psychiatry", name:"Psychiatry", emoji:"🧠", bg:"linear-gradient(135deg,#1a1a2e,#2d2b55)", accent:"#ce93d8", school:"IU", blocks:[{id:"psych1",name:"Psychiatry",questions:[],available:false},{id:"pastq_psychiatry",name:"Past Questions",questions:[],available:true,isPastQSection:true,pastQKey:"psychiatry"}] },
   { id:"preclinical", name:"Preclinicals", emoji:"🔬", bg:"linear-gradient(135deg,#1a1a2e,#2d1b4e)", accent:"#ce93d8", school:"IU",
-    blocks:[
-      { id:"anatomy", name:"Anatomy", questions:ANATOMY_Qs, available:true },
-      { id:"physiology", name:"Physiology", questions:PHYSIO_Qs, available:true },
-      { id:"biochemistry", name:"Biochemistry", questions:BIOCHEM_Qs, available:true },
-      { id:"pathology", name:"Pathology", questions:[], available:false },
-      { id:"pharmacology", name:"Pharmacology", questions:[], available:false },
-      { id:"pastq_preclinical", name:"Past Questions", questions:[], available:true, isPastQSection:true, pastQKey:"preclinical" },
-    ]
+    isPreclinical:true,
+    levels:[
+      { id:"200L", label:"200 Level", blocks:[
+        { id:"ana_stomach", name:"Gross Anatomy of the Stomach", questions:ANA_STOMACH_Qs, available:true, topic:"Gross Anatomy", lecturer:"Unnamed", system:"Gastrointestinal" },
+        { id:"anatomy", name:"Anatomy (General)", questions:ANATOMY_Qs, available:true, topic:"Gross Anatomy", lecturer:"Unnamed", system:"General" },
+        { id:"physiology", name:"Physiology (General)", questions:PHYSIO_Qs, available:true, topic:"Physiology", lecturer:"Unnamed", system:"General" },
+        { id:"biochemistry", name:"Biochemistry (General)", questions:BIOCHEM_Qs, available:true, topic:"Biochemistry", lecturer:"Unnamed", system:"General" },
+        { id:"pathology_200", name:"Pathology", questions:[], available:false, topic:"Pathology", lecturer:"Unnamed", system:"General" },
+        { id:"pharmacology_200", name:"Pharmacology", questions:[], available:false, topic:"Pharmacology", lecturer:"Unnamed", system:"General" },
+      ]},
+      { id:"300L", label:"300 Level", blocks:[
+        { id:"anatomy_300", name:"Anatomy", questions:[], available:false, topic:"Gross Anatomy", lecturer:"Unnamed", system:"General" },
+        { id:"physiology_300", name:"Physiology", questions:[], available:false, topic:"Physiology", lecturer:"Unnamed", system:"General" },
+        { id:"biochemistry_300", name:"Biochemistry", questions:[], available:false, topic:"Biochemistry", lecturer:"Unnamed", system:"General" },
+        { id:"pathology_300", name:"Pathology", questions:[], available:false, topic:"Pathology", lecturer:"Unnamed", system:"General" },
+        { id:"pharmacology_300", name:"Pharmacology", questions:[], available:false, topic:"Pharmacology", lecturer:"Unnamed", system:"General" },
+      ]},
+    ],
+    blocks:[ { id:"pastq_preclinical", name:"Past Questions", questions:[], available:true, isPastQSection:true, pastQKey:"preclinical" } ],
   },
 ];
 
@@ -2742,6 +2775,61 @@ const loadAttempts = async () => {
 };
 
 /* ═══════════ APP ═══════════ */
+/* ── Support Banner (copyable account number) ── */
+function SupportBanner(){
+  const [copied,setCopied]=useState(false);
+  const copy=()=>{
+    navigator.clipboard.writeText("9161452645").then(()=>{
+      setCopied(true);
+      setTimeout(()=>setCopied(false),2000);
+    }).catch(()=>{
+      /* fallback for older browsers */
+      const el=document.createElement("textarea");
+      el.value="9161452645";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      setCopied(true);
+      setTimeout(()=>setCopied(false),2000);
+    });
+  };
+  return e("div",{style:{marginTop:22,borderTop:"1px solid #e8e3db",paddingTop:18,textAlign:"center"}},
+    e("p",{style:{fontSize:".78rem",color:"#888",lineHeight:1.7,marginBottom:12}},
+      "MedQ is an open resource — your support helps keep it that way.",
+      e("br"),
+      "If it's been useful, a small contribution means a lot."
+    ),
+    e("button",{
+      onClick:copy,
+      title:"Tap to copy account number",
+      style:{
+        display:"inline-flex",alignItems:"center",gap:14,
+        background:copied?"#e8f5ee":"#f7f3ed",
+        border:"1px solid "+(copied?"#a5d6a7":"#e0d8cc"),
+        borderRadius:6,padding:"11px 18px",cursor:"pointer",
+        transition:"background .2s,border .2s",
+        outline:"none"
+      }},
+      e("div",{style:{textAlign:"left"}},
+        e("p",{style:{fontSize:".62rem",color:copied?"#2e7d32":"#aaa",letterSpacing:".08em",textTransform:"uppercase",marginBottom:2,transition:"color .2s"}},
+          copied?"Copied!":"Support via Opay"
+        ),
+        e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:copied?"#2e7d32":"#0f2744",letterSpacing:".04em",transition:"color .2s"}},
+          "9161452645"
+        ),
+        e("p",{style:{fontSize:".72rem",color:copied?"#66bb6a":"#999",marginTop:1,transition:"color .2s"}},
+          "Mikhail Abubakar · Opay"
+        )
+      ),
+      e("span",{style:{fontSize:"1rem",opacity:.7}}, copied?"✓":"📋")
+    ),
+    e("p",{style:{fontSize:".68rem",color:"#ccc",marginTop:9}},
+      copied?"Account number copied 🙏":"Tap to copy account number"
+    )
+  );
+}
+
 function App(){
   const [view,setView]=useState("home");
   const [course,setCourse]=useState(null);
@@ -2783,6 +2871,8 @@ function App(){
   };
   const isFavorite = q => favorites.some(f => f.id === q.q.slice(0,60));
   const [topic,setTopic]=useState(null);  // selected topic object {label, blocks}
+  const [preclinLevel,setPreclinLevel]=useState(null); // selected level object {id, label, blocks}
+  const [blockSort,setBlockSort]=useState("system");   // "system" | "topic" | "lecturer"
   // ── Past Questions worksheet state ──
   const [pastQExam,setPastQExam]=useState(null);     // { className, examLabel, questions }
   const [pqVotes,setPqVotes]=useState({});            // { qIndex: optionIndex }
@@ -3079,7 +3169,7 @@ function App(){
             style:{animationDelay:i*50+"ms",cursor:"pointer",borderRadius:8,overflow:"hidden",boxShadow:"0 4px 16px rgba(15,39,68,.1)",transition:"transform .2s,box-shadow .2s"},
             onMouseEnter:ev=>{ev.currentTarget.style.transform="translateY(-4px)";ev.currentTarget.style.boxShadow="0 10px 28px rgba(15,39,68,.17)";},
             onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 4px 16px rgba(15,39,68,.1)";},
-            onClick:()=>{setCourse(c);setView("blocks");}},
+            onClick:()=>{setCourse(c);setPreclinLevel(null);setView("blocks");}},
             e("div",{style:{background:c.bg,padding:"clamp(18px,3vw,26px) 18px",display:"flex",flexDirection:"column",alignItems:"center",gap:10}},
               e("span",{style:{fontSize:"clamp(1.6rem,3vw,2.2rem)"}},c.emoji),
               e("span",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(.9rem,1.8vw,1.05rem)",fontWeight:700,color:"#fff",textAlign:"center"}},c.name)
@@ -3372,6 +3462,157 @@ function App(){
 
   /* ══════════ BLOCKS ══════════ */
   if(view==="blocks"){
+    // ── helpers ──────────────────────────────────────────────────────────
+    const blockCard=(b,key,isUnified,animIdx)=>{
+      const isPQCard=b.isPastQSection;
+      return e("div",{key,className:"fade-up",
+        style:{animationDelay:animIdx*40+"ms",
+          background:isPQCard?"linear-gradient(135deg,#2a1f0e,#4a3820)":isUnified?"linear-gradient(135deg,#0f2744,#1a3a5c)":"#fff",
+          borderRadius:6,padding:"17px 20px",display:"flex",alignItems:"center",
+          justifyContent:"space-between",gap:12,
+          boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:b.available?"pointer":"not-allowed",
+          opacity:b.available?1:.5,border:"1px solid "+(isPQCard?"#6b4f20":isUnified?"transparent":b.available?"#e0d8cc":"#e8e3db"),
+          transition:"transform .18s,box-shadow .18s",minHeight:68},
+        onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
+        onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
+        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}},
+        e("div",{style:{flex:1,minWidth:0}},
+          e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
+            isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
+            e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:isPQCard?"#ffcc80":isUnified?"#c9a84c":"#0f2744"}},b.name),
+            isPQCard&&e("span",{style:{background:"rgba(255,204,128,.18)",color:"#ffcc80",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Enahoro"),
+            !isPQCard&&b.available&&!isUnified&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live"),
+            !isPQCard&&!b.available&&e("span",{style:{background:"#f5f0e8",color:"#bbb",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Coming Soon")
+          ),
+          isPQCard
+            ? e("p",{style:{color:"rgba(255,204,128,.5)",fontSize:".76rem"}},"Past exam questions by class & sitting")
+            : b.available&&e("p",{style:{color:isUnified?"rgba(255,255,255,.45)":"#aaa",fontSize:".76rem"}},b.questions.length+" questions")
+        ),
+        b.available&&e("span",{style:{color:isPQCard?"#ffcc80":isUnified?"#c9a84c":course.accent,fontSize:"1.3rem",flexShrink:0}},"→")
+      );
+    };
+
+    // ── PRECLINICAL: show level selection (200L / 300L) ──────────────────
+    if(course.isPreclinical && !preclinLevel){
+      return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
+        e("div",{style:{background:course.bg,padding:"clamp(24px,5vw,36px) 20px 28px",position:"relative",overflow:"hidden"}},
+          e("div",{style:{position:"absolute",inset:0,backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.03) 50px,rgba(255,255,255,.03) 100px)"}}),
+          e("div",{style:{position:"relative",maxWidth:720,margin:"0 auto"}},
+            navBtn("← Back",()=>setView("home")),
+            e("div",{style:{display:"flex",alignItems:"center",gap:14}},
+              e("span",{style:{fontSize:"clamp(1.6rem,4vw,2.2rem)"}},course.emoji),
+              e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.4rem,4vw,1.8rem)",fontWeight:900,color:"#fff"}},course.name)
+            )
+          )
+        ),
+        e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
+        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"28px 20px"}},
+          e("p",{style:{fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",color:"#999",marginBottom:16,fontWeight:600}},"Select Year"),
+          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            course.levels.map((lv,li)=>{
+              const liveCount=lv.blocks.filter(b=>b.available&&b.questions.length>0).length;
+              const totalQs=lv.blocks.filter(b=>b.available&&b.questions.length>0).reduce((s,b)=>s+b.questions.length,0);
+              return e("div",{key:lv.id,className:"fade-up",
+                style:{animationDelay:li*60+"ms",background:"#fff",borderRadius:6,padding:"20px 22px",
+                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                  boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:"pointer",
+                  border:"1px solid #e0d8cc",transition:"transform .18s,box-shadow .18s",minHeight:72},
+                onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
+                onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
+                onClick:()=>{ setPreclinLevel(lv); setBlockSort("system"); }},
+                e("div",{style:{flex:1}},
+                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
+                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#0f2744"}},lv.label),
+                    liveCount>0&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live")
+                  ),
+                  liveCount>0
+                    ? e("p",{style:{color:"#aaa",fontSize:".76rem"}},totalQs+" questions · "+liveCount+" topic"+(liveCount!==1?"s":""))
+                    : e("p",{style:{color:"#ccc",fontSize:".76rem"}},"Coming soon")
+                ),
+                e("span",{style:{color:course.accent,fontSize:"1.3rem"}},"›")
+              );
+            }),
+            // Past Questions card
+            course.blocks.filter(b=>b.isPastQSection).map((b,bi)=>blockCard(b,"pq-"+bi,false,course.levels.length+bi))
+          )
+        )
+      );
+    }
+
+    // ── PRECLINICAL: show blocks within selected level (with sort) ────────
+    if(course.isPreclinical && preclinLevel){
+      const sortBlocks=blocks=>{
+        if(blockSort==="system") return blocks;
+        if(blockSort==="topic"){
+          const named=[...blocks].filter(b=>b.topic&&b.topic!=="").sort((a,b)=>a.topic.localeCompare(b.topic));
+          return named;
+        }
+        if(blockSort==="lecturer"){
+          const withLec=blocks.filter(b=>b.lecturer&&b.lecturer!=="Unnamed").sort((a,b)=>a.lecturer.localeCompare(b.lecturer));
+          const unnamed=blocks.filter(b=>!b.lecturer||b.lecturer==="Unnamed");
+          return [...withLec,...unnamed];
+        }
+        return blocks;
+      };
+      const groupedByKey=blocks=>{
+        if(blockSort==="system") return [{label:null,items:blocks}];
+        const key=blockSort==="topic"?"topic":"lecturer";
+        const groups=[];
+        const map={};
+        blocks.forEach(b=>{
+          const k=(b[key]&&b[key]!=="")?(blockSort==="lecturer"&&b[key]==="Unnamed"?"Unnamed":b[key]):(blockSort==="lecturer"?"Unnamed":b[key]||"Other");
+          if(!map[k]){map[k]={label:k,items:[]};groups.push(map[k]);}
+          map[k].items.push(b);
+        });
+        if(blockSort==="lecturer"){
+          groups.sort((a,b)=>{ if(a.label==="Unnamed") return 1; if(b.label==="Unnamed") return -1; return a.label.localeCompare(b.label); });
+        } else {
+          groups.sort((a,b)=>a.label.localeCompare(b.label));
+        }
+        return groups;
+      };
+      const sorted=sortBlocks(preclinLevel.blocks);
+      const grouped=groupedByKey(sorted);
+      const sortBtn=(label,val)=>e("button",{onClick:()=>setBlockSort(val),style:{padding:"6px 14px",borderRadius:20,fontSize:".75rem",fontWeight:600,cursor:"pointer",border:"1.5px solid "+(blockSort===val?course.accent:"#ddd"),background:blockSort===val?course.accent+"22":"#fff",color:blockSort===val?course.accent:"#888",transition:"all .15s"}},label);
+      return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
+        e("div",{style:{background:course.bg,padding:"clamp(24px,5vw,36px) 20px 28px",position:"relative",overflow:"hidden"}},
+          e("div",{style:{position:"absolute",inset:0,backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.03) 50px,rgba(255,255,255,.03) 100px)"}}),
+          e("div",{style:{position:"relative",maxWidth:720,margin:"0 auto"}},
+            navBtn("← Back",()=>setPreclinLevel(null)),
+            e("div",{style:{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}},
+              e("span",{style:{fontSize:"clamp(1.6rem,4vw,2.2rem)"}},course.emoji),
+              e("div",null,
+                e("p",{style:{color:"rgba(255,255,255,.5)",fontSize:".72rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},course.name),
+                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.7rem)",fontWeight:900,color:"#fff"}},preclinLevel.label)
+              )
+            )
+          )
+        ),
+        e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
+        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
+          e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:18,flexWrap:"wrap"}},
+            e("span",{style:{fontSize:".75rem",color:"#999",fontWeight:600,textTransform:"uppercase",letterSpacing:".08em",marginRight:4}},"Sort by"),
+            sortBtn("System","system"),
+            sortBtn("Topic","topic"),
+            sortBtn("Lecturer","lecturer")
+          ),
+          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            grouped.map((group,gi)=>
+              e("div",{key:"g-"+gi},
+                group.label&&e("div",{style:{padding:"6px 4px 4px",marginTop:gi>0?8:0}},
+                  e("span",{style:{fontSize:".72rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:blockSort==="lecturer"&&group.label==="Unnamed"?"#bbb":course.accent}},
+                    blockSort==="lecturer"&&group.label==="Unnamed"?"Unnamed Lecturer":group.label
+                  )
+                ),
+                group.items.map((b,bi)=>blockCard(b,b.id,false,gi*10+bi))
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // ── STANDARD COURSE blocks view ───────────────────────────────────────
     const topicCards=getTopicCards(course);
     return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
       e("div",{style:{background:course.bg,padding:"clamp(24px,5vw,36px) 20px 28px",position:"relative",overflow:"hidden"}},
@@ -3388,39 +3629,11 @@ function App(){
       e("div",{style:{maxWidth:720,margin:"0 auto",padding:"28px 20px"}},
         e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
           topicCards.map((g,gi)=>{
-            // Render a single card
-            const card=(b,key,isUnified)=>{
-              const isPQCard = b.isPastQSection;
-              return e("div",{key,className:"fade-up",
-              style:{animationDelay:gi*40+"ms",
-                background:isPQCard?"linear-gradient(135deg,#2a1f0e,#4a3820)":isUnified?"linear-gradient(135deg,#0f2744,#1a3a5c)":"#fff",
-                borderRadius:6,padding:"17px 20px",display:"flex",alignItems:"center",
-                justifyContent:"space-between",gap:12,
-                boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:b.available?"pointer":"not-allowed",
-                opacity:b.available?1:.5,border:"1px solid "+(isPQCard?"#6b4f20":isUnified?"transparent":b.available?"#e0d8cc":"#e8e3db"),
-                transition:"transform .18s,box-shadow .18s",minHeight:68},
-              onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
-              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-              onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}},
-              e("div",{style:{flex:1,minWidth:0}},
-                e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
-                  isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
-                  e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:isPQCard?"#ffcc80":isUnified?"#c9a84c":"#0f2744"}},b.name),
-                  isPQCard&&e("span",{style:{background:"rgba(255,204,128,.18)",color:"#ffcc80",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Enahoro"),
-                  !isPQCard&&b.available&&!isUnified&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live"),
-                  !isPQCard&&!b.available&&e("span",{style:{background:"#f5f0e8",color:"#bbb",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Coming Soon")
-                ),
-                isPQCard
-                  ? e("p",{style:{color:"rgba(255,204,128,.5)",fontSize:".76rem"}},"Past exam questions by class & sitting")
-                  : b.available&&e("p",{style:{color:isUnified?"rgba(255,255,255,.45)":"#aaa",fontSize:".76rem"}},b.questions.length+" questions")
-              ),
-              b.available&&e("span",{style:{color:isPQCard?"#ffcc80":isUnified?"#c9a84c":course.accent,fontSize:"1.3rem",flexShrink:0}},"→")
-            );};
-            if(g.type==="unified") return card(g.block,"unified",true);
-            if(g.type==="block") return card(g.block,g.block.id,false);
+            if(g.type==="unified") return blockCard(g.block,"unified",true,gi);
+            if(g.type==="block") return blockCard(g.block,g.block.id,false,gi);
             // type==="topic"
-            const hasMultiple = g.blocks.filter(b=>b.available&&b.questions.length>0).length > 1;
-            const singleBlock = !hasMultiple && g.blocks.find(b=>b.available&&b.questions.length>0);
+            const hasMultiple=g.blocks.filter(b=>b.available&&b.questions.length>0).length>1;
+            const singleBlock=!hasMultiple&&g.blocks.find(b=>b.available&&b.questions.length>0);
             return e("div",{key:"t-"+gi,className:"fade-up",
               style:{animationDelay:gi*40+"ms",background:"#fff",borderRadius:6,padding:"17px 20px",
                 display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
@@ -3433,11 +3646,8 @@ function App(){
               onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
               onClick:()=>{
                 if(!g.anyAvailable) return;
-                if(singleBlock){
-                  setBlock(singleBlock);setQCount(Math.min(20,singleBlock.questions.length));setView("setup");
-                } else {
-                  setTopic(g);setView("topic_blocks");
-                }
+                if(singleBlock){ setBlock(singleBlock);setQCount(Math.min(20,singleBlock.questions.length));setView("setup"); }
+                else { setTopic(g);setView("topic_blocks"); }
               }},
               e("div",{style:{flex:1,minWidth:0}},
                 e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
@@ -3970,7 +4180,9 @@ function App(){
               e("button",{onClick:()=>setView("home"),style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
               e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Try Again")
             )
-          )
+          ),
+          /* Support banner */
+          e(SupportBanner,null)
         )
       )
     );
