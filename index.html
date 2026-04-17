@@ -3544,7 +3544,7 @@ function App(){
         e("div",{style:{marginBottom:16}},
           e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
           e("div",{style:{display:"flex",gap:8}},
-            e("input",{type:"text",placeholder:"e.g. Gen-XXXX-XXXX",value:gbCodeInput,
+            e("input",{type:"text",placeholder:"e.g. GEN-XXXX-XXXX",value:gbCodeInput,
               onChange:ev=>{setGbCodeInput(ev.target.value.toUpperCase());setGbCodeError("");},
               onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("gb_redeem_btn")?.click();},
               style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(gbCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:"#faf8f5",fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
@@ -4733,7 +4733,7 @@ function App(){
                       e("option",{value:"UI"},"UI — Univ. of Ibadan"),
                       e("option",{value:"UNILAG"},"UNILAG — Univ. of Lagos"),
                       e("option",{value:"ABU"},"ABU — Ahmadu Bello Univ."),
-                      e("option",{value:"Gen"},"Gen — General Question Bank"),
+                      e("option",{value:"GEN"},"GEN — General Question Bank"),
                       e("option",{value:"DEMO"},"DEMO — Demo / Test")
                     )
                   ),
