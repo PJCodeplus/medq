@@ -3546,6 +3546,7 @@ function App(){
           e("div",{style:{display:"flex",gap:8}},
             e("input",{type:"text",placeholder:"e.g. GEN-XXXX-XXXX",value:gbCodeInput,
               onChange:ev=>{setGbCodeInput(ev.target.value.toUpperCase());setGbCodeError("");},
+              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setGbCodeInput(clean);setGbCodeError("");},
               onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("gb_redeem_btn")?.click();},
               style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(gbCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:"#faf8f5",fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
             e("button",{id:"gb_redeem_btn",disabled:gbCodeLoading||!gbCodeInput.trim(),
@@ -4791,7 +4792,7 @@ function App(){
                   ),
                   e("div",{style:{display:"flex",flexDirection:"column",gap:4}},
                     genResult.map((c,i)=>e("div",{key:i,style:{display:"flex",alignItems:"center",gap:10}},
-                      e("code",{style:{fontFamily:"'Courier New',monospace",fontSize:".9rem",background:"#fff",padding:"4px 10px",borderRadius:3,border:"1px solid #cce8d4",letterSpacing:".05em",flex:1}},c.code),
+                      e("span",{style:{fontFamily:"'Courier New',monospace",fontSize:".9rem",background:"#fff",padding:"4px 10px",borderRadius:3,border:"1px solid #cce8d4",letterSpacing:".05em",flex:1,display:"inline-block",userSelect:"all"}},c.code),
                       e("span",{style:{fontSize:".73rem",color:"#888"}},new Date(c.expiresAt).toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}))
                     ))
                   )
