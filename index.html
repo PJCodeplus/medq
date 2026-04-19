@@ -5005,16 +5005,7 @@ function App(){
   // Keep paused ref in sync
   useEffect(()=>{ pausedRef.current=paused; },[paused]);
 
-  useEffect(()=>{
-    if(validSubAccess(subAccess)) return;
-    const did=getDeviceId();
-    if(window._fbGetSubDevice) window._fbGetSubDevice(did).then(d=>{
-      if(!d) return;
-      const fsCount=d.count||0;
-      if(fsCount>subFreeCount){ setSubFreeCount(fsCount); ls.set(SUB_FREE_KEY,String(fsCount)); }
-      if(d.blocked){ setSubHardBlocked(true); }
-    });
-  },[]);
+  // Sub device check handled at block entry
 
   const endQuiz = useCallback((timedOut)=>{
     clearInterval(timerRef.current);
@@ -5415,7 +5406,7 @@ function App(){
   );
 
   // ═══════════ SUB HARD BLOCK ═══════════
-  if(showSubPaywall&&view==="quiz") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
         e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
@@ -5466,7 +5457,10 @@ function App(){
         ),
         subCodeError&&e("p",{style:{color:"#c62828",fontSize:".76rem",marginBottom:10}},subCodeError),
         
-        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:10}},"Device ID: "+getDeviceId())
+        view==="quiz"&&qs.length>0
+          ?e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#666",cursor:"pointer",marginBottom:8}},"End session & see results")
+          :e("button",{onClick:()=>{setShowSubPaywall(false);setView("home");},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#666",cursor:"pointer",marginBottom:8}},"← Go Home"),
+        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:4}},"Device ID: "+getDeviceId())
       )
     )
   );
@@ -5841,7 +5835,22 @@ function App(){
           transition:"transform .18s,box-shadow .18s",minHeight:68},
         onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{if(course?.id==="subspecialties"&&subBlocked()){setShowSubPaywall(true);}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}}},
+        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{(()=>{
+              if(course?.id==="subspecialties"&&!validSubAccess(subAccess)){
+                const did=getDeviceId();
+                const proceed=()=>{if(!subBlocked()){setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}else{setShowSubPaywall(true);}};
+                if(window._fbGetSubDevice){
+                  window._fbGetSubDevice(did).then(d=>{
+                    if(d){
+                      const fc=d.count||0;
+                      if(fc>subFreeCount){setSubFreeCount(fc);ls.set(SUB_FREE_KEY,String(fc));}
+                      if(d.blocked||fc>=50){setSubHardBlocked(true);}
+                    }
+                    proceed();
+                  }).catch(proceed);
+                } else { proceed(); }
+              } else { setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup"); }
+            })()}}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
             isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
