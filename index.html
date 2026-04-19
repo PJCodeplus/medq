@@ -5035,8 +5035,14 @@ function App(){
       )
     ),
 
-    e("div",{style:{textAlign:"center",padding:"4px 20px 10px"}},
+    currentSchool!=="GENERAL"&&e("div",{style:{textAlign:"center",padding:"4px 20px 10px"}},
       e("div",{style:{maxWidth:480,margin:"0 auto"}},
+        e("p",{style:{fontSize:".82rem",color:"#888",marginBottom:2}},
+          "MedQ is currently an open resource \u2014 your support goes a long way."
+        ),
+        e("p",{style:{fontSize:".78rem",color:"#aaa",marginBottom:8}},
+          "If it\u2019s been useful, a small contribution means a lot."
+        ),
         e(SupportBanner,null)
       )
     ),
@@ -6124,8 +6130,14 @@ function App(){
           )
         )
       ),
-      /* Support banner — outside card so it renders on mobile too */
-      e("div",{style:{width:"100%",maxWidth:520}},
+      /* Support banner — outside card, institution only */
+      currentSchool!=="GENERAL"&&e("div",{style:{width:"100%",maxWidth:520,textAlign:"center",padding:"4px 20px 0"}},
+        e("p",{style:{fontSize:".82rem",color:"#888",marginBottom:2}},
+          "MedQ is currently an open resource \u2014 your support goes a long way."
+        ),
+        e("p",{style:{fontSize:".78rem",color:"#aaa",marginBottom:8}},
+          "If it\u2019s been useful, a small contribution means a lot."
+        ),
         e(SupportBanner,null)
       )
     );
