@@ -5094,7 +5094,7 @@ function App(){
     try{ return new Date(acc.expiresAt) > new Date(); }catch{ return false; }
   };
   const validSubAccess = acc => { if(!acc)return false; try{return new Date(acc.expiresAt)>new Date();}catch{return false;} };
-  const isSub = () => currentCourse?.id==="subspecialties";
+  const isSub = () => course?.id==="subspecialties";
   const subBlocked = () => !validSubAccess(subAccess)&&(subHardBlocked||subFreeCount>=50);
 
   const pickAnswer=i=>{
@@ -5355,7 +5355,7 @@ function App(){
   );
 
   // ═══════════ SUB WARNING (10 left) ═══════════
-  if(showSubWarn&&!showSubPaywall) return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  if(showSubWarn&&!showSubPaywall&&view!=="results") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 8px 32px rgba(0,0,0,.15)",width:"100%",maxWidth:400,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"24px 24px 18px",textAlign:"center"}},
         e("div",{style:{fontSize:"2rem",marginBottom:6}},"⏳"),
@@ -5406,13 +5406,14 @@ function App(){
         ),
         subCodeError&&e("p",{style:{color:"#c62828",fontSize:".76rem",marginBottom:10}},subCodeError),
         e("button",{onClick:()=>{setShowSubWarn(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#777",cursor:"pointer"}},"Continue with remaining questions"),
-        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:10}},"Device ID: "+getDeviceId())
+        e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#777",cursor:"pointer",marginBottom:8}},"End session & see results"),
+        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:4}},"Device ID: "+getDeviceId())
       )
     )
   );
 
   // ═══════════ SUB HARD BLOCK ═══════════
-  if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  if(showSubPaywall&&view!=="results") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
         e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
@@ -5838,7 +5839,7 @@ function App(){
           transition:"transform .18s,box-shadow .18s",minHeight:68},
         onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{if(currentCourse?.id==="subspecialties"&&subBlocked()){setShowSubPaywall(true);}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}}},
+        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{if(course?.id==="subspecialties"&&subBlocked()){setShowSubPaywall(true);}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
             isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
