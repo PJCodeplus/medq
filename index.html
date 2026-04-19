@@ -156,12 +156,7 @@ window._fbCreateCodes = async (codes) => {
     return true;
   } catch(e){ return false; }
 };
-window._fbGetSubDevice = async (did) => {
-  try { const snap=await getDoc(doc(db,"sub_devices",did)); return snap.exists()?snap.data():null; } catch(e){ return null; }
-};
-window._fbSetSubDevice = async (did, data) => {
-  try { await setDoc(doc(db,"sub_devices",did),data,{merge:true}); return true; } catch(e){ return false; }
-};
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -179,7 +174,7 @@ const GB_FREE_KEY  = "medq_gb_free";   // number of free GB questions answered
 const GB_ACCESS_KEY = "medq_gb_access"; // {name, expiresAt} if paid
 const SUB_FREE_KEY   = "medq_sub_free";   // subspecialties free Qs used
 const SUB_ACCESS_KEY = "medq_sub_access"; // {expiresAt,code} if paid
-const SUB_DID_KEY    = "medq_did";        // stable device id
+
 
 /* ═══════════ QUESTIONS ═══════════ */
 const NEPHRO_B1_Qs = [
@@ -4872,21 +4867,7 @@ function SupportBanner(){
   );
 }
 
-const getDeviceId = () => {
-  try {
-    let id = localStorage.getItem(SUB_DID_KEY);
-    if (id) return id;
-    const raw = [navigator.userAgent, navigator.language||'',
-      (screen.width||0)+'x'+(screen.height||0)+'x'+(screen.colorDepth||0),
-      navigator.hardwareConcurrency||0,
-      Intl.DateTimeFormat().resolvedOptions().timeZone||''].join('|');
-    let h = 5381;
-    for (let i = 0; i < raw.length; i++) { h = (((h<<5)+h) ^ raw.charCodeAt(i)) >>> 0; }
-    id = 'D'+h.toString(36).toUpperCase().padStart(7,'0');
-    localStorage.setItem(SUB_DID_KEY, id);
-    return id;
-  } catch(err) { return 'D0000000'; }
-};
+
 
 function App(){
   const [view,setView]=useState("home");
@@ -4954,16 +4935,13 @@ function App(){
   const [gbCodeError,setGbCodeError]=useState("");
   const [gbCodeLoading,setGbCodeLoading]=useState(false);
 
-  // ── Subspecialties paywall ──
+  // ── Subspecialties paywall (mirrors General Bank) ──
   const [subFreeCount,setSubFreeCount]=useState(()=>Number(ls.get(SUB_FREE_KEY)||0));
   const [subAccess,setSubAccess]=useState(()=>{try{return JSON.parse(ls.get(SUB_ACCESS_KEY)||"null");}catch{return null;}});
-  const [subHardBlocked,setSubHardBlocked]=useState(false);
   const [showSubPaywall,setShowSubPaywall]=useState(false);
-  const [showSubWarn,setShowSubWarn]=useState(false);
   const [subCodeInput,setSubCodeInput]=useState("");
   const [subCodeError,setSubCodeError]=useState("");
   const [subCodeLoading,setSubCodeLoading]=useState(false);
-  const [subWarnDone,setSubWarnDone]=useState(false);
 
   // ── School selector ──
   const [selectedSchool,setSelectedSchool]=useState(()=>ls.get(SCHOOL_KEY)||null);
@@ -5021,7 +4999,7 @@ function App(){
       school:currentSchool||"",
     };
     setResult(r);
-    setShowSubPaywall(false); setShowSubWarn(false);
+    setShowSubPaywall(false);
     // Strip non-serializable fields before saving to Firestore (undefined values cause silent failures)
     const { questions:_q, answers:_a, ...toSave } = r;
     saveAttempt(toSave);
@@ -5088,7 +5066,6 @@ function App(){
   };
   const validSubAccess = acc => { if(!acc)return false; try{return new Date(acc.expiresAt)>new Date();}catch{return false;} };
   const isSub = () => course?.id==="subspecialties";
-  const subBlocked = () => !validSubAccess(subAccess)&&(subHardBlocked||subFreeCount>=50);
 
   const pickAnswer=i=>{
     if(picked!==null)return;
@@ -5106,8 +5083,6 @@ function App(){
     // Track sub free questions
     if(isSub()&&!validSubAccess(subAccess)){
       const nc=subFreeCount+1; setSubFreeCount(nc); ls.set(SUB_FREE_KEY,String(nc));
-      const did=getDeviceId();
-      if(window._fbSetSubDevice) window._fbSetSubDevice(did,{count:nc,blocked:nc>=50,lastSeen:new Date().toISOString()});
     }
   };
 
@@ -5117,10 +5092,9 @@ function App(){
       setShowGbPaywall(true);
       return;
     }
-    // Sub paywall checks
-    if(isSub()&&!validSubAccess(subAccess)){
-      if(subFreeCount>=50){ setShowSubPaywall(true); return; }
-      if(subFreeCount>=40&&!subWarnDone){ setSubWarnDone(true); setShowSubWarn(true); return; }
+    // Sub paywall — mirrors General Bank, triggers at 10
+    if(isSub()&&!validSubAccess(subAccess)&&subFreeCount>=10){
+      setShowSubPaywall(true); return;
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -5347,120 +5321,68 @@ function App(){
     )
   );
 
-  // ═══════════ SUB WARNING (10 left) ═══════════
-  if(showSubWarn&&!showSubPaywall&&view==="quiz") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
-    e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 8px 32px rgba(0,0,0,.15)",width:"100%",maxWidth:400,overflow:"hidden"}},
-      e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"24px 24px 18px",textAlign:"center"}},
-        e("div",{style:{fontSize:"2rem",marginBottom:6}},"⏳"),
-        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.25rem",fontWeight:900,color:"#fff",marginBottom:4}},"10 free questions remaining"),
-        e("p",{style:{color:"rgba(144,202,249,.7)",fontSize:".78rem"}},"Subspecialties · Igbinedion University")
-      ),
-      e("div",{style:{height:3,background:"linear-gradient(90deg,#2196f3,#90caf9,#2196f3)"}}),
-      e("div",{style:{padding:"22px 24px 24px"}},
-        e("div",{style:{textAlign:"center",marginBottom:18}},
-          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.8rem",fontWeight:900,color:"#1a2535"}},"₦1,000"),
-          e("div",{style:{fontSize:".7rem",color:"#777",marginTop:2,letterSpacing:".06em"}},"30-day full access")
-        ),
-        e("div",{style:{background:"#f1f5f9",borderRadius:6,padding:"14px 16px",marginBottom:18}},
-          e("p",{style:{fontWeight:700,fontSize:".74rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Payment Details"),
-          e("div",{style:{fontSize:".84rem",color:"#333",lineHeight:2.1}},
-            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
-            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
-            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
-          ),
-          e("p",{style:{fontSize:".76rem",color:"#888",marginTop:8,lineHeight:1.5}},
-            "Pay and send proof to WhatsApp ",e("strong",{style:{color:"#1a2535"}},"09161452645"),". Your access code will be sent.")
-        ),
-        
-        e("div",{style:{display:"flex",gap:8,marginBottom:subCodeError?8:16}},
-          e("input",{type:"text",placeholder:"Enter access code",value:subCodeInput,
-            onChange:ev=>{setSubCodeInput(ev.target.value.toUpperCase());setSubCodeError("");},
-            onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("sub_warn_btn")?.click();},
-            style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(subCodeError?"#ef5350":"#d0d7e0"),borderRadius:4,fontSize:".88rem",outline:"none",textTransform:"uppercase",letterSpacing:".05em"}}),
-          e("button",{id:"sub_warn_btn",disabled:subCodeLoading||!subCodeInput.trim(),
-            onClick:async()=>{
-              if(!subCodeInput.trim())return;
-              setSubCodeLoading(true);setSubCodeError("");
-              const res=await window._fbValidateCode(subCodeInput.trim(),studentName||"Student");
-              setSubCodeLoading(false);
-              if(res.ok){
-                const acc={name:studentName||"Student",expiresAt:res.expiresAt,code:subCodeInput.trim()};
-                setSubAccess(acc);ls.set(SUB_ACCESS_KEY,JSON.stringify(acc));
-                const did=getDeviceId();
-                if(window._fbSetSubDevice) window._fbSetSubDevice(did,{blocked:false,accessUntil:res.expiresAt,count:0});
-                ls.set(SUB_FREE_KEY,"0"); setSubFreeCount(0); setSubHardBlocked(false);
-                setShowSubPaywall(false); setShowSubWarn(false);
-              } else {
-                setSubCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"Code already used by someone else.":"Network error — try again.");
-              }
-            },
-            style:{padding:"11px 18px",background:subCodeLoading?"#aaa":"#1a2535",color:"#90caf9",border:"none",borderRadius:4,fontWeight:700,fontSize:".88rem",cursor:subCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-            subCodeLoading?"…":"Unlock")
-        ),
-        subCodeError&&e("p",{style:{color:"#c62828",fontSize:".76rem",marginBottom:10}},subCodeError),
-        e("button",{onClick:()=>{setShowSubWarn(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#777",cursor:"pointer"}},"Continue with remaining questions"),
-        e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#777",cursor:"pointer",marginBottom:8}},"End session & see results"),
-        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:4}},"Device ID: "+getDeviceId())
-      )
-    )
-  );
 
-  // ═══════════ SUB HARD BLOCK ═══════════
-  if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  // ═══════════ SUBSPECIALTIES PAYWALL (mirrors General Bank) ═══════════
+  if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:"#f0ece4",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
         e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
-        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.4rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free limit reached"),
-        e("p",{style:{color:"rgba(144,202,249,.7)",fontSize:".8rem",lineHeight:1.6}},"You've used all 50 free Subspecialties questions.")
+        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free limit reached"),
+        e("p",{style:{color:"rgba(144,202,249,.8)",fontSize:".82rem",lineHeight:1.6}},"You've answered 10 free Subspecialties questions.")
       ),
       e("div",{style:{height:3,background:"linear-gradient(90deg,#2196f3,#90caf9,#2196f3)"}}),
-      e("div",{style:{padding:"24px 28px 24px"}},
-        e("div",{style:{textAlign:"center",marginBottom:18}},
-          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"2rem",fontWeight:900,color:"#1a2535"}},"₦1,000"),
-          e("div",{style:{fontSize:".72rem",color:"#666",marginTop:3,letterSpacing:".05em"}},"30-day full access")
+      e("div",{style:{padding:"24px 28px 32px"}},
+        e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:20}},
+          "To continue, purchase access and send your payment receipt to WhatsApp."),
+        e("div",{style:{border:"2px solid #2196f3",borderRadius:8,padding:"16px 14px",textAlign:"center",background:"#f0f7ff",marginBottom:20}},
+          e("div",{style:{fontSize:".72rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:6}},"Monthly"),
+          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.7rem",fontWeight:900,color:"#1a2535"}},"₦1,000"),
+          e("div",{style:{fontSize:".72rem",color:"#888",marginTop:4}},"30-day access")
         ),
-        e("div",{style:{background:"#f1f5f9",borderRadius:6,padding:"14px 16px",marginBottom:18}},
-          e("p",{style:{fontWeight:700,fontSize:".74rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Payment Details"),
-          e("div",{style:{fontSize:".84rem",color:"#333",lineHeight:2.1}},
-            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
-            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
-            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
+        e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"14px 16px",marginBottom:20}},
+          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#8a6f30",marginBottom:8}},"Payment Details"),
+          e("div",{style:{fontSize:".88rem",color:"#333",lineHeight:2}},
+            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
+            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
+            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
           ),
-          e("p",{style:{fontSize:".76rem",color:"#888",marginTop:8,lineHeight:1.5}},
-            "Pay and send proof to WhatsApp ",e("strong",{style:{color:"#1a2535"}},"09161452645"),". Your access code will be sent.")
+          e("p",{style:{fontSize:".78rem",color:"#888",marginTop:8,lineHeight:1.5}},
+            "After payment, send your receipt to WhatsApp: ",
+            e("strong",{style:{color:"#1a2535"}},"09161452645"),
+            ". Your access code will be sent to you.")
         ),
-        
-        e("div",{style:{display:"flex",gap:8,marginBottom:subCodeError?8:16}},
-          e("input",{type:"text",placeholder:"Enter access code",value:subCodeInput,
-            onChange:ev=>{setSubCodeInput(ev.target.value.toUpperCase());setSubCodeError("");},
-            onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("sub_hard_btn")?.click();},
-            style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(subCodeError?"#ef5350":"#d0d7e0"),borderRadius:4,fontSize:".88rem",outline:"none",textTransform:"uppercase",letterSpacing:".05em"}}),
-          e("button",{id:"sub_hard_btn",disabled:subCodeLoading||!subCodeInput.trim(),
-            onClick:async()=>{
-              if(!subCodeInput.trim())return;
-              setSubCodeLoading(true);setSubCodeError("");
-              const res=await window._fbValidateCode(subCodeInput.trim(),studentName||"Student");
-              setSubCodeLoading(false);
-              if(res.ok){
-                const acc={name:studentName||"Student",expiresAt:res.expiresAt,code:subCodeInput.trim()};
-                setSubAccess(acc);ls.set(SUB_ACCESS_KEY,JSON.stringify(acc));
-                const did=getDeviceId();
-                if(window._fbSetSubDevice) window._fbSetSubDevice(did,{blocked:false,accessUntil:res.expiresAt,count:0});
-                ls.set(SUB_FREE_KEY,"0"); setSubFreeCount(0); setSubHardBlocked(false);
-                setShowSubPaywall(false); setShowSubWarn(false);
-              } else {
-                setSubCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"Code already used by someone else.":"Network error — try again.");
-              }
-            },
-            style:{padding:"11px 18px",background:subCodeLoading?"#aaa":"#1a2535",color:"#90caf9",border:"none",borderRadius:4,fontWeight:700,fontSize:".88rem",cursor:subCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-            subCodeLoading?"…":"Unlock")
+        e("div",{style:{marginBottom:16}},
+          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
+          e("div",{style:{display:"flex",gap:8}},
+            e("input",{type:"text",placeholder:"e.g. SUB-XXXX-XXXX",value:subCodeInput,
+              onChange:ev=>{setSubCodeInput(ev.target.value.toUpperCase());setSubCodeError("");},
+              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setSubCodeInput(clean);setSubCodeError("");},
+              onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("sub_redeem_btn")?.click();},
+              style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(subCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:"#faf8f5",fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
+            e("button",{id:"sub_redeem_btn",disabled:subCodeLoading||!subCodeInput.trim(),
+              onClick:async()=>{
+                if(!subCodeInput.trim())return;
+                setSubCodeLoading(true); setSubCodeError("");
+                const res=await window._fbValidateCode(subCodeInput.trim(),studentName||"Student");
+                setSubCodeLoading(false);
+                if(res.ok){
+                  const access={name:studentName||"Student",expiresAt:res.expiresAt,code:subCodeInput.trim()};
+                  setSubAccess(access); ls.set(SUB_ACCESS_KEY,JSON.stringify(access));
+                  setSubFreeCount(0); ls.set(SUB_FREE_KEY,"0");
+                  setShowSubPaywall(false);
+                  setQIdx(q=>q); setPicked(null); setShowFb(false);
+                } else {
+                  setSubCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
+                }
+              },
+              style:{padding:"11px 18px",background:subCodeLoading?"#aaa":"#1a2535",color:"#90caf9",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:subCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+              subCodeLoading?"…":"Redeem")
+          ),
+          subCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},subCodeError)
         ),
-        subCodeError&&e("p",{style:{color:"#c62828",fontSize:".76rem",marginBottom:10}},subCodeError),
-        
-        view==="quiz"&&qs.length>0
-          ?e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#666",cursor:"pointer",marginBottom:8}},"End session & see results")
-          :e("button",{onClick:()=>{setShowSubPaywall(false);setView("home");},style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #ddd",borderRadius:4,fontSize:".85rem",color:"#666",cursor:"pointer",marginBottom:8}},"← Go Home"),
-        e("p",{style:{textAlign:"center",fontSize:".66rem",color:"#ccc",marginTop:4}},"Device ID: "+getDeviceId())
+        e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},
+          style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".85rem",color:"#888",cursor:"pointer",fontFamily:"Georgia,serif"}},
+          "End session & see results")
       )
     )
   );
@@ -5835,22 +5757,7 @@ function App(){
           transition:"transform .18s,box-shadow .18s",minHeight:68},
         onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{(()=>{
-              if(course?.id==="subspecialties"&&!validSubAccess(subAccess)){
-                const did=getDeviceId();
-                const proceed=()=>{if(!subBlocked()){setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}else{setShowSubPaywall(true);}};
-                if(window._fbGetSubDevice){
-                  window._fbGetSubDevice(did).then(d=>{
-                    if(d){
-                      const fc=d.count||0;
-                      if(fc>subFreeCount){setSubFreeCount(fc);ls.set(SUB_FREE_KEY,String(fc));}
-                      if(d.blocked||fc>=50){setSubHardBlocked(true);}
-                    }
-                    proceed();
-                  }).catch(proceed);
-                } else { proceed(); }
-              } else { setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup"); }
-            })()}}}},
+        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup")}}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
             isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
@@ -6635,7 +6542,7 @@ function App(){
               "🔁 Retake Failed Questions ("+failedQs.length+")"
             ),
             e("div",{style:{display:"flex",gap:10}},
-              e("button",{onClick:()=>{setView("home");setShowSubPaywall(false);setShowSubWarn(false);},style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
+              e("button",{onClick:()=>{setView("home");setShowSubPaywall(false);},style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
               e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Try Again")
             )
           )
