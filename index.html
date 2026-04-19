@@ -514,6 +514,314 @@ const EKO_ANATOMY_Qs = [];
 const EKO_PHYSIO_Qs = [];
 const EKO_BIOCHEM_Qs = [];
 
+/* ═══════════ IU BIOCHEMISTRY — BCH 201 / BCH 205 ═══════════ */
+
+const BCH_CARB_AA_Qs = [
+  {
+    q: "Which functional group is exclusively present in an aldose but absent in a ketose?",
+    opts: ["A hydroxyl group at the terminal carbon","An aldehyde group at the terminal carbon","A phosphate group at carbon 1","A carboxyl group at the terminal carbon","An amino group at carbon 2"],
+    ans: 1,
+    exp: "Aldoses contain an aldehyde group (–CHO) at the terminal carbon (carbon 1), while ketoses contain a ketone group (C=O) at an internal carbon, typically carbon 2. Glucose is the prototype aldose; fructose is the prototype ketose. Hydroxyl groups are present in both aldoses and ketoses and do not distinguish them. Phosphate, carboxyl, and amino groups are not the defining functional groups of either class."
+  },
+  {
+    q: "Which of the following hexoses is classified as a ketose?",
+    opts: ["Glucose","Galactose","Fructose","Mannose","Ribose"],
+    ans: 2,
+    exp: "Fructose contains a ketone group at carbon 2, classifying it as a ketose (specifically a ketohexose). Glucose, galactose, and mannose all possess aldehyde groups at carbon 1 and are therefore aldohexoses. Ribose is a pentose aldose, not a hexose. Despite sharing the molecular formula C₆H₁₂O₆ with glucose and galactose, fructose differs in the position and type of its carbonyl functional group."
+  },
+  {
+    q: "In the Haworth projection of D-glucose, the α and β anomers are distinguished by:",
+    opts: ["The orientation of the hydroxyl group at carbon 1","The number of carbon atoms forming the ring","The position of the ring oxygen atom","The orientation of the hydroxyl group at carbon 6","Whether the ring is five-membered or six-membered"],
+    ans: 0,
+    exp: "The α and β anomers of D-glucose differ only in the orientation of the hydroxyl group at carbon 1 — the anomeric carbon. In α-D-glucose, the C1 hydroxyl is on the opposite side from the C6 hydroxymethyl group (trans). In β-D-glucose, the C1 hydroxyl is on the same side as the C6 hydroxymethyl group (cis). This distinction has profound functional consequences: α-glycosidic bonds produce digestible polymers like starch, while β-glycosidic bonds produce indigestible structural polymers like cellulose."
+  },
+  {
+    q: "When glucose cyclizes in aqueous solution, the six-membered ring formed is correctly termed a:",
+    opts: ["Pyranose ring","Furanose ring","Lactone ring","Hemiketal ring","Lactol ring"],
+    ans: 0,
+    exp: "A six-membered cyclic monosaccharide ring is called a pyranose (named after the six-membered oxygen-containing compound pyran). Glucose forms a pyranose when the aldehyde at C1 reacts intramolecularly with the C5 hydroxyl group. Fructose, by contrast, typically forms a five-membered furanose ring when its C2 ketone reacts with the C5 hydroxyl. Hemiketal and hemiacetal describe the type of bond formed at the anomeric carbon, not the ring size, and are not used as ring nomenclature."
+  },
+  {
+    q: "Which disaccharide consists of two glucose units joined by an α-1,4-glycosidic bond?",
+    opts: ["Sucrose","Lactose","Cellobiose","Maltose","Trehalose"],
+    ans: 3,
+    exp: "Maltose consists of two α-D-glucose units linked by an α-1,4-glycosidic bond. It is produced during the digestion of starch by salivary and pancreatic amylase and is hydrolyzed to glucose by maltase. Sucrose links glucose to fructose via an α-1,2-glycosidic bond. Lactose links galactose to glucose via a β-1,4-glycosidic bond. Cellobiose, the repeating disaccharide unit of cellulose, also links two glucose units but via a β-1,4 bond. Trehalose links two glucose units at both anomeric carbons via an α-1,1 bond."
+  },
+  {
+    q: "Lactose is a disaccharide composed of which two monosaccharide units?",
+    opts: ["Glucose and glucose","Glucose and fructose","Galactose and fructose","Glucose and galactose","Galactose and mannose"],
+    ans: 3,
+    exp: "Lactose is composed of glucose and galactose joined by a β-1,4-glycosidic bond, with galactose at the non-reducing end. It is the principal carbohydrate in mammalian milk and is hydrolyzed by the brush-border enzyme lactase. Deficiency of lactase leads to lactose intolerance, characterized by bloating, diarrhea, and flatulence after dairy consumption. Glucose + fructose = sucrose; glucose + glucose = maltose (α-1,4 bond) or cellobiose (β-1,4 bond)."
+  },
+  {
+    q: "Which of the following disaccharides is a non-reducing sugar?",
+    opts: ["Maltose","Lactose","Cellobiose","Sucrose","Melibiose"],
+    ans: 3,
+    exp: "Sucrose is non-reducing because its glycosidic bond (α-1,2) involves the anomeric carbons of both glucose and fructose simultaneously, leaving neither monosaccharide with a free reducing group. Maltose, lactose, cellobiose, and melibiose are all reducing sugars because each retains one free anomeric carbon on its terminal monosaccharide unit, which can open to the aldehyde form and reduce Benedict's reagent (Cu²⁺ → Cu⁺)."
+  },
+  {
+    q: "The glycosidic bond in sucrose links which two carbons of its component monosaccharides?",
+    opts: ["Carbon 1 of glucose to carbon 4 of fructose","Carbon 1 of glucose to carbon 2 of fructose","Carbon 1 of glucose to carbon 6 of fructose","Carbon 1 of glucose to carbon 1 of fructose","Carbon 2 of glucose to carbon 2 of fructose"],
+    ans: 1,
+    exp: "In sucrose, an α-1,2-glycosidic bond links carbon 1 of glucose (in its α configuration) to carbon 2 of fructose — the anomeric carbon of fructose. Because both anomeric carbons are engaged in this bond, sucrose cannot open to a free aldehyde or ketone and is therefore non-reducing. This distinguishes it from maltose (α-1,4) and lactose (β-1,4), both of which retain a free reducing end."
+  },
+  {
+    q: "The indigestibility of cellulose in humans is primarily attributable to:",
+    opts: ["Its extremely high molecular weight and long chain length","Its high degree of branching at α-1,6-glycosidic linkages","Its N-acetylglucosamine subunits instead of glucose","Its complete insolubility preventing contact with intestinal enzymes","Its β-1,4-glycosidic bonds between glucose residues"],
+    ans: 4,
+    exp: "Cellulose is indigestible because it contains β-1,4-glycosidic bonds, which human digestive enzymes (α-amylase and α-glucosidases) cannot hydrolyze — these enzymes are specific for α-glycosidic linkages. Starch is digestible precisely because it uses α-1,4 and α-1,6 linkages. α-1,6 branching is a feature of glycogen and amylopectin, not cellulose. N-acetylglucosamine subunits define chitin, not cellulose."
+  },
+  {
+    q: "The primary energy storage polysaccharide in skeletal muscle is:",
+    opts: ["Amylose","Starch","Cellulose","Glycogen","Amylopectin"],
+    ans: 3,
+    exp: "Glycogen is the storage polysaccharide of animals, maintained in large amounts in the liver and skeletal muscle. Muscle glycogen serves as a rapid glucose source during exercise, mobilized by glycogenolysis. Hepatic glycogen primarily maintains blood glucose between meals. Glycogen resembles amylopectin structurally but is more highly branched, with α-1,6 branch points every 8–12 glucose residues. Starch (amylose + amylopectin) is the plant equivalent of glycogen and is not synthesized in animal tissues."
+  },
+  {
+    q: "Amylopectin differs structurally from amylose in that amylopectin:",
+    opts: ["Is composed of fructose units rather than glucose units","Has branch points formed by α-1,6-glycosidic bonds","Contains β-1,4-glycosidic bonds throughout its chain","Is water-insoluble owing to its strictly linear structure","Requires cellulase for its complete hydrolysis"],
+    ans: 1,
+    exp: "Amylopectin is the branched component of starch, with linear α-1,4-linked glucose chains and branch points introduced by α-1,6-glycosidic bonds approximately every 24–30 glucose residues. Amylose, by contrast, is an unbranched polymer of glucose with only α-1,4 bonds. Cellulose — not starch — contains β-1,4 bonds and requires cellulase. Both amylose and amylopectin are composed entirely of glucose units."
+  },
+  {
+    q: "Chitin is structurally similar to cellulose, but its monomer units are:",
+    opts: ["β-D-galactose residues","α-D-glucose with sulfate modifications","L-fucose residues","Glucuronic acid residues","N-acetylglucosamine residues"],
+    ans: 4,
+    exp: "Chitin is composed of N-acetylglucosamine (GlcNAc) units joined by β-1,4-glycosidic bonds — the same bond type as cellulose. The key structural difference is the substitution of the C2 hydroxyl group with an N-acetyl amino group (–NHCOCH₃), conferring greater rigidity. Chitin forms the exoskeleton of arthropods and cell walls of fungi. Glucuronic acid is a component of glycosaminoglycans like hyaluronic acid and heparin."
+  },
+  {
+    q: "Which monosaccharide rotates the plane of polarized light in a levorotatory (counterclockwise) direction?",
+    opts: ["Galactose","Ribose","Fructose","Glucose","Mannose"],
+    ans: 2,
+    exp: "Fructose is levorotatory, rotating polarized light to the left, and is designated (–)-fructose. Glucose is dextrorotatory, rotating light to the right — designated (+)-glucose. The direction of optical rotation is an intrinsic property of each sugar's three-dimensional arrangement around its chiral centers and is independent of D/L designation. Galactose, ribose, and mannose are all dextrorotatory."
+  },
+  {
+    q: "Heparin, a sulfated polysaccharide found in animal tissues, primarily functions to:",
+    opts: ["Regulate blood coagulation as an anticoagulant","Provide structural support to connective tissue","Serve as an energy reserve in hepatic tissue","Act as dietary fiber to promote gut motility","Facilitate cell-cell recognition on erythrocyte surfaces"],
+    ans: 0,
+    exp: "Heparin is a highly sulfated glycosaminoglycan found on the luminal surface of vascular endothelium. Its primary function is anticoagulation — it activates antithrombin III, which inactivates thrombin (factor IIa) and factor Xa. Structural support in connective tissue is provided by collagen and hyaluronic acid. Energy storage is the role of glycogen. Cell-cell recognition via oligosaccharides applies to glycoproteins and glycolipids on cell membranes, not heparin."
+  },
+  {
+    q: "Oligosaccharide chains attached to cell surface glycoproteins and glycolipids primarily function in:",
+    opts: ["Energy storage and rapid glucose mobilization","Cell-cell recognition and immune signaling","Structural reinforcement of the plasma membrane lipid bilayer","Fatty acid transport across the plasma membrane","Regulation of intracellular calcium homeostasis"],
+    ans: 1,
+    exp: "Cell surface oligosaccharides on glycoproteins and glycolipids are central to cell-cell recognition, immune function, and pathogen interactions. A classic example is the ABO blood group system, where A, B, and H antigens are oligosaccharide chains on erythrocyte glycoproteins that determine blood type. Influenza virus hemagglutinin also exploits cell surface sialic acid-containing oligosaccharides for host cell attachment."
+  },
+  {
+    q: "What result does sucrose produce in Benedict's test, and what is the structural basis?",
+    opts: ["Positive result, as sucrose retains a free aldehyde group","Positive result, as the fructose moiety retains a free ketone group","Negative result, as both anomeric carbons are engaged in its glycosidic bond","Negative result, as sucrose is insoluble in the alkaline reagent","Positive result, as sucrose is hydrolyzed by the alkaline reagent"],
+    ans: 2,
+    exp: "Sucrose gives a negative Benedict's test because its α-1,2-glycosidic bond involves the anomeric carbons of both glucose (C1) and fructose (C2), leaving no free reducing group to reduce Cu²⁺. Benedict's test is positive only for reducing sugars — those with a free anomeric carbon that can exist in the open-chain aldehyde or ketone form. While glucose and fructose individually are reducing sugars, their combination in sucrose locks both anomeric carbons in bonding, eliminating reducing capacity."
+  },
+  {
+    q: "Raffinose, a trisaccharide present in beans, causes flatulence primarily because:",
+    opts: ["Pancreatic lipases rapidly ferment it within the small intestine","It is hydrolyzed in the stomach, generating excess acidic byproducts","It competitively inhibits lactase activity within the small intestine","It stimulates excess insulin release, producing osmotic diarrhea","Humans lack α-galactosidase and colonic bacteria ferment the undigested sugar"],
+    ans: 4,
+    exp: "Raffinose (galactose–glucose–fructose) cannot be digested because humans lack α-galactosidase, the enzyme needed to cleave the α-1,6 bond between galactose and glucose. The intact raffinose passes to the large intestine, where colonic bacteria ferment it, producing hydrogen, carbon dioxide, and methane — the direct cause of flatulence after legume consumption. This fermentation also classifies raffinose as a prebiotic. Pancreatic lipases act on lipids, not carbohydrates."
+  },
+  {
+    q: "The five-carbon sugar that distinguishes RNA from DNA within the nucleotide backbone is:",
+    opts: ["Glucose","Ribose","Fructose","Deoxyribose","Galactose"],
+    ans: 1,
+    exp: "RNA contains ribose, a pentose sugar with a hydroxyl group at carbon 2 (2'-OH). DNA contains deoxyribose, which lacks this C2 hydroxyl. The 2'-OH in ribose makes RNA more chemically reactive and less stable than DNA, properties suited to its transient functional roles. DNA's stability, conferred by deoxyribose, is essential for long-term genetic storage. Both are pentoses; glucose, fructose, and galactose are hexoses with no role in the nucleic acid backbone."
+  },
+  {
+    q: "Which physical property applies universally to all amino acids, without exception?",
+    opts: ["Optical activity due to at least one chiral carbon center","Ready solubility in non-polar organic solvents","High melting points exceeding 200°C","Decomposition preferentially in acidic aqueous conditions","Fluorescent properties detectable under ultraviolet light"],
+    ans: 2,
+    exp: "All amino acids have high melting points above 200°C, a consequence of their zwitterionic nature and strong ionic interactions within their crystalline lattice. Optical activity applies to almost all amino acids, but glycine is the exception — it lacks a chiral center because both substituents on its α-carbon are identical hydrogen atoms. Amino acids are characteristically insoluble in non-polar solvents. Fluorescence is not a general amino acid property, though tryptophan, tyrosine, and phenylalanine do absorb UV light."
+  },
+  {
+    q: "The ninhydrin reaction with α-amino acids produces which characteristic colored product?",
+    opts: ["Yellow-orange precipitate","Brick-red precipitate","Blue-green coloration","Deep purple coloration","Colorless soluble product"],
+    ans: 3,
+    exp: "Ninhydrin reacts with the α-amino group of amino acids to produce a deep purple color (Ruhemann's purple). The reaction proceeds through oxidative deamination, releasing ammonia that condenses with a reduced ninhydrin molecule to form the colored product. This reaction is highly sensitive, capable of detecting nanomolar (10⁻⁹ mol) quantities of amino acids. The critical exception is proline, which yields a yellow product because its nitrogen is a secondary amine within a pyrrolidine ring, preventing formation of the full purple product."
+  },
+  {
+    q: "At the isoelectric point (pI) of an amino acid, which of the following is correct?",
+    opts: ["The amino acid carries a net negative charge and migrates to the anode","The amino acid carries a net positive charge and migrates to the cathode","The cationic form predominates over the anionic form in solution","The carboxyl group is fully protonated while the amino group is fully deprotonated","The amino acid carries no net charge and does not migrate in an electric field"],
+    ans: 4,
+    exp: "At the isoelectric point, the ionization of positive and negative charges on the amino acid is exactly equal, producing a net charge of zero. An amino acid at its pI placed in an electric field will not migrate toward either electrode. Below the pI, excess protons protonate the carboxylate group, generating a net positive cation that migrates to the cathode. Above the pI, the –NH₃⁺ group loses a proton, producing a net negative anion that migrates to the anode."
+  },
+  {
+    q: "An amino acid placed in a solution at pH significantly below its isoelectric point will:",
+    opts: ["Lose protons from both its carboxyl and amino groups simultaneously","Carry a net negative charge and migrate toward the cathode","Release protons from the amino group only","Remain electrically neutral through zwitterion stabilization","Gain protons and carry a net positive charge"],
+    ans: 4,
+    exp: "At pH below the pI, excess hydrogen ions are accepted by the carboxylate group (–COO⁻), converting it to –COOH, while the amino group remains ionized as –NH₃⁺. The net result is a positively charged cationic amino acid that migrates toward the cathode in an electric field. The opposite occurs at pH above the pI: the –NH₃⁺ group loses a proton, generating a net negative anion that migrates toward the anode."
+  },
+  {
+    q: "The pKa of the α-carboxyl group of most neutral amino acids falls within which approximate range?",
+    opts: ["1.8–2.5","4.0–5.0","6.0–7.0","8.0–9.0","9.5–11.0"],
+    ans: 0,
+    exp: "The pKa of the α-carboxyl group of neutral amino acids consistently falls between 1.8 and 2.5. This low value reflects the electron-withdrawing influence of the adjacent positively charged α-amino group, which stabilizes the carboxylate anion and makes it a stronger acid than a typical aliphatic carboxylic acid (pKa ~4–5). The pKa of the α-amino group ranges from 9 to 10. At physiological pH of 7.4, both groups are ionized, giving the neutral zwitterion."
+  },
+  {
+    q: "Among the standard amino acids, histidine uniquely functions as a physiological buffer because:",
+    opts: ["Its imidazole side chain has a pKa close to physiological pH","It is present at the highest concentration in plasma proteins","Its two carboxyl groups straddle the physiological pH range","Its phenolic side chain accepts protons efficiently at pH 7.4","It forms disulfide bridges that stabilize protein buffering capacity"],
+    ans: 0,
+    exp: "Histidine is the only standard amino acid capable of buffering at physiological pH because its imidazole side chain has a pKa of approximately 6.0 — close enough to pH 7.4 for the imidazole to accept and donate protons within the biologically relevant range. Histidine residues are critical in enzyme active sites and in hemoglobin, where they participate in the Bohr effect. The phenolic side chain of tyrosine has a pKa of ~10, far from physiological range. Disulfide bridges are formed by cysteine."
+  },
+  {
+    q: "Which of the following amino acids lacks optical activity because it has no chiral carbon?",
+    opts: ["Alanine","Proline","Glycine","Serine","Valine"],
+    ans: 2,
+    exp: "Glycine is the only standard amino acid without optical activity. Its α-carbon bears two identical hydrogen atoms, meaning it lacks four distinct substituents and therefore has no asymmetric (chiral) center. All other amino acids have four different groups on the α-carbon (–H, –NH₂, –COOH, and a unique R group), making them optically active. Proline, despite its nitrogen in a ring, still possesses a chiral α-carbon and is optically active."
+  }
+];
+
+const BCH_AA_PEP_Qs = [
+  {
+    q: "How many amino acids are classified as essential in adult human nutrition?",
+    opts: ["Nine","Eight","Ten","Eleven","Seven"],
+    ans: 0,
+    exp: "There are nine essential amino acids that the human body cannot synthesize and must obtain from the diet: histidine, isoleucine, leucine, lysine, methionine, phenylalanine, threonine, tryptophan, and valine. A useful mnemonic is PVT TIM HaLL. Some sources historically listed eight, excluding histidine, which was later confirmed essential for adults as well as children. The eleven non-essential amino acids can be synthesized endogenously under normal conditions."
+  },
+  {
+    q: "Which three amino acids are classified as branched-chain amino acids (BCAAs)?",
+    opts: ["Leucine, lysine, and valine","Leucine, isoleucine, and valine","Leucine, isoleucine, and threonine","Isoleucine, valine, and methionine","Leucine, valine, and phenylalanine"],
+    ans: 1,
+    exp: "The three branched-chain amino acids are leucine, isoleucine, and valine — all essential amino acids characterized by an aliphatic side chain with a branch point. Unlike most amino acids metabolized in the liver, BCAAs are primarily metabolized in skeletal muscle. Leucine specifically activates the mTOR pathway to trigger muscle protein synthesis. BCAAs are widely used in sports nutrition to reduce muscle breakdown during intense exercise."
+  },
+  {
+    q: "Tryptophan is an essential amino acid that serves as the dietary precursor to:",
+    opts: ["Dopamine and norepinephrine","Histamine and carnosine","Serotonin and melatonin","Glutathione and taurine","Epinephrine and thyroid hormone"],
+    ans: 2,
+    exp: "Tryptophan is hydroxylated to 5-hydroxytryptophan (5-HTP), which is decarboxylated to serotonin (5-HT). Serotonin is further converted to melatonin in the pineal gland, regulating sleep-wake cycles. Dopamine and norepinephrine are catecholamines derived from phenylalanine/tyrosine, not tryptophan. Histamine is derived from histidine. Glutathione is a tripeptide synthesized from glutamate, cysteine, and glycine."
+  },
+  {
+    q: "Phenylalanine is the dietary precursor to which group of neurotransmitters and hormones?",
+    opts: ["Serotonin, melatonin, and GABA","Acetylcholine, histamine, and glycine","Glutamate, GABA, and aspartate","Dopamine, norepinephrine, and epinephrine","Enkephalin, endorphin, and substance P"],
+    ans: 3,
+    exp: "Phenylalanine is converted to tyrosine by phenylalanine hydroxylase. Tyrosine is then sequentially converted to L-DOPA, dopamine, norepinephrine, and epinephrine via the catecholamine biosynthesis pathway. In phenylketonuria (PKU), phenylalanine hydroxylase is deficient, causing toxic accumulation of phenylalanine. Serotonin and melatonin derive from tryptophan; GABA derives from glutamate."
+  },
+  {
+    q: "Methionine is an essential amino acid that serves as the metabolic precursor to:",
+    opts: ["Tyrosine","Tryptophan","Histidine","Threonine","Cysteine"],
+    ans: 4,
+    exp: "Methionine is the metabolic precursor to cysteine through the transsulfuration pathway. Methionine donates its methyl group via S-adenosylmethionine (SAM), becoming homocysteine, which is then converted to cystathionine and subsequently to cysteine. Because cysteine can be synthesized from methionine, it is classified as non-essential under normal conditions but may become conditionally essential if methionine intake is inadequate. Tyrosine is derived from phenylalanine."
+  },
+  {
+    q: "Which essential amino acid serves as the precursor to histamine and plays a key role in immune response?",
+    opts: ["Histidine","Lysine","Threonine","Valine","Isoleucine"],
+    ans: 0,
+    exp: "Histidine is the precursor to histamine, formed by decarboxylation of histidine by histidine decarboxylase. Histamine plays central roles in allergic and inflammatory responses, gastric acid secretion (by parietal cells), and neurotransmission. Histidine is also the only standard amino acid that can act as a physiological buffer, due to its imidazole side chain (pKa ≈ 6.0). Lysine contributes to collagen synthesis and calcium absorption but does not produce histamine."
+  },
+  {
+    q: "Lysine is an essential amino acid particularly important for:",
+    opts: ["Serotonin synthesis and sleep regulation","Collagen synthesis and calcium absorption","Histamine production and gastric acid secretion","Thyroid hormone production and basal metabolic rate","Glucose regulation and hemoglobin production"],
+    ans: 1,
+    exp: "Lysine provides key residues (hydroxylysine) in collagen cross-linking through lysyl oxidase, essential for connective tissue strength; and it enhances calcium absorption from the gut, making it important in bone health. Lysine deficiency can impair wound healing and collagen integrity. Serotonin derives from tryptophan. Histamine derives from histidine. Thyroid hormones are synthesized from tyrosine and iodine."
+  },
+  {
+    q: "Which of the following correctly defines conditionally essential amino acids?",
+    opts: ["Amino acids essential only during childhood development","Amino acids obtainable exclusively from animal protein sources","Non-essential amino acids that require dietary supply under physiological stress","Amino acids essential only when renal clearance is significantly impaired","Essential amino acids requiring specific cofactors for intestinal absorption"],
+    ans: 2,
+    exp: "Conditionally essential amino acids are normally non-essential — the body can synthesize them — but under conditions of physiological stress such as illness, severe injury, or surgery, endogenous synthesis becomes insufficient to meet demand. They must then be supplied through diet or supplementation. Examples include arginine, cysteine, glutamine, tyrosine, glycine, proline, and serine. Glutamine becomes conditionally essential during critical illness when skeletal muscle catabolism cannot sustain adequate synthesis for immune cells and enterocytes."
+  },
+  {
+    q: "Which of the following is classified as a conditionally essential amino acid?",
+    opts: ["Leucine","Tryptophan","Methionine","Glutamine","Lysine"],
+    ans: 3,
+    exp: "Glutamine is conditionally essential — synthesized endogenously in adequate amounts under normal conditions, but during critical illness, major surgery, burns, or intense exercise, demand exceeds synthetic capacity, making dietary supplementation necessary. Glutamine is the primary fuel for rapidly dividing cells including enterocytes and immune cells, and supports intestinal barrier integrity. Leucine, tryptophan, methionine, and lysine are unconditionally essential amino acids."
+  },
+  {
+    q: "Arginine has clinical applications primarily because it is the precursor to:",
+    opts: ["Glutathione, a major intracellular antioxidant","Dopamine, a neurotransmitter in reward pathways","Collagen, the primary structural protein of connective tissue","Serotonin, a neurotransmitter regulating mood and appetite","Nitric oxide, a vasodilator important for cardiovascular function"],
+    ans: 4,
+    exp: "Arginine is the sole substrate for nitric oxide synthase (NOS), which produces nitric oxide (NO). NO diffuses into vascular smooth muscle, activating guanylyl cyclase, increasing cGMP, and causing vasodilation. This underlies arginine's use in supplements for cardiovascular health, erectile dysfunction, and exercise performance. Arginine is also important in the urea cycle for ammonia detoxification. Glutathione is synthesized from glutamate, cysteine, and glycine. Dopamine and serotonin derive from phenylalanine/tyrosine and tryptophan, respectively."
+  },
+  {
+    q: "Glutathione is a biologically important tripeptide composed of which three amino acids?",
+    opts: ["Glutamate, cysteine, and glycine","Glutamine, alanine, and cysteine","Glycine, serine, and cysteine","Cysteine, methionine, and glycine","Glutamine, cysteine, and serine"],
+    ans: 0,
+    exp: "Glutathione (γ-L-glutamyl-L-cysteinyl-glycine) is a tripeptide composed of glutamate, cysteine, and glycine. Note that the glutamate residue is linked via its γ-carboxyl group — an unusual peptide bond. The cysteine residue provides the thiol (–SH) group responsible for antioxidant activity. It is oxidized to glutathione disulfide (GSSG) and regenerated by glutathione reductase using NADPH. Note: some sources incorrectly list glutamine instead of glutamate — the correct component is glutamate (glutamic acid)."
+  },
+  {
+    q: "Oxytocin is correctly described as:",
+    opts: ["An 11-amino acid peptide involved in pain signal transmission","A 9-amino acid hormone involved in childbirth and social bonding","A 9-amino acid peptide that raises blood glucose by hepatic glycogenolysis","A 29-amino acid hormone that stimulates uterine contractions","A 9-amino acid vasoactive peptide that lowers systemic blood pressure"],
+    ans: 1,
+    exp: "Oxytocin is a nonapeptide (9 amino acids) synthesized in the hypothalamus and released from the posterior pituitary. It stimulates uterine contractions during labour and triggers milk ejection during breastfeeding. It is also known as the 'bonding hormone' for its role in social attachment and trust. Glucagon (not oxytocin) raises blood glucose. Bradykinin (also 9 amino acids) is the vasoactive peptide causing vasodilation. Substance P (11 amino acids) mediates pain signalling."
+  },
+  {
+    q: "Insulin consists of two polypeptide chains joined by disulfide bonds. The correct amino acid counts for the A and B chains, respectively, are:",
+    opts: ["20 amino acids in the A chain and 30 in the B chain","21 amino acids in the A chain and 29 in the B chain","21 amino acids in the A chain and 30 in the B chain","29 amino acids in the A chain and 21 in the B chain","30 amino acids in the A chain and 21 in the B chain"],
+    ans: 2,
+    exp: "Insulin's A chain contains 21 amino acids and the B chain contains 30 amino acids (total 51). The two chains are connected by two interchain disulfide bonds, with an additional intrachain disulfide bond within the A chain. Insulin is initially synthesized as proinsulin — a single chain containing the A and B chains connected by the C-peptide. Proteolytic cleavage of the C-peptide generates mature insulin. The C-peptide is released in equimolar amounts with insulin and is used to assess endogenous insulin production."
+  },
+  {
+    q: "Glucagon is a 29-amino acid peptide hormone. Its primary metabolic action is to:",
+    opts: ["Promote peripheral glucose uptake by activating insulin receptors","Lower blood glucose by stimulating hepatic glycogen synthesis","Reduce hepatic glucose output by inhibiting glycogenolysis","Raise blood glucose by promoting hepatic glycogenolysis and gluconeogenesis","Stimulate pancreatic beta cell insulin secretion in hyperglycemia"],
+    ans: 3,
+    exp: "Glucagon is secreted by pancreatic α-cells in response to hypoglycemia and acts primarily on the liver to raise blood glucose. It activates glycogenolysis (breakdown of hepatic glycogen) and stimulates gluconeogenesis. Glucagon binds its GPCR, activating adenylyl cyclase, increasing cAMP, and activating protein kinase A — the opposite of insulin's signalling pathway. Insulin promotes peripheral glucose uptake and glycogen synthesis. Glucagon and insulin are counter-regulatory hormones."
+  },
+  {
+    q: "Bradykinin is a nonapeptide that produces which primary hemodynamic effect?",
+    opts: ["Vasoconstriction leading to increased systemic blood pressure","Increased cardiac output and reflex tachycardia","Decreased renal perfusion and sodium retention","Bronchoconstriction and increased airway resistance","Vasodilation leading to a reduction in blood pressure"],
+    ans: 4,
+    exp: "Bradykinin is a 9-amino acid vasoactive peptide formed from kininogen by kallikrein. Its principal hemodynamic effect is vasodilation of arterioles, reducing peripheral vascular resistance and lowering blood pressure. It also increases vascular permeability, contributing to inflammation. Bradykinin is inactivated by ACE — the reason ACE inhibitors cause bradykinin accumulation and dry cough. Vasoconstriction is produced by angiotensin II and endothelin, not bradykinin."
+  },
+  {
+    q: "Substance P is an undecapeptide (11 amino acids) that functions primarily as:",
+    opts: ["A neurotransmitter involved in pain signal transmission","A peptide hormone that regulates blood glucose levels","A nonapeptide mediating uterine contraction and lactation","A vasodilator that lowers systemic blood pressure acutely","A peptide enzyme that degrades extracellular matrix proteins"],
+    ans: 0,
+    exp: "Substance P is an 11-amino acid neuropeptide belonging to the tachykinin family. It is released from primary afferent sensory neurons and functions as a key neurotransmitter in the transmission of pain (nociception) and the stress response. It binds the neurokinin 1 (NK1) receptor and also plays a role in inflammation, emesis, and mood regulation. Oxytocin mediates uterine contractions. Bradykinin (also a nonapeptide) is the vasoactive peptide. Blood glucose is regulated by insulin and glucagon."
+  },
+  {
+    q: "Amyloid beta peptide is most closely associated with which pathological condition?",
+    opts: ["Type 1 diabetes mellitus through pancreatic beta cell destruction","Alzheimer's disease through amyloid plaque formation in the brain","Rheumatoid arthritis through deposition in synovial joint spaces","Chronic kidney disease through glomerular basement membrane deposition","Systemic amyloidosis through preferential deposition in cardiac muscle"],
+    ans: 1,
+    exp: "Amyloid beta peptides (Aβ), most commonly 40–42 amino acids long, are produced by cleavage of amyloid precursor protein (APP) by β- and γ-secretase. Pathological aggregation of Aβ42 forms insoluble amyloid plaques in the extracellular space of the brain — a hallmark of Alzheimer's disease, triggering neuroinflammation and neuronal death. Islet amyloid polypeptide (amylin) — not amyloid beta — is associated with type 2 diabetes. Primary systemic amyloidosis involves AL or AA amyloid, not amyloid beta."
+  },
+  {
+    q: "Peptides are defined as chains of amino acids smaller than proteins. The accepted size range for a peptide is:",
+    opts: ["2 to 10 amino acids only","10 to 100 amino acids in length","2 to 50 amino acids in length","50 to 100 amino acids in length","More than 100 amino acids in length"],
+    ans: 2,
+    exp: "Peptides are conventionally defined as chains of 2 to approximately 50 amino acids. Below this range, individual amino acid-derived molecules are not considered peptides. Above 50 amino acids, the molecule transitions into the category of a protein or polypeptide, though this boundary is not strict. Insulin, at 51 amino acids total (A+B chains), sits near this boundary. Di- and tripeptides are at the lower end; oligopeptides refer to chains of 3–10 amino acids."
+  },
+  {
+    q: "The two polypeptide chains of insulin are covalently held together by:",
+    opts: ["Hydrogen bonds between complementary amino acid residues","Ionic bonds between positively and negatively charged side chains","Hydrophobic interactions between non-polar amino acid residues","Disulfide bonds between cysteine residues on both chains","Peptide bonds formed post-translationally between the two chains"],
+    ans: 3,
+    exp: "The A and B chains of insulin are linked by two interchain disulfide bonds (–S–S–) formed between cysteine residues (A7–B7 and A20–B19). A third, intrachain disulfide bond exists within the A chain alone (A6–A11). Disulfide bonds are formed by oxidation of thiol (–SH) groups of cysteine residues and contribute to the stability of mature insulin. Hydrogen bonds, ionic bonds, and hydrophobic interactions are non-covalent and contribute to tertiary structure but do not covalently link the chains."
+  },
+  {
+    q: "Collagen peptides are short chains derived from collagen protein. Their primary applications in clinical nutrition are:",
+    opts: ["Regulating blood glucose levels in insulin-resistant patients","Delivering anticoagulant therapy in thromboembolic conditions","Inhibiting amyloid plaque accumulation in neurodegenerative disease","Modulating systemic immune responses in autoimmune conditions","Supporting skin integrity, joint health, and connective tissue repair"],
+    ans: 4,
+    exp: "Collagen peptides (hydrolyzed collagen) are rich in glycine, proline, and hydroxyproline — the key amino acids in collagen triple helix formation. Evidence supports their use in reducing skin wrinkle depth, improving joint pain in osteoarthritis, and enhancing nail and hair growth. Anticoagulant peptides (e.g., bivalirudin) and glucose-regulating peptides (e.g., insulin) are pharmacologically distinct classes unrelated to collagen."
+  },
+  {
+    q: "C-peptide levels are measured clinically to assess:",
+    opts: ["Endogenous insulin production capacity","Glucagon reserve in type 2 diabetes management","Amyloid plaque burden in Alzheimer's disease","Renal clearance of small peptide hormones","Hepatic synthesis of coagulation factors"],
+    ans: 0,
+    exp: "C-peptide is the connecting peptide cleaved from proinsulin during insulin processing in pancreatic beta cells. It is released into the portal circulation in equimolar amounts with insulin, making it a reliable biomarker of endogenous insulin secretion. Because C-peptide has a longer half-life and is not cleared by the liver on first pass, it is a more accurate marker of beta cell function than insulin itself. It is used to distinguish type 1 from type 2 diabetes and to detect insulinoma or surreptitious insulin injection."
+  },
+  {
+    q: "Bivalirudin is a peptide-based drug used clinically as:",
+    opts: ["An antifibrinolytic agent for surgical hemostasis","A direct thrombin inhibitor for anticoagulation","A vasodilator for acute hypertensive emergencies","An analgesic for managing neuropathic pain","An antimicrobial for gram-positive bacterial infections"],
+    ans: 1,
+    exp: "Bivalirudin is a synthetic 20-amino acid peptide that acts as a direct thrombin inhibitor. It binds reversibly to both the active site and exosite 1 of thrombin, preventing fibrin clot formation. It is used in percutaneous coronary interventions (PCI) as an alternative to heparin, particularly in patients at high risk of bleeding or heparin-induced thrombocytopenia (HIT). Unlike heparin, bivalirudin does not require antithrombin III as a cofactor."
+  },
+  {
+    q: "Antimicrobial peptides (AMPs) exert their bactericidal effect primarily by:",
+    opts: ["Inhibiting bacterial ribosomal function and protein synthesis","Blocking bacterial DNA gyrase to prevent replication","Disrupting bacterial cell membranes without promoting resistance","Inhibiting bacterial cell wall synthesis by blocking transpeptidation","Chelating divalent cations essential for bacterial enzyme function"],
+    ans: 2,
+    exp: "Antimicrobial peptides target the bacterial cell membrane directly, inserting into and disrupting the phospholipid bilayer through mechanisms such as barrel-stave pore formation or the carpet model. Because this mechanism is non-specific to any particular bacterial protein, bacteria are less likely to develop resistance compared to conventional antibiotics. Ribosome inhibition is the mechanism of aminoglycosides and macrolides. DNA gyrase inhibition is the mechanism of fluoroquinolones. Cell wall transpeptidase inhibition is the mechanism of beta-lactam antibiotics."
+  },
+  {
+    q: "Endorphins are endogenous neuropeptides that function primarily to:",
+    opts: ["Stimulate the inflammatory cascade and facilitate wound healing","Enhance neurotransmitter release at the neuromuscular junction","Modulate circadian rhythm and promote wakefulness","Reduce pain perception and promote feelings of pleasure","Regulate systemic blood pressure through peripheral vasodilation"],
+    ans: 3,
+    exp: "Endorphins are endogenous opioid neuropeptides produced in the CNS and pituitary gland. They bind μ-opioid receptors and produce analgesia by inhibiting substance P release in pain pathways and activating descending inhibitory pain circuits. They also activate the mesolimbic dopamine reward pathway, producing euphoria — the basis of 'runner's high.' Exogenous opioids such as morphine mimic their action. Endorphins are distinct from endocannabinoids, acetylcholine, and melatonin."
+  },
+  {
+    q: "Cell-penetrating peptides (CPPs) are used in biotechnology and medicine primarily to:",
+    opts: ["Stimulate collagen production in dermal fibroblasts","Provide first-line antimicrobial defense against pathogens","Assess endogenous insulin secretory capacity in diabetes","Inhibit amyloid fibril formation in neurodegenerative diseases","Deliver drugs or genetic material across cell membranes"],
+    ans: 4,
+    exp: "Cell-penetrating peptides (CPPs) are short peptides (typically 5–30 amino acids) that can cross cell membranes by endocytosis or direct membrane translocation. Their primary application is as intracellular delivery vehicles for therapeutic agents that cannot independently penetrate the cell membrane — including nucleic acids, proteins, small molecule drugs, and nanoparticles. This makes them valuable in gene therapy, cancer treatment, and targeted drug delivery. Collagen-stimulating peptides (e.g., copper peptides) are a distinct class used in dermatology."
+  }
+];
+
 /* ═══════════ HISTOLOGY QUESTION ARRAYS ═══════════ */
 
 const HISTOLOGY_BATCH1_Qs = [
@@ -4149,6 +4457,8 @@ const COURSES = [
         { id:"ana202_cranial_base", name:"Cranial Base", questions:IU_ANA301_CRANIAL_BASE_Qs, available:true, subject:"anatomy", anatomyType:"Gross Anatomy", lecturer:"Dr. Emmanuel O. Bienonwu" },
         { id:"physiology", name:"Basal Ganglia", questions:PHYSIO_Qs, available:true, subject:"physiology", lecturer:"Unnamed" },
         { id:"biochemistry", name:"Biochemical Aspects of Cancer and Cancer Therapy", questions:BIOCHEM_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
+        { id:"bch201_carbohydrates", name:"Carbohydrates: Structure, Properties & Functions", questions:BCH_CARB_AA_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
+        { id:"bch205_aa_peptides", name:"Amino Acids & Peptides", questions:BCH_AA_PEP_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
         { id:"histo_ct",     name:"Connective Tissue",                questions:HISTO_CONNECTIVE_TISSUE_Qs, available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
         { id:"histo_tp",     name:"Tissue Processing",                questions:HISTO_TISSUE_PROCESSING_Qs, available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
         { id:"histo_intro",  name:"Introduction to Histology",        questions:HISTO_GENERAL_INTRO_Qs,     available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
