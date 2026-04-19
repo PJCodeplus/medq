@@ -514,6 +514,1199 @@ const EKO_ANATOMY_Qs = [];
 const EKO_PHYSIO_Qs = [];
 const EKO_BIOCHEM_Qs = [];
 
+/* ═══════════ HISTOLOGY QUESTION ARRAYS ═══════════ */
+
+const HISTOLOGY_BATCH1_Qs = [
+
+  // ── CONNECTIVE TISSUE ───────────────────────────────────────────────────────
+
+  {
+    q: "Which of the following is a component of the ground substance of connective tissue?",
+    opts: ["Collagen fibers","Proteoglycans","Reticular fibers","Fibroblasts","Elastic fibers"],
+    ans: 1,
+    exp: "Ground substance consists of proteoglycans (which include glycosaminoglycans/GAGs), adhesion proteins such as fibronectin and laminin, and interstitial fluid. Collagen, elastic, and reticular fibers are separate structural components of connective tissue, not part of the ground substance itself. Fibroblasts are the cells that produce and maintain connective tissue — they are not a matrix constituent."
+  },
+  {
+    q: "The primary functional role of ground substance in connective tissue is to act as a:",
+    opts: ["Contractile scaffold for smooth muscle cells","Rigid supportive framework resisting compression","Immunological barrier preventing pathogen entry","Storage depot for fat-soluble vitamins","Molecular sieve through which nutrients diffuse between capillaries and cells"],
+    ans: 4,
+    exp: "Ground substance acts as a molecular sieve through which nutrients, waste products, and signalling molecules diffuse between blood capillaries and cells. This function depends on its composition of proteoglycans and adhesion proteins within a fluid matrix. It is not contractile, not rigid, not immunological, and does not function primarily as a vitamin depot."
+  },
+  {
+    q: "Which connective tissue fiber is primarily responsible for allowing tissues to return to their original shape after being stretched?",
+    opts: ["Collagen fibers","Reticular fibers","Elastic fibers","Fibronectin","Laminin"],
+    ans: 2,
+    exp: "Elastic fibers are long, thin fibers that allow stretch and recoil, enabling tissues to return to their original shape after deformation. Collagen fibers provide high tensile strength but do not recoil elastically. Reticular fibers form delicate branching support networks. Fibronectin and laminin are adhesion proteins of the ground substance, not structural fiber types."
+  },
+  {
+    q: "Which cell type is responsible for secreting the fibers and ground substance of connective tissue proper?",
+    opts: ["Chondroblasts","Osteoblasts","Mast cells","Fibroblasts","Hematopoietic stem cells"],
+    ans: 3,
+    exp: "Fibroblasts are the principal cells of connective tissue proper and are responsible for synthesizing collagen, elastic, and reticular fibers as well as the components of ground substance. Chondroblasts perform this role in cartilage; osteoblasts in bone. Hematopoietic stem cells give rise to blood cells. Mast cells are resident immune-type cells that release histamine and heparin — they do not produce the structural matrix."
+  },
+  {
+    q: "Areolar connective tissue is best described as having which of the following characteristics?",
+    opts: ["Gel-like matrix containing all three fiber types with fibroblasts, macrophages, and mast cells","Parallel collagen fibers with few elastic fibers and fibroblasts as the major cell type","Closely packed adipocytes within a matrix similar to the gel-like ground substance","Loose ground substance with only reticular fibers forming a delicate support network","Amorphous firm matrix with chondrocytes residing within lacunae"],
+    ans: 0,
+    exp: "Areolar connective tissue has a gel-like matrix containing all three fiber types — collagen, elastic, and reticular — and a diverse cell population including fibroblasts, macrophages, mast cells, and white blood cells. It wraps and cushions organs and is widely distributed. Dense regular connective tissue has parallel collagen fibers (option B). Adipose tissue has closely packed adipocytes (option C). Reticular tissue has only reticular fibers (option D). Option E describes hyaline cartilage."
+  },
+  {
+    q: "Reticular connective tissue forms the internal supporting framework (stroma) of which of the following structures?",
+    opts: ["Tendons and ligaments","Dermis and fibrous organ capsules","Intervertebral discs and pubic symphysis","Lymph nodes, bone marrow, and spleen","Costal cartilage and tracheal rings"],
+    ans: 3,
+    exp: "Reticular connective tissue consists of reticular fibers produced by reticular cells, forming a delicate internal skeleton (stroma) that supports lymphocytes and blood cell populations in lymph nodes, bone marrow, and the spleen. Tendons and ligaments contain dense regular connective tissue. The dermis contains dense irregular connective tissue. Intervertebral discs contain fibrocartilage. Costal cartilage and tracheal rings contain hyaline cartilage."
+  },
+  {
+    q: "Dense regular connective tissue is characteristically found in which of the following structures?",
+    opts: ["Dermis of the skin","Submucosa of the digestive tract","Tendons and ligaments","Lymph nodes and spleen","Stroma of the liver and bone marrow"],
+    ans: 2,
+    exp: "Dense regular connective tissue has parallel-arranged collagen fibers conferring high tensile strength in one direction, making it ideal for tendons (muscle to bone) and ligaments (bone to bone). Dense irregular connective tissue, with randomly arranged collagen fibers, is found in the dermis and organ capsules. Submucosa is loose areolar connective tissue. Lymph nodes and bone marrow stroma are reticular connective tissue."
+  },
+  {
+    q: "Hyaline cartilage is found at all of the following locations EXCEPT:",
+    opts: ["Articular surfaces of long bones","Costal cartilages of the ribs","Walls of the trachea and larynx","Intervertebral discs","Nasal cartilage"],
+    ans: 3,
+    exp: "Intervertebral discs contain fibrocartilage, not hyaline cartilage. Fibrocartilage has thick collagen fiber bundles that provide tensile strength and absorb compressive shock between vertebrae. Hyaline cartilage, which has an amorphous firm matrix with chondrocytes in lacunae, is found at articular surfaces, costal cartilages, trachea, larynx, and nasal cartilage."
+  },
+  {
+    q: "Elastic cartilage differs from hyaline cartilage primarily in that it contains:",
+    opts: ["Chondrocytes located within lacunae","Abundant elastic fibers in the matrix","A perichondrium covering its outer surface","A collagen fiber framework within the matrix","Ground substance secreted by chondroblasts"],
+    ans: 1,
+    exp: "Elastic cartilage has a matrix similar to hyaline cartilage but is distinguished by a rich network of elastic fibers, which allow flexibility while maintaining shape. This makes it suitable for the external ear (pinna) and epiglottis. Both hyaline and elastic cartilage share chondrocytes in lacunae, a perichondrium, collagen framework, and matrix produced by chondroblasts — these are shared features, not distinguishing ones."
+  },
+  {
+    q: "Which structural property makes fibrocartilage uniquely suited for the intervertebral discs?",
+    opts: ["Its elastic fibers allow full recoil after axial loading","Its amorphous matrix with invisible collagen resists shear forces","Its reticular fiber network distributes mechanical loads evenly","Its hyaluronic acid-rich ground substance reduces friction between vertebrae","Its thick collagen fiber bundles provide both tensile strength and compressive shock absorption"],
+    ans: 4,
+    exp: "Fibrocartilage has densely packed thick collagen fiber bundles that confer both tensile strength and compressive shock absorption — properties required at weight-bearing sites such as the intervertebral discs, pubic symphysis, and knee menisci. The amorphous matrix with invisible collagen is a feature of hyaline cartilage. Elastic recoil is a feature of elastic cartilage. Reticular fibers are found in reticular connective tissue, not cartilage."
+  },
+  {
+    q: "Mesenchyme is significant in the study of connective tissue because it:",
+    opts: ["Forms the lining of all body cavities in the adult organism","Is the embryonic tissue from which all connective tissues are derived","Produces myelin sheaths around peripheral nerve fibers during development","Differentiates exclusively into skeletal muscle during embryogenesis","Serves as the precursor to epithelial cells of the gastrointestinal tract"],
+    ans: 1,
+    exp: "Mesenchyme is the embryonic connective tissue with a gel-like ground substance, scattered fibers, and star-shaped mesenchymal cells found in the embryo. It gives rise to all connective tissues — connective tissue proper, cartilage, bone, and blood. It does not give rise to epithelium (endo/ectoderm origin), nerve myelin (Schwann cells from neural crest), or directly to skeletal muscle (myoblasts from paraxial mesoderm via distinct lineages)."
+  },
+  {
+    q: "Adipose connective tissue is classified as a loose connective tissue because:",
+    opts: ["Its matrix resembles areolar tissue with the predominant cell being a lipid-storing adipocyte","Its scattered reticular fibers form an open mesh without dense collagen bundles","Its parallel collagen arrangement resists tensile forces in one direction","Its delicate fiber network primarily supports lymphoid cell populations","Its chondrocytes lie within lacunae in a firm, avascular matrix"],
+    ans: 0,
+    exp: "Adipose tissue is classified as loose connective tissue because its matrix composition resembles areolar tissue, but the predominant cell type is the adipocyte, closely packed and storing lipid. It functions in energy reserve, thermal insulation, and organ protection. Reticular connective tissue (option B) and dense regular connective tissue (option C) are distinct types. Lymphoid stroma (option D) is reticular connective tissue. Option E describes cartilage."
+  },
+
+  // ── TISSUE PROCESSING ───────────────────────────────────────────────────────
+
+  {
+    q: "The first and most critical step in routine tissue processing for light microscopy is:",
+    opts: ["Fixation to stabilize and preserve tissue architecture","Dehydration using graded alcohols to remove tissue water","Clearing with xylene to render the tissue receptive to paraffin","Infiltration of the tissue with molten paraffin wax","Embedding the infiltrated tissue in a solidified paraffin block"],
+    ans: 0,
+    exp: "Fixation is the essential first step. It stabilizes tissue by cross-linking proteins, preventing autolysis and bacterial decomposition, and preserving cellular morphology. The standard fixative is 10% formalin. Without adequate fixation, all subsequent steps produce distorted sections. Dehydration, clearing, infiltration, and embedding follow fixation in sequence."
+  },
+  {
+    q: "During tissue processing, a series of alcohols with increasing concentration is used. The primary purpose of this dehydration step is to:",
+    opts: ["Cross-link proteins to prevent tissue degradation","Kill microorganisms remaining in the fixed tissue","Remove water from the tissue because paraffin wax is hydrophobic","Make the tissue transparent by replacing alcohol with a miscible solvent","Harden the tissue to allow thin sectioning on a microtome"],
+    ans: 2,
+    exp: "Paraffin wax is hydrophobic and cannot penetrate water-containing tissue. Dehydration uses ascending concentrations of alcohol (typically 70%, 80%, 95%, 100%) to progressively remove all water and prepare the tissue for paraffin infiltration. Protein cross-linking is the function of fixation. Making the tissue transparent is the role of clearing. Tissue hardening occurs through embedding. Microbial killing is a side effect, not the primary purpose."
+  },
+  {
+    q: "In tissue processing, xylene is used as a clearing agent. Its specific function in this step is to:",
+    opts: ["Provide a permanent mounting medium for the finished glass slide","Render the tissue receptive to paraffin wax by replacing the dehydrating alcohol","Harden the tissue block by solidifying around the embedded specimen","Remove residual fixative from the tissue before paraffin infiltration","Stain lipid components within the tissue before sectioning"],
+    ans: 1,
+    exp: "Xylene is miscible with both alcohol and paraffin wax, making it an ideal intermediary. It replaces the dehydrating alcohol within the tissue and renders the tissue translucent — hence 'clearing' — preparing it for molten paraffin infiltration in the next step. Mounting medium is used at the final slide-preparation stage after staining. Tissue hardening occurs during embedding. Xylene does not stain or remove fixative."
+  },
+  {
+    q: "After paraffin embedding, thin tissue sections for light microscopy are cut using a:",
+    opts: ["Cryostat for frozen sections at subzero temperatures","Vibratome for cutting unfixed soft tissue without embedding","Ultramicrotome for sections suitable for electron microscopy","Microtome for routine thin sections from paraffin-embedded blocks","Dermatome for harvesting surface-area tissue sections"],
+    ans: 3,
+    exp: "A microtome cuts the hardened paraffin-embedded tissue block into thin sections (typically 3–7 µm) for mounting on glass slides. A cryostat is used for rapid frozen sections (e.g., intraoperative diagnosis) but produces lower resolution. An ultramicrotome cuts ultrathin sections (50–100 nm) for transmission electron microscopy. A vibratome cuts unfixed, unembedded tissue by vibration. A dermatome is a surgical instrument for harvesting skin grafts."
+  },
+  {
+    q: "In a standard H&E-stained section, hematoxylin stains cell nuclei blue-purple because it binds to:",
+    opts: ["Acidic structures such as nucleic acids in nuclei and ribosomes","Basic structures such as cytoplasmic proteins and collagen fibers","Lipid-rich membranes including the nuclear envelope and mitochondria","Carbohydrate-rich structures such as glycogen and proteoglycans","Hydrophobic structures including keratin and elastic fibers"],
+    ans: 0,
+    exp: "Hematoxylin is a basic (cationic) dye that binds to acidic (basophilic/anionic) structures — primarily nucleic acids (DNA in nuclei, RNA in ribosomes and rough ER). This produces the characteristic blue-purple staining of cell nuclei and nucleolus-rich cytoplasm. Eosin is an acidic dye that stains basic structures (cytoplasm, collagen, red blood cells, muscle) pink. Lipids and glycogen are not well demonstrated by standard H&E."
+  },
+  {
+    q: "The most commonly used fixative in routine histopathological tissue processing is:",
+    opts: ["Osmium tetroxide for preservation of lipid membrane ultrastructure","Glutaraldehyde for high-resolution electron microscopy processing","10% formalin for general preservation of tissue morphology","Bouin's fluid for gonadal and embryonic tissue fixation","Absolute ethanol for nucleic acid preservation in cytological smears"],
+    ans: 2,
+    exp: "10% formalin (formaldehyde solution) is the standard fixative in routine histopathology. It preserves tissue morphology by cross-linking proteins, is inexpensive, widely available, and compatible with most stains including H&E and immunohistochemistry. Osmium tetroxide and glutaraldehyde are used for electron microscopy. Bouin's fluid is used for specific tissues such as gonads. Absolute ethanol is used for cytological smears and nucleic acid preservation, not routine sections."
+  },
+
+  // ── TISSUES & HISTOLOGY — GENERAL ───────────────────────────────────────────
+
+  {
+    q: "Epithelial tissue is avascular. The practical consequence of this property is that epithelial cells:",
+    opts: ["Have no capacity for mitosis and therefore cannot regenerate after injury","Receive oxygen and nutrients exclusively by diffusion from underlying connective tissue","Are protected from immune surveillance because lymphocytes cannot enter the epithelium","Cannot be invaded by malignant cells because they lack a vascular supply","Are incapable of secretion because exocytosis requires a direct vascular supply"],
+    ans: 1,
+    exp: "Because epithelial tissue lacks blood vessels, all nutrients and oxygen reach epithelial cells by diffusion from capillaries in the underlying connective tissue (lamina propria or dermis). This limits maximum epithelial thickness and makes epithelia dependent on their basement membrane contact with the underlying vascular tissue. Epithelium retains high regenerative capacity despite avascularity — surface cells are continuously replaced by mitosis from basal layers."
+  },
+  {
+    q: "Pseudostratified epithelium is correctly defined as an epithelium in which:",
+    opts: ["All cells contact the basement membrane but nuclei appear at different heights","Multiple genuine cell layers are present between the basement membrane and the surface","Cells change shape reversibly depending on the degree of organ distension","Two morphologically distinct cell types alternate within a single epithelial layer","Basal cells are columnar while surface cells flatten into a squamous layer"],
+    ans: 0,
+    exp: "Pseudostratified epithelium is technically a simple epithelium — all cells contact the basement membrane, making it a single true layer. However, nuclei are positioned at varying heights, giving the false appearance of multiple layers. The classic example is pseudostratified ciliated columnar epithelium lining the trachea. True stratified epithelium has multiple genuine cell layers. Transitional epithelium changes shape with distension. Options D and E describe unrelated epithelial patterns."
+  },
+  {
+    q: "Transitional epithelium (urothelium) is specialized for lining the urinary tract primarily because it:",
+    opts: ["Secretes a protective mucus layer that neutralises the acidity of urine","Allows the organ wall to stretch and recoil without disrupting epithelial integrity","Provides a thick multilayered barrier that is impermeable to all ions and solutes","Rapidly regenerates to replace cells damaged by bacterial toxins in cystitis","Contains ciliated cells that sweep cellular debris toward the urethral opening"],
+    ans: 1,
+    exp: "Transitional epithelium is uniquely adapted to accommodate the dramatic volume changes as the bladder fills and empties. Its surface cells change shape — dome-shaped when relaxed, flat when stretched — without disrupting epithelial continuity. It does not secrete neutralising mucus. While it does form a barrier, the defining adaptive feature is shape change under distension. It is not ciliated."
+  },
+  {
+    q: "Which of the following correctly distinguishes keratinized from non-keratinized stratified squamous epithelium?",
+    opts: ["Keratinized epithelium has living surface cells; non-keratinized has dead surface cells","Keratinized epithelium lines moist body openings; non-keratinized covers dry exposed surfaces","Keratinized surface cells are dead and filled with keratin; non-keratinized surface cells are living","Keratinized epithelium is found in the esophagus; non-keratinized forms the epidermis","Keratinized epithelium is thinner and less protective than non-keratinized epithelium"],
+    ans: 2,
+    exp: "In keratinized stratified squamous epithelium, surface cells are dead and packed with the protein keratin, forming a durable, waterproof barrier — as seen in the epidermis. In non-keratinized stratified squamous epithelium, surface cells remain living and nucleated, lining moist surfaces such as the oral cavity, esophagus, and vagina. Options A and B have the properties reversed. Option D has the locations reversed (esophagus is non-keratinized; epidermis is keratinized)."
+  },
+  {
+    q: "Simple squamous epithelium is the lining epithelium of which of the following structures?",
+    opts: ["Proximal convoluted tubules of the kidney","Gastric mucosa of the stomach","Conducting airways of the trachea","Inner surface of the urinary bladder","Lumen of blood vessels and lymphatic vessels"],
+    ans: 4,
+    exp: "Simple squamous epithelium lines blood vessels (endothelium), lymphatic vessels, and body cavity surfaces (mesothelium — pleura, peritoneum, pericardium). Its extremely flat, thin cells facilitate rapid diffusion and filtration. The proximal convoluted tubule is lined by simple cuboidal epithelium with a brush border. The stomach is lined by simple columnar epithelium. The trachea is lined by pseudostratified ciliated columnar epithelium. The urinary bladder is lined by transitional epithelium."
+  },
+  {
+    q: "Tight junctions (zonula occludens) between adjacent epithelial cells function primarily to:",
+    opts: ["Form an impermeable seal in the intercellular space preventing paracellular passage","Anchor cells to the basement membrane via transmembrane linker proteins","Allow direct passage of ions and small molecules between adjacent cytoplasms","Provide mechanical adhesion between cells through keratin intermediate filaments","Generate signals that regulate cell proliferation and apico-basal polarity"],
+    ans: 0,
+    exp: "Tight junctions are formed by fusion of integral membrane proteins (claudins, occludins) of adjacent cells, completely encircling the cell near its apical surface. They seal the intercellular space, preventing substances from passing between cells (paracellular route) and forcing selective transcellular transport. Gap junctions (option C) allow direct cytoplasmic communication. Desmosomes (option D) provide mechanical adhesion via keratin. Hemidesmosomes anchor cells to the basement membrane (option B)."
+  },
+  {
+    q: "The primary structural function of desmosomes in epithelial tissue is to:",
+    opts: ["Seal the intercellular space to prevent paracellular transport of macromolecules","Provide mechanical adhesion between adjacent cells through keratin intermediate filaments","Allow direct passage of ions and second messengers between adjacent cells","Attach the basal surface of epithelial cells to the basement membrane","Regulate apico-basal polarity by segregating apical and lateral membrane proteins"],
+    ans: 1,
+    exp: "Desmosomes consist of two disc-like intracellular plaques in adjacent cells, connected across the intercellular space by transmembrane glycoproteins (desmosomal cadherins). Intracellularly, they anchor to keratin intermediate filaments, forming a continuous mechanical linkage that distributes tensile stress across the epithelium. Tight junctions seal the intercellular space (option A). Gap junctions allow ion/small molecule transfer (option C). Hemidesmosomes attach cells to the basement membrane (option D)."
+  },
+  {
+    q: "Gap junctions are formed by paired connexon channels between adjacent cells. The primary function of these channels is to:",
+    opts: ["Mechanically anchor adjacent cells together to resist shear and tensile forces","Prevent luminal antigens from crossing between cells into the bloodstream","Serve as the primary site for transcytosis of large plasma proteins","Allow direct cytoplasmic communication of ions and small molecules between adjacent cells","Restrict lateral diffusion of membrane proteins to maintain apico-basal polarity"],
+    ans: 3,
+    exp: "Gap junctions are formed by paired connexon hemichannels (each composed of 6 connexin proteins) spanning the membranes of two adjacent cells, creating a direct aqueous channel between cytoplasms. This allows passage of ions, second messengers (cAMP, IP3, Ca2+), and small metabolites — enabling electrical and metabolic coupling as seen in cardiac muscle and smooth muscle. Mechanical anchoring is the role of desmosomes. Paracellular sealing is the role of tight junctions."
+  },
+  {
+    q: "The fundamental structural difference between endocrine and exocrine glands is that exocrine glands:",
+    opts: ["Secrete their products directly into the bloodstream without an intervening duct","Are derived from mesenchymal rather than epithelial tissue during development","Produce protein-based secretions while endocrine glands exclusively produce steroid hormones","Are exclusively multicellular while endocrine glands may be unicellular in structure","Retain a duct connecting their secretory unit to an epithelial surface"],
+    ans: 4,
+    exp: "Both gland types originate from epithelium by infolding, but exocrine glands retain their ductal connection to the surface, through which secretions are delivered to a body cavity or external surface. Endocrine glands lose their duct during development and secrete hormones directly into the bloodstream. Goblet cells are unicellular exocrine glands (disproving option D). Both gland types can produce proteins or steroids depending on the specific cell type."
+  },
+  {
+    q: "The mesoderm gives rise to which of the following tissue types?",
+    opts: ["Lining epithelium of the gastrointestinal tract and liver parenchyma","Epidermis of the skin and neural tissue of the brain and spinal cord","Cornea, lens, and sensory epithelium of the inner ear","Muscle, bone, cartilage, blood vessels, and kidney","Respiratory epithelium and mucosal lining of the urinary bladder"],
+    ans: 3,
+    exp: "The mesoderm gives rise to connective tissue derivatives including muscle (smooth, skeletal, cardiac), bone, cartilage, blood, blood vessels, and kidneys. The endoderm (inner layer) gives rise to the lining epithelium of the GI tract, respiratory tract, liver, and urinary bladder. The ectoderm (outer layer) forms the epidermis, neural tissue, cornea, lens, and inner ear. Germ layer origins are fundamental to classifying tumors and understanding congenital malformations."
+  },
+  {
+    q: "An exocrine gland whose main duct branches extensively before terminating in multiple secretory units is classified as a:",
+    opts: ["Compound gland","Simple tubular gland","Simple branched tubular gland","Unicellular exocrine gland","Simple alveolar gland"],
+    ans: 0,
+    exp: "Compound glands have a main duct that branches multiple times before reaching the secretory acini or tubules, resulting in a tree-like ductal system. Examples include the pancreas, salivary glands, and mammary glands. Simple glands have an unbranched duct. Unicellular glands consist of a single secretory cell (e.g., goblet cells). Simple branched glands have a branched secretory unit but a single, unbranched duct — a distinction from compound glands."
+  },
+  {
+    q: "An epithelium consisting of a single layer of cells that are taller than they are wide, with oval nuclei in the basal portion, is classified as:",
+    opts: ["Simple squamous epithelium","Simple cuboidal epithelium","Pseudostratified ciliated columnar epithelium","Simple columnar epithelium","Stratified squamous epithelium"],
+    ans: 3,
+    exp: "Simple columnar epithelium consists of a single layer of cells taller than wide, with oval nuclei located basally. Well-suited for secretion and absorption, it lines the stomach, small and large intestines, and gallbladder. Simple squamous cells are flat and scale-like. Simple cuboidal cells are roughly equal in height and width. Pseudostratified columnar is a single layer but nuclei appear at varying heights. Stratified squamous has multiple genuine cell layers."
+  }
+
+];
+
+const HISTOLOGY_BATCH2_Qs = [
+  {
+    q: "The nephron is the functional unit of the kidney and consists of five structural components. Which of the following correctly lists all five in sequence from the site of filtration to drainage?",
+    opts: ["Glomerulus → PCT → Loop of Henle → DCT → collecting duct","Renal corpuscle → PCT → DCT → Loop of Henle → collecting duct","Renal corpuscle → PCT → Loop of Henle → DCT → collecting duct","Glomerulus → Bowman's capsule → PCT → Loop of Henle → collecting duct","PCT → Renal corpuscle → Loop of Henle → DCT → collecting duct"],
+    ans: 2,
+    exp: "The nephron consists of: (1) renal corpuscle — where filtration occurs; (2) proximal convoluted tubule; (3) medullary loop (loop of Henle); (4) distal convoluted tubule; and (5) collecting duct. The renal corpuscle, not just the glomerulus alone, is the correct starting component — it includes both the glomerular capillary tuft and Bowman's capsule. Options A and D incorrectly name the glomerulus alone as a starting point."
+  },
+  {
+    q: "The renal corpuscle is a spherical structure responsible for producing the glomerular ultrafiltrate. It consists of:",
+    opts: ["A cluster of fenestrated capillaries (the glomerulus) enclosed within a double-walled epithelial envelope (Bowman's capsule)","The macula densa and juxtaglomerular cells arranged around the afferent arteriole","Podocytes lining the outer parietal layer and simple squamous cells forming the visceral layer","Mesangial cells supported by a basement membrane and surrounded by Bowman's space","A fenestrated capillary network served by afferent and efferent arterioles of equal calibre"],
+    ans: 0,
+    exp: "The renal corpuscle comprises the glomerulus (a tuft of fenestrated capillaries) enclosed within Bowman's capsule (a double-walled epithelial cup). The outer parietal layer is simple squamous epithelium; the inner visceral layer is formed by podocytes. Bowman's space lies between the two layers and collects the ultrafiltrate. The JGA (option B) is a separate structure. Mesangial cells (option D) support the glomerular capillaries but do not constitute the corpuscle itself."
+  },
+  {
+    q: "The thin segment of the loop of Henle is lined by which type of epithelium?",
+    opts: ["Simple cuboidal with a prominent brush border and abundant mitochondria","Low simple cuboidal without microvilli but with basal infoldings","Simple squamous epithelium whose cells bulge into the tubular lumen","Pseudostratified columnar epithelium with scattered goblet cells","Transitional epithelium that flattens when the tubule is distended with fluid"],
+    ans: 2,
+    exp: "The thin segment of the loop of Henle is lined by simple squamous epithelium. The cells are flat and their nuclei bulge into the tubular lumen — a characteristic histological feature of this segment. This thin, permeable wall is essential for the passive diffusion of water and solutes that drives the counter-current multiplier mechanism. The brush border and basal infoldings seen in the PCT are absent here."
+  },
+  {
+    q: "At the renal corpuscle, the vascular pole is correctly defined as the site where:",
+    opts: ["The ultrafiltrate exits Bowman's space to enter the proximal convoluted tubule","Podocyte foot processes contact the outer surface of glomerular capillaries","Parietal epithelial cells transition to the cuboidal cells of the PCT","The afferent arteriole enters and the efferent arteriole leaves the glomerulus","Mesangial cells bridge and support adjacent glomerular capillary loops"],
+    ans: 3,
+    exp: "The vascular pole is where the afferent arteriole enters and the efferent arteriole exits the glomerulus. The opposite end is the urinary (tubular) pole, where Bowman's space is continuous with the lumen of the PCT (option A). Podocyte foot processes (option B) cover the visceral surface throughout. Mesangial cells (option E) provide structural support but do not define a pole."
+  },
+  {
+    q: "Podocytes form the visceral layer of Bowman's capsule. Their structural contribution to glomerular filtration is through:",
+    opts: ["Tight junctions between adjacent cells that regulate paracellular solute flow","Foot processes (pedicels) that contact glomerular capillaries, leaving filtration slits between them","Fenestrations in their own cell membranes that directly control the size of filtered molecules","Microvilli on their luminal surface that increase the surface area available for ultrafiltration","Secretion of glycosaminoglycans that form the primary charge barrier of the filtration membrane"],
+    ans: 1,
+    exp: "Podocytes are highly specialised cells whose primary processes branch into foot processes (pedicels) that wrap around glomerular capillaries. Adjacent pedicels interdigitate and leave narrow gaps called filtration slits through which the ultrafiltrate passes. The fenestrations in option C belong to the capillary endothelium, not the podocytes. The charge barrier is provided mainly by the glomerular basement membrane's anionic glycoproteins."
+  },
+  {
+    q: "The proximal convoluted tubule (PCT) performs obligatory reabsorption. The term 'obligatory' means the reabsorption:",
+    opts: ["Occurs regardless of the body's hydration state and is not regulated by hormones","Is stimulated by aldosterone when plasma sodium concentration falls below normal","Requires active transport of all substances exclusively across the basolateral membrane","Occurs only when ADH is present to increase tubular permeability to water","Is restricted to sodium and glucose and excludes amino acids and small proteins"],
+    ans: 0,
+    exp: "The PCT reabsorbs approximately 65–70% of the glomerular filtrate — including water, sodium, glucose, amino acids, and bicarbonate — regardless of the body's fluid status and without hormonal regulation. This is in contrast to the DCT and collecting duct, where reabsorption is facultative and regulated by ADH and aldosterone. The PCT has no significant hormonal control of its reabsorptive activity."
+  },
+  {
+    q: "Compared to the proximal convoluted tubule, the distal convoluted tubule (DCT) is histologically distinguished by its:",
+    opts: ["Taller cuboidal cells with a more prominent brush border and deeper basal infoldings","Simple squamous lining that facilitates passive diffusion of water and solutes","Single layer of columnar cells with supranuclear secretory granules","Low cuboidal cells lacking microvilli, with less prominent infoldings and fewer mitochondria","Pseudostratified epithelium reflecting a mixed population of secretory and absorptive cells"],
+    ans: 3,
+    exp: "The DCT is lined by low simple cuboidal epithelium lacking the prominent brush border (microvilli) of the PCT. Its cells have basal infoldings and mitochondria but these are less prominent, and the cytoplasm stains less osmophilically than PCT cells. These differences reflect the DCT's role in facultative reabsorption regulated by ADH and aldosterone rather than obligatory bulk reabsorption. The absence of a brush border is the key distinguishing histological feature."
+  },
+  {
+    q: "The juxtaglomerular apparatus (JGA) is constituted by three distinct cell types. Which of the following correctly identifies all three?",
+    opts: ["Podocytes, intraglomerular mesangial cells, and parietal epithelial cells of Bowman's capsule","Macula densa cells of the DCT, juxtaglomerular cells of the afferent arteriole, and extraglomerular mesangial cells","Macula densa cells, smooth muscle cells of the efferent arteriole, and podocytes","Juxtaglomerular cells of the efferent arteriole, macula densa cells, and collecting duct principal cells","Intraglomerular mesangial cells, macula densa cells, and collecting duct intercalated cells"],
+    ans: 1,
+    exp: "The JGA forms where the DCT contacts its parent afferent arteriole and consists of: (1) macula densa cells — DCT cells that become columnar and closely packed, sensing tubular NaCl concentration; (2) juxtaglomerular (granular) cells — modified smooth muscle cells of the afferent arteriole tunica media containing renin granules; and (3) extraglomerular mesangial (lacis) cells — similar to intraglomerular mesangial cells, situated between the other two components."
+  },
+  {
+    q: "The collecting duct is lined by two distinct cell types. Which of the following correctly identifies them?",
+    opts: ["Chief cells reabsorbing water and goblet-like cells secreting protective mucus","Parietal cells regulating acid secretion and surface cells responding to ADH","Collecting duct (principal) cells regulating water and ion transport, and intercalated (dark) cells that bulge into the lumen","Type I and Type II pneumocyte-like cells adapted for fluid exchange across the tubular wall","Cuboidal secretory cells and squamous absorptive cells alternating along the tubular length"],
+    ans: 2,
+    exp: "The collecting duct has two cell types: (1) collecting duct cells (principal cells) — cuboidal in the cortex, columnar in the medulla; permeability to water and ions is regulated by ADH; and (2) intercalated (dark) cells — they resemble DCT cells but characteristically bulge into the lumen. Both cell types rest on a thin basement membrane and lack basal infoldings. The duct is not lined by pneumocytes, goblet cells, or parietal cells."
+  },
+  {
+    q: "The juxtaglomerular cells of the afferent arteriole are functionally significant because they:",
+    opts: ["Monitor NaCl concentration in the DCT and directly alter the glomerular filtration rate","Secrete erythropoietin in response to cortical hypoxia","Regulate collecting duct water permeability by releasing ADH into the peritubular space","Contribute to the glomerular basement membrane by secreting type IV collagen","Contain renin granules and secrete renin, initiating the angiotensin cascade and raising blood pressure"],
+    ans: 4,
+    exp: "Juxtaglomerular cells are modified smooth muscle cells of the afferent arteriole that store renin in secretory granules. Released renin cleaves angiotensinogen to angiotensin I, which is converted to angiotensin II — a potent vasoconstrictor that raises blood pressure and stimulates aldosterone release. Macula densa cells (option A) are the NaCl sensors. Erythropoietin is produced by peritubular interstitial cells. ADH is produced in the hypothalamus, not locally in the kidney."
+  },
+  {
+    q: "The ureter wall consists of which of the following correctly ordered tissue layers?",
+    opts: ["Tunica mucosa (transitional epithelium on lamina propria), tunica muscularis with inner and outer longitudinal and middle circular smooth muscle, and tunica serosa/adventitia","Mucosa with pseudostratified columnar epithelium, submucosa with Brunner's glands, muscularis externa, and serosa","Transitional epithelium, submucosal elastic tissue, inner circular and outer longitudinal smooth muscle, and adventitia","Simple columnar mucosa, a thick muscularis of oblique and circular layers, and visceral peritoneum throughout","Stratified squamous mucosa, dense fibrous submucosa, circular smooth muscle only, and adventitia"],
+    ans: 0,
+    exp: "The ureter wall has three layers: tunica mucosa (transitional epithelium of 5–6 cell layers on a lamina propria of loose connective tissue), tunica muscularis (inner and outer longitudinal layers plus a middle circular layer of smooth muscle), and tunica serosa/adventitia. Brunner's glands (option B) are exclusive to the duodenal submucosa. The ureter has neither pseudostratified columnar nor stratified squamous epithelium."
+  },
+  {
+    q: "Within the renal cortex, medullary rays are best described as:",
+    opts: ["Extensions of the renal medulla into the cortex containing only vasa recta","Columns of cortical tissue that separate adjacent renal pyramids","Aggregations of renal corpuscles arranged around a central interlobular arteriole","Vascular channels connecting the cortical capillary bed to juxtamedullary nephrons","Bundles of straight tubules — collecting ducts and loops of Henle — projecting from the medulla into the cortex"],
+    ans: 4,
+    exp: "Medullary rays are streaks within the renal cortex composed of straight tubules (thick limbs of Henle's loop and collecting ducts) extending upward from the medulla into the cortex. They define the axis of renal lobules — each lobule consists of nephrons that drain into the collecting duct at the lobule's centre. The renal columns (option B) are cortical tissue between adjacent pyramids, distinct from medullary rays."
+  },
+  {
+    q: "The urinary bladder wall is distinguished from the ureter primarily by which of the following histological features?",
+    opts: ["It is lined by pseudostratified columnar rather than transitional epithelium","Its muscularis contains only a single inner circular smooth muscle layer","Its lamina propria contains Brunner's glands providing mucosal protection","Its transitional epithelium may reach up to 14 cell layers and its muscularis forms the three-layered detrusor muscle","Its serosa is replaced throughout by adventitia due to its entirely retroperitoneal position"],
+    ans: 3,
+    exp: "The bladder's transitional epithelium is considerably thicker than that of the ureter — up to 14 cell layers when empty. Its muscularis (detrusor muscle) consists of three interlacing smooth muscle layers (inner and outer longitudinal + middle circular), compared to the ureter's simpler arrangement. The longitudinal fibres form sphincters at the ureterovesical junction and the bladder neck. Brunner's glands are exclusive to the duodenum. Both bladder and ureter are lined by transitional epithelium."
+  },
+  {
+    q: "The urethra differs from the ureter and bladder in that its submucosa characteristically contains:",
+    opts: ["Brunner's glands secreting alkaline mucus to neutralise residual acidic urine","Cavernous tissue spaces characteristic of erectile tissue","Peyer's patches providing organised mucosal immune surveillance","Meissner's plexus regulating submucosal smooth muscle and secretory tone","Dense collagen bundles providing structural resistance to distension during urine storage"],
+    ans: 1,
+    exp: "The urethra is unique among the urinary passages in having cavernous tissue spaces (erectile tissue) in its submucosa — absent in both the ureter and bladder. Additionally, the urethra transitions from transitional epithelium to stratified squamous at the external urethral orifice, and acquires an outer layer of skeletal muscle (striated urethralis muscle) distally. Brunner's glands belong to the duodenum. Meissner's plexus is found in the GIT submucosa, not the urinary tract."
+  },
+  {
+    q: "The proximal convoluted tubule is lined by simple cuboidal epithelium with which of the following distinctive structural features?",
+    opts: ["Cilia on the luminal surface with few mitochondria and no basal infoldings","No basal infoldings and pale-staining cytoplasm with small, centrally located nuclei","A sparse, irregular brush border with numerous large secretory vesicles near the apex","Smooth luminal surface with extensive lateral interdigitations and scarce organelles","A prominent brush border of dense microvilli and deep basal infoldings with abundant mitochondria"],
+    ans: 4,
+    exp: "PCT cells have two defining structural features reflecting their high reabsorptive activity: (1) a prominent brush border of dense microvilli on the luminal surface, maximising surface area for reabsorption; and (2) deep basal membrane infoldings with abundant mitochondria packed between the folds, providing ATP for active transport. This combination produces the striated appearance of PCT cells under light microscopy. DCT cells also have infoldings but these are far less prominent, and there is no brush border."
+  },
+
+  // ── CNS CORTEX ───────────────────────────────────────────────────────────────
+
+  {
+    q: "The cerebral cortex appears grey in the fresh state while the underlying white matter appears white. This colour difference is directly explained by:",
+    opts: ["The rich vascular supply of the cortex giving it a red-grey appearance compared to the pale avascular white matter","The abundance of myelinated fibres in the cortex compared to unmyelinated fibres in the white matter","The presence of myelinated fibres in the white matter and predominantly unmyelinated fibres with neuronal cell bodies in the cortex","The abundance of astrocytes in the cortex compared to the oligodendrocyte-dominated white matter","The difference in water content between the neuron-rich cortex and the lipid-poor white matter"],
+    ans: 2,
+    exp: "The colour difference is directly attributable to myelin. White matter is rich in myelinated nerve fibres — myelin is a fatty, white sheath — giving it a white appearance. The cortex (grey matter) contains neuronal cell bodies, dendrites, synapses, and neuroglia, but its fibres are predominantly unmyelinated, so the tissue appears grey. Astrocytes are present in both regions. Vascularity does contribute to the grey tint but is not the primary explanation."
+  },
+  {
+    q: "Under H&E staining, the neuropil of the cerebral cortex appears as:",
+    opts: ["A featureless, pale pink (eosinophilic) background filling the spaces between neuronal cell bodies","A densely basophilic network of fibres visible as dark blue threads between neurons","A clear, structureless space devoid of any visible material between cell bodies","A granular, PAS-positive material reflecting the glycoprotein content of synaptic terminals","A finely vacuolated background due to lipid droplets from myelin breakdown products"],
+    ans: 0,
+    exp: "Under H&E, the neuropil appears as a structureless, homogeneous pale pink (eosinophilic) background between neuronal cell bodies — it looks nearly empty at the light microscope level. However, electron microscopy reveals it is a dense tangle of axons, dendrites, astrocyte processes, and intercellular fluid. The neuropil is highly sensitive to hypoxia and hypoglycaemia — its minimal energy reserve means neurons begin dying within minutes of oxygen or glucose deprivation."
+  },
+  {
+    q: "Pyramidal cells are the main output neurons of the cerebral cortex. Which of the following best describes their morphology?",
+    opts: ["Small, star-shaped cells with dendrites radiating in all directions and short local axons","Spindle-shaped cells in the deepest cortical layer with axons projecting upward toward layer I","Flask-shaped cells arranged in a single row, projecting axons to the deep cerebellar nuclei","Pyramid-shaped cell bodies with an apical dendrite toward the surface and a long axon descending into the white matter","Horizontally oriented cells in layer I with axons running parallel to the cortical surface"],
+    ans: 3,
+    exp: "Pyramidal cells have a pyramid-shaped soma with the apex directed toward the cortical surface. A single long apical dendrite extends toward the surface, and multiple basal dendrites radiate from the base. Their axon descends into the white matter and projects to distant targets — including the spinal cord, subcortical nuclei, and other cortical areas — making them the main output neurons. Option A describes stellate (granule) cells. Option B describes Martinotti cells. Option C describes Purkinje cells of the cerebellum."
+  },
+  {
+    q: "Stellate (granule) cells of the cerebral cortex are classified as interneurons. This means they primarily:",
+    opts: ["Project long axons through the internal capsule to control voluntary skeletal movement","Process and relay signals locally within the cortex rather than projecting to distant targets","Form the main efferent output of the cortex by sending axons into the descending motor tracts","Receive olfactory input from the thalamus and relay it to the primary sensory cortex","Provide structural support to neurons in the manner of protoplasmic astrocytes"],
+    ans: 1,
+    exp: "Stellate (granule) cells are small, star-shaped interneurons whose short axons remain within the cortex to process and relay signals between local neurons. They are the primary recipient cells for specific thalamic sensory afferents, particularly in layer IV of the sensory cortex. They do not project to the spinal cord or distant targets — that is the role of pyramidal cells. They are neurons, not glia, and do not provide structural support."
+  },
+  {
+    q: "Layer I (Molecular/Plexiform layer) of the cerebral cortex is described as cell-poor and fibre-rich. The cell bodies found within it are:",
+    opts: ["Large pyramidal cells and densely packed granule cells receiving thalamic input","Medium pyramidal cells projecting to other cortical areas and local stellate interneurons","Horizontal cells of Cajal and scattered neuroglial cells","Cells of Martinotti whose axons project downward into the white matter","Betz cells and basket cells projecting axons to the deep cerebellar nuclei"],
+    ans: 2,
+    exp: "Layer I contains very few cell bodies — mainly horizontal cells of Cajal (whose axons run parallel to the cortical surface, interconnecting local areas) and scattered neuroglial cells. The layer is dominated by fibres: apical dendrites of pyramidal cells ascending from below, and axons of granule cells and Martinotti cells converging here. It is a synaptic integration zone rather than a cell-body layer. Betz cells are in layer V. Martinotti cells are in layer VI. Dense granule cells are in layers II and IV."
+  },
+  {
+    q: "Layer IV (Internal Granular layer) of the cerebral cortex is described as the primary input layer because it:",
+    opts: ["Receives specific thalamic afferent fibres terminating on its granule (stellate) cells","Sends output axons directly through the internal capsule to the anterior horn of the spinal cord","Contains Betz cells whose axons form the corticospinal (pyramidal) tract","Provides feedback connections upward to layer I via Martinotti cell axons","Contains horizontal cells of Cajal whose fibres interconnect adjacent cortical columns"],
+    ans: 0,
+    exp: "Layer IV is densely packed with granule (stellate) cells and is the principal termination site for specific thalamic sensory afferents. In the sensory cortex, this layer is exceptionally thick because its primary function is receiving sensory input. In the motor cortex, layer IV is thin and poorly developed because the motor cortex is primarily an output structure. Betz cells (option C) are in layer V. Martinotti cells (option D) are in layer VI. Horizontal cells of Cajal (option E) are in layer I."
+  },
+  {
+    q: "The sensory cortex is classified as 'granular' while the motor cortex is 'agranular'. This distinction refers to:",
+    opts: ["The presence of Betz cells in the sensory cortex and their complete absence in the motor cortex","The thickness of the molecular layer (layer I), which is greater in the sensory than the motor cortex","The total number of cortical layers, which is six in the motor cortex but only four in the sensory cortex","The relative development of the granular layers (II and IV), which are thick in the sensory cortex and thin in the motor cortex","The degree of myelination of layer V axons, which is greater in the granular sensory cortex"],
+    ans: 3,
+    exp: "In the sensory (granular) cortex, layers II and IV are thick and densely packed because the cortex specialises in receiving thalamic sensory input — granule cells are the primary thalamic recipients. In the motor (agranular) cortex, these granular layers are thin and poorly developed because the primary function is motor output, not sensory reception. Betz cells are found only in the motor cortex (layer V) — the opposite of option A. Both cortices have six layers."
+  },
+  {
+    q: "The cerebellar cortex has three layers. Which of the following correctly names them from outermost to innermost?",
+    opts: ["External granular layer, Purkinje cell layer, internal granular layer","Molecular layer, Purkinje cell layer, granular layer","Molecular layer, internal granular layer, Purkinje cell layer","External pyramidal layer, Purkinje cell layer, granular layer","Plexiform layer, stellate cell layer, granular layer"],
+    ans: 1,
+    exp: "The cerebellar cortex has three layers from outside inward: (1) Molecular layer — outermost; contains basket cells, dendrites of Purkinje cells, and parallel fibres (granule cell axons) plus climbing fibres from the inferior olive; (2) Purkinje cell layer — a single row of large flask-shaped output neurons; (3) Granular layer — innermost; densely packed granule cells receiving mossy fibre input and Golgi inhibitory interneurons. This three-layer arrangement contrasts with the six-layer cerebral cortex."
+  },
+  {
+    q: "Purkinje cells of the cerebellar cortex are unique among cortical neurons because they are:",
+    opts: ["The only CNS neurons capable of axonal regeneration following traumatic injury","Found in the granular layer where they receive mossy fibre input at cerebellar glomeruli","Small inhibitory interneurons that suppress granule cell activity via GABA release","Responsible for CSF production within the cerebellar folia through ependymal-like foot processes","The sole output neurons of the cerebellar cortex, projecting axons exclusively to the deep cerebellar nuclei"],
+    ans: 4,
+    exp: "Purkinje cells are the only efferent (output) neurons of the cerebellar cortex. They are large, flask-shaped (pyriform) cells arranged in a single row, with elaborate dendritic trees fanning into the molecular layer. Their axons project exclusively to the deep cerebellar nuclei (dentate, emboliform, globose, fastigial), from which all cerebellar output originates. They are inhibitory (GABAergic). Granule cells (option B) receive mossy fibre input. Basket cells (not Purkinje cells) inhibit surrounding Purkinje cells."
+  },
+  {
+    q: "Betz cells are the largest neurons in the human nervous system. Which of the following statements about them is correct?",
+    opts: ["They are found in layer IV of the sensory cortex and receive direct thalamic sensory input","They are located in layer II and project commissural fibres to the contralateral hemisphere","They are present throughout all cortical areas as the dominant pyramidal neuron type","They are found in layer VI and send axons upward toward layer I as part of a feedback circuit","They are found in layer V of the primary motor cortex and their axons form the corticospinal tract"],
+    ans: 4,
+    exp: "Betz cells are giant pyramidal neurons found exclusively in layer V of the primary motor cortex (precentral gyrus). Their large myelinated axons descend through the internal capsule and form the corticospinal (pyramidal) tract, synapsing on anterior horn motor neurons to control voluntary skeletal movement. Their presence is the histological hallmark of the motor cortex — they are absent from all other cortical areas. Martinotti cells (layer VI) send axons upward. Layer IV granule cells receive thalamic input."
+  }
+];
+
+const HISTOLOGY_BATCH3_Qs = [
+
+  // ── CNS CORTEX — REMAINING ───────────────────────────────────────────────
+
+  {
+    q: "The cerebellar cortex is organised into three layers. Which option correctly identifies them from the outer surface to the interior?",
+    opts: [
+      "Molecular layer → External Granular layer → Internal Pyramidal layer",
+      "Granular layer → Purkinje cell layer → Molecular layer",
+      "External Granular → Purkinje cell → Internal Granular",
+      "Molecular layer → Purkinje cell layer → Granular layer",
+      "Polymorphic layer → Purkinje cell layer → Molecular layer"
+    ],
+    ans: 3,
+    exp: "The cerebellar cortex has three layers from outer to inner: (1) Molecular layer — outermost, fiber-rich; contains basket cells, neuroglia, dendrites of Purkinje and Golgi cells, and parallel fibers (axons of granule cells); (2) Purkinje cell layer — a single row of large flask-shaped (pyriform) cells, the only output neurons of the cerebellar cortex; (3) Granular layer — innermost, densely packed with granule cells receiving mossy fibers, and Golgi cells. This three-layer arrangement is distinct from the six-layer pattern of the cerebral cortex."
+  },
+  {
+    q: "Purkinje cells of the cerebellar cortex are designated as the only output neurons of the cerebellar cortex. Which of the following correctly describes their morphology and axonal projection?",
+    opts: [
+      "Small granule-like cells in the innermost layer projecting to the thalamus via the cerebellar peduncles",
+      "Large flask-shaped (pyriform) cells arranged in a single row, projecting to the deep cerebellar nuclei",
+      "Star-shaped interneurons in the molecular layer whose axons terminate on granule cells",
+      "Bipolar neurons in the granular layer projecting to the contralateral cerebral cortex",
+      "Giant pyramidal cells in layer V whose axons descend to the spinal cord"
+    ],
+    ans: 1,
+    exp: "Purkinje cells are large, flask-shaped (pyriform) neurons arranged in a single row between the molecular and granular layers. Their extensively branched dendrites fan out into the molecular layer. Their axons are the sole output of the cerebellar cortex — projecting to the deep cerebellar nuclei (dentate, interposed, fastigial) and to the vestibular nuclei. Giant pyramidal cells descending to the spinal cord (option E) are Betz cells of the cerebral motor cortex, not the cerebellum."
+  },
+  {
+    q: "In the cerebellar cortex, which of the following correctly distinguishes climbing fibers from mossy fibers in terms of their origin and synaptic targets?",
+    opts: [
+      "Climbing fibers arise from the pontine nuclei and end on granule cells; mossy fibers arise from the inferior olivary nucleus",
+      "Both fiber types arise from the inferior olivary nucleus and converge directly on Purkinje cell dendrites",
+      "Mossy fibers are the efferent output of the cerebellar cortex projecting to deep cerebellar nuclei",
+      "Climbing fibers arise from the pontine nuclei; mossy fibers arise from the inferior olivary nucleus and end on Purkinje cells",
+      "Climbing fibers arise from the inferior olivary nucleus and synapse directly on Purkinje cell dendrites; mossy fibers are the main afferent input ending on granule cells at cerebellar glomeruli"
+    ],
+    ans: 4,
+    exp: "Climbing fibers originate from the inferior olivary nucleus and wrap around and synapse directly on the dendritic tree of Purkinje cells — each climbing fiber innervates only 1–10 Purkinje cells, producing a powerful excitatory input. Mossy fibers are the main afferent pathway from many sources (spinal cord, pontine nuclei, vestibular nuclei); they end on granule cell dendrites at specialised synaptic zones called cerebellar glomeruli. Granule cell axons then ascend and bifurcate into parallel fibers that contact many Purkinje cell dendrites in the molecular layer."
+  },
+  {
+    q: "The blood-brain barrier (BBB) prevents most substances in the bloodstream from entering brain tissue. The structural components forming the BBB are:",
+    opts: [
+      "Non-fenestrated capillaries with tight junctions between endothelial cells, a continuous basal lamina, and astrocyte end-feet completely surrounding the capillaries",
+      "Fenestrated capillaries with a thick basement membrane and podocyte foot processes similar to the glomerular filtration barrier",
+      "Tight junctions between ependymal cells lining the ventricular system, restricting entry of blood constituents",
+      "Non-fenestrated capillaries with gap junctions between endothelial cells and surrounding pericytes only",
+      "Myelinated nerve fibers forming a lipid diffusion barrier around all cortical blood vessels"
+    ],
+    ans: 0,
+    exp: "The BBB is formed by three components acting together: (1) non-fenestrated capillary endothelial cells linked by tight junctions — the primary structural barrier; (2) a continuous basal lamina around the capillaries; and (3) astrocyte end-feet (perivascular feet) that completely ensheath the capillaries, inducing and maintaining barrier properties. This restricts passage of toxins, large molecules, and many drugs while allowing O2, CO2, glucose, and small lipid-soluble molecules to cross. Tight junctions between ependymal cells form the brain-CSF barrier, a separate entity."
+  },
+  {
+    q: "The blood-CSF barrier is responsible for maintaining CSF composition different from blood plasma. The structural basis of this barrier is:",
+    opts: [
+      "Non-fenestrated capillary endothelium with tight junctions, identical to the blood-brain barrier",
+      "Ependymal cells lining the walls of the brain ventricles forming a continuous barrier",
+      "Tight junctions between the ependymal (epithelial) cells of the choroid plexus",
+      "Astrocyte end-feet surrounding the choroid plexus capillaries forming a glial barrier",
+      "A continuous basement membrane beneath the ependymal cells of the central canal of the spinal cord"
+    ],
+    ans: 2,
+    exp: "The blood-CSF barrier is located at the choroid plexus — a vascular structure within the brain ventricles that produces CSF. The barrier is formed by tight junctions between the ependymal (epithelial) cells overlying the choroid plexus capillaries, which are themselves fenestrated. This selectivity keeps CSF composition (low protein, specific ion concentrations) different from blood plasma. The brain-CSF barrier (option B) — formed by ventricular ependymal cells — is a separate, less tight structure permitting limited exchange between CSF and brain tissue."
+  },
+
+  // ── GIT HISTOLOGY ────────────────────────────────────────────────────────
+
+  {
+    q: "The wall of the gastrointestinal tract follows a basic four-layer pattern throughout its length. From the innermost to the outermost layer, these are:",
+    opts: [
+      "Submucosa → Mucosa → Muscularis externa → Serosa",
+      "Mucosa → Submucosa → Muscularis externa → Serosa or Adventitia",
+      "Mucosa → Muscularis externa → Submucosa → Serosa",
+      "Mucosa → Submucosa → Serosa → Muscularis externa",
+      "Muscularis mucosae → Submucosa → Mucosa → Adventitia"
+    ],
+    ans: 1,
+    exp: "The basic GIT wall pattern from inside to outside is: (1) Mucosa — epithelium, lamina propria, muscularis mucosae; (2) Submucosa — loose connective tissue with blood vessels, lymphatics, and Meissner's plexus; (3) Muscularis externa — inner circular and outer longitudinal smooth muscle with Auerbach's plexus between them; (4) Serosa (visceral peritoneum) or Adventitia (loose connective tissue where the organ lies outside the abdominal cavity, e.g., the esophagus). This four-layer pattern is modified in specific segments to reflect regional function."
+  },
+  {
+    q: "The submucosal nerve plexus (Meissner's plexus) is located in which layer of the GIT wall?",
+    opts: [
+      "Within the lamina propria immediately beneath the surface epithelium",
+      "Between the inner circular and outer longitudinal layers of the muscularis externa",
+      "Within the mucosa between the lamina propria and muscularis mucosae",
+      "In the submucosa, between the muscularis mucosae and the muscularis externa",
+      "In the adventitia or serosa at the outer surface of the muscularis externa"
+    ],
+    ans: 3,
+    exp: "Meissner's plexus (submucosal plexus) consists of nerve fibers and ganglion cells located in the submucosa — the loose connective tissue layer that lies between the muscularis mucosae and the muscularis externa. It controls secretion and local blood flow in the mucosa. Auerbach's plexus (myenteric plexus) is the other major enteric plexus, located between the inner circular and outer longitudinal layers of the muscularis externa (option B), where it controls peristaltic movement."
+  },
+  {
+    q: "The myenteric plexus (Auerbach's plexus) controls peristaltic movement of the GIT. It is located between:",
+    opts: [
+      "The inner circular and outer longitudinal layers of the muscularis externa",
+      "The mucosa and the submucosa, just above the muscularis mucosae",
+      "The submucosa and the inner circular muscle layer",
+      "The muscularis mucosae and the submucosal connective tissue",
+      "The outer longitudinal muscle layer and the serosa"
+    ],
+    ans: 0,
+    exp: "Auerbach's plexus (myenteric plexus) consists of nerve fibers and ganglionic cells situated between the inner circular and outer longitudinal layers of the muscularis externa. It regulates peristaltic contractions along the GIT. It is part of the enteric nervous system and is present throughout the GIT. Meissner's plexus, by contrast, is located in the submucosa and controls glandular secretion and mucosal blood flow. Hirschsprung's disease results from the absence of ganglionic cells in Auerbach's plexus in the colon."
+  },
+  {
+    q: "The epithelium lining the esophagus is characterised as:",
+    opts: [
+      "Simple columnar epithelium suited for secretion and absorption along its entire length",
+      "Pseudostratified ciliated columnar epithelium similar to the lower respiratory tract",
+      "Non-keratinized stratified squamous epithelium providing protection against mechanical abrasion",
+      "Transitional epithelium that changes morphology with the passage of a food bolus",
+      "Simple cuboidal epithelium with a brush border for selective nutrient absorption"
+    ],
+    ans: 2,
+    exp: "The esophagus is lined by non-keratinized stratified squamous epithelium throughout its length, suited to withstand the mechanical stress of food passage rather than absorption. The lumen appears star-shaped in cross-section due to longitudinal folds created by the elastic fibers in the submucosa. The esophagus transitions abruptly to simple columnar epithelium at the cardio-esophageal junction — a clinically significant boundary, since Barrett's esophagus involves metaplastic replacement of this squamous epithelium with columnar epithelium due to chronic acid reflux."
+  },
+  {
+    q: "The composition of the muscularis externa of the esophagus changes along its length. Which option correctly describes this transition?",
+    opts: [
+      "Upper third smooth muscle only, transitioning to skeletal muscle in the lower third",
+      "Entirely smooth muscle throughout the full length of the esophagus",
+      "Entirely skeletal muscle throughout the full length of the esophagus",
+      "Upper third mixed skeletal and smooth, middle third skeletal only, lower third smooth muscle",
+      "Upper third skeletal muscle only, middle third mixed skeletal and smooth, lower third smooth muscle only"
+    ],
+    ans: 4,
+    exp: "The muscularis externa of the esophagus transitions in composition: the upper third contains skeletal (voluntary) muscle — allowing conscious initiation of swallowing; the middle third contains both skeletal and smooth muscle; and the lower third contains purely smooth (involuntary) muscle. This arrangement reflects the transition from voluntary to involuntary control of swallowing. Throughout, the muscle is arranged in two layers — inner circular and outer longitudinal — with Auerbach's plexus between them."
+  },
+  {
+    q: "Unlike most abdominal GIT organs, the esophagus lacks a serosa. Its outermost layer is instead:",
+    opts: [
+      "An adventitia of loose areolar connective tissue that merges with surrounding mediastinal structures",
+      "A visceral peritoneum composed of mesothelium over loose connective tissue",
+      "A thick peritoneal reflection forming the greater omentum at the thoracic level",
+      "A dense fibrous capsule providing rigid support to the esophageal wall",
+      "A smooth muscle coat with no outer connective tissue covering"
+    ],
+    ans: 0,
+    exp: "The esophagus lies outside the abdominal cavity (in the neck and posterior mediastinum) and therefore lacks a serosa. Its outermost layer is an adventitia — loose areolar connective tissue that merges with surrounding mediastinal structures. Abdominal GIT organs (stomach, small intestine, large intestine) are covered by a serosa (visceral peritoneum) because they lie within the peritoneal cavity. The distinction between adventitia and serosa is frequently tested and has clinical relevance in esophageal and rectal surgery."
+  },
+  {
+    q: "The stomach is divided into three histologically distinct regions. Which option correctly identifies all three?",
+    opts: [
+      "Fundus, body, and antrum — each with distinct glandular morphology",
+      "Fundus, corpus, and cardia — each with different muscularis externa arrangements",
+      "Body, antrum, and pylorus — distinguished by the depth of their gastric pits",
+      "Cardia, fundus and body (histologically identical to each other), and pylorus",
+      "Fundus, corpus, and pylorus — based on differences in epithelial cell type only"
+    ],
+    ans: 3,
+    exp: "The stomach has three histological regions: (1) Cardia — contains cardiac glands, few or absent parietal cells, shallow gastric pits; (2) Fundus and body — histologically identical, containing fundic/gastric glands with mucous neck cells, parietal cells (most numerous here), chief cells, and APUD cells; (3) Pylorus — deep gastric pits, short tortuous branched pyloric glands producing mucus and gastrin, few parietal cells. The fundus and body are grouped together because they share the same microscopic structure."
+  },
+  {
+    q: "Parietal (oxyntic) cells of the fundic gastric glands secrete which products?",
+    opts: [
+      "Pepsinogen, which is converted to the active enzyme pepsin in the acidic gastric lumen",
+      "Hydrochloric acid and intrinsic factor",
+      "Serotonin, histamine, and gastrin directly into the submucosal blood vessels",
+      "Soluble mucus protecting the surface epithelium from mechanical and chemical damage",
+      "Gastrin in response to distension and protein content in the gastric lumen"
+    ],
+    ans: 1,
+    exp: "Parietal (oxyntic) cells secrete two products: (1) hydrochloric acid, which creates the acidic pH necessary for protein digestion and pepsinogen activation, and (2) intrinsic factor, a glycoprotein that binds dietary vitamin B12 and is essential for its absorption in the terminal ileum. Loss of parietal cells (as in autoimmune gastritis) results in both achlorhydria and vitamin B12 deficiency (pernicious anaemia). Parietal cells are large, ovoid cells with a central nucleus, most numerous in the upper half of fundic glands."
+  },
+  {
+    q: "Chief (zymogenic) cells of the gastric glands are characterised by which of the following histological and secretory features?",
+    opts: [
+      "Large central nucleus and location predominantly in the upper half of the gastric gland",
+      "Columnar shape with mucinogen granules in the apical cytoplasm and basally placed nucleus",
+      "Rough endoplasmic reticulum basally, secretory (zymogen) granules apically, and secretion of pepsinogen",
+      "Spherical shape with renin-containing granules, located in the outer third of the gastric gland",
+      "Basal cytoplasmic granules releasing serotonin and gastrin into adjacent blood vessels"
+    ],
+    ans: 2,
+    exp: "Chief (zymogenic) cells are located in the lower third of the gastric glands. They contain abundant rough endoplasmic reticulum near the base (giving intense basophilic staining), a small Golgi apparatus, and secretory (zymogen) granules near the apex. They secrete pepsinogen, which is converted by HCl (from parietal cells) into the active protease pepsin. Their rich RER reflects high protein synthesis — a classic feature of professional secretory cells. Mucous neck cells (option B) are columnar with apical mucinogen granules and are located just below the gastric pit."
+  },
+  {
+    q: "Mucous neck cells of the gastric glands are positioned just below the gastric pit. Which of the following correctly describes their secretory product and morphological characteristics?",
+    opts: [
+      "They secrete hydrochloric acid and intrinsic factor in addition to mucus",
+      "They are found in the lower third of the gland alongside chief cells",
+      "They contain parietal-type tubulovesicular membranes and secrete both acid and mucus simultaneously",
+      "They are basal enteroendocrine cells that release gastrin directly into blood vessels",
+      "They produce soluble mucus, with mucinogen granules in the apical cytoplasm and basally placed nuclei"
+    ],
+    ans: 4,
+    exp: "Mucous neck cells are columnar cells located just below the gastric pit at the neck of the gastric gland. They contain mucinogen granules in the apical cytoplasm with nuclei pushed basally — distinguishing them from surface mucous cells where the granules occupy the whole supranuclear cytoplasm. They produce soluble mucus (as opposed to the insoluble mucus of surface cells). They are distinct from parietal cells (HCl and intrinsic factor) and from chief cells (pepsinogen, lower third of gland)."
+  },
+  {
+    q: "The muscularis externa of the stomach is unique among all GIT organs in that it possesses:",
+    opts: [
+      "Three smooth muscle layers — an inner oblique, a middle circular, and an outer longitudinal layer",
+      "Only two layers — inner circular and outer longitudinal — as in the rest of the GIT",
+      "Four layers, including an additional serosal smooth muscle coat unique to the gastric wall",
+      "An inner skeletal muscle layer in the cardia transitioning to smooth muscle in the fundus",
+      "A single thick circular muscle layer forming the pyloric sphincter throughout the stomach"
+    ],
+    ans: 0,
+    exp: "Unlike the rest of the GIT (which has two muscularis externa layers — inner circular and outer longitudinal), the stomach has three: inner oblique, middle circular, and outer longitudinal. This three-layer arrangement generates the complex churning and mixing movements required for mechanical digestion. The middle circular layer is thickened at the pylorus to form the pyloric sphincter. This is a classic GIT exam fact: the stomach is the only GIT organ with a three-layered muscularis externa."
+  },
+  {
+    q: "Gastric pits are present in all regions of the stomach. Compared to the fundus and body, the pyloric region is characterised by:",
+    opts: [
+      "Fewer and shallower gastric pits with more abundant parietal cells than the fundus",
+      "Longer, straight, unbranched glands with a high density of chief cells in the lower third",
+      "Gastric pits of identical depth with glands structurally indistinguishable from those of the fundus",
+      "Deeper gastric pits with short, tortuous, branched glands that produce mucus and gastrin",
+      "Absence of gastric pits with direct secretion from undifferentiated surface columnar cells only"
+    ],
+    ans: 3,
+    exp: "The pyloric region has deeper gastric pits (deeper than those of the fundic/cardiac regions) and short, tortuous, branched pyloric glands in the lamina propria. These glands produce mucus and gastrin (from G cells). Parietal cells are sparse in the pylorus compared to the fundus and body. The fundus and body have shallower pits and straight glands containing abundant parietal cells and chief cells. This regional variation is a common exam comparison and can be appreciated on microscopy by assessing pit depth relative to gland length."
+  },
+  {
+    q: "Plicae circulares (valves of Kerckring) are permanent crescent-shaped folds of the mucosa and submucosa in the small intestine. Which statement about them is correct?",
+    opts: [
+      "They are transient structures that flatten completely when the small intestine is distended with food",
+      "They are best developed in the jejunum and absent from the first few centimetres of the duodenum and the distal ileum",
+      "They consist of mucosal folds only, without incorporation of the submucosal layer",
+      "They are most prominent in the ileum, where they coincide with the location of Peyer's patches",
+      "They are exclusive to the duodenum, providing maximum surface area at the primary site of digestion"
+    ],
+    ans: 1,
+    exp: "Plicae circulares are permanent structures — they do not flatten when the intestine is distended with food, unlike the rugae of the stomach. They are composed of both mucosa and submucosa and are best developed in the jejunum. They are absent from the first few centimetres of the duodenum and from the distal ileum. They increase mucosal surface area approximately threefold. Villi increase surface area tenfold, and microvilli (brush border) increase it a further twentyfold — together providing the enormous absorptive surface of the small intestine."
+  },
+  {
+    q: "Brunner's glands are a characteristic feature that uniquely identifies the duodenum from the rest of the small intestine. They are located in the:",
+    opts: [
+      "Lamina propria of the duodenal mucosa alongside the crypts of Lieberkühn",
+      "Lumen of the duodenum as free-floating aggregates of secretory cells",
+      "Muscularis externa between the circular and longitudinal smooth muscle layers",
+      "Serosal layer forming visible surface nodules on the outer duodenal wall",
+      "Submucosa of the duodenum, secreting alkaline mucus to neutralise acid chyme from the stomach"
+    ],
+    ans: 4,
+    exp: "Brunner's glands are compound tubulo-alveolar glands located in the submucosa of the duodenum — the only segment of the GIT with glands in the submucosa (apart from the esophageal submucosal glands). They secrete alkaline mucus rich in bicarbonate, neutralising the acidic chyme entering from the stomach and protecting the duodenal mucosa. Their presence in the submucosa (not the lamina propria) is the key histological distinguisher. The ileum's distinguishing submucosal feature is Peyer's patches, not glands."
+  },
+  {
+    q: "Paneth cells are found at the base of the crypts of Lieberkühn in the small intestine. Their primary role is:",
+    opts: [
+      "Absorption of digested nutrients via a prominent brush border of apical microvilli",
+      "Secretion of alkaline mucus to neutralise the acidity of intestinal contents",
+      "Secretion of antimicrobial peptides including defensins and lysozyme to regulate intestinal microflora",
+      "Production of intrinsic factor for vitamin B12 absorption in the terminal ileum",
+      "Phagocytosis of luminal antigens and their presentation to submucosal lymphoid tissue"
+    ],
+    ans: 2,
+    exp: "Paneth cells are specialised secretory cells located at the base of the crypts of Lieberkühn throughout the small intestine. They contain prominent eosinophilic apical secretory granules packed with antimicrobial proteins — including defensins (cryptdins), lysozyme, and phospholipase A2 — which they secrete into the crypt lumen to regulate the intestinal microflora and protect stem cells at the crypt base. Intrinsic factor (option D) is secreted by gastric parietal cells. Antigen presentation (option E) is the role of M cells overlying Peyer's patches."
+  },
+  {
+    q: "M (microfold) cells are specialised epithelial cells in the small intestine. Their defining function is to:",
+    opts: [
+      "Endocytose luminal antigens and transport them to underlying macrophages and lymphoid cells in Peyer's patches",
+      "Secrete secretory IgA into the intestinal lumen to neutralise luminal pathogens",
+      "Phagocytose intact bacteria and destroy them within lysosomal compartments",
+      "Produce a glycocalyx layer that traps antigens before delivery to dendritic cells",
+      "Act as stem cells continuously replacing absorptive enterocytes on intestinal villi"
+    ],
+    ans: 0,
+    exp: "M cells are specialised epithelial cells that overlie the lymphoid follicles of Peyer's patches in the ileum. They have irregular microfolds (not microvilli) on their luminal surface, lack a glycocalyx, and are characterised by intraepithelial lymphocytes and antigen-presenting cells (macrophages) within deep cytoplasmic pockets on their basolateral surface. They endocytose luminal antigens — including bacteria, viruses, and particles — and transcytose them to the underlying macrophages and lymphoid cells, initiating mucosal immune responses."
+  },
+  {
+    q: "Peyer's patches are prominent aggregations of lymphoid tissue in the small intestine. They are found predominantly in:",
+    opts: [
+      "The duodenum, where they are associated with the Brunner's glands in the submucosa",
+      "Equally throughout the entire length of the small intestine in the lamina propria",
+      "The jejunum, where they coincide with the most highly developed plicae circulares",
+      "The ileum, as prominent raised patches in the lamina propria and submucosa",
+      "Both the duodenum and jejunum as bilateral paired lymphoid aggregations"
+    ],
+    ans: 3,
+    exp: "Peyer's patches are aggregations of lymphoid follicles found predominantly in the ileum (the distal small intestine), where they are visible as raised oval patches spanning the mucosa and submucosa on the anti-mesenteric border. They are covered by specialised follicle-associated epithelium containing M cells that sample luminal antigens. They form part of the gut-associated lymphoid tissue (GALT). The duodenum's distinctive submucosal feature is Brunner's glands, not lymphoid patches."
+  },
+  {
+    q: "Which of the following features correctly distinguishes the large intestine from the small intestine histologically?",
+    opts: [
+      "Presence of villi projecting into the lumen and crypts of Lieberkühn between them",
+      "Absence of villi, marked abundance of goblet cells, and the presence of taeniae coli",
+      "Presence of Brunner's glands throughout the submucosal layer of its entire length",
+      "Presence of Peyer's patches within both the lamina propria and submucosal layer",
+      "Pseudostratified ciliated columnar epithelium lining the entire mucosal surface"
+    ],
+    ans: 1,
+    exp: "The large intestine is histologically distinguished from the small intestine by: (1) absence of villi — the mucosa is flat with only intestinal glands (no finger-like projections); (2) marked abundance of goblet cells — reflecting its primary role in mucus secretion for lubrication; (3) taeniae coli — three bands of outer longitudinal smooth muscle that gather the wall into haustra. Other features include the presence of appendices epiploicae (fat-filled peritoneal appendages) and lymphoid follicles but no Brunner's glands or Peyer's patches."
+  },
+  {
+    q: "In comparing the three histological regions of the stomach, which statement correctly identifies the distribution of parietal (oxyntic) cells?",
+    opts: [
+      "Parietal cells are absent from the fundus and most numerous in the cardia",
+      "Parietal cells are present in equal numbers throughout all three gastric regions",
+      "Parietal cells are found only in the pyloric glands, co-secreting HCl and gastrin",
+      "Parietal cells are most numerous in the cardia, with progressively fewer toward the pylorus",
+      "Parietal cells are absent from the cardia, most numerous in the fundus and body, and few in the pylorus"
+    ],
+    ans: 4,
+    exp: "Parietal cells follow a characteristic regional distribution: absent or very few in the cardia; most numerous in the fundus and body (located predominantly in the upper half of the gastric glands); and few in the pylorus. This distribution explains why the fundus and body are the primary sites of gastric acid production. The pyloric glands contain predominantly mucus-secreting cells and G cells (producing gastrin). This regional comparison — cardia (absent/few) vs fundus/body (most) vs pylorus (few) — is a classic histology exam table."
+  },
+  {
+    q: "The muscularis mucosae, present throughout the GIT wall, consists of:",
+    opts: [
+      "Three layers — inner oblique, middle circular, and outer longitudinal smooth muscle",
+      "A single thick layer of longitudinal smooth muscle without a circular component",
+      "An inner circular and an outer longitudinal layer of smooth muscle",
+      "Skeletal muscle fibers in the upper GIT transitioning to smooth muscle in the lower GIT",
+      "Dense irregular connective tissue with scattered smooth muscle cells throughout"
+    ],
+    ans: 2,
+    exp: "The muscularis mucosae is a thin layer of smooth muscle separating the lamina propria from the submucosa throughout the GIT. It consists of an inner circular and an outer longitudinal layer of smooth muscle. Its contraction changes the shape of the mucosa locally, aiding absorption and secretion, and causes local movement of intestinal villi. It is distinct from the muscularis externa (which drives propulsion) and should not be confused with the three-layered muscularis externa of the stomach."
+  }
+
+];
+
+const HISTOLOGY_BATCH4_Qs = [
+
+  // ── RESPIRATORY SYSTEM HISTOLOGY ─────────────────────────────────────────
+
+  {
+    q: "The respiratory system is divided into a conducting portion and a respiratory portion. The primary function of the conducting portion is to:",
+    opts: [
+      "Filter, warm, and humidify inspired air while providing a conduit for its passage to the lungs",
+      "Exchange oxygen and carbon dioxide between alveolar air and pulmonary capillary blood",
+      "Generate surfactant that prevents alveolar collapse during expiration",
+      "Regulate alveolar pressure via pores of Kohn to equalise ventilation across lung segments",
+      "Produce mucus via goblet cells for mucociliary clearance within alveolar ducts"
+    ],
+    ans: 0,
+    exp: "The conducting portion — comprising the nasal cavities, pharynx, larynx, trachea, bronchi, and bronchioles — does not participate in gas exchange. Its functions are to provide a passageway for air and to condition inspired air by filtering particles (via cilia and mucus), warming it to body temperature (via the submucosal vascular network), and humidifying it. Gas exchange occurs exclusively in the respiratory portion, which begins at the respiratory bronchioles and includes the alveolar ducts and alveoli."
+  },
+  {
+    q: "The nasal cavity is divided into three functional regions based on their epithelium and lamina propria. Which option correctly identifies all three?",
+    opts: [
+      "Olfactory, respiratory, and paranasal sinus regions",
+      "Vestibular, respiratory, and olfactory regions",
+      "Nasal, pharyngeal, and olfactory regions",
+      "Vestibular, ciliated, and neuroepithelial regions",
+      "Anterior, middle, and posterior nasal regions"
+    ],
+    ans: 1,
+    exp: "The nasal cavity has three regions: (1) Vestibular region — the most anterior; lined by stratified squamous epithelium with sebaceous and sweat glands; (2) Respiratory region — the largest; lined by pseudostratified ciliated columnar epithelium with goblet cells and a rich submucosal vascular plexus for air conditioning; (3) Olfactory region — in the roof; lined by olfactory neuroepithelium containing bipolar receptor neurons, supporting cells, and basal cells, with Bowman's glands in the lamina propria."
+  },
+  {
+    q: "The olfactory region of the nasal cavity contains a specialised neuroepithelium. Which option correctly identifies the three cell types found within it?",
+    opts: [
+      "Ciliated columnar cells, goblet cells, and basal cells",
+      "Pseudostratified ciliated cells, mucous neck cells, and Kulchitsky cells",
+      "Olfactory receptor cells, supporting cells, and basal cells",
+      "Brush cells, granule cells, and horizontal cells of Cajal",
+      "Bipolar sensory neurons, astrocytes, and oligodendrocytes"
+    ],
+    ans: 2,
+    exp: "The olfactory epithelium contains three cell types: (1) Olfactory receptor (bipolar sensory) cells — neurons with modified cilia on the apical surface that detect odorant molecules; their axons form the olfactory nerve (CN I); (2) Supporting cells — tall columnar cells providing structural and metabolic support to the olfactory neurons; (3) Basal cells — stem cells that can regenerate all other cell types. The lamina propria contains Bowman's (olfactory) glands, which secrete serous fluid to dissolve odorant molecules and refresh the receptor surface."
+  },
+  {
+    q: "The respiratory region of the nasal cavity, which conditions inspired air, is lined by:",
+    opts: [
+      "Non-keratinized stratified squamous epithelium similar to the oral cavity",
+      "Simple columnar epithelium with absorptive cells and goblet cells",
+      "Transitional epithelium that changes morphology with airflow velocity",
+      "Pseudostratified ciliated columnar epithelium resting on a lamina propria with a rich vascular network",
+      "Simple squamous epithelium facilitating diffusion of odorant molecules"
+    ],
+    ans: 3,
+    exp: "The respiratory region, the largest portion of the nasal cavity, is lined by pseudostratified ciliated columnar epithelium (respiratory epithelium) with goblet cells. The lamina propria contains a rich vascular plexus that warms inspired air to body temperature and a lymphocytic infiltrate. The goblet cells and cilia work together in the mucociliary escalator to trap and remove inhaled particles. This epithelium continues into the trachea and major bronchi."
+  },
+  {
+    q: "The vestibular region of the nasal cavity — the most anterior portion — is lined by which type of epithelium?",
+    opts: [
+      "Pseudostratified ciliated columnar epithelium with goblet cells and a vascular lamina propria",
+      "Olfactory neuroepithelium containing bipolar receptor neurons and supporting cells",
+      "Simple columnar epithelium with abundant serous glands in the lamina propria",
+      "Transitional epithelium similar to that lining the urinary tract",
+      "Stratified squamous epithelium with sebaceous and sweat glands in the lamina propria"
+    ],
+    ans: 4,
+    exp: "The vestibular region is continuous with the skin of the face and is lined by stratified squamous epithelium. Its lamina propria contains sebaceous glands and sweat glands (similar to skin), as well as coarse hairs (vibrissae) that trap large inhaled particles — the first line of mechanical filtration. This region transitions posteriorly into the respiratory region lined by pseudostratified ciliated columnar epithelium."
+  },
+  {
+    q: "The epithelium lining the lumen of the trachea is classified as:",
+    opts: [
+      "Pseudostratified ciliated columnar epithelium (respiratory epithelium)",
+      "Simple columnar epithelium with goblet cells and a prominent brush border",
+      "Non-keratinized stratified squamous epithelium as in the esophagus",
+      "Simple squamous epithelium facilitating rapid gas diffusion across the tracheal wall",
+      "Stratified cuboidal epithelium suited to both secretion and mechanical protection"
+    ],
+    ans: 0,
+    exp: "The trachea is lined by pseudostratified ciliated columnar epithelium — also called respiratory epithelium. It appears stratified because nuclei are at different heights, but all cells contact the basement membrane, making it a single (simple) layer. Cell types include ciliated columnar cells, goblet cells, brush cells, basal cells, and small granule (Kulchitsky/neuroendocrine) cells. This same epithelium lines the nasal respiratory region, nasopharynx, and large bronchi."
+  },
+  {
+    q: "Ciliated columnar cells are the most numerous cell type in the tracheal epithelium. Their primary function is:",
+    opts: [
+      "Secreting mucus that forms the gel layer trapping inhaled dust and microorganisms",
+      "Providing a sweeping (mucociliary) motion that propels trapped particles toward the larynx for removal",
+      "Acting as stem cells that replenish other cell types lost to mechanical or chemical injury",
+      "Secreting hormones and bioactive peptides including serotonin and calcitonin",
+      "Receiving chemical sensory stimuli from the inhaled airstream"
+    ],
+    ans: 1,
+    exp: "Ciliated cells bear numerous apical cilia that beat in a coordinated fashion, propelling the mucus layer — with trapped particles — from the farthest reaches of the airways upward toward the larynx, where it is swallowed. This mucociliary escalator is the primary clearance mechanism of the conducting airways. Goblet cells (not ciliated cells) secrete mucus. Basal cells act as stem cells. Small granule cells secrete hormones. Brush cells are thought to be sensory."
+  },
+  {
+    q: "Goblet cells in the respiratory epithelium of the trachea serve which primary function?",
+    opts: [
+      "Replenishing the epithelial lining by dividing and differentiating into ciliated cells",
+      "Secreting watery serous fluid that maintains moisture at the epithelial surface",
+      "Synthesising and secreting mucus that covers the epithelial surface and traps inhaled particles",
+      "Detecting luminal chemical stimuli and transmitting signals to submucosal nerve endings",
+      "Providing structural anchorage to ciliated cells via intercellular desmosomes"
+    ],
+    ans: 2,
+    exp: "Goblet cells are unicellular mucous glands distributed throughout the respiratory epithelium. They synthesise and secrete mucus (glycoprotein-rich) that coats the epithelial surface, trapping inhaled dust particles, microorganisms, and allergens. The mucus layer is then swept toward the pharynx by the ciliated cells. Serous fluid is secreted by non-ciliated serous cells (not goblet cells), which keep the epithelium moist. Basal cells (not goblet cells) replenish the epithelium."
+  },
+  {
+    q: "Basal cells in the pseudostratified ciliated columnar epithelium of the trachea function primarily as:",
+    opts: [
+      "Cells that secrete dense-core granules containing serotonin and calcitonin into the tissue",
+      "Sensory cells that detect inhaled chemical stimuli via brush-like apical microvilli",
+      "Secretory cells producing soluble mucus to supplement goblet cell output",
+      "Stem cells that proliferate and differentiate to replace other cell types within the epithelium",
+      "Structural support cells that anchor ciliated cells to the basement membrane"
+    ],
+    ans: 3,
+    exp: "Basal cells are the stem cell population of the respiratory epithelium. They are short cells that contact the basement membrane but do not reach the luminal surface — hence the pseudostratified appearance. They multiply and differentiate into ciliated columnar cells, goblet cells, and other cell types to maintain epithelial integrity. This regenerative capacity is important in repair after injury from pollutants, smoking, or infection. Kulchitsky (small granule) cells secrete neuroendocrine products including serotonin."
+  },
+  {
+    q: "Small granule cells (Kulchitsky cells) in the tracheal epithelium are classified as neuroendocrine cells containing dense-core cytoplasmic granules. They secrete:",
+    opts: [
+      "Mucus and serous fluid to maintain the airway surface liquid layer",
+      "Antimicrobial defensins that protect the airway epithelium from bacterial colonisation",
+      "Surfactant proteins to reduce surface tension in small airways",
+      "Contractile proteins that regulate the beating frequency of adjacent ciliated cells",
+      "Hormones and active peptides including serotonin and calcitonin, regulating smooth muscle contraction and glandular secretion"
+    ],
+    ans: 4,
+    exp: "Small granule cells (Kulchitsky/neuroendocrine cells) are sparse but present throughout the respiratory epithelium. Under electron microscopy they show dense-core secretory granules near the base. They secrete bioactive substances including serotonin (5-hydroxytryptamine) and calcitonin into the lamina propria, where they regulate bronchiolar smooth muscle tone and glandular secretion in a paracrine fashion. They are analogous to the diffuse neuroendocrine (APUD) cells of the GIT. Their neoplastic transformation gives rise to carcinoid tumours."
+  },
+  {
+    q: "The C-shaped rings of hyaline cartilage in the tracheal wall provide structural support. The open (posterior) ends of these C-shaped rings are connected by:",
+    opts: [
+      "Trachealis smooth muscle, which completes the posterior wall of the trachea",
+      "Elastic cartilage providing flexible yet supportive closure of the posterior tracheal wall",
+      "Dense regular connective tissue forming a rigid ligamentous posterior bridge",
+      "Skeletal muscle allowing voluntary control of tracheal luminal diameter",
+      "Fibrocartilage providing both tensile strength and compressive resistance at the posterior wall"
+    ],
+    ans: 0,
+    exp: "The open posterior ends of the C-shaped tracheal cartilage rings are bridged by the trachealis muscle — a band of smooth muscle. This arrangement allows the posterior wall of the trachea to bulge into the lumen during coughing (increasing expiratory airflow velocity) and to expand during swallowing of large food boluses in the adjacent esophagus. The cartilage rings prevent tracheal collapse during inspiration when intrathoracic pressure falls."
+  },
+  {
+    q: "As the bronchi divide and become progressively smaller, which of the following correctly describes the changes in wall composition?",
+    opts: [
+      "Cartilage increases in mass; smooth muscle decreases progressively; epithelium remains pseudostratified throughout",
+      "Cartilage becomes irregular then absent in bronchioles; smooth muscle increases; epithelium changes from pseudostratified to columnar to cuboidal",
+      "Goblet cell number increases markedly; cartilage thickness remains constant; smooth muscle disappears",
+      "Cartilage disappears; smooth muscle simultaneously disappears; epithelium becomes simple squamous",
+      "Cartilage transitions from hyaline to elastic; smooth muscle increases; mucous glands disappear in the bronchioles"
+    ],
+    ans: 1,
+    exp: "As the airways divide: (1) Cartilage — present as irregular plates in bronchi, completely absent in bronchioles; (2) Smooth muscle — relatively increases as cartilage decreases, prominent in bronchioles (contraction causes bronchospasm in asthma); (3) Epithelium — pseudostratified ciliated columnar in principal bronchi → simple ciliated columnar in secondary bronchi → columnar in tertiary bronchi → cuboidal in terminal bronchioles → cuboidal in respiratory bronchioles; (4) Goblet cells — decrease progressively, absent in bronchioles; (5) Mucous glands — decrease, absent in bronchioles."
+  },
+  {
+    q: "Clara cells (Club cells) are non-ciliated secretory cells found predominantly in terminal bronchioles. Their primary functions include:",
+    opts: [
+      "Secreting mucus to protect the bronchiolar epithelium from inhaled chemical irritants",
+      "Producing surfactant protein A for alveolar stabilisation in the terminal respiratory zone",
+      "Secreting a surface-active fluid that reduces surface tension in bronchioles, and acting as stem cells to replenish damaged bronchiolar epithelium",
+      "Detecting chemical stimuli and signalling to submucosal mast cells via paracrine secretion",
+      "Phagocytosing inhaled particles that have escaped mucociliary clearance in larger airways"
+    ],
+    ans: 2,
+    exp: "Clara cells (now called Club cells) are dome-shaped, non-ciliated cells in terminal and respiratory bronchioles. They serve two key functions: (1) they secrete a surface-active fluid (containing proteins and phospholipids) that spreads over the bronchiolar epithelial surface, reducing surface tension and preventing bronchiolar collapse; and (2) they function as stem cells, able to proliferate and differentiate to replace damaged epithelial cells in the bronchioles. They are the predominant cell type in bronchioles where goblet cells and mucous glands are absent."
+  },
+  {
+    q: "Which of the following correctly distinguishes the respiratory bronchiole from the terminal bronchiole?",
+    opts: [
+      "The respiratory bronchiole has C-shaped cartilage rings; the terminal bronchiole has irregular cartilage patches",
+      "The terminal bronchiole has cuboidal epithelium with Clara cells and alveoli in its wall",
+      "The respiratory bronchiole contains goblet cells; the terminal bronchiole has only ciliated columnar cells",
+      "The respiratory bronchiole has alveoli budding directly from its wall, making it the first airway segment capable of gas exchange",
+      "The terminal bronchiole has prominent smooth muscle and no Clara cells; the respiratory bronchiole lacks smooth muscle entirely"
+    ],
+    ans: 3,
+    exp: "The respiratory bronchiole is the first airway segment capable of gas exchange because alveoli bud directly from its wall — this is what defines it as part of the respiratory (rather than conducting) portion. Its epithelium is low cuboidal with Clara cells and no goblet cells. The terminal bronchiole, immediately proximal, is the last purely conducting airway — it has columnar to cuboidal epithelium with Clara cells but no alveoli in its wall. Neither terminal nor respiratory bronchioles have cartilage."
+  },
+  {
+    q: "Type I alveolar cells (Type I pneumocytes) cover approximately 90% of the alveolar surface. Their primary structural role in the lung is to:",
+    opts: [
+      "Secrete pulmonary surfactant stored in cytoplasmic multilamellar bodies",
+      "Phagocytose inhaled particles and cellular debris within the alveolar lumen",
+      "Divide to replace damaged Type II pneumocytes after oxidative injury",
+      "Synthesise collagen and elastin fibers forming the alveolar basement membrane",
+      "Form the extremely thin epithelial layer of the blood-air barrier through which gas exchange occurs"
+    ],
+    ans: 4,
+    exp: "Type I pneumocytes are extremely thin, flat squamous cells (0.05–0.2 µm thick at their thinnest) that cover 90% of the alveolar surface and form the epithelial component of the blood-air barrier. Their thinness minimises diffusion distance for O2 and CO2. Edges of adjacent Type I cells overlap and are joined by tight junctions, preventing leakage of fluid into the alveolar lumen. Type I cells cannot divide; Type II pneumocytes (option A for surfactant) serve as the progenitor cells that regenerate the alveolar epithelium."
+  },
+  {
+    q: "Type II alveolar cells (Type II pneumocytes) are characterised by which of the following features?",
+    opts: [
+      "Rounded or cuboidal cells with apical microvilli and cytoplasmic multilamellar bodies, secreting pulmonary surfactant",
+      "Extremely flat squamous cells covering 90% of the alveolar surface to facilitate gas diffusion",
+      "Monocyte-derived phagocytic cells that patrol the alveolar lumen and interstitium",
+      "Ciliated columnar cells propelling mucus from alveolar ducts toward terminal bronchioles",
+      "Brush cells with dense-core granules secreting serotonin into alveolar capillaries"
+    ],
+    ans: 0,
+    exp: "Type II pneumocytes are rounded or cuboidal secretory cells with apical microvilli, clustered at the corners where alveolar walls meet. Their cytoplasm contains multilamellar bodies — membrane-bound organelles composed of phospholipid lamellae that fuse with the apical membrane and release surfactant into the alveolar space by exocytosis. Type II cells also serve as the progenitor cells of the alveolar epithelium, dividing to replace damaged Type I cells. They are also called septal cells."
+  },
+  {
+    q: "The blood-air barrier in the alveolus consists of several layers through which gas exchange occurs. Which option correctly lists these layers in sequence from the alveolar lumen to the capillary lumen?",
+    opts: [
+      "Surfactant layer → Type II pneumocyte cytoplasm → fused basement membrane → endothelial cytoplasm",
+      "Surfactant layer → Type I pneumocyte cytoplasm → basement membrane(s) → capillary endothelial cytoplasm",
+      "Type I pneumocyte cytoplasm → alveolar macrophage → basement membrane → endothelial cytoplasm",
+      "Surfactant → alveolar macrophage → basement membrane → Type I pneumocyte → endothelial cytoplasm",
+      "Type II pneumocyte cytoplasm → surfactant layer → intervening connective tissue → endothelial basement membrane"
+    ],
+    ans: 1,
+    exp: "The blood-air barrier consists of: (1) thin film of surfactant lining the alveolar surface; (2) cytoplasm of the Type I pneumocyte (extremely thin); (3) basement membrane of the pneumocyte; (4) a narrow intervening connective tissue space (at points where the two basement membranes are fused, this space is eliminated, reducing barrier thickness to its minimum); (5) basement membrane of the capillary endothelium; (6) cytoplasm of the capillary endothelial cell. The total barrier thickness is 0.5–1.0 µm where fused."
+  },
+  {
+    q: "The interalveolar septum contains structures called alveolar pores (pores of Kohn). Their functional significance is that they:",
+    opts: [
+      "Allow Type II pneumocytes to migrate between adjacent alveoli for epithelial repair after injury",
+      "Serve as dedicated channels for surfactant secretion from Type II cells into the alveolar air space",
+      "Allow passage of air between adjacent alveoli, equalising intra-alveolar pressure and enabling collateral ventilation",
+      "Provide vascular anastomoses between adjacent alveolar capillaries for blood redistribution",
+      "Permit migration of alveolar macrophages between adjacent alveoli during phagocytic surveillance"
+    ],
+    ans: 2,
+    exp: "Pores of Kohn are small openings in the interalveolar septum that allow air to pass between adjacent alveoli. They equalise pressure between alveoli and enable collateral ventilation — allowing air to bypass an obstructed terminal bronchiole and ventilate alveoli that would otherwise collapse. They also facilitate movement of surfactant and macrophages between alveoli. Each human lung contains approximately 200 million alveoli with a total surface area of about 75 m²."
+  },
+  {
+    q: "Alveolar macrophages (dust cells) are the primary phagocytic cells of the alveolar space. Which statement correctly describes their origin and function?",
+    opts: [
+      "They derive from Type II pneumocytes that have discharged their surfactant granules and become phagocytic",
+      "They originate from fibroblasts of the alveolar septum that undergo phagocytic differentiation",
+      "They are produced locally by alveolar epithelial stem cells in response to inflammatory signals",
+      "They are derived from blood monocytes, form part of the mononuclear phagocytic system, and clear inhaled particles, cellular debris, and microorganisms from the alveolar space",
+      "They originate from bone marrow megakaryocytes and reach the lungs via the pulmonary circulation"
+    ],
+    ans: 3,
+    exp: "Alveolar macrophages (dust cells) are derived from blood monocytes and represent the tissue macrophages of the lung — part of the mononuclear phagocytic system. They reside in the alveolar lumen and interstitium, phagocytosing inhaled particles (carbon, dust, microorganisms) and cellular debris. Carbon-laden macrophages in the lung parenchyma are a histological hallmark of urban pollution exposure. After phagocytosis, macrophages migrate to the mucociliary escalator in bronchioles and are eventually expelled via sputum. In heart failure, congestion causes red cell extravasation — macrophages that phagocytose erythrocytes become 'heart failure cells' filled with haemosiderin."
+  },
+  {
+    q: "Pulmonary surfactant is secreted by Type II pneumocytes from cytoplasmic multilamellar bodies. Which option correctly describes its composition and principal physiological effect?",
+    opts: [
+      "A protein-only substance that stabilises alveolar diameter by cross-linking collagen fibers in the alveolar wall",
+      "A glycoprotein secreted into the bloodstream that reduces systemic vascular resistance in the pulmonary circulation",
+      "A lipid-rich fluid secreted into alveolar ducts that increases surface tension to prevent alveolar overdistension",
+      "A mucus layer produced by goblet cells in the alveolar ducts providing antimicrobial protection",
+      "A phospholipid-protein mixture that reduces alveolar surface tension, prevents alveolar collapse during expiration, and has bactericidal properties"
+    ],
+    ans: 4,
+    exp: "Pulmonary surfactant is composed of phospholipids (mainly dipalmitoylphosphatidylcholine), proteins (SP-A, SP-B, SP-C, SP-D), and glycosaminoglycans. It reduces surface tension at the air-liquid interface within alveoli, preventing alveolar collapse (atelectasis) during expiration and reducing the inspiratory work needed to re-inflate them. It also has bactericidal properties via opsonisation mediated by SP-A and SP-D. Surfactant deficiency in premature neonates causes neonatal respiratory distress syndrome (RDS). It is constantly renewed and removed by Type I pneumocytes and macrophages."
+  },
+
+  // ── FEMALE REPRODUCTIVE TRACT HISTOLOGY — START ──────────────────────────
+
+  {
+    q: "The epithelium of the fallopian tube consists of two main cell types in a simple columnar layer. Which option correctly identifies both cell types and their respective functions?",
+    opts: [
+      "Ciliated cells that beat toward the uterus to aid ovum transport, and secretory (peg) cells that produce tubal fluid nourishing the ovum and early embryo",
+      "Goblet cells secreting mucus and absorptive cells with a prominent brush border of microvilli",
+      "Parietal cells secreting intrinsic factor and chief cells secreting digestive enzymes",
+      "Type I lining cells and Type II secretory cells producing a surface-active film",
+      "Basal stem cells and surface columnar cells providing mechanical protection"
+    ],
+    ans: 0,
+    exp: "The fallopian tube epithelium is simple columnar with two cell types: (1) Ciliated cells — bear cilia that beat rhythmically toward the uterus, propelling the ovum along the tube; they predominate near the infundibulum and fimbriae and increase under oestrogen stimulation; (2) Secretory (peg) cells — non-ciliated, taller and narrower, with an apically protruding nucleus; they secrete tubal fluid rich in nutrients and growth factors that sustain the ovum and facilitate fertilisation; they are most active after ovulation under progesterone stimulation."
+  },
+  {
+    q: "The ampulla of the fallopian tube is the widest segment and is clinically the most important region. Which option correctly identifies its two key distinguishing features?",
+    opts: [
+      "It has the thickest muscularis layer and the lowest density of ciliated epithelial cells of all tubal segments",
+      "It is the site of fertilisation and contains the most elaborate mucosal folds (plicae) of all tubal segments",
+      "It is the narrowest segment with the tallest epithelium and opens directly into the peritoneal cavity near the ovary",
+      "It contains the highest concentration of secretory cells and completely lacks ciliated cells",
+      "It lies within the uterine wall and connects the tubal lumen directly to the uterine cavity"
+    ],
+    ans: 1,
+    exp: "The ampulla is the widest segment of the fallopian tube and is the normal site of fertilisation — where sperm and ovum meet following ovulation. It is histologically recognised by its highly elaborate, branching mucosal folds (plicae) that nearly fill the lumen and give it a characteristic complex appearance on cross-section. The plicae are most elaborate here and progressively decrease toward the uterus (isthmus → intramural). The ampulla is also the most common site of ectopic (tubal) pregnancy, due to delays in embryo transport caused by tubal scarring or inflammation."
+  },
+  {
+    q: "The wall of the fallopian tube consists of three concentric layers. Which structural feature distinguishes the fallopian tube mucosa from the mucosa of the GIT?",
+    opts: [
+      "The fallopian tube has a thick muscularis mucosae separating the lamina propria from the muscularis",
+      "The fallopian tube lacks a serosa and is instead covered by a dense fibrous adventitia",
+      "The fallopian tube has no muscularis mucosae — the mucosa rests directly on the muscularis without an intervening submucosal layer",
+      "The fallopian tube muscularis consists of three smooth muscle layers identical to the gastric muscularis externa",
+      "The fallopian tube has a submucosa containing secretory glands analogous to Brunner's glands"
+    ],
+    ans: 2,
+    exp: "Unlike the GIT (which has muscularis mucosae separating lamina propria from submucosa), the fallopian tube mucosa lacks both a muscularis mucosae and a submucosa. The epithelium and thin lamina propria of loose cellular connective tissue sit directly on the muscularis (inner circular + outer longitudinal smooth muscle). There are no glands in the fallopian tube wall — the epithelial cells themselves (secretory/peg cells) provide tubal fluid. The outermost layer is a serosa (mesosalpinx, part of the broad ligament)."
+  },
+  {
+    q: "The wall of the uterus consists of three concentric layers. Which option correctly names these layers from the innermost to the outermost?",
+    opts: [
+      "Endometrium → Perimetrium → Myometrium",
+      "Myometrium → Endometrium → Perimetrium",
+      "Perimetrium → Myometrium → Endometrium",
+      "Endometrium → Myometrium → Perimetrium",
+      "Stratum functionale → Myometrium → Stratum basale"
+    ],
+    ans: 3,
+    exp: "The uterine wall from inside to outside consists of: (1) Endometrium — the inner mucosa; simple columnar epithelium with uterine glands embedded in a cellular stroma; undergoes cyclical changes; site of implantation; (2) Myometrium — the thickest layer; interlacing bundles of smooth muscle in three poorly defined layers (inner longitudinal, middle circular/oblique, outer longitudinal); the middle layer contains the arcuate arteries; (3) Perimetrium — the outermost layer; serosa (visceral peritoneum) posteriorly and superiorly, adventitia anteriorly adjacent to the bladder."
+  },
+  {
+    q: "The endometrium is divided into two functional zones. Which option correctly distinguishes the stratum functionale from the stratum basale?",
+    opts: [
+      "The stratum functionale is the deeper layer providing structural support; it is insensitive to hormones and does not shed",
+      "The stratum basale is the upper two-thirds of the endometrium, containing spiral arteries and gland bodies that shed at menstruation",
+      "The stratum functionale contains only basal arteries and is relatively insensitive to hormonal fluctuations",
+      "Both layers shed equally during menstruation and regenerate from stem cells within the myometrium",
+      "The stratum functionale is the upper two-thirds that responds to hormones and sheds at menstruation; the stratum basale is the deeper layer that does not shed and serves as the source of regeneration"
+    ],
+    ans: 4,
+    exp: "The endometrium has two zones: (1) Stratum functionale — the upper two-thirds; contains spiral arteries (coiled, hormone-sensitive), gland bodies, and proliferating stroma; responds to oestrogen and progesterone throughout the cycle; sheds entirely during menstruation; (2) Stratum basale — the lower one-third; contains gland bases and basal arteries (non-coiled, hormone-insensitive); does not shed during menstruation; is the regenerative layer that regrows the stratum functionale after each menstrual phase. Damage to the stratum basale (e.g., Asherman's syndrome) results in amenorrhoea."
+  },
+  {
+    q: "A histological section of the endometrium shows glandular epithelial cells with vacuoles located beneath the nucleus (subnuclear vacuoles). This appearance is the classic histological sign of:",
+    opts: [
+      "Early secretory phase (approximately day 16–17 of the cycle), indicating recent ovulation and the onset of progesterone effect",
+      "Late proliferative phase (around day 14), indicating peak oestrogen stimulation and maximal mitotic activity in the glands",
+      "Late secretory phase (days 25–28), characterised by saw-toothed glands and pre-decidualisation of the stroma",
+      "Menstrual phase (days 1–4), characterised by stromal necrosis and shedding of the stratum functionale",
+      "Early proliferative phase (days 5–9), characterised by re-epithelialisation from straight tubular glands"
+    ],
+    ans: 0,
+    exp: "Subnuclear vacuoles — glycogen-rich vacuoles positioned beneath the nucleus in endometrial glandular cells — are the first reliable histological sign of ovulation and progesterone effect. They appear around day 16–17 of a standard 28-day cycle (2–3 days after ovulation). They are a classic exam slide finding and one of the most tested landmarks in endometrial dating. The sequence of histological dating landmarks: day 14 (mitoses peak, straight glands) → day 16–17 (subnuclear vacuoles) → day 22–23 (stromal oedema, supranuclear secretion) → day 25–28 (tortuous saw-toothed glands, pre-decidualisation)."
+  }
+
+];
+
+const HISTOLOGY_BATCH5_Qs = [
+
+  // ── FALLOPIAN TUBE — DETAILED ────────────────────────────────────────────
+
+  {
+    q: "The ampulla is the most clinically significant region of the fallopian tube because it is:",
+    opts: [
+      "The narrowest segment, where smooth muscle contractions are strongest",
+      "The segment with the lowest density of ciliated cells and the thinnest muscularis",
+      "The normal site of fertilisation, with the most elaborate mucosal plicae of any tubal region",
+      "The segment where the tube enters the uterine wall with minimal mucosal folding",
+      "The funnel-shaped lateral opening bearing fimbriae and the highest density of ciliated cells"
+    ],
+    ans: 2,
+    exp: "The ampulla is the widest segment of the fallopian tube and the normal site of fertilisation of the ovum by spermatozoa. It has the most elaborate mucosal plicae of any tubal region — tall, complex, highly branched folds that create an extensive surface for ovum-sperm interaction and early embryo nourishment. The infundibulum (option E) is the funnel-shaped lateral opening with fimbriae and highest ciliated cell density. Ectopic (tubal) pregnancy most commonly occurs in the ampulla because delayed transport — often from tubal scarring — traps the embryo there."
+  },
+  {
+    q: "The two epithelial cell types of the fallopian tube respond differently to the hormonal phases of the menstrual cycle. Which of the following correctly describes this cyclic hormonal regulation?",
+    opts: [
+      "Ciliated cells increase and proliferate under oestrogen stimulation; secretory (peg) cells predominate after ovulation under progesterone",
+      "Secretory cells increase under oestrogen; ciliated cells increase under progesterone stimulation",
+      "Both cell types increase simultaneously under progesterone following the luteinising hormone surge",
+      "Ciliated cells are hormonally insensitive; only secretory cells undergo cyclic changes",
+      "Both cell types undergo apoptosis during the proliferative phase and regenerate in the secretory phase"
+    ],
+    ans: 0,
+    exp: "The fallopian tube epithelium undergoes cyclic changes mirroring those of the endometrium: oestrogen (follicular phase) stimulates proliferation and growth of ciliated cells, which beat toward the uterus to transport the ovum; after ovulation, progesterone (luteal phase) promotes the predominance of secretory (peg) cells, which secrete tubal fluid nourishing the ovum and early embryo. The fallopian tube uniquely lacks a muscularis mucosae and submucosa — the simple columnar epithelium rests directly on a thin lamina propria, which rests directly on the muscularis."
+  },
+
+  // ── UTERUS — ENDOMETRIUM ────────────────────────────────────────────────
+
+  {
+    q: "The endometrium is divided into two functional layers. Which of the following correctly distinguishes the stratum functionale from the stratum basale?",
+    opts: [
+      "The stratum basale is shed during menstruation while the stratum functionale remains and regenerates the cycle",
+      "Both layers are shed during menstruation and both regenerate from the underlying myometrium",
+      "The stratum functionale and basale are histologically identical but differ only in their vascular supply",
+      "The stratum functionale is the lower third that persists after menstruation and regenerates the upper layer",
+      "The stratum basale is the lower third that does not shed and serves as the source of regeneration; the stratum functionale is the upper two-thirds that sheds at menstruation"
+    ],
+    ans: 4,
+    exp: "The endometrium has two layers: (1) Stratum functionale — the upper two-thirds; contains spiral arteries and gland bodies; responds to oestrogen and progesterone; sheds during menstruation. (2) Stratum basale — the lower third; contains gland bases and straight basal arteries; does NOT shed during menstruation; is relatively insensitive to hormonal withdrawal; serves as the source of endometrial regeneration each cycle. Damage to the stratum basale (e.g., vigorous curettage) causes Asherman's syndrome — intrauterine adhesions and amenorrhoea."
+  },
+  {
+    q: "During the proliferative phase of the menstrual cycle, the histological appearance of the endometrium is characterised by:",
+    opts: [
+      "Straight, narrow, tubular glands with a compact cellular stroma and increasing mitotic activity under rising oestrogen",
+      "Tortuous, saw-toothed glands with luminal secretion and oedematous stroma under progesterone",
+      "Collapsed glands with stromal necrosis, haemorrhage, and shedding of the stratum functionale",
+      "Subnuclear vacuoles in gland epithelial cells signalling the onset of progesterone secretion",
+      "Predecidualisation of the stromal cells around spiral arteries in preparation for implantation"
+    ],
+    ans: 0,
+    exp: "The proliferative phase (days 5–14, oestrogen-driven) is characterised by re-epithelialisation from the stratum basale, straight narrow tubular glands with mitotic figures, a compact cellular stroma, and progressive lengthening of spiral arteries. The endometrium thickens steadily. Tortuous saw-toothed glands (option B) and stromal oedema are features of the late secretory phase. Subnuclear vacuoles (option D) appear at day 16–17 as the first reliable sign of ovulation and progesterone effect. Stromal necrosis (option C) is the menstrual phase."
+  },
+  {
+    q: "In histological dating of the endometrium, subnuclear vacuoles in the glandular epithelium are the classic hallmark of which phase and timing?",
+    opts: [
+      "Late proliferative phase, around day 12–13, reflecting peak oestrogen stimulation",
+      "Menstrual phase, days 1–4, reflecting breakdown of glandular epithelium",
+      "Mid-secretory phase, days 22–23, reflecting maximal progesterone effect on gland secretion",
+      "Late secretory phase, days 25–28, reflecting pre-decidualisation of stromal cells",
+      "Early secretory phase, days 16–17, representing the first reliable histological sign of ovulation"
+    ],
+    ans: 4,
+    exp: "Subnuclear vacuoles — glycogen-filled vacuoles beneath the nuclei of glandular epithelial cells — appear on days 16–17 of the cycle and are the first reliable histological sign of recent ovulation and progesterone effect. They represent glycogen accumulation in preparation for embryo nutrition. By days 22–23 (mid-secretory), vacuoles shift to a supranuclear position and intraluminal secretion begins. By days 25–28 (late secretory), glands become tortuous and saw-toothed and stromal predecidualisation occurs around spiral arteries. Subnuclear vacuoles at day 16–17 are a classic exam slide question."
+  },
+  {
+    q: "In the late secretory phase of the endometrial cycle, the characteristic histological appearance of the uterine glands is:",
+    opts: [
+      "Straight, narrow, tubular glands with regular epithelium and a compact undifferentiated stroma",
+      "Collapsed glands within a necrotic stroma undergoing ischaemia prior to menstruation",
+      "Subnuclear vacuoles in gland cells with a loose, mildly oedematous stroma",
+      "Simple tubular glands identical to those of the menstrual phase but with active mitoses",
+      "Tortuous, highly coiled (saw-toothed) glands with luminal secretion in an oedematous predecidualised stroma"
+    ],
+    ans: 4,
+    exp: "The late secretory phase (days 22–28, high progesterone) produces the most dramatic endometrial changes: the uterine glands become elongated, tortuous, and saw-toothed in outline (a key histological identifier on microscopy) with abundant intraluminal secretion. The stroma becomes markedly oedematous and predecidualisation begins around spiral arteries — stromal cells enlarge and acquire eosinophilic cytoplasm. If no implantation occurs, progesterone withdrawal causes spiral artery spasm, ischaemia, and menstruation. Straight tubular glands (option A) are the proliferative phase."
+  },
+  {
+    q: "Spiral arteries play a critical role in the endometrium. Which of the following correctly describes their location and function?",
+    opts: [
+      "They supply the stratum basale exclusively and are resistant to hormonal withdrawal",
+      "They are found in the stratum functionale and their spasm upon progesterone withdrawal causes ischaemia and menstruation",
+      "They traverse the full thickness of the myometrium and supply the uterine serosa",
+      "They are non-responsive to oestrogen and progesterone and maintain constant blood flow throughout the cycle",
+      "They supply the stratum basale only and persist through menstruation to enable regeneration"
+    ],
+    ans: 1,
+    exp: "Spiral arteries are coiled, hormone-sensitive arteries supplying the stratum functionale of the endometrium. They lengthen and coil progressively during the proliferative and secretory phases under oestrogen and progesterone. When progesterone falls at the end of the luteal phase (if no implantation occurs), spiral arteries undergo intense vasospasm, causing ischaemia and necrosis of the stratum functionale — producing menstruation. Basal arteries (not spiral arteries) supply the stratum basale; they are hormone-insensitive and persist through menstruation, enabling regeneration."
+  },
+
+  // ── CERVIX ───────────────────────────────────────────────────────────────
+
+  {
+    q: "The endocervix (cervical canal) is lined by which epithelium, and how does this differ from the ectocervix?",
+    opts: [
+      "Endocervix: non-keratinized stratified squamous; ectocervix: simple columnar mucus-secreting",
+      "Endocervix: simple columnar mucus-secreting with branched cervical glands; ectocervix: non-keratinized stratified squamous",
+      "Endocervix: pseudostratified ciliated columnar; ectocervix: transitional epithelium",
+      "Endocervix: simple cuboidal with mucus glands; ectocervix: keratinized stratified squamous",
+      "Both endocervix and ectocervix are lined by identical non-keratinized stratified squamous epithelium"
+    ],
+    ans: 1,
+    exp: "The endocervix (cervical canal) is lined by simple columnar mucus-secreting epithelium with branched cervical glands (crypts) that produce cervical mucus. It does not shed during menstruation. The ectocervix (portio vaginalis, facing the vaginal lumen) is lined by non-keratinized stratified squamous epithelium — the same type as the vagina. The sharp transition between these two epithelial types is the squamocolumnar junction, located in the transformation zone. Understanding this junction is fundamental because it is the site of origin of most cervical carcinomas."
+  },
+  {
+    q: "The transformation zone of the cervix is clinically significant primarily because it is:",
+    opts: [
+      "The region where the cervical stroma transitions from fibrous to muscular tissue",
+      "The site where the myometrium becomes contiguous with the cervical wall",
+      "The area where squamous metaplasia occurs at the squamocolumnar junction and where most cervical carcinomas originate",
+      "The zone of maximum cervical mucus production under oestrogen stimulation",
+      "The location of the internal os where the cervical canal opens into the uterine cavity"
+    ],
+    ans: 2,
+    exp: "The transformation zone is the area on the ectocervix where the columnar epithelium of the endocervix meets the stratified squamous epithelium of the ectocervix — the squamocolumnar junction. In this zone, columnar epithelium undergoes squamous metaplasia (replacement by immature squamous cells), making it biologically active and vulnerable to oncogenic stimuli, particularly HPV infection. Virtually all cervical squamous cell carcinomas and most cervical intraepithelial neoplasias (CIN) arise here. This zone is the primary target of cervical smears and colposcopic biopsy."
+  },
+
+  // ── MYOMETRIUM ───────────────────────────────────────────────────────────
+
+  {
+    q: "The myometrium is the thickest layer of the uterine wall. Which of the following correctly describes its structural organisation?",
+    opts: [
+      "A single thick layer of longitudinal smooth muscle with large blood vessels running along its inner surface",
+      "Two layers of smooth muscle — inner circular and outer longitudinal — with Auerbach's plexus between them",
+      "Interlacing bundles of smooth muscle in three poorly defined layers, with the middle layer containing the largest blood vessels",
+      "Dense regular connective tissue with scattered smooth muscle cells forming a passive supportive framework",
+      "Smooth muscle cells arranged in a single oblique layer similar to the inner oblique layer of the stomach"
+    ],
+    ans: 2,
+    exp: "The myometrium consists of interlacing bundles of smooth muscle in three poorly defined layers: inner longitudinal, middle circular/oblique, and outer longitudinal. The middle layer contains the large arcuate and radial blood vessels. During pregnancy, oestrogen drives marked hypertrophy of smooth muscle cells, which undergo autolytic apoptosis after delivery. The interlacing arrangement allows powerful coordinated contractions during labour while maintaining structural integrity. The myometrium is the primary source of uterine contractions and constitutes the majority of uterine wall thickness."
+  },
+
+  // ── VAGINA ───────────────────────────────────────────────────────────────
+
+  {
+    q: "The vaginal wall is histologically notable in that it has no glands. This means that vaginal lubrication is provided by:",
+    opts: [
+      "Goblet cells distributed throughout the vaginal epithelium secreting acidic mucus directly into the lumen",
+      "Mucus-secreting simple columnar cells lining the vaginal crypts of the lamina propria",
+      "Secretions from the Bartholin's glands embedded within the vaginal muscularis",
+      "Transudate from subepithelial blood vessels and secretions from the cervical glands",
+      "Serous secretions from submucosal glands similar to Brunner's glands of the duodenum"
+    ],
+    ans: 3,
+    exp: "The vaginal wall contains no glands anywhere — no mucus glands, no secretory glands of any kind. Vaginal lubrication is provided by two external sources: (1) transudate from the rich subepithelial vascular plexus that seeps through the epithelium, especially during sexual arousal, and (2) cervical mucus secreted by the endocervical glands that drains into the vaginal vault. The absence of vaginal glands is a classic exam fact, often summarised as one of the 'three Nos' of the vagina: No glands, No serosa, Non-keratinized stratified squamous epithelium."
+  },
+  {
+    q: "The wall of the vagina consists of three layers. Which option correctly identifies them from innermost to outermost?",
+    opts: [
+      "Mucosa (non-keratinized stratified squamous + lamina propria) → Muscularis (inner circular + outer longitudinal smooth muscle) → Adventitia",
+      "Mucosa → Submucosa → Muscularis → Serosa, identical to the standard GIT pattern",
+      "Mucosa (transitional epithelium) → Submucosa (loose CT) → Muscularis (skeletal muscle throughout)",
+      "Mucosa (simple columnar) → Muscularis (three smooth muscle layers) → Serosa (visceral peritoneum)",
+      "Endometrium-like mucosa → Myometrium-like muscularis → Perimetrium-like serosa"
+    ],
+    ans: 0,
+    exp: "The vaginal wall has three layers: (1) Mucosa — non-keratinized stratified squamous epithelium resting on a lamina propria of loose connective tissue rich in elastic fibers and lymphocytes; no glands; (2) Muscularis — inner circular (thicker) and outer longitudinal smooth muscle; the inferior end acquires an outer layer of skeletal muscle forming the sphincter; (3) Adventitia — dense irregular connective tissue merging with surrounding pelvic structures; no serosa. The vagina is one of the few pelvic organs with adventitia rather than serosa."
+  },
+  {
+    q: "The vaginal epithelium is non-keratinized stratified squamous epithelium divided into four layers. Which layer contains the greatest glycogen concentration and is most important for maintaining the normal vaginal microenvironment?",
+    opts: [
+      "Stratum basale — the single mitotically active layer attached to the basement membrane",
+      "Stratum spinosum — the polygonal prickle cell layer with early glycogen accumulation",
+      "Stratum superficiale — the surface layer with pyknotic nuclei and partial keratinisation",
+      "Stratum intermedium — the largest cells, richest in glycogen, providing substrate for Lactobacillus",
+      "All layers contain equal amounts of glycogen and contribute equally to the microenvironment"
+    ],
+    ans: 3,
+    exp: "The stratum intermedium contains the largest cells and the highest concentration of glycogen. This glycogen is metabolised by Lactobacillus acidophilus (Döderlein's bacilli) to produce lactic acid, maintaining the normal acidic vaginal pH of 3.8–4.5. This acidic environment is protective against pathogenic organisms. The stratum superficiale (surface layer) has pyknotic nuclei and may partially keratinise but contains less glycogen. The stratum basale is the single mitotically active layer providing continuous epithelial renewal."
+  },
+  {
+    q: "Oestrogen has a profound effect on the vaginal epithelium. Which of the following correctly describes the consequences of oestrogen deficiency on the vagina?",
+    opts: [
+      "Marked thickening of the epithelium with excess keratin deposition causing rigidity and pain",
+      "Increased glycogen production leading to overgrowth of Lactobacillus and chronic vaginitis",
+      "No significant change to vaginal epithelium as oestrogen does not regulate epithelial turnover",
+      "Thinning and atrophy of the epithelium with reduced glycogen, loss of Lactobacilli, rising pH, and susceptibility to infection",
+      "Hyperplasia of the stratum basale only, with unchanged surface layers and maintained acidic pH"
+    ],
+    ans: 3,
+    exp: "Oestrogen stimulates proliferation and full maturation of the vaginal epithelium, increasing glycogen content across all layers. In oestrogen deficiency (post-menopause, or childhood before puberty), the epithelium thins dramatically — few cell layers remain, glycogen content falls, Lactobacillus populations decline, vaginal pH rises above 4.5, and the mucosa becomes susceptible to opportunistic infections and trauma (atrophic vaginitis). Clinically this presents as dyspareunia, dryness, and recurrent infections. Oestrogen replacement restores the normal thick, glycogen-rich epithelium and protective acidic pH."
+  },
+  {
+    q: "In the vaginal epithelium, Lactobacillus acidophilus (Döderlein's bacilli) metabolise glycogen to produce lactic acid. The normal vaginal pH maintained by this process is:",
+    opts: [
+      "6.5–7.4, similar to blood plasma, reflecting the buffering capacity of cervical mucus",
+      "7.0–8.0, mildly alkaline, providing an optimal environment for sperm motility at rest",
+      "5.5–6.5, mildly acidic, sufficient to inhibit most but not all pathogenic bacteria",
+      "Above 7.0 during the luteal phase when progesterone thickens the cervical mucus",
+      "3.8–4.5, strongly acidic, providing protection against most bacterial and fungal pathogens"
+    ],
+    ans: 4,
+    exp: "The normal vaginal pH is 3.8–4.5, maintained by lactic acid produced when Lactobacillus acidophilus (Döderlein's bacilli) metabolises glycogen shed from the stratum intermedium. This acidic environment is bacteriostatic and fungistatic, providing protection against most pathogens. Disruption of this ecology — by antibiotics killing lactobacilli, by oestrogen deficiency reducing glycogen, or by excessive douching — raises the pH and predisposes to bacterial vaginosis (Gardnerella), Candida overgrowth, and trichomonas infection. Semen (pH 7.2–8.0) transiently alkalinises the vaginal environment to facilitate sperm survival."
+  }
+
+];
+
+/* ── Histology topic slices ── */
+const HISTO_CONNECTIVE_TISSUE_Qs = HISTOLOGY_BATCH1_Qs.slice(0,12);
+const HISTO_TISSUE_PROCESSING_Qs = HISTOLOGY_BATCH1_Qs.slice(12,18);
+const HISTO_GENERAL_INTRO_Qs     = HISTOLOGY_BATCH1_Qs.slice(18,30);
+const HISTO_URINARY_Qs           = HISTOLOGY_BATCH2_Qs.slice(0,15);
+const HISTO_CNS_CORTEX_Qs        = [...HISTOLOGY_BATCH2_Qs.slice(15,25),...HISTOLOGY_BATCH3_Qs.slice(0,5)];
+const HISTO_GIT_Qs               = HISTOLOGY_BATCH3_Qs.slice(5,25);
+const HISTO_RESPIRATORY_Qs       = HISTOLOGY_BATCH4_Qs;
+const HISTO_FEMALE_REPRO_Qs      = HISTOLOGY_BATCH5_Qs;
+
+
 /* ─── Eko Unimed Paediatrics — Neonatology ─── */
 const EKO_PAEDS_INFANT_FEEDING_Qs = [
   { q:"Which of the following best defines exclusive breastfeeding?", opts:["Breast milk only, with no other fluids or foods except medications or vitamin supplements","Breast milk as the main feed, with water permitted during hot weather","Breast milk combined with infant formula when maternal supply is insufficient","Breast milk continued until 12 months without any introduction of complementary foods","Breast milk alongside small amounts of semi-solid foods introduced from four months"], ans:0, exp:"Exclusive breastfeeding means the infant receives only breast milk — directly from the breast, expressed, or pumped — with no other foods, fluids, or water, except oral medications or vitamin supplements. This is recommended for the first 6 months of life per WHO/UNICEF guidelines. Option B describes predominant breastfeeding, where water is permitted. Option C describes mixed or partial feeding. Option D incorrectly extends the exclusive period to 12 months without complementary foods — WHO recommends EBF for 6 months, followed by complementary feeding while breastfeeding continues to 2 years. Option E reflects an older (now abandoned) recommendation of introducing solids at 4 months." },
@@ -2956,6 +4149,14 @@ const COURSES = [
         { id:"ana202_cranial_base", name:"Cranial Base", questions:IU_ANA301_CRANIAL_BASE_Qs, available:true, subject:"anatomy", anatomyType:"Gross Anatomy", lecturer:"Dr. Emmanuel O. Bienonwu" },
         { id:"physiology", name:"Basal Ganglia", questions:PHYSIO_Qs, available:true, subject:"physiology", lecturer:"Unnamed" },
         { id:"biochemistry", name:"Biochemical Aspects of Cancer and Cancer Therapy", questions:BIOCHEM_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
+        { id:"histo_ct",     name:"Connective Tissue",                questions:HISTO_CONNECTIVE_TISSUE_Qs, available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_tp",     name:"Tissue Processing",                questions:HISTO_TISSUE_PROCESSING_Qs, available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_intro",  name:"Introduction to Histology",        questions:HISTO_GENERAL_INTRO_Qs,     available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_urinary",name:"Urinary System",                   questions:HISTO_URINARY_Qs,           available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_cns",    name:"CNS Cortex",                       questions:HISTO_CNS_CORTEX_Qs,        available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_git",    name:"GIT Histology",                    questions:HISTO_GIT_Qs,               available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_resp",   name:"Respiratory System",               questions:HISTO_RESPIRATORY_Qs,       available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
+        { id:"histo_repro",  name:"Female Reproductive Tract",        questions:HISTO_FEMALE_REPRO_Qs,      available:true, subject:"anatomy", anatomyType:"Histology", lecturer:"Dr. Uche" },
       ]},
       { id:"300L", label:"300 Level", blocks:[
         { id:"anatomy_300", name:"Anatomy", questions:[], available:false, subject:"anatomy" },
@@ -4190,15 +5391,19 @@ function App(){
       );
     };
 
-    // ── PRECLINICAL: show level selection (200L / 300L) ──────────────────
-    if(course.isPreclinical && !preclinLevel){
+    // ── PRECLINICAL: screen 1 — subject cards (Anatomy / Physiology / Biochemistry) ──
+    if(course.isPreclinical && !preclinSubject){
+      const SUBJECTS=[
+        {id:"anatomy",    label:"Anatomy"},
+        {id:"physiology", label:"Physiology"},
+        {id:"biochem",    label:"Biochemistry"},
+      ];
       const pqBlocks=course.blocks.filter(b=>b.isPastQSection);
       return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
         preclinHeader(course.name,null,()=>setView("home")),
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
-        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"28px 20px"}},
+        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            // Past Questions at top
             pqBlocks.map((b,bi)=>e("div",{key:"pq-top-"+bi,className:"fade-up",
               style:{animationDelay:bi*60+"ms",background:"linear-gradient(135deg,#2a1f0e,#4a3820)",borderRadius:6,padding:"17px 20px",
                 display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
@@ -4216,21 +5421,82 @@ function App(){
               ),
               e("span",{style:{color:"#ffcc80",fontSize:"1.3rem"}},"→")
             )),
-            // divider
+            e("div",{style:{height:1,background:"#e0d8cc",margin:"4px 0"}}),
+            SUBJECTS.map((subj,si)=>{
+              const subjBlocks=course.levels.flatMap(lv=>lv.blocks.filter(b=>b.subject===subj.id));
+              const liveBlocks=subjBlocks.filter(b=>b.available&&b.questions.length>0);
+              const totalQs=liveBlocks.reduce((s,b)=>s+b.questions.length,0);
+              const hasContent=liveBlocks.length>0;
+              return e("div",{key:subj.id,className:"fade-up",
+                style:{animationDelay:(pqBlocks.length+1+si)*60+"ms",background:"#fff",borderRadius:6,padding:"20px 22px",
+                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                  boxShadow:"0 2px 10px rgba(15,39,68,.07)",
+                  cursor:hasContent?"pointer":"not-allowed",
+                  border:"1px solid "+(hasContent?"#e0d8cc":"#e8e3db"),
+                  transition:"transform .18s,box-shadow .18s",minHeight:72,
+                  opacity:hasContent?1:.5},
+                onMouseEnter:ev=>{if(hasContent){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
+                onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
+                onClick:()=>{if(hasContent){setPreclinSubject(subj);setPreclinLevel(null);}}},
+                e("div",{style:{flex:1}},
+                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
+                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#0f2744"}},subj.label),
+                    hasContent&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live")
+                  ),
+                  hasContent
+                    ? e("p",{style:{color:"#aaa",fontSize:".76rem"}},totalQs+" questions · "+liveBlocks.length+" topic"+(liveBlocks.length!==1?"s":""))
+                    : e("p",{style:{color:"#ccc",fontSize:".76rem"}},"Coming soon")
+                ),
+                hasContent&&e("span",{style:{color:course.accent,fontSize:"1.3rem"}},"›")
+              );
+            })
+          )
+        )
+      );
+    }
+
+    // ── PRECLINICAL: screen 2 — level cards within subject + All Subject Qs ──
+    if(course.isPreclinical && preclinSubject && !preclinLevel){
+      const allSubjectQs=course.levels
+        .flatMap(lv=>lv.blocks.filter(b=>b.subject===preclinSubject.id&&b.available&&b.questions.length>0))
+        .flatMap(b=>b.questions);
+      return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
+        preclinHeader(preclinSubject.label,course.name,()=>setPreclinSubject(null)),
+        e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
+        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"28px 20px"}},
+          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            allSubjectQs.length>0&&e("div",{className:"fade-up",
+              style:{background:"linear-gradient(135deg,#0f2744,#1a3a5c)",borderRadius:6,padding:"17px 20px",
+                display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:"pointer",
+                border:"1px solid transparent",transition:"transform .18s,box-shadow .18s",minHeight:68},
+              onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
+              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
+              onClick:()=>{
+                const unified={id:"unified_"+preclinSubject.id,name:"All "+preclinSubject.label+" Questions",questions:allSubjectQs,available:true,isUnified:true};
+                setBlock(unified);setQCount(Math.min(20,allSubjectQs.length));setView("setup");
+              }},
+              e("div",{style:{flex:1}},
+                e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#c9a84c"}},"All "+preclinSubject.label+" Questions"),
+                e("p",{style:{color:"rgba(255,255,255,.45)",fontSize:".76rem",marginTop:3}},allSubjectQs.length+" questions")
+              ),
+              e("span",{style:{color:"#c9a84c",fontSize:"1.3rem"}},"→")
+            ),
             e("div",{style:{height:1,background:"#e0d8cc",margin:"4px 0"}}),
             e("p",{style:{fontSize:".75rem",letterSpacing:".1em",textTransform:"uppercase",color:"#aaa",marginBottom:4,fontWeight:600}},"Select Year"),
-            // Level cards
             course.levels.map((lv,li)=>{
-              const liveCount=lv.blocks.filter(b=>b.available&&b.questions.length>0).length;
-              const totalQs=lv.blocks.filter(b=>b.available&&b.questions.length>0).reduce((s,b)=>s+b.questions.length,0);
+              const liveCount=lv.blocks.filter(b=>b.subject===preclinSubject.id&&b.available&&b.questions.length>0).length;
+              const totalQs=lv.blocks.filter(b=>b.subject===preclinSubject.id&&b.available&&b.questions.length>0).reduce((s,b)=>s+b.questions.length,0);
               return e("div",{key:lv.id,className:"fade-up",
-                style:{animationDelay:(pqBlocks.length+li)*60+"ms",background:"#fff",borderRadius:6,padding:"20px 22px",
+                style:{animationDelay:(1+li)*60+"ms",background:"#fff",borderRadius:6,padding:"20px 22px",
                   display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
-                  boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:"pointer",
-                  border:"1px solid #e0d8cc",transition:"transform .18s,box-shadow .18s",minHeight:72},
-                onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
+                  boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:liveCount>0?"pointer":"not-allowed",
+                  border:"1px solid "+(liveCount>0?"#e0d8cc":"#e8e3db"),
+                  transition:"transform .18s,box-shadow .18s",minHeight:72,
+                  opacity:liveCount>0?1:.5},
+                onMouseEnter:ev=>{if(liveCount>0){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-                onClick:()=>{ setPreclinLevel(lv); setPreclinSubject(null); }},
+                onClick:()=>{ if(liveCount>0) setPreclinLevel(lv); }},
                 e("div",{style:{flex:1}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#0f2744"}},lv.label),
@@ -4240,7 +5506,7 @@ function App(){
                     ? e("p",{style:{color:"#aaa",fontSize:".76rem"}},totalQs+" questions · "+liveCount+" topic"+(liveCount!==1?"s":""))
                     : e("p",{style:{color:"#ccc",fontSize:".76rem"}},"Coming soon")
                 ),
-                e("span",{style:{color:course.accent,fontSize:"1.3rem"}},"›")
+                liveCount>0&&e("span",{style:{color:course.accent,fontSize:"1.3rem"}},"›")
               );
             })
           )
@@ -4248,35 +5514,14 @@ function App(){
       );
     }
 
-    // ── PRECLINICAL: subject topics page ────────────────────────────────
-    if(course.isPreclinical && preclinLevel && preclinSubject){
+    // ── PRECLINICAL: screen 3 — topic list for selected subject + level ──────
+    if(course.isPreclinical && preclinSubject && preclinLevel){
       const ANATOMY_TYPES=["Gross Anatomy","Histology","Embryology"];
-      const subjBlocks=preclinLevel.blocks.filter(b=>b.subject===preclinSubject.id&&b.available&&b.questions.length>0);
-      const allSubjectQs=subjBlocks.flatMap(b=>b.questions);
       return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
-        preclinHeader(preclinSubject.label,preclinLevel.label,()=>setPreclinSubject(null)),
+        preclinHeader(preclinSubject.label,preclinLevel.label,()=>setPreclinLevel(null)),
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            // All [Subject] Questions aggregate
-            allSubjectQs.length>0&&e("div",{className:"fade-up",
-              style:{background:"linear-gradient(135deg,#0f2744,#1a3a5c)",borderRadius:6,padding:"17px 20px",
-                display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
-                boxShadow:"0 2px 10px rgba(15,39,68,.07)",cursor:"pointer",
-                border:"1px solid transparent",transition:"transform .18s,box-shadow .18s",minHeight:68},
-              onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
-              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-              onClick:()=>{
-                const unified={id:"unified_"+preclinSubject.id,name:"All "+preclinLevel.label+" "+preclinSubject.label+" Questions",questions:allSubjectQs,available:true,isUnified:true};
-                setBlock(unified);setQCount(Math.min(20,allSubjectQs.length));setView("setup");
-              }},
-              e("div",{style:{flex:1}},
-                e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#c9a84c"}},"All "+preclinLevel.label+" "+preclinSubject.label+" Questions"),
-                e("p",{style:{color:"rgba(255,255,255,.45)",fontSize:".76rem",marginTop:3}},allSubjectQs.length+" questions")
-              ),
-              e("span",{style:{color:"#c9a84c",fontSize:"1.3rem"}},"→")
-            ),
-            // Anatomy: gutter sections by type
             preclinSubject.id==="anatomy"
               ? ANATOMY_TYPES.map((atype,ati)=>{
                   const typeBlocks=preclinLevel.blocks
@@ -4292,56 +5537,10 @@ function App(){
                     ...typeBlocks.map((b,bi)=>preclinTopicCard(b,b.id,ati*10+bi))
                   );
                 }).filter(Boolean)
-              // Physiology / Biochem: flat alphabetical list
               : preclinLevel.blocks
                   .filter(b=>b.subject===preclinSubject.id)
                   .sort((a,z)=>a.name.localeCompare(z.name))
                   .map((b,bi)=>preclinTopicCard(b,b.id,bi))
-          )
-        )
-      );
-    }
-
-    // ── PRECLINICAL: subject cards within selected level ────────────────
-    if(course.isPreclinical && preclinLevel){
-      const SUBJECTS=[
-        {id:"anatomy",    label:"Anatomy"},
-        {id:"physiology", label:"Physiology"},
-        {id:"biochem",    label:"Biochemistry"},
-      ];
-      return e("div",{style:{minHeight:"100vh",background:"#f0ece4"}},
-        preclinHeader(preclinLevel.label,course.name,()=>{ setPreclinLevel(null); setPreclinSubject(null); }),
-        e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
-        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
-          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            SUBJECTS.map((subj,si)=>{
-              const subjBlocks=preclinLevel.blocks.filter(b=>b.subject===subj.id);
-              const liveBlocks=subjBlocks.filter(b=>b.available&&b.questions.length>0);
-              const totalQs=liveBlocks.reduce((s,b)=>s+b.questions.length,0);
-              const hasContent=liveBlocks.length>0;
-              return e("div",{key:subj.id,className:"fade-up",
-                style:{animationDelay:si*60+"ms",background:"#fff",borderRadius:6,padding:"20px 22px",
-                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
-                  boxShadow:"0 2px 10px rgba(15,39,68,.07)",
-                  cursor:hasContent?"pointer":"not-allowed",
-                  border:"1px solid "+(hasContent?"#e0d8cc":"#e8e3db"),
-                  transition:"transform .18s,box-shadow .18s",minHeight:72,
-                  opacity:hasContent?1:.5},
-                onMouseEnter:ev=>{if(hasContent){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
-                onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-                onClick:()=>{if(hasContent) setPreclinSubject(subj);}},
-                e("div",{style:{flex:1}},
-                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
-                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#0f2744"}},subj.label),
-                    hasContent&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live")
-                  ),
-                  hasContent
-                    ? e("p",{style:{color:"#aaa",fontSize:".76rem"}},totalQs+" questions · "+liveBlocks.length+" topic"+(liveBlocks.length!==1?"s":""))
-                    : e("p",{style:{color:"#ccc",fontSize:".76rem"}},"Coming soon")
-                ),
-                hasContent&&e("span",{style:{color:course.accent,fontSize:"1.3rem"}},"›")
-              );
-            })
           )
         )
       );
