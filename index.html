@@ -4963,6 +4963,7 @@ function App(){
   const [subCodeInput,setSubCodeInput]=useState("");
   const [subCodeError,setSubCodeError]=useState("");
   const [subCodeLoading,setSubCodeLoading]=useState(false);
+  const [subWarnDone,setSubWarnDone]=useState(false);
 
   // ── School selector ──
   const [selectedSchool,setSelectedSchool]=useState(()=>ls.get(SCHOOL_KEY)||null);
@@ -5029,6 +5030,7 @@ function App(){
       school:currentSchool||"",
     };
     setResult(r);
+    setShowSubPaywall(false); setShowSubWarn(false);
     // Strip non-serializable fields before saving to Firestore (undefined values cause silent failures)
     const { questions:_q, answers:_a, ...toSave } = r;
     saveAttempt(toSave);
@@ -5127,7 +5129,7 @@ function App(){
     // Sub paywall checks
     if(isSub()&&!validSubAccess(subAccess)){
       if(subFreeCount>=50){ setShowSubPaywall(true); return; }
-      if(subFreeCount===40&&!showSubWarn){ setShowSubWarn(true); return; }
+      if(subFreeCount>=40&&!subWarnDone){ setSubWarnDone(true); setShowSubWarn(true); return; }
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -5355,7 +5357,7 @@ function App(){
   );
 
   // ═══════════ SUB WARNING (10 left) ═══════════
-  if(showSubWarn&&!showSubPaywall&&view!=="results") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  if(showSubWarn&&!showSubPaywall&&view==="quiz") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 8px 32px rgba(0,0,0,.15)",width:"100%",maxWidth:400,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"24px 24px 18px",textAlign:"center"}},
         e("div",{style:{fontSize:"2rem",marginBottom:6}},"⏳"),
@@ -5413,12 +5415,12 @@ function App(){
   );
 
   // ═══════════ SUB HARD BLOCK ═══════════
-  if(showSubPaywall&&view!=="results") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+  if(showSubPaywall&&view==="quiz") return e("div",{style:{minHeight:"100vh",background:"#edf2f7",display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:"#fff",borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
         e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
         e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.4rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free limit reached"),
-        e("p",{style:{color:"rgba(144,202,249,.7)",fontSize:".8rem",lineHeight:1.6}},"You've used your 50 free Subspecialties questions on this device.")
+        e("p",{style:{color:"rgba(144,202,249,.7)",fontSize:".8rem",lineHeight:1.6}},"You've used all 50 free Subspecialties questions.")
       ),
       e("div",{style:{height:3,background:"linear-gradient(90deg,#2196f3,#90caf9,#2196f3)"}}),
       e("div",{style:{padding:"24px 28px 24px"}},
@@ -6624,7 +6626,7 @@ function App(){
               "🔁 Retake Failed Questions ("+failedQs.length+")"
             ),
             e("div",{style:{display:"flex",gap:10}},
-              e("button",{onClick:()=>setView("home"),style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
+              e("button",{onClick:()=>{setView("home");setShowSubPaywall(false);setShowSubWarn(false);},style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
               e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Try Again")
             )
           )
