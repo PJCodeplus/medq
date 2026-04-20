@@ -4648,6 +4648,377 @@ const PAST_Q_STRUCTURE = {
 };
 
 /* ═══════════ COURSE STRUCTURE ═══════════ */
+const RADIOLOGY_Qs = [
+  {
+    q: "Which of the following best describes the process by which electrons are released from the cathode of an x-ray tube?",
+    opts: [
+      "Photoelectric emission from a copper plate irradiated by ultraviolet light",
+      "Secondary emission from a barium-coated surface under electron bombardment",
+      "Field emission from a cold tungsten tip driven by a high voltage gradient",
+      "Thermionic emission from a heated tungsten filament",
+      "Auger emission from a molybdenum target following inner-shell ionization"
+    ],
+    ans: 3,
+    exp: "Electrons are released at the cathode of an x-ray tube by thermionic emission. The tungsten filament is heated to incandescence by an electric current, giving surface electrons sufficient thermal energy to escape the metal lattice. These liberated electrons are then accelerated across the evacuated tube toward the anode by a large potential difference of 30–150 kilovolts. Photoelectric emission (option B) requires incident photons rather than heat to release electrons. Field emission (option D) occurs from unheated sharp metallic tips under extreme electric field gradients and is not the mechanism in diagnostic x-ray tubes. Understanding thermionic emission is foundational to understanding x-ray tube function, image quality, and the significance of tube heating."
+  },
+  {
+    q: "During x-ray production, when fast-moving electrons strike the tungsten anode, approximately what proportion of their kinetic energy is converted into x-rays?",
+    opts: [
+      "Approximately 50%, with the remainder producing visible light and infrared radiation",
+      "Approximately 10%, with the remaining 90% released as x-ray photons",
+      "No more than 1%, with the remainder converted into heat",
+      "Approximately 90%, as energy conversion is efficient at diagnostic tube voltages",
+      "Nearly 100%, as the entire kinetic energy of electrons is released as electromagnetic radiation"
+    ],
+    ans: 2,
+    exp: "X-ray production is remarkably inefficient: no more than 1% of the kinetic energy of the accelerated electrons is converted into x-rays upon impact with the tungsten anode target. The remaining 99% or more is released as heat. This extreme heat production explains why x-ray tubes require active cooling mechanisms and why the anode is designed to rotate — distributing heat over a larger surface area to prevent local melting. Options suggesting 10% or 50% conversion substantially overestimate x-ray yield. If nearly 100% efficiency were achievable (option E), x-ray tubes would generate negligible heat and require no cooling system, which is contrary to established physics."
+  },
+  {
+    q: "Which of the following correctly lists the five basic plain radiographic densities in order from least to most x-ray attenuating?",
+    opts: [
+      "Air, fat, soft tissue/fluid, calcium, metal",
+      "Air, fat, calcium, soft tissue/fluid, metal",
+      "Fat, air, soft tissue/fluid, metal, calcium",
+      "Air, soft tissue/fluid, fat, calcium, metal",
+      "Air, fat, soft tissue/fluid, metal, calcium"
+    ],
+    ans: 0,
+    exp: "The five basic plain radiographic densities from least to most x-ray attenuating are: air, fat, soft tissue/fluid, calcium, and metal. Air attenuates the fewest x-ray photons and appears black (radiolucent); metal attenuates the most and appears white (radio-opaque). Fat lies between air and soft tissue in attenuation, appearing darker than soft tissue but lighter than air — this difference is subtle but exploitable radiographically. Soft tissue and fluid have similar attenuation coefficients and cannot be reliably distinguished from each other without contrast. Calcium (bone) is more attenuating than soft tissue but less so than metal. Option B incorrectly places calcium before soft tissue. Option E incorrectly places metal before calcium. Memorizing this sequence is essential for interpreting any plain radiograph."
+  },
+  {
+    q: "A radiologist needs to evaluate a deep retroperitoneal structure using ultrasonography. Which transducer frequency should be selected, and why?",
+    opts: [
+      "A higher frequency transducer, as greater energy penetrates more deeply into retroperitoneal tissues",
+      "A lower frequency transducer, as its reduced attenuation allows greater depth of penetration",
+      "A higher frequency transducer, as it generates less acoustic shadowing at greater tissue depths",
+      "A lower frequency transducer, as it produces a wider beam angle suited to deeper structures",
+      "Either frequency, as depth of penetration in ultrasonography is determined solely by probe position"
+    ],
+    ans: 1,
+    exp: "In ultrasonography, frequency and depth of penetration have an inverse relationship. Higher frequency sound waves undergo greater attenuation as they travel through tissue and therefore cannot reach deep structures effectively. Lower frequency transducers (typically 2–5 MHz) attenuate less and penetrate more deeply, making them ideal for imaging retroperitoneal structures, the liver, kidneys, and deep abdominal organs in adults. The trade-off is reduced spatial resolution. Higher frequency probes (7–15 MHz) provide superior resolution but are limited to superficial structures such as the thyroid gland, breast, and tendons. The idea that higher frequency equals greater penetration (option A) reverses this relationship entirely and is a common misconception."
+  },
+  {
+    q: "Why is a coupling gel applied between the ultrasound transducer and the patient's skin surface before scanning?",
+    opts: [
+      "To increase electrical conductivity between the probe and the skin for clearer signal processing",
+      "To reduce frictional heat generated between the probe head and skin during prolonged examinations",
+      "To sterilize the skin surface and prevent cross-contamination between the probe and patient",
+      "To increase acoustic impedance at the skin surface and enhance tissue-level reflection",
+      "To eliminate the acoustic mismatch at the air-tissue interface and permit sound wave transmission"
+    ],
+    ans: 4,
+    exp: "Acoustic impedance (Z) is the resistance a medium offers to the propagation of sound waves. When sound waves encounter an interface between two materials with very different acoustic impedances, most of the wave energy is reflected rather than transmitted. The air-tissue interface presents a very large acoustic mismatch — without correction, nearly all ultrasound energy from the transducer would be reflected at the skin surface, and virtually no signal would reach deeper tissues. Coupling gel eliminates the thin air layer between the transducer surface and skin, matching their impedances and allowing maximal transmission of sound into the body. The gel is not conducting, sterilizing, or heat-reducing in function. Option E is incorrect because increasing impedance mismatch at the skin would reduce, not enhance, transmission."
+  },
+  {
+    q: "A patient is instructed to attend a pelvic ultrasound examination with a full urinary bladder. Which of the following best explains this requirement?",
+    opts: [
+      "A distended bladder compresses the ovaries against the pelvic sidewall, making them easier to visualize",
+      "Urine within the full bladder emits Doppler signals that help distinguish it from adjacent pelvic masses",
+      "The dilated bladder wall generates strong posterior echoes that guide probe placement toward pelvic organs",
+      "The full bladder displaces air-containing bowel loops from the pelvis and provides an acoustic window for imaging",
+      "A full bladder elevates intra-abdominal pressure, lifting the uterus into a more accessible scanning position"
+    ],
+    ans: 3,
+    exp: "The full urinary bladder serves two critical functions in pelvic ultrasonography. First, it acts as an acoustic window: fluid has acoustic impedance well-matched to surrounding soft tissues, allowing sound waves to pass through the bladder with minimal reflection and image the uterus, ovaries, and adnexae beyond it. Second, the distended bladder physically displaces air-containing bowel loops superiorly and out of the pelvis. Gas causes near-total reflection of sound waves, creating acoustic shadowing that obscures deeper pelvic structures. Without a full bladder, bowel gas would prevent adequate visualization of the female pelvis. The bladder does not compress the ovaries, generate Doppler signals, or primarily work through elevation of intra-abdominal pressure."
+  },
+  {
+    q: "On a computed tomography image, a structure within the abdomen measures a CT number of -80 Hounsfield units. Which tissue type does this density most likely represent?",
+    opts: [
+      "Air",
+      "Fat",
+      "Water",
+      "Soft tissue",
+      "Cortical bone"
+    ],
+    ans: 1,
+    exp: "The Hounsfield unit (HU) scale assigns CT numbers based on x-ray attenuation relative to water. By convention, water measures 0 HU, air measures approximately -1000 HU, and cortical bone exceeds +1000 HU. Fat attenuates x-rays less than water but more than air, and typically measures between -50 and -100 HU on CT. A CT number of -80 HU falls clearly within the fat density range. Soft tissue (muscle, solid organs) typically measures +20 to +80 HU. Recognizing fat density on CT is clinically important for identifying lipomas, adrenal myelolipomas, ovarian dermoid cysts, retroperitoneal liposarcoma, and fat stranding in acute inflammation. A structure measuring near -1000 would represent air; near 0 would represent water; above +400 would represent calcification or bone."
+  },
+  {
+    q: "In computed tomography, the CT number range spans approximately 4,000 shades of grey. Which of the following best explains why windowing is required for image interpretation?",
+    opts: [
+      "CT scanners generate insufficient inherent contrast between tissues without manual windowing amplification",
+      "Windowing corrects for beam hardening artefacts introduced during helical CT acquisition",
+      "The CT number range is too narrow to differentiate tissues without windowing-based signal amplification",
+      "Windowing increases the radiation dose applied per slice to enhance spatial resolution in the selected tissue",
+      "The human eye can appreciate no more than 50 shades of grey, necessitating a narrow display range to resolve tissue differences"
+    ],
+    ans: 4,
+    exp: "CT images encompass a CT number range of approximately -1000 to +3000 Hounsfield units, representing roughly 4,000 distinct shades of grey. The human visual system, however, can distinguish no more than approximately 50 shades of grey simultaneously. If all 4,000 CT number values were displayed at once, the eye would be unable to detect subtle density differences between adjacent soft tissue structures. Windowing resolves this by selecting a narrow range of CT numbers — the window width — centred on a level appropriate for the tissue of interest — the window level. This compresses the chosen density range into the 50 or so appreciable shades, enabling fine tissue discrimination. For example, a narrow brain window distinguishes grey and white matter; a wide lung window displays both air and soft tissue in the same image."
+  },
+  {
+    q: "A patient requires urgent brain MRI. Which of the following implants represents the most absolute contraindication to entering the MRI scanner?",
+    opts: [
+      "A titanium total hip replacement inserted more than one year prior",
+      "A copper-bearing intrauterine contraceptive device in situ for three years",
+      "An electronic cardiac pacemaker implanted six months ago",
+      "Dental amalgam fillings placed within the previous twelve months",
+      "Stainless steel surgical staples applied to a closed abdominal wound six weeks ago"
+    ],
+    ans: 2,
+    exp: "Electronic cardiac pacemakers are an absolute contraindication to MRI. The strong static magnetic field can displace the device, disrupt its programming, or trigger inappropriate pacing. Additionally, the radiofrequency pulses used in MRI can induce currents in pacemaker leads, causing thermal injury to surrounding myocardium or lethal arrhythmias. Titanium is non-ferromagnetic and titanium implants are generally MRI-safe. Copper IUDs are non-ferromagnetic and do not interact significantly with the magnetic field. Dental amalgam may produce artefact but rarely poses a safety risk. Surgical staples placed more than 6–8 weeks ago and deemed non-ferromagnetic are generally acceptable. Other absolute contraindications include ferromagnetic surgical aneurysm clips, cochlear implants with magnets, and internal ferromagnetic metal objects."
+  },
+  {
+    q: "What property of the hydrogen proton forms the physical basis for signal generation in magnetic resonance imaging?",
+    opts: [
+      "The neutron's nuclear spin creates oscillating magnetic dipoles that are detectable by surrounding receiver coils",
+      "The proton's electrical charge interacts directly with the external magnetic field to generate a measurable voltage",
+      "The proton's magnetic moment enables it to precess in a magnetic field and absorb radiofrequency energy at resonance",
+      "The electron's orbital angular momentum produces radiofrequency waves captured by gradient coils around the patient",
+      "The nucleus emits gamma rays during radioactive decay, which are then detected by surface coils positioned around the patient"
+    ],
+    ans: 2,
+    exp: "MRI exploits the nuclear magnetic resonance properties of the hydrogen proton — the most abundant nucleus in biological tissue given the high water content of the body. The proton possesses an intrinsic magnetic moment arising from its spin. When placed within a strong external magnetic field (typically 1.5 Tesla), the proton precesses about the field axis at a characteristic frequency called the Larmor frequency (approximately 64 MHz at 1.5T). When a radiofrequency pulse precisely matching this Larmor frequency is applied, the proton absorbs energy — resonance. When the pulse is switched off, the proton releases this absorbed energy as a detectable radiofrequency signal, which is processed into images. Neutrons, electrons, and gamma rays play no role in standard clinical MRI. Gamma ray emission is the basis of radionuclide imaging, a completely different modality."
+  },
+  {
+    q: "Which of the following correctly distinguishes radionuclide imaging from plain radiography in terms of the radiation source used for image acquisition?",
+    opts: [
+      "Radionuclide imaging transmits x-rays from an external tube through the patient; plain radiography detects internally emitted gamma rays",
+      "Radionuclide imaging uses radiofrequency waves generated internally; plain radiography uses ionizing photons applied from an external source",
+      "Both modalities use an external radiation source, but radionuclide imaging employs a rotating detector array rather than a static receptor",
+      "Radionuclide imaging uses radiation emitted from within the patient; plain radiography uses radiation transmitted from an external source",
+      "Radionuclide imaging produces transmission images from an internal source; plain radiography produces emission images from an external tube"
+    ],
+    ans: 3,
+    exp: "Radionuclide imaging is fundamentally an emission modality: a radiopharmaceutical is administered to the patient and concentrates in a target organ according to its physiological or pathological status. The radioisotope then emits gamma rays from within the patient, which are detected externally by a gamma camera. This makes it 'radiation from within.' Plain radiography, CT, mammography, and fluoroscopy are all transmission modalities — radiation generated from an external x-ray source passes through the patient and is captured by a detector on the other side, making them 'radiation from without.' This distinction is clinically important: radionuclide imaging reflects metabolic and functional information rather than purely anatomic structure, explaining its utility in cancer staging, pulmonary embolism diagnosis, and assessing chemotherapy response."
+  },
+  {
+    q: "Which of the following contrast agents is classified as a negative contrast medium based on its effect on x-ray attenuation in the region of interest?",
+    opts: [
+      "Iodinated contrast administered intravenously",
+      "Carbon dioxide used in double-contrast studies",
+      "Barium sulphate suspension administered orally",
+      "Gadolinium-based contrast used in conjunction with MRI",
+      "Lipiodol administered via the lymphatic or hepatic arterial route"
+    ],
+    ans: 1,
+    exp: "Contrast media are classified by their effect on x-ray attenuation at the target site. Positive contrast agents increase attenuation relative to surrounding tissue and appear white (radio-opaque) — iodinated contrast and barium sulphate are the primary examples used in x-ray-based modalities. Negative contrast agents decrease attenuation and appear darker than surrounding tissue — examples include air, carbon dioxide, and mannitol. Carbon dioxide is used as a negative contrast agent in double-contrast barium studies (e.g., double-contrast barium enema) and in CO2 angiography for patients with iodinated contrast allergy or severe renal impairment. Gadolinium is MRI-specific and cannot be classified by x-ray attenuation properties. Lipiodol is a lipid-soluble iodinated positive contrast medium."
+  },
+  {
+    q: "Which of the following correctly pairs an intravenous iodinated contrast agent with its osmolarity classification?",
+    opts: [
+      "Iohexol — high osmolar; urographin — low osmolar",
+      "Urographin — iso-osmolar; gadolinium — high osmolar",
+      "Iopamidol — iso-osmolar; iohexol — high osmolar",
+      "Barium sulphate — low osmolar; iodinated contrast — high osmolar",
+      "Iopamidol — low osmolar; urographin — high osmolar"
+    ],
+    ans: 4,
+    exp: "Intravenous iodinated contrast media are classified by their osmolality relative to plasma. High osmolar contrast media (HOCM) such as urographin have osmolalities several times that of plasma (approximately 1500–2000 mOsm/kg) and are associated with higher rates of adverse reactions including pain at the injection site, nausea, vomiting, and greater nephrotoxicity. Low osmolar contrast media (LOCM) such as iopamidol and iohexol have osmolalities closer to plasma (approximately 500–800 mOsm/kg) and are significantly better tolerated; they have largely replaced HOCM in routine clinical practice. Iso-osmolar agents (e.g., iodixanol) match plasma osmolality precisely. Gadolinium is MRI-specific and is not classified within the iodinated contrast osmolarity system. Barium sulphate is not administered intravenously."
+  },
+  {
+    q: "A patient undergoes an investigation in which intravenous iodinated contrast is administered and subsequently excreted by the kidneys, opacifying the renal collecting system and ureters on the acquired images. This application of contrast medium is best classified under which category?",
+    opts: [
+      "Luminal filling, as the contrast fills the collecting system from below via retrograde instillation",
+      "Parenchymal enhancement, as the contrast stains the renal cortex and medulla uniformly",
+      "Renal excretion, as in intravenous urography or CT urography",
+      "Angiography, as the contrast opacifies the renal vasculature before entering the collecting system",
+      "Lymphography, as contrast percolates through peri-renal lymphatic channels to reach the ureter"
+    ],
+    ans: 2,
+    exp: "Contrast medium applications can be grouped into four categories: luminal filling (e.g., barium enema, hysterosalpingography — contrast is instilled directly into a cavity), angiography (e.g., arteriography, venography — contrast is injected into blood vessels), renal excretion (intravenous contrast filtered by the glomerulus, concentrated by tubules, and excreted into the collecting system — as in IVU or CT urography), and parenchymal enhancement (contrast accumulates in solid organ tissue post-intravenously, as in post-contrast CT or MRI liver imaging). The described investigation — contrast given IV, excreted by kidneys, opacifying the pelvis and ureter — is the classic description of intravenous urography (IVU) or CT urography (CTU), belonging firmly to the renal excretion category."
+  },
+  {
+    q: "A radiographer doubles their distance from a radiation source while remaining in the fluoroscopy suite. According to the inverse square law, what happens to their radiation exposure?",
+    opts: [
+      "The exposure is reduced by half compared with the original dose",
+      "The exposure is reduced to one quarter of the original dose",
+      "The exposure is reduced by two thirds compared with the original dose",
+      "The exposure is unchanged, as only shielding affects personal dose at diagnostic energies",
+      "The exposure is eliminated entirely, as doubling distance exceeds the threshold for ionizing radiation"
+    ],
+    ans: 1,
+    exp: "The inverse square law states that radiation intensity is inversely proportional to the square of the distance from the source: I ∝ 1/d². If the distance is doubled (×2), the intensity decreases by a factor of 2² = 4, reducing exposure to one quarter of the original dose. This makes increasing distance one of the most practical and efficient tools for reducing occupational radiation exposure, particularly in fluoroscopy where the radiologist stands in proximity to the x-ray source. Halving the dose (option A) would only occur if distance increased by a factor of √2, not doubling. Ionizing radiation does not have a distance threshold beyond which exposure ceases — it follows a continuous inverse square relationship. Distance, along with minimizing time of exposure and using appropriate shielding, forms the triad of radiation dose limitation principles."
+  },
+  {
+    q: "A 45-year-old man presents with a 48-hour history of colicky abdominal pain, progressive distension, and absolute constipation. Supine and erect abdominal radiographs are obtained. Which combination of radiographic findings most strongly supports a diagnosis of intestinal obstruction?",
+    opts: [
+      "Multiple dilated bowel loops on the supine film with multiple air-fluid levels on the erect film",
+      "Generalized haziness of the abdomen with central displacement of bowel and obliteration of the psoas shadows",
+      "Calcification overlying the right iliac fossa with a surrounding soft tissue density on the supine film",
+      "Free intraperitoneal air beneath the diaphragm on the erect film with absent bowel gas distally",
+      "A ground-glass opacity in the pelvis with displacement of bowel loops superiorly and laterally"
+    ],
+    ans: 0,
+    exp: "The radiographic triad of intestinal obstruction consists of: multiple dilated loops of bowel (small bowel >3 cm, large bowel >6 cm in diameter is generally considered dilated), paucity or absence of bowel gas in the pelvis distal to the point of obstruction, and multiple air-fluid levels on the erect film — formed as gas rises and fluid settles within the dilated, static bowel loops. These three signs together strongly support mechanical obstruction. Generalized haziness suggests ascites or haemoperitoneum. Calcification in the right iliac fossa may suggest appendicolith or ureteric calculus. Free intraperitoneal air (option D) indicates perforation rather than obstruction, though obstruction can lead to perforation if untreated. Pelvic opacity (option E) suggests a pelvic mass, not obstruction."
+  },
+  {
+    q: "A 38-year-old woman presents with sudden severe abdominal pain and board-like rigidity. An erect chest radiograph is obtained urgently. Which radiographic finding would confirm the clinical suspicion of bowel perforation?",
+    opts: [
+      "A right-sided pleural effusion with blunting of the right costophrenic angle",
+      "Air beneath one or both hemidiaphragms on the erect chest radiograph",
+      "Bilateral lower zone opacification consistent with aspiration pneumonitis",
+      "Mediastinal widening with loss of the normal aortic knuckle outline",
+      "Elevated left hemidiaphragm with a small reactive pleural effusion"
+    ],
+    ans: 1,
+    exp: "Pneumoperitoneum — free air within the peritoneal cavity — is the radiographic hallmark of hollow viscus perforation. On an erect chest radiograph, free intraperitoneal gas rises to collect beneath the diaphragm, appearing as a crescentic lucency between the liver dome and the right hemidiaphragm (right subphrenic space), or between the left hemidiaphragm and the gastric fundus. The erect chest radiograph is the most sensitive plain film for detecting pneumoperitoneum, as only 1–2 mL of free air may be sufficient to produce a visible sign. The patient must be upright for at least 10 minutes prior to exposure. Pleural effusion, mediastinal widening, and elevated hemidiaphragm are important findings in their own right but do not specifically confirm hollow viscus perforation."
+  },
+  {
+    q: "The radiograph shown demonstrates a fracture of the distal radius with dorsal angulation of the distal fracture fragment. Which of the following fractures does this represent?",
+    img: "assets/raid/colle's_fracture.png",
+    opts: [
+      "Smith's fracture",
+      "Galeazzi fracture dislocation",
+      "Colles' fracture",
+      "Monteggia fracture dislocation",
+      "Barton's fracture"
+    ],
+    ans: 2,
+    exp: "Colles' fracture is a fracture of the distal inch (approximately 2.5 cm) of the radius characterized by dorsal angulation of the distal fracture fragment — producing the classic 'dinner fork' deformity on clinical examination. Additional features include impaction at the fracture site and may involve dislocation of the distal radioulnar joint. It typically results from a fall on an outstretched hand (FOOSH mechanism) and is common in postmenopausal women. Smith's fracture is the reverse — it involves the same distal radial location but with palmar (volar) angulation, producing a 'garden spade' deformity. Galeazzi fracture-dislocation involves the radial shaft (not the distal inch) with dislocation of the inferior radioulnar joint. Monteggia involves a ulnar shaft fracture with dislocation of the radial head. Barton's fracture is an intra-articular fracture of the distal radius."
+  },
+  {
+    q: "The radiograph shown demonstrates a fracture of the distal radius with palmar angulation of the distal fragment and dislocation of the distal radioulnar joint. This injury pattern is best described as:",
+    img: "assets/raid/smith's_fracture.png",
+    opts: [
+      "Smith's fracture",
+      "Colles' fracture",
+      "Galeazzi fracture dislocation",
+      "Nightstick fracture",
+      "Monteggia fracture dislocation"
+    ],
+    ans: 0,
+    exp: "Smith's fracture involves a fracture of the distal radius with palmar (volar) angulation of the distal fragment — effectively the reverse of Colles' fracture, hence it is sometimes termed a 'reverse Colles' fracture.' Clinically it produces a 'garden spade' deformity. It is associated with dislocation of the distal radioulnar joint and typically results from a fall on the back of a flexed (pronated) hand. Colles' fracture, by contrast, produces dorsal angulation after a fall on an outstretched hand. Galeazzi fracture-dislocation involves the radial shaft, not the distal inch of the radius. Monteggia is a forearm injury involving the ulna shaft rather than the radius. Nightstick fracture is an isolated fracture of the ulnar shaft without associated joint dislocation."
+  },
+  {
+    q: "The radiograph shown demonstrates a fracture of the shaft of the radius associated with dislocation of the inferior radioulnar joint. This combination of injuries is known as:",
+    img: "assets/raid/galleazi_fracture.png",
+    opts: [
+      "Monteggia fracture dislocation",
+      "Colles' fracture",
+      "Galeazzi fracture dislocation",
+      "Essex-Lopresti injury",
+      "Nightstick fracture"
+    ],
+    ans: 2,
+    exp: "Galeazzi fracture-dislocation consists of a fracture of the radial shaft combined with dislocation of the inferior (distal) radioulnar joint. It differs critically from Monteggia in that it is the radius (not the ulna) that fractures, and the disruption occurs at the distal (not proximal) radioulnar articulation. A useful aide-memoire: 'Galeazzi — radial fracture with distal joint disruption; Monteggia — ulnar fracture with proximal (radial head) dislocation.' Essex-Lopresti injury involves a radial head fracture with dislocation of the distal radioulnar joint and disruption of the interosseous membrane — it differs from Galeazzi in that the radial head (not shaft) fractures. Nightstick fracture is an isolated ulnar shaft fracture without associated dislocation. Any isolated forearm bone fracture on radiograph should prompt careful scrutiny of both adjacent joint articulations."
+  },
+  {
+    q: "The radiograph shown demonstrates a fracture of the ulna shaft with dislocation of the radial head at the elbow. This injury is eponymously known as:",
+    img: "assets/raid/monteggia_fracture_dislocation.png",
+    opts: [
+      "Galeazzi fracture dislocation",
+      "Essex-Lopresti injury",
+      "Terrible triad elbow injury",
+      "Nightstick fracture",
+      "Monteggia fracture dislocation"
+    ],
+    ans: 4,
+    exp: "Monteggia fracture-dislocation consists of a fracture of the ulna shaft with dislocation of the radial head at the elbow. The critical teaching point is that in any isolated ulnar fracture on radiograph, the radial head must always be checked for dislocation — failure to identify the associated dislocation is a classic radiographic pitfall that leads to missed diagnosis. Galeazzi is the counterpart: a radial shaft fracture with dislocation of the distal (inferior) radioulnar joint. Essex-Lopresti injury involves fracture of the radial head (not shaft) with disruption of the interosseous membrane and distal radioulnar joint — a longitudinal forearm dissociation. The terrible triad describes elbow dislocation combined with fractures of both the radial head and coronoid process. Nightstick fracture is an isolated ulnar shaft fracture without any associated dislocation."
+  },
+  {
+    q: "A plain radiograph of a child with longstanding tibial infection shows a central sclerotic bony fragment devoid of blood supply, enclosed within a shell of periosteal new bone. What are these two structures correctly termed?",
+    opts: [
+      "Involucrum and sequestrum respectively",
+      "Cloaca and periosteal reaction respectively",
+      "Involucrum and cloaca respectively",
+      "Sequestrum and involucrum respectively",
+      "Brodie's abscess and involucrum respectively"
+    ],
+    ans: 3,
+    exp: "In chronic osteomyelitis, two characteristic radiographic structures are seen. The sequestrum is the central fragment of devitalized, avascular dead bone — it appears sclerotic and dense on radiographs because, having lost its blood supply, it cannot be resorbed or remodelled and persists as an island of necrotic bone. Surrounding the sequestrum is the involucrum — a shell of new periosteal bone laid down by the viable periosteum in response to the underlying infection; it represents the body's attempt to wall off the infection. The question lists the central sclerotic fragment first and the periosteal shell second, making sequestrum and involucrum the correct respective terms. Additional features of chronic osteomyelitis include the cloaca (a defect or opening in the involucrum through which pus and necrotic debris drain) and a sinus tract (the soft tissue channel connecting bone to the skin surface)."
+  },
+  {
+    q: "The chest radiograph shown demonstrates a region of hypertransradiancy in the left hemithorax that is completely devoid of pulmonary vascular markings, with collapse of the underlying lung. The most likely diagnosis is:",
+    img: "assets/raid/pneumothorax_radiograph.png",
+    opts: [
+      "Left-sided pleural effusion",
+      "Left-sided pneumothorax",
+      "Left lower lobe consolidation",
+      "Left-sided tension haemothorax",
+      "Emphysematous bulla involving the left upper lobe"
+    ],
+    ans: 1,
+    exp: "Pneumothorax on a chest radiograph is characterized by a region of abnormal hypertransradiancy (greater blackness than normal aerated lung) that is completely devoid of pulmonary vascular markings, since no lung tissue occupies the air-filled pleural space. A thin visceral pleural line may be visible at the lung edge, marking the collapsed lung margin. Pleural effusion presents as the opposite — a homogeneous opacity with a concave upper meniscus, not a lucency. Consolidation also produces opacity. Tension haemothorax would appear as a dense unilateral opacity with contralateral mediastinal shift — not a lucency. Emphysematous bullae can occasionally mimic pneumothorax, but vascular markings can usually be traced to the bulla's edge, helping to distinguish them; in pneumothorax, the avascular space extends fully to the chest wall."
+  },
+  {
+    q: "The chest radiograph shown demonstrates a homogeneous opacity in the lower left hemithorax with a concave upper border tracking up the lateral chest wall, and loss of the sharp outline of the left hemidiaphragm. The loss of the normally sharp border between two contiguous structures of different radiodensities is called:",
+    img: "assets/raid/pleural_effusion.png",
+    opts: [
+      "The silhouette sign",
+      "The deep sulcus sign",
+      "The air bronchogram sign",
+      "The meniscus sign",
+      "The Hampton's hump sign"
+    ],
+    ans: 0,
+    exp: "The silhouette sign describes the loss of the normally sharp radiographic interface between two adjacent structures that are of different radiodensities. Under normal conditions, the left hemidiaphragm is visible as a sharp line because air-filled lung (radiolucent) lies directly adjacent to it (soft tissue density), creating a contrast interface. When the adjacent lung becomes airless — as occurs in pleural effusion, lobar consolidation, or collapse — both the diaphragm and the adjacent opacity share similar soft tissue density, and the interface is lost. The silhouette sign is a powerful localizing tool: loss of the right heart border indicates right middle lobe pathology; loss of the left hemidiaphragm outline indicates left lower lobe pathology. The meniscus sign (option D) refers to the concave upper margin of the pleural fluid itself and is a separate, though often concurrent, finding. The deep sulcus sign is a pneumothorax sign on supine films."
+  },
+  {
+    q: "The chest radiograph shown demonstrates a homogeneous opacity occupying the right lower lobe, limited by the oblique fissure, and containing linear branching lucencies within it. These lucencies result from air within the patent bronchi surrounded by exudate-filled airless alveoli. They are called:",
+    img: "assets/raid/lobar_consolidation.png",
+    opts: [
+      "Kerley B lines",
+      "Deep sulcus signs",
+      "Air bronchograms",
+      "Silhouette signs",
+      "Fleischner lines"
+    ],
+    ans: 2,
+    exp: "Air bronchograms are a specific radiographic sign in which the bronchial tree becomes visible as linear branching lucencies within an area of pulmonary opacification. They occur because the normally invisible air-filled bronchi are surrounded by alveoli that have become airless, filled with inflammatory exudate, fluid, or cellular infiltrate. Since the bronchi remain patent and air-filled while the alveoli are consolidated, the air-filled bronchial lumen stands out against the surrounding opaque lung. Air bronchograms are an important finding because their presence within an opacity confirms alveolar (rather than pleural) pathology, and suggests the supplying airway is patent — making proximal bronchial obstruction a less likely aetiology. Kerley B lines are short horizontal lines at the lung bases representing interstitial oedema. Fleischner lines represent subsegmental atelectasis."
+  },
+  {
+    q: "A 68-year-old man with ischaemic cardiomyopathy presents with acute breathlessness. The chest radiograph shown demonstrates cardiomegaly, bilateral hilar vessel fullness, and upper lobe vascular prominence. Short horizontal lines are visible at the periphery of the lung bases. These lines represent:",
+    img: "assets/raid/heart_failure.png",
+    opts: [
+      "Air bronchograms indicating bilateral lower lobe consolidation",
+      "Fleischner lines indicating bilateral subsegmental atelectasis",
+      "Plate-like atelectasis from impaired diaphragmatic excursion",
+      "Kerley B lines indicating interstitial pulmonary oedema",
+      "Hampton's humps indicating bilateral pulmonary infarction"
+    ],
+    ans: 3,
+    exp: "In heart failure, the sequence of plain radiographic findings reflects progressive fluid accumulation. Upper lobe vascular diversion (cephalization) and bilateral hilar fullness appear early. As pulmonary capillary pressure continues to rise, fluid tracks into the interstitial spaces, producing Kerley B lines — short (1–2 cm), horizontal, non-branching lines perpendicular to the pleural surface at the lung bases, representing fluid within the interlobular septa. With further progression to alveolar flooding, fluffy perihilar opacities develop. Cardiomegaly is an expected accompaniment. Air bronchograms are seen in alveolar consolidation, not interstitial oedema. Fleischner lines and plate-like atelectasis arise from hypoventilation and diaphragmatic splinting, typically post-operative. Hampton's humps are wedge-shaped pleural-based opacities indicating pulmonary infarction."
+  },
+  {
+    q: "Which of the following plain radiographic findings specifically indicates the presence of alveolar oedema in a patient with heart failure?",
+    opts: [
+      "Fluffy perihilar opacities with a bat-wing distribution",
+      "Peripheral lung hyperinflation with bilateral flattening of the hemidiaphragms",
+      "Mediastinal widening with obliteration of the normal aortic knuckle outline",
+      "Bilateral apical cavitation with surrounding areas of nodular consolidation",
+      "Unilateral pleural effusion with ipsilateral mediastinal shift toward the opacity"
+    ],
+    ans: 0,
+    exp: "Alveolar oedema in heart failure manifests radiographically as fluffy, poorly marginated opacities with a perihilar or bat-wing (butterfly) distribution on the chest radiograph. These opacities result from flooding of the alveolar spaces with protein-rich transudate due to elevated pulmonary capillary hydrostatic pressure exceeding plasma oncotic pressure. This finding represents the most advanced stage of radiographic pulmonary oedema, beyond upper lobe vascular diversion (cephalization) and Kerley B lines. Bilateral flat diaphragms with peripheral hyperinflation indicate obstructive airways disease (emphysema or asthma). Mediastinal widening suggests aortic dissection or mediastinal lymphoma. Bilateral apical cavitation with nodular consolidation is characteristic of tuberculosis. Unilateral effusion with mediastinal shift toward the opacity is seen in lobar collapse — not heart failure."
+  },
+  {
+    q: "A neonate presents with central cyanosis unresponsive to supplemental oxygen. Echocardiography establishes a diagnosis of Tetralogy of Fallot. Which of the following correctly identifies all four cardinal anatomical components of this condition?",
+    opts: [
+      "Right ventricular outflow tract obstruction, overriding aorta, ventricular septal defect, and right ventricular hypertrophy",
+      "Right ventricular outflow tract obstruction, patent foramen ovale, atrial septal defect, and right ventricular hypertrophy",
+      "Aortic stenosis, overriding pulmonary artery, ventricular septal defect, and left ventricular hypertrophy",
+      "Right ventricular outflow tract obstruction, overriding aorta, atrial septal defect, and right ventricular hypertrophy",
+      "Pulmonary atresia, overriding aorta, ventricular septal defect, and biventricular hypertrophy"
+    ],
+    ans: 0,
+    exp: "Tetralogy of Fallot is the most common cyanotic congenital heart disease and is defined by four anatomical abnormalities that occur together: (1) right ventricular outflow tract obstruction — typically pulmonary stenosis — which reduces pulmonary blood flow; (2) an overriding aorta, which straddles the ventricular septal defect and receives blood from both ventricles; (3) a ventricular septal defect (VSD), through which deoxygenated right ventricular blood shunts to the left side; and (4) right ventricular hypertrophy, developing secondary to the increased right ventricular pressure caused by outflow obstruction. Cyanosis results from right-to-left shunting across the VSD. The classic plain film shows a 'boot-shaped heart' (coeur en sabot) due to RVH with a concave pulmonary bay and reduced pulmonary vascularity. Option D incorrectly substitutes the VSD with an atrial septal defect — a critical distinction."
+  },
+  {
+    q: "During a fluoroscopic barium swallow examination, the radiologist captures rapid static images at specific moments to document significant findings. What is the correct term for these static images obtained during fluoroscopy?",
+    opts: [
+      "Scout images obtained before contrast administration",
+      "Spot films captured at key moments during the procedure",
+      "Topograms acquired during the rotational phase of imaging",
+      "Projection radiographs obtained independently after fluoroscopy is completed",
+      "Cine sequences stored as a continuous looped digital recording"
+    ],
+    ans: 1,
+    exp: "During fluoroscopy, real-time imaging allows the radiologist to observe dynamic processes such as swallowing mechanics, contrast flow through the GI tract, or joint movement. At specific moments of diagnostic significance, the radiologist captures instantaneous static images — these are called spot films. They provide a permanent photographic record of key findings identified during the dynamic study and form part of the formal radiological report. Scout images (or topograms) are low-dose overview images obtained before CT acquisition to plan slice positioning — not a fluoroscopy concept. Topograms specifically refer to pre-CT localizer scans. Cine sequences are continuous moving image recordings captured during fluoroscopy rather than individual static frames. Projection radiographs are standard static x-rays obtained outside the context of fluoroscopy."
+  },
+  {
+    q: "A 28-year-old woman presents with pelvic pain and a suspected ovarian cyst. Which imaging modality is most appropriate as the initial investigation?",
+    opts: [
+      "Plain radiography",
+      "Computed tomography",
+      "Magnetic resonance imaging",
+      "Radionuclide imaging",
+      "Ultrasonography"
+    ],
+    ans: 4,
+    exp: "Ultrasonography is the imaging modality of first choice for evaluation of the female pelvis and suspected ovarian pathology. It is widely available, inexpensive, portable, uses non-ionizing radiation (making it safe for repeated examinations and particularly appropriate in women of reproductive age), and provides excellent real-time soft tissue characterization of pelvic organs. It can readily distinguish solid from cystic masses, evaluate ovarian morphology and internal architecture, assess uterine structure, and guide aspiration if required. Plain radiography provides poor soft tissue contrast and is of no value in routine pelvic soft tissue assessment. CT involves significant ionizing radiation and is typically reserved for staging, complex presentations, or when ultrasonography is inconclusive. MRI offers superior tissue characterization in certain scenarios but is more expensive, less available, and not required as an initial investigation. Radionuclide imaging has no primary role in routine pelvic evaluation."
+  }
+];
+
 const COURSES = [
   { id:"internal", name:"Internal Medicine", emoji:"🩺", bg:"linear-gradient(135deg,#0f2744,#1a3a5c)", accent:"#c9a84c", school:"IU",
     blocks:[
@@ -4707,7 +5078,7 @@ const COURSES = [
       { id:"ortho_meta", name:"Metabolic Response to Trauma", questions:ORTHO_META_TRAUMA_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
       { id:"ortho_poly", name:"Management of Multiply Injured", questions:ORTHO_POLYTRAUMA_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
       { id:"ortho_splints", name:"Splints & Traction", questions:ORTHO_SPLINTS_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. A.U. Nwokocha" },
-      { id:"radio", name:"Radiology", questions:[], available:false },
+      { id:"radio", name:"Radiology", questions:RADIOLOGY_Qs, available:true, topic:"Radiology" },
       { id:"pastq_subspecialties", name:"Past Questions", questions:[], available:true, isPastQSection:true, pastQKey:"subspecialties" },
     ]
   },
