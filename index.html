@@ -4647,6 +4647,369 @@ const PAST_Q_STRUCTURE = {
   },
 };
 
+const ANAES_Qs = [
+  {
+    q: "Which of the following clinical values, in isolation, meets a recognized guideline threshold for initiating mechanical ventilation?",
+    opts: [
+      "Respiratory rate of 28 breaths per minute in a patient with resolving community-acquired pneumonia",
+      "PaCO2 of 7.5 kPa in a patient with known chronic obstructive pulmonary disease and stable baseline",
+      "PaO2 of 9 kPa in a patient receiving high-flow supplemental oxygen therapy via a non-rebreather mask",
+      "Glasgow Coma Score of 7 in a patient with a closed traumatic brain injury",
+      "Tidal volume of 8 mL/kg measured in a mechanically ventilated post-operative patient"
+    ],
+    ans: 3,
+    exp: "A Glasgow Coma Score below 8 is a recognized guideline threshold for initiating mechanical ventilation, reflecting a degree of neurological compromise that places the patient at high risk of airway loss, aspiration, and respiratory failure. The other values in this question do not individually meet threshold: respiratory rate of 28 breaths/min falls below the guideline threshold of >35 breaths/min; a PaCO2 of 7.5 kPa (56 mmHg), while elevated, may represent a patient's acceptable compensated baseline in COPD; a PaO2 of 9 kPa exceeds the threshold of <8 kPa (60 mmHg) on supplemental oxygen; and a tidal volume of 8 mL/kg is above the threshold of <5 mL/kg. Other accepted parameters include PaCO2 >8 kPa, SaO2 <90% on supplemental oxygen, respiratory rate <5 breaths/min, and vital capacity <15 mL/kg."
+  },
+  {
+    q: "Type II respiratory failure is distinguished from Type I primarily by:",
+    opts: [
+      "The presence of bilateral pulmonary infiltrates on chest radiograph with refractory hypoxaemia",
+      "An elevated PaCO2 above 50 mmHg, reflecting primary ventilatory failure rather than gas exchange failure",
+      "A PaO2 below 60 mmHg on room air with a normal or reduced arterial carbon dioxide tension",
+      "Diffuse alveolar damage causing intrapulmonary shunting and V/Q mismatch on perfusion scanning",
+      "Hypoxaemia that responds to supplemental oxygen, indicating a predominant diffusion limitation"
+    ],
+    ans: 1,
+    exp: "Type I (hypoxaemic) respiratory failure is defined by a PaO2 below 60 mmHg with a normal or low PaCO2, typically resulting from V/Q mismatch, shunting, or impaired diffusion — as in pulmonary oedema, pneumonia, ARDS, and pulmonary fibrosis. Type II (hypercapnoeic) respiratory failure is characterized by an elevated PaCO2 above 50 mmHg, indicating ventilatory failure — the lungs cannot move sufficient tidal volume to eliminate CO2, regardless of the underlying aetiology. Causes of Type II include drug overdose, head injury, high cervical spinal cord injury, Guillain-Barré syndrome, poliomyelitis, tetanus, neuromuscular diseases, chest wall trauma, and airway obstruction. This distinction is clinically critical as Type II failure is the primary indication for mechanical ventilatory support."
+  },
+  {
+    q: "A patient presents with ascending flaccid limb weakness over 10 days and is now unable to lift their arms against gravity. Arterial blood gas shows PaCO2 of 7.8 kPa. Which of the following is the most appropriate underlying diagnosis accounting for this patient's ventilatory failure?",
+    opts: [
+      "Pulmonary oedema causing alveolar flooding and impaired alveolar gas exchange",
+      "Pneumonia causing ventilation-perfusion mismatch and progressive hypoxaemia",
+      "Pulmonary fibrosis reducing diffusing capacity and alveolar surface area for gas transfer",
+      "Adult respiratory distress syndrome causing diffuse alveolar damage and intrapulmonary shunting",
+      "Guillain-Barré syndrome causing respiratory muscle paralysis and alveolar hypoventilation"
+    ],
+    ans: 4,
+    exp: "The clinical picture of ascending flaccid paralysis over days is characteristic of Guillain-Barré syndrome (GBS), an immune-mediated polyneuropathy. When the paralysis extends to the intercostal muscles and diaphragm, alveolar ventilation becomes inadequate — CO2 accumulates, producing Type II (hypercapnoeic) respiratory failure, as reflected by the PaCO2 of 7.8 kPa. GBS is explicitly listed among the neuromuscular causes of Type II respiratory failure and is an indication for mechanical ventilation. Pulmonary oedema, pneumonia, pulmonary fibrosis, and ARDS all cause Type I (hypoxaemic) failure through parenchymal mechanisms, not through loss of respiratory muscle function. The key distinguishing feature is that the patient's lungs themselves are normal — the failure lies in the neuromuscular pump driving them."
+  },
+  {
+    q: "A patient with severe generalized tetanus presents with opisthotonos, autonomic instability, and repeated laryngospasm. According to the Ablett classification, which score threshold constitutes an indication for mechanical ventilation?",
+    opts: [
+      "Ablett score 1, representing mild tetanus with trismus and no significant dysphagia",
+      "Ablett score 2, representing moderate tetanus with dysphagia and generalized rigidity",
+      "Ablett score 3 or 4, representing severe tetanus with autonomic disturbance and life-threatening spasms",
+      "Ablett score 5, representing the most severe tetanus with refractory cardiovascular collapse",
+      "Any Ablett score in a patient with a fever above 38.5°C and a history of unvaccinated wound contamination"
+    ],
+    ans: 2,
+    exp: "Severe tetanus — classified as Ablett score 3 or 4 — is a recognized indication for mechanical ventilation. Ablett score 3 describes severe tetanus with dysphagia, opisthotonus, and tachycardia; score 4 adds autonomic dysfunction including labile blood pressure and severe tachycardia. At these levels, the risk of laryngospasm, respiratory arrest, and aspiration is high and the airway cannot be safely managed without intubation and ventilatory support. Ablett scores 1 and 2 represent milder disease that may be managed conservatively. There is no Ablett score 5; the classification runs to 4. The decision to ventilate in tetanus is clinical, guided by the severity grade and trajectory of disease — waiting for cardiorespiratory arrest is not appropriate at Ablett 3 or 4."
+  },
+  {
+    q: "Which of the following post-operative scenarios is a recognized evidence-based indication for elective mechanical ventilation following surgery?",
+    opts: [
+      "Coronary artery bypass graft surgery in a patient with pre-existing pulmonary oedema and moderate COPD",
+      "Laparoscopic appendicectomy in a previously fit young adult with no cardiopulmonary comorbidities",
+      "Inguinal hernia repair under spinal anaesthesia with an uneventful intraoperative course",
+      "Total knee arthroplasty under regional anaesthesia in an otherwise healthy middle-aged patient",
+      "Cataract extraction under topical anaesthesia in a diabetic patient with normal baseline spirometry"
+    ],
+    ans: 0,
+    exp: "Evidence supports elective post-operative mechanical ventilation following coronary artery bypass graft (CABG) surgery, particularly in patients with underlying COPD or pulmonary oedema — both are listed as conditions that increase the benefit of elective ventilation. Other recognized high-risk procedures include lung resection surgery, gastroplasty, and thoracoabdominal aortic procedures. Phrenic nerve injury — a recognized complication of cardiac surgery — can itself compromise ventilation post-operatively. The key principle is that patients at high risk of pulmonary complications or with pre-existing cardiopulmonary compromise benefit from planned ventilatory support rather than emergency reinstitution of ventilation after extubation failure. The other procedures listed involve minor or regional techniques in patients without high-risk features, making elective post-operative ventilation unnecessary."
+  },
+  {
+    q: "The Meyer-Overton hypothesis proposes that the potency of an inhalational anaesthetic agent is determined primarily by:",
+    opts: [
+      "Its molecular weight and the rate at which it diffuses across the alveolar-capillary membrane",
+      "Its blood-gas partition coefficient and the speed at which it equilibrates between alveoli and blood",
+      "Its rate of hepatic metabolism and the accumulation of active metabolites in neural tissue",
+      "Its oil-gas partition coefficient and the extent to which it dissolves in neuronal lipid membranes",
+      "Its minimum alveolar concentration and the number of GABA-B receptor subunits it occupies at steady state"
+    ],
+    ans: 3,
+    exp: "The Meyer-Overton hypothesis, proposed by Meyer and Overton, states that anaesthetic potency correlates directly with lipid solubility as measured by the oil-gas partition coefficient — the higher the oil-gas coefficient, the more the agent dissolves into lipid-rich neuronal membranes, and the more potent the anaesthetic effect. This principle explains why agents with high lipid solubility require lower alveolar concentrations (lower MAC) to produce anaesthesia. However, the Meyer-Overton hypothesis is incomplete: it does not explain muscle relaxation, and subsequent research identified that most halogenated agents produce anaesthesia by potentiating inhibitory GABA-B receptors, while nitrous oxide and xenon act through NMDA receptor inhibition — mechanisms not predicted by lipid solubility alone. The blood-gas coefficient governs speed of induction, not potency."
+  },
+  {
+    q: "Minimum Alveolar Concentration (MAC) is best defined as:",
+    opts: [
+      "The inspired concentration that produces unconsciousness in 95% of unpremedicated adult patients",
+      "The alveolar concentration that prevents movement in 50% of patients in response to a standard surgical stimulus",
+      "The end-tidal concentration that suppresses autonomic responses to incision in half of all patients tested",
+      "The blood concentration of an agent that corresponds to loss of verbal contact in the majority of patients",
+      "The partial pressure in the alveoli that saturates all available GABA-B receptor binding sites within the CNS"
+    ],
+    ans: 1,
+    exp: "MAC — minimum alveolar concentration — is the standard measure of inhalational anaesthetic potency. It is defined as the alveolar concentration that prevents a purposeful motor response (movement) in 50% of patients exposed to a standardised noxious stimulus, typically a surgical skin incision. Because MAC is measured at steady state (equilibrium between alveolar and brain partial pressures), the alveolar concentration serves as a reliable surrogate for the brain tissue concentration. MAC is an ED50 measure — not an ED95 — so it deliberately represents only 50% of patients. The MAC values of commonly used agents are: halothane 0.75%, sevoflurane 2.0%, isoflurane 1.22%, desflurane 6.0%, and nitrous oxide 105%. These values form the basis for comparing agent potency and guiding clinical dosing."
+  },
+  {
+    q: "Which of the following correctly ranks the following inhalational agents from lowest to highest MAC value?",
+    opts: [
+      "Nitrous oxide < desflurane < isoflurane < sevoflurane < halothane",
+      "Sevoflurane < isoflurane < halothane < desflurane < nitrous oxide",
+      "Halothane < isoflurane < sevoflurane < desflurane < nitrous oxide",
+      "Halothane < sevoflurane < desflurane < isoflurane < nitrous oxide",
+      "Halothane < isoflurane < desflurane < sevoflurane < nitrous oxide"
+    ],
+    ans: 2,
+    exp: "The MAC values of these agents are: halothane 0.75%, isoflurane 1.22%, sevoflurane 2.0%, desflurane 6.0%, and nitrous oxide 105%. Ranked from lowest to highest MAC: halothane (0.75%) < isoflurane (1.22%) < sevoflurane (2.0%) < desflurane (6.0%) < nitrous oxide (105%). A lower MAC indicates greater potency, as a smaller alveolar concentration is required to achieve the anaesthetic endpoint. Halothane is therefore the most potent among this group. Nitrous oxide has the highest MAC — exceeding 100% — meaning it cannot produce surgical anaesthesia at atmospheric pressure as a single agent; it is always used in combination. Understanding MAC rankings is clinically useful when selecting agents and calculating effective doses in combined anaesthesia."
+  },
+  {
+    q: "Which of the following clinical conditions is associated with a DECREASE in the minimum alveolar concentration of an inhalational anaesthetic agent?",
+    opts: [
+      "Hypothermia, reducing cerebral metabolic rate and enhancing sensitivity to anaesthetic agents",
+      "Hyperthermia, increasing neural activity and elevating the anaesthetic requirement per unit concentration",
+      "Thyrotoxicosis, increasing cerebral blood flow and reducing anaesthetic partial pressure at receptors",
+      "Chronic alcohol use, inducing hepatic enzyme activity and accelerating anaesthetic agent metabolism",
+      "Severe anxiety, increasing central noradrenergic tone and raising the threshold for anaesthetic effect"
+    ],
+    ans: 0,
+    exp: "Hypothermia decreases MAC — lower body temperature reduces cerebral metabolic rate and neural activity, making the brain more susceptible to anaesthetic agents, so a lower alveolar concentration achieves the same effect. Other conditions that decrease MAC include hyponatraemia, hypothyroidism, hypovolaemia/hypotension, hypoxia, acute alcohol use, and administration of CNS depressants such as opioids, benzodiazepines, barbiturates, and local anaesthetics. Conditions that increase MAC include hyperthermia, hyperthyroidism/thyrotoxicosis, chronic alcohol use, chronic CNS stimulant abuse, and severe anxiety — all of which increase CNS excitability or reduce the effective concentration at target receptors. Confusing the directions of these factors is a common examination error; the clinical implication is that pre-existing medical conditions and drug use significantly alter anaesthetic depth at standard agent concentrations."
+  },
+  {
+    q: "Which property of an inhalational anaesthetic agent most directly determines the speed of both induction and recovery from anaesthesia?",
+    opts: [
+      "The oil-gas partition coefficient, which determines the agent's affinity for neuronal lipid membranes",
+      "The minimum alveolar concentration, which determines the steady-state alveolar partial pressure required",
+      "The hepatic extraction ratio, which determines how rapidly the agent is cleared from systemic circulation",
+      "The molecular weight of the agent, which determines its rate of diffusion across the alveolar membrane",
+      "The blood-gas partition coefficient, which governs the rate of equilibration between alveolar gas and blood"
+    ],
+    ans: 4,
+    exp: "The blood-gas partition coefficient determines how rapidly an agent moves between alveolar gas and blood — and consequently how quickly brain partial pressure rises toward equilibrium. An agent with a low blood-gas coefficient is poorly soluble in blood, so very little agent is required to saturate the blood and drive the partial pressure upward; alveolar and brain concentrations rise quickly, producing fast induction and rapid recovery on discontinuation. Agents with high blood-gas coefficients (e.g., older agents like ether) are highly soluble in blood, which acts as a large reservoir, slowing the rise in partial pressure and prolonging both induction and recovery. For example, desflurane and nitrous oxide have low blood-gas coefficients and are associated with rapid emergence. The oil-gas coefficient governs potency (MAC), not speed. The hepatic extraction ratio is relevant to IV agents, not inhalational ones excreted primarily via the lungs."
+  },
+  {
+    q: "Which of the following correctly identifies a property unique to halothane compared with isoflurane?",
+    opts: [
+      "Halothane has a pungent smell that limits its use for inhalational induction in paediatric patients",
+      "Halothane produces the greatest degree of cardiovascular depression of all currently used inhalational agents",
+      "Halothane is an isomer of enflurane and shares identical minimum alveolar concentration values",
+      "Halothane is photostable and requires no stabilizer during storage under standard theatre conditions",
+      "Halothane causes minimal tidal volume reduction, making it preferable in patients with restrictive lung disease"
+    ],
+    ans: 1,
+    exp: "Halothane has the greatest effect on the cardiovascular system of all inhalational agents in current use — it produces more profound myocardial depression than isoflurane, sevoflurane, or desflurane. It also reduces tidal volume and respiratory rate more markedly than other agents. Halothane's pleasant sweet smell makes it well-tolerated for inhalational induction, particularly in children — the opposite of option A. It is isoflurane that is pungent and unsuitable for induction. Isoflurane (not halothane) is the isomer of enflurane. Halothane is photosensitive — it is stored in dark amber bottles with thymol added as a stabilizer to prevent decomposition in light; option D is therefore false. These distinguishing features of halothane remain high-yield examination content in anaesthesia pharmacology."
+  },
+  {
+    q: "Unlike most halogenated inhalational anaesthetic agents which act through GABA-B receptors, nitrous oxide and xenon produce anaesthesia primarily by:",
+    opts: [
+      "Potentiating glycine receptor-mediated inhibition in the spinal cord dorsal horn to suppress nociception",
+      "Blocking voltage-gated sodium channels in both peripheral nerves and brainstem reticular formations",
+      "Enhancing serotonergic descending inhibitory pathways via 5-HT3 receptor activation in the raphe nuclei",
+      "Inhibiting N-methyl-D-aspartate receptors, thereby reducing excitatory glutamatergic neurotransmission",
+      "Activating mu-opioid receptors in the periaqueductal grey matter, producing analgesia and sedation"
+    ],
+    ans: 3,
+    exp: "The majority of halogenated inhalational agents — isoflurane, sevoflurane, desflurane, halothane, enflurane — produce anaesthesia primarily by potentiating GABA-B (gamma-aminobutyric acid type B) receptor-mediated inhibition, enhancing chloride channel opening and hyperpolarizing neurons. Some also act at the myoneural junction to cause a degree of muscle relaxation, particularly in younger patients. Nitrous oxide and xenon are exceptions: they inhibit NMDA (N-methyl-D-aspartate) receptors, blocking excitatory glutamatergic neurotransmission — the same mechanism exploited by ketamine. This mechanistic distinction has clinical relevance, as it explains why nitrous oxide lacks the muscle relaxant properties of halogenated agents and why its analgesic profile differs. Understanding this dual mechanism is essential for interpreting adjunctive anaesthetic strategies."
+  },
+  {
+    q: "Which of the following best describes the four core pharmacological goals of general anaesthesia?",
+    opts: [
+      "Narcosis, areflexia, muscle relaxation, and analgesia",
+      "Sedation, amnesia, neuromuscular blockade, and cardiovascular stabilization",
+      "Unconsciousness, sympathetic suppression, analgesia, and paralysis of all voluntary muscles",
+      "Analgesia, amnesia, autonomic blockade, and maintenance of protective airway reflexes",
+      "Narcosis, anxiolysis, muscle relaxation, and suppression of the hypothalamic stress response"
+    ],
+    ans: 0,
+    exp: "General anaesthesia aims to achieve four pharmacological states simultaneously: narcosis (deep sleep/unconsciousness), areflexia (suppression of reflexes to noxious stimuli), muscle relaxation (facilitating surgical access and preventing movement), and analgesia (abolition of pain perception). These four goals are rarely achieved by a single agent — modern balanced anaesthesia uses combinations of induction agents, inhalational or IV maintenance agents, neuromuscular blocking drugs, and analgesics to achieve each component independently. Sedation and amnesia are components of narcosis rather than separate goals. Cardiovascular stabilization is an anaesthetic management objective, not a pharmacological goal per se. Maintaining protective airway reflexes is the opposite of what general anaesthesia achieves — airway reflexes are typically ablated, necessitating airway management."
+  },
+  {
+    q: "Muscle relaxants used in general anaesthesia are classified into two main groups based on their mechanism of action at the neuromuscular junction. Which of the following correctly identifies these two groups?",
+    opts: [
+      "Pre-synaptic and post-synaptic blockers, differing by their site of action on the motor end plate",
+      "Aminosteroid and benzylisoquinolinium agents, classified by chemical structure and route of metabolism",
+      "Depolarizing and non-depolarizing agents, differing by their effect on the post-junctional membrane",
+      "Competitive and non-competitive antagonists, differing by their reversibility at nicotinic receptors",
+      "Short-acting and long-acting agents, classified primarily by their duration of neuromuscular blockade"
+    ],
+    ans: 2,
+    exp: "Neuromuscular blocking agents are classified into depolarizing and non-depolarizing agents based on their mechanism at the post-junctional nicotinic acetylcholine receptor. Depolarizing agents — such as suxamethonium (succinylcholine) — bind to the receptor and activate it, producing an initial depolarization seen clinically as muscle fasciculations, followed by a flaccid paralysis because sustained receptor occupancy prevents repolarization. Non-depolarizing agents — such as vecuronium, rocuronium, atracurium, and pancuronium — competitively block acetylcholine from binding without activating the receptor, producing a clean non-fasciculating paralysis that is reversible with anticholinesterases. This classification has direct clinical implications: depolarizing agents are not reversible in the same way as non-depolarizing agents, and each class has distinct adverse effect profiles."
+  },
+  {
+    q: "Which of the following correctly pairs two local anaesthetic agents with their chemical class?",
+    opts: [
+      "Lidocaine — ester; bupivacaine — ester",
+      "Cocaine — amide; procaine — ester",
+      "Tetracaine — amide; benzocaine — ester",
+      "Bupivacaine — ester; mepivacaine — ester",
+      "Lidocaine — amide; cocaine — ester"
+    ],
+    ans: 4,
+    exp: "Local anaesthetics are classified as esters or amides based on the chemical linkage between the aromatic and amine ends of the molecule. Amides include lidocaine, bupivacaine, mepivacaine, cincocaine, and etidocaine — a useful mnemonic is that amide agents have two letter 'i' sounds in their names (lidocaine, bupivacaine). Esters include cocaine, procaine, chloroprocaine, tetracaine, and benzocaine. Lidocaine is an amide; cocaine is an ester — making option E correct. Ester-linked agents are hydrolysed by plasma cholinesterase with a short half-life of 1–8 minutes, and allergic reactions are more common with ester agents due to their metabolite para-aminobenzoic acid. Amide agents are metabolised by hepatic microsomal enzymes and are generally associated with fewer allergic reactions."
+  },
+  {
+    q: "Local anaesthetic agents block sodium channels and produce differential blockade of peripheral nerve fibers. Which sequence correctly describes the order in which fiber types are blocked?",
+    opts: [
+      "Motor fibers blocked first, followed by sensory fibers, then autonomic fibers blocked last",
+      "Autonomic fibers blocked first, followed by sensory fibers, then motor fibers blocked last",
+      "Sensory fibers blocked first, followed by autonomic fibers, then motor fibers blocked last",
+      "Large myelinated A-alpha fibers blocked first, followed by small unmyelinated C fibers last",
+      "All fiber types are blocked simultaneously, as sodium channel density is uniform across fiber types"
+    ],
+    ans: 1,
+    exp: "Local anaesthetics block peripheral nerve fibers in a predictable sequence based on fiber diameter and myelination: smaller fibers are blocked before larger fibers. The clinical sequence is: autonomic (A-delta and B fibers) → sensory (A-delta and C fibers) → motor (A-alpha fibers), often remembered by the acronym ANSEM. This explains why a patient under spinal anaesthesia loses sympathetic tone first (producing vasodilation and potential hypotension), then loses pain sensation, then finally loses motor function — all before the block sets in fully. Conversely, recovery occurs in reverse: motor function returns first, then sensory, then autonomic tone last. The clinical significance of this sequence includes anticipating hypotension during neuraxial blocks and explaining why a patient may feel pressure but not pain during surgical procedures."
+  },
+  {
+    q: "A 48-year-old man undergoing an awake brachial plexus nerve block develops restlessness, perioral tingling, and auditory disturbance, then abruptly begins generalized tonic-clonic seizures. The most likely cause of this presentation is:",
+    opts: [
+      "Systemic absorption of local anaesthetic agent producing progressive central nervous system toxicity",
+      "Immediate IgE-mediated anaphylaxis to the amide local anaesthetic agent used for the block",
+      "Vasovagal syncope with tonic posturing precipitated by pain and anxiety during needle insertion",
+      "Hypertensive emergency from systemic absorption of the co-administered adrenaline vasoconstrictor",
+      "Direct neurotoxicity from inadvertent intraneural injection of the agent into the brachial plexus sheath"
+    ],
+    ans: 0,
+    exp: "The described sequence — restlessness, perioral tingling, auditory disturbance, then seizures — is the classic progression of local anaesthetic systemic toxicity (LAST) due to CNS involvement. Local anaesthetics cause membrane stabilization in excitable tissues; at toxic plasma concentrations, the CNS progresses from cortical excitation (restlessness, tremors, seizures) to depression (coma). Toxicity occurs when large doses are administered, when there is inadvertent intravascular injection, or when injection is into highly vascular tissue — the brachial plexus region has significant vascularity. IgE-mediated anaphylaxis presents with urticaria, bronchospasm, and cardiovascular collapse rather than a CNS excitatory sequence. Vasovagal syncope causes bradycardia and pallor without prodromal neurological symptoms. Adrenaline toxicity causes tachycardia and hypertension, not a seizure progression."
+  },
+  {
+    q: "Which of the following correctly states the maximum safe dose of lidocaine for local infiltration anaesthesia?",
+    opts: [
+      "3 mg/kg without adrenaline to a maximum of 500 mg; 7 mg/kg with adrenaline to a maximum of 200 mg",
+      "7 mg/kg without adrenaline to a maximum of 200 mg; 3 mg/kg with adrenaline to a maximum of 500 mg",
+      "5 mg/kg without adrenaline to a maximum of 300 mg; 9 mg/kg with adrenaline to a maximum of 600 mg",
+      "3 mg/kg without adrenaline to a maximum of 200 mg; 7 mg/kg with adrenaline to a maximum of 500 mg",
+      "5 mg/kg without adrenaline to a maximum of 400 mg; 7 mg/kg with adrenaline to a maximum of 600 mg"
+    ],
+    ans: 3,
+    exp: "The maximum safe dose of lidocaine for infiltration anaesthesia is 3 mg/kg without adrenaline, up to a maximum of 200 mg; and 7 mg/kg with adrenaline, up to a maximum of 500 mg. The vasoconstrictor adrenaline (epinephrine) reduces the rate of systemic absorption by causing local vasoconstriction, thereby permitting a significantly higher total dose and prolonging the duration of action from approximately 60 minutes to 90–120 minutes. Understanding these dose limits is clinically essential to prevent local anaesthetic systemic toxicity. Option A reverses the values — a common examination trap. Lidocaine is the most widely used amide local anaesthetic; its various concentrations serve different purposes: 0.25–0.5% for infiltration, 1.5–2% with adrenaline for nerve blocks, 4% for topical mucosal use, and 5% in dextrose for subarachnoid block."
+  },
+  {
+    q: "Which of the following correctly identifies a pharmacological property that distinguishes bupivacaine from lidocaine?",
+    opts: [
+      "Bupivacaine has a faster onset than lidocaine and a shorter duration, making it preferred for day-case procedures",
+      "Bupivacaine undergoes rapid hydrolysis by plasma cholinesterase, unlike lidocaine which requires hepatic metabolism",
+      "Bupivacaine is approximately four times more potent than lidocaine and carries significantly greater cardiotoxicity",
+      "Bupivacaine is classified as an ester-linked local anaesthetic with higher rates of plasma cholinesterase hydrolysis",
+      "Bupivacaine has an onset of action of 2–3 minutes and a maximum duration of 4 hours across all nerve block types"
+    ],
+    ans: 2,
+    exp: "Bupivacaine is approximately four times more potent than lidocaine on a concentration basis and is significantly more cardiogenic — meaning it has greater cardiac toxicity at toxic plasma concentrations compared with lidocaine. Bupivacaine binds cardiac sodium channels with much greater affinity and slower dissociation, producing profound cardiac depression and ventricular arrhythmias that are difficult to reverse. Its onset of action is approximately 15 minutes — slower than lidocaine. However, its duration of action is markedly prolonged, up to 25 hours after peripheral nerve block, making it valuable for post-operative analgesia. Bupivacaine, like lidocaine, is an amide-linked local anaesthetic metabolized in the liver — option B incorrectly classifies it as an ester. The maximum dose of bupivacaine is 2 mg/kg, and it is used at concentrations of 0.25–0.5% for spinal and peripheral nerve block anaesthesia."
+  },
+  {
+    q: "A 55-year-old man undergoing elective inguinal hernia repair under local infiltration anaesthesia develops sudden bradycardia, profound hypotension, and proceeds to cardiac arrest 10 minutes after a large-volume injection of local anaesthetic. Which agent is most likely responsible for this degree of cardiovascular toxicity?",
+    opts: [
+      "Cocaine, which causes sympathetic stimulation and vasoconstriction at systemic doses",
+      "Procaine, which undergoes slow plasma cholinesterase hydrolysis, prolonging systemic exposure",
+      "Lidocaine, which blocks cardiac sodium channels at standard clinical doses used for infiltration",
+      "Tetracaine, which has a prolonged systemic half-life due to impaired plasma cholinesterase activity",
+      "Bupivacaine, whose greater cardiotoxicity compared with other local anaesthetics makes refractory arrest likely"
+    ],
+    ans: 4,
+    exp: "Bupivacaine is explicitly described as more cardiogenic (more cardiotoxic) than lidocaine. At toxic systemic concentrations — which can occur after inadvertent intravascular injection or excessive dosing — bupivacaine produces profound cardiac sodium channel blockade with slow dissociation kinetics, leading to ventricular arrhythmias and cardiac arrest that is notoriously resistant to standard resuscitation. This property has prompted the development of levobupivacaine and ropivacaine as safer alternatives. Cocaine causes cardiovascular stimulation at systemic doses (tachycardia, hypertension) rather than bradycardia and arrest. Procaine and tetracaine are ester agents with moderate cardiotoxicity profiles, not preferentially associated with refractory cardiac arrest. Lidocaine, though a cardiac membrane stabilizer, has a much wider cardiovascular safety margin at routine infiltration doses. The treatment of bupivacaine-induced cardiac arrest includes intralipid (lipid emulsion) therapy."
+  },
+  {
+    q: "Which of the following correctly states the recommended compression rate and depth for high-quality adult cardiopulmonary resuscitation?",
+    opts: [
+      "Rate 80–100 compressions per minute and depth of at least 4 centimetres with full chest recoil",
+      "Rate 100–120 compressions per minute and depth of at least 5 centimetres with full chest recoil",
+      "Rate 120–140 compressions per minute and depth of at least 6 centimetres with full chest recoil",
+      "Rate 60–80 compressions per minute and depth of at least 5 centimetres with full chest recoil",
+      "Rate 100–120 compressions per minute and depth of at least 3 centimetres with full chest recoil"
+    ],
+    ans: 1,
+    exp: "High-quality CPR requires compressions at a rate of 100–120 per minute and a depth of at least 5 centimetres (approximately 2 inches) in adults. Both parameters are critical: rates below 100 generate insufficient cardiac output; rates exceeding 120 reduce diastolic filling time and compromise coronary perfusion. Depth must be at least 5 cm — inadequate depth generates negligible perfusion pressure. Full chest recoil between compressions must be allowed to enable venous return to the heart; leaning on the chest during the release phase impedes refill and reduces effectiveness. Interruptions to compressions must be minimized to less than 10 seconds. Excessive ventilation should also be avoided as it increases intrathoracic pressure and reduces cardiac output. The sequence in BLS begins with compressions — CAB (Compressions, Airway, Breathing) — not the older ABC sequence."
+  },
+  {
+    q: "In the management of cardiac arrest, which drug is administered first, and at what dose and frequency?",
+    opts: [
+      "Epinephrine 1 mg IV (1:10,000), repeated every 3–5 minutes throughout the resuscitation attempt",
+      "Amiodarone 300 mg IV bolus, repeated as 150 mg for persistent shockable rhythm after further defibrillation",
+      "Lidocaine 1–1.5 mg/kg IV, repeated at 0.5–0.75 mg/kg as an alternative for refractory ventricular fibrillation",
+      "Magnesium sulphate 2 g slow IV push, administered for torsades de pointes or suspected hypomagnesaemia",
+      "Atropine 0.5 mg IV, repeated every 3–5 minutes to a maximum of 3 mg for pulseless electrical activity"
+    ],
+    ans: 0,
+    exp: "Epinephrine (adrenaline) is the first drug given in cardiac arrest and applies to all rhythms — shockable (VF/pVT) and non-shockable (PEA/asystole) alike. The dose is 1 mg (1:10,000) IV, repeated every 3–5 minutes throughout the resuscitation. Its primary mechanism is alpha-1 adrenergic vasoconstriction, which increases aortic diastolic pressure and improves coronary and cerebral perfusion during CPR. Amiodarone 300 mg is an antiarrhythmic given after the third defibrillation shock in refractory VF or pulseless VT, followed by 150 mg if needed. Lidocaine 1–1.5 mg/kg is an alternative antiarrhythmic if amiodarone is unavailable. Magnesium sulphate 2 g slow IV is reserved for torsades de pointes. Atropine is no longer recommended in PEA or asystole in current guidelines and is used for symptomatic bradycardia."
+  },
+  {
+    q: "The reversible causes of cardiac arrest are organized as the 5 Hs and 5 Ts. Which of the following is correctly categorized as one of the 5 Ts?",
+    opts: [
+      "Hypoxia, corrected by ensuring a patent airway and administering high-flow supplemental oxygen",
+      "Hypovolaemia, corrected by aggressive intravenous fluid resuscitation or blood transfusion",
+      "Hydrogen ion excess (acidosis), addressed by optimizing ventilation and administering sodium bicarbonate",
+      "Tension pneumothorax, treated by immediate needle decompression followed by chest tube insertion",
+      "Hypothermia, managed by active rewarming and continuation of CPR until normothermia is achieved"
+    ],
+    ans: 3,
+    exp: "The reversible causes of cardiac arrest (the 4Hs and 4Ts, or 5Hs and 5Ts depending on the framework used) must be systematically excluded during resuscitation. The 5 Hs are: Hypoxia, Hypovolaemia, Hydrogen ion (acidosis), Hypo/hyperkalaemia, and Hypothermia. The 5 Ts are: Toxins, Tamponade (cardiac), Tension pneumothorax, Thrombosis (pulmonary), and Thrombosis (coronary). Tension pneumothorax is therefore one of the 5 Ts. It causes cardiac arrest through obstructive physiology — progressive air accumulation collapses the lung, shifts the mediastinum, and compresses the heart and great veins, abolishing cardiac output. Treatment is immediate needle decompression at the second intercostal space, midclavicular line, followed by definitive chest tube insertion. Identifying and treating the cause of arrest is as important as performing compressions and defibrillation."
+  },
+  {
+    q: "What is the correct initial dose and route of administration of adenosine for the treatment of a regular narrow-complex tachycardia?",
+    opts: [
+      "Adenosine 3 mg given as a slow intravenous infusion over 5 minutes with continuous cardiac monitoring",
+      "Adenosine 12 mg given as a rapid intravenous bolus, with a 6 mg repeat dose if no response at 2 minutes",
+      "Adenosine 6 mg given as a rapid intravenous bolus, with a repeat dose of 12 mg if required",
+      "Adenosine 1 mg given as a slow intravenous push into a peripheral vein at a rate of 20 mg per minute",
+      "Adenosine 6 mg given orally, repeated at 30-minute intervals until the tachycardia terminates"
+    ],
+    ans: 2,
+    exp: "Adenosine is the drug of choice for terminating regular narrow-complex tachycardias, particularly atrioventricular nodal re-entry tachycardia (AVNRT) and AV re-entry tachycardia (AVRT). The initial dose is 6 mg administered as a rapid intravenous bolus — speed of administration is critical as adenosine has an extremely short half-life of approximately 10 seconds; slow infusion renders it ineffective before it reaches the heart. A large saline flush should follow immediately. If the 6 mg dose is ineffective, a second dose of 12 mg is given. Adenosine must be given through a large proximal vein (ideally antecubital) to ensure rapid delivery to the cardiac conduction system. Patients should be warned of transient side effects including flushing, chest tightness, and a feeling of impending doom, which resolve within seconds. It is contraindicated in asthma and pre-excited tachycardias."
+  },
+  {
+    q: "What is the correct initial dose and maximum cumulative dose of atropine for the treatment of symptomatic bradyarrhythmia?",
+    opts: [
+      "Initial dose 1 mg IV, repeated every 5 minutes to a maximum cumulative dose of 6 mg",
+      "Initial dose 1 mg IV given as a single bolus, with escalation to pacing if no immediate response",
+      "Initial dose 0.5 mg IV, repeated every 3–5 minutes to a maximum cumulative dose of 5 mg",
+      "Initial dose 0.5 mg IV given as a single bolus, with dopamine infusion if blood pressure does not improve",
+      "Initial dose 0.5 mg IV, repeated every 3–5 minutes to a maximum cumulative dose of 3 mg"
+    ],
+    ans: 4,
+    exp: "Atropine is the first-line pharmacological treatment for symptomatic bradyarrhythmia. The correct dose is 0.5 mg IV, repeated every 3–5 minutes as needed, to a maximum cumulative dose of 3 mg. Doses below 0.5 mg should be avoided as paradoxical bradycardia can occur at sub-therapeutic doses due to a central vagotonic effect. If atropine is ineffective, second-line options include an epinephrine infusion at 2–10 mcg/min or a dopamine infusion at 2–20 mcg/kg/min. Transcutaneous or transvenous pacing should be initiated if pharmacological management fails or if the patient is haemodynamically unstable. Atropine works by blocking vagal (muscarinic) tone at the sinoatrial and atrioventricular nodes, increasing heart rate. It is most effective for bradycardia arising from excessive vagal tone and less effective for infranodal or structural conduction disease."
+  },
+  {
+    q: "Which of the following correctly identifies the current recommended sequence of initial interventions in adult Basic Life Support?",
+    opts: [
+      "Compressions first, then airway management, then rescue breathing (CAB)",
+      "Airway assessment first, then rescue breathing, then chest compressions (ABC)",
+      "Rescue breathing first, then compressions, then airway management (BCA)",
+      "Airway management first, then compressions, then rescue breathing (ACB)",
+      "Compressions first, then rescue breathing, then airway management (CBA)"
+    ],
+    ans: 0,
+    exp: "Current BLS guidelines recommend the CAB sequence — Compressions first, then Airway management, then Breathing — representing a significant change from the historically taught ABC sequence. This change was motivated by evidence that delays to chest compressions significantly worsen outcomes: cardiac arrest causes immediate cessation of coronary and cerebral perfusion, and compressions are the most critical immediate intervention. Arterial oxygen stores last approximately 4–6 minutes following arrest, whereas forward coronary perfusion is abolished immediately; compressions therefore take priority. After 30 compressions are delivered at the appropriate rate and depth, the airway is opened and two rescue breaths given, establishing a 30:2 ratio in single-rescuer adult BLS. High-quality CPR also requires allowing full chest recoil, minimizing interruptions to less than 10 seconds, and avoiding excessive ventilation."
+  },
+  {
+    q: "Which of the following best defines shock as a clinical and physiological state?",
+    opts: [
+      "An acute fall in systolic blood pressure below 90 mmHg with associated tachycardia and cool peripheries",
+      "A state of circulatory failure resulting in inadequate tissue perfusion and oxygen delivery to meet cellular metabolic demands",
+      "A syndrome of severe peripheral vasodilatation and reduced systemic vascular resistance caused by bacteraemia",
+      "A haemodynamic state defined by reduced cardiac output with elevated systemic vascular resistance",
+      "An acute reduction in intravascular volume producing compensatory sympathetic activation and tachycardia"
+    ],
+    ans: 1,
+    exp: "Shock is defined as a state of circulatory failure resulting in inadequate tissue perfusion and oxygen delivery to meet cellular metabolic demands. It is a dynamic clinical syndrome characterized by metabolic acidosis, oliguria, and altered level of consciousness — reflecting the downstream consequences of cellular hypoxia. Critically, this definition is not anchored to a single vital sign: shock can occur with a systolic blood pressure above 90 mmHg (compensated shock), and a blood pressure of 85 mmHg may reflect a patient's acceptable normal in an elderly hypertensive individual. Options A, C, D, and E each describe specific clinical correlates or subtypes of shock rather than the unifying pathophysiological definition. Understanding the broad definition allows clinicians to recognize shock early — before haemodynamic collapse — and initiate treatment before irreversible organ damage occurs."
+  },
+  {
+    q: "Which of the following correctly pairs a type of shock with its primary pathophysiological mechanism?",
+    opts: [
+      "Cardiogenic — peripheral vasodilatation; hypovolaemic — pump failure; distributive — reduced preload",
+      "Cardiogenic — reduced afterload; obstructive — impaired myocardial contractility; distributive — reduced blood volume",
+      "Hypovolaemic — pump failure; cardiogenic — reduced intravascular volume; obstructive — vasodilation",
+      "Cardiogenic — pump failure; hypovolaemic — reduced circulating blood volume; obstructive — mechanical impedance to flow",
+      "Distributive — pump failure; cardiogenic — vasodilation; obstructive — impaired venous return from blood loss"
+    ],
+    ans: 3,
+    exp: "Shock is classified by mechanism into four types: Cardiogenic — the heart fails as a pump (myocarditis, myocardial infarction) resulting in reduced cardiac output despite adequate preload; Hypovolaemic — reduced circulating blood volume (haemorrhage, burns, fluid loss) reduces preload and cardiac output; Obstructive — the heart is structurally normal but cannot pump effectively due to mechanical impedance (tension pneumothorax, constrictive pericarditis, cardiac tamponade); and Distributive — blood volume is normal but peripheral vascular resistance is pathologically reduced (septic, anaphylactic, neurogenic shock), producing maldistribution of blood flow. The mnemonic CHOD (Cardiogenic, Hypovolaemic, Obstructive, Distributive) covers all four; distributive is further subdivided as ANS (Anaphylactic, Neurogenic, Septic). Confusing these mechanisms leads to incorrect treatment — vasopressors are appropriate for distributive shock but harmful if given before volume replacement in hypovolaemia."
+  },
+  {
+    q: "A 23-year-old motorcyclist sustains a complete spinal cord injury at the C5 level. On assessment, blood pressure is 82/48 mmHg, heart rate is 54 beats per minute, and the lower limbs are warm and vasodilated. Which type of shock best explains this clinical picture?",
+    opts: [
+      "Hypovolaemic shock from occult haemorrhage into the thoracic cavity or retroperitoneum",
+      "Obstructive shock from tension pneumothorax compressing the right heart and reducing venous return",
+      "Neurogenic shock from loss of sympathetic vasomotor tone below the level of the cervical cord injury",
+      "Cardiogenic shock from blunt myocardial contusion sustained during the high-speed impact",
+      "Septic shock from early gram-negative bacteraemia complicating open wounds sustained in the accident"
+    ],
+    ans: 2,
+    exp: "The triad of hypotension, bradycardia, and warm vasodilated extremities following a cervical spinal cord injury is pathognomonic of neurogenic shock. Sympathetic vasomotor pathways descend from the thoracic cord; a complete cervical cord lesion severs these pathways, abolishing tonic sympathetic outflow to peripheral vasculature. The result is widespread vasodilation — reducing systemic vascular resistance — and inability to mount a compensatory tachycardia, because sympathetic tone to the heart (via T1-T4) is also lost. Hypovolaemic and septic shock both produce tachycardia and cold, clammy peripheries — the opposite of this presentation. Obstructive shock produces tachycardia and distended neck veins. Cardiogenic shock produces cold, clammy skin with pulmonary oedema. The warm peripheries and relative bradycardia in the context of cord injury confirm the neurogenic mechanism, distinguishing it from haemorrhagic shock, which is the more common cause of hypotension after trauma."
+  },
+  {
+    q: "A 28-year-old woman develops generalised urticaria, severe bronchospasm, and rapidly progressive hypotension within 3 minutes of receiving an intravenous antibiotic. What is the most appropriate immediate pharmacological intervention?",
+    opts: [
+      "Intravenous hydrocortisone 200 mg to suppress the underlying IgE-mediated inflammatory response",
+      "Intravenous chlorphenamine 10 mg to block histamine H1 receptors and reduce vascular permeability",
+      "Intravenous fluid resuscitation alone with normal saline as the initial sole pharmacological strategy",
+      "Intravenous dopamine infusion at 5–10 mcg/kg/min to restore systemic vascular resistance and perfusion",
+      "Intramuscular adrenaline (epinephrine) 0.5 mg as the immediate first-line treatment for anaphylactic shock"
+    ],
+    ans: 4,
+    exp: "Anaphylactic shock is an IgE-mediated distributive emergency requiring immediate intramuscular adrenaline (epinephrine) 0.5 mg (0.5 mL of 1:1000 solution) into the anterolateral thigh as the first-line, life-saving intervention. Adrenaline acts through alpha-1 adrenergic receptors to reverse vasodilation and laryngeal oedema, and through beta-2 receptors to reverse bronchospasm — addressing all three life-threatening mechanisms simultaneously. Antihistamines (chlorphenamine) and corticosteroids (hydrocortisone) have important adjunctive roles in preventing biphasic reactions and reducing urticaria, but they have a slow onset and no role as immediate first-line agents. Intravenous fluids are an important adjunct for refractory hypotension but do not address the primary mechanism. Dopamine is reserved for refractory shock unresponsive to adrenaline. Delay in administering adrenaline in anaphylaxis is a leading cause of preventable death."
+  }
+];
+
 /* ═══════════ COURSE STRUCTURE ═══════════ */
 const RADIOLOGY_Qs = [
   {
@@ -5070,7 +5433,7 @@ const COURSES = [
       { id:"derma_pilosebaceous", name:"Acne, Rosacea & Hidradenitis", questions:DERM_PILOSEBACEOUS_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
       { id:"derma_pr_sebderm", name:"Pityriasis Rosea & Seborrheic Dermatitis", questions:DERM_PR_SEBDERM_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
       { id:"derma_lp", name:"Lichen Planus", questions:DERM_LP_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
-      { id:"anaes", name:"Anaesthesiology", questions:[], available:false },
+      { id:"anaes", name:"Anaesthesiology", questions:ANAES_Qs, available:true, topic:"Anaesthesiology" },
       { id:"ent", name:"ENT", questions:[], available:false },
       { id:"ophthal", name:"Ophthalmology", questions:[], available:false },
       { id:"ortho_septic", name:"Septic Arthritis", questions:ORTHO_SEPTIC_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
@@ -5507,6 +5870,9 @@ function SupportBanner(){
 
 function App(){
   const [view,setView]=useState("home");
+  const [navHistory,setNavHistory]=useState([]);
+  const pushView = (v) => { setNavHistory(prev=>[...prev,view]); setView(v); };
+  const popView  = () => { setNavHistory(prev=>{ const h=[...prev]; const back=h.pop()||"home"; setView(back); return h; }); };
   const [course,setCourse]=useState(null);
   const [block,setBlock]=useState(null);
   const [qCount,setQCount]=useState(10);
@@ -5639,7 +6005,7 @@ function App(){
     // Strip non-serializable fields before saving to Firestore (undefined values cause silent failures)
     const { questions:_q, answers:_a, ...toSave } = r;
     saveAttempt(toSave);
-    setView("results");
+    pushView("results");
     setAllAttempts(prev=>{ const next=[...prev,r]; try{ localStorage.setItem('medq_all_attempts',JSON.stringify(next.slice(-200))); }catch{} return next; });
   },[]);
   endQuizRef.current=endQuiz;
@@ -5692,7 +6058,7 @@ function App(){
     setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setPaused(false);
     correctRef.current=0; answeredRef.current=0;
     setRetakeMode(!!retakeQs);
-    setView("quiz");
+    pushView("quiz");
     setTimeout(()=>startTimer(shuffled.length*secsPerQ),80);
   };
 
@@ -6075,7 +6441,7 @@ function App(){
             style:{animationDelay:i*50+"ms",cursor:"pointer",borderRadius:8,overflow:"hidden",boxShadow:"0 4px 16px rgba(15,39,68,.1)",transition:"transform .2s,box-shadow .2s"},
             onMouseEnter:ev=>{ev.currentTarget.style.transform="translateY(-4px)";ev.currentTarget.style.boxShadow="0 10px 28px rgba(15,39,68,.17)";},
             onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 4px 16px rgba(15,39,68,.1)";},
-            onClick:()=>{setCourse(c);setPreclinLevel(null);setView("blocks");}},
+            onClick:()=>{setCourse(c);setPreclinLevel(null);pushView("blocks");}},
             e("div",{style:{background:c.bg,padding:"clamp(18px,3vw,26px) 18px",display:"flex",flexDirection:"column",alignItems:"center",gap:10}},
               e("span",{style:{fontSize:"clamp(1.6rem,3vw,2.2rem)"}},c.emoji),
               e("span",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(.9rem,1.8vw,1.05rem)",fontWeight:700,color:"#fff",textAlign:"center"}},c.name)
@@ -6121,7 +6487,7 @@ function App(){
       e("div",{style:{background:headerBg,padding:"clamp(20px,4vw,32px) 20px 26px",position:"relative",overflow:"hidden"}},
         e("div",{style:{position:"absolute",inset:0,backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.03) 50px,rgba(255,255,255,.03) 100px)"}}),
         e("div",{style:{position:"relative",maxWidth:720,margin:"0 auto"}},
-          navBtn("← Back",()=>setView("blocks")),
+          navBtn("← Back",()=>popView()),
           e("div",{style:{display:"flex",alignItems:"center",gap:14,marginTop:8}},
             e("span",{style:{fontSize:"1.9rem"}},"📜"),
             e("div",null,
@@ -6166,7 +6532,7 @@ function App(){
                       if(hasQs){
                         setPastQExam({className:cls.name, examLabel:exam.label, questions:exam.questions});
                         setPqVotes({}); setPqAiOpen({});
-                        setView("pastq_worksheet");
+                        pushView("pastq_worksheet");
                       }
                     },
                     style:{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between",
@@ -6393,7 +6759,7 @@ function App(){
           transition:"transform .18s,box-shadow .18s",minHeight:68},
         onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup")}}}},
+        onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);pushView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup")}}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
             isPQCard&&e("span",{style:{fontSize:"1rem",marginRight:2}},"📜"),
@@ -6437,7 +6803,7 @@ function App(){
           transition:"transform .18s,box-shadow .18s",minHeight:64},
         onMouseEnter:ev=>{if(b.available&&b.questions.length>0){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available&&b.questions.length>0){setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}},
+        onClick:()=>{if(b.available&&b.questions.length>0){setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup");}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:b.lecturer?2:0}},
             e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#0f2744"}},b.name),
@@ -6471,7 +6837,7 @@ function App(){
                 border:"1px solid #6b4f20",transition:"transform .18s,box-shadow .18s",minHeight:64},
               onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
               onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-              onClick:()=>{setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}},
+              onClick:()=>{setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);pushView("pastq_system");}},
               e("div",{style:{flex:1}},
                 e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3}},
                   e("span",{style:{fontSize:"1rem"}},"📜"),
@@ -6612,7 +6978,7 @@ function App(){
       e("div",{style:{background:course.bg,padding:"clamp(24px,5vw,36px) 20px 28px",position:"relative",overflow:"hidden"}},
         e("div",{style:{position:"absolute",inset:0,backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.03) 50px,rgba(255,255,255,.03) 100px)"}}),
         e("div",{style:{position:"relative",maxWidth:720,margin:"0 auto"}},
-          navBtn("← Back",()=>setView("home")),
+          navBtn("← Back",()=>popView()),
           e("div",{style:{display:"flex",alignItems:"center",gap:14}},
             e("span",{style:{fontSize:"clamp(1.6rem,4vw,2.2rem)"}},course.emoji),
             e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.4rem,4vw,1.8rem)",fontWeight:900,color:"#fff"}},course.name)
@@ -6640,8 +7006,8 @@ function App(){
               onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
               onClick:()=>{
                 if(!g.anyAvailable) return;
-                if(singleBlock){ setBlock(singleBlock);setQCount(Math.min(20,singleBlock.questions.length));setView("setup"); }
-                else { setTopic(g);setView("topic_blocks"); }
+                if(singleBlock){ setBlock(singleBlock);setQCount(Math.min(20,singleBlock.questions.length));pushView("setup"); }
+                else { setTopic(g);pushView("topic_blocks"); }
               }},
               e("div",{style:{flex:1,minWidth:0}},
                 e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
@@ -6670,7 +7036,7 @@ function App(){
       e("div",{style:{background:course.bg,padding:"clamp(24px,5vw,36px) 20px 28px",position:"relative",overflow:"hidden"}},
         e("div",{style:{position:"absolute",inset:0,backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.03) 50px,rgba(255,255,255,.03) 100px)"}}),
         e("div",{style:{position:"relative",maxWidth:720,margin:"0 auto"}},
-          navBtn("← Back",()=>setView("blocks")),
+          navBtn("← Back",()=>popView()),
           e("div",{style:{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}},
             e("span",{style:{fontSize:"clamp(1.6rem,4vw,2.2rem)"}},course.emoji),
             e("div",null,
@@ -6693,7 +7059,7 @@ function App(){
             onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
             onClick:()=>{
               const unified={id:"unified_"+topic.label,name:"All "+topic.label+" Questions",questions:allTopicQs,available:true,isUnified:true};
-              setBlock(unified);setQCount(Math.min(20,allTopicQs.length));setView("setup");
+              setBlock(unified);setQCount(Math.min(20,allTopicQs.length));pushView("setup");
             }},
             e("div",{style:{flex:1}},
               e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#c9a84c"}},"All "+topic.label+" Questions"),
@@ -6714,7 +7080,7 @@ function App(){
               transition:"transform .18s,box-shadow .18s",minHeight:68},
             onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
             onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-            onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);setView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}},
+            onClick:()=>{if(b.available){if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);pushView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));setView("setup");}}}},
             e("div",{style:{flex:1,minWidth:0}},
               e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
                 isPQCard&&e("span",{style:{fontSize:"1rem"}},"📜"),
@@ -6723,7 +7089,7 @@ function App(){
                 !isPQCard&&b.available&&b.questions.length>0&&e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live"),
                 !isPQCard&&(!b.available||b.questions.length===0)&&e("span",{style:{background:"#f5f0e8",color:"#bbb",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Coming Soon")
               ),
-              b.lecturer&&e("p",{style:{fontSize:".74rem",color:"#bbb",fontStyle:"italic",marginBottom:2}},b.lecturer),
+              
               isPQCard
                 ? e("p",{style:{color:"rgba(255,204,128,.5)",fontSize:".76rem"}},"Past exam questions by class & sitting")
                 : b.available&&b.questions.length>0&&e("p",{style:{color:"#aaa",fontSize:".76rem"}},b.questions.length+" questions")
@@ -6885,7 +7251,7 @@ function App(){
 
           /* Buttons */
           e("div",{style:{display:"flex",gap:10}},
-            e("button",{onClick:()=>setView(topic?"topic_blocks":"blocks"),style:{flex:1,padding:"13px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".9rem",color:"#666",minHeight:50}},"← Back"),
+            e("button",{onClick:()=>popView(),style:{flex:1,padding:"13px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".9rem",color:"#666",minHeight:50}},"← Back"),
             e("button",{onClick:()=>{
               if(!isValidName(studentName.trim())){setNameErr("Name must be at least 4 letters (no numbers or symbols)");return;}
               beginQuiz();
@@ -7177,9 +7543,17 @@ function App(){
               style:{width:"100%",padding:"12px",background:"#fff3e0",color:"#e65100",border:"1.5px solid #ffcc80",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".95rem",minHeight:48}},
               "🔁 Retake Failed Questions ("+failedQs.length+")"
             ),
-            e("div",{style:{display:"flex",gap:10}},
-              e("button",{onClick:()=>{setView("home");setShowSubPaywall(false);},style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"Home"),
-              e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Try Again")
+            e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+              e("button",{onClick:()=>{
+                // go back to the course/topic screen (pop past quiz+results+setup)
+                setNavHistory([]);setView("blocks");
+                setShowSubPaywall(false);
+              },style:{width:"100%",padding:"12px",background:"transparent",border:"1.5px solid #c9a84c",borderRadius:4,color:"#0f2744",fontSize:".9rem",fontWeight:600,minHeight:48}},
+                "← Back to "+(course?course.name:"Course")),
+              e("div",{style:{display:"flex",gap:10}},
+                e("button",{onClick:()=>{setNavHistory([]);setView("home");setShowSubPaywall(false);},style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",fontSize:".9rem",minHeight:48}},"🏠 Home"),
+                e("button",{onClick:()=>{setPicked(null);setShowFb(false);setView("setup");},style:{flex:2,padding:"12px",background:"#0f2744",color:"#c9a84c",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"↺ Try Again")
+              )
             )
           )
         )
