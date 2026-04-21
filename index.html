@@ -5041,263 +5041,143 @@ const allTopicsQuestions = [
 const abgQuizQuestions = [
 
   {
-    q: "Which of the following is a directly measured variable in arterial blood gas analysis?",
-    opts: [
-      "HCO₃⁻",
-      "SpO₂",
-      "PaCO₂",
-      "Base excess",
-      "Standard bicarbonate"
-    ],
+    q: "Which of the following is a directly measured variable in ABG?",
+    opts: ["HCO₃⁻", "SpO₂", "PaCO₂", "Base Excess", "Standard bicarbonate"],
     ans: 2,
     exp: "PaCO₂, pH, and PaO₂ are directly measured by blood gas analysers using specific electrodes. HCO₃⁻, base excess, and standard bicarbonate are all calculated values derived from the Henderson-Hasselbalch equation using the directly measured pH and PaCO₂. SpO₂ (pulse oximetry) is a non-invasive estimate obtained from light absorption and is not measured in ABG analysis."
   },
 
   {
-    q: "What is the normal range of arterial blood pH?",
-    opts: [
-      "7.25–7.35",
-      "7.35–7.45",
-      "7.45–7.55",
-      "7.30–7.40",
-      "7.40–7.50"
-    ],
+    q: "What is the normal range of arterial pH?",
+    opts: ["7.25 – 7.35", "7.35 – 7.45", "7.45 – 7.55", "7.30 – 7.40", "7.40 – 7.50"],
     ans: 1,
     exp: "Normal arterial pH is 7.35–7.45, maintained by the bicarbonate buffer system, haemoglobin, plasma proteins, and the coordinated actions of the lungs and kidneys. A pH below 7.35 defines acidaemia; above 7.45 defines alkalaemia. This narrow range is critical for normal enzyme function, oxygen delivery, and cellular metabolism."
   },
 
   {
-    q: "Which formula calculates the age-adjusted expected PaO₂ in mmHg?",
-    opts: [
-      "100 − age",
-      "102 − (0.33 × age)",
-      "90 − (0.44 × age)",
-      "120 − age",
-      "95 − (0.5 × age)"
-    ],
+    q: "Which formula calculates the age-adjusted expected PaO₂ (in mmHg)?",
+    opts: ["100 – age", "102 – 0.33 × age", "90 – 0.44 × age", "120 – age", "95 – 0.5 × age"],
     ans: 1,
-    exp: "The age-adjusted expected PaO₂ is calculated as 102 − (0.33 × age) mmHg. This accounts for the progressive physiological decline in PaO₂ that occurs with ageing due to increasing ventilation-perfusion mismatch and reduced alveolar surface area. A patient's measured PaO₂ must be compared against this age-adjusted expected value rather than a fixed threshold to accurately identify clinically significant hypoxaemia."
+    exp: "The age-adjusted expected PaO₂ is calculated as 102 − (0.33 × age) mmHg. This accounts for the progressive physiological decline in PaO₂ that occurs with ageing due to increasing ventilation-perfusion mismatch and reduced alveolar surface area. A patient’s measured PaO₂ must be compared against this age-adjusted expected value rather than a fixed threshold to accurately identify clinically significant hypoxaemia."
   },
 
   {
-    q: "A pH of 7.30 with HCO₃⁻ of 18 mEq/L indicates:",
-    opts: [
-      "Metabolic acidosis",
-      "Respiratory alkalosis",
-      "Metabolic alkalosis",
-      "Respiratory acidosis",
-      "Mixed metabolic and respiratory acidosis"
-    ],
+    q: "A pH < 7.35 with HCO₃⁻ < 22 mEq/L indicates:",
+    opts: ["Metabolic acidosis", "Respiratory alkalosis", "Metabolic alkalosis", "Respiratory acidosis", "Mixed respiratory and metabolic acidosis"],
     ans: 0,
-    exp: "A pH below 7.35 indicates acidaemia, and an HCO₃⁻ below 22 mEq/L (normal: 22–26 mEq/L) identifies a primary metabolic cause. Together, these define uncompensated or partially compensated metabolic acidosis. Common causes include diabetic ketoacidosis, lactic acidosis, renal failure, and severe diarrhoea. Respiratory acidosis would be characterised by elevated PaCO₂, not reduced HCO₃⁻, as the primary abnormality."
+    exp: "A pH below 7.35 indicates acidaemia, and an HCO₃⁻ below 22 mEq/L (normal: 22–26 mEq/L) identifies a primary metabolic cause. Together, these define metabolic acidosis. Common causes include diabetic ketoacidosis, lactic acidosis, renal failure, and severe diarrhoea. Respiratory acidosis would be characterised by elevated PaCO₂ as the primary abnormality, not reduced HCO₃⁻."
   },
 
   {
-    q: "Which artery is most preferred for arterial blood gas sample collection?",
-    opts: [
-      "Carotid artery",
-      "Femoral artery",
-      "Radial artery",
-      "Brachial artery",
-      "Ulnar artery"
-    ],
+    q: "Which artery is most preferred for ABG collection?",
+    opts: ["Carotid", "Femoral", "Radial", "Brachial", "Ulnar"],
     ans: 2,
     exp: "The radial artery is preferred for ABG sampling due to its superficial location, ease of palpation, and the presence of collateral circulation from the ulnar artery — assessed by the Allen test before sampling. If the radial is unavailable, the brachial or femoral artery may be used. The carotid artery is never used for ABG due to the unacceptable risk of cerebral embolism or haematoma compromising airway or cerebral blood flow."
   },
 
   {
-    q: "In compensated respiratory acidosis, what change in HCO₃⁻ is expected?",
-    opts: [
-      "HCO₃⁻ remains normal",
-      "HCO₃⁻ decreases",
-      "HCO₃⁻ increases",
-      "HCO₃⁻ is unchanged from baseline",
-      "HCO₃⁻ rises transiently then normalizes"
-    ],
+    q: "In compensated respiratory acidosis, what is expected of HCO₃⁻?",
+    opts: ["Normal", "Decreased", "Increased", "Unchanged", "Increased then normalizes"],
     ans: 2,
-    exp: "In respiratory acidosis, CO₂ accumulates, lowering pH. Over 3–5 days, the kidneys compensate by increasing HCO₃⁻ reabsorption and H⁺ excretion, raising serum HCO₃⁻ to partially restore pH toward normal. This compensatory elevation in HCO₃⁻ is the hallmark of chronic (compensated) respiratory acidosis. In acute, uncompensated respiratory acidosis, HCO₃⁻ is initially normal — the metabolic compensation has not yet had time to develop."
+    exp: "In respiratory acidosis, CO₂ accumulates, lowering pH. Over 3–5 days, the kidneys compensate by increasing HCO₃⁻ reabsorption and H⁺ excretion, raising serum HCO₃⁻ to partially restore pH toward normal. This compensatory elevation in HCO₃⁻ is the hallmark of chronic (compensated) respiratory acidosis. In acute uncompensated respiratory acidosis, HCO₃⁻ is initially normal — the metabolic compensation has not yet had time to develop."
   },
 
   {
-    q: "What acid is formed from the combination of CO₂ and H₂O in the blood?",
-    opts: [
-      "Lactic acid",
-      "Sulfuric acid",
-      "Phosphoric acid",
-      "Carbonic acid",
-      "Bicarbonic acid"
-    ],
+    q: "What acid is formed from CO₂ and H₂O?",
+    opts: ["Lactic acid", "Sulfuric acid", "Phosphoric acid", "Carbonic acid", "Bicarbonic acid"],
     ans: 3,
     exp: "CO₂ combines with water in the blood (catalysed by carbonic anhydrase in red blood cells) to form carbonic acid: CO₂ + H₂O ⇌ H₂CO₃. Carbonic acid then rapidly dissociates into H⁺ and HCO₃⁻. This reaction is central to respiratory acid-base regulation — by controlling the rate of CO₂ exhalation, the lungs directly control the production and elimination of carbonic acid and thus blood pH."
   },
 
   {
-    q: "A fully compensated metabolic alkalosis would show which of the following ABG patterns?",
-    opts: [
-      "Normal pH, with abnormal HCO₃⁻ and PaCO₂",
-      "High pH with low HCO₃⁻",
-      "Low pH with high HCO₃⁻",
-      "High pH with low PaCO₂",
-      "High pH with high HCO₃⁻ and low PaCO₂"
-    ],
+    q: "A fully compensated metabolic alkalosis would have:",
+    opts: ["Normal pH, abnormal HCO₃⁻ and PaCO₂", "High pH, low HCO₃⁻", "Low pH, high HCO₃⁻", "High pH, low PaCO₂", "High pH, normal HCO₃⁻ and PaCO₂"],
     ans: 0,
     exp: "In fully compensated metabolic alkalosis, the pH has been restored to the normal range (7.35–7.45) through respiratory compensation — hypoventilation retains CO₂, raising PaCO₂. Both HCO₃⁻ (primarily elevated — the metabolic disturbance) and PaCO₂ (secondarily elevated — the compensation) remain abnormal, even though pH appears normal. This is the key distinction between full and partial compensation."
   },
 
   {
-    q: "What is the normal range of PaCO₂?",
-    opts: [
-      "20–30 mmHg",
-      "30–40 mmHg",
-      "35–45 mmHg",
-      "45–55 mmHg",
-      "40–50 mmHg"
-    ],
+    q: "What is the normal value of PaCO₂?",
+    opts: ["20–30 mmHg", "30–40 mmHg", "35–45 mmHg", "45–55 mmHg", "40–50 mmHg"],
     ans: 2,
-    exp: "Normal PaCO₂ is 35–45 mmHg. A PaCO₂ below 35 mmHg indicates hyperventilation and defines respiratory alkalosis; above 45 mmHg indicates hypoventilation and defines respiratory acidosis. PaCO₂ is the primary respiratory component of acid-base balance and is tightly regulated by the brainstem's chemoreceptors, which respond to changes in H⁺ concentration and CO₂ levels by adjusting respiratory rate and depth."
+    exp: "Normal PaCO₂ is 35–45 mmHg. A PaCO₂ below 35 mmHg indicates hyperventilation and defines respiratory alkalosis; above 45 mmHg indicates hypoventilation and defines respiratory acidosis. PaCO₂ is the primary respiratory component of acid-base balance and is tightly regulated by brainstem chemoreceptors, which respond to changes in H⁺ concentration and CO₂ levels by adjusting respiratory rate and depth."
   },
 
   {
-    q: "Base excess (BE) in arterial blood gas analysis is used to quantify:",
-    opts: [
-      "The degree of respiratory compensation",
-      "The adequacy of arterial oxygenation",
-      "The metabolic component of acid-base disturbance",
-      "The serum potassium level",
-      "The renal bicarbonate reabsorption threshold"
-    ],
+    q: "Base excess (BE) is used to quantify:",
+    opts: ["Respiratory compensation", "Oxygenation status", "Metabolic component", "Serum potassium", "Renal bicarbonate threshold"],
     ans: 2,
     exp: "Base excess quantifies the metabolic component of acid-base disturbances. It represents the amount of acid or base (in mEq/L) required to return 1 litre of blood to a normal pH at a standardised PaCO₂ of 40 mmHg. Normal BE is −2 to +2 mEq/L. A negative BE (base deficit) indicates metabolic acidosis; a positive BE indicates metabolic alkalosis. By standardising PaCO₂, BE isolates the metabolic contribution from the respiratory component."
   },
 
   {
-    q: "What happens to serum potassium in metabolic acidosis?",
-    opts: [
-      "It decreases as the kidneys excrete more potassium",
-      "It remains unchanged despite changes in pH",
-      "It moves into cells in exchange for hydrogen ions",
-      "It moves out of cells into the extracellular fluid",
-      "It is selectively excreted by the kidneys in excess"
-    ],
+    q: "What happens to potassium in metabolic acidosis?",
+    opts: ["Decreases in serum", "Remains unchanged", "Moves into cells", "Moves out of cells", "Is excreted in the urine"],
     ans: 3,
     exp: "In metabolic acidosis, the accumulation of H⁺ ions drives a transcellular exchange: H⁺ enters cells and K⁺ shifts out into the extracellular fluid, raising serum potassium. For approximately every 0.1-unit fall in pH, serum K⁺ rises by 0.5–1.0 mmol/L. This hyperkalaemia can precipitate life-threatening cardiac arrhythmias. The reverse occurs in metabolic alkalosis, where K⁺ moves into cells, causing hypokalaemia."
   },
 
   {
     q: "Which of the following is a symptom of respiratory alkalosis?",
-    opts: [
-      "Lethargy",
-      "Diaphoresis",
-      "Warm flushed skin",
-      "Bradycardia",
-      "Hyporeflexia"
-    ],
+    opts: ["Lethargy", "Diaphoresis", "Warm flushed skin", "Bradycardia", "Hyporeflexia"],
     ans: 1,
-    exp: "Respiratory alkalosis results from hyperventilation-induced hypocapnia, which reduces cerebral perfusion and alters ionised calcium levels. Symptoms include diaphoresis, perioral tingling, carpopedal spasm (Trousseau's sign), light-headedness, and palpitations. Lethargy is more characteristic of hypercapnia (respiratory acidosis). Warm flushed skin is associated with CO₂ retention due to peripheral vasodilation, not alkalosis."
+    exp: "Respiratory alkalosis results from hyperventilation-induced hypocapnia, which reduces cerebral perfusion and alters ionised calcium levels. Symptoms include diaphoresis, perioral tingling, carpopedal spasm (Trousseau’s sign), light-headedness, and palpitations. Lethargy is more characteristic of hypercapnia (respiratory acidosis). Warm flushed skin is associated with CO₂ retention due to peripheral vasodilation, not alkalosis."
   },
 
   {
-    q: "The anion gap is calculated to help identify:",
-    opts: [
-      "The presence of hypokalemia",
-      "Arterial oxygen content",
-      "The type of metabolic acidosis",
-      "The severity of respiratory failure",
-      "The degree of respiratory alkalosis"
-    ],
+    q: "Anion gap helps identify:",
+    opts: ["Hypokalemia", "Oxygen content", "Types of metabolic acidosis", "Respiratory failure", "Degree of metabolic compensation"],
     ans: 2,
     exp: "The anion gap = Na⁺ − (Cl⁻ + HCO₃⁻), normal value 8–12 mEq/L. It distinguishes between high anion gap metabolic acidosis (HAGMA) — caused by accumulation of unmeasured anions such as lactate, ketoacids, phosphates, or toxins — and normal anion gap metabolic acidosis (NAGMA) — caused by HCO₃⁻ loss with compensatory Cl⁻ retention, as in diarrhoea or renal tubular acidosis. This distinction is critical for directing the diagnostic workup."
   },
 
   {
-    q: "Which of the following conditions causes a high anion gap metabolic acidosis?",
-    opts: [
-      "Diarrhoea",
-      "Renal failure",
-      "Vomiting",
-      "Nasogastric suction",
-      "Hyperchloraemia from saline infusion"
-    ],
+    q: "Which condition can cause a high anion gap?",
+    opts: ["Diarrhea", "Renal failure", "Vomiting", "NG suction", "Hyperchloraemia"],
     ans: 1,
-    exp: "Renal failure causes high anion gap metabolic acidosis because the kidneys fail to excrete phosphates and sulphates (unmeasured anions) and cannot regenerate HCO₃⁻. Other HAGMA causes: DKA, lactic acidosis, and certain toxins (methanol, ethylene glycol, salicylates). Diarrhoea and renal tubular acidosis cause normal anion gap acidosis. Vomiting and NG suction cause metabolic alkalosis from loss of HCl."
+    exp: "Renal failure causes high anion gap metabolic acidosis because the kidneys fail to excrete phosphates and sulphates (unmeasured anions) and cannot regenerate HCO₃⁻. Other HAGMA causes: DKA, lactic acidosis, and certain toxins (methanol, ethylene glycol, salicylates). Diarrhoea causes normal anion gap acidosis. Vomiting and NG suction cause metabolic alkalosis from loss of HCl."
   },
 
   {
-    q: "In uncompensated metabolic alkalosis, PaCO₂ is:",
-    opts: [
-      "Always low regardless of compensation status",
-      "Normal because the respiratory system has not yet responded",
-      "Decreased as the lungs attempt to blow off excess bicarbonate",
-      "Always elevated due to CO₂ retention from hypoventilation",
-      "Elevated in both compensated and uncompensated states equally"
-    ],
+    q: "In metabolic alkalosis, PaCO₂ is:",
+    opts: ["Always low", "Normal if uncompensated", "Decreased when compensated", "Always increased", "Elevated only in chronic states"],
     ans: 1,
-    exp: "In uncompensated metabolic alkalosis, the primary disturbance is an elevated HCO₃⁻ with a high pH, but PaCO₂ is initially normal — respiratory compensation (hypoventilation to retain CO₂) has not yet occurred. When compensation develops, PaCO₂ rises above normal. Therefore, normal PaCO₂ in the setting of elevated HCO₃⁻ and high pH indicates an uncompensated state, while elevated PaCO₂ indicates partial or full compensation."
+    exp: "In uncompensated metabolic alkalosis, the primary disturbance is an elevated HCO₃⁻ with a high pH, but PaCO₂ is initially normal — respiratory compensation (hypoventilation to retain CO₂) has not yet occurred. When compensation develops, PaCO₂ rises above normal. Therefore, normal PaCO₂ in the setting of elevated HCO₃⁻ and high pH indicates an uncompensated state."
   },
 
   {
-    q: "What is the primary role of the lungs in acid-base balance?",
-    opts: [
-      "Excrete metabolic acids such as lactic acid directly",
-      "Reabsorb bicarbonate from pulmonary capillaries",
-      "Excrete carbonic acid in the form of CO₂ and water",
-      "Produce hydrogen ions for the bicarbonate buffer system",
-      "Convert bicarbonate into carbonic acid for elimination"
-    ],
+    q: "What is the role of the lungs in acid-base balance?",
+    opts: ["Excrete metabolic acids", "Reabsorb bicarbonate", "Excrete carbonic acid", "Produce hydrogen ions", "Store excess bicarbonate"],
     ans: 2,
     exp: "The lungs maintain acid-base balance by excreting carbonic acid as CO₂ and water through expiration: H₂CO₃ → CO₂ + H₂O. By adjusting respiratory rate and tidal volume, the lungs can rapidly alter PaCO₂ and thus the carbonic acid concentration in the blood. This is the fastest buffering mechanism available. The kidneys, not the lungs, reabsorb bicarbonate and excrete H⁺ — a slower but more precise compensatory mechanism."
   },
 
   {
-    q: "A patient has pH 7.60, PaCO₂ 25 mmHg, and HCO₃⁻ 24 mEq/L. What is the most accurate interpretation?",
-    opts: [
-      "Metabolic alkalosis",
-      "Uncompensated respiratory alkalosis",
-      "Fully compensated respiratory alkalosis",
-      "Normal acid-base status",
-      "Partially compensated metabolic alkalosis"
-    ],
+    q: "A pH of 7.60, PaCO₂ of 25 mmHg, and HCO₃⁻ of 24 mEq/L is:",
+    opts: ["Metabolic alkalosis", "Uncompensated respiratory alkalosis", "Fully compensated alkalosis", "Normal", "Partially compensated respiratory alkalosis"],
     ans: 1,
     exp: "Systematic interpretation: pH 7.60 is alkalotic. PaCO₂ 25 mmHg is below normal (35–45), indicating a primary respiratory cause — respiratory alkalosis. HCO₃⁻ 24 mEq/L is normal, confirming that no metabolic compensation has yet occurred. This pattern — high pH, low PaCO₂, normal HCO₃⁻ — defines uncompensated respiratory alkalosis. If renal compensation had occurred, HCO₃⁻ would have fallen below normal."
   },
 
   {
-    q: "A patient has pH 7.49, PaCO₂ 48 mmHg, and HCO₃⁻ 38 mEq/L. What does this ABG indicate?",
-    opts: [
-      "Uncompensated metabolic alkalosis",
-      "Fully compensated respiratory alkalosis",
-      "Partially compensated metabolic alkalosis",
-      "Normal acid-base status",
-      "Compensated respiratory acidosis"
-    ],
+    q: "What does a pH of 7.49, PaCO₂ 48, and HCO₃⁻ 38 suggest?",
+    opts: ["Uncompensated metabolic alkalosis", "Fully compensated alkalosis", "Partially compensated metabolic alkalosis", "Normal", "Compensated respiratory acidosis"],
     ans: 2,
-    exp: "Systematic interpretation: pH 7.49 is mildly alkalotic. HCO₃⁻ 38 mEq/L is markedly elevated — this is the primary metabolic alkalosis. PaCO₂ 48 mmHg is above the normal range (35–45), indicating that respiratory compensation (hypoventilation retaining CO₂) has begun. However, pH is still above 7.45, confirming the compensation is incomplete — defining partially compensated metabolic alkalosis. Full compensation would normalise pH to within the 7.35–7.45 range."
+    exp: "Systematic interpretation: pH 7.49 is mildly alkalotic. HCO₃⁻ 38 mEq/L is markedly elevated — this is the primary metabolic alkalosis. PaCO₂ 48 mmHg is above the normal range (35–45), indicating that respiratory compensation (hypoventilation retaining CO₂) has begun. However, pH is still above 7.45, confirming the compensation is incomplete — defining partially compensated metabolic alkalosis."
   },
 
   {
     q: "Which of the following does NOT cause respiratory alkalosis?",
-    opts: [
-      "Anxiety",
-      "Pregnancy",
-      "Pulmonary embolism",
-      "Diarrhoea",
-      "Mechanical over-ventilation"
-    ],
+    opts: ["Anxiety", "Pregnancy", "Pulmonary embolism", "Diarrhea", "Mechanical hyperventilation"],
     ans: 3,
-    exp: "Respiratory alkalosis results from hyperventilation causing a fall in PaCO₂. Causes include anxiety, pregnancy (progesterone-driven hyperventilation), pulmonary embolism (hypoxia-driven reflex hyperventilation), mechanical over-ventilation, altitude, and fever. Diarrhoea causes loss of HCO₃⁻-rich fluid from the gastrointestinal tract, resulting in normal anion gap metabolic acidosis — not alkalosis. This is a classic distractor."
+    exp: "Respiratory alkalosis results from hyperventilation causing a fall in PaCO₂. Causes include anxiety, pregnancy (progesterone-driven hyperventilation), pulmonary embolism (hypoxia-driven reflex hyperventilation), and mechanical over-ventilation. Diarrhoea causes loss of HCO₃⁻-rich fluid from the gastrointestinal tract, resulting in normal anion gap metabolic acidosis — not alkalosis."
   },
 
   {
-    q: "In which acid-base condition is Kussmaul respiration characteristically observed?",
-    opts: [
-      "Metabolic alkalosis",
-      "Metabolic acidosis",
-      "Respiratory alkalosis",
-      "Respiratory acidosis",
-      "Mixed metabolic and respiratory alkalosis"
-    ],
+    q: "In which condition is Kussmaul respiration observed?",
+    opts: ["Metabolic alkalosis", "Metabolic acidosis", "Respiratory alkalosis", "Respiratory acidosis", "Mixed metabolic and respiratory acidosis"],
     ans: 1,
-    exp: "Kussmaul respiration is a deep, regular, laboured breathing pattern representing the respiratory compensation for severe metabolic acidosis. By increasing tidal volume (depth), the lungs attempt to blow off CO₂ and reduce carbonic acid production, partially correcting the acidaemia. It is classically associated with diabetic ketoacidosis and advanced renal failure. The pattern is the lungs trying to compensate for a metabolic problem — not a primary respiratory disorder."
+    exp: "Kussmaul respiration is a deep, regular, laboured breathing pattern representing the respiratory compensation for severe metabolic acidosis. By increasing tidal volume (depth), the lungs attempt to blow off CO₂ and reduce carbonic acid production, partially correcting the acidaemia. It is classically associated with diabetic ketoacidosis and advanced renal failure."
   }
 
 ];
@@ -5305,133 +5185,73 @@ const abgQuizQuestions = [
 const inhalationalRevisionQuestions = [
 
   {
-    q: "The first proposed theory of the mechanism of action of inhalational anaesthetic agents is called the:",
-    opts: [
-      "Pauling-Miller Theory",
-      "Frank-Lieb Theory",
-      "Meyer-Overton Hypothesis",
-      "Ivan Pavlov Hypothesis",
-      "Kepler's Law"
-    ],
+    q: "The First theory of the mechanism of action of inhalational agents is called the:",
+    opts: ["Pauling-Miller Theory", "Frank-Lieb Theory", "Meyer-Overton Hypothesis", "Ivan Pavlov Hypothesis", "Kepler's Law"],
     ans: 2,
-    exp: "The Meyer-Overton Hypothesis — proposed by Hans Meyer and Charles Overton independently around 1899–1901 — states that anaesthetic potency correlates directly with lipid solubility, as quantified by the Oil-Gas partition coefficient. Agents with higher oil-gas coefficients are more lipid-soluble and therefore more potent. While this relationship holds across a wide range of agents, the hypothesis does not explain all aspects of anaesthesia, including muscle relaxation. Later research identified GABA-B receptor potentiation as the primary mechanism for most inhaled agents, and NMDA receptor inhibition for N₂O and Xenon."
+    exp: "The Meyer-Overton Hypothesis — proposed by Hans Meyer and Charles Overton independently — states that anaesthetic potency correlates directly with lipid solubility, as quantified by the Oil-Gas partition coefficient. Agents with higher oil-gas coefficients are more lipid-soluble and therefore more potent. While this relationship holds across a wide range of agents, the hypothesis does not explain muscle relaxation. Later research identified GABA-B receptor potentiation as the primary mechanism for most inhaled agents, and NMDA receptor inhibition for N₂O and Xenon."
   },
 
   {
-    q: "The following factors affect transfer of the inhalational anaesthetic agent from the anaesthetic machine to the alveoli EXCEPT:",
-    opts: [
-      "Blood-gas partition coefficient",
-      "Inspired partial pressure",
-      "Alveolar ventilation",
-      "Anaesthetic breathing system",
-      "Functional residual capacity"
-    ],
+    q: "The following factors affect transfer of the inhalational agents from the anesthetic machine to the alveoli EXCEPT:",
+    opts: ["Blood-gas coefficient", "Inspired Partial Pressure", "Alveoli Ventilation", "Anesthetic Breathing System", "Functional Residual Capacity"],
     ans: 0,
-    exp: "The blood-gas partition coefficient governs how readily the agent moves from the alveoli into the blood — it influences the alveoli-to-blood transfer step, not the machine-to-alveoli step. Factors affecting machine-to-alveoli transfer include: Inspired Partial Pressure (driving force), Alveolar Ventilation (determines how quickly the agent is delivered to alveoli), the Anaesthetic Breathing System (affects rebreathing and wash-in), and Functional Residual Capacity (acts as a diluting buffer — larger FRC means slower rise in alveolar concentration)."
+    exp: "The blood-gas partition coefficient governs how readily the agent moves from the alveoli into the blood — it influences the alveoli-to-blood transfer step, not the machine-to-alveoli step. Factors affecting machine-to-alveoli transfer include: Inspired Partial Pressure (driving force), Alveolar Ventilation (determines how quickly the agent reaches the alveoli), the Anaesthetic Breathing System (affects rebreathing and wash-in), and Functional Residual Capacity (acts as a diluting buffer)."
   },
 
   {
-    q: "The potency of an inhalational anaesthetic agent is measured by:",
-    opts: [
-      "Minimum inhibitory concentration",
-      "Oil-gas partition coefficient",
-      "Minimum alveolar concentration",
-      "Blood-gas partition coefficient",
-      "None of the above"
-    ],
+    q: "The potency of an inhalational agent is measured by:",
+    opts: ["Minimum Inhibitory Concentration", "Oil-Gas Coefficient", "Minimum Alveolar Concentration", "Blood-gas coefficient", "None of the above"],
     ans: 2,
     exp: "The Minimum Alveolar Concentration (MAC) is the standard measure of inhalational anaesthetic potency. It is defined as the alveolar concentration at which 50% of unpremedicated patients do not move in response to a standardised surgical stimulus (such as a skin incision). A lower MAC indicates greater potency — halothane (MAC 0.75) is more potent than desflurane (MAC 6.0). The oil-gas partition coefficient correlates with potency via the Meyer-Overton hypothesis but is not itself the direct clinical measure of potency."
   },
 
   {
-    q: "The majority of inhalational anaesthetic agents are excreted via:",
-    opts: [
-      "Kidneys",
-      "Lungs",
-      "Intestines",
-      "Bile",
-      "Liver"
-    ],
+    q: "Majority of inhalational agents are excreted via:",
+    opts: ["Kidneys", "Lungs", "Intestines", "Bile", "Liver"],
     ans: 1,
-    exp: "The primary excretion route for inhalational anaesthetic agents is the lungs, through expiration — the reverse of their administration route. The rate of excretion depends on the same pharmacokinetic factors that govern uptake, particularly blood-gas solubility and alveolar ventilation. Agents with low blood-gas partition coefficients (e.g. desflurane, sevoflurane) are excreted rapidly, producing fast recovery. A small proportion of some agents undergoes hepatic metabolism — notably halothane (~20%), which contributes to the risk of halothane hepatitis."
+    exp: "The primary excretion route for inhalational anaesthetic agents is the lungs, through expiration — the reverse of their administration route. The rate of excretion depends on blood-gas solubility and alveolar ventilation. Agents with low blood-gas partition coefficients (e.g. desflurane, sevoflurane) are excreted rapidly, producing fast recovery. A small proportion undergoes hepatic metabolism — notably halothane (~20%), which contributes to the risk of halothane hepatitis."
   },
 
   {
-    q: "Which of the following modes of administering anaesthesia has the fastest onset and best manipulability?",
-    opts: [
-      "Intrarectal",
-      "Oral",
-      "Intramuscular",
-      "Inhalational",
-      "Intravenous"
-    ],
+    q: "Which of the following modes of administrating anesthesia has the fastest response?",
+    opts: ["Intrarectal", "Oral", "Intramuscular", "Inhalational", "Intravenous"],
     ans: 3,
     exp: "Inhalational anaesthesia provides the fastest onset of all routes and the greatest manipulability — the ability to rapidly adjust the depth of anaesthesia by changing the inspired concentration. Alveolar concentrations can be increased or decreased within minutes by adjusting the vaporiser setting and ventilation rate. Intravenous agents provide rapid onset but, once administered as a bolus, cannot be retrieved. Intramuscular, oral, and intrarectal routes all have slow, variable absorption profiles."
   },
 
   {
-    q: "The following are pharmacodynamic effects of inhalational anaesthetic agents on the body EXCEPT:",
-    opts: [
-      "Reduction of gastric motility",
-      "Increase in glomerular filtration rate",
-      "Decrease in glomerular filtration rate",
-      "Reduction of tidal volume",
-      "Relaxation of uterine smooth muscle"
-    ],
+    q: "The following are the pharmacodynamic effects of inhalational agents on parts of the body EXCEPT:",
+    opts: ["Reduce gastric motility", "Increase GFR", "Decrease GFR", "Reduce tidal volume", "Relax uterine muscles"],
     ans: 1,
-    exp: "Inhalational agents decrease GFR and urine output — they do NOT increase GFR. The renal depression results from reduced cardiac output and mean arterial pressure, which lowers renal perfusion pressure and activates the renin-angiotensin system. All other listed effects are correct: they reduce gastric motility (relevant to post-operative nausea), reduce tidal volume (requiring monitoring of ventilation), and relax uterine smooth muscle (clinically important in obstetric anaesthesia as it can cause uterine atony and haemorrhage)."
+    exp: "Inhalational agents decrease GFR and urine output — they do NOT increase GFR. The renal depression results from reduced cardiac output and mean arterial pressure, which lowers renal perfusion pressure and activates the renin-angiotensin system. All other listed effects are correct: they reduce gastric motility, reduce tidal volume (requiring monitoring of ventilation), and relax uterine smooth muscle (important in obstetric anaesthesia as it can cause uterine atony and haemorrhage)."
   },
 
   {
     q: "The following is true of Isoflurane EXCEPT:",
-    opts: [
-      "It is used for maintenance of anaesthesia",
-      "It has a pungent, ethereal smell",
-      "It is an isomer of enflurane",
-      "It is used for induction of anaesthesia",
-      "It causes irritation of the airway"
-    ],
+    opts: ["Used for maintenance of anesthesia", "Has a pungent ethereal smell", "An isomer of enflurane", "Used for induction of anesthesia", "Causes irritation of the airway"],
     ans: 3,
-    exp: "Isoflurane is NOT used for induction of anaesthesia. Its pungent, ethereal odour is highly irritating to the respiratory tract, causing coughing, breath-holding, laryngospasm, and excessive secretions during inhalational induction — making it unsuitable for this purpose. It is used exclusively for maintenance of anaesthesia. All other statements are true: it is a structural isomer of enflurane, has a pungent smell, and causes airway irritation. Halothane, with its pleasant sweet smell, is the preferred agent for inhalational induction, particularly in children."
+    exp: "Isoflurane is NOT used for induction of anaesthesia. Its pungent, ethereal odour is highly irritating to the respiratory tract, causing coughing, breath-holding, laryngospasm, and excessive secretions during inhalational induction — making it unsuitable for this purpose. It is used exclusively for maintenance of anaesthesia. All other statements are true: it is a structural isomer of enflurane, has a pungent smell, and causes airway irritation. Halothane, with its pleasant sweet smell, is the preferred agent for inhalational induction."
   },
 
   {
-    q: "Which of the following inhalational agents is a halogenated ether?",
-    opts: [
-      "Chloroethane",
-      "Halothane",
-      "Desflurane",
-      "Chloroform",
-      "Trichloroethylene"
-    ],
+    q: "Which of the following is a halogenated ether?",
+    opts: ["Chloroethane", "Halothane", "Desflurane", "Chloroform", "Trichloroethylene"],
     ans: 2,
-    exp: "Desflurane is a halogenated ether — it contains an ether linkage (C-O-C) and has been halogenated (fluorinated). The halogenated ethers include isoflurane, desflurane, sevoflurane, enflurane, and methoxyflurane. Chloroethane is a halogenated hydrocarbon (no ether linkage). Halothane and chloroform are halogenated hydrocarbons (not ethers). Trichloroethylene is also a halogenated hydrocarbon. The distinction between halogenated ethers and halogenated hydrocarbons is important for classification of inhalational agents."
+    exp: "Desflurane is a halogenated ether — it contains an ether linkage (C-O-C) and has been halogenated (fluorinated). The halogenated ethers include isoflurane, desflurane, sevoflurane, enflurane, and methoxyflurane. Chloroethane, halothane, chloroform, and trichloroethylene are all halogenated hydrocarbons (not ethers) — they lack the ether oxygen linkage. The distinction between halogenated ethers and halogenated hydrocarbons is important for classification."
   },
 
   {
-    q: "Which inhalational anaesthetic agent was historically used to understand and describe the planes of anaesthesia?",
-    opts: [
-      "Methoxyflurane",
-      "Ether",
-      "Chloroform",
-      "Nitrous oxide",
-      "Isoflurane"
-    ],
+    q: "Which of the following was used to understand the plane of anesthesia?",
+    opts: ["Methoxyflurane", "Ether", "Chloroform", "Nitrous oxide", "Isoflurane"],
     ans: 1,
-    exp: "Ether (diethyl ether) was the mother of all inhalational anaesthetics and became the reference standard for describing the planes (stages) of anaesthesia — systematized by Guedel in his 4-stage classification: analgesia, excitement, surgical anaesthesia (with four planes), and medullary depression. Ether's slow, gradual, and highly predictable pharmacokinetics made it ideal for identifying distinct anaesthetic stages. Modern agents achieve surgical anaesthesia rapidly with less distinct staging, making Guedel's classification of mainly historical significance today."
+    exp: "Ether (diethyl ether) was the mother of all inhalational anaesthetics and became the reference standard for describing the planes (stages) of anaesthesia — systematized by Guedel in his 4-stage classification: analgesia, excitement, surgical anaesthesia (with four planes), and medullary depression. Ether’s slow, gradual, and highly predictable pharmacokinetics made it ideal for identifying distinct anaesthetic stages."
   },
 
   {
-    q: "The following is true of halothane EXCEPT:",
-    opts: [
-      "It is used for induction of anaesthesia",
-      "It has a sweet, pleasant smell",
-      "It is stabilised by the addition of glycol",
-      "It has the greatest cardiovascular depressant effect among inhalational agents",
-      "It reduces tidal volume and respiratory rate more greatly than other agents"
-    ],
+    q: "The following is true of Halothane EXCEPT:",
+    opts: ["Used for induction", "Has a sweet smell", "Stabilised by adding glycol", "Has the greatest effect on the heart than any other inhalational agent", "Reduces tidal volume more greatly than other inhalational agents"],
     ans: 2,
-    exp: "Halothane is stabilised by the addition of THYMOL (0.01%), not glycol. Thymol is an antioxidant that prevents oxidative degradation of halothane. It is also stored in dark amber bottles to protect it from light-induced breakdown. All other statements are correct: halothane has a sweet, non-irritating smell (making it suitable for induction, especially in children), produces the most profound cardiovascular depression among inhalational agents (greatest reduction in heart rate and blood pressure), and reduces tidal volume and respiratory rate more markedly than isoflurane or sevoflurane."
+    exp: "Halothane is stabilised by the addition of THYMOL (0.01%), not glycol. Thymol is an antioxidant that prevents oxidative degradation of halothane. It is also stored in dark amber bottles to protect it from light-induced breakdown. All other statements are correct: halothane has a sweet non-irritating smell (making it suitable for induction), produces the most profound cardiovascular depression among inhalational agents, and reduces tidal volume and respiratory rate more markedly than other agents."
   }
 
 ];
@@ -5861,7 +5681,7 @@ const COURSES = [
       { id:"derma_lp", name:"Lichen Planus", questions:DERM_LP_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
       { id:"anaes_all",     name:"All Topics",                           questions:allTopicsQuestions,          available:true, topic:"Anaesthesiology" },
       { id:"anaes_abg",     name:"ABG Quiz Questions",                   questions:abgQuizQuestions,            available:true, topic:"Anaesthesiology" },
-      { id:"anaes_inhale",  name:"Inhalational Revision Questions",      questions:inhalationalRevisionQuestions, available:true, topic:"Anaesthesiology" },
+      { id:"anaes_inhale",  name:"Inhalational Agents Revision Questions",      questions:inhalationalRevisionQuestions, available:true, topic:"Anaesthesiology" },
       { id:"ent", name:"ENT", questions:[], available:false },
       { id:"ophthal", name:"Ophthalmology", questions:[], available:false },
       { id:"ortho_septic", name:"Septic Arthritis", questions:ORTHO_SEPTIC_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
