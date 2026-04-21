@@ -4647,367 +4647,793 @@ const PAST_Q_STRUCTURE = {
   },
 };
 
-const ANAES_Qs = [
+const allTopicsQuestions = [
+
+  // ── INTRODUCTION TO ANAESTHESIA ──────────────────────────────────────────
+
   {
-    q: "Which of the following clinical values, in isolation, meets a recognized guideline threshold for initiating mechanical ventilation?",
+    q: "Which of the following is NOT a goal of general anaesthesia?",
     opts: [
-      "Respiratory rate of 28 breaths per minute in a patient with resolving community-acquired pneumonia",
-      "PaCO2 of 7.5 kPa in a patient with known chronic obstructive pulmonary disease and stable baseline",
-      "PaO2 of 9 kPa in a patient receiving high-flow supplemental oxygen therapy via a non-rebreather mask",
-      "Glasgow Coma Score of 7 in a patient with a closed traumatic brain injury",
-      "Tidal volume of 8 mL/kg measured in a mechanically ventilated post-operative patient"
+      "Analgesia",
+      "Areflexia",
+      "Narcosis",
+      "Anaesthetic reversal",
+      "Muscle relaxation"
     ],
     ans: 3,
-    exp: "A Glasgow Coma Score below 8 is a recognized guideline threshold for initiating mechanical ventilation, reflecting a degree of neurological compromise that places the patient at high risk of airway loss, aspiration, and respiratory failure. The other values in this question do not individually meet threshold: respiratory rate of 28 breaths/min falls below the guideline threshold of >35 breaths/min; a PaCO2 of 7.5 kPa (56 mmHg), while elevated, may represent a patient's acceptable compensated baseline in COPD; a PaO2 of 9 kPa exceeds the threshold of <8 kPa (60 mmHg) on supplemental oxygen; and a tidal volume of 8 mL/kg is above the threshold of <5 mL/kg. Other accepted parameters include PaCO2 >8 kPa, SaO2 <90% on supplemental oxygen, respiratory rate <5 breaths/min, and vital capacity <15 mL/kg."
+    exp: "The four goals of general anaesthesia are narcosis (deep sleep), areflexia (abolition of reflexes), muscle relaxation, and analgesia. Reversal of the anaesthetic agent is part of the emergence phase — it is a phase of the procedure, not a goal of the anaesthetic state itself. All four goals must be achieved simultaneously for safe surgical anaesthesia."
   },
+
   {
-    q: "Type II respiratory failure is distinguished from Type I primarily by:",
+    q: "Which type of anaesthesia produces reversible sensory and motor blockade limited to a circumscribed area of the body without affecting consciousness?",
     opts: [
-      "The presence of bilateral pulmonary infiltrates on chest radiograph with refractory hypoxaemia",
-      "An elevated PaCO2 above 50 mmHg, reflecting primary ventilatory failure rather than gas exchange failure",
-      "A PaO2 below 60 mmHg on room air with a normal or reduced arterial carbon dioxide tension",
-      "Diffuse alveolar damage causing intrapulmonary shunting and V/Q mismatch on perfusion scanning",
-      "Hypoxaemia that responds to supplemental oxygen, indicating a predominant diffusion limitation"
-    ],
-    ans: 1,
-    exp: "Type I (hypoxaemic) respiratory failure is defined by a PaO2 below 60 mmHg with a normal or low PaCO2, typically resulting from V/Q mismatch, shunting, or impaired diffusion — as in pulmonary oedema, pneumonia, ARDS, and pulmonary fibrosis. Type II (hypercapnoeic) respiratory failure is characterized by an elevated PaCO2 above 50 mmHg, indicating ventilatory failure — the lungs cannot move sufficient tidal volume to eliminate CO2, regardless of the underlying aetiology. Causes of Type II include drug overdose, head injury, high cervical spinal cord injury, Guillain-Barré syndrome, poliomyelitis, tetanus, neuromuscular diseases, chest wall trauma, and airway obstruction. This distinction is clinically critical as Type II failure is the primary indication for mechanical ventilatory support."
-  },
-  {
-    q: "A patient presents with ascending flaccid limb weakness over 10 days and is now unable to lift their arms against gravity. Arterial blood gas shows PaCO2 of 7.8 kPa. Which of the following is the most appropriate underlying diagnosis accounting for this patient's ventilatory failure?",
-    opts: [
-      "Pulmonary oedema causing alveolar flooding and impaired alveolar gas exchange",
-      "Pneumonia causing ventilation-perfusion mismatch and progressive hypoxaemia",
-      "Pulmonary fibrosis reducing diffusing capacity and alveolar surface area for gas transfer",
-      "Adult respiratory distress syndrome causing diffuse alveolar damage and intrapulmonary shunting",
-      "Guillain-Barré syndrome causing respiratory muscle paralysis and alveolar hypoventilation"
-    ],
-    ans: 4,
-    exp: "The clinical picture of ascending flaccid paralysis over days is characteristic of Guillain-Barré syndrome (GBS), an immune-mediated polyneuropathy. When the paralysis extends to the intercostal muscles and diaphragm, alveolar ventilation becomes inadequate — CO2 accumulates, producing Type II (hypercapnoeic) respiratory failure, as reflected by the PaCO2 of 7.8 kPa. GBS is explicitly listed among the neuromuscular causes of Type II respiratory failure and is an indication for mechanical ventilation. Pulmonary oedema, pneumonia, pulmonary fibrosis, and ARDS all cause Type I (hypoxaemic) failure through parenchymal mechanisms, not through loss of respiratory muscle function. The key distinguishing feature is that the patient's lungs themselves are normal — the failure lies in the neuromuscular pump driving them."
-  },
-  {
-    q: "A patient with severe generalized tetanus presents with opisthotonos, autonomic instability, and repeated laryngospasm. According to the Ablett classification, which score threshold constitutes an indication for mechanical ventilation?",
-    opts: [
-      "Ablett score 1, representing mild tetanus with trismus and no significant dysphagia",
-      "Ablett score 2, representing moderate tetanus with dysphagia and generalized rigidity",
-      "Ablett score 3 or 4, representing severe tetanus with autonomic disturbance and life-threatening spasms",
-      "Ablett score 5, representing the most severe tetanus with refractory cardiovascular collapse",
-      "Any Ablett score in a patient with a fever above 38.5°C and a history of unvaccinated wound contamination"
-    ],
-    ans: 2,
-    exp: "Severe tetanus — classified as Ablett score 3 or 4 — is a recognized indication for mechanical ventilation. Ablett score 3 describes severe tetanus with dysphagia, opisthotonus, and tachycardia; score 4 adds autonomic dysfunction including labile blood pressure and severe tachycardia. At these levels, the risk of laryngospasm, respiratory arrest, and aspiration is high and the airway cannot be safely managed without intubation and ventilatory support. Ablett scores 1 and 2 represent milder disease that may be managed conservatively. There is no Ablett score 5; the classification runs to 4. The decision to ventilate in tetanus is clinical, guided by the severity grade and trajectory of disease — waiting for cardiorespiratory arrest is not appropriate at Ablett 3 or 4."
-  },
-  {
-    q: "Which of the following post-operative scenarios is a recognized evidence-based indication for elective mechanical ventilation following surgery?",
-    opts: [
-      "Coronary artery bypass graft surgery in a patient with pre-existing pulmonary oedema and moderate COPD",
-      "Laparoscopic appendicectomy in a previously fit young adult with no cardiopulmonary comorbidities",
-      "Inguinal hernia repair under spinal anaesthesia with an uneventful intraoperative course",
-      "Total knee arthroplasty under regional anaesthesia in an otherwise healthy middle-aged patient",
-      "Cataract extraction under topical anaesthesia in a diabetic patient with normal baseline spirometry"
-    ],
-    ans: 0,
-    exp: "Evidence supports elective post-operative mechanical ventilation following coronary artery bypass graft (CABG) surgery, particularly in patients with underlying COPD or pulmonary oedema — both are listed as conditions that increase the benefit of elective ventilation. Other recognized high-risk procedures include lung resection surgery, gastroplasty, and thoracoabdominal aortic procedures. Phrenic nerve injury — a recognized complication of cardiac surgery — can itself compromise ventilation post-operatively. The key principle is that patients at high risk of pulmonary complications or with pre-existing cardiopulmonary compromise benefit from planned ventilatory support rather than emergency reinstitution of ventilation after extubation failure. The other procedures listed involve minor or regional techniques in patients without high-risk features, making elective post-operative ventilation unnecessary."
-  },
-  {
-    q: "The Meyer-Overton hypothesis proposes that the potency of an inhalational anaesthetic agent is determined primarily by:",
-    opts: [
-      "Its molecular weight and the rate at which it diffuses across the alveolar-capillary membrane",
-      "Its blood-gas partition coefficient and the speed at which it equilibrates between alveoli and blood",
-      "Its rate of hepatic metabolism and the accumulation of active metabolites in neural tissue",
-      "Its oil-gas partition coefficient and the extent to which it dissolves in neuronal lipid membranes",
-      "Its minimum alveolar concentration and the number of GABA-B receptor subunits it occupies at steady state"
+      "General anaesthesia",
+      "Neuroaxial block",
+      "Regional anaesthesia",
+      "Local anaesthesia",
+      "Peripheral nerve block"
     ],
     ans: 3,
-    exp: "The Meyer-Overton hypothesis, proposed by Meyer and Overton, states that anaesthetic potency correlates directly with lipid solubility as measured by the oil-gas partition coefficient — the higher the oil-gas coefficient, the more the agent dissolves into lipid-rich neuronal membranes, and the more potent the anaesthetic effect. This principle explains why agents with high lipid solubility require lower alveolar concentrations (lower MAC) to produce anaesthesia. However, the Meyer-Overton hypothesis is incomplete: it does not explain muscle relaxation, and subsequent research identified that most halogenated agents produce anaesthesia by potentiating inhibitory GABA-B receptors, while nitrous oxide and xenon act through NMDA receptor inhibition — mechanisms not predicted by lipid solubility alone. The blood-gas coefficient governs speed of induction, not potency."
+    exp: "Local anaesthesia affects only a localized, circumscribed area of the body and does not impair consciousness or systemic function. General anaesthesia affects all body systems including consciousness. Regional anaesthesia (which includes neuroaxial blocks and peripheral nerve blocks) affects broader anatomical regions such as an entire limb or the lower half of the body. Local and regional anaesthesia both use local anaesthetic agents but differ in the scale and location of blockade."
   },
+
   {
-    q: "Minimum Alveolar Concentration (MAC) is best defined as:",
+    q: "What is the correct sequence of phases in the administration of general anaesthesia?",
     opts: [
-      "The inspired concentration that produces unconsciousness in 95% of unpremedicated adult patients",
-      "The alveolar concentration that prevents movement in 50% of patients in response to a standard surgical stimulus",
-      "The end-tidal concentration that suppresses autonomic responses to incision in half of all patients tested",
-      "The blood concentration of an agent that corresponds to loss of verbal contact in the majority of patients",
-      "The partial pressure in the alveoli that saturates all available GABA-B receptor binding sites within the CNS"
-    ],
-    ans: 1,
-    exp: "MAC — minimum alveolar concentration — is the standard measure of inhalational anaesthetic potency. It is defined as the alveolar concentration that prevents a purposeful motor response (movement) in 50% of patients exposed to a standardised noxious stimulus, typically a surgical skin incision. Because MAC is measured at steady state (equilibrium between alveolar and brain partial pressures), the alveolar concentration serves as a reliable surrogate for the brain tissue concentration. MAC is an ED50 measure — not an ED95 — so it deliberately represents only 50% of patients. The MAC values of commonly used agents are: halothane 0.75%, sevoflurane 2.0%, isoflurane 1.22%, desflurane 6.0%, and nitrous oxide 105%. These values form the basis for comparing agent potency and guiding clinical dosing."
-  },
-  {
-    q: "Which of the following correctly ranks the following inhalational agents from lowest to highest MAC value?",
-    opts: [
-      "Nitrous oxide < desflurane < isoflurane < sevoflurane < halothane",
-      "Sevoflurane < isoflurane < halothane < desflurane < nitrous oxide",
-      "Halothane < isoflurane < sevoflurane < desflurane < nitrous oxide",
-      "Halothane < sevoflurane < desflurane < isoflurane < nitrous oxide",
-      "Halothane < isoflurane < desflurane < sevoflurane < nitrous oxide"
-    ],
-    ans: 2,
-    exp: "The MAC values of these agents are: halothane 0.75%, isoflurane 1.22%, sevoflurane 2.0%, desflurane 6.0%, and nitrous oxide 105%. Ranked from lowest to highest MAC: halothane (0.75%) < isoflurane (1.22%) < sevoflurane (2.0%) < desflurane (6.0%) < nitrous oxide (105%). A lower MAC indicates greater potency, as a smaller alveolar concentration is required to achieve the anaesthetic endpoint. Halothane is therefore the most potent among this group. Nitrous oxide has the highest MAC — exceeding 100% — meaning it cannot produce surgical anaesthesia at atmospheric pressure as a single agent; it is always used in combination. Understanding MAC rankings is clinically useful when selecting agents and calculating effective doses in combined anaesthesia."
-  },
-  {
-    q: "Which of the following clinical conditions is associated with a DECREASE in the minimum alveolar concentration of an inhalational anaesthetic agent?",
-    opts: [
-      "Hypothermia, reducing cerebral metabolic rate and enhancing sensitivity to anaesthetic agents",
-      "Hyperthermia, increasing neural activity and elevating the anaesthetic requirement per unit concentration",
-      "Thyrotoxicosis, increasing cerebral blood flow and reducing anaesthetic partial pressure at receptors",
-      "Chronic alcohol use, inducing hepatic enzyme activity and accelerating anaesthetic agent metabolism",
-      "Severe anxiety, increasing central noradrenergic tone and raising the threshold for anaesthetic effect"
+      "Induction → Maintenance → Muscle relaxation → Emergence",
+      "Maintenance → Induction → Muscle relaxation → Emergence",
+      "Induction → Emergence → Muscle relaxation → Maintenance",
+      "Muscle relaxation → Induction → Maintenance → Emergence",
+      "Maintenance → Muscle relaxation → Induction → Emergence"
     ],
     ans: 0,
-    exp: "Hypothermia decreases MAC — lower body temperature reduces cerebral metabolic rate and neural activity, making the brain more susceptible to anaesthetic agents, so a lower alveolar concentration achieves the same effect. Other conditions that decrease MAC include hyponatraemia, hypothyroidism, hypovolaemia/hypotension, hypoxia, acute alcohol use, and administration of CNS depressants such as opioids, benzodiazepines, barbiturates, and local anaesthetics. Conditions that increase MAC include hyperthermia, hyperthyroidism/thyrotoxicosis, chronic alcohol use, chronic CNS stimulant abuse, and severe anxiety — all of which increase CNS excitability or reduce the effective concentration at target receptors. Confusing the directions of these factors is a common examination error; the clinical implication is that pre-existing medical conditions and drug use significantly alter anaesthetic depth at standard agent concentrations."
+    exp: "General anaesthesia proceeds through four sequential phases: Induction (rendering the patient unconscious), Maintenance (sustaining the anaesthetic depth required for surgery), Muscle relaxation (facilitating surgical access and ventilation), and Emergence (reversal of anaesthetic agents and return to consciousness). Understanding this sequence is fundamental to planning anaesthetic management and anticipating the pharmacological needs at each stage."
   },
+
+  // ── INDICATIONS FOR MECHANICAL VENTILATION ────────────────────────────────
+
   {
-    q: "Which property of an inhalational anaesthetic agent most directly determines the speed of both induction and recovery from anaesthesia?",
+    q: "Below which Glasgow Coma Score is mechanical ventilation indicated due to loss of airway protection?",
     opts: [
-      "The oil-gas partition coefficient, which determines the agent's affinity for neuronal lipid membranes",
-      "The minimum alveolar concentration, which determines the steady-state alveolar partial pressure required",
-      "The hepatic extraction ratio, which determines how rapidly the agent is cleared from systemic circulation",
-      "The molecular weight of the agent, which determines its rate of diffusion across the alveolar membrane",
-      "The blood-gas partition coefficient, which governs the rate of equilibration between alveolar gas and blood"
+      "Less than 12",
+      "Less than 10",
+      "Less than 8",
+      "Less than 6",
+      "Less than 4"
     ],
-    ans: 4,
-    exp: "The blood-gas partition coefficient determines how rapidly an agent moves between alveolar gas and blood — and consequently how quickly brain partial pressure rises toward equilibrium. An agent with a low blood-gas coefficient is poorly soluble in blood, so very little agent is required to saturate the blood and drive the partial pressure upward; alveolar and brain concentrations rise quickly, producing fast induction and rapid recovery on discontinuation. Agents with high blood-gas coefficients (e.g., older agents like ether) are highly soluble in blood, which acts as a large reservoir, slowing the rise in partial pressure and prolonging both induction and recovery. For example, desflurane and nitrous oxide have low blood-gas coefficients and are associated with rapid emergence. The oil-gas coefficient governs potency (MAC), not speed. The hepatic extraction ratio is relevant to IV agents, not inhalational ones excreted primarily via the lungs."
+    ans: 2,
+    exp: "A GCS of less than 8 indicates severely impaired consciousness and loss of protective airway reflexes (gag, cough, swallow), placing the patient at high risk of airway obstruction and aspiration. This threshold is widely used as the indication for definitive airway management, including endotracheal intubation and mechanical ventilation. It applies across aetiologies — traumatic brain injury, stroke, encephalopathy, and overdose."
   },
+
   {
-    q: "Which of the following correctly identifies a property unique to halothane compared with isoflurane?",
+    q: "Type II respiratory failure is characterized by:",
     opts: [
-      "Halothane has a pungent smell that limits its use for inhalational induction in paediatric patients",
-      "Halothane produces the greatest degree of cardiovascular depression of all currently used inhalational agents",
-      "Halothane is an isomer of enflurane and shares identical minimum alveolar concentration values",
-      "Halothane is photostable and requires no stabilizer during storage under standard theatre conditions",
-      "Halothane causes minimal tidal volume reduction, making it preferable in patients with restrictive lung disease"
+      "PaO₂ <60 mmHg with a normal or low PaCO₂",
+      "PaCO₂ >50 mmHg resulting from inadequate ventilation",
+      "SaO₂ <90% despite supplemental oxygen therapy",
+      "Bilateral pulmonary infiltrates causing refractory hypoxaemia",
+      "Increased oxygen demand exceeding the lungs' delivery capacity"
     ],
     ans: 1,
-    exp: "Halothane has the greatest effect on the cardiovascular system of all inhalational agents in current use — it produces more profound myocardial depression than isoflurane, sevoflurane, or desflurane. It also reduces tidal volume and respiratory rate more markedly than other agents. Halothane's pleasant sweet smell makes it well-tolerated for inhalational induction, particularly in children — the opposite of option A. It is isoflurane that is pungent and unsuitable for induction. Isoflurane (not halothane) is the isomer of enflurane. Halothane is photosensitive — it is stored in dark amber bottles with thymol added as a stabilizer to prevent decomposition in light; option D is therefore false. These distinguishing features of halothane remain high-yield examination content in anaesthesia pharmacology."
+    exp: "Type II (hypercapnoeic) respiratory failure results from ventilatory failure — the patient cannot breathe effectively enough to eliminate CO₂, causing PaCO₂ to rise above 50 mmHg. This is distinct from Type I (hypoxaemic) failure, where PaO₂ falls below 60 mmHg due to impaired gas exchange rather than ventilatory drive. Causes of Type II include drug overdose, high cervical spine injury, Guillain-Barré syndrome, tetanus, neuromuscular diseases, and chest wall trauma."
   },
+
   {
-    q: "Unlike most halogenated inhalational anaesthetic agents which act through GABA-B receptors, nitrous oxide and xenon produce anaesthesia primarily by:",
+    q: "Which of the following is a cause of Type I (hypoxaemic) respiratory failure?",
     opts: [
-      "Potentiating glycine receptor-mediated inhibition in the spinal cord dorsal horn to suppress nociception",
-      "Blocking voltage-gated sodium channels in both peripheral nerves and brainstem reticular formations",
-      "Enhancing serotonergic descending inhibitory pathways via 5-HT3 receptor activation in the raphe nuclei",
-      "Inhibiting N-methyl-D-aspartate receptors, thereby reducing excitatory glutamatergic neurotransmission",
-      "Activating mu-opioid receptors in the periaqueductal grey matter, producing analgesia and sedation"
+      "Guillain-Barré syndrome",
+      "Drug overdose causing respiratory depression",
+      "Acute respiratory distress syndrome",
+      "High cervical spine injury",
+      "Severe tetanus with muscle rigidity"
+    ],
+    ans: 2,
+    exp: "Type I (hypoxaemic) respiratory failure results from conditions that impair alveolar gas exchange, causing inadequate oxygenation despite adequate ventilatory effort. ARDS, pulmonary oedema, pneumonia, and pulmonary fibrosis are classic causes. The other options — Guillain-Barré syndrome, drug overdose, high cervical spine injury, and severe tetanus — impair the drive or mechanics of ventilation, producing Type II (hypercapnoeic) failure."
+  },
+
+  {
+    q: "Mechanical ventilation is indicated in tetanus at which Ablett classification grade?",
+    opts: [
+      "Grade 1 or 2",
+      "Grade 2 only",
+      "Grade 3 or 4",
+      "Grade 4 only",
+      "Any grade with evidence of trismus"
+    ],
+    ans: 2,
+    exp: "Ablett grades 3 and 4 represent severe and very severe tetanus, characterized by prolonged generalized spasms, significant autonomic dysfunction, and high risk of respiratory failure due to laryngospasm or sustained chest wall rigidity. These patients require mechanical ventilation and sedation in an ICU. Grades 1 and 2 are mild-to-moderate forms that can often be managed without intubation, with monitoring and supportive care."
+  },
+
+  {
+    q: "Which of the following spirometric thresholds is an indication for mechanical ventilation?",
+    opts: [
+      "Tidal volume <10 ml/kg or vital capacity <20 ml/kg",
+      "Tidal volume <8 ml/kg or vital capacity <18 ml/kg",
+      "Tidal volume <5 ml/kg or vital capacity <15 ml/kg",
+      "Tidal volume <3 ml/kg or vital capacity <12 ml/kg",
+      "Tidal volume <7 ml/kg or vital capacity <10 ml/kg"
+    ],
+    ans: 2,
+    exp: "A tidal volume below 5 ml/kg or vital capacity below 15 ml/kg indicates critically reduced respiratory reserve, insufficient to maintain adequate alveolar ventilation. These thresholds are particularly relevant in neuromuscular disorders such as Guillain-Barré syndrome and myasthenic crisis, where serial spirometry guides the timing of intubation before frank respiratory failure occurs."
+  },
+
+  {
+    q: "Obstructive sleep apnoea requiring mechanical ventilatory support falls under which indication category?",
+    opts: [
+      "Neuromuscular disorders",
+      "Severe neurological disorders",
+      "Postoperative care",
+      "Airway obstruction",
+      "Type I respiratory failure"
     ],
     ans: 3,
-    exp: "The majority of halogenated inhalational agents — isoflurane, sevoflurane, desflurane, halothane, enflurane — produce anaesthesia primarily by potentiating GABA-B (gamma-aminobutyric acid type B) receptor-mediated inhibition, enhancing chloride channel opening and hyperpolarizing neurons. Some also act at the myoneural junction to cause a degree of muscle relaxation, particularly in younger patients. Nitrous oxide and xenon are exceptions: they inhibit NMDA (N-methyl-D-aspartate) receptors, blocking excitatory glutamatergic neurotransmission — the same mechanism exploited by ketamine. This mechanistic distinction has clinical relevance, as it explains why nitrous oxide lacks the muscle relaxant properties of halogenated agents and why its analgesic profile differs. Understanding this dual mechanism is essential for interpreting adjunctive anaesthetic strategies."
+    exp: "Obstructive sleep apnoea, along with COPD, acute epiglottitis, severe asthma, cystic fibrosis, and upper airway obstruction, falls under the category of airway obstruction as an indication for mechanical ventilatory support. In this group, the primary problem is impaired airflow rather than ventilatory failure or gas exchange impairment, and management focuses on maintaining airway patency."
   },
+
   {
-    q: "Which of the following best describes the four core pharmacological goals of general anaesthesia?",
+    q: "Phrenic nerve injury following cardiac surgery is an indication for mechanical ventilation under which category?",
     opts: [
-      "Narcosis, areflexia, muscle relaxation, and analgesia",
-      "Sedation, amnesia, neuromuscular blockade, and cardiovascular stabilization",
-      "Unconsciousness, sympathetic suppression, analgesia, and paralysis of all voluntary muscles",
-      "Analgesia, amnesia, autonomic blockade, and maintenance of protective airway reflexes",
-      "Narcosis, anxiolysis, muscle relaxation, and suppression of the hypothalamic stress response"
-    ],
-    ans: 0,
-    exp: "General anaesthesia aims to achieve four pharmacological states simultaneously: narcosis (deep sleep/unconsciousness), areflexia (suppression of reflexes to noxious stimuli), muscle relaxation (facilitating surgical access and preventing movement), and analgesia (abolition of pain perception). These four goals are rarely achieved by a single agent — modern balanced anaesthesia uses combinations of induction agents, inhalational or IV maintenance agents, neuromuscular blocking drugs, and analgesics to achieve each component independently. Sedation and amnesia are components of narcosis rather than separate goals. Cardiovascular stabilization is an anaesthetic management objective, not a pharmacological goal per se. Maintaining protective airway reflexes is the opposite of what general anaesthesia achieves — airway reflexes are typically ablated, necessitating airway management."
-  },
-  {
-    q: "Muscle relaxants used in general anaesthesia are classified into two main groups based on their mechanism of action at the neuromuscular junction. Which of the following correctly identifies these two groups?",
-    opts: [
-      "Pre-synaptic and post-synaptic blockers, differing by their site of action on the motor end plate",
-      "Aminosteroid and benzylisoquinolinium agents, classified by chemical structure and route of metabolism",
-      "Depolarizing and non-depolarizing agents, differing by their effect on the post-junctional membrane",
-      "Competitive and non-competitive antagonists, differing by their reversibility at nicotinic receptors",
-      "Short-acting and long-acting agents, classified primarily by their duration of neuromuscular blockade"
+      "Neuromuscular disorders",
+      "Airway obstruction",
+      "Postoperative care",
+      "Type II respiratory failure",
+      "Severe neurological disorders"
     ],
     ans: 2,
-    exp: "Neuromuscular blocking agents are classified into depolarizing and non-depolarizing agents based on their mechanism at the post-junctional nicotinic acetylcholine receptor. Depolarizing agents — such as suxamethonium (succinylcholine) — bind to the receptor and activate it, producing an initial depolarization seen clinically as muscle fasciculations, followed by a flaccid paralysis because sustained receptor occupancy prevents repolarization. Non-depolarizing agents — such as vecuronium, rocuronium, atracurium, and pancuronium — competitively block acetylcholine from binding without activating the receptor, producing a clean non-fasciculating paralysis that is reversible with anticholinesterases. This classification has direct clinical implications: depolarizing agents are not reversible in the same way as non-depolarizing agents, and each class has distinct adverse effect profiles."
+    exp: "Phrenic nerve injury — a known complication of cardiac surgery — impairs ipsilateral diaphragmatic function and can cause significant respiratory embarrassment, particularly in patients with underlying pulmonary disease. This falls under the postoperative care indication for mechanical ventilation. Evidence supports elective postoperative ventilation for high-risk procedures including coronary artery bypass grafting, lung resection, gastroplasty, and thoracoabdominal aortic surgery."
   },
+
+  // ── LOCAL ANAESTHESIA ─────────────────────────────────────────────────────
+
   {
-    q: "Which of the following correctly pairs two local anaesthetic agents with their chemical class?",
+    q: "Which of the following local anaesthetics is classified as an amide?",
     opts: [
-      "Lidocaine — ester; bupivacaine — ester",
-      "Cocaine — amide; procaine — ester",
-      "Tetracaine — amide; benzocaine — ester",
-      "Bupivacaine — ester; mepivacaine — ester",
-      "Lidocaine — amide; cocaine — ester"
-    ],
-    ans: 4,
-    exp: "Local anaesthetics are classified as esters or amides based on the chemical linkage between the aromatic and amine ends of the molecule. Amides include lidocaine, bupivacaine, mepivacaine, cincocaine, and etidocaine — a useful mnemonic is that amide agents have two letter 'i' sounds in their names (lidocaine, bupivacaine). Esters include cocaine, procaine, chloroprocaine, tetracaine, and benzocaine. Lidocaine is an amide; cocaine is an ester — making option E correct. Ester-linked agents are hydrolysed by plasma cholinesterase with a short half-life of 1–8 minutes, and allergic reactions are more common with ester agents due to their metabolite para-aminobenzoic acid. Amide agents are metabolised by hepatic microsomal enzymes and are generally associated with fewer allergic reactions."
-  },
-  {
-    q: "Local anaesthetic agents block sodium channels and produce differential blockade of peripheral nerve fibers. Which sequence correctly describes the order in which fiber types are blocked?",
-    opts: [
-      "Motor fibers blocked first, followed by sensory fibers, then autonomic fibers blocked last",
-      "Autonomic fibers blocked first, followed by sensory fibers, then motor fibers blocked last",
-      "Sensory fibers blocked first, followed by autonomic fibers, then motor fibers blocked last",
-      "Large myelinated A-alpha fibers blocked first, followed by small unmyelinated C fibers last",
-      "All fiber types are blocked simultaneously, as sodium channel density is uniform across fiber types"
-    ],
-    ans: 1,
-    exp: "Local anaesthetics block peripheral nerve fibers in a predictable sequence based on fiber diameter and myelination: smaller fibers are blocked before larger fibers. The clinical sequence is: autonomic (A-delta and B fibers) → sensory (A-delta and C fibers) → motor (A-alpha fibers), often remembered by the acronym ANSEM. This explains why a patient under spinal anaesthesia loses sympathetic tone first (producing vasodilation and potential hypotension), then loses pain sensation, then finally loses motor function — all before the block sets in fully. Conversely, recovery occurs in reverse: motor function returns first, then sensory, then autonomic tone last. The clinical significance of this sequence includes anticipating hypotension during neuraxial blocks and explaining why a patient may feel pressure but not pain during surgical procedures."
-  },
-  {
-    q: "A 48-year-old man undergoing an awake brachial plexus nerve block develops restlessness, perioral tingling, and auditory disturbance, then abruptly begins generalized tonic-clonic seizures. The most likely cause of this presentation is:",
-    opts: [
-      "Systemic absorption of local anaesthetic agent producing progressive central nervous system toxicity",
-      "Immediate IgE-mediated anaphylaxis to the amide local anaesthetic agent used for the block",
-      "Vasovagal syncope with tonic posturing precipitated by pain and anxiety during needle insertion",
-      "Hypertensive emergency from systemic absorption of the co-administered adrenaline vasoconstrictor",
-      "Direct neurotoxicity from inadvertent intraneural injection of the agent into the brachial plexus sheath"
-    ],
-    ans: 0,
-    exp: "The described sequence — restlessness, perioral tingling, auditory disturbance, then seizures — is the classic progression of local anaesthetic systemic toxicity (LAST) due to CNS involvement. Local anaesthetics cause membrane stabilization in excitable tissues; at toxic plasma concentrations, the CNS progresses from cortical excitation (restlessness, tremors, seizures) to depression (coma). Toxicity occurs when large doses are administered, when there is inadvertent intravascular injection, or when injection is into highly vascular tissue — the brachial plexus region has significant vascularity. IgE-mediated anaphylaxis presents with urticaria, bronchospasm, and cardiovascular collapse rather than a CNS excitatory sequence. Vasovagal syncope causes bradycardia and pallor without prodromal neurological symptoms. Adrenaline toxicity causes tachycardia and hypertension, not a seizure progression."
-  },
-  {
-    q: "Which of the following correctly states the maximum safe dose of lidocaine for local infiltration anaesthesia?",
-    opts: [
-      "3 mg/kg without adrenaline to a maximum of 500 mg; 7 mg/kg with adrenaline to a maximum of 200 mg",
-      "7 mg/kg without adrenaline to a maximum of 200 mg; 3 mg/kg with adrenaline to a maximum of 500 mg",
-      "5 mg/kg without adrenaline to a maximum of 300 mg; 9 mg/kg with adrenaline to a maximum of 600 mg",
-      "3 mg/kg without adrenaline to a maximum of 200 mg; 7 mg/kg with adrenaline to a maximum of 500 mg",
-      "5 mg/kg without adrenaline to a maximum of 400 mg; 7 mg/kg with adrenaline to a maximum of 600 mg"
+      "Cocaine",
+      "Procaine",
+      "Tetracaine",
+      "Bupivacaine",
+      "Benzocaine"
     ],
     ans: 3,
-    exp: "The maximum safe dose of lidocaine for infiltration anaesthesia is 3 mg/kg without adrenaline, up to a maximum of 200 mg; and 7 mg/kg with adrenaline, up to a maximum of 500 mg. The vasoconstrictor adrenaline (epinephrine) reduces the rate of systemic absorption by causing local vasoconstriction, thereby permitting a significantly higher total dose and prolonging the duration of action from approximately 60 minutes to 90–120 minutes. Understanding these dose limits is clinically essential to prevent local anaesthetic systemic toxicity. Option A reverses the values — a common examination trap. Lidocaine is the most widely used amide local anaesthetic; its various concentrations serve different purposes: 0.25–0.5% for infiltration, 1.5–2% with adrenaline for nerve blocks, 4% for topical mucosal use, and 5% in dextrose for subarachnoid block."
+    exp: "Bupivacaine is an amide-linked local anaesthetic. The amides include lidocaine, bupivacaine, mepivacaine, cincocaine, and etidocaine. A useful memory aid: amide names contain two letter 'i's before '-caine' (bup-i-vaca-i-ne, l-i-doca-i-ne). The esters — procaine, tetracaine, cocaine, benzocaine, and chloroprocaine — are hydrolyzed by plasma cholinesterase with a half-life of 1–8 minutes and are associated with higher rates of allergic reactions than amides."
   },
+
   {
-    q: "Which of the following correctly identifies a pharmacological property that distinguishes bupivacaine from lidocaine?",
+    q: "The mechanism of action of local anaesthetics involves:",
     opts: [
-      "Bupivacaine has a faster onset than lidocaine and a shorter duration, making it preferred for day-case procedures",
-      "Bupivacaine undergoes rapid hydrolysis by plasma cholinesterase, unlike lidocaine which requires hepatic metabolism",
-      "Bupivacaine is approximately four times more potent than lidocaine and carries significantly greater cardiotoxicity",
-      "Bupivacaine is classified as an ester-linked local anaesthetic with higher rates of plasma cholinesterase hydrolysis",
-      "Bupivacaine has an onset of action of 2–3 minutes and a maximum duration of 4 hours across all nerve block types"
+      "Potentiation of GABA receptors at central synapses",
+      "Blockade of voltage-gated calcium channels in smooth muscle",
+      "Inhibition of voltage-gated sodium channels in excitable tissue membranes",
+      "Activation of potassium channels causing membrane hyperpolarization",
+      "Competitive antagonism at nicotinic acetylcholine receptors"
     ],
     ans: 2,
-    exp: "Bupivacaine is approximately four times more potent than lidocaine on a concentration basis and is significantly more cardiogenic — meaning it has greater cardiac toxicity at toxic plasma concentrations compared with lidocaine. Bupivacaine binds cardiac sodium channels with much greater affinity and slower dissociation, producing profound cardiac depression and ventricular arrhythmias that are difficult to reverse. Its onset of action is approximately 15 minutes — slower than lidocaine. However, its duration of action is markedly prolonged, up to 25 hours after peripheral nerve block, making it valuable for post-operative analgesia. Bupivacaine, like lidocaine, is an amide-linked local anaesthetic metabolized in the liver — option B incorrectly classifies it as an ester. The maximum dose of bupivacaine is 2 mg/kg, and it is used at concentrations of 0.25–0.5% for spinal and peripheral nerve block anaesthesia."
+    exp: "Local anaesthetics act by binding to and blocking voltage-gated sodium channels in the membranes of excitable tissues — including peripheral nerves, smooth muscle, striated muscle, and blood vessel walls. By preventing sodium influx, they inhibit membrane depolarization and block the propagation of action potentials. This produces a reversible, localized loss of sensory and motor function."
   },
+
   {
-    q: "A 55-year-old man undergoing elective inguinal hernia repair under local infiltration anaesthesia develops sudden bradycardia, profound hypotension, and proceeds to cardiac arrest 10 minutes after a large-volume injection of local anaesthetic. Which agent is most likely responsible for this degree of cardiovascular toxicity?",
+    q: "The correct order of nerve fibre blockade by local anaesthetics from first to last is:",
     opts: [
-      "Cocaine, which causes sympathetic stimulation and vasoconstriction at systemic doses",
-      "Procaine, which undergoes slow plasma cholinesterase hydrolysis, prolonging systemic exposure",
-      "Lidocaine, which blocks cardiac sodium channels at standard clinical doses used for infiltration",
-      "Tetracaine, which has a prolonged systemic half-life due to impaired plasma cholinesterase activity",
-      "Bupivacaine, whose greater cardiotoxicity compared with other local anaesthetics makes refractory arrest likely"
+      "Motor → Sensory → Autonomic",
+      "Sensory → Motor → Autonomic",
+      "Autonomic → Sensory → Motor",
+      "Autonomic → Motor → Sensory",
+      "Sensory → Autonomic → Motor"
     ],
-    ans: 4,
-    exp: "Bupivacaine is explicitly described as more cardiogenic (more cardiotoxic) than lidocaine. At toxic systemic concentrations — which can occur after inadvertent intravascular injection or excessive dosing — bupivacaine produces profound cardiac sodium channel blockade with slow dissociation kinetics, leading to ventricular arrhythmias and cardiac arrest that is notoriously resistant to standard resuscitation. This property has prompted the development of levobupivacaine and ropivacaine as safer alternatives. Cocaine causes cardiovascular stimulation at systemic doses (tachycardia, hypertension) rather than bradycardia and arrest. Procaine and tetracaine are ester agents with moderate cardiotoxicity profiles, not preferentially associated with refractory cardiac arrest. Lidocaine, though a cardiac membrane stabilizer, has a much wider cardiovascular safety margin at routine infiltration doses. The treatment of bupivacaine-induced cardiac arrest includes intralipid (lipid emulsion) therapy."
+    ans: 2,
+    exp: "Local anaesthetics block small fibres before large fibres, following the ANSEM sequence: Autonomic (C-fibres, smallest) → Sensory (Aδ fibres) → Motor (Aα fibres, largest). This explains the typical patient experience during regional blocks: first warmth and vasodilation (autonomic blockade), then loss of pain and temperature sensation, and finally loss of motor power. Recovery occurs in reverse order — motor function returns before sensation."
   },
+
   {
-    q: "Which of the following correctly states the recommended compression rate and depth for high-quality adult cardiopulmonary resuscitation?",
+    q: "The maximum safe dose of lidocaine administered WITHOUT adrenaline is:",
     opts: [
-      "Rate 80–100 compressions per minute and depth of at least 4 centimetres with full chest recoil",
-      "Rate 100–120 compressions per minute and depth of at least 5 centimetres with full chest recoil",
-      "Rate 120–140 compressions per minute and depth of at least 6 centimetres with full chest recoil",
-      "Rate 60–80 compressions per minute and depth of at least 5 centimetres with full chest recoil",
-      "Rate 100–120 compressions per minute and depth of at least 3 centimetres with full chest recoil"
+      "2 mg/kg with a ceiling of 150 mg",
+      "3 mg/kg with a ceiling of 200 mg",
+      "5 mg/kg with a ceiling of 300 mg",
+      "7 mg/kg with a ceiling of 500 mg",
+      "10 mg/kg with a ceiling of 600 mg"
     ],
     ans: 1,
-    exp: "High-quality CPR requires compressions at a rate of 100–120 per minute and a depth of at least 5 centimetres (approximately 2 inches) in adults. Both parameters are critical: rates below 100 generate insufficient cardiac output; rates exceeding 120 reduce diastolic filling time and compromise coronary perfusion. Depth must be at least 5 cm — inadequate depth generates negligible perfusion pressure. Full chest recoil between compressions must be allowed to enable venous return to the heart; leaning on the chest during the release phase impedes refill and reduces effectiveness. Interruptions to compressions must be minimized to less than 10 seconds. Excessive ventilation should also be avoided as it increases intrathoracic pressure and reduces cardiac output. The sequence in BLS begins with compressions — CAB (Compressions, Airway, Breathing) — not the older ABC sequence."
+    exp: "Without adrenaline, lidocaine's maximum safe dose is 3 mg/kg, not exceeding 200 mg. Adding adrenaline (a vasoconstrictor) slows systemic absorption from the injection site, raising the maximum permissible dose to 7 mg/kg (up to 500 mg). Adrenaline also prolongs the duration of lidocaine's action from approximately 60 minutes to 90–120 minutes. Exceeding maximum doses risks progressive CNS toxicity (convulsions, coma) and cardiovascular collapse."
   },
+
   {
-    q: "In the management of cardiac arrest, which drug is administered first, and at what dose and frequency?",
+    q: "Bupivacaine is approximately how many times more potent than lidocaine?",
     opts: [
-      "Epinephrine 1 mg IV (1:10,000), repeated every 3–5 minutes throughout the resuscitation attempt",
-      "Amiodarone 300 mg IV bolus, repeated as 150 mg for persistent shockable rhythm after further defibrillation",
-      "Lidocaine 1–1.5 mg/kg IV, repeated at 0.5–0.75 mg/kg as an alternative for refractory ventricular fibrillation",
-      "Magnesium sulphate 2 g slow IV push, administered for torsades de pointes or suspected hypomagnesaemia",
-      "Atropine 0.5 mg IV, repeated every 3–5 minutes to a maximum of 3 mg for pulseless electrical activity"
-    ],
-    ans: 0,
-    exp: "Epinephrine (adrenaline) is the first drug given in cardiac arrest and applies to all rhythms — shockable (VF/pVT) and non-shockable (PEA/asystole) alike. The dose is 1 mg (1:10,000) IV, repeated every 3–5 minutes throughout the resuscitation. Its primary mechanism is alpha-1 adrenergic vasoconstriction, which increases aortic diastolic pressure and improves coronary and cerebral perfusion during CPR. Amiodarone 300 mg is an antiarrhythmic given after the third defibrillation shock in refractory VF or pulseless VT, followed by 150 mg if needed. Lidocaine 1–1.5 mg/kg is an alternative antiarrhythmic if amiodarone is unavailable. Magnesium sulphate 2 g slow IV is reserved for torsades de pointes. Atropine is no longer recommended in PEA or asystole in current guidelines and is used for symptomatic bradycardia."
-  },
-  {
-    q: "The reversible causes of cardiac arrest are organized as the 5 Hs and 5 Ts. Which of the following is correctly categorized as one of the 5 Ts?",
-    opts: [
-      "Hypoxia, corrected by ensuring a patent airway and administering high-flow supplemental oxygen",
-      "Hypovolaemia, corrected by aggressive intravenous fluid resuscitation or blood transfusion",
-      "Hydrogen ion excess (acidosis), addressed by optimizing ventilation and administering sodium bicarbonate",
-      "Tension pneumothorax, treated by immediate needle decompression followed by chest tube insertion",
-      "Hypothermia, managed by active rewarming and continuation of CPR until normothermia is achieved"
-    ],
-    ans: 3,
-    exp: "The reversible causes of cardiac arrest (the 4Hs and 4Ts, or 5Hs and 5Ts depending on the framework used) must be systematically excluded during resuscitation. The 5 Hs are: Hypoxia, Hypovolaemia, Hydrogen ion (acidosis), Hypo/hyperkalaemia, and Hypothermia. The 5 Ts are: Toxins, Tamponade (cardiac), Tension pneumothorax, Thrombosis (pulmonary), and Thrombosis (coronary). Tension pneumothorax is therefore one of the 5 Ts. It causes cardiac arrest through obstructive physiology — progressive air accumulation collapses the lung, shifts the mediastinum, and compresses the heart and great veins, abolishing cardiac output. Treatment is immediate needle decompression at the second intercostal space, midclavicular line, followed by definitive chest tube insertion. Identifying and treating the cause of arrest is as important as performing compressions and defibrillation."
-  },
-  {
-    q: "What is the correct initial dose and route of administration of adenosine for the treatment of a regular narrow-complex tachycardia?",
-    opts: [
-      "Adenosine 3 mg given as a slow intravenous infusion over 5 minutes with continuous cardiac monitoring",
-      "Adenosine 12 mg given as a rapid intravenous bolus, with a 6 mg repeat dose if no response at 2 minutes",
-      "Adenosine 6 mg given as a rapid intravenous bolus, with a repeat dose of 12 mg if required",
-      "Adenosine 1 mg given as a slow intravenous push into a peripheral vein at a rate of 20 mg per minute",
-      "Adenosine 6 mg given orally, repeated at 30-minute intervals until the tachycardia terminates"
-    ],
-    ans: 2,
-    exp: "Adenosine is the drug of choice for terminating regular narrow-complex tachycardias, particularly atrioventricular nodal re-entry tachycardia (AVNRT) and AV re-entry tachycardia (AVRT). The initial dose is 6 mg administered as a rapid intravenous bolus — speed of administration is critical as adenosine has an extremely short half-life of approximately 10 seconds; slow infusion renders it ineffective before it reaches the heart. A large saline flush should follow immediately. If the 6 mg dose is ineffective, a second dose of 12 mg is given. Adenosine must be given through a large proximal vein (ideally antecubital) to ensure rapid delivery to the cardiac conduction system. Patients should be warned of transient side effects including flushing, chest tightness, and a feeling of impending doom, which resolve within seconds. It is contraindicated in asthma and pre-excited tachycardias."
-  },
-  {
-    q: "What is the correct initial dose and maximum cumulative dose of atropine for the treatment of symptomatic bradyarrhythmia?",
-    opts: [
-      "Initial dose 1 mg IV, repeated every 5 minutes to a maximum cumulative dose of 6 mg",
-      "Initial dose 1 mg IV given as a single bolus, with escalation to pacing if no immediate response",
-      "Initial dose 0.5 mg IV, repeated every 3–5 minutes to a maximum cumulative dose of 5 mg",
-      "Initial dose 0.5 mg IV given as a single bolus, with dopamine infusion if blood pressure does not improve",
-      "Initial dose 0.5 mg IV, repeated every 3–5 minutes to a maximum cumulative dose of 3 mg"
-    ],
-    ans: 4,
-    exp: "Atropine is the first-line pharmacological treatment for symptomatic bradyarrhythmia. The correct dose is 0.5 mg IV, repeated every 3–5 minutes as needed, to a maximum cumulative dose of 3 mg. Doses below 0.5 mg should be avoided as paradoxical bradycardia can occur at sub-therapeutic doses due to a central vagotonic effect. If atropine is ineffective, second-line options include an epinephrine infusion at 2–10 mcg/min or a dopamine infusion at 2–20 mcg/kg/min. Transcutaneous or transvenous pacing should be initiated if pharmacological management fails or if the patient is haemodynamically unstable. Atropine works by blocking vagal (muscarinic) tone at the sinoatrial and atrioventricular nodes, increasing heart rate. It is most effective for bradycardia arising from excessive vagal tone and less effective for infranodal or structural conduction disease."
-  },
-  {
-    q: "Which of the following correctly identifies the current recommended sequence of initial interventions in adult Basic Life Support?",
-    opts: [
-      "Compressions first, then airway management, then rescue breathing (CAB)",
-      "Airway assessment first, then rescue breathing, then chest compressions (ABC)",
-      "Rescue breathing first, then compressions, then airway management (BCA)",
-      "Airway management first, then compressions, then rescue breathing (ACB)",
-      "Compressions first, then rescue breathing, then airway management (CBA)"
-    ],
-    ans: 0,
-    exp: "Current BLS guidelines recommend the CAB sequence — Compressions first, then Airway management, then Breathing — representing a significant change from the historically taught ABC sequence. This change was motivated by evidence that delays to chest compressions significantly worsen outcomes: cardiac arrest causes immediate cessation of coronary and cerebral perfusion, and compressions are the most critical immediate intervention. Arterial oxygen stores last approximately 4–6 minutes following arrest, whereas forward coronary perfusion is abolished immediately; compressions therefore take priority. After 30 compressions are delivered at the appropriate rate and depth, the airway is opened and two rescue breaths given, establishing a 30:2 ratio in single-rescuer adult BLS. High-quality CPR also requires allowing full chest recoil, minimizing interruptions to less than 10 seconds, and avoiding excessive ventilation."
-  },
-  {
-    q: "Which of the following best defines shock as a clinical and physiological state?",
-    opts: [
-      "An acute fall in systolic blood pressure below 90 mmHg with associated tachycardia and cool peripheries",
-      "A state of circulatory failure resulting in inadequate tissue perfusion and oxygen delivery to meet cellular metabolic demands",
-      "A syndrome of severe peripheral vasodilatation and reduced systemic vascular resistance caused by bacteraemia",
-      "A haemodynamic state defined by reduced cardiac output with elevated systemic vascular resistance",
-      "An acute reduction in intravascular volume producing compensatory sympathetic activation and tachycardia"
+      "2 times more potent",
+      "4 times more potent",
+      "6 times more potent",
+      "8 times more potent",
+      "10 times more potent"
     ],
     ans: 1,
-    exp: "Shock is defined as a state of circulatory failure resulting in inadequate tissue perfusion and oxygen delivery to meet cellular metabolic demands. It is a dynamic clinical syndrome characterized by metabolic acidosis, oliguria, and altered level of consciousness — reflecting the downstream consequences of cellular hypoxia. Critically, this definition is not anchored to a single vital sign: shock can occur with a systolic blood pressure above 90 mmHg (compensated shock), and a blood pressure of 85 mmHg may reflect a patient's acceptable normal in an elderly hypertensive individual. Options A, C, D, and E each describe specific clinical correlates or subtypes of shock rather than the unifying pathophysiological definition. Understanding the broad definition allows clinicians to recognize shock early — before haemodynamic collapse — and initiate treatment before irreversible organ damage occurs."
+    exp: "Bupivacaine is 4 times more potent than lidocaine, allowing it to be effective at lower concentrations (0.25–0.5% vs lidocaine 1–2%). Despite this, bupivacaine carries a significantly higher risk of cardiotoxicity — it is described as more cardiogenic than lidocaine because it binds cardiac sodium channels with greater affinity. Its onset is slower (~15 minutes) but duration considerably longer — up to 25 hours after peripheral nerve block, compared to 60–120 minutes for lidocaine. Maximum dose is 2 mg/kg."
   },
+
   {
-    q: "Which of the following correctly pairs a type of shock with its primary pathophysiological mechanism?",
+    q: "Which of the following correctly describes the features of CNS toxicity from local anaesthetics?",
     opts: [
-      "Cardiogenic — peripheral vasodilatation; hypovolaemic — pump failure; distributive — reduced preload",
-      "Cardiogenic — reduced afterload; obstructive — impaired myocardial contractility; distributive — reduced blood volume",
-      "Hypovolaemic — pump failure; cardiogenic — reduced intravascular volume; obstructive — vasodilation",
-      "Cardiogenic — pump failure; hypovolaemic — reduced circulating blood volume; obstructive — mechanical impedance to flow",
-      "Distributive — pump failure; cardiogenic — vasodilation; obstructive — impaired venous return from blood loss"
+      "Miosis and bradycardia progressing to coma",
+      "Convulsions and coma from progressive depression of neural function",
+      "Peripheral oedema and urticaria from IgE-mediated hypersensitivity",
+      "Hyperthermia and tachycardia from autonomic stimulation",
+      "Hypertension and bradypnoea from central medullary effects"
     ],
-    ans: 3,
-    exp: "Shock is classified by mechanism into four types: Cardiogenic — the heart fails as a pump (myocarditis, myocardial infarction) resulting in reduced cardiac output despite adequate preload; Hypovolaemic — reduced circulating blood volume (haemorrhage, burns, fluid loss) reduces preload and cardiac output; Obstructive — the heart is structurally normal but cannot pump effectively due to mechanical impedance (tension pneumothorax, constrictive pericarditis, cardiac tamponade); and Distributive — blood volume is normal but peripheral vascular resistance is pathologically reduced (septic, anaphylactic, neurogenic shock), producing maldistribution of blood flow. The mnemonic CHOD (Cardiogenic, Hypovolaemic, Obstructive, Distributive) covers all four; distributive is further subdivided as ANS (Anaphylactic, Neurogenic, Septic). Confusing these mechanisms leads to incorrect treatment — vasopressors are appropriate for distributive shock but harmful if given before volume replacement in hypovolaemia."
+    ans: 1,
+    exp: "Local anaesthetic CNS toxicity progresses through restlessness, tremors, vertigo, and hysterical behaviour before culminating in convulsions and coma. This results from membrane stabilization in the brain causing progressive depression of inhibitory pathways first (producing excitation), then all neural function. Cardiovascular toxicity follows: bradycardia, hypotension, and potentially cardiac arrest. Prevention includes not exceeding maximum safe doses, test aspiration before injection, and adding a vasoconstrictor where appropriate."
   },
+
+  // ── CARDIOPULMONARY RESUSCITATION ─────────────────────────────────────────
+
   {
-    q: "A 23-year-old motorcyclist sustains a complete spinal cord injury at the C5 level. On assessment, blood pressure is 82/48 mmHg, heart rate is 54 beats per minute, and the lower limbs are warm and vasodilated. Which type of shock best explains this clinical picture?",
+    q: "The correct sequence for primary assessment of a critically ill patient is:",
     opts: [
-      "Hypovolaemic shock from occult haemorrhage into the thoracic cavity or retroperitoneum",
-      "Obstructive shock from tension pneumothorax compressing the right heart and reducing venous return",
-      "Neurogenic shock from loss of sympathetic vasomotor tone below the level of the cervical cord injury",
-      "Cardiogenic shock from blunt myocardial contusion sustained during the high-speed impact",
-      "Septic shock from early gram-negative bacteraemia complicating open wounds sustained in the accident"
+      "Airway, Breathing, Circulation, Disability, Exposure",
+      "Airway, Circulation, Breathing, Disability, Exposure",
+      "Circulation, Airway, Breathing, Disability, Exposure",
+      "Breathing, Airway, Circulation, Disability, Exposure",
+      "Airway, Breathing, Disability, Circulation, Exposure"
+    ],
+    ans: 0,
+    exp: "The primary assessment follows the ABCDE sequence: Airway, Breathing, Circulation, Disability (neurological status), Exposure. This systematic approach ensures life-threatening problems are identified and addressed in priority order. Note that while BLS uses a compression-first (CAB) approach once cardiac arrest is confirmed, ABCDE is the structured framework used for the initial assessment of any critically ill or injured patient."
+  },
+
+  {
+    q: "In the Basic Life Support (BLS) algorithm, the correct sequence of actions after confirming cardiac arrest is:",
+    opts: [
+      "Airway → Breathing → Compressions",
+      "Compressions → Airway → Breathing",
+      "Breathing → Compressions → Airway",
+      "Airway → Compressions → Breathing",
+      "Compressions → Breathing → Airway"
+    ],
+    ans: 1,
+    exp: "The BLS sequence is CAB: Compressions → Airway → Breathing. This prioritizes chest compressions, which are the most critical intervention for maintaining coronary and cerebral perfusion during cardiac arrest. Compressions must begin within 10 seconds of recognizing cardiac arrest. Interruptions should be minimized to less than 10 seconds, and excessive ventilation must be avoided as it increases intrathoracic pressure and reduces venous return."
+  },
+
+  {
+    q: "The recommended compression rate during high-quality CPR in adults is:",
+    opts: [
+      "60–80 compressions per minute",
+      "80–100 compressions per minute",
+      "100–120 compressions per minute",
+      "120–140 compressions per minute",
+      "140–160 compressions per minute"
     ],
     ans: 2,
-    exp: "The triad of hypotension, bradycardia, and warm vasodilated extremities following a cervical spinal cord injury is pathognomonic of neurogenic shock. Sympathetic vasomotor pathways descend from the thoracic cord; a complete cervical cord lesion severs these pathways, abolishing tonic sympathetic outflow to peripheral vasculature. The result is widespread vasodilation — reducing systemic vascular resistance — and inability to mount a compensatory tachycardia, because sympathetic tone to the heart (via T1-T4) is also lost. Hypovolaemic and septic shock both produce tachycardia and cold, clammy peripheries — the opposite of this presentation. Obstructive shock produces tachycardia and distended neck veins. Cardiogenic shock produces cold, clammy skin with pulmonary oedema. The warm peripheries and relative bradycardia in the context of cord injury confirm the neurogenic mechanism, distinguishing it from haemorrhagic shock, which is the more common cause of hypotension after trauma."
+    exp: "High-quality CPR requires a compression rate of 100–120 per minute. Rates below 100/min are insufficient to generate adequate cardiac output, while rates above 120/min compromise compression depth and reduce the time available for full chest recoil. Both too slow and too fast a rate reduce resuscitation effectiveness. This rate, combined with adequate depth and full recoil, is the cornerstone of effective BLS."
   },
+
   {
-    q: "A 28-year-old woman develops generalised urticaria, severe bronchospasm, and rapidly progressive hypotension within 3 minutes of receiving an intravenous antibiotic. What is the most appropriate immediate pharmacological intervention?",
+    q: "The minimum recommended chest compression depth during adult CPR is:",
     opts: [
-      "Intravenous hydrocortisone 200 mg to suppress the underlying IgE-mediated inflammatory response",
-      "Intravenous chlorphenamine 10 mg to block histamine H1 receptors and reduce vascular permeability",
-      "Intravenous fluid resuscitation alone with normal saline as the initial sole pharmacological strategy",
-      "Intravenous dopamine infusion at 5–10 mcg/kg/min to restore systemic vascular resistance and perfusion",
-      "Intramuscular adrenaline (epinephrine) 0.5 mg as the immediate first-line treatment for anaphylactic shock"
+      "3 cm",
+      "4 cm",
+      "5 cm",
+      "6 cm",
+      "7 cm"
+    ],
+    ans: 2,
+    exp: "Compressions must reach at least 5 cm depth in adults to generate sufficient intrathoracic pressure for coronary and cerebral perfusion. Shallow compressions are a common and underrecognized cause of poor resuscitation outcomes. Full chest recoil between compressions is equally important — incomplete recoil increases intrathoracic pressure, reduces venous return to the heart, and decreases the effectiveness of each subsequent compression."
+  },
+
+  {
+    q: "The recommended dose and administration interval for epinephrine during cardiac arrest is:",
+    opts: [
+      "0.5 mg (1:10,000) IV every 5–10 minutes",
+      "1 mg (1:10,000) IV every 3–5 minutes",
+      "2 mg (1:1,000) IV every 3–5 minutes",
+      "1 mg (1:1,000) IV every 10 minutes",
+      "0.5 mg (1:1,000) IV every 5 minutes"
+    ],
+    ans: 1,
+    exp: "Epinephrine (adrenaline) is administered as 1 mg IV in a 1:10,000 dilution (0.1 mg/mL) every 3–5 minutes during cardiac arrest. Its alpha-adrenergic effects increase systemic vascular resistance, raising coronary and cerebral perfusion pressure during CPR. The 1:10,000 concentration used intravenously is 10 times more dilute than the 1:1,000 concentration used intramuscularly for anaphylaxis — confusing the two can be fatal."
+  },
+
+  {
+    q: "The first dose of amiodarone used in refractory ventricular fibrillation is:",
+    opts: [
+      "150 mg IV bolus",
+      "200 mg IV bolus",
+      "300 mg IV bolus",
+      "360 mg IV bolus",
+      "400 mg IV bolus"
+    ],
+    ans: 2,
+    exp: "Amiodarone 300 mg IV is given as the first dose in shock-refractory VF or pulseless VT, followed by a second dose of 150 mg if VF/VT persists. Amiodarone is a class III antiarrhythmic that prolongs the action potential duration and refractory period across cardiac tissue. Lidocaine (1–1.5 mg/kg IV) is the alternative when amiodarone is unavailable. Both should be considered only after defibrillation and epinephrine."
+  },
+
+  {
+    q: "Which of the following is NOT among the recognized reversible causes of cardiac arrest?",
+    opts: [
+      "Hypothermia",
+      "Hypoglycaemia",
+      "Tension pneumothorax",
+      "Cardiac tamponade",
+      "Pulmonary thrombosis"
+    ],
+    ans: 1,
+    exp: "The reversible causes of cardiac arrest are the 4Hs and 4Ts: Hypoxia, Hypo/Hyperkalemia, Hydrogen ion excess (acidosis), Hypothermia, Hypovolemia, Toxins, Tamponade (cardiac), Tension pneumothorax, and Thrombosis (pulmonary and coronary). Hypoglycaemia is a medical emergency that can cause unconsciousness and seizures, but it is not in this classification. Blood glucose must still be checked and corrected during resuscitation, but it is not listed among the 4Hs."
+  },
+
+  {
+    q: "The initial dose of atropine for the management of symptomatic bradyarrhythmia is:",
+    opts: [
+      "0.1 mg IV, repeated to a maximum of 1 mg",
+      "0.3 mg IV, repeated to a maximum of 2 mg",
+      "0.5 mg IV, repeated to a maximum of 3 mg",
+      "1 mg IV, repeated to a maximum of 3 mg",
+      "2 mg IV as a single dose only"
+    ],
+    ans: 2,
+    exp: "Atropine is given as 0.5 mg IV and may be repeated every 3–5 minutes to a cumulative maximum of 3 mg for symptomatic bradyarrhythmia. It acts by blocking vagal (parasympathetic/muscarinic) tone on the sinoatrial and atrioventricular nodes, increasing heart rate. Doses below 0.5 mg may paradoxically worsen bradycardia by blocking presynaptic inhibitory autoreceptors. If atropine fails, dopamine (2–20 mcg/kg/min) or epinephrine (2–10 mcg/min) infusion are second-line options."
+  },
+
+  {
+    q: "Which of the following correctly represents the MONA mnemonic for emergency treatment of acute coronary syndrome?",
+    opts: [
+      "Metoprolol, Oxygen, Nitroprusside, Aspirin",
+      "Morphine, Oxygen, Nitroglycerin, Aspirin",
+      "Midazolam, Oxygen, Nitroglycerin, Adenosine",
+      "Morphine, Ondansetron, Nitroglycerin, Aspirin",
+      "Methylprednisolone, Oxygen, Nitroglycerin, Aspirin"
+    ],
+    ans: 1,
+    exp: "MONA stands for Morphine, Oxygen, Nitroglycerin, and Aspirin — the four cornerstone drugs in the initial emergency management of ACS. Aspirin irreversibly inhibits platelet aggregation and reduces thrombus propagation. Nitroglycerin relieves ischaemic chest pain by venodilation and reducing preload. Morphine provides analgesia, reduces anxiety, and decreases sympathetic drive. Oxygen is supplemented for hypoxic patients. Door-to-balloon time for PCI should be within 90 minutes; door-to-needle for fibrinolysis within 30 minutes."
+  },
+
+  // ── INHALATIONAL ANAESTHETIC AGENTS ──────────────────────────────────────
+
+  {
+    q: "Nitrous oxide and Xenon produce their anaesthetic effects primarily by:",
+    opts: [
+      "Potentiating GABA-B receptors in the central nervous system",
+      "Blocking voltage-gated sodium channels in peripheral nerves",
+      "Inhibiting NMDA receptors in the central nervous system",
+      "Activating mu-opioid receptors in the brainstem",
+      "Enhancing glycine receptor activity in the spinal cord"
+    ],
+    ans: 2,
+    exp: "Unlike most volatile anaesthetics — which produce unconsciousness by potentiating inhibitory GABA-B receptors — N₂O and Xenon act primarily by inhibiting NMDA (N-methyl-D-aspartate) receptors, which are excitatory glutamate-gated ion channels. This distinct mechanism explains why N₂O has a unique pharmacological profile and why it does not simply add to volatile agent potency in a straightforward MAC-additive manner."
+  },
+
+  {
+    q: "Which inhalational anaesthetic agent has the highest minimum alveolar concentration (MAC)?",
+    opts: [
+      "Halothane (MAC 0.75)",
+      "Sevoflurane (MAC 2.0)",
+      "Isoflurane (MAC 1.22)",
+      "Desflurane (MAC 6.0)",
+      "Nitrous oxide (MAC 105)"
     ],
     ans: 4,
-    exp: "Anaphylactic shock is an IgE-mediated distributive emergency requiring immediate intramuscular adrenaline (epinephrine) 0.5 mg (0.5 mL of 1:1000 solution) into the anterolateral thigh as the first-line, life-saving intervention. Adrenaline acts through alpha-1 adrenergic receptors to reverse vasodilation and laryngeal oedema, and through beta-2 receptors to reverse bronchospasm — addressing all three life-threatening mechanisms simultaneously. Antihistamines (chlorphenamine) and corticosteroids (hydrocortisone) have important adjunctive roles in preventing biphasic reactions and reducing urticaria, but they have a slow onset and no role as immediate first-line agents. Intravenous fluids are an important adjunct for refractory hypotension but do not address the primary mechanism. Dopamine is reserved for refractory shock unresponsive to adrenaline. Delay in administering adrenaline in anaphylaxis is a leading cause of preventable death."
+    exp: "Nitrous oxide has a MAC of 105%, making it the least potent inhalational agent — it cannot produce surgical anaesthesia alone at normal atmospheric pressure, as doing so would require displacing all oxygen. MAC is inversely related to potency: the lower the MAC, the more potent the agent. Halothane (MAC 0.75) is the most potent listed agent. N₂O is therefore always used as an adjunct, not a sole anaesthetic, typically alongside a volatile agent to reduce the required dose of each."
+  },
+
+  {
+    q: "Which of the following correctly describes the effect of inhalational anaesthetic agents on the central nervous system?",
+    opts: [
+      "Cerebral vasoconstriction, reduced cerebral blood flow, and lower intracranial pressure",
+      "Cerebral vasodilation, increased cerebral blood flow, and elevated intracranial pressure",
+      "Increased cerebral metabolic rate of oxygen with compensatory vasoconstriction",
+      "Elevated intracranial pressure with no change in cerebrovascular resistance",
+      "Reduced cerebral blood flow with preserved cerebral metabolic rate of oxygen"
+    ],
+    ans: 1,
+    exp: "Inhalational agents cause cerebral vasodilation, which increases cerebral blood flow, reduces cerebrovascular resistance, and elevates intracranial pressure (ICP). They also reduce the cerebral metabolic rate of oxygen (CMRO₂) — a potentially neuroprotective effect — except N₂O, which paradoxically increases CMRO₂. Because of their ICP-raising properties, inhalational agents must be used cautiously in patients with space-occupying lesions or traumatic brain injury."
+  },
+
+  {
+    q: "Halothane is preferred over isoflurane for inhalational induction of anaesthesia because it:",
+    opts: [
+      "Has a lower MAC value, allowing faster onset of unconsciousness at lower concentrations",
+      "Is stored in clear bottles for easy visual confirmation during induction setup",
+      "Has a sweet, non-irritating smell that patients tolerate well during mask breathing",
+      "Causes less cardiovascular depression during the induction phase than isoflurane",
+      "Is a structural isomer of isoflurane with more predictable dose-response kinetics"
+    ],
+    ans: 2,
+    exp: "Halothane's pleasant, sweet smell and absence of airway irritation make it ideal for inhalational induction — particularly in paediatric patients or those who refuse intravenous access. Isoflurane has a pungent, ethereal smell that irritates the airways, causing coughing, breath-holding, and laryngospasm when used for induction. For this reason, isoflurane is used exclusively for maintenance of anaesthesia, not induction. Notably, halothane is actually less stable and must be stored in amber bottles with thymol as a stabilizer."
   }
+
+];
+
+const abgQuizQuestions = [
+
+  {
+    q: "Which of the following is a directly measured variable in arterial blood gas analysis?",
+    opts: [
+      "HCO₃⁻",
+      "SpO₂",
+      "PaCO₂",
+      "Base excess",
+      "Standard bicarbonate"
+    ],
+    ans: 2,
+    exp: "PaCO₂, pH, and PaO₂ are directly measured by blood gas analysers using specific electrodes. HCO₃⁻, base excess, and standard bicarbonate are all calculated values derived from the Henderson-Hasselbalch equation using the directly measured pH and PaCO₂. SpO₂ (pulse oximetry) is a non-invasive estimate obtained from light absorption and is not measured in ABG analysis."
+  },
+
+  {
+    q: "What is the normal range of arterial blood pH?",
+    opts: [
+      "7.25–7.35",
+      "7.35–7.45",
+      "7.45–7.55",
+      "7.30–7.40",
+      "7.40–7.50"
+    ],
+    ans: 1,
+    exp: "Normal arterial pH is 7.35–7.45, maintained by the bicarbonate buffer system, haemoglobin, plasma proteins, and the coordinated actions of the lungs and kidneys. A pH below 7.35 defines acidaemia; above 7.45 defines alkalaemia. This narrow range is critical for normal enzyme function, oxygen delivery, and cellular metabolism."
+  },
+
+  {
+    q: "Which formula calculates the age-adjusted expected PaO₂ in mmHg?",
+    opts: [
+      "100 − age",
+      "102 − (0.33 × age)",
+      "90 − (0.44 × age)",
+      "120 − age",
+      "95 − (0.5 × age)"
+    ],
+    ans: 1,
+    exp: "The age-adjusted expected PaO₂ is calculated as 102 − (0.33 × age) mmHg. This accounts for the progressive physiological decline in PaO₂ that occurs with ageing due to increasing ventilation-perfusion mismatch and reduced alveolar surface area. A patient's measured PaO₂ must be compared against this age-adjusted expected value rather than a fixed threshold to accurately identify clinically significant hypoxaemia."
+  },
+
+  {
+    q: "A pH of 7.30 with HCO₃⁻ of 18 mEq/L indicates:",
+    opts: [
+      "Metabolic acidosis",
+      "Respiratory alkalosis",
+      "Metabolic alkalosis",
+      "Respiratory acidosis",
+      "Mixed metabolic and respiratory acidosis"
+    ],
+    ans: 0,
+    exp: "A pH below 7.35 indicates acidaemia, and an HCO₃⁻ below 22 mEq/L (normal: 22–26 mEq/L) identifies a primary metabolic cause. Together, these define uncompensated or partially compensated metabolic acidosis. Common causes include diabetic ketoacidosis, lactic acidosis, renal failure, and severe diarrhoea. Respiratory acidosis would be characterised by elevated PaCO₂, not reduced HCO₃⁻, as the primary abnormality."
+  },
+
+  {
+    q: "Which artery is most preferred for arterial blood gas sample collection?",
+    opts: [
+      "Carotid artery",
+      "Femoral artery",
+      "Radial artery",
+      "Brachial artery",
+      "Ulnar artery"
+    ],
+    ans: 2,
+    exp: "The radial artery is preferred for ABG sampling due to its superficial location, ease of palpation, and the presence of collateral circulation from the ulnar artery — assessed by the Allen test before sampling. If the radial is unavailable, the brachial or femoral artery may be used. The carotid artery is never used for ABG due to the unacceptable risk of cerebral embolism or haematoma compromising airway or cerebral blood flow."
+  },
+
+  {
+    q: "In compensated respiratory acidosis, what change in HCO₃⁻ is expected?",
+    opts: [
+      "HCO₃⁻ remains normal",
+      "HCO₃⁻ decreases",
+      "HCO₃⁻ increases",
+      "HCO₃⁻ is unchanged from baseline",
+      "HCO₃⁻ rises transiently then normalizes"
+    ],
+    ans: 2,
+    exp: "In respiratory acidosis, CO₂ accumulates, lowering pH. Over 3–5 days, the kidneys compensate by increasing HCO₃⁻ reabsorption and H⁺ excretion, raising serum HCO₃⁻ to partially restore pH toward normal. This compensatory elevation in HCO₃⁻ is the hallmark of chronic (compensated) respiratory acidosis. In acute, uncompensated respiratory acidosis, HCO₃⁻ is initially normal — the metabolic compensation has not yet had time to develop."
+  },
+
+  {
+    q: "What acid is formed from the combination of CO₂ and H₂O in the blood?",
+    opts: [
+      "Lactic acid",
+      "Sulfuric acid",
+      "Phosphoric acid",
+      "Carbonic acid",
+      "Bicarbonic acid"
+    ],
+    ans: 3,
+    exp: "CO₂ combines with water in the blood (catalysed by carbonic anhydrase in red blood cells) to form carbonic acid: CO₂ + H₂O ⇌ H₂CO₃. Carbonic acid then rapidly dissociates into H⁺ and HCO₃⁻. This reaction is central to respiratory acid-base regulation — by controlling the rate of CO₂ exhalation, the lungs directly control the production and elimination of carbonic acid and thus blood pH."
+  },
+
+  {
+    q: "A fully compensated metabolic alkalosis would show which of the following ABG patterns?",
+    opts: [
+      "Normal pH, with abnormal HCO₃⁻ and PaCO₂",
+      "High pH with low HCO₃⁻",
+      "Low pH with high HCO₃⁻",
+      "High pH with low PaCO₂",
+      "High pH with high HCO₃⁻ and low PaCO₂"
+    ],
+    ans: 0,
+    exp: "In fully compensated metabolic alkalosis, the pH has been restored to the normal range (7.35–7.45) through respiratory compensation — hypoventilation retains CO₂, raising PaCO₂. Both HCO₃⁻ (primarily elevated — the metabolic disturbance) and PaCO₂ (secondarily elevated — the compensation) remain abnormal, even though pH appears normal. This is the key distinction between full and partial compensation."
+  },
+
+  {
+    q: "What is the normal range of PaCO₂?",
+    opts: [
+      "20–30 mmHg",
+      "30–40 mmHg",
+      "35–45 mmHg",
+      "45–55 mmHg",
+      "40–50 mmHg"
+    ],
+    ans: 2,
+    exp: "Normal PaCO₂ is 35–45 mmHg. A PaCO₂ below 35 mmHg indicates hyperventilation and defines respiratory alkalosis; above 45 mmHg indicates hypoventilation and defines respiratory acidosis. PaCO₂ is the primary respiratory component of acid-base balance and is tightly regulated by the brainstem's chemoreceptors, which respond to changes in H⁺ concentration and CO₂ levels by adjusting respiratory rate and depth."
+  },
+
+  {
+    q: "Base excess (BE) in arterial blood gas analysis is used to quantify:",
+    opts: [
+      "The degree of respiratory compensation",
+      "The adequacy of arterial oxygenation",
+      "The metabolic component of acid-base disturbance",
+      "The serum potassium level",
+      "The renal bicarbonate reabsorption threshold"
+    ],
+    ans: 2,
+    exp: "Base excess quantifies the metabolic component of acid-base disturbances. It represents the amount of acid or base (in mEq/L) required to return 1 litre of blood to a normal pH at a standardised PaCO₂ of 40 mmHg. Normal BE is −2 to +2 mEq/L. A negative BE (base deficit) indicates metabolic acidosis; a positive BE indicates metabolic alkalosis. By standardising PaCO₂, BE isolates the metabolic contribution from the respiratory component."
+  },
+
+  {
+    q: "What happens to serum potassium in metabolic acidosis?",
+    opts: [
+      "It decreases as the kidneys excrete more potassium",
+      "It remains unchanged despite changes in pH",
+      "It moves into cells in exchange for hydrogen ions",
+      "It moves out of cells into the extracellular fluid",
+      "It is selectively excreted by the kidneys in excess"
+    ],
+    ans: 3,
+    exp: "In metabolic acidosis, the accumulation of H⁺ ions drives a transcellular exchange: H⁺ enters cells and K⁺ shifts out into the extracellular fluid, raising serum potassium. For approximately every 0.1-unit fall in pH, serum K⁺ rises by 0.5–1.0 mmol/L. This hyperkalaemia can precipitate life-threatening cardiac arrhythmias. The reverse occurs in metabolic alkalosis, where K⁺ moves into cells, causing hypokalaemia."
+  },
+
+  {
+    q: "Which of the following is a symptom of respiratory alkalosis?",
+    opts: [
+      "Lethargy",
+      "Diaphoresis",
+      "Warm flushed skin",
+      "Bradycardia",
+      "Hyporeflexia"
+    ],
+    ans: 1,
+    exp: "Respiratory alkalosis results from hyperventilation-induced hypocapnia, which reduces cerebral perfusion and alters ionised calcium levels. Symptoms include diaphoresis, perioral tingling, carpopedal spasm (Trousseau's sign), light-headedness, and palpitations. Lethargy is more characteristic of hypercapnia (respiratory acidosis). Warm flushed skin is associated with CO₂ retention due to peripheral vasodilation, not alkalosis."
+  },
+
+  {
+    q: "The anion gap is calculated to help identify:",
+    opts: [
+      "The presence of hypokalemia",
+      "Arterial oxygen content",
+      "The type of metabolic acidosis",
+      "The severity of respiratory failure",
+      "The degree of respiratory alkalosis"
+    ],
+    ans: 2,
+    exp: "The anion gap = Na⁺ − (Cl⁻ + HCO₃⁻), normal value 8–12 mEq/L. It distinguishes between high anion gap metabolic acidosis (HAGMA) — caused by accumulation of unmeasured anions such as lactate, ketoacids, phosphates, or toxins — and normal anion gap metabolic acidosis (NAGMA) — caused by HCO₃⁻ loss with compensatory Cl⁻ retention, as in diarrhoea or renal tubular acidosis. This distinction is critical for directing the diagnostic workup."
+  },
+
+  {
+    q: "Which of the following conditions causes a high anion gap metabolic acidosis?",
+    opts: [
+      "Diarrhoea",
+      "Renal failure",
+      "Vomiting",
+      "Nasogastric suction",
+      "Hyperchloraemia from saline infusion"
+    ],
+    ans: 1,
+    exp: "Renal failure causes high anion gap metabolic acidosis because the kidneys fail to excrete phosphates and sulphates (unmeasured anions) and cannot regenerate HCO₃⁻. Other HAGMA causes: DKA, lactic acidosis, and certain toxins (methanol, ethylene glycol, salicylates). Diarrhoea and renal tubular acidosis cause normal anion gap acidosis. Vomiting and NG suction cause metabolic alkalosis from loss of HCl."
+  },
+
+  {
+    q: "In uncompensated metabolic alkalosis, PaCO₂ is:",
+    opts: [
+      "Always low regardless of compensation status",
+      "Normal because the respiratory system has not yet responded",
+      "Decreased as the lungs attempt to blow off excess bicarbonate",
+      "Always elevated due to CO₂ retention from hypoventilation",
+      "Elevated in both compensated and uncompensated states equally"
+    ],
+    ans: 1,
+    exp: "In uncompensated metabolic alkalosis, the primary disturbance is an elevated HCO₃⁻ with a high pH, but PaCO₂ is initially normal — respiratory compensation (hypoventilation to retain CO₂) has not yet occurred. When compensation develops, PaCO₂ rises above normal. Therefore, normal PaCO₂ in the setting of elevated HCO₃⁻ and high pH indicates an uncompensated state, while elevated PaCO₂ indicates partial or full compensation."
+  },
+
+  {
+    q: "What is the primary role of the lungs in acid-base balance?",
+    opts: [
+      "Excrete metabolic acids such as lactic acid directly",
+      "Reabsorb bicarbonate from pulmonary capillaries",
+      "Excrete carbonic acid in the form of CO₂ and water",
+      "Produce hydrogen ions for the bicarbonate buffer system",
+      "Convert bicarbonate into carbonic acid for elimination"
+    ],
+    ans: 2,
+    exp: "The lungs maintain acid-base balance by excreting carbonic acid as CO₂ and water through expiration: H₂CO₃ → CO₂ + H₂O. By adjusting respiratory rate and tidal volume, the lungs can rapidly alter PaCO₂ and thus the carbonic acid concentration in the blood. This is the fastest buffering mechanism available. The kidneys, not the lungs, reabsorb bicarbonate and excrete H⁺ — a slower but more precise compensatory mechanism."
+  },
+
+  {
+    q: "A patient has pH 7.60, PaCO₂ 25 mmHg, and HCO₃⁻ 24 mEq/L. What is the most accurate interpretation?",
+    opts: [
+      "Metabolic alkalosis",
+      "Uncompensated respiratory alkalosis",
+      "Fully compensated respiratory alkalosis",
+      "Normal acid-base status",
+      "Partially compensated metabolic alkalosis"
+    ],
+    ans: 1,
+    exp: "Systematic interpretation: pH 7.60 is alkalotic. PaCO₂ 25 mmHg is below normal (35–45), indicating a primary respiratory cause — respiratory alkalosis. HCO₃⁻ 24 mEq/L is normal, confirming that no metabolic compensation has yet occurred. This pattern — high pH, low PaCO₂, normal HCO₃⁻ — defines uncompensated respiratory alkalosis. If renal compensation had occurred, HCO₃⁻ would have fallen below normal."
+  },
+
+  {
+    q: "A patient has pH 7.49, PaCO₂ 48 mmHg, and HCO₃⁻ 38 mEq/L. What does this ABG indicate?",
+    opts: [
+      "Uncompensated metabolic alkalosis",
+      "Fully compensated respiratory alkalosis",
+      "Partially compensated metabolic alkalosis",
+      "Normal acid-base status",
+      "Compensated respiratory acidosis"
+    ],
+    ans: 2,
+    exp: "Systematic interpretation: pH 7.49 is mildly alkalotic. HCO₃⁻ 38 mEq/L is markedly elevated — this is the primary metabolic alkalosis. PaCO₂ 48 mmHg is above the normal range (35–45), indicating that respiratory compensation (hypoventilation retaining CO₂) has begun. However, pH is still above 7.45, confirming the compensation is incomplete — defining partially compensated metabolic alkalosis. Full compensation would normalise pH to within the 7.35–7.45 range."
+  },
+
+  {
+    q: "Which of the following does NOT cause respiratory alkalosis?",
+    opts: [
+      "Anxiety",
+      "Pregnancy",
+      "Pulmonary embolism",
+      "Diarrhoea",
+      "Mechanical over-ventilation"
+    ],
+    ans: 3,
+    exp: "Respiratory alkalosis results from hyperventilation causing a fall in PaCO₂. Causes include anxiety, pregnancy (progesterone-driven hyperventilation), pulmonary embolism (hypoxia-driven reflex hyperventilation), mechanical over-ventilation, altitude, and fever. Diarrhoea causes loss of HCO₃⁻-rich fluid from the gastrointestinal tract, resulting in normal anion gap metabolic acidosis — not alkalosis. This is a classic distractor."
+  },
+
+  {
+    q: "In which acid-base condition is Kussmaul respiration characteristically observed?",
+    opts: [
+      "Metabolic alkalosis",
+      "Metabolic acidosis",
+      "Respiratory alkalosis",
+      "Respiratory acidosis",
+      "Mixed metabolic and respiratory alkalosis"
+    ],
+    ans: 1,
+    exp: "Kussmaul respiration is a deep, regular, laboured breathing pattern representing the respiratory compensation for severe metabolic acidosis. By increasing tidal volume (depth), the lungs attempt to blow off CO₂ and reduce carbonic acid production, partially correcting the acidaemia. It is classically associated with diabetic ketoacidosis and advanced renal failure. The pattern is the lungs trying to compensate for a metabolic problem — not a primary respiratory disorder."
+  }
+
+];
+
+const inhalationalRevisionQuestions = [
+
+  {
+    q: "The first proposed theory of the mechanism of action of inhalational anaesthetic agents is called the:",
+    opts: [
+      "Pauling-Miller Theory",
+      "Frank-Lieb Theory",
+      "Meyer-Overton Hypothesis",
+      "Ivan Pavlov Hypothesis",
+      "Kepler's Law"
+    ],
+    ans: 2,
+    exp: "The Meyer-Overton Hypothesis — proposed by Hans Meyer and Charles Overton independently around 1899–1901 — states that anaesthetic potency correlates directly with lipid solubility, as quantified by the Oil-Gas partition coefficient. Agents with higher oil-gas coefficients are more lipid-soluble and therefore more potent. While this relationship holds across a wide range of agents, the hypothesis does not explain all aspects of anaesthesia, including muscle relaxation. Later research identified GABA-B receptor potentiation as the primary mechanism for most inhaled agents, and NMDA receptor inhibition for N₂O and Xenon."
+  },
+
+  {
+    q: "The following factors affect transfer of the inhalational anaesthetic agent from the anaesthetic machine to the alveoli EXCEPT:",
+    opts: [
+      "Blood-gas partition coefficient",
+      "Inspired partial pressure",
+      "Alveolar ventilation",
+      "Anaesthetic breathing system",
+      "Functional residual capacity"
+    ],
+    ans: 0,
+    exp: "The blood-gas partition coefficient governs how readily the agent moves from the alveoli into the blood — it influences the alveoli-to-blood transfer step, not the machine-to-alveoli step. Factors affecting machine-to-alveoli transfer include: Inspired Partial Pressure (driving force), Alveolar Ventilation (determines how quickly the agent is delivered to alveoli), the Anaesthetic Breathing System (affects rebreathing and wash-in), and Functional Residual Capacity (acts as a diluting buffer — larger FRC means slower rise in alveolar concentration)."
+  },
+
+  {
+    q: "The potency of an inhalational anaesthetic agent is measured by:",
+    opts: [
+      "Minimum inhibitory concentration",
+      "Oil-gas partition coefficient",
+      "Minimum alveolar concentration",
+      "Blood-gas partition coefficient",
+      "None of the above"
+    ],
+    ans: 2,
+    exp: "The Minimum Alveolar Concentration (MAC) is the standard measure of inhalational anaesthetic potency. It is defined as the alveolar concentration at which 50% of unpremedicated patients do not move in response to a standardised surgical stimulus (such as a skin incision). A lower MAC indicates greater potency — halothane (MAC 0.75) is more potent than desflurane (MAC 6.0). The oil-gas partition coefficient correlates with potency via the Meyer-Overton hypothesis but is not itself the direct clinical measure of potency."
+  },
+
+  {
+    q: "The majority of inhalational anaesthetic agents are excreted via:",
+    opts: [
+      "Kidneys",
+      "Lungs",
+      "Intestines",
+      "Bile",
+      "Liver"
+    ],
+    ans: 1,
+    exp: "The primary excretion route for inhalational anaesthetic agents is the lungs, through expiration — the reverse of their administration route. The rate of excretion depends on the same pharmacokinetic factors that govern uptake, particularly blood-gas solubility and alveolar ventilation. Agents with low blood-gas partition coefficients (e.g. desflurane, sevoflurane) are excreted rapidly, producing fast recovery. A small proportion of some agents undergoes hepatic metabolism — notably halothane (~20%), which contributes to the risk of halothane hepatitis."
+  },
+
+  {
+    q: "Which of the following modes of administering anaesthesia has the fastest onset and best manipulability?",
+    opts: [
+      "Intrarectal",
+      "Oral",
+      "Intramuscular",
+      "Inhalational",
+      "Intravenous"
+    ],
+    ans: 3,
+    exp: "Inhalational anaesthesia provides the fastest onset of all routes and the greatest manipulability — the ability to rapidly adjust the depth of anaesthesia by changing the inspired concentration. Alveolar concentrations can be increased or decreased within minutes by adjusting the vaporiser setting and ventilation rate. Intravenous agents provide rapid onset but, once administered as a bolus, cannot be retrieved. Intramuscular, oral, and intrarectal routes all have slow, variable absorption profiles."
+  },
+
+  {
+    q: "The following are pharmacodynamic effects of inhalational anaesthetic agents on the body EXCEPT:",
+    opts: [
+      "Reduction of gastric motility",
+      "Increase in glomerular filtration rate",
+      "Decrease in glomerular filtration rate",
+      "Reduction of tidal volume",
+      "Relaxation of uterine smooth muscle"
+    ],
+    ans: 1,
+    exp: "Inhalational agents decrease GFR and urine output — they do NOT increase GFR. The renal depression results from reduced cardiac output and mean arterial pressure, which lowers renal perfusion pressure and activates the renin-angiotensin system. All other listed effects are correct: they reduce gastric motility (relevant to post-operative nausea), reduce tidal volume (requiring monitoring of ventilation), and relax uterine smooth muscle (clinically important in obstetric anaesthesia as it can cause uterine atony and haemorrhage)."
+  },
+
+  {
+    q: "The following is true of Isoflurane EXCEPT:",
+    opts: [
+      "It is used for maintenance of anaesthesia",
+      "It has a pungent, ethereal smell",
+      "It is an isomer of enflurane",
+      "It is used for induction of anaesthesia",
+      "It causes irritation of the airway"
+    ],
+    ans: 3,
+    exp: "Isoflurane is NOT used for induction of anaesthesia. Its pungent, ethereal odour is highly irritating to the respiratory tract, causing coughing, breath-holding, laryngospasm, and excessive secretions during inhalational induction — making it unsuitable for this purpose. It is used exclusively for maintenance of anaesthesia. All other statements are true: it is a structural isomer of enflurane, has a pungent smell, and causes airway irritation. Halothane, with its pleasant sweet smell, is the preferred agent for inhalational induction, particularly in children."
+  },
+
+  {
+    q: "Which of the following inhalational agents is a halogenated ether?",
+    opts: [
+      "Chloroethane",
+      "Halothane",
+      "Desflurane",
+      "Chloroform",
+      "Trichloroethylene"
+    ],
+    ans: 2,
+    exp: "Desflurane is a halogenated ether — it contains an ether linkage (C-O-C) and has been halogenated (fluorinated). The halogenated ethers include isoflurane, desflurane, sevoflurane, enflurane, and methoxyflurane. Chloroethane is a halogenated hydrocarbon (no ether linkage). Halothane and chloroform are halogenated hydrocarbons (not ethers). Trichloroethylene is also a halogenated hydrocarbon. The distinction between halogenated ethers and halogenated hydrocarbons is important for classification of inhalational agents."
+  },
+
+  {
+    q: "Which inhalational anaesthetic agent was historically used to understand and describe the planes of anaesthesia?",
+    opts: [
+      "Methoxyflurane",
+      "Ether",
+      "Chloroform",
+      "Nitrous oxide",
+      "Isoflurane"
+    ],
+    ans: 1,
+    exp: "Ether (diethyl ether) was the mother of all inhalational anaesthetics and became the reference standard for describing the planes (stages) of anaesthesia — systematized by Guedel in his 4-stage classification: analgesia, excitement, surgical anaesthesia (with four planes), and medullary depression. Ether's slow, gradual, and highly predictable pharmacokinetics made it ideal for identifying distinct anaesthetic stages. Modern agents achieve surgical anaesthesia rapidly with less distinct staging, making Guedel's classification of mainly historical significance today."
+  },
+
+  {
+    q: "The following is true of halothane EXCEPT:",
+    opts: [
+      "It is used for induction of anaesthesia",
+      "It has a sweet, pleasant smell",
+      "It is stabilised by the addition of glycol",
+      "It has the greatest cardiovascular depressant effect among inhalational agents",
+      "It reduces tidal volume and respiratory rate more greatly than other agents"
+    ],
+    ans: 2,
+    exp: "Halothane is stabilised by the addition of THYMOL (0.01%), not glycol. Thymol is an antioxidant that prevents oxidative degradation of halothane. It is also stored in dark amber bottles to protect it from light-induced breakdown. All other statements are correct: halothane has a sweet, non-irritating smell (making it suitable for induction, especially in children), produces the most profound cardiovascular depression among inhalational agents (greatest reduction in heart rate and blood pressure), and reduces tidal volume and respiratory rate more markedly than isoflurane or sevoflurane."
+  }
+
 ];
 
 /* ═══════════ COURSE STRUCTURE ═══════════ */
@@ -5433,7 +5859,9 @@ const COURSES = [
       { id:"derma_pilosebaceous", name:"Acne, Rosacea & Hidradenitis", questions:DERM_PILOSEBACEOUS_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
       { id:"derma_pr_sebderm", name:"Pityriasis Rosea & Seborrheic Dermatitis", questions:DERM_PR_SEBDERM_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
       { id:"derma_lp", name:"Lichen Planus", questions:DERM_LP_Qs, available:true, topic:"Dermatology", lecturer:"Prof. Madubuko" },
-      { id:"anaes", name:"Anaesthesiology", questions:[], available:false },
+      { id:"anaes_all",     name:"All Topics",                           questions:allTopicsQuestions,          available:true, topic:"Anaesthesiology" },
+      { id:"anaes_abg",     name:"ABG Quiz Questions",                   questions:abgQuizQuestions,            available:true, topic:"Anaesthesiology" },
+      { id:"anaes_inhale",  name:"Inhalational Revision Questions",      questions:inhalationalRevisionQuestions, available:true, topic:"Anaesthesiology" },
       { id:"ent", name:"ENT", questions:[], available:false },
       { id:"ophthal", name:"Ophthalmology", questions:[], available:false },
       { id:"ortho_septic", name:"Septic Arthritis", questions:ORTHO_SEPTIC_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
