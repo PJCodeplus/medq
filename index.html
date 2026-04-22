@@ -5041,143 +5041,263 @@ const allTopicsQuestions = [
 const abgQuizQuestions = [
 
   {
-    q: "Which of the following is a directly measured variable in ABG?",
-    opts: ["HCO₃⁻", "SpO₂", "PaCO₂", "Base Excess", "Standard bicarbonate"],
+    q: "Which of the following is a directly measured variable in arterial blood gas analysis?",
+    opts: [
+      "HCO₃⁻",
+      "SpO₂",
+      "PaCO₂",
+      "Base excess",
+      "Standard bicarbonate"
+    ],
     ans: 2,
     exp: "PaCO₂, pH, and PaO₂ are directly measured by blood gas analysers using specific electrodes. HCO₃⁻, base excess, and standard bicarbonate are all calculated values derived from the Henderson-Hasselbalch equation using the directly measured pH and PaCO₂. SpO₂ (pulse oximetry) is a non-invasive estimate obtained from light absorption and is not measured in ABG analysis."
   },
 
   {
-    q: "What is the normal range of arterial pH?",
-    opts: ["7.25 – 7.35", "7.35 – 7.45", "7.45 – 7.55", "7.30 – 7.40", "7.40 – 7.50"],
+    q: "What is the normal range of arterial blood pH?",
+    opts: [
+      "7.25–7.35",
+      "7.35–7.45",
+      "7.45–7.55",
+      "7.30–7.40",
+      "7.40–7.50"
+    ],
     ans: 1,
     exp: "Normal arterial pH is 7.35–7.45, maintained by the bicarbonate buffer system, haemoglobin, plasma proteins, and the coordinated actions of the lungs and kidneys. A pH below 7.35 defines acidaemia; above 7.45 defines alkalaemia. This narrow range is critical for normal enzyme function, oxygen delivery, and cellular metabolism."
   },
 
   {
-    q: "Which formula calculates the age-adjusted expected PaO₂ (in mmHg)?",
-    opts: ["100 – age", "102 – 0.33 × age", "90 – 0.44 × age", "120 – age", "95 – 0.5 × age"],
+    q: "Which formula calculates the age-adjusted expected PaO₂ in mmHg?",
+    opts: [
+      "100 − age",
+      "102 − (0.33 × age)",
+      "90 − (0.44 × age)",
+      "120 − age",
+      "95 − (0.5 × age)"
+    ],
     ans: 1,
-    exp: "The age-adjusted expected PaO₂ is calculated as 102 − (0.33 × age) mmHg. This accounts for the progressive physiological decline in PaO₂ that occurs with ageing due to increasing ventilation-perfusion mismatch and reduced alveolar surface area. A patient’s measured PaO₂ must be compared against this age-adjusted expected value rather than a fixed threshold to accurately identify clinically significant hypoxaemia."
+    exp: "The age-adjusted expected PaO₂ is calculated as 102 − (0.33 × age) mmHg. This accounts for the progressive physiological decline in PaO₂ that occurs with ageing due to increasing ventilation-perfusion mismatch and reduced alveolar surface area. A patient's measured PaO₂ must be compared against this age-adjusted expected value rather than a fixed threshold to accurately identify clinically significant hypoxaemia."
   },
 
   {
-    q: "A pH < 7.35 with HCO₃⁻ < 22 mEq/L indicates:",
-    opts: ["Metabolic acidosis", "Respiratory alkalosis", "Metabolic alkalosis", "Respiratory acidosis", "Mixed respiratory and metabolic acidosis"],
+    q: "A pH of 7.30 with HCO₃⁻ of 18 mEq/L indicates:",
+    opts: [
+      "Metabolic acidosis",
+      "Respiratory alkalosis",
+      "Metabolic alkalosis",
+      "Respiratory acidosis",
+      "Mixed metabolic and respiratory acidosis"
+    ],
     ans: 0,
-    exp: "A pH below 7.35 indicates acidaemia, and an HCO₃⁻ below 22 mEq/L (normal: 22–26 mEq/L) identifies a primary metabolic cause. Together, these define metabolic acidosis. Common causes include diabetic ketoacidosis, lactic acidosis, renal failure, and severe diarrhoea. Respiratory acidosis would be characterised by elevated PaCO₂ as the primary abnormality, not reduced HCO₃⁻."
+    exp: "A pH below 7.35 indicates acidaemia, and an HCO₃⁻ below 22 mEq/L (normal: 22–26 mEq/L) identifies a primary metabolic cause. Together, these define uncompensated or partially compensated metabolic acidosis. Common causes include diabetic ketoacidosis, lactic acidosis, renal failure, and severe diarrhoea. Respiratory acidosis would be characterised by elevated PaCO₂, not reduced HCO₃⁻, as the primary abnormality."
   },
 
   {
-    q: "Which artery is most preferred for ABG collection?",
-    opts: ["Carotid", "Femoral", "Radial", "Brachial", "Ulnar"],
+    q: "Which artery is most preferred for arterial blood gas sample collection?",
+    opts: [
+      "Carotid artery",
+      "Femoral artery",
+      "Radial artery",
+      "Brachial artery",
+      "Ulnar artery"
+    ],
     ans: 2,
     exp: "The radial artery is preferred for ABG sampling due to its superficial location, ease of palpation, and the presence of collateral circulation from the ulnar artery — assessed by the Allen test before sampling. If the radial is unavailable, the brachial or femoral artery may be used. The carotid artery is never used for ABG due to the unacceptable risk of cerebral embolism or haematoma compromising airway or cerebral blood flow."
   },
 
   {
-    q: "In compensated respiratory acidosis, what is expected of HCO₃⁻?",
-    opts: ["Normal", "Decreased", "Increased", "Unchanged", "Increased then normalizes"],
+    q: "In compensated respiratory acidosis, what change in HCO₃⁻ is expected?",
+    opts: [
+      "HCO₃⁻ remains normal",
+      "HCO₃⁻ decreases",
+      "HCO₃⁻ increases",
+      "HCO₃⁻ is unchanged from baseline",
+      "HCO₃⁻ rises transiently then normalizes"
+    ],
     ans: 2,
-    exp: "In respiratory acidosis, CO₂ accumulates, lowering pH. Over 3–5 days, the kidneys compensate by increasing HCO₃⁻ reabsorption and H⁺ excretion, raising serum HCO₃⁻ to partially restore pH toward normal. This compensatory elevation in HCO₃⁻ is the hallmark of chronic (compensated) respiratory acidosis. In acute uncompensated respiratory acidosis, HCO₃⁻ is initially normal — the metabolic compensation has not yet had time to develop."
+    exp: "In respiratory acidosis, CO₂ accumulates, lowering pH. Over 3–5 days, the kidneys compensate by increasing HCO₃⁻ reabsorption and H⁺ excretion, raising serum HCO₃⁻ to partially restore pH toward normal. This compensatory elevation in HCO₃⁻ is the hallmark of chronic (compensated) respiratory acidosis. In acute, uncompensated respiratory acidosis, HCO₃⁻ is initially normal — the metabolic compensation has not yet had time to develop."
   },
 
   {
-    q: "What acid is formed from CO₂ and H₂O?",
-    opts: ["Lactic acid", "Sulfuric acid", "Phosphoric acid", "Carbonic acid", "Bicarbonic acid"],
+    q: "What acid is formed from the combination of CO₂ and H₂O in the blood?",
+    opts: [
+      "Lactic acid",
+      "Sulfuric acid",
+      "Phosphoric acid",
+      "Carbonic acid",
+      "Bicarbonic acid"
+    ],
     ans: 3,
     exp: "CO₂ combines with water in the blood (catalysed by carbonic anhydrase in red blood cells) to form carbonic acid: CO₂ + H₂O ⇌ H₂CO₃. Carbonic acid then rapidly dissociates into H⁺ and HCO₃⁻. This reaction is central to respiratory acid-base regulation — by controlling the rate of CO₂ exhalation, the lungs directly control the production and elimination of carbonic acid and thus blood pH."
   },
 
   {
-    q: "A fully compensated metabolic alkalosis would have:",
-    opts: ["Normal pH, abnormal HCO₃⁻ and PaCO₂", "High pH, low HCO₃⁻", "Low pH, high HCO₃⁻", "High pH, low PaCO₂", "High pH, normal HCO₃⁻ and PaCO₂"],
+    q: "A fully compensated metabolic alkalosis would show which of the following ABG patterns?",
+    opts: [
+      "Normal pH, with abnormal HCO₃⁻ and PaCO₂",
+      "High pH with low HCO₃⁻",
+      "Low pH with high HCO₃⁻",
+      "High pH with low PaCO₂",
+      "High pH with high HCO₃⁻ and low PaCO₂"
+    ],
     ans: 0,
     exp: "In fully compensated metabolic alkalosis, the pH has been restored to the normal range (7.35–7.45) through respiratory compensation — hypoventilation retains CO₂, raising PaCO₂. Both HCO₃⁻ (primarily elevated — the metabolic disturbance) and PaCO₂ (secondarily elevated — the compensation) remain abnormal, even though pH appears normal. This is the key distinction between full and partial compensation."
   },
 
   {
-    q: "What is the normal value of PaCO₂?",
-    opts: ["20–30 mmHg", "30–40 mmHg", "35–45 mmHg", "45–55 mmHg", "40–50 mmHg"],
+    q: "What is the normal range of PaCO₂?",
+    opts: [
+      "20–30 mmHg",
+      "30–40 mmHg",
+      "35–45 mmHg",
+      "45–55 mmHg",
+      "40–50 mmHg"
+    ],
     ans: 2,
-    exp: "Normal PaCO₂ is 35–45 mmHg. A PaCO₂ below 35 mmHg indicates hyperventilation and defines respiratory alkalosis; above 45 mmHg indicates hypoventilation and defines respiratory acidosis. PaCO₂ is the primary respiratory component of acid-base balance and is tightly regulated by brainstem chemoreceptors, which respond to changes in H⁺ concentration and CO₂ levels by adjusting respiratory rate and depth."
+    exp: "Normal PaCO₂ is 35–45 mmHg. A PaCO₂ below 35 mmHg indicates hyperventilation and defines respiratory alkalosis; above 45 mmHg indicates hypoventilation and defines respiratory acidosis. PaCO₂ is the primary respiratory component of acid-base balance and is tightly regulated by the brainstem's chemoreceptors, which respond to changes in H⁺ concentration and CO₂ levels by adjusting respiratory rate and depth."
   },
 
   {
-    q: "Base excess (BE) is used to quantify:",
-    opts: ["Respiratory compensation", "Oxygenation status", "Metabolic component", "Serum potassium", "Renal bicarbonate threshold"],
+    q: "Base excess (BE) in arterial blood gas analysis is used to quantify:",
+    opts: [
+      "The degree of respiratory compensation",
+      "The adequacy of arterial oxygenation",
+      "The metabolic component of acid-base disturbance",
+      "The serum potassium level",
+      "The renal bicarbonate reabsorption threshold"
+    ],
     ans: 2,
     exp: "Base excess quantifies the metabolic component of acid-base disturbances. It represents the amount of acid or base (in mEq/L) required to return 1 litre of blood to a normal pH at a standardised PaCO₂ of 40 mmHg. Normal BE is −2 to +2 mEq/L. A negative BE (base deficit) indicates metabolic acidosis; a positive BE indicates metabolic alkalosis. By standardising PaCO₂, BE isolates the metabolic contribution from the respiratory component."
   },
 
   {
-    q: "What happens to potassium in metabolic acidosis?",
-    opts: ["Decreases in serum", "Remains unchanged", "Moves into cells", "Moves out of cells", "Is excreted in the urine"],
+    q: "What happens to serum potassium in metabolic acidosis?",
+    opts: [
+      "It decreases as the kidneys excrete more potassium",
+      "It remains unchanged despite changes in pH",
+      "It moves into cells in exchange for hydrogen ions",
+      "It moves out of cells into the extracellular fluid",
+      "It is selectively excreted by the kidneys in excess"
+    ],
     ans: 3,
     exp: "In metabolic acidosis, the accumulation of H⁺ ions drives a transcellular exchange: H⁺ enters cells and K⁺ shifts out into the extracellular fluid, raising serum potassium. For approximately every 0.1-unit fall in pH, serum K⁺ rises by 0.5–1.0 mmol/L. This hyperkalaemia can precipitate life-threatening cardiac arrhythmias. The reverse occurs in metabolic alkalosis, where K⁺ moves into cells, causing hypokalaemia."
   },
 
   {
     q: "Which of the following is a symptom of respiratory alkalosis?",
-    opts: ["Lethargy", "Diaphoresis", "Warm flushed skin", "Bradycardia", "Hyporeflexia"],
+    opts: [
+      "Lethargy",
+      "Diaphoresis",
+      "Warm flushed skin",
+      "Bradycardia",
+      "Hyporeflexia"
+    ],
     ans: 1,
-    exp: "Respiratory alkalosis results from hyperventilation-induced hypocapnia, which reduces cerebral perfusion and alters ionised calcium levels. Symptoms include diaphoresis, perioral tingling, carpopedal spasm (Trousseau’s sign), light-headedness, and palpitations. Lethargy is more characteristic of hypercapnia (respiratory acidosis). Warm flushed skin is associated with CO₂ retention due to peripheral vasodilation, not alkalosis."
+    exp: "Respiratory alkalosis results from hyperventilation-induced hypocapnia, which reduces cerebral perfusion and alters ionised calcium levels. Symptoms include diaphoresis, perioral tingling, carpopedal spasm (Trousseau's sign), light-headedness, and palpitations. Lethargy is more characteristic of hypercapnia (respiratory acidosis). Warm flushed skin is associated with CO₂ retention due to peripheral vasodilation, not alkalosis."
   },
 
   {
-    q: "Anion gap helps identify:",
-    opts: ["Hypokalemia", "Oxygen content", "Types of metabolic acidosis", "Respiratory failure", "Degree of metabolic compensation"],
+    q: "The anion gap is calculated to help identify:",
+    opts: [
+      "The presence of hypokalemia",
+      "Arterial oxygen content",
+      "The type of metabolic acidosis",
+      "The severity of respiratory failure",
+      "The degree of respiratory alkalosis"
+    ],
     ans: 2,
     exp: "The anion gap = Na⁺ − (Cl⁻ + HCO₃⁻), normal value 8–12 mEq/L. It distinguishes between high anion gap metabolic acidosis (HAGMA) — caused by accumulation of unmeasured anions such as lactate, ketoacids, phosphates, or toxins — and normal anion gap metabolic acidosis (NAGMA) — caused by HCO₃⁻ loss with compensatory Cl⁻ retention, as in diarrhoea or renal tubular acidosis. This distinction is critical for directing the diagnostic workup."
   },
 
   {
-    q: "Which condition can cause a high anion gap?",
-    opts: ["Diarrhea", "Renal failure", "Vomiting", "NG suction", "Hyperchloraemia"],
+    q: "Which of the following conditions causes a high anion gap metabolic acidosis?",
+    opts: [
+      "Diarrhoea",
+      "Renal failure",
+      "Vomiting",
+      "Nasogastric suction",
+      "Hyperchloraemia from saline infusion"
+    ],
     ans: 1,
-    exp: "Renal failure causes high anion gap metabolic acidosis because the kidneys fail to excrete phosphates and sulphates (unmeasured anions) and cannot regenerate HCO₃⁻. Other HAGMA causes: DKA, lactic acidosis, and certain toxins (methanol, ethylene glycol, salicylates). Diarrhoea causes normal anion gap acidosis. Vomiting and NG suction cause metabolic alkalosis from loss of HCl."
+    exp: "Renal failure causes high anion gap metabolic acidosis because the kidneys fail to excrete phosphates and sulphates (unmeasured anions) and cannot regenerate HCO₃⁻. Other HAGMA causes: DKA, lactic acidosis, and certain toxins (methanol, ethylene glycol, salicylates). Diarrhoea and renal tubular acidosis cause normal anion gap acidosis. Vomiting and NG suction cause metabolic alkalosis from loss of HCl."
   },
 
   {
-    q: "In metabolic alkalosis, PaCO₂ is:",
-    opts: ["Always low", "Normal if uncompensated", "Decreased when compensated", "Always increased", "Elevated only in chronic states"],
+    q: "In uncompensated metabolic alkalosis, PaCO₂ is:",
+    opts: [
+      "Always low regardless of compensation status",
+      "Normal because the respiratory system has not yet responded",
+      "Decreased as the lungs attempt to blow off excess bicarbonate",
+      "Always elevated due to CO₂ retention from hypoventilation",
+      "Elevated in both compensated and uncompensated states equally"
+    ],
     ans: 1,
-    exp: "In uncompensated metabolic alkalosis, the primary disturbance is an elevated HCO₃⁻ with a high pH, but PaCO₂ is initially normal — respiratory compensation (hypoventilation to retain CO₂) has not yet occurred. When compensation develops, PaCO₂ rises above normal. Therefore, normal PaCO₂ in the setting of elevated HCO₃⁻ and high pH indicates an uncompensated state."
+    exp: "In uncompensated metabolic alkalosis, the primary disturbance is an elevated HCO₃⁻ with a high pH, but PaCO₂ is initially normal — respiratory compensation (hypoventilation to retain CO₂) has not yet occurred. When compensation develops, PaCO₂ rises above normal. Therefore, normal PaCO₂ in the setting of elevated HCO₃⁻ and high pH indicates an uncompensated state, while elevated PaCO₂ indicates partial or full compensation."
   },
 
   {
-    q: "What is the role of the lungs in acid-base balance?",
-    opts: ["Excrete metabolic acids", "Reabsorb bicarbonate", "Excrete carbonic acid", "Produce hydrogen ions", "Store excess bicarbonate"],
+    q: "What is the primary role of the lungs in acid-base balance?",
+    opts: [
+      "Excrete metabolic acids such as lactic acid directly",
+      "Reabsorb bicarbonate from pulmonary capillaries",
+      "Excrete carbonic acid in the form of CO₂ and water",
+      "Produce hydrogen ions for the bicarbonate buffer system",
+      "Convert bicarbonate into carbonic acid for elimination"
+    ],
     ans: 2,
     exp: "The lungs maintain acid-base balance by excreting carbonic acid as CO₂ and water through expiration: H₂CO₃ → CO₂ + H₂O. By adjusting respiratory rate and tidal volume, the lungs can rapidly alter PaCO₂ and thus the carbonic acid concentration in the blood. This is the fastest buffering mechanism available. The kidneys, not the lungs, reabsorb bicarbonate and excrete H⁺ — a slower but more precise compensatory mechanism."
   },
 
   {
-    q: "A pH of 7.60, PaCO₂ of 25 mmHg, and HCO₃⁻ of 24 mEq/L is:",
-    opts: ["Metabolic alkalosis", "Uncompensated respiratory alkalosis", "Fully compensated alkalosis", "Normal", "Partially compensated respiratory alkalosis"],
+    q: "A patient has pH 7.60, PaCO₂ 25 mmHg, and HCO₃⁻ 24 mEq/L. What is the most accurate interpretation?",
+    opts: [
+      "Metabolic alkalosis",
+      "Uncompensated respiratory alkalosis",
+      "Fully compensated respiratory alkalosis",
+      "Normal acid-base status",
+      "Partially compensated metabolic alkalosis"
+    ],
     ans: 1,
     exp: "Systematic interpretation: pH 7.60 is alkalotic. PaCO₂ 25 mmHg is below normal (35–45), indicating a primary respiratory cause — respiratory alkalosis. HCO₃⁻ 24 mEq/L is normal, confirming that no metabolic compensation has yet occurred. This pattern — high pH, low PaCO₂, normal HCO₃⁻ — defines uncompensated respiratory alkalosis. If renal compensation had occurred, HCO₃⁻ would have fallen below normal."
   },
 
   {
-    q: "What does a pH of 7.49, PaCO₂ 48, and HCO₃⁻ 38 suggest?",
-    opts: ["Uncompensated metabolic alkalosis", "Fully compensated alkalosis", "Partially compensated metabolic alkalosis", "Normal", "Compensated respiratory acidosis"],
+    q: "A patient has pH 7.49, PaCO₂ 48 mmHg, and HCO₃⁻ 38 mEq/L. What does this ABG indicate?",
+    opts: [
+      "Uncompensated metabolic alkalosis",
+      "Fully compensated respiratory alkalosis",
+      "Partially compensated metabolic alkalosis",
+      "Normal acid-base status",
+      "Compensated respiratory acidosis"
+    ],
     ans: 2,
-    exp: "Systematic interpretation: pH 7.49 is mildly alkalotic. HCO₃⁻ 38 mEq/L is markedly elevated — this is the primary metabolic alkalosis. PaCO₂ 48 mmHg is above the normal range (35–45), indicating that respiratory compensation (hypoventilation retaining CO₂) has begun. However, pH is still above 7.45, confirming the compensation is incomplete — defining partially compensated metabolic alkalosis."
+    exp: "Systematic interpretation: pH 7.49 is mildly alkalotic. HCO₃⁻ 38 mEq/L is markedly elevated — this is the primary metabolic alkalosis. PaCO₂ 48 mmHg is above the normal range (35–45), indicating that respiratory compensation (hypoventilation retaining CO₂) has begun. However, pH is still above 7.45, confirming the compensation is incomplete — defining partially compensated metabolic alkalosis. Full compensation would normalise pH to within the 7.35–7.45 range."
   },
 
   {
     q: "Which of the following does NOT cause respiratory alkalosis?",
-    opts: ["Anxiety", "Pregnancy", "Pulmonary embolism", "Diarrhea", "Mechanical hyperventilation"],
+    opts: [
+      "Anxiety",
+      "Pregnancy",
+      "Pulmonary embolism",
+      "Diarrhoea",
+      "Mechanical over-ventilation"
+    ],
     ans: 3,
-    exp: "Respiratory alkalosis results from hyperventilation causing a fall in PaCO₂. Causes include anxiety, pregnancy (progesterone-driven hyperventilation), pulmonary embolism (hypoxia-driven reflex hyperventilation), and mechanical over-ventilation. Diarrhoea causes loss of HCO₃⁻-rich fluid from the gastrointestinal tract, resulting in normal anion gap metabolic acidosis — not alkalosis."
+    exp: "Respiratory alkalosis results from hyperventilation causing a fall in PaCO₂. Causes include anxiety, pregnancy (progesterone-driven hyperventilation), pulmonary embolism (hypoxia-driven reflex hyperventilation), mechanical over-ventilation, altitude, and fever. Diarrhoea causes loss of HCO₃⁻-rich fluid from the gastrointestinal tract, resulting in normal anion gap metabolic acidosis — not alkalosis. This is a classic distractor."
   },
 
   {
-    q: "In which condition is Kussmaul respiration observed?",
-    opts: ["Metabolic alkalosis", "Metabolic acidosis", "Respiratory alkalosis", "Respiratory acidosis", "Mixed metabolic and respiratory acidosis"],
+    q: "In which acid-base condition is Kussmaul respiration characteristically observed?",
+    opts: [
+      "Metabolic alkalosis",
+      "Metabolic acidosis",
+      "Respiratory alkalosis",
+      "Respiratory acidosis",
+      "Mixed metabolic and respiratory alkalosis"
+    ],
     ans: 1,
-    exp: "Kussmaul respiration is a deep, regular, laboured breathing pattern representing the respiratory compensation for severe metabolic acidosis. By increasing tidal volume (depth), the lungs attempt to blow off CO₂ and reduce carbonic acid production, partially correcting the acidaemia. It is classically associated with diabetic ketoacidosis and advanced renal failure."
+    exp: "Kussmaul respiration is a deep, regular, laboured breathing pattern representing the respiratory compensation for severe metabolic acidosis. By increasing tidal volume (depth), the lungs attempt to blow off CO₂ and reduce carbonic acid production, partially correcting the acidaemia. It is classically associated with diabetic ketoacidosis and advanced renal failure. The pattern is the lungs trying to compensate for a metabolic problem — not a primary respiratory disorder."
   }
 
 ];
@@ -5185,75 +5305,190 @@ const abgQuizQuestions = [
 const inhalationalRevisionQuestions = [
 
   {
-    q: "The First theory of the mechanism of action of inhalational agents is called the:",
-    opts: ["Pauling-Miller Theory", "Frank-Lieb Theory", "Meyer-Overton Hypothesis", "Ivan Pavlov Hypothesis", "Kepler's Law"],
+    q: "The first proposed theory of the mechanism of action of inhalational anaesthetic agents is called the:",
+    opts: [
+      "Pauling-Miller Theory",
+      "Frank-Lieb Theory",
+      "Meyer-Overton Hypothesis",
+      "Ivan Pavlov Hypothesis",
+      "Kepler's Law"
+    ],
     ans: 2,
-    exp: "The Meyer-Overton Hypothesis — proposed by Hans Meyer and Charles Overton independently — states that anaesthetic potency correlates directly with lipid solubility, as quantified by the Oil-Gas partition coefficient. Agents with higher oil-gas coefficients are more lipid-soluble and therefore more potent. While this relationship holds across a wide range of agents, the hypothesis does not explain muscle relaxation. Later research identified GABA-B receptor potentiation as the primary mechanism for most inhaled agents, and NMDA receptor inhibition for N₂O and Xenon."
+    exp: "The Meyer-Overton Hypothesis — proposed by Hans Meyer and Charles Overton independently around 1899–1901 — states that anaesthetic potency correlates directly with lipid solubility, as quantified by the Oil-Gas partition coefficient. Agents with higher oil-gas coefficients are more lipid-soluble and therefore more potent. While this relationship holds across a wide range of agents, the hypothesis does not explain all aspects of anaesthesia, including muscle relaxation. Later research identified GABA-B receptor potentiation as the primary mechanism for most inhaled agents, and NMDA receptor inhibition for N₂O and Xenon."
   },
 
   {
-    q: "The following factors affect transfer of the inhalational agents from the anesthetic machine to the alveoli EXCEPT:",
-    opts: ["Blood-gas coefficient", "Inspired Partial Pressure", "Alveoli Ventilation", "Anesthetic Breathing System", "Functional Residual Capacity"],
+    q: "The following factors affect transfer of the inhalational anaesthetic agent from the anaesthetic machine to the alveoli EXCEPT:",
+    opts: [
+      "Blood-gas partition coefficient",
+      "Inspired partial pressure",
+      "Alveolar ventilation",
+      "Anaesthetic breathing system",
+      "Functional residual capacity"
+    ],
     ans: 0,
-    exp: "The blood-gas partition coefficient governs how readily the agent moves from the alveoli into the blood — it influences the alveoli-to-blood transfer step, not the machine-to-alveoli step. Factors affecting machine-to-alveoli transfer include: Inspired Partial Pressure (driving force), Alveolar Ventilation (determines how quickly the agent reaches the alveoli), the Anaesthetic Breathing System (affects rebreathing and wash-in), and Functional Residual Capacity (acts as a diluting buffer)."
+    exp: "The blood-gas partition coefficient governs how readily the agent moves from the alveoli into the blood — it influences the alveoli-to-blood transfer step, not the machine-to-alveoli step. Factors affecting machine-to-alveoli transfer include: Inspired Partial Pressure (driving force), Alveolar Ventilation (determines how quickly the agent is delivered to alveoli), the Anaesthetic Breathing System (affects rebreathing and wash-in), and Functional Residual Capacity (acts as a diluting buffer — larger FRC means slower rise in alveolar concentration)."
   },
 
   {
-    q: "The potency of an inhalational agent is measured by:",
-    opts: ["Minimum Inhibitory Concentration", "Oil-Gas Coefficient", "Minimum Alveolar Concentration", "Blood-gas coefficient", "None of the above"],
+    q: "The potency of an inhalational anaesthetic agent is measured by:",
+    opts: [
+      "Minimum inhibitory concentration",
+      "Oil-gas partition coefficient",
+      "Minimum alveolar concentration",
+      "Blood-gas partition coefficient",
+      "None of the above"
+    ],
     ans: 2,
     exp: "The Minimum Alveolar Concentration (MAC) is the standard measure of inhalational anaesthetic potency. It is defined as the alveolar concentration at which 50% of unpremedicated patients do not move in response to a standardised surgical stimulus (such as a skin incision). A lower MAC indicates greater potency — halothane (MAC 0.75) is more potent than desflurane (MAC 6.0). The oil-gas partition coefficient correlates with potency via the Meyer-Overton hypothesis but is not itself the direct clinical measure of potency."
   },
 
   {
-    q: "Majority of inhalational agents are excreted via:",
-    opts: ["Kidneys", "Lungs", "Intestines", "Bile", "Liver"],
+    q: "The majority of inhalational anaesthetic agents are excreted via:",
+    opts: [
+      "Kidneys",
+      "Lungs",
+      "Intestines",
+      "Bile",
+      "Liver"
+    ],
     ans: 1,
-    exp: "The primary excretion route for inhalational anaesthetic agents is the lungs, through expiration — the reverse of their administration route. The rate of excretion depends on blood-gas solubility and alveolar ventilation. Agents with low blood-gas partition coefficients (e.g. desflurane, sevoflurane) are excreted rapidly, producing fast recovery. A small proportion undergoes hepatic metabolism — notably halothane (~20%), which contributes to the risk of halothane hepatitis."
+    exp: "The primary excretion route for inhalational anaesthetic agents is the lungs, through expiration — the reverse of their administration route. The rate of excretion depends on the same pharmacokinetic factors that govern uptake, particularly blood-gas solubility and alveolar ventilation. Agents with low blood-gas partition coefficients (e.g. desflurane, sevoflurane) are excreted rapidly, producing fast recovery. A small proportion of some agents undergoes hepatic metabolism — notably halothane (~20%), which contributes to the risk of halothane hepatitis."
   },
 
   {
-    q: "Which of the following modes of administrating anesthesia has the fastest response?",
-    opts: ["Intrarectal", "Oral", "Intramuscular", "Inhalational", "Intravenous"],
+    q: "Which of the following modes of administering anaesthesia has the fastest onset and best manipulability?",
+    opts: [
+      "Intrarectal",
+      "Oral",
+      "Intramuscular",
+      "Inhalational",
+      "Intravenous"
+    ],
     ans: 3,
     exp: "Inhalational anaesthesia provides the fastest onset of all routes and the greatest manipulability — the ability to rapidly adjust the depth of anaesthesia by changing the inspired concentration. Alveolar concentrations can be increased or decreased within minutes by adjusting the vaporiser setting and ventilation rate. Intravenous agents provide rapid onset but, once administered as a bolus, cannot be retrieved. Intramuscular, oral, and intrarectal routes all have slow, variable absorption profiles."
   },
 
   {
-    q: "The following are the pharmacodynamic effects of inhalational agents on parts of the body EXCEPT:",
-    opts: ["Reduce gastric motility", "Increase GFR", "Decrease GFR", "Reduce tidal volume", "Relax uterine muscles"],
+    q: "The following are pharmacodynamic effects of inhalational anaesthetic agents on the body EXCEPT:",
+    opts: [
+      "Reduction of gastric motility",
+      "Increase in glomerular filtration rate",
+      "Decrease in glomerular filtration rate",
+      "Reduction of tidal volume",
+      "Relaxation of uterine smooth muscle"
+    ],
     ans: 1,
-    exp: "Inhalational agents decrease GFR and urine output — they do NOT increase GFR. The renal depression results from reduced cardiac output and mean arterial pressure, which lowers renal perfusion pressure and activates the renin-angiotensin system. All other listed effects are correct: they reduce gastric motility, reduce tidal volume (requiring monitoring of ventilation), and relax uterine smooth muscle (important in obstetric anaesthesia as it can cause uterine atony and haemorrhage)."
+    exp: "Inhalational agents decrease GFR and urine output — they do NOT increase GFR. The renal depression results from reduced cardiac output and mean arterial pressure, which lowers renal perfusion pressure and activates the renin-angiotensin system. All other listed effects are correct: they reduce gastric motility (relevant to post-operative nausea), reduce tidal volume (requiring monitoring of ventilation), and relax uterine smooth muscle (clinically important in obstetric anaesthesia as it can cause uterine atony and haemorrhage)."
   },
 
   {
     q: "The following is true of Isoflurane EXCEPT:",
-    opts: ["Used for maintenance of anesthesia", "Has a pungent ethereal smell", "An isomer of enflurane", "Used for induction of anesthesia", "Causes irritation of the airway"],
+    opts: [
+      "It is used for maintenance of anaesthesia",
+      "It has a pungent, ethereal smell",
+      "It is an isomer of enflurane",
+      "It is used for induction of anaesthesia",
+      "It causes irritation of the airway"
+    ],
     ans: 3,
-    exp: "Isoflurane is NOT used for induction of anaesthesia. Its pungent, ethereal odour is highly irritating to the respiratory tract, causing coughing, breath-holding, laryngospasm, and excessive secretions during inhalational induction — making it unsuitable for this purpose. It is used exclusively for maintenance of anaesthesia. All other statements are true: it is a structural isomer of enflurane, has a pungent smell, and causes airway irritation. Halothane, with its pleasant sweet smell, is the preferred agent for inhalational induction."
+    exp: "Isoflurane is NOT used for induction of anaesthesia. Its pungent, ethereal odour is highly irritating to the respiratory tract, causing coughing, breath-holding, laryngospasm, and excessive secretions during inhalational induction — making it unsuitable for this purpose. It is used exclusively for maintenance of anaesthesia. All other statements are true: it is a structural isomer of enflurane, has a pungent smell, and causes airway irritation. Halothane, with its pleasant sweet smell, is the preferred agent for inhalational induction, particularly in children."
   },
 
   {
-    q: "Which of the following is a halogenated ether?",
-    opts: ["Chloroethane", "Halothane", "Desflurane", "Chloroform", "Trichloroethylene"],
+    q: "Which of the following inhalational agents is a halogenated ether?",
+    opts: [
+      "Chloroethane",
+      "Halothane",
+      "Desflurane",
+      "Chloroform",
+      "Trichloroethylene"
+    ],
     ans: 2,
-    exp: "Desflurane is a halogenated ether — it contains an ether linkage (C-O-C) and has been halogenated (fluorinated). The halogenated ethers include isoflurane, desflurane, sevoflurane, enflurane, and methoxyflurane. Chloroethane, halothane, chloroform, and trichloroethylene are all halogenated hydrocarbons (not ethers) — they lack the ether oxygen linkage. The distinction between halogenated ethers and halogenated hydrocarbons is important for classification."
+    exp: "Desflurane is a halogenated ether — it contains an ether linkage (C-O-C) and has been halogenated (fluorinated). The halogenated ethers include isoflurane, desflurane, sevoflurane, enflurane, and methoxyflurane. Chloroethane is a halogenated hydrocarbon (no ether linkage). Halothane and chloroform are halogenated hydrocarbons (not ethers). Trichloroethylene is also a halogenated hydrocarbon. The distinction between halogenated ethers and halogenated hydrocarbons is important for classification of inhalational agents."
   },
 
   {
-    q: "Which of the following was used to understand the plane of anesthesia?",
-    opts: ["Methoxyflurane", "Ether", "Chloroform", "Nitrous oxide", "Isoflurane"],
+    q: "Which inhalational anaesthetic agent was historically used to understand and describe the planes of anaesthesia?",
+    opts: [
+      "Methoxyflurane",
+      "Ether",
+      "Chloroform",
+      "Nitrous oxide",
+      "Isoflurane"
+    ],
     ans: 1,
-    exp: "Ether (diethyl ether) was the mother of all inhalational anaesthetics and became the reference standard for describing the planes (stages) of anaesthesia — systematized by Guedel in his 4-stage classification: analgesia, excitement, surgical anaesthesia (with four planes), and medullary depression. Ether’s slow, gradual, and highly predictable pharmacokinetics made it ideal for identifying distinct anaesthetic stages."
+    exp: "Ether (diethyl ether) was the mother of all inhalational anaesthetics and became the reference standard for describing the planes (stages) of anaesthesia — systematized by Guedel in his 4-stage classification: analgesia, excitement, surgical anaesthesia (with four planes), and medullary depression. Ether's slow, gradual, and highly predictable pharmacokinetics made it ideal for identifying distinct anaesthetic stages. Modern agents achieve surgical anaesthesia rapidly with less distinct staging, making Guedel's classification of mainly historical significance today."
   },
 
   {
-    q: "The following is true of Halothane EXCEPT:",
-    opts: ["Used for induction", "Has a sweet smell", "Stabilised by adding glycol", "Has the greatest effect on the heart than any other inhalational agent", "Reduces tidal volume more greatly than other inhalational agents"],
+    q: "The following is true of halothane EXCEPT:",
+    opts: [
+      "It is used for induction of anaesthesia",
+      "It has a sweet, pleasant smell",
+      "It is stabilised by the addition of glycol",
+      "It has the greatest cardiovascular depressant effect among inhalational agents",
+      "It reduces tidal volume and respiratory rate more greatly than other agents"
+    ],
     ans: 2,
-    exp: "Halothane is stabilised by the addition of THYMOL (0.01%), not glycol. Thymol is an antioxidant that prevents oxidative degradation of halothane. It is also stored in dark amber bottles to protect it from light-induced breakdown. All other statements are correct: halothane has a sweet non-irritating smell (making it suitable for induction), produces the most profound cardiovascular depression among inhalational agents, and reduces tidal volume and respiratory rate more markedly than other agents."
+    exp: "Halothane is stabilised by the addition of THYMOL (0.01%), not glycol. Thymol is an antioxidant that prevents oxidative degradation of halothane. It is also stored in dark amber bottles to protect it from light-induced breakdown. All other statements are correct: halothane has a sweet, non-irritating smell (making it suitable for induction, especially in children), produces the most profound cardiovascular depression among inhalational agents (greatest reduction in heart rate and blood pressure), and reduces tidal volume and respiratory rate more markedly than isoflurane or sevoflurane."
   }
 
+];
+
+
+/* ═══════════ OPHTHALMOLOGY — CATARACTS ═══════════ */
+const OPHTHAL_CATARACTS_Qs = [
+  { q:"The water-soluble crystallins of the human lens are composed of three protein subtypes — alpha, beta, and gamma. Which of the following correctly states their relative proportions?", opts:["Alpha crystallins 55%, beta 30%, gamma 15%","Beta crystallins 55%, alpha 30%, gamma 15%","Gamma crystallins 55%, beta 30%, alpha 15%","Alpha crystallins 50%, beta 35%, gamma 15%","Beta crystallins 45%, gamma 35%, alpha 20%"], ans:1, exp:"Beta crystallins constitute the largest fraction of water-soluble lens proteins at 55%, followed by alpha at 30% and gamma at 15%. These proteins are derived from two unrelated protein superfamilies. Alpha crystallins are the most highly conserved among the three. Water-insoluble proteins increase with age and are directly responsible for cataract genesis — this is why senile cataracts develop as protein homeostasis deteriorates over time." },
+  { q:"A 70-year-old woman who previously relied on reading glasses reports she can now read newspaper print without them. Slit lamp examination reveals a dense nuclear opacity in both lenses. What is the most likely explanation for this change?", opts:["Hyperopic shift from progressive flattening of the posterior lens surface","Improved retinal sensitivity from reduced light scatter through the opacity","Myopic refractive shift caused by the increasing refractive index of the nuclear cataract","Reduction in axial length from posterior displacement of the lens into the vitreous","Irregular astigmatism from asymmetric distribution of the nuclear opacity"], ans:2, exp:"This is the phenomenon of 'second sight.' As a nuclear cataract develops, the increasing density of the lens nucleus raises its refractive index, producing a myopic shift. This temporarily corrects the presbyopia most elderly patients experience, allowing them to read without spectacles. The patient has not improved — the cataract is creating a new refractive error that happens to counteract the previous hyperopic/presbyopic state. As the cataract worsens further, this improvement disappears and vision deteriorates overall." },
+  { q:"A patient with a cataract has a visual acuity of 6/24 in the affected eye. According to standard clinical staging, this corresponds to which stage of cataract formation?", opts:["Developing cataract","Mature cataract","Developed cataract","Immature cataract","Hypermature cataract"], ans:3, exp:"The clinical staging of cataracts by visual acuity is: Developing cataract — VA still full (6/12–6/6); Immature cataract — VA reduced (6/18–6/36); Developed cataract — VA severely reduced (6/60–3/60); Mature/Hypermature cataract — only counting fingers, hand movements, or light perception. A VA of 6/24 falls within the immature range (6/18–6/36). This staging guides the urgency and appropriateness of surgical intervention." },
+  { q:"Cataracts may develop as a consequence of chronic systemic drug exposure. Which of the following drug groups is most strongly associated with posterior subcapsular cataract formation?", opts:["Beta-blockers","ACE inhibitors","Calcium channel blockers","Proton pump inhibitors","Corticosteroids"], ans:4, exp:"Corticosteroids are the most well-established drug cause of posterior subcapsular cataracts. Both topical and systemic steroids can cause this complication with prolonged use. Other drug-induced cataracts include those from miotics (e.g. pilocarpine), phenothiazines (e.g. chlorpromazine — cause anterior lens changes), and smoking. The mechanism involves inhibition of lens epithelial cell metabolism and accumulation of sorbitol-like compounds. Beta-blockers, ACE inhibitors, calcium channel blockers, and PPIs do not have established cataractogenic effects." },
+  { q:"Intracapsular cataract extraction (ICCE) is rarely performed today. In current ophthalmological practice, which clinical scenario remains a valid indication for ICCE?", opts:["Subluxation or dislocation of the crystalline lens","Hypermature cataract with a liquefied milky cortex","Dense posterior polar cataract with a thin posterior capsule","Traumatic cataract developing months after blunt ocular injury","Failure of phacoemulsification due to a very hard nucleus"], ans:0, exp:"ICCE was the standard surgical approach until the mid-1980s. Today it is reserved for cases of subluxation or dislocation of the lens, where the zonular fibres are too compromised to support an extracapsular approach safely. In all other situations, ECCE or phacoemulsification is preferred because they preserve the posterior capsule, which provides stable support for posterior chamber IOL implantation." },
+  { q:"Phacoemulsification with posterior chamber IOL implantation requires a significantly smaller incision than conventional ECCE. What is the standard incision length required for phacoemulsification?", opts:["1–2 mm","3–6 mm","7–10 mm","6–8 mm","10–13 mm"], ans:1, exp:"Phacoemulsification requires an incision of only 3–6 mm, compared to the 10–12 mm incision required for conventional ECCE. When a tunnel technique is used, this incision is self-sealing and requires no suture. The procedure uses a high-frequency ultrasonic needle to emulsify and aspirate the lens nucleus. The smaller incision results in faster wound healing, less induced astigmatism, and a shorter recovery." },
+  { q:"During administration of a retrobulbar block before cataract surgery, the patient suddenly develops bradycardia and a cardiac arrhythmia — the oculocardiac reflex. What is the correct immediate pharmacological treatment?", opts:["Intravenous adrenaline 0.1 mg","Sublingual glyceryl trinitrate 0.4 mg","Intravenous atropine 0.2 μg/kg","Intravenous lignocaine 1 mg/kg","Intravenous calcium gluconate 10 mL"], ans:2, exp:"The oculocardiac reflex (Aschner reflex) results from pressure on or around the globe stimulating the ophthalmic division of the trigeminal nerve, which reflexively activates the vagus nerve, causing bradycardia and arrhythmias. The correct treatment is intravenous atropine 0.2 μg/kg — an anticholinergic agent that blocks vagal activity and restores normal heart rate. Adrenaline would be inappropriate for simple bradycardia." },
+  { q:"Expulsive choroidal hemorrhage is a catastrophic intraoperative complication of cataract surgery. Which patient group carries the highest risk for this complication?", opts:["Young myopic patients undergoing their first cataract surgery","Diabetic patients with proliferative retinopathy","Patients with a prior history of corneal transplantation","Hypertensive patients and those with arteriosclerosis","Patients with congenital cataracts and small anterior chambers"], ans:3, exp:"Expulsive choroidal haemorrhage results from rupture of choroidal vessels, usually the long posterior ciliary arteries. Risk factors include hypertension, arteriosclerosis (weakened vessel walls), chronic glaucoma, advanced age, hypotony, and atherosclerosis. During the haemorrhage the wound gaps, intraocular contents are expelled, followed by a gush of bright red blood. Its incidence has significantly decreased with phacoemulsification compared to ICCE and ECCE." },
+  { q:"Acute bacterial endophthalmitis is one of the most feared complications of cataract surgery. Within what timeframe after surgery do its clinical features characteristically appear?", opts:["6–12 hours postoperatively","5–7 days postoperatively","2–4 weeks postoperatively","3–6 months postoperatively","48–72 hours postoperatively"], ans:4, exp:"Acute bacterial endophthalmitis following cataract surgery characteristically presents between 48 and 72 hours postoperatively. Features include pain, diminished vision, lid oedema, exudates in the pupillary area, hypopyon, and a diminished or absent red pupillary reflex. It is an ophthalmic emergency requiring intravitreal and systemic antibiotics, as well as subconjunctival steroids and antibiotics. Delayed chronic endophthalmitis (e.g. P. acnes) presents months to years later — an entirely different entity." },
+  { q:"A patient presents 9 months after uncomplicated ECCE with a low-grade uveitis, hypopyon, and a white plaque visible within the capsular bag. The most likely causative organism trapped within the capsular bag is:", opts:["Propionibacterium acnes","Pseudomonas aeruginosa","Aspergillus fumigatus","Staphylococcus aureus","Streptococcus viridans"], ans:0, exp:"Delayed chronic postoperative endophthalmitis is caused by organisms of low virulence — most classically Propionibacterium acnes (now Cutibacterium acnes) or Staphylococcus epidermidis — that become trapped within the capsular bag at the time of surgery. The onset ranges from 4 weeks to years, with an average of 9 months. The white plaque within the capsular bag is a hallmark finding, representing bacterial colonies encased within residual lens material. The indolent course distinguishes it from acute endophthalmitis caused by more virulent organisms." },
+  { q:"Cystoid macular oedema (CMO) is a recognised late complication of cataract surgery. What is the characteristic pattern seen on fluorescein angiography (FA)?", opts:["Bull's-eye hypofluorescence with a central bright spot","Flower petal pattern from leakage of perifoveal capillaries","Late disc hyperfluorescence with central macular pooling","Diffuse background choroidal hyperfluorescence at the posterior pole","Arteriovenous shunting with filling defects at the macula"], ans:1, exp:"CMO on fluorescein angiography produces the classic 'flower petal' or 'petaloid' pattern, caused by leakage of dye from dilated perifoveal capillaries into cystic spaces in the Henle fibre layer of the macula. Its incidence is 50% by FA after ICCE, 20% after ECCE, and considerably less after uncomplicated phacoemulsification. Treatment is with anti-prostaglandins (e.g. indomethacin, ketorolac eye drops). Cases with vitreous incarceration may benefit from anterior vitrectomy." },
+  { q:"A patient who underwent ECCE returns 8 months later with progressive visual decline. Slit lamp examination reveals multiple pearl-like clusters of lens epithelial cell proliferation distributed across the posterior capsule. This specific morphological type of after-cataract is termed:", opts:["Soemmering's ring","Dense membranous after-cataract","Elschnig's pearls","Thickened posterior capsule opacification","Fibrinous membranous after-cataract"], ans:2, exp:"Elschnig's pearls are a subtype of after-cataract arising from proliferation of residual anterior lens epithelial cells across the posterior capsule, forming characteristic round, bubble-like, pearl-like formations. The four clinical types of after-cataract are: (1) thickened posterior capsule, (2) dense membranous type, (3) Soemmering's ring — a doughnut-shaped opacity peripherally — and (4) Elschnig's pearls. Elschnig's pearls involving the central posterior capsule are treated with Nd:YAG laser capsulotomy." },
+  { q:"A patient who received a rigid anterior chamber IOL develops recurrent uveitis, persistently elevated intraocular pressure, and repeated episodes of spontaneous hyphema. This triad of complications specifically associated with rigid AC IOL use is known as:", opts:["Toxic lens syndrome","Pseudophakic bullous keratopathy","Iridocorneal endothelial syndrome","UGH syndrome","Sunset syndrome"], ans:3, exp:"UGH syndrome stands for Uveitis-Glaucoma-Hyphema and is a complication associated with the use of rigid anterior chamber IOLs. The haptics or optic repeatedly traumatise the iris, causing recurring hyphema, inflammation (uveitis), and secondary elevation of IOP (glaucoma). Toxic lens syndrome is uveal inflammation caused by ethylene oxide used in IOL sterilisation. Sunset syndrome refers to inferior subluxation of a PC IOL." },
+  { q:"Following posterior chamber IOL implantation, examination reveals that the optic of the IOL has undergone superior subluxation out of the capsular bag. This specific finding is termed:", opts:["Windshield wiper syndrome","Lost lens syndrome","Sunset syndrome","Pupillary capture syndrome","Sunrise syndrome"], ans:4, exp:"IOL subluxation/malposition has specific descriptive terms based on direction: Sunrise syndrome refers to superior subluxation of the IOL; Sunset syndrome refers to inferior subluxation of the IOL; Lost lens syndrome describes complete dislocation of the IOL into the vitreous cavity; Windshield wiper syndrome occurs when a very small IOL is placed vertically in the sulcus. Remembering the analogy: the 'sun' rising = superior, setting = inferior." }
+];
+
+/* ═══════════ OPHTHALMOLOGY — CONJUNCTIVA ═══════════ */
+const OPHTHAL_CONJUNCTIVA_Qs = [
+  { q:"A 40-year-old farmer presents with a triangular fibrovascular growth on the nasal aspect of his right eye that crosses the limbus and encroaches onto the cornea. As this lesion extends beyond the limbus, it specifically invades which corneal layer?", opts:["Descemet's membrane","Bowman's layer","The corneal stroma","The deep corneal epithelium","The anterior conjunctival stroma"], ans:1, exp:"Pterygium is a triangular fibrovascular subepithelial ingrowth of degenerative bulbar conjunctival tissue that crosses the limbus and invades the cornea by destroying Bowman's layer. This is the key histological difference from a pingueculum, which undergoes the same elastotic stromal degeneration but does NOT cross the limbus. The invasion of Bowman's layer explains why pterygium can cause corneal scarring and why simple excision carries a high recurrence rate — the basement membrane is disrupted." },
+  { q:"On slit lamp examination of a patient with pterygium, a linear deposit of iron pigment is seen in the corneal epithelium immediately anterior to the advancing head of the lesion. What is the correct name for this finding?", opts:["Hudson-Stahli line","Fleischer's ring","Stocker's line","Ferry's line","Kayser-Fleischer ring"], ans:2, exp:"Stocker's line is a horizontal iron deposit in the corneal epithelium found at the leading edge of a pterygium, particularly in slowly growing or regressing lesions. Other corneal iron deposit lines: Hudson-Stahli line — found at the junction of the middle and lower thirds of normal corneas in elderly patients; Fleischer's ring — at the base of the cone in keratoconus; Ferry's line — anterior to a filtering bleb after glaucoma surgery; Kayser-Fleischer ring — in Wilson's disease." },
+  { q:"A 55-year-old outdoor worker presents with a yellow-white elevated mound on the nasal bulbar conjunctiva, adjacent to the limbus, that has been slowly present for years. Unlike pterygium, this lesion has which of the following distinctive characteristics?", opts:["It invades Bowman's layer of the adjacent nasal cornea","It is composed of hyaline rather than elastotic stromal tissue","It causes corneal astigmatism by traction on the adjacent limbus","It does not cross the limbus or encroach on the cornea","It is always symptomatic and requires early surgical excision"], ans:3, exp:"The lesion described is a pingueculum — a growth resulting from elastotic degeneration of the conjunctival stroma. Its defining feature compared to pterygium is that it does NOT cross the limbus and does not encroach on the cornea. Both pingueculum and pterygium share the same histological process (elastotic degeneration). In some cases, a pingueculum may transform into a pterygium. Pingueculae are often asymptomatic; when inflamed (pingueculitis), they cause tearing, burning, and itching." },
+  { q:"A known pingueculum becomes acutely inflamed, presenting with redness, tearing, and burning sensation — a condition termed pingueculitis. What is the most appropriate topical pharmacological treatment?", opts:["Topical pilocarpine","Topical hypamellose","Topical mitomycin C","Topical timolol","Topical fluorometholone"], ans:4, exp:"Pingueculitis is managed with topical corticosteroids, of which topical fluorometholone is specifically mentioned for this indication. Corticosteroids suppress the acute inflammatory response. Outside of acute flares, routine management involves topical lubricants such as hypamellose. Mitomycin C is an antimetabolite used in pterygium surgery to prevent recurrence — not for pingueculitis. Pilocarpine is a miotic used in glaucoma; timolol is a beta-blocker for glaucoma." },
+  { q:"Simple excision of a pterygium without any adjunctive treatment is associated with a well-documented high recurrence rate. What is the approximate recurrence rate following simple excision alone?", opts:["Approximately 80%","Approximately 25%","Approximately 40%","Approximately 60%","Approximately 95%"], ans:0, exp:"Simple excision of pterygium carries a recurrence rate of approximately 80%, which is the highest among surgical management options. Critically, the recurrent growths are typically more aggressive than the original lesion. This high recurrence rate has driven the development of adjunctive therapies: Mitomycin C (MMC) — reduces recurrence by inhibiting residual fibroblast proliferation; conjunctival autograft — transplants healthy limbal stem cells to the defect, significantly reducing recurrence." },
+  { q:"Mitomycin C (MMC) is used as an adjunctive treatment after pterygium excision to reduce recurrence. Its use is specifically associated with which of the following complications?", opts:["Secondary glaucoma and persistent corneal oedema","Non-healing epithelial defect and scleral melt","Corneal vascularization and chronic anterior uveitis","Bacterial endophthalmitis and hyphaema","Corneal iron line deposition and limbal stem cell deficiency"], ans:1, exp:"Mitomycin C is an alkylating antimetabolite that inhibits fibroblast proliferation to prevent pterygium recurrence. However, its cytotoxic properties cause two specific and serious complications: (1) Non-healing epithelial defect — due to inhibition of epithelial cell proliferation at the surgical site; and (2) Scleral melt (scleromalacia) — from disruption of scleral fibroblasts and avascular necrosis of the sclera. Scleral melt can progress to perforation and is a serious sight-threatening complication." },
+  { q:"A patient who sustained a chemical burn develops a conjunctival lesion resembling a pterygium. Compared with a true pterygium, which of the following features is characteristic of a pseudopterygium?", opts:["It causes progressive growth toward the visual axis from UV radiation exposure","It adheres to the cornea along its entire body and is confined to 3 and 9 o'clock positions","It adheres to the cornea only at its head and may deviate from the 3 and 9 o'clock positions","It is histologically distinct, showing hyaline rather than elastotic degeneration","It remains confined to the bulbar conjunctiva without reaching the cornea"], ans:2, exp:"Pseudopterygium differs from true pterygium in several key ways: Cause — pseudopterygium follows an inflammatory episode (chemical burn, corneal ulcer, trauma) rather than actinic UV damage; Adhesion — it adheres to the cornea only at its head (a probe can be passed beneath its body), whereas a true pterygium adheres along its entire body; Location — it may deviate from the classic 3 and 9 o'clock positions." },
+  { q:"A 22-year-old sexually active man presents with a 24-hour history of copious bilateral purulent eye discharge with rapid symptom progression, severe lid swelling, and tender preauricular lymphadenopathy. The most likely causative organism is:", opts:["Haemophilus influenzae","Chlamydia trachomatis","Streptococcus pneumoniae","Neisseria gonorrhoeae","Staphylococcus aureus"], ans:3, exp:"This presentation is hyperacute bacterial conjunctivitis, caused most commonly by Neisseria gonorrhoeae. Its defining features are: extremely rapid onset (within 12–24 hours), copious and frankly purulent discharge, moderate-to-severe eye pain, marked lid swelling, and tender enlarged preauricular lymphadenopathy. This is a vision-threatening emergency because N. gonorrhoeae can penetrate intact corneal epithelium and cause perforation. The other organisms produce a less fulminant picture." },
+  { q:"A patient presents with bilateral irritation and redness at the medial and lateral canthi, with a characteristic dirty white foamy discharge at the angles and excoriation of the surrounding skin. The causative organism of this form of angular conjunctivitis is:", opts:["Neisseria gonorrhoeae","Koch-Weeks bacillus","Staphylococcus aureus","Haemophilus influenzae","Moraxella axenfeld"], ans:4, exp:"Angular conjunctivitis, characterised by mild inflammation near the angles with maceration of surrounding skin and a distinctive dirty white foamy discharge, is caused by Moraxella axenfeld (also known as Moraxella lacunata). The usual source of infection is the nasal cavity. The foamy appearance of the discharge is characteristic and helps distinguish it from other forms of bacterial conjunctivitis. Koch-Weeks bacillus causes acute bacterial conjunctivitis in hot dry climates." },
+  { q:"The WHO grading system for trachoma uses five cardinal clinical signs as the basis for its classification. Which of the following correctly lists all five components?", opts:["Follicular inflammation, Intense inflammation, Scarring, Trichiasis, Corneal opacity","Follicular inflammation, Intense inflammation, Scarring, Pannus, Corneal opacity","Follicular inflammation, Iris atrophy, Scarring, Trichiasis, Corneal opacity","Fibrous bands, Intense inflammation, Scarring, Trichiasis, Corneal opacity","Follicular inflammation, Intense inflammation, Symblepharon, Trichiasis, Corneal opacity"], ans:0, exp:"The WHO simplified grading for trachoma uses the mnemonic TF-TI-TS-TT-CO: TF — Trachomatous Inflammation-Follicular (5+ follicles on upper tarsal conjunctiva); TI — Trachomatous Inflammation-Intense (inflammatory thickening obscuring >50% of tarsal vessels); TS — Trachomatous Scarring; TT — Trachomatous Trichiasis (at least one eyelash rubbing the globe); CO — Corneal Opacity (opacity obscuring the pupil margin). Pannus is a real trachoma sign but is NOT part of the WHO simplified grading." },
+  { q:"A newborn develops conjunctival discharge on day 3 of life. Based on the known incubation periods of causative agents in ophthalmia neonatorum, which organism is most consistent with this timing?", opts:["Chemical irritant","Neisseria gonorrhoeae","Chlamydia trachomatis","Herpes simplex virus","Staphylococcus aureus"], ans:1, exp:"The incubation periods in ophthalmia neonatorum are: Chemical (silver nitrate) — 4–6 hours; Gonococcal (N. gonorrhoeae) — 2–4 days; Other bacterial — 4–5 days; Neonatal inclusion (Chlamydia) — 5–14 days; Herpes simplex — 5–7 days. Day 3 of life is most consistent with gonococcal conjunctivitis (2–4 day incubation). Chemical conjunctivitis would appear within hours. Gonococcal ophthalmia neonatorum is the most serious because N. gonorrhoeae can perforate the cornea." },
+  { q:"Credé's prophylaxis for ophthalmia neonatorum consists of which agent instilled into the conjunctival sac of newborns immediately after delivery?", opts:["1% tetracycline ointment","0.5% erythromycin ointment","1% silver nitrate solution","2.5% povidone-iodine solution","50 mg/kg intramuscular ceftriaxone"], ans:2, exp:"Credé's method, introduced by the German obstetrician Carl Credé, involves instillation of 1% silver nitrate solution into the conjunctival sac of every newborn immediately after delivery to prevent gonococcal ophthalmia neonatorum. Other postnatal prophylactic agents include 1% tetracycline ointment and 0.5% erythromycin ointment, which also provide coverage against chlamydial disease. Silver nitrate itself can cause a chemical conjunctivitis within 4–6 hours — a recognised side effect." },
+  { q:"Seasonal allergic rhinoconjunctivitis (hay fever conjunctivitis), the most common form of allergic conjunctivitis, is produced by which immunological mechanism?", opts:["Complement-mediated cytotoxicity via IgG antibodies against conjunctival antigens","Type IV delayed-type hypersensitivity mediated by sensitized T-lymphocytes","Immune complex deposition in conjunctival vessels activating the complement cascade","IgE-mediated hypersensitivity causing local mast cell degranulation","IgA-mediated mucosal immunity causing goblet cell hyperplasia"], ans:3, exp:"Seasonal allergic rhinoconjunctivitis is a Type I (immediate) hypersensitivity reaction mediated by IgE. Airborne allergens cross-link IgE molecules bound to sensitized conjunctival mast cells, triggering degranulation and release of mediators including histamine and eosinophil chemotactic factors. This produces the characteristic bilateral presentation: itching (the hallmark symptom), redness, watery discharge, and rhinorrhoea. Type IV (T-cell-mediated) hypersensitivity causes contact dermatoconjunctivitis." }
+];
+
+/* ═══════════ OPHTHALMOLOGY — GLAUCOMA ═══════════ */
+const OPHTHAL_GLAUCOMA_Qs = [
+  { q:"Which of the following best defines glaucoma as a disease entity?", opts:["An acute elevation of IOP above 21 mmHg causing reversible optic disc changes and visual field loss","A condition defined by IOP exceeding 21 mmHg regardless of optic disc appearance or visual field changes","A group of disorders characterised by progressive optic neuropathy with characteristic disc changes and visual field loss, in which elevated IOP is the most important risk factor","A hereditary optic neuropathy invariably associated with elevated IOP in both eyes simultaneously","A condition characterised by progressive peripheral anterior synechiae causing permanent drainage angle closure"], ans:2, exp:"Glaucoma is not defined by IOP alone. The definition encompasses: (1) progressive optic neuropathy with a characteristic disc appearance (cupping, neuroretinal rim loss); (2) a specific pattern of visual field defects; and (3) elevated IOP as the most important — but not the only — risk factor. This allows for the inclusion of Normal Tension Glaucoma (NTG), where IOP is statistically normal yet glaucomatous damage occurs. Option B describes ocular hypertension — elevated IOP without disc/field changes." },
+  { q:"Glaucoma is the second leading cause of blindness globally after cataract, but holds an additional distinction. What further characteristic underscores its public health significance?", opts:["It predominantly affects children under the age of 15 years globally","It causes more rapid visual loss than any other known ocular disease","It has no effective surgical treatment to halt its progression","It is the leading cause of irreversible blindness worldwide","It affects more people in developed countries than in developing countries"], ans:3, exp:"While cataract is the leading overall cause of blindness, glaucoma is specifically the leading cause of IRREVERSIBLE blindness — because cataract-related blindness is treatable and reversible with surgery, whereas glaucomatous optic neuropathy causes permanent, irreparable loss. By the time a patient notices visual loss, approximately 40% of retinal ganglion cells may already be dead. In Nigeria specifically, glaucoma accounts for 17.9% of unilateral and 42.3% of bilateral blindness." },
+  { q:"Primary open angle glaucoma (POAG) shows significant racial variation. Compared with white individuals, how does POAG manifest differently in black patients?", opts:["Less prevalent in blacks but associated with more rapid deterioration when it does occur","More prevalent in blacks but follows a similarly severe course as in whites","Less prevalent in blacks but presenting with central visual field loss first","More prevalent, earlier-onset, more aggressive, and more difficult to treat in blacks","More prevalent in blacks and responds better due to faster pharmacological response"], ans:3, exp:"POAG in black patients is characterised by four key differences: it is significantly more prevalent (higher prevalence), develops earlier (younger age of onset), runs a more progressive and severe course, and is more difficult to treat. POAG is the most common type of glaucoma in Africa and in Nigeria. Blacks are also more likely to present late (at advanced stages), worsening outcomes. This has significant implications for screening policies and treatment aggressiveness in African populations." },
+  { q:"Primary open angle glaucoma is believed to be genetically determined with a multifactorial inheritance pattern. In what fraction of POAG patients is a positive family history documented?", opts:["Approximately 75% of patients","Approximately 10% of patients","Approximately 25% of patients","Approximately 90% of patients","Approximately 50% of patients"], ans:4, exp:"A positive family history is found in approximately 50% of POAG patients, underscoring the strong but complex genetic contribution. POAG is inherited in a multifactorial manner with incomplete penetrance and variable expressivity. Two major genes identified: the myocilin gene on chromosome 1q21-q31 (GLC1A locus), and the optineurin gene at the GLC1E interval on chromosome 10p. Siblings and first-degree relatives of POAG patients have a significantly increased risk and should receive regular eye examinations." },
+  { q:"Steroid responsiveness is an important ocular risk factor for POAG. What percentage of POAG patients are classified as high responders to a 6-week course of topical steroids (defined as IOP elevation above 30 mmHg)?", opts:["90%","50%","10%","30%","70%"], ans:0, exp:"In the general population, steroid responsiveness after a 6-week course of topical steroids: high responders (IOP >30 mmHg) are approximately 5% of the general population. However, in patients with POAG, 90% are high responders. A patient who develops a marked IOP rise from topical steroids should be evaluated carefully for underlying POAG. This explains why long-term corticosteroid use is a recognised risk factor for secondary open angle glaucoma (steroid-induced glaucoma)." },
+  { q:"The direct mechanical theory of glaucomatous optic neuropathy proposes that elevated IOP causes damage by which specific mechanism?", opts:["Anterior displacement of the optic nerve head compresses its central blood supply","Posterior bowing of the lamina cribrosa obstructs axoplasmic flow in retinal nerve fibres","Stretching of retinal nerve fibres across the equatorial retina by elevated pressure","Rupture of the inner blood-retinal barrier causing oedema of the nerve fibre layer","Direct compression of the central retinal artery as it traverses the optic nerve head"], ans:1, exp:"The direct mechanical theory proposes that elevated IOP causes posterior bowing of the lamina cribrosa — the sieve-like structure through which retinal nerve fibres pass as they exit the eye. This mechanical distortion obstructs axoplasmic flow (the transport of nutrients and growth factors along nerve axons) at the level of the lamina cribrosa, leading to nerve fibre starvation and death. Retinal ganglion cells die predominantly by apoptosis rather than necrosis." },
+  { q:"Which of the following best describes the characteristic clinical presentation of primary open angle glaucoma (POAG)?", opts:["Sudden excruciating periocular pain with corneal oedema and a narrow angle on gonioscopy","Progressive central visual loss with optic disc swelling and bilateral elevated IOP","Gradual painless peripheral visual field loss with optic disc cupping and an open angle on gonioscopy","Acute painful red eye with rainbow halos, a fixed mid-dilated pupil, and shallow anterior chamber","Buphthalmos, corneal haze, and photophobia in a neonate with bilateral involvement"], ans:2, exp:"POAG is insidious in onset and typically asymptomatic in early stages — this is what makes it 'the sneak thief of sight.' As disease advances, peripheral (arcuate) visual field defects develop gradually and painlessly, progressing to tunnel vision in advanced disease. The optic disc shows characteristic cupping with neuroretinal rim thinning. Gonioscopy demonstrates an open, normally appearing drainage angle — distinguishing POAG from angle closure glaucoma." },
+  { q:"Normal tension glaucoma (NTG) is characterised by glaucomatous optic disc damage and visual field loss despite IOP consistently within the normal range. Which systemic conditions are most classically associated with NTG?", opts:["Hypertension, type 2 diabetes mellitus, and obesity","Hyperthyroidism, systemic lupus erythematosus, and anaemia","Obstructive sleep apnoea, ischaemic heart disease, and atrial fibrillation","Raynaud's phenomenon, migraine, and nocturnal hypotension","Sickle cell disease, polycythaemia vera, and hyperviscosity syndromes"], ans:3, exp:"Normal tension glaucoma is associated with Raynaud's phenomenon (vasospasm), migraine (also mediated by vasospasm), and nocturnal hypotension (or over-treated hypertension causing low blood pressure at night). These associations point to vascular dysregulation as the key mechanism — the optic nerve head is susceptible to ischaemia from poor perfusion, even when IOP is not elevated. NTG predominantly affects the elderly and is more common among females." },
+  { q:"Primary angle closure glaucoma (PACG) has a distinct demographic risk profile. Which of the following correctly identifies the characteristic risk factors for PACG?", opts:["Male sex predominance, age over 40 years, black race, associated with myopia","Female sex (2:1), age over 40 years, positive family history, more common in Africans","Equal sex distribution, age over 70 years, associated with hyperopia in South Americans","Male sex predominance, age over 60 years, myopia, more common in Asian populations","Female sex (4:1), age over 60 years, positive family history, more common in Asians and Eskimos"], ans:4, exp:"PACG has a characteristic demographic profile: Gender — females are affected 4 times more than males (4:1 ratio); Age — average age of presentation is 60 years; Race — significantly more common in South-East Asians, Chinese, and Eskimos; uncommon in blacks (unlike POAG, which is more common in blacks); Family history — first-degree relatives are at increased risk because the predisposing anatomical factors (shallow anterior chamber, smaller eye) are heritable. Hyperopia is associated due to the smaller eye anatomy." },
+  { q:"In the pathogenesis of primary angle closure glaucoma, the mechanism responsible for acute IOP elevation is best described as:", opts:["Pupil block increases posterior chamber pressure, bowing the peripheral iris anteriorly to occlude the trabecular meshwork","Progressive trabecular meshwork fibrosis gradually reduces aqueous outflow capacity","Anterior rotation of the ciliary body causes forward displacement of the lens-iris diaphragm","Anterior synechiae formation permanently seals the drainage angle following repeated inflammation","Choroidal swelling displaces the iris-lens diaphragm anteriorly to obstruct the drainage angle"], ans:0, exp:"In PACG, the key mechanism is pupil block — relative or complete obstruction to the flow of aqueous from the posterior chamber through the pupil to the anterior chamber. This causes pressure in the posterior chamber to exceed that of the anterior chamber, bowing the peripheral iris anteriorly (iris bombé) where it appositions against the trabecular meshwork, causing a sudden dramatic rise in IOP. The eye is anatomically predisposed: small, with a shallow anterior chamber and narrow drainage angle." },
+  { q:"A 63-year-old woman presents with sudden severe pain around the left eye, rapid visual loss, nausea, vomiting, and IOP of 72 mmHg. Examination reveals conjunctival injection, corneal oedema, a shallow anterior chamber, and a fixed mid-dilated pupil. Which additional symptom is most characteristic of this condition?", opts:["Inferior arcuate visual field defect on confrontation testing","Rainbow-coloured halos seen around lights","Monocular diplopia from acute lens subluxation","Sudden loss of peripheral vision with preserved central vision","Bilateral simultaneous presentation"], ans:1, exp:"The presentation is acute primary angle closure glaucoma (PACG) — an ophthalmic emergency. The rainbow-coloured halos around lights are characteristic and result from corneal oedema causing diffraction of light. The fixed mid-dilated pupil occurs because high IOP causes ischaemic paralysis of the iris sphincter when the pupil is at approximately 4 mm. The presentation is typically unilateral. The fellow eye should receive prophylactic treatment (laser iridotomy or peripheral iridectomy)." },
+  { q:"In the emergency management of acute primary angle closure glaucoma, topical pilocarpine is administered. By which specific mechanism does pilocarpine relieve the angle closure?", opts:["It relaxes the ciliary muscle to increase uveoscleral drainage","It inhibits carbonic anhydrase to reduce aqueous secretion","It constricts the pupil, pulling the peripheral iris away from the trabecular meshwork to restore aqueous outflow","It directly dilates trabecular pores to allow aqueous to bypass the obstructed angle","It flattens the lens by ciliary muscle contraction to deepen the anterior chamber"], ans:2, exp:"Pilocarpine is a parasympathomimetic (muscarinic agonist) that causes pupillary constriction (miosis) by contracting the iris sphincter muscle. In acute PACG, this pupillary constriction physically pulls the peripheral iris away from the trabecular meshwork, breaking the pupil block and allowing aqueous to pass from the posterior to the anterior chamber. Systemic management simultaneously involves IV acetazolamide and topical timolol. The definitive treatment is Nd:YAG laser iridotomy or peripheral iridectomy." },
+  { q:"Surgical intervention is the mainstay of treatment for primary congenital glaucoma. What is the preferred primary surgical procedure for this condition?", opts:["Trabeculectomy","Peripheral iridectomy","Ahmed valve implantation","Goniotomy","Cyclodiode laser ablation"], ans:3, exp:"Goniotomy is the surgical treatment of choice for primary congenital glaucoma (PCG). In this procedure, a fine needle or blade is inserted into the anterior chamber under gonioscopic visualisation and used to incise the abnormal trabecular meshwork (trabeculodysgenesis) directly, improving aqueous outflow. This works effectively when the cornea is clear enough for gonioscopic visualisation. Trabeculotomy is an alternative when the cornea is too cloudy. Medical therapy plays only a temporising role — it is not curative." },
+  { q:"A neonate presents with bilateral tearing, photophobia, and blepharospasm. Examination reveals cloudy corneas, enlarged globes, and horizontal breaks in Descemet's membrane. These corneal breaks in congenital glaucoma are specifically called:", opts:["Fleischer's rings","Kayser-Fleischer rings","Vogt's striae","Munson's sign","Haab's striae"], ans:4, exp:"Haab's striae are horizontal or curvilinear breaks in Descemet's membrane of the cornea, caused by the sudden stretching of the cornea from elevated IOP in congenital glaucoma. They are horizontal or concentric with the corneal limbus. The presentation described is classic congenital glaucoma: the triad of photophobia, tearing, and blepharospasm should prompt urgent examination. Buphthalmos (enlarged eye) occurs because the infant's sclera can expand under elevated IOP — reversible only if treated before the age of 3 years." },
+  { q:"Prostaglandin analogues such as latanoprost and travoprost are commonly used as first-line agents in glaucoma management. They lower intraocular pressure primarily by which mechanism?", opts:["Enhancing uveoscleral aqueous outflow","Decreasing aqueous humour secretion by the ciliary body epithelium","Constricting the pupil to widen the iridocorneal drainage angle","Increasing aqueous drainage through the trabecular meshwork","Reducing episcleral venous pressure"], ans:0, exp:"Prostaglandin analogues (latanoprost, travoprost) lower IOP by enhancing uveoscleral (non-conventional) aqueous outflow — they act by relaxing the ciliary muscle and remodelling the extracellular matrix around the ciliary body. Beta-blockers (timolol, betaxolol) work by decreasing aqueous secretion. Alpha-2 agonists (brimonidine) have a dual mechanism: decreasing aqueous secretion AND enhancing uveoscleral outflow. Carbonic anhydrase inhibitors decrease aqueous production by inhibiting bicarbonate formation." }
 ];
 
 /* ═══════════ COURSE STRUCTURE ═══════════ */
@@ -5683,7 +5918,9 @@ const COURSES = [
       { id:"anaes_abg",     name:"ABG Quiz Questions",                   questions:abgQuizQuestions,            available:true, topic:"Anaesthesiology" },
       { id:"anaes_inhale",  name:"Inhalational Agents Revision Questions",      questions:inhalationalRevisionQuestions, available:true, topic:"Anaesthesiology" },
       { id:"ent", name:"ENT", questions:[], available:false },
-      { id:"ophthal", name:"Ophthalmology", questions:[], available:false },
+      { id:"ophthal_cataracts", name:"Cataracts", questions:OPHTHAL_CATARACTS_Qs, available:true, topic:"Ophthalmology" },
+      { id:"ophthal_conjunctiva", name:"Conjunctiva & Conjunctivitis", questions:OPHTHAL_CONJUNCTIVA_Qs, available:true, topic:"Ophthalmology" },
+      { id:"ophthal_glaucoma", name:"Glaucoma", questions:OPHTHAL_GLAUCOMA_Qs, available:true, topic:"Ophthalmology" },
       { id:"ortho_septic", name:"Septic Arthritis", questions:ORTHO_SEPTIC_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
       { id:"ortho_bone", name:"Bone Tumours", questions:ORTHO_BONE_TUMOR_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
       { id:"ortho_meta", name:"Metabolic Response to Trauma", questions:ORTHO_META_TRAUMA_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
@@ -6133,6 +6370,7 @@ function App(){
   const [timeLeft,setTimeLeft]=useState(0);
   const [totalSecs,setTotalSecs]=useState(0);
   const [paused,setPaused]=useState(false);
+  const [endConfirm,setEndConfirm]=useState(false);
   const [result,setResult]=useState(null);
   const [reviewMode,setReviewMode]=useState(false);
   const [reviewIdx,setReviewIdx]=useState(null);
@@ -6303,7 +6541,7 @@ function App(){
     const shuffled=pool.map(shuffleOpts);
     qsRef.current=shuffled; courseRef.current=course; blockRef.current=block; topicRef.current=topic; nameRef.current=name;
     userAnswersRef.current=[];
-    setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setPaused(false);
+    setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setPaused(false); setEndConfirm(false);
     correctRef.current=0; answeredRef.current=0;
     setRetakeMode(!!retakeQs);
     pushView("quiz");
@@ -7628,13 +7866,38 @@ function App(){
         )
       ),
 
-      /* Pause overlay */
-      paused && e("div",{style:{position:"fixed",inset:0,background:"rgba(10,25,47,.95)",zIndex:200,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:20,textAlign:"center"}},
-        e("div",{style:{fontSize:"3rem"}},"⏸"),
-        e("h3",{style:{fontFamily:"Georgia,serif",color:"#fff",fontSize:"clamp(1.2rem,3vw,1.5rem)",fontWeight:700}},"Test Paused"),
-        e("p",{style:{color:"rgba(255,255,255,.6)",fontSize:".9rem",maxWidth:300,lineHeight:1.65}},"Take a breather. Your progress is saved and the timer is stopped."),
-        e("p",{style:{color:"#c9a84c",fontFamily:"Georgia,serif",fontSize:"1.1rem",fontWeight:700}},fmtTime(timeLeft)+" remaining"),
-        e("button",{onClick:()=>setPaused(false),style:{marginTop:8,background:"#c9a84c",color:"#0f2744",border:"none",borderRadius:4,padding:"13px 32px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:50}},"▶ Resume Test")
+      /* Pause overlay — Step 1: paused, Step 2: end-session warning */
+      paused && e("div",{style:{position:"fixed",inset:0,background:"rgba(10,25,47,.97)",zIndex:200,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:18,padding:"24px 20px",textAlign:"center"}},
+        !endConfirm
+          ? e(React.Fragment,null,
+              e("div",{style:{fontSize:"2.8rem"}},"⏸"),
+              e("h3",{style:{fontFamily:"Georgia,serif",color:"#fff",fontSize:"clamp(1.15rem,3vw,1.45rem)",fontWeight:700}},"Test Paused"),
+              e("p",{style:{color:"rgba(255,255,255,.55)",fontSize:".88rem",maxWidth:300,lineHeight:1.7}},"Your timer is stopped. Take a breather and resume when you're ready."),
+              e("p",{style:{color:"#c9a84c",fontFamily:"Georgia,serif",fontSize:"1.05rem",fontWeight:700,marginBottom:4}},fmtTime(timeLeft)+" remaining"),
+              e("div",{style:{display:"flex",flexDirection:"column",gap:10,width:"100%",maxWidth:300,marginTop:4}},
+                e("button",{onClick:()=>setPaused(false),
+                  style:{background:"#c9a84c",color:"#0f2744",border:"none",borderRadius:5,padding:"14px 28px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:52,width:"100%"}},
+                  "▶ Resume Test"),
+                e("button",{onClick:()=>setEndConfirm(true),
+                  style:{background:"rgba(198,40,40,.18)",color:"#ff8a80",border:"1px solid rgba(198,40,40,.4)",borderRadius:5,padding:"13px 28px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".95rem",minHeight:52,width:"100%"}},
+                  "End Session & See Results")
+              )
+            )
+          : e(React.Fragment,null,
+              e("div",{style:{fontSize:"2.8rem"}},"⚠️"),
+              e("h3",{style:{fontFamily:"Georgia,serif",color:"#fff",fontSize:"clamp(1.15rem,3vw,1.45rem)",fontWeight:700}},"Are you sure?"),
+              e("p",{style:{color:"rgba(255,255,255,.65)",fontSize:".88rem",maxWidth:320,lineHeight:1.75}},
+                "You've answered "+answeredRef.current+" of "+qs.length+" questions with a score of "+correctRef.current+"/"+answeredRef.current+". Ending now will save your results and you won't be able to continue this session."
+              ),
+              e("div",{style:{display:"flex",flexDirection:"column",gap:10,width:"100%",maxWidth:300,marginTop:4}},
+                e("button",{onClick:()=>{setEndConfirm(false);endQuiz(false);},
+                  style:{background:"#c62828",color:"#fff",border:"none",borderRadius:5,padding:"14px 28px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:52,width:"100%"}},
+                  "Yes, End & See Results"),
+                e("button",{onClick:()=>setEndConfirm(false),
+                  style:{background:"rgba(255,255,255,.1)",color:"rgba(255,255,255,.85)",border:"1px solid rgba(255,255,255,.2)",borderRadius:5,padding:"13px 28px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".95rem",minHeight:52,width:"100%"}},
+                  "Go Back")
+              )
+            )
       ),
 
       /* Question */
