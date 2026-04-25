@@ -7734,6 +7734,7 @@ function App(){
   const [readingContext,setReadingContext]=useState("psych"); // "psych"|"physiology"
   const [tocOpen,setTocOpen]=useState(false);
   const [paywallVisible,setPaywallVisible]=useState(false);
+  const [physioAccess,setPhysioAccess]=useState(()=>ls.get('medq_physio_access')==='1');
   const [showPayDetails,setShowPayDetails]=useState(false);
   const [payCopied,setPayCopied]=useState(false);
   const [accessCode,setAccessCode]=useState("");
@@ -7769,8 +7770,30 @@ function App(){
   useEffect(()=>{
     if(view!=="reading_view"){ return; }
     paywallShownRef.current=false;
-    paywallDismissedRef.current=false;
+    // If user already has access for this context, skip paywall entirely
+    const alreadyUnlocked=(readingContext==="physiology"&&physioAccess);
+    paywallDismissedRef.current=alreadyUnlocked;
     setPaywallVisible(true); // always mounted; CSS transform keeps it off-screen
+
+    // Hard-hide locked physio content after the trigger point
+    const applyContentLock=()=>{
+      if(readingContext==="physiology"){
+        const trigger=document.getElementById("rdrPaywallTrigger");
+        if(!trigger) return;
+        const locked=!physioAccess;
+        // Hide/show siblings after trigger within topic 3
+        let el=trigger.nextElementSibling;
+        while(el){el.style.display=locked?"none":"";el=el.nextElementSibling;}
+        // Hide/show topic 4 onwards (siblings of the topic 3 container)
+        const parentTopic=trigger.closest(".rdr-topic");
+        if(parentTopic){
+          let s=parentTopic.nextElementSibling;
+          while(s){s.style.display=locked?"none":"";s=s.nextElementSibling;}
+        }
+      }
+    };
+    const lockTimer=setTimeout(applyContentLock,0);
+
     const getPw=()=>document.querySelector(".rdr-paywall");
     const onScroll=()=>{
       const docH=document.documentElement.scrollHeight-window.innerHeight;
@@ -7798,8 +7821,9 @@ function App(){
     window.addEventListener("scroll",onScroll,{passive:true});
     return ()=>{
       window.removeEventListener("scroll",onScroll);
+      clearTimeout(lockTimer);
     };
-  },[view]);
+  },[view,readingContext,physioAccess]);
 
   // Sub device check handled at block entry
 
@@ -9900,28 +9924,862 @@ function App(){
           <p class="rdr-p">Transport across the cell membrane is either <strong>passive</strong> (no energy required, moves down a gradient) or <strong>active</strong> (energy required, moves against a gradient). The type of transport determines which substances enter and leave the cell and at what rate — understanding this underpins drug absorption, kidney physiology, and nerve conduction.</p>
         </div>
         <div id="rdrPaywallTrigger" style="height:1px;margin:0"></div>
-        <div style="filter:blur(5px);opacity:0.28;pointer-events:none;user-select:none">
-          <div class="rdr-section"><div class="rdr-section-hdr">Passive Transport</div>
-            <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>Energy</th><th>Carrier?</th><th>Examples</th></tr></thead><tbody>
-              <tr><td><strong>Simple diffusion</strong></td><td>None</td><td>No</td><td>O₂, CO₂, N₂, lipid-soluble drugs, alcohols, urea</td></tr>
-              <tr><td><strong>Facilitated diffusion</strong></td><td>None</td><td>Yes (channel or transporter)</td><td>Glucose (GLUT1-5), fructose, water (aquaporins)</td></tr>
-              <tr><td><strong>Osmosis</strong></td><td>None</td><td>Via aquaporins</td><td>Water movement down osmotic gradient</td></tr>
-            </tbody></table></div>
-            <p class="rdr-p"><strong>Fick's Law:</strong> Rate of diffusion is proportional to surface area × concentration gradient × membrane permeability, inversely proportional to thickness...</p>
-          </div>
-          <div class="rdr-section"><div class="rdr-section-hdr">Active Transport</div>
-            <ul class="rdr-list">
-              <li><strong>Primary active transport:</strong> ATP-driven directly — Na⁺/K⁺-ATPase (3 Na⁺ out, 2 K⁺ in), Ca²⁺-ATPase, H⁺/K⁺-ATPase</li>
-              <li><strong>Secondary active transport:</strong> piggybacks on the Na⁺ gradient — cotransport (symport) and countertransport (antiport)...</li>
-            </ul>
-          </div>
-          <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
-            <p>The Na⁺/K⁺-ATPase is electrogenic — 3 Na⁺ out, 2 K⁺ in. Digoxin inhibits it, raising intracellular Ca²⁺ and increasing cardiac contractility...</p>
-          </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Passive Transport</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>Energy</th><th>Carrier?</th><th>Examples</th></tr></thead><tbody>
+            <tr><td><strong>Simple diffusion</strong></td><td>None</td><td>No</td><td>O₂, CO₂, N₂, lipid-soluble drugs, alcohols, urea</td></tr>
+            <tr><td><strong>Facilitated diffusion</strong></td><td>None</td><td>Yes (channel or transporter)</td><td>Glucose (GLUT1-5), fructose, water (aquaporins)</td></tr>
+            <tr><td><strong>Osmosis</strong></td><td>None</td><td>Via aquaporins</td><td>Water movement down osmotic gradient</td></tr>
+            <tr><td><strong>Filtration</strong></td><td>None (hydrostatic pressure)</td><td>No</td><td>Glomerular filtration</td></tr>
+          </tbody></table></div>
+          <p class="rdr-p"><strong>Fick's Law:</strong> Rate of diffusion is proportional to: surface area × concentration gradient × membrane permeability, and inversely proportional to membrane thickness. Clinically: pulmonary fibrosis increases membrane thickness → reduces O₂ diffusion.</p>
         </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Active Transport</div>
+          <ul class="rdr-list">
+            <li><strong>Primary active transport:</strong> energy from ATP directly. Example: Na⁺/K⁺-ATPase (3 Na⁺ out, 2 K⁺ in per cycle), Ca²⁺-ATPase, H⁺/K⁺-ATPase (gastric parietal cells)</li>
+            <li><strong>Secondary active transport:</strong> energy from the Na⁺ gradient created by the Na⁺/K⁺-ATPase. No direct ATP use.
+              <ul style="margin-top:6px;padding-left:16px">
+                <li><em>Cotransport (symport):</em> Na⁺ and solute move in the same direction — e.g. Na⁺-glucose in the gut and renal tubule, Na⁺-amino acid</li>
+                <li><em>Countertransport (antiport):</em> Na⁺ moves in, solute moves out — e.g. Na⁺/Ca²⁺ exchanger, Na⁺/H⁺ exchanger</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Vesicular Transport</div>
+          <ul class="rdr-list">
+            <li><strong>Endocytosis:</strong> membrane engulfs extracellular material — pinocytosis (fluid), phagocytosis (particles), receptor-mediated endocytosis (e.g. LDL via clathrin-coated pits)</li>
+            <li><strong>Exocytosis:</strong> vesicle fuses with membrane and releases contents — e.g. neurotransmitter release, hormone secretion</li>
+            <li><strong>Transcytosis:</strong> endocytosis on one side, exocytosis on the other — used at the blood-brain barrier and placenta</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>The Na⁺/K⁺-ATPase is <strong>electrogenic</strong> — it moves 3 charges out and 2 in per cycle, generating a net outward positive current. This contributes approximately −4 mV to the resting membrane potential. Inhibiting it (e.g. cardiac glycosides like digoxin) raises intracellular Na⁺, which reduces Na⁺/Ca²⁺ exchange, raising intracellular Ca²⁺ and increasing cardiac contractility.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>"3 Sodium OUT, 2 Potassium IN"</strong> — Na has 3 letters, K has 1. Always ATP-dependent. Secondary active transport uses the Na⁺ gradient — so ultimately still depends on ATP (via the pump that created the gradient).</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Transport</h4><ul>
+          <li>Simple diffusion: no energy, no carrier — gases, lipids, small uncharged molecules</li>
+          <li>Facilitated diffusion: no energy, carrier needed — glucose (GLUT), water (aquaporins)</li>
+          <li>Primary active transport: direct ATP use — Na⁺/K⁺-ATPase, Ca²⁺-ATPase</li>
+          <li>Na⁺/K⁺-ATPase: 3 Na⁺ out, 2 K⁺ in, 1 ATP — electrogenic; digoxin inhibits it</li>
+          <li>Secondary active transport: uses Na⁺ gradient (ultimately ATP-dependent) — gut glucose absorption, renal tubular reabsorption</li>
+          <li>Fick's Law: rate of diffusion ∝ area × gradient × permeability ÷ thickness</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">04</div>
+          <div><div class="rdr-topic-title">Homeostasis</div><div class="rdr-topic-sub">General Physiology</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Definition</div>
+          <p class="rdr-p">Homeostasis is the maintenance of a relatively constant internal environment despite changes in the external environment. The term was coined by <strong>Walter Cannon</strong> (1932), building on Claude Bernard's concept of <em>milieu intérieur</em>. Every physiological control system — cardiovascular, respiratory, renal — exists to defend homeostasis.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Components of a Control System</div>
+          <ul class="rdr-list">
+            <li><strong>Receptor (sensor):</strong> detects the change in the variable (e.g. baroreceptors detect BP change)</li>
+            <li><strong>Control centre (integrator):</strong> compares input to set point and determines response (e.g. medullary cardiovascular centre)</li>
+            <li><strong>Effector:</strong> carries out the corrective response (e.g. heart, blood vessels, kidneys)</li>
+          </ul>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Feedback Mechanisms</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>Effect</th><th>Purpose</th><th>Examples</th></tr></thead><tbody>
+            <tr><td><strong>Negative feedback</strong></td><td>Response opposes the original change — restores set point</td><td>Maintains stability — the basis of almost all homeostatic control</td><td>Temperature regulation, blood glucose control, blood pressure regulation, thyroid axis</td></tr>
+            <tr><td><strong>Positive feedback</strong></td><td>Response amplifies the original change — moves away from set point</td><td>Drives a process to completion; rare and always self-limiting</td><td>Parturition (oxytocin), blood clotting, LH surge at ovulation, action potential depolarisation</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Positive feedback is <strong>not a pathological failure of homeostasis</strong> — it is a deliberate physiological mechanism used when a process needs to be driven to a rapid, all-or-nothing completion. The classic examples (parturition, LH surge, clotting) are all self-terminating once the trigger is removed.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Homeostasis</h4><ul>
+          <li>Homeostasis = maintenance of constant internal environment; coined by Walter Cannon</li>
+          <li>Control system: receptor → control centre → effector</li>
+          <li>Negative feedback: opposes change, restores set point — basis of most homeostatic control</li>
+          <li>Positive feedback: amplifies change to drive completion — parturition, clotting, LH surge, action potential</li>
+          <li>Positive feedback is physiological (not pathological) — always self-limiting</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">05</div>
+          <div><div class="rdr-topic-title">Acid-Base Balance</div><div class="rdr-topic-sub">General Physiology</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Acid-base balance maintains blood pH within the narrow range of <strong>[7.35–7.45]</strong>. Below 7.35 is acidosis; above 7.45 is alkalosis. Three systems defend this range: chemical buffers (seconds), respiratory compensation (minutes), and renal compensation (hours to days). The kidneys provide the only true correction — the others only buffer or compensate.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Buffer Systems</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Buffer System</th><th>Location</th><th>Components</th><th>Notes</th></tr></thead><tbody>
+            <tr><td><strong>Bicarbonate</strong></td><td>Extracellular (plasma)</td><td>H₂CO₃ ⇌ H⁺ + HCO₃⁻ [normal HCO₃⁻: 22–26 mEq/L]</td><td>Most important ECF buffer; linked to respiratory and renal regulation</td></tr>
+            <tr><td><strong>Phosphate</strong></td><td>Intracellular; renal tubules</td><td>H₂PO₄⁻ ⇌ H⁺ + HPO₄²⁻</td><td>Important in renal H⁺ excretion as titratable acid</td></tr>
+            <tr><td><strong>Protein</strong></td><td>Intracellular; plasma</td><td>Amino acid side chains (esp. histidine imidazole groups)</td><td>Most abundant buffer in the body overall; haemoglobin is the dominant protein buffer in blood</td></tr>
+            <tr><td><strong>Haemoglobin</strong></td><td>RBCs</td><td>Deoxyhaemoglobin is a better H⁺ acceptor than oxyhaemoglobin</td><td>Critical for CO₂ transport from tissues to lungs</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Respiratory Regulation</div>
+          <p class="rdr-p">CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. Rising CO₂ (↑PaCO₂) drives the reaction right → acidosis. Falling CO₂ drives it left → alkalosis. The respiratory centre responds to pH and PaCO₂: acidosis increases ventilation to blow off CO₂; alkalosis reduces ventilation. [Normal PaCO₂: 35–45 mmHg]</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Acid-Base Disorders</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Disorder</th><th>Primary Change</th><th>Compensation</th><th>Common Causes</th></tr></thead><tbody>
+            <tr><td><strong>Metabolic acidosis</strong></td><td>↓HCO₃⁻</td><td>↓PaCO₂ (hyperventilation — Kussmaul breathing)</td><td>DKA, lactic acidosis, renal failure, diarrhoea</td></tr>
+            <tr><td><strong>Metabolic alkalosis</strong></td><td>↑HCO₃⁻</td><td>↑PaCO₂ (hypoventilation)</td><td>Vomiting, diuretics, hyperaldosteronism</td></tr>
+            <tr><td><strong>Respiratory acidosis</strong></td><td>↑PaCO₂</td><td>↑HCO₃⁻ (renal H⁺ excretion)</td><td>COPD, respiratory depression, neuromuscular disease</td></tr>
+            <tr><td><strong>Respiratory alkalosis</strong></td><td>↓PaCO₂</td><td>↓HCO₃⁻ (renal HCO₃⁻ excretion)</td><td>Hyperventilation, anxiety, altitude, PE, pregnancy</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Compensation never fully corrects pH</strong> — it only moves it back towards 7.4, never past it. If a patient with metabolic acidosis has a normal or alkalotic pH, suspect a mixed disorder. Also: <strong>vomiting</strong> causes metabolic alkalosis (loss of HCl), while <strong>diarrhoea</strong> causes metabolic acidosis (loss of HCO₃⁻) — a classic pair the examiners test.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>ROME</strong> — <strong>R</strong>espiratory <strong>O</strong>pposite, <strong>M</strong>etabolic <strong>E</strong>qual: In respiratory disorders, pH and PaCO₂ change in opposite directions. In metabolic disorders, pH and HCO₃⁻ change in the same direction.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Acid-Base Balance</h4><ul>
+          <li>Normal blood pH: 7.35–7.45; &lt;7.35 = acidosis, &gt;7.45 = alkalosis</li>
+          <li>Three defences: buffers (seconds), respiratory (minutes), renal (hours–days) — only kidneys truly correct</li>
+          <li>Most important ECF buffer: bicarbonate [HCO₃⁻ normal: 22–26 mEq/L]; most abundant overall: proteins</li>
+          <li>Respiratory acidosis: ↑CO₂; compensated by renal ↑HCO₃⁻ retention</li>
+          <li>Metabolic acidosis: ↓HCO₃⁻; compensated by respiratory ↑ventilation (Kussmaul breathing)</li>
+          <li>Vomiting → metabolic alkalosis (HCl loss); diarrhoea → metabolic acidosis (HCO₃⁻ loss)</li>
+        </ul></div>
+      </div>
+
+      <div class="rdr-divider"></div>
+      <div style="margin:32px 0 24px;padding:14px 20px;background:linear-gradient(135deg,#0f2744,#1a3a5c);border-radius:8px;text-align:center">
+        <div style="font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,168,76,.8);margin-bottom:4px">Section 2</div>
+        <div style="font-family:Georgia,serif;font-size:1.1rem;font-weight:900;color:#fff">Blood and Body Fluids</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.5);margin-top:3px">Chapters 6–27 · Sembulingam</div>
+      </div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">06</div>
+          <div><div class="rdr-topic-title">Body Fluids</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Fluid Compartments</div>
+          <p class="rdr-p">Total body water (TBW) is approximately <strong>60% of body weight</strong> in males and <strong>55%</strong> in females (females have more adipose tissue, which is relatively anhydrous). TBW is divided into intracellular fluid (ICF) and extracellular fluid (ECF).</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Compartment</th><th>% Body Weight</th><th>Volume (70 kg)</th><th>Key Solutes</th></tr></thead><tbody>
+            <tr><td><strong>Total Body Water</strong></td><td>60%</td><td>42 L</td><td>—</td></tr>
+            <tr><td><strong>Intracellular Fluid (ICF)</strong></td><td>40% (2/3 TBW)</td><td>28 L</td><td>K⁺, Mg²⁺, HPO₄²⁻, proteins</td></tr>
+            <tr><td><strong>Extracellular Fluid (ECF)</strong></td><td>20% (1/3 TBW)</td><td>14 L</td><td>Na⁺, Cl⁻, HCO₃⁻</td></tr>
+            <tr><td>&nbsp;&nbsp;→ Plasma</td><td>5%</td><td>3.5 L</td><td>Na⁺ + plasma proteins</td></tr>
+            <tr><td>&nbsp;&nbsp;→ Interstitial fluid</td><td>15%</td><td>10.5 L</td><td>Na⁺, Cl⁻ (protein-poor)</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Measurement (Dilution Principle)</div>
+          <ul class="rdr-list">
+            <li><strong>TBW:</strong> deuterium oxide (D₂O), antipyrine, or tritiated water — distributes throughout all water</li>
+            <li><strong>ECF:</strong> inulin, mannitol, or radioactive Na²⁴ — does not enter cells</li>
+            <li><strong>Plasma volume:</strong> Evans blue dye (T-1824) or ¹³¹I-labelled albumin</li>
+            <li><strong>ICF:</strong> calculated — ICF = TBW − ECF (cannot be measured directly)</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>The major cation of ICF is <strong>K⁺</strong>; the major cation of ECF is <strong>Na⁺</strong>. Plasma osmolality [normal: 280–295 mOsm/kg] is maintained mainly by Na⁺ and its anions. Formula: Osmolality ≈ 2[Na⁺] + Glucose/18 + BUN/2.8. In clinical practice, Na⁺ alone is the dominant determinant.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>60-40-20 rule:</strong> TBW = 60% body weight; ICF = 40%; ECF = 20%. Remember as 60/40/20 or "the rule of 60."</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Body Fluids</h4><ul>
+          <li>TBW: 60% body weight in males (55% females); ICF = 40%, ECF = 20%</li>
+          <li>ECF = plasma (5%) + interstitial (15%); interstitial is protein-poor plasma</li>
+          <li>ICF dominant cation: K⁺; ECF dominant cation: Na⁺</li>
+          <li>Normal plasma osmolality: 280–295 mOsm/kg; driven by Na⁺</li>
+          <li>ICF cannot be measured directly — calculated as TBW minus ECF</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">07</div>
+          <div><div class="rdr-topic-title">Blood</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Composition and Volume</div>
+          <p class="rdr-p">Blood is a connective tissue consisting of a liquid portion (plasma, ~55%) and formed elements (cells, ~45%). Total blood volume is approximately <strong>5–6 L in males</strong> and <strong>4–5 L in females</strong> (70 mL/kg body weight). Blood pH is tightly regulated at <strong>7.35–7.45</strong>.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+            <tr><td>Total blood volume</td><td>70 mL/kg (5–6 L in males; 4–5 L in females)</td></tr>
+            <tr><td>Plasma</td><td>55% of blood volume</td></tr>
+            <tr><td>Formed elements (PCV)</td><td>45% of blood volume</td></tr>
+            <tr><td>pH</td><td>7.35–7.45 (arterial 7.40; venous 7.36)</td></tr>
+            <tr><td>Specific gravity (whole blood)</td><td>1.050–1.060</td></tr>
+            <tr><td>Specific gravity (plasma)</td><td>1.025–1.030</td></tr>
+            <tr><td>Viscosity (relative to water)</td><td>3–4 times that of water</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Functions of Blood</div>
+          <ul class="rdr-list">
+            <li><strong>Transport:</strong> O₂, CO₂, nutrients, hormones, metabolic wastes, drugs</li>
+            <li><strong>Regulation:</strong> pH (buffers), body temperature (heat distribution), water balance (osmolality)</li>
+            <li><strong>Protection:</strong> WBCs (immunity), platelets and coagulation factors (hemostasis)</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Venous blood pH (7.36) is slightly lower than arterial (7.40) because CO₂ generated by tissues enters venous blood, forming H⁺ + HCO₃⁻. The 5-litre blood volume is approximately <strong>8% of body weight</strong> in a 70 kg individual — a figure used in fluid resuscitation calculations.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Blood</h4><ul>
+          <li>Blood volume: 70 mL/kg; ~5 L in adult male; ~8% of body weight</li>
+          <li>Plasma = 55%; formed elements = 45% (PCV/haematocrit)</li>
+          <li>pH: 7.35–7.45; specific gravity: 1.050–1.060; viscosity: 3–4× water</li>
+          <li>Functions: transport, regulation (pH/temperature/osmolality), protection (immunity, hemostasis)</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">08</div>
+          <div><div class="rdr-topic-title">Plasma Proteins</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Total plasma protein concentration is <strong>6–8 g/dL</strong>. Almost all plasma proteins are synthesised in the <strong>liver</strong>, except immunoglobulins (plasma cells) and von Willebrand factor (endothelium). Plasma proteins maintain oncotic pressure, transport substances, and participate in coagulation and immunity.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Plasma Protein Fractions</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Protein</th><th>Normal Level</th><th>Key Functions</th><th>Exam Notes</th></tr></thead><tbody>
+            <tr><td><strong>Albumin</strong></td><td>3.5–5.0 g/dL</td><td>Maintains plasma oncotic pressure; transport (bilirubin, Ca²⁺, drugs, fatty acids)</td><td>Most abundant; largest contributor to oncotic pressure; synthesised only in liver</td></tr>
+            <tr><td><strong>Globulins (total)</strong></td><td>2.0–3.5 g/dL</td><td>Immunity (γ), transport (α, β), acute phase</td><td>α₁: AAT; α₂: haptoglobin, ceruloplasmin; β: transferrin, LDL; γ: IgG, IgA, IgM</td></tr>
+            <tr><td><strong>Fibrinogen</strong></td><td>0.2–0.4 g/dL</td><td>Coagulation — converted to fibrin by thrombin</td><td>Absent in serum (consumed during clotting); acute phase reactant</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Albumin:Globulin Ratio</div>
+          <p class="rdr-p">Normal A:G ratio is <strong>1.5–2.5:1</strong>. Reversal of A:G ratio (ratio &lt;1) occurs in chronic liver disease (reduced albumin synthesis), chronic infections, myeloma (increased immunoglobulins), and nephrotic syndrome (selective albumin loss in urine).</p>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Serum vs plasma:</strong> Plasma contains fibrinogen; serum does not (fibrinogen is consumed during clot formation). Albumin is the protein responsible for approximately <strong>80%</strong> of plasma oncotic pressure (colloid osmotic pressure [normal: 25–28 mmHg]). Hypoalbuminaemia below 2.5 g/dL causes oedema regardless of the cause.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>A FAG</strong> — plasma proteins synthesised in the <strong>L</strong>iver: <strong>A</strong>lbumin, <strong>F</strong>ibrinogen, <strong>A</strong>cute phase proteins, <strong>G</strong>lobulins (except γ). The exception: <strong>γ-globulins</strong> (immunoglobulins) come from plasma cells.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Plasma Proteins</h4><ul>
+          <li>Total plasma protein: 6–8 g/dL; albumin 3.5–5 g/dL; fibrinogen 0.2–0.4 g/dL</li>
+          <li>All synthesised in liver EXCEPT immunoglobulins (plasma cells)</li>
+          <li>Albumin provides ~80% of oncotic pressure [COP: 25–28 mmHg]</li>
+          <li>Normal A:G ratio: 1.5–2.5:1; reversal in liver disease, myeloma, nephrotic syndrome</li>
+          <li>Fibrinogen absent in serum (consumed in clotting); its presence distinguishes plasma from serum</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">09</div>
+          <div><div class="rdr-topic-title">Red Blood Cells</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview and Normal Values</div>
+          <p class="rdr-p">Red blood cells (erythrocytes) are the most numerous blood cells, responsible for O₂ and CO₂ transport. The mature RBC is a <strong>biconcave disc</strong>, 7–8 µm in diameter, 2 µm thick — a shape that maximises surface area for gas exchange and allows deformability through narrow capillaries.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Parameter</th><th>Males</th><th>Females</th></tr></thead><tbody>
+            <tr><td>RBC count</td><td>4.5–6.5 million/µL</td><td>3.9–5.6 million/µL</td></tr>
+            <tr><td>Haemoglobin</td><td>13–17 g/dL</td><td>11.5–16.5 g/dL</td></tr>
+            <tr><td>PCV (Haematocrit)</td><td>40–54%</td><td>37–47%</td></tr>
+            <tr><td>Lifespan</td><td colspan="2">120 days</td></tr>
+            <tr><td>Diameter</td><td colspan="2">7–8 µm</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Special Features of Mature RBCs</div>
+          <ul class="rdr-list">
+            <li><strong>No nucleus:</strong> expelled at normoblast stage during erythropoiesis</li>
+            <li><strong>No mitochondria:</strong> ATP produced exclusively by anaerobic glycolysis</li>
+            <li><strong>No ribosomes:</strong> cannot synthesise proteins after maturation</li>
+            <li><strong>Flexible membrane:</strong> spectrin-ankyrin cytoskeleton allows deformability; spectrin defects → hereditary spherocytosis</li>
+            <li><strong>Site of destruction:</strong> spleen (extravascular hemolysis) — by macrophages after 120 days</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Because RBCs lack mitochondria, they cannot use the TCA cycle or oxidative phosphorylation. Their only ATP source is anaerobic glycolysis. They also need <strong>2,3-BPG</strong> (produced via the Luebering-Rapaport shunt off glycolysis) to shift the O₂ dissociation curve rightward and facilitate O₂ release to tissues. Stored blood loses 2,3-BPG — a transfusion risk in massive transfusion.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Red Blood Cells</h4><ul>
+          <li>Normal count: males 4.5–6.5, females 3.9–5.6 million/µL; lifespan 120 days</li>
+          <li>Biconcave disc — maximises surface area; spectrin-ankyrin skeleton enables deformability</li>
+          <li>No nucleus, no mitochondria, no ribosomes in mature RBCs</li>
+          <li>ATP from anaerobic glycolysis only; 2,3-BPG shifts O₂ curve right (facilitates O₂ unloading)</li>
+          <li>Destroyed by splenic macrophages after 120 days (extravascular haemolysis)</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">10</div>
+          <div><div class="rdr-topic-title">Erythropoiesis</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Sites of Erythropoiesis (by Age)</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Stage</th><th>Site</th><th>Age</th></tr></thead><tbody>
+            <tr><td>Mesoblastic</td><td>Yolk sac (extraembryonic mesoderm)</td><td>Up to 2 months gestation</td></tr>
+            <tr><td>Hepatic</td><td>Liver (primary), spleen, lymph nodes</td><td>2–7 months gestation</td></tr>
+            <tr><td>Myeloid (medullary)</td><td>Red bone marrow — all bones in childhood, axial skeleton in adults</td><td>7 months gestation → lifelong</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Developmental Sequence</div>
+          <p class="rdr-p">Proerythroblast → Early erythroblast → Late erythroblast → <strong>Normoblast (nucleus expelled here)</strong> → Reticulocyte (contains remnant RNA, released into blood) → Mature RBC. The reticulocyte count [normal: 0.5–2.5%] reflects bone marrow erythropoietic activity.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Erythropoietin (EPO)</div>
+          <ul class="rdr-list">
+            <li>Produced by peritubular cells of the kidney (<strong>90%</strong>) and liver (10%) in response to hypoxia</li>
+            <li>Stimulates: proliferation of erythroid precursors, haemoglobin synthesis, early release of reticulocytes</li>
+            <li>Clinical use: recombinant EPO in chronic kidney disease anaemia; abused in sport (blood doping)</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Requirements for erythropoiesis:</strong> Iron (haem synthesis), Vitamin B12 and folate (DNA synthesis — deficiency causes megaloblastic anaemia), EPO, protein, trace elements (copper, cobalt). B12 requires intrinsic factor from gastric parietal cells for absorption — lack of IF → pernicious anaemia.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>PRELN</strong>R — erythropoiesis stages: <strong>P</strong>roerythroblast, <strong>R</strong>ubriblast (early erythroblast), <strong>E</strong>arly erythroblast, <strong>L</strong>ate erythroblast, <strong>N</strong>ormoblast (loses nucleus), <strong>R</strong>eticulocyte. Or simply: nucleus is lost at the normoblast stage.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Erythropoiesis</h4><ul>
+          <li>Yolk sac → liver/spleen (fetal) → red bone marrow (adult, axial skeleton)</li>
+          <li>Nucleus expelled at normoblast stage; reticulocyte still has RNA [normal: 0.5–2.5%]</li>
+          <li>EPO from kidney (90%) + liver (10%); stimulated by hypoxia</li>
+          <li>Requirements: iron, B12, folate, protein, EPO; B12 absorption requires intrinsic factor</li>
+          <li>B12/folate deficiency → impaired DNA synthesis → megaloblastic (macrocytic) anaemia</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">11</div>
+          <div><div class="rdr-topic-title">Haemoglobin and Iron Metabolism</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Haemoglobin Structure and Types</div>
+          <p class="rdr-p">Haemoglobin (Hb) is a tetramer of 4 globin chains, each carrying one <strong>haem</strong> group (protoporphyrin ring + Fe²⁺). Each molecule carries 4 O₂ molecules. Normal Hb: males <strong>13–17 g/dL</strong>, females <strong>11.5–16.5 g/dL</strong>.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>Chains</th><th>Normal %</th><th>Notes</th></tr></thead><tbody>
+            <tr><td><strong>HbA</strong></td><td>α₂β₂</td><td>97%</td><td>Dominant adult Hb</td></tr>
+            <tr><td><strong>HbA₂</strong></td><td>α₂δ₂</td><td>2–3%</td><td>↑ in β-thalassaemia trait (diagnostic)</td></tr>
+            <tr><td><strong>HbF</strong></td><td>α₂γ₂</td><td>&lt;1% (adult)</td><td>Higher O₂ affinity (2,3-BPG binds less); dominant until 6 months of age</td></tr>
+            <tr><td><strong>HbS</strong></td><td>α₂βS₂</td><td>0 (normal)</td><td>Sickle cell: Glu→Val at position 6 of β-chain</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Iron Metabolism</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Aspect</th><th>Detail</th></tr></thead><tbody>
+            <tr><td>Daily requirement</td><td>Males: 1 mg/day; females (menstruating): 2 mg/day; pregnancy: 3–4 mg/day</td></tr>
+            <tr><td>Absorption site</td><td>Duodenum and upper jejunum; Fe²⁺ (ferrous) absorbed; Fe³⁺ (ferric) must be reduced first</td></tr>
+            <tr><td>Absorption enhancers</td><td>Vitamin C (reduces Fe³⁺ → Fe²⁺), acid pH, meat (haem iron absorbed directly)</td></tr>
+            <tr><td>Absorption inhibitors</td><td>Phytates, oxalates, tannins (tea), calcium, antacids</td></tr>
+            <tr><td>Transport in blood</td><td>Transferrin (β-globulin); each molecule carries 2 Fe³⁺; TIBC [normal: 250–400 µg/dL]</td></tr>
+            <tr><td>Storage form</td><td>Ferritin (soluble, main store); haemosiderin (insoluble, excess); mainly liver, spleen, bone marrow</td></tr>
+            <tr><td>Total body iron</td><td>~4 g total; 70% in haemoglobin, 25% stored, 5% in myoglobin/enzymes</td></tr>
+            <tr><td>Serum iron</td><td>[Normal: 60–170 µg/dL]; ↓ in iron deficiency; ↑ in haemolysis, haemochromatosis</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>In iron deficiency anaemia: serum iron ↓, TIBC ↑, transferrin saturation ↓ (below 15%), ferritin ↓ (earliest indicator). The order of depletion is: stores (↓ferritin first) → serum iron falls → then anaemia appears. <strong>Ferritin is the earliest and most sensitive marker of iron deficiency.</strong> In anaemia of chronic disease: serum iron ↓ BUT ferritin ↑ and TIBC ↓ — this distinguishes the two.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>Iron deficiency vs Anaemia of Chronic Disease:</strong> "Iron deficiency = TIBC UP, ferritin DOWN. Chronic disease = TIBC DOWN, ferritin UP." Both have low serum iron — ferritin is the distinguishing marker.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Haemoglobin and Iron</h4><ul>
+          <li>HbA (α₂β₂) = 97% of adult Hb; HbF (α₂γ₂) has higher O₂ affinity than HbA</li>
+          <li>HbA₂ ↑ in β-thalassaemia trait; HbS has Glu→Val substitution at β-chain position 6</li>
+          <li>Iron absorbed as Fe²⁺ in duodenum; vitamin C enhances; phytates/tannins inhibit</li>
+          <li>Transported as transferrin; stored as ferritin (earliest marker of deficiency)</li>
+          <li>Iron deficiency: ↓ ferritin, ↓ serum Fe, ↑ TIBC; Anaemia of chronic disease: ↑ ferritin, ↓ TIBC</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">12</div>
+          <div><div class="rdr-topic-title">Erythrocyte Sedimentation Rate</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">ESR measures the rate at which RBCs settle in a vertical tube of anticoagulated blood over 1 hour. <strong>Normal values (Westergren method):</strong> males &lt;15 mm/hr; females &lt;20 mm/hr; elderly up to 30 mm/hr. ESR is a non-specific marker of inflammation — it rises when plasma proteins (especially fibrinogen) increase, causing RBC rouleaux formation.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Factors Affecting ESR</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Increased ESR</th><th>Decreased ESR</th></tr></thead><tbody>
+            <tr><td>Infections, inflammation (↑ fibrinogen/globulins cause rouleaux)</td><td>Polycythaemia (more cells, less settling)</td></tr>
+            <tr><td>Anaemia (fewer cells, faster settling of remainder)</td><td>Sickle cell disease (abnormal shape prevents rouleaux)</td></tr>
+            <tr><td>Pregnancy, menstruation</td><td>Spherocytosis (spherical cells cannot form rouleaux)</td></tr>
+            <tr><td>Malignancy, autoimmune disease</td><td>DIC (fibrinogen consumed)</td></tr>
+            <tr><td>Hypercholesterolaemia</td><td>Cardiac failure (venous stasis effect)</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>ESR proceeds in three stages: (1) rouleaux formation (first 10 min), (2) sedimentation (10–40 min), (3) packing (40–60 min). The ESR is elevated in almost any inflammatory state — it has poor specificity. Its main clinical utility is monitoring disease activity over time (e.g., TB treatment, temporal arteritis, rheumatoid arthritis) rather than diagnosis. <strong>CRP rises and falls faster than ESR</strong> — CRP is a better acute marker.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — ESR</h4><ul>
+          <li>Normal (Westergren): males &lt;15, females &lt;20 mm/hr</li>
+          <li>Driven by rouleaux formation — increased by fibrinogen, globulins, acute phase proteins</li>
+          <li>Increased: inflammation, infection, malignancy, anaemia, pregnancy</li>
+          <li>Decreased: polycythaemia, sickle cell, spherocytosis (shapes prevent rouleaux)</li>
+          <li>CRP is more sensitive and reacts faster than ESR for acute inflammation</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">13</div>
+          <div><div class="rdr-topic-title">Packed Cell Volume and Blood Indices</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">PCV (Haematocrit)</div>
+          <p class="rdr-p">PCV is the proportion of blood volume occupied by RBCs. Normal: <strong>males 40–54%; females 37–47%</strong>. Measured by centrifugation (Wintrobe tube). PCV is used to calculate blood indices and screen for polycythaemia and anaemia.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Blood Indices (Absolute Values)</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Index</th><th>Formula</th><th>Normal Range</th><th>Interpretation</th></tr></thead><tbody>
+            <tr><td><strong>MCV</strong> (Mean Corpuscular Volume)</td><td>(PCV ÷ RBC count) × 10</td><td>78–96 fL</td><td>↓ = microcytic; ↑ = macrocytic</td></tr>
+            <tr><td><strong>MCH</strong> (Mean Corpuscular Haemoglobin)</td><td>(Hb ÷ RBC count) × 10</td><td>27–33 pg</td><td>↓ = hypochromic</td></tr>
+            <tr><td><strong>MCHC</strong> (Mean Corpuscular Hb Conc.)</td><td>(Hb ÷ PCV) × 100</td><td>30–35 g/dL</td><td>↑ = spherocytosis; never truly ↑ except spherocytes</td></tr>
+            <tr><td><strong>RDW</strong> (RBC Distribution Width)</td><td>SD of MCV / mean MCV × 100</td><td>11.5–14.5%</td><td>↑ = anisocytosis (mixed cell sizes)</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>MCHC is the most reliable index because it does not depend on cell count accuracy. MCHC above 36 g/dL is seen in <strong>hereditary spherocytosis</strong> (the only common anaemia where MCHC is raised) — spherocytes pack Hb into a smaller volume. In all iron deficiency anaemias, MCHC is low (hypochromic); MCV is low (microcytic). In B12/folate deficiency, MCV is high (macrocytic) but MCHC is normal.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — PCV and Blood Indices</h4><ul>
+          <li>PCV: males 40–54%, females 37–47%; used to calculate blood indices</li>
+          <li>MCV [78–96 fL]: ↓ microcytic (iron def., thalassaemia); ↑ macrocytic (B12/folate def.)</li>
+          <li>MCH [27–33 pg]: ↓ in hypochromic anaemias</li>
+          <li>MCHC [30–35 g/dL]: ↑ only in spherocytosis; most reliable index (doesn't depend on cell count)</li>
+          <li>RDW: measures anisocytosis; ↑ in mixed deficiency or early iron deficiency</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">14</div>
+          <div><div class="rdr-topic-title">Anaemia</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Definition and Classification</div>
+          <p class="rdr-p">Anaemia is a reduction in haemoglobin concentration below normal: <strong>Hb &lt;13 g/dL in males; &lt;12 g/dL in females</strong> (WHO). Classified morphologically by MCV or aetiologically by mechanism (impaired production, increased destruction, blood loss).</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Morphological Classification</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>MCV</th><th>MCHC</th><th>Causes</th></tr></thead><tbody>
+            <tr><td><strong>Microcytic hypochromic</strong></td><td>↓ &lt;78 fL</td><td>↓</td><td>Iron deficiency, thalassaemia, sideroblastic anaemia, lead poisoning</td></tr>
+            <tr><td><strong>Normocytic normochromic</strong></td><td>Normal</td><td>Normal</td><td>Aplastic anaemia, acute blood loss, haemolytic anaemia, anaemia of chronic disease, renal failure</td></tr>
+            <tr><td><strong>Macrocytic</strong></td><td>↑ &gt;96 fL</td><td>Normal</td><td>B12 deficiency, folate deficiency, hypothyroidism, liver disease, alcoholism, reticulocytosis</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>The most common anaemia worldwide is <strong>iron deficiency anaemia</strong>. It presents late — stores deplete before Hb falls. Features: microcytic, hypochromic RBCs, target cells, pencil cells; ↓ ferritin, ↓ serum Fe, ↑ TIBC; koilonychia (spoon nails), angular stomatitis, glossitis. <strong>Pernicious anaemia</strong> (B12 deficiency + anti-intrinsic factor antibodies) causes subacute combined degeneration of the cord — not just anaemia.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>SITS</strong> — microcytic hypochromic anaemias: <strong>S</strong>ideroblastic, <strong>I</strong>ron deficiency, <strong>T</strong>halassaemia, <strong>S</strong>aturated (lead poisoning). All have ↓MCV and ↓MCHC but different iron studies.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Anaemia</h4><ul>
+          <li>Anaemia: Hb &lt;13 (males) / &lt;12 (females) g/dL; WHO definition</li>
+          <li>Microcytic hypochromic (↓MCV): iron deficiency, thalassaemia, sideroblastic, lead poisoning</li>
+          <li>Normocytic normochromic: haemolytic, aplastic, acute blood loss, CKD, chronic disease</li>
+          <li>Macrocytic (↑MCV): B12/folate deficiency, liver disease, hypothyroidism, alcoholism</li>
+          <li>Pernicious anaemia = B12 deficiency + anti-IF antibodies → megaloblastic + subacute combined cord degeneration</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">15</div>
+          <div><div class="rdr-topic-title">Haemolysis and Fragility of Red Blood Cells</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Osmotic Fragility</div>
+          <p class="rdr-p">When RBCs are placed in hypotonic NaCl solutions, water enters by osmosis and cells swell. When swelling exceeds capacity, the membrane ruptures (haemolysis). Normal RBCs begin to haemolyse at <strong>0.45% NaCl</strong> and are completely haemolysed at <strong>0.3% NaCl</strong>. This is the osmotic fragility test.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Condition</th><th>Osmotic Fragility</th><th>Reason</th></tr></thead><tbody>
+            <tr><td>Hereditary spherocytosis</td><td>Increased ↑</td><td>Spherical cells have no excess membrane; minimal swelling causes lysis</td></tr>
+            <tr><td>Thalassaemia</td><td>Decreased ↓</td><td>Target cells — flat with excess membrane; can swell more before lysing</td></tr>
+            <tr><td>Iron deficiency anaemia</td><td>Decreased ↓</td><td>Hypochromic cells have more membrane relative to Hb content</td></tr>
+            <tr><td>Sickle cell disease</td><td>Decreased ↓</td><td>Elongated cells tolerate osmotic change better</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Types of Haemolysis</div>
+          <ul class="rdr-list">
+            <li><strong>Intravascular haemolysis:</strong> RBCs lyse in circulation → haemoglobinaemia, haemoglobinuria, ↓ haptoglobin. Causes: ABO mismatch, G6PD deficiency, PNH, mechanical valve</li>
+            <li><strong>Extravascular haemolysis:</strong> RBCs phagocytosed by splenic/hepatic macrophages → unconjugated hyperbilirubinaemia, splenomegaly. Causes: hereditary spherocytosis, sickle cell, autoimmune haemolytic anaemia</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Haemolytic anaemia is a <strong>normocytic normochromic</strong> anaemia with a raised reticulocyte count (reticulocytosis — the marrow's compensatory response). The hallmark biochemistry: ↑ unconjugated bilirubin, ↑ LDH, ↓ haptoglobin, ↑ reticulocytes. In intravascular haemolysis, add: haemoglobinaemia and haemoglobinuria (pink/red urine).</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Haemolysis and Fragility</h4><ul>
+          <li>Osmotic fragility: haemolysis begins at 0.45% NaCl; complete at 0.3% NaCl</li>
+          <li>Increased fragility: hereditary spherocytosis (no excess membrane)</li>
+          <li>Decreased fragility: thalassaemia, iron deficiency, sickle cell (excess membrane or abnormal shape)</li>
+          <li>Extravascular (spleen): ↑ unconjugated bilirubin, splenomegaly, reticulocytosis</li>
+          <li>Intravascular (blood): haemoglobinaemia, haemoglobinuria, ↓ haptoglobin, ↑ LDH</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">16</div>
+          <div><div class="rdr-topic-title">White Blood Cells</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Normal Differential</div>
+          <p class="rdr-p">Total WBC count: <strong>4,000–11,000/µL</strong>. Leucocytosis (&gt;11,000) indicates infection, inflammation, or malignancy. Leucopenia (&lt;4,000) occurs in viral infections, bone marrow suppression, and autoimmune disease.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Cell Type</th><th>Normal %</th><th>Function</th><th>Key Associations</th></tr></thead><tbody>
+            <tr><td><strong>Neutrophils</strong></td><td>50–70%</td><td>Phagocytosis; first responders to bacterial infection</td><td>↑ bacterial infection; ↓ viral/chemotherapy/aplastic</td></tr>
+            <tr><td><strong>Lymphocytes</strong></td><td>20–40%</td><td>T-cells (cell-mediated); B-cells (antibody)</td><td>↑ viral infection, CLL, TB; ↓ HIV, steroids</td></tr>
+            <tr><td><strong>Monocytes</strong></td><td>2–8%</td><td>Phagocytosis; → tissue macrophages; antigen presentation</td><td>↑ chronic infections (TB, malaria, SBE)</td></tr>
+            <tr><td><strong>Eosinophils</strong></td><td>1–4%</td><td>Allergic reactions; anti-parasitic</td><td>↑ allergy, asthma, parasites (NAPALM); ↓ steroids</td></tr>
+            <tr><td><strong>Basophils</strong></td><td>0.5–1%</td><td>IgE-mediated allergy; contain histamine, heparin</td><td>↑ CML, allergic reactions; rarest WBC</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>"Shift to the left"</strong> means an increase in immature neutrophils (band cells/stab cells) in the blood, indicating an acute severe bacterial infection demanding rapid neutrophil production from the marrow. A shift to the right (hypersegmented neutrophils — &gt;5 lobes) occurs in B12/folate deficiency — a classic finding on blood film.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>Never Let Monkeys Eat Bananas</strong> — differential in order: <strong>N</strong>eutrophils (50–70%), <strong>L</strong>ymphocytes (20–40%), <strong>M</strong>onocytes (2–8%), <strong>E</strong>osinophils (1–4%), <strong>B</strong>asophils (0.5–1%).</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — White Blood Cells</h4><ul>
+          <li>Normal total WBC: 4,000–11,000/µL; order by count: N &gt; L &gt; M &gt; E &gt; B</li>
+          <li>Neutrophils: bacterial infections, first responders; shift left = immature bands = severe sepsis</li>
+          <li>Eosinophils: allergies and parasites; suppressed by corticosteroids</li>
+          <li>Basophils: contain histamine and heparin; ↑ in CML and allergic states</li>
+          <li>Hypersegmented neutrophils (&gt;5 lobes) = B12/folate deficiency on blood film</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">17</div>
+          <div><div class="rdr-topic-title">Immunity</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Innate vs Adaptive Immunity</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Feature</th><th>Innate (Non-specific)</th><th>Adaptive (Specific)</th></tr></thead><tbody>
+            <tr><td>Response time</td><td>Immediate (seconds–hours)</td><td>Days (first exposure); faster on re-exposure</td></tr>
+            <tr><td>Memory</td><td>None</td><td>Yes — immunological memory</td></tr>
+            <tr><td>Components</td><td>Barriers, phagocytes, NK cells, complement, interferons</td><td>T-lymphocytes, B-lymphocytes, antibodies</td></tr>
+            <tr><td>Specificity</td><td>Non-specific (PAMPs/PRRs)</td><td>Antigen-specific (TCR, BCR, antibodies)</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Immunoglobulins</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Ig</th><th>Key Facts</th></tr></thead><tbody>
+            <tr><td><strong>IgG</strong></td><td>Most abundant (75–80%); only Ig crossing placenta (passive immunity); secondary response; opsonisation</td></tr>
+            <tr><td><strong>IgA</strong></td><td>Secretory form (dimer) — found in saliva, tears, breast milk, gut; mucosal immunity; first line at surfaces</td></tr>
+            <tr><td><strong>IgM</strong></td><td>Pentamer; first produced in primary response; most efficient complement activator; largest Ig; ABO blood group antibodies are IgM</td></tr>
+            <tr><td><strong>IgE</strong></td><td>Lowest serum concentration; binds mast cells and basophils; ↑ in allergy (type I hypersensitivity) and parasitic infections</td></tr>
+            <tr><td><strong>IgD</strong></td><td>B-cell surface receptor; activates naive B-cells; minimal in serum</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>T-cell subsets:</strong> CD4⁺ helper T-cells orchestrate immune response (depleted in HIV); CD8⁺ cytotoxic T-cells kill virus-infected cells and tumour cells; regulatory T-cells suppress immune activation. MHC class I (on all nucleated cells) presents to CD8⁺; MHC class II (on APCs) presents to CD4⁺. Rule: <strong>CD4 × CD8 = 8 (8 = MHC class paired number)</strong> — CD4 sees class II, CD8 sees class I.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>GAMED</strong> — immunoglobulins in order of serum concentration: <strong>G</strong> (most, 75%) &gt; <strong>A</strong> &gt; <strong>M</strong> &gt; <strong>E</strong> &gt; <strong>D</strong> (least). IgG crosses the placenta; IgM is the first responder and a pentamer; IgA is secretory.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Immunity</h4><ul>
+          <li>Innate: immediate, no memory, non-specific; Adaptive: delayed, antigen-specific, has memory</li>
+          <li>IgG: most abundant, crosses placenta, opsonises — secondary response antibody</li>
+          <li>IgM: pentamer, first response, ABO antibodies, best complement activator</li>
+          <li>IgA: secretory dimer at mucosal surfaces (saliva, breast milk, gut)</li>
+          <li>IgE: mast cell/basophil binding; type I hypersensitivity; ↑ parasites/allergy</li>
+          <li>CD4⁺ → MHC class II (APCs); CD8⁺ → MHC class I (all nucleated cells)</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">18</div>
+          <div><div class="rdr-topic-title">Platelets</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Platelets (thrombocytes) are anucleate cell fragments derived from <strong>megakaryocytes</strong> in the bone marrow. They are the smallest formed element of blood and are essential for primary haemostasis. Normal count: <strong>150,000–400,000/µL</strong>; lifespan: <strong>9–10 days</strong>; aged platelets are removed by the spleen.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Platelet Activation Sequence</div>
+          <ul class="rdr-list">
+            <li><strong>Adhesion:</strong> vascular injury exposes collagen and von Willebrand factor (vWF); platelets bind via GPIb receptor to vWF (critical in high-shear conditions)</li>
+            <li><strong>Activation:</strong> ADP, thromboxane A₂ (TXA₂), and thrombin activate platelets → shape change, granule release</li>
+            <li><strong>Aggregation:</strong> fibrinogen bridges activated platelets via GPIIb/IIIa receptors → platelet plug (primary haemostasis)</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Thrombocytopenia</strong> (&lt;150,000/µL) causes mucocutaneous bleeding (petechiae, purpura, gum bleeding, epistaxis). Thrombocytosis (&gt;400,000/µL) increases thrombosis risk. Aspirin irreversibly inhibits COX-1 → blocks TXA₂ synthesis → impairs platelet aggregation for the platelet's entire lifespan (9–10 days). This is why aspirin must be stopped 7–10 days before surgery.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Platelets</h4><ul>
+          <li>Normal count: 150,000–400,000/µL; lifespan 9–10 days; derived from megakaryocytes</li>
+          <li>Adhesion: GPIb binds vWF at site of injury</li>
+          <li>Aggregation: GPIIb/IIIa binds fibrinogen to form platelet plug</li>
+          <li>Aspirin irreversibly blocks TXA₂ synthesis for platelet lifespan; stop 7–10 days pre-op</li>
+          <li>Thrombocytopenia: mucocutaneous bleeding (petechiae, purpura); thrombocytosis: thrombotic risk</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">19</div>
+          <div><div class="rdr-topic-title">Haemostasis</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Haemostasis is the arrest of bleeding following vascular injury. It occurs in three sequential phases: <strong>(1) vascular spasm</strong>, <strong>(2) primary haemostasis</strong> (platelet plug), and <strong>(3) secondary haemostasis</strong> (coagulation → fibrin clot).</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Phases of Haemostasis</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Phase</th><th>Mechanism</th><th>Key Mediators</th></tr></thead><tbody>
+            <tr><td><strong>Vascular spasm</strong></td><td>Immediate vasoconstriction to reduce blood flow</td><td>Endothelin, serotonin (from platelets), TXA₂</td></tr>
+            <tr><td><strong>Primary haemostasis</strong></td><td>Platelet adhesion → activation → aggregation → platelet plug</td><td>vWF (adhesion), ADP/TXA₂ (activation), fibrinogen/GPIIb/IIIa (aggregation)</td></tr>
+            <tr><td><strong>Secondary haemostasis</strong></td><td>Coagulation cascade → fibrin mesh reinforces platelet plug</td><td>Coagulation factors, thrombin, fibrin, Factor XIII (cross-linking)</td></tr>
+            <tr><td><strong>Fibrinolysis</strong></td><td>Plasminogen → plasmin dissolves clot after healing</td><td>tPA, plasmin; inhibited by α₂-antiplasmin</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>vWF is essential for platelet adhesion in <strong>high-shear conditions</strong> (arteries). von Willebrand disease (the most common inherited bleeding disorder) presents with mucocutaneous bleeding, prolonged bleeding time, and normal platelet count and coagulation tests. It is distinct from haemophilia, which causes deep tissue/joint bleeding and normal bleeding time.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Haemostasis</h4><ul>
+          <li>Three phases: vascular spasm → platelet plug (primary) → fibrin clot (secondary) → fibrinolysis</li>
+          <li>vWF mediates platelet adhesion (GPIb binding) at high shear; deficiency = von Willebrand disease</li>
+          <li>GPIIb/IIIa binds fibrinogen to aggregate platelets; blocked by abciximab, tirofiban</li>
+          <li>Fibrinolysis: tPA activates plasminogen → plasmin → degrades fibrin (D-dimers)</li>
+          <li>vWD = mucocutaneous bleeding + ↑ bleeding time; haemophilia = deep/joint bleeding + normal bleeding time</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">20</div>
+          <div><div class="rdr-topic-title">Coagulation of Blood</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Coagulation Cascade</div>
+          <p class="rdr-p">The coagulation cascade converts soluble fibrinogen to an insoluble fibrin clot. It proceeds via the <strong>extrinsic pathway</strong> (faster — initiated by tissue factor), the <strong>intrinsic pathway</strong> (slower — initiated by contact activation), and a final <strong>common pathway</strong> where both converge at Factor X.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Pathway</th><th>Initiation</th><th>Factors Involved</th><th>Test</th><th>Normal</th></tr></thead><tbody>
+            <tr><td><strong>Extrinsic</strong></td><td>Tissue factor (TF/Factor III) + VIIa</td><td>TF → VII → X</td><td>PT (Prothrombin Time)</td><td>12–14 seconds</td></tr>
+            <tr><td><strong>Intrinsic</strong></td><td>Contact activation (collagen) → XII</td><td>XII → XI → IX → VIII-IXa complex → X</td><td>aPTT (activated Partial Thromboplastin Time)</td><td>25–35 seconds</td></tr>
+            <tr><td><strong>Common</strong></td><td>Both pathways → Xa + Va</td><td>X → V → II (prothrombin → thrombin) → fibrinogen → fibrin → XIII cross-links</td><td>Both PT and aPTT</td><td>—</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Vitamin K and Anticoagulants</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Anticoagulant</th><th>Mechanism</th><th>Monitoring</th><th>Reversal</th></tr></thead><tbody>
+            <tr><td><strong>Heparin</strong></td><td>Activates antithrombin III → inhibits IIa, Xa, IXa, XIa, XIIa</td><td>aPTT</td><td>Protamine sulphate</td></tr>
+            <tr><td><strong>Warfarin</strong></td><td>Inhibits vitamin K epoxide reductase → ↓ factors II, VII, IX, X + protein C, S</td><td>PT/INR</td><td>Vitamin K, FFP</td></tr>
+            <tr><td><strong>DOACs</strong></td><td>Rivaroxaban/apixaban: direct Xa inhibitor; dabigatran: direct IIa inhibitor</td><td>Anti-Xa level</td><td>Idarucizumab (dabigatran), andexanet alfa (Xa inhibitors)</td></tr>
+          </tbody></table></div>
+          <p class="rdr-p"><strong>Vitamin K-dependent factors:</strong> II, VII, IX, X (clotting) + Protein C, Protein S (anticoagulant). Mnemonic: <strong>1972</strong> — factors I(I), VII, II, IX = not right. Better: <strong>"Ten Ninety-Nine, Seven Two"</strong> = 10, 9, 7, 2 + Protein C and S.</p>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>PT tests extrinsic + common; aPTT tests intrinsic + common.</strong> Isolated ↑PT = Factor VII deficiency or early warfarin (VII shortest half-life). Isolated ↑aPTT = haemophilia A (VIII), haemophilia B (IX), or heparin. Both ↑ = common pathway defect (X, V, II, fibrinogen) or massive warfarin, liver failure, or DIC.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>Vitamin K factors: "1972"</strong> — factors I(I=2), VII, IX, X. Better: <strong>FSNT</strong> — <strong>F</strong>actors 2 (II), <strong>S</strong>even (VII), <strong>N</strong>ine (IX), <strong>T</strong>en (X), plus <strong>P</strong>rotein C &amp; S. All are γ-carboxylated in the liver using vitamin K.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Coagulation</h4><ul>
+          <li>Extrinsic (TF + VII) and intrinsic (XII → XI → IX + VIII) converge at Factor X → common pathway</li>
+          <li>PT [12–14 sec] tests extrinsic + common; aPTT [25–35 sec] tests intrinsic + common</li>
+          <li>Vitamin K-dependent: II, VII, IX, X + Protein C, S; inhibited by warfarin; reversed by vitamin K or FFP</li>
+          <li>Heparin activates antithrombin III; monitored by aPTT; reversed by protamine</li>
+          <li>Isolated ↑PT = FVII deficiency or warfarin; isolated ↑aPTT = haemophilia or heparin; both ↑ = DIC/liver failure</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">21</div>
+          <div><div class="rdr-topic-title">Blood Groups</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">ABO Blood Group System</div>
+          <p class="rdr-p">The ABO system (Landsteiner, 1901) is based on antigens on the RBC surface and naturally-occurring IgM antibodies in plasma. These antibodies form against ABO antigens not present on the individual's own cells (Landsteiner's law).</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Blood Group</th><th>RBC Antigen</th><th>Plasma Antibody</th><th>Can Donate To</th><th>Can Receive From</th></tr></thead><tbody>
+            <tr><td><strong>A</strong></td><td>A antigen</td><td>Anti-B (IgM)</td><td>A, AB</td><td>A, O</td></tr>
+            <tr><td><strong>B</strong></td><td>B antigen</td><td>Anti-A (IgM)</td><td>B, AB</td><td>B, O</td></tr>
+            <tr><td><strong>AB</strong></td><td>A and B antigens</td><td>Neither</td><td>AB only</td><td>All groups (universal recipient)</td></tr>
+            <tr><td><strong>O</strong></td><td>Neither</td><td>Anti-A and Anti-B (IgM)</td><td>All groups (universal donor — packed RBCs)</td><td>O only</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Rhesus (Rh) System</div>
+          <ul class="rdr-list">
+            <li>Based on the <strong>D antigen</strong>: Rh-positive (D antigen present, ~85% of population); Rh-negative (D antigen absent)</li>
+            <li>Anti-D antibodies are NOT naturally occurring — they form only after exposure to Rh+ blood (transfusion or pregnancy)</li>
+            <li><strong>Haemolytic disease of the newborn (HDN):</strong> Rh-negative mother, Rh-positive fetus; maternal IgG anti-D crosses placenta → haemolysis in fetus. Prevented by anti-D immunoglobulin (Rh prophylaxis) given at 28 weeks and within 72 hours of delivery</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>ABO antibodies are <strong>IgM</strong> (do not cross the placenta → ABO HDN is mild); Rh(D) antibodies after sensitisation are <strong>IgG</strong> (cross the placenta → severe HDN possible). ABO mismatched transfusion causes <strong>acute intravascular haemolysis</strong> (complement activation) — the most dangerous transfusion reaction, potentially fatal. The first affected pregnancy in Rh incompatibility is usually spared; subsequent pregnancies are at risk.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Blood Groups</h4><ul>
+          <li>ABO system: antigens on RBCs; naturally-occurring IgM antibodies in plasma (Landsteiner's law)</li>
+          <li>Group O: universal RBC donor (no A/B antigens); Group AB: universal recipient (no antibodies)</li>
+          <li>Rh(D) antibodies are IgG (cross placenta); ABO antibodies are IgM (do not cross placenta)</li>
+          <li>HDN: Rh-negative mother sensitised by Rh+ fetus → anti-D IgG → haemolysis in subsequent pregnancy</li>
+          <li>Prevention of HDN: anti-D immunoglobulin at 28 weeks and &lt;72 hours post-delivery</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">22</div>
+          <div><div class="rdr-topic-title">Blood Transfusion</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Transfusion Reactions</div>
+          <p class="rdr-p">Blood transfusion carries risks of immunological and non-immunological reactions. Proper cross-matching (type and screen, major cross-match) prevents most serious reactions. Stored blood (CPDA-1 preservative) is stable for <strong>35–42 days</strong> at 2–6°C.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Reaction</th><th>Mechanism</th><th>Timing</th><th>Features</th></tr></thead><tbody>
+            <tr><td><strong>Acute haemolytic</strong></td><td>ABO mismatch → IgM complement activation → intravascular haemolysis</td><td>During transfusion</td><td>Fever, chills, flank pain, haemoglobinuria, DIC, renal failure — FATAL if continued</td></tr>
+            <tr><td><strong>Febrile non-haemolytic</strong></td><td>Recipient anti-WBC antibodies vs donor WBC antigens</td><td>During–1 hour after</td><td>Fever, chills — mild; most common reaction; use leukodepleted blood to prevent</td></tr>
+            <tr><td><strong>Allergic/anaphylactic</strong></td><td>IgE against donor plasma proteins</td><td>During transfusion</td><td>Urticaria, bronchospasm, anaphylaxis</td></tr>
+            <tr><td><strong>TRALI</strong></td><td>Donor anti-HLA/neutrophil antibodies activate recipient neutrophils in lungs</td><td>Within 6 hours</td><td>Acute respiratory failure, bilateral pulmonary infiltrates, hypoxia — no cardiogenic oedema</td></tr>
+            <tr><td><strong>TACO</strong></td><td>Volume overload — transfusion too fast</td><td>During–6 hours</td><td>Hypertension, pulmonary oedema — distinguish from TRALI by ↑ JVP and cardiomegaly</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Stored blood undergoes metabolic changes: pH ↓ (lactic acid accumulates), 2,3-BPG ↓ (left shift of O₂ curve — Hb holds O₂ tighter), K⁺ ↑ (RBC pump failure → K⁺ leaks). Massive transfusion risks: hyperkalaemia, hypocalcaemia (citrate chelates Ca²⁺), hypothermia, and dilutional coagulopathy. The immediate management of any haemolytic transfusion reaction is <strong>STOP the transfusion</strong>.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Blood Transfusion</h4><ul>
+          <li>Most dangerous: acute haemolytic (ABO mismatch) — stop transfusion immediately</li>
+          <li>Most common: febrile non-haemolytic — prevented by leukodepleted blood</li>
+          <li>TRALI: donor anti-HLA antibodies → bilateral lung infiltrates → respiratory failure within 6 hours</li>
+          <li>Stored blood: ↓ pH, ↓ 2,3-BPG, ↑ K⁺; shelf life 35–42 days (CPDA-1)</li>
+          <li>Massive transfusion complications: ↑K⁺, ↓Ca²⁺, hypothermia, dilutional coagulopathy</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">23</div>
+          <div><div class="rdr-topic-title">Blood Volume</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Total blood volume is approximately <strong>70–75 mL/kg</strong> (~5 L in a 70 kg adult male). Plasma volume is ~45 mL/kg. Blood volume is measured by the <strong>dilution principle</strong> — a known amount of indicator is injected, equilibrates, and concentration is measured to calculate volume.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Method</th><th>Indicator</th><th>Measures</th></tr></thead><tbody>
+            <tr><td>Evans blue dye (T-1824)</td><td>Binds albumin immediately</td><td>Plasma volume</td></tr>
+            <tr><td>¹³¹I-labelled albumin</td><td>Radiolabelled albumin</td><td>Plasma volume</td></tr>
+            <tr><td>⁵¹Cr-labelled RBCs</td><td>Radiolabelled red cells</td><td>RBC volume (total cell mass)</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Blood volume increases by <strong>40–50% in pregnancy</strong> (plasma volume increases more than RBC mass → physiological dilutional anaemia of pregnancy). PCV falls to ~33% in pregnancy despite normal total RBC count. Blood volume is maintained by aldosterone-renin system and ADH — volume depletion activates these to retain fluid.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Blood Volume</h4><ul>
+          <li>Total blood volume: 70–75 mL/kg (~5 L in adult male); plasma volume ~45 mL/kg</li>
+          <li>Measured by dilution principle: Evans blue or ¹³¹I-albumin for plasma; ⁵¹Cr-RBCs for cell volume</li>
+          <li>Blood volume ↑ 40–50% in pregnancy → physiological dilutional anaemia</li>
+          <li>Regulated by RAAS and ADH maintaining effective circulating volume</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">24</div>
+          <div><div class="rdr-topic-title">Reticuloendothelial System and Tissue Macrophages</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">The reticuloendothelial system (RES), now called the <strong>mononuclear phagocyte system (MPS)</strong>, comprises monocytes (blood) and macrophages (tissues) derived from bone marrow progenitor cells. It is the body's primary defence against particulate matter, old/damaged cells, and pathogens.</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Location</th><th>Cell Name</th><th>Primary Function</th></tr></thead><tbody>
+            <tr><td>Blood</td><td>Monocyte</td><td>Precursor; phagocytosis en route to tissues</td></tr>
+            <tr><td>Liver</td><td>Kupffer cells</td><td>Phagocytose gut-derived bacteria and old RBCs; produce cytokines</td></tr>
+            <tr><td>Lung</td><td>Alveolar macrophages</td><td>Remove inhaled particles and micro-organisms</td></tr>
+            <tr><td>Brain/CNS</td><td>Microglia</td><td>CNS immune surveillance; phagocytose debris</td></tr>
+            <tr><td>Bone</td><td>Osteoclasts</td><td>Bone resorption (modified macrophages)</td></tr>
+            <tr><td>Skin</td><td>Langerhans cells</td><td>Antigen presentation (dendritic macrophages)</td></tr>
+            <tr><td>Spleen/lymph nodes</td><td>Fixed macrophages</td><td>Filter blood and lymph; phagocytosis and APC function</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Kupffer cells (hepatic macrophages) are responsible for removing <strong>senescent RBCs</strong> as a secondary site (after the spleen). After splenectomy, Kupffer cells take over as the primary site of extravascular haemolysis. The MPS is also critical for processing haemoglobin → bilirubin → bile — explaining why haemolysis causes unconjugated hyperbilirubinaemia.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — RES/Macrophages</h4><ul>
+          <li>MPS: monocytes (blood) → tissue macrophages; all derived from bone marrow</li>
+          <li>Key cells: Kupffer (liver), alveolar (lung), microglia (brain), osteoclasts (bone), Langerhans (skin)</li>
+          <li>Functions: phagocytosis, antigen presentation, cytokine production, RBC breakdown</li>
+          <li>After splenectomy, Kupffer cells become primary site of RBC destruction</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">25</div>
+          <div><div class="rdr-topic-title">The Spleen</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Structure and Functions</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Component</th><th>Contents</th><th>Functions</th></tr></thead><tbody>
+            <tr><td><strong>Red pulp</strong></td><td>Venous sinuses, splenic cords (macrophages)</td><td>Filtration of blood — removes old/abnormal RBCs; blood reservoir (~300 mL)</td></tr>
+            <tr><td><strong>White pulp</strong></td><td>Periarteriolar lymphoid sheath (T-cells), germinal centres (B-cells)</td><td>Immune responses — antibody production, T-cell activation</td></tr>
+            <tr><td><strong>Marginal zone</strong></td><td>Between red and white pulp</td><td>Captures encapsulated bacteria; responds to polysaccharide antigens</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Post-Splenectomy Changes</div>
+          <ul class="rdr-list">
+            <li><strong>Blood film:</strong> Howell-Jolly bodies (DNA remnants normally removed by spleen), target cells, siderocytes</li>
+            <li><strong>Blood count:</strong> thrombocytosis (short-term), lymphocytosis, monocytosis</li>
+            <li><strong>Infection risk:</strong> OPSI (overwhelming post-splenectomy infection) — especially encapsulated bacteria: <em>S. pneumoniae, H. influenzae, N. meningitidis</em> (SHIN). Vaccinate before splenectomy; lifelong penicillin prophylaxis recommended</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Howell-Jolly bodies on blood film = hyposplenic state (post-splenectomy, splenic atrophy in sickle cell, coeliac disease). The <strong>OPSI organisms</strong> are all encapsulated — the spleen is the primary organ for producing antibodies against polysaccharide capsules and clearing opsonised encapsulated bacteria. Vaccinate against <em>Pneumococcus, Haemophilus</em>, and <em>Meningococcus</em> ≥2 weeks before elective splenectomy.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Spleen</h4><ul>
+          <li>Red pulp: filters blood, destroys old RBCs, blood reservoir (~300 mL)</li>
+          <li>White pulp: T-cell sheath + B-cell follicles; antibody production against encapsulated bacteria</li>
+          <li>Post-splenectomy: Howell-Jolly bodies, thrombocytosis, OPSI risk</li>
+          <li>OPSI organisms: S. pneumoniae, H. influenzae, N. meningitidis (SHIN) — vaccinate before splenectomy</li>
+          <li>Sickle cell disease causes autosplenectomy (repeated infarcts) → same OPSI risk by adulthood</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">26</div>
+          <div><div class="rdr-topic-title">Lymphatic System and Lymph</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">The lymphatic system returns excess interstitial fluid and proteins to the circulation, absorbs dietary fat (as chylomicrons) from the gut, and is the highway for immune surveillance. Lymph is excess interstitial fluid that has entered lymphatic capillaries — it is similar in composition to interstitial fluid (low protein) except in the gut (chyle — high fat).</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Flow and Drainage</div>
+          <ul class="rdr-list">
+            <li>Lymph flows <strong>unidirectionally</strong>: tissue → lymphatic capillaries → lymph nodes → collecting ducts → venous system</li>
+            <li><strong>Thoracic duct:</strong> drains everything below the diaphragm + left side above → left venous angle (left subclavian + left internal jugular)</li>
+            <li><strong>Right lymphatic duct:</strong> drains right upper limb + right side of head and thorax → right venous angle</li>
+            <li>Lymph flow driven by: skeletal muscle contraction, respiratory movements, intrinsic lymphatic vessel contractions, valves preventing backflow</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Lymphoedema occurs when lymphatic capacity is exceeded or lymphatics are obstructed. It is characteristically <strong>non-pitting</strong> (protein-rich fluid causes tissue fibrosis over time) and does not respond to diuretics. In contrast, cardiac and hypoalbuminaemic oedema is pitting. Filariasis (<em>Wuchereria bancrofti</em>) blocks lymphatics → elephantiasis.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Lymphatic System</h4><ul>
+          <li>Returns excess interstitial fluid and proteins to blood; absorbs gut fat as chylomicrons</li>
+          <li>Thoracic duct drains everything except right upper body → left venous angle</li>
+          <li>Lymph is similar to interstitial fluid; chyle (gut lymph) is rich in fat</li>
+          <li>Lymphoedema: non-pitting (protein-rich); does not respond to diuretics; filariasis is key cause</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">27</div>
+          <div><div class="rdr-topic-title">Tissue Fluid and Oedema</div><div class="rdr-topic-sub">Blood and Body Fluids</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Starling's Forces</div>
+          <p class="rdr-p">Net fluid movement across capillary walls is governed by <strong>Starling's forces</strong>. The net filtration pressure determines whether fluid leaves the capillary (filtration) or returns to it (absorption).</p>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Force</th><th>Direction</th><th>Normal Value</th></tr></thead><tbody>
+            <tr><td>Capillary hydrostatic pressure (CHP)</td><td>Outward (filtration)</td><td>~32 mmHg (arteriolar end); ~15 mmHg (venular end)</td></tr>
+            <tr><td>Plasma oncotic pressure (COP)</td><td>Inward (absorption)</td><td>~25–28 mmHg throughout</td></tr>
+            <tr><td>Interstitial hydrostatic pressure</td><td>Inward</td><td>~0–3 mmHg (slightly negative in loose tissues)</td></tr>
+            <tr><td>Interstitial oncotic pressure</td><td>Outward</td><td>~8 mmHg</td></tr>
+          </tbody></table></div>
+          <p class="rdr-p">Net filtration at arteriolar end; net absorption at venular end. Approximately 2 L/day of residual fluid is returned by lymphatics.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Causes of Oedema</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Mechanism</th><th>Cause</th><th>Examples</th></tr></thead><tbody>
+            <tr><td>↑ Capillary hydrostatic pressure</td><td>Venous outflow obstruction, heart failure</td><td>CCF, DVT, hepatic venous obstruction</td></tr>
+            <tr><td>↓ Plasma oncotic pressure</td><td>Hypoalbuminaemia</td><td>Nephrotic syndrome, liver failure, malnutrition, protein-losing enteropathy</td></tr>
+            <tr><td>↑ Capillary permeability</td><td>Inflammatory mediators damage vessel wall</td><td>Burns, sepsis, anaphylaxis, angioedema</td></tr>
+            <tr><td>Lymphatic obstruction</td><td>Impaired lymph drainage</td><td>Filariasis, post-mastectomy, malignant infiltration</td></tr>
+            <tr><td>Na⁺/water retention</td><td>Renal Na⁺ retention</td><td>CKD, hyperaldosteronism, SIADH</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Pitting oedema</strong> = protein-poor fluid (cardiac, renal, hypoalbuminaemic) — responds to diuretics. <strong>Non-pitting oedema</strong> = protein-rich or mucopolysaccharide-rich fluid (lymphoedema, myxoedema in hypothyroidism) — does not respond to diuretics. Oedema in nephrotic syndrome is periorbital in the morning (face, low tissue pressure) and ankle by evening (gravity). Cardiac oedema is gravity-dependent from the start.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>CHOP L</strong> — causes of oedema: <strong>C</strong>apillary pressure ↑, <strong>H</strong>ypoalbuminaemia, <strong>O</strong>bstructed lymphatics, <strong>P</strong>ermeability ↑, <strong>L</strong>ow tissue pressure. Each requires a different treatment strategy.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Tissue Fluid and Oedema</h4><ul>
+          <li>Starling's forces: filtration (↑CHP, ↑interstitial oncotic) vs absorption (↑COP, ↑interstitial hydrostatic)</li>
+          <li>Net filtration at arteriolar end; net absorption at venular end; 2 L/day returned by lymphatics</li>
+          <li>Pitting oedema: protein-poor (cardiac, hepatic, renal, hypoalbuminaemic) — responds to diuretics</li>
+          <li>Non-pitting: protein-rich (lymphoedema, myxoedema) — does not respond to diuretics</li>
+          <li>Nephrotic syndrome: periorbital morning oedema; cardiac oedema: gravity-dependent (ankle/sacral)</li>
+        </ul></div>
       </div>
     `;
-
 
     const contentHTML=isPhysiology?physioContentHTML:psychContentHTML;
 
@@ -10065,7 +10923,22 @@ function App(){
                     setAccessLoading(true);setAccessErr("");
                     const res=window._fbValidateCode?await window._fbValidateCode(code,"physiology-reader"):{ok:false,error:"network"};
                     setAccessLoading(false);
-                    if(res.ok){ paywallDismissedRef.current=true; const pw=document.querySelector(".rdr-paywall"); if(pw){pw.style.transition="transform .4s cubic-bezier(.4,0,.2,1)";pw.style.transform="translateY(110%)";pw.style.pointerEvents="none";} setShowPayDetails(false); }
+                    if(res.ok){
+                      paywallDismissedRef.current=true;
+                      const pw=document.querySelector(".rdr-paywall");
+                      if(pw){pw.style.transition="transform .4s cubic-bezier(.4,0,.2,1)";pw.style.transform="translateY(110%)";pw.style.pointerEvents="none";}
+                      setShowPayDetails(false);
+                      // Save access permanently so they never need to enter the code again
+                      if(isPhysiology){ setPhysioAccess(true); ls.set('medq_physio_access','1'); }
+                      // Un-hide the locked content immediately
+                      const trigger=document.getElementById("rdrPaywallTrigger");
+                      if(trigger){
+                        let el=trigger.nextElementSibling;
+                        while(el){el.style.display="";el=el.nextElementSibling;}
+                        const parentTopic=trigger.closest(".rdr-topic");
+                        if(parentTopic){let s=parentTopic.nextElementSibling;while(s){s.style.display="";s=s.nextElementSibling;}}
+                      }
+                    }
                     else setAccessErr(res.error==="used"?"Code already used":res.error==="expired"?"Code expired":"Invalid code");
                   },
                   style:{background:accessLoading?"#aaa":"#1a1a2e",color:"#c9a84c",border:"none",borderRadius:5,padding:"9px 16px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:accessLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},"Continue →")
