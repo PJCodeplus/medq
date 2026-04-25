@@ -68,6 +68,16 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 .rdr-ctrl{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.75);width:34px;height:34px;border-radius:6px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}
 .rdr-ctrl:hover{background:rgba(255,255,255,.2)}
 .rdr-ctrl.active{background:rgba(167,139,250,.3);color:#a78bfa}
+.rdr-toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:599;opacity:0;pointer-events:none;transition:opacity .3s}
+.rdr-toc-overlay.open{opacity:1;pointer-events:all}
+.rdr-toc{position:fixed;top:0;left:0;bottom:0;width:min(310px,82vw);z-index:600;overflow-y:auto;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:6px 0 40px rgba(0,0,0,.25)}
+.rdr-toc.open{transform:translateX(0)}
+.rdr-toc-head{padding:18px 20px 14px;border-bottom:1px solid var(--rdr-border);position:sticky;top:0;z-index:1;background:var(--rdr-card,#fff)}
+.rdr-toc-section{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rdr-subhead);padding:14px 20px 6px;border-bottom:none}
+.rdr-toc-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;border-left:3px solid transparent;transition:background .15s,border-color .15s;font-size:.85rem;line-height:1.4}
+.rdr-toc-item:hover{background:rgba(124,58,237,.05);border-left-color:rgba(124,58,237,.3)}
+.rdr-toc-num{font-size:.65rem;font-weight:700;color:var(--rdr-muted);min-width:24px;flex-shrink:0}
+.rdr-toc-locked{font-size:.6rem;color:var(--rdr-muted);margin-left:auto;flex-shrink:0;opacity:.5}
 .rdr-progress-wrap{height:3px;background:rgba(255,255,255,.1)}
 .rdr-progress{height:100%;background:linear-gradient(90deg,#c9a84c,#a78bfa);width:0%;transition:width .15s}
 
@@ -123,9 +133,10 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 .rdr-divider{height:1px;background:linear-gradient(90deg,transparent,var(--rdr-subhead-line),transparent);margin:44px 0}
 
 /* ── PAYWALL ── */
-.rdr-paywall{position:fixed;bottom:0;left:0;right:0;z-index:500;pointer-events:none;opacity:0;transition:opacity .5s ease}
-.rdr-paywall.show{opacity:1;pointer-events:all}
+@keyframes rdrSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.rdr-paywall{position:fixed;bottom:0;left:0;right:0;z-index:500;pointer-events:all;transform:translateY(110%);will-change:transform}
 .rdr-pw-fade{height:200px;background:linear-gradient(to bottom,transparent,var(--pw-bg,#fafafa));pointer-events:none}
+
 .rdr-pw-card{background:var(--pw-card,#fff);border-top:3px solid;border-image:linear-gradient(90deg,#c9a84c,#7c3aed,#c9a84c) 1;box-shadow:0 -12px 50px rgba(15,39,68,.18);padding:20px 20px 28px}
 .rdr-pw-inner{max-width:520px;margin:0 auto;text-align:center}
 .rdr-pw-lock{font-size:1.9rem;margin-bottom:7px}
@@ -650,6 +661,37 @@ const NILE_PHYSIO_Qs = [
   { q:"Hypoxic pulmonary vasoconstriction (HPV) is unique to the pulmonary circulation because, unlike systemic vessels, pulmonary arterioles:", opts:["Dilate in response to low oxygen to maximise diffusion","Constrict in response to low alveolar pO₂ to divert blood to better-ventilated alveoli","Contain more smooth muscle than systemic arterioles","Respond to CO₂ rather than O₂","Are innervated by parasympathetic fibres that respond to hypoxia"], ans:1, exp:"HYPOXIC PULMONARY VASOCONSTRICTION (HPV): uniquely, pulmonary arterioles CONSTRICT in response to LOW ALVEOLAR pO₂ (not arterial). This redirects blood flow from poorly-ventilated to better-ventilated alveoli, optimising V/Q matching. The opposite occurs in systemic vessels (hypoxia → vasodilation). If hypoxia is widespread (e.g., altitude, COPD), generalised HPV → pulmonary hypertension → cor pulmonale." },
   { q:"The glomerular filtration rate (GFR) is estimated clinically using serum creatinine because creatinine is:", opts:["Actively secreted by the proximal tubule only","Freely filtered and neither secreted nor significantly reabsorbed by the tubules","Bound to albumin and partially filtered","Synthesised at a variable rate dependent on diet","Reabsorbed in the loop of Henle"], ans:1, exp:"Creatinine is used as a GFR marker because it is: (1) FREELY FILTERED at the glomerulus, (2) NOT significantly reabsorbed, and (3) minimally secreted (tubular secretion causes a slight overestimation of GFR — hence 'creatinine clearance' slightly overestimates true GFR). Creatinine is produced at a fairly constant rate from creatine phosphate in muscle. The Cockcroft-Gault and CKD-EPI formulae use creatinine to estimate GFR." },
   { q:"During a normal swallowing reflex (deglutition), the epiglottis covers the laryngeal inlet primarily because:", opts:["Active muscular contraction of the epiglottis closes the inlet","The hyoid bone moves inferiorly, depressing the epiglottis","Elevation and anterior movement of the larynx causes the epiglottis to fold back over the glottis","Negative intrathoracic pressure sucks the epiglottis down","The bolus directly pushes the epiglottis posteriorly and inferiorly"], ans:2, exp:"During swallowing, the SUPRAHYOID MUSCLES elevate the HYOID BONE, which pulls the LARYNX UPWARD AND ANTERIORLY. This movement tips the epiglottis POSTERIORLY over the laryngeal inlet. Additionally, adduction of the vocal cords (aryepiglottic folds) and closure of the false/true vocal folds protect the airway. The laryngeal elevation is visible externally as the larynx rises in the neck during swallowing." },
+];
+
+const IU_GENERAL_PHYSIO_Qs = [
+  { q:"Which organelle is responsible for post-translational modification, glycosylation, and packaging of proteins destined for secretion?", opts:["Rough endoplasmic reticulum, where secretory proteins are first synthesised","Smooth endoplasmic reticulum, which processes lipid-soluble cargo","Golgi apparatus, which receives, modifies, and dispatches vesicles to the cell surface","Lysosome, which adds carbohydrate groups before exocytosis","Ribosome, which completes translation and attaches glycan residues directly"], ans:2, exp:"The Golgi apparatus (Golgi complex) receives proteins from the rough ER via transport vesicles, processes and glycosylates them, and packages them into secretory vesicles for the cell surface or lysosomes. The rough ER handles initial synthesis and folding; it does not do final packaging. The lysosome is a degradative organelle, not a processing one. Ribosomes handle translation only — glycosylation occurs in the ER lumen and Golgi, not at the ribosome surface." },
+  { q:"All of the following are true regarding cholesterol in the cell membrane EXCEPT:", opts:["It is intercalated between phospholipid molecules in the bilayer","It prevents excessive membrane fluidity at elevated temperatures","It prevents membrane rigidity at low temperatures by disrupting tight phospholipid packing","It increases membrane permeability to ions and small polar molecules","It acts as a fluidity buffer that stabilises the membrane across a physiological range"], ans:3, exp:"Cholesterol regulates membrane fluidity — it prevents membranes becoming too rigid at cold temperatures and too fluid at warm temperatures. It does NOT increase permeability to ions or polar molecules. In fact, the hydrophobic interior of the bilayer (reinforced by cholesterol) is highly impermeable to ions and polar substances. Options A, B, C, and E are all accurate descriptions of cholesterol's role as a fluidity buffer." },
+  { q:"The lysosome maintains an internal pH of approximately 5. Which statement best explains why this acidic environment is physiologically essential?", opts:["It generates a proton gradient used for ATP synthesis via lysosomal ATPase","It is the optimal pH for the hydrolytic enzymes that digest engulfed macromolecules and organelles","It prevents osmotic rupture of the lysosomal membrane during autophagic digestion","It inhibits lysosomal fusion with the endoplasmic reticulum, protecting secretory proteins","It activates catalase, which neutralises the hydrogen peroxide produced during oxidation"], ans:1, exp:"Lysosomal hydrolases (proteases, lipases, nucleases, glycosidases) are acid hydrolases — they function optimally at pH ~5. The low pH is maintained by H⁺-ATPase pumps in the lysosomal membrane. If lysosomes become neutralised (e.g., by chloroquine), enzyme activity is lost and undigested material accumulates. Catalase is a peroxisomal enzyme, not lysosomal. ATP synthesis via proton gradients is a mitochondrial function, not lysosomal." },
+  { q:"The Na⁺/K⁺-ATPase pump is described as electrogenic. Which of the following correctly explains this property?", opts:["It uses more than one ATP molecule per cycle, generating a large energy gradient across the membrane","It exports three positive charges and imports two per cycle, producing a net outward positive current","It operates faster than other transporters, creating a measurable current in the membrane","It is directly gated by voltage changes across the membrane during action potentials","It co-transports anions alongside cations, generating a charge separation at the membrane surface"], ans:1, exp:"Electrogenic means the pump generates a net electrical current. The Na⁺/K⁺-ATPase moves 3 Na⁺ out and 2 K⁺ in per cycle — a net export of one positive charge per cycle. This contributes approximately −4 mV to the resting membrane potential. The pump is not voltage-gated (option D) and does not transport anions (option E). Options A and C describe energy use and speed, neither of which defines electrogenicity." },
+  { q:"Which cell junction allows direct passage of ions and molecules below 1000 Da between adjacent cells without entering the extracellular space?", opts:["Tight junction, via claudin and occludin strand fusion at the apical membrane","Adherens junction, via cadherin-linked channels in the junctional complex","Desmosome, through keratin intermediate filaments that bridge the intercellular gap","Gap junction, through connexon channels formed by pairs of connexin hexamers","Hemidesmosome, via integrin-linked pores in the basal cell membrane"], ans:3, exp:"Gap junctions (nexus) are the only junctions that permit direct cytoplasmic communication. Each connexon is a hemichannel made of six connexin proteins; two connexons from adjacent cells align to form a full channel. Molecules below ~1000 Da pass freely — ions, cAMP, metabolites — enabling electrical and metabolic coupling between cells. This is essential for cardiac synchrony and smooth muscle coordination. Tight junctions seal the paracellular space but do not form channels between cytoplasms." },
+  { q:"Glucose is absorbed from the intestinal lumen across the enterocyte brush border membrane. This transport process is best classified as:", opts:["Primary active transport, because the transporter directly hydrolyses ATP to move glucose against its gradient","Facilitated diffusion, because glucose moves down its own concentration gradient via a protein carrier","Secondary active transport, because it is driven by the Na⁺ gradient maintained by the basolateral Na⁺/K⁺-ATPase","Simple diffusion, because glucose is a small molecule that crosses lipid bilayers without a carrier","Osmosis, because water accompanying sodium creates an osmotic force that drives glucose movement"], ans:2, exp:"Na⁺-glucose cotransport (SGLT1/SGLT2) is secondary active transport — it uses the Na⁺ electrochemical gradient (maintained by the Na⁺/K⁺-ATPase) as the driving force to move glucose against its own concentration gradient. No ATP is consumed directly by the cotransporter itself, but the system ultimately depends on ATP via the pump. This is distinct from facilitated diffusion (GLUT transporters), which is passive and does not concentrate glucose above the luminal level." },
+  { q:"All of the following substances cross cell membranes primarily by simple diffusion EXCEPT:", opts:["Oxygen, which moves from alveoli to pulmonary capillary blood down its partial pressure gradient","Carbon dioxide, which diffuses from metabolising tissues into the capillary blood","Ethanol, a small lipophilic molecule that crosses freely without a carrier","Urea, a small uncharged molecule with moderate lipid solubility","Glucose, a six-carbon hexose sugar requiring a specific carrier protein for membrane crossing"], ans:4, exp:"Glucose cannot cross cell membranes by simple diffusion — it is a large, polar, hydrophilic molecule that requires GLUT (facilitated diffusion) transporters in most tissues or SGLT cotransporters in the gut and kidney. O₂, CO₂, ethanol, and urea all possess properties (small size, non-polarity, or sufficient lipid solubility) that allow unassisted diffusion through the phospholipid bilayer." },
+  { q:"According to Fick's Law of Diffusion, which single change would produce the greatest increase in the rate of diffusion of a gas across a membrane?", opts:["Doubling the surface area available for exchange while halving the membrane thickness","Reducing the membrane thickness alone by 50% with all other variables constant","Doubling the concentration gradient across the membrane with all other variables constant","Halving the membrane thickness alone with all other variables constant","Increasing both surface area and concentration gradient by 50% each with thickness unchanged"], ans:0, exp:"Fick's Law: Rate of diffusion = (Surface area × Concentration gradient × Permeability) ÷ Membrane thickness. Doubling surface area AND halving membrane thickness together produce a fourfold multiplicative increase (×2 for area, ×2 for 1/thickness = ×4 overall). This is greater than doubling the gradient alone (×2) or halving thickness alone (×2) or increasing both area and gradient by 50% (1.5 × 1.5 = ×2.25). Option A produces the largest combined effect." },
+  { q:"In pemphigus vulgaris, IgG autoantibodies directed against desmoglein cause intraepidermal blistering. Desmoglein is a transmembrane glycoprotein that forms part of which cell junction?", opts:["Tight junction, where it spans the extracellular space to seal adjacent epithelial cells","Adherens junction, where it links actin microfilaments to the membrane","Desmosome, where it forms the extracellular adhesion core linked to intracellular keratin","Gap junction, where it forms the connexon channel responsible for cell-cell communication","Hemidesmosome, where it anchors cells to the basement membrane via integrin linkage"], ans:2, exp:"Desmoglein is a cadherin-type transmembrane adhesion protein found in desmosomes (macula adherens). It provides the extracellular adhesive bond between adjacent cells, linked intracellularly to intermediate filaments (keratin). In pemphigus vulgaris, anti-desmoglein antibodies disrupt desmosomal adhesion → intraepidermal acantholysis → flaccid blisters that rupture easily (positive Nikolsky sign). Desmoglein is not a component of tight junctions, gap junctions, or hemidesmosomes." },
+  { q:"Cardiac glycosides such as digoxin increase myocardial contractility by which mechanism?", opts:["Directly opening voltage-gated Ca²⁺ channels in the sarcolemma during the action potential plateau","Stimulating β₁-adrenergic receptors, which activate adenylyl cyclase and raise intracellular cAMP","Inhibiting the Na⁺/K⁺-ATPase, raising intracellular Na⁺, reducing Na⁺/Ca²⁺ exchange, and increasing intracellular Ca²⁺","Blocking phosphodiesterase, preventing the breakdown of cAMP and prolonging protein kinase A activity","Directly activating ryanodine receptors on the sarcoplasmic reticulum to release stored calcium"], ans:2, exp:"Digoxin inhibits the Na⁺/K⁺-ATPase → intracellular Na⁺ accumulates → Na⁺/Ca²⁺ exchanger (NCX) operates less efficiently (less Na⁺ gradient to drive Ca²⁺ out) → intracellular Ca²⁺ rises → increased contractility. β₁-agonists (option B) and PDE inhibitors (option D) raise cAMP but are not the digoxin mechanism. Direct Ca²⁺ channel opening (option A) and ryanodine receptor activation (option E) are pharmacologically distinct mechanisms." },
+  { q:"All of the following are true regarding gap junctions EXCEPT:", opts:["Each connexon is formed by six connexin protein subunits arranged in a ring","They permit propagation of action potentials between cardiac myocytes without chemical transmission","Molecules up to approximately 1000 Da can pass freely through connexon channels","They permanently fuse the outer leaflets of adjacent cell membranes to form a shared cytoplasmic compartment","They are present in hepatocytes, smooth muscle, cardiac muscle, and many epithelial cells"], ans:3, exp:"Gap junctions do NOT fuse the outer leaflets of cell membranes — the two cells remain as physically separate entities with distinct membranes and cytoplasms. Connexons are simply aligned channels spanning the narrow intercellular space (~2–4 nm). Options A, B, C, and E are all accurate. Tight junctions fuse the outer leaflets of adjacent membranes to seal the paracellular space; this is a common confusion." },
+  { q:"Water movement across cell membranes occurs primarily through aquaporin channel proteins. This process is best classified as:", opts:["Primary active transport, because water movement against an osmotic gradient requires ATP","Simple diffusion, because water is a small molecule that passes freely through the lipid bilayer","Facilitated diffusion, because aquaporins provide a protein channel that water traverses down its osmotic gradient","Secondary active transport, because aquaporins are linked to the Na⁺/K⁺-ATPase activity","Osmosis driven by electrogenic pumps that generate a net charge across the membrane"], ans:2, exp:"Aquaporin-mediated water transport is facilitated diffusion — water moves down its osmotic gradient through protein channels without any energy expenditure. While a small amount of water can cross by simple diffusion, the bulk of physiological water movement (kidneys, secretory epithelia, RBCs) goes through aquaporins. No ATP is used, the gradient drives movement, and a specific protein carrier (aquaporin) facilitates it — the definition of facilitated diffusion." },
+  { q:"The claudins and occludins that form tight junctions are located at which position relative to other junctional complexes in a simple epithelial cell?", opts:["At the basal surface, closest to the basement membrane","In the middle of the lateral membrane, between desmosomes","At the most apical aspect of the lateral membrane, just below the luminal surface","Distributed diffusely throughout the lateral membrane without a fixed position","At the basolateral surface, adjacent to the Na⁺/K⁺-ATPase-rich domain"], ans:2, exp:"The junctional complex in simple epithelia is arranged apical to basal in the sequence: tight junction (zonula occludens) → adherens junction (zonula adherens) → desmosome (macula adherens). Tight junctions are always at the most apical position of the lateral membrane, forming the seal between lumen and intercellular space. This positioning is critical — they prevent luminal contents from leaking paracellularly into the bloodstream." },
+  { q:"In pulmonary fibrosis, progressive thickening of the alveolar-capillary membrane leads to arterial hypoxaemia. The underlying physiological mechanism is best described by:", opts:["Reduction in pulmonary capillary blood flow due to obliteration of vessels in fibrotic tissue","Impaired alveolar ventilation from airway obstruction caused by collagen deposition in bronchioles","Reduced rate of O₂ diffusion from alveoli to blood due to the increased membrane thickness, consistent with Fick's Law","Decreased haemoglobin concentration secondary to chronic inflammation reducing erythropoiesis","Shunting of blood through unventilated alveoli caused by collapse of fibrotic lung segments"], ans:2, exp:"Fick's Law states that diffusion rate is inversely proportional to membrane thickness. In pulmonary fibrosis, collagen deposition thickens the alveolar-capillary membrane → O₂ diffusion rate falls → arterial hypoxaemia. CO₂ is less affected because it is 20 times more soluble than O₂. This is a diffusion limitation, not a ventilation-perfusion mismatch (though V/Q mismatch may also contribute). The primary physiological mechanism tested here is Fick's Law applied clinically." },
+  { q:"Which of the following processes involves receptor-mediated endocytosis via clathrin-coated pits?", opts:["Phagocytosis of bacteria by neutrophils after opsonisation with IgG","Macropinocytosis of extracellular fluid by dendritic cells for antigen sampling","Internalisation of LDL-cholesterol particles bound to LDL receptors on hepatocytes","Transcytosis of IgG across the placental syncytiotrophoblast to the fetal circulation","Exocytosis of insulin granules from pancreatic beta cells after glucose stimulation"], ans:2, exp:"LDL receptor-mediated endocytosis is the classic example of receptor-mediated endocytosis via clathrin-coated pits. LDL binds surface receptors → clathrin assembles on the cytoplasmic face → the membrane invaginates → a coated vesicle pinches off → clathrin dissociates → early endosome → lysosomal degradation releases cholesterol. In familial hypercholesterolaemia, LDL receptor mutations prevent this process, causing LDL accumulation. Phagocytosis uses actin, not clathrin. Pinocytosis and macropinocytosis are clathrin-independent." },
+  { q:"Homeostasis is best defined as which of the following?", opts:["The process by which all body systems reach a fixed, unchanging steady state that requires no further regulation","The maintenance of a relatively constant internal environment despite variations in the external environment","The complete elimination of all physiological variables that could threaten cell survival","The process by which the body adapts permanently to chronic environmental changes","The equilbrium state reached when all opposing physiological forces exactly cancel each other out"], ans:1, exp:"Homeostasis (Walter Cannon, 1932, building on Claude Bernard's milieu intérieur) is the maintenance of a RELATIVELY CONSTANT internal environment — not a fixed or unchanging state. Physiological variables are continuously regulated within acceptable ranges by negative feedback systems. Option A incorrectly implies a static, unchanging state. Option C incorrectly implies elimination rather than regulation. Options D and E misrepresent the nature of dynamic equilibrium." },
+  { q:"The LH surge that triggers ovulation occurs in response to rising oestrogen levels. This represents which type of physiological feedback?", opts:["Negative feedback, because the response (LH surge) acts to lower the oestrogen level that triggered it","Negative feedback, because LH restores the hormonal set point after oestrogen has deviated from baseline","Positive feedback, because rising oestrogen amplifies LH secretion, driving ovulation to completion","Compensatory feedback, because LH counteracts the stimulatory effects of oestrogen on the follicle","Feedforward control, because LH is secreted in anticipation of ovulation before oestrogen peaks"], ans:2, exp:"The LH surge is a classic positive feedback example. Rising oestrogen (above a threshold of ~200 pg/mL for >36 hours) acts on the anterior pituitary to amplify GnRH receptor expression and LH release, further driving oestrogen production — a self-amplifying loop that ends abruptly at ovulation when the triggering follicle ruptures. Positive feedback is used here because ovulation needs to be a rapid, all-or-nothing event, not a slow titration back to baseline." },
+  { q:"All of the following are examples of negative feedback regulation in physiology EXCEPT:", opts:["A rise in arterial CO₂ stimulating the respiratory centre to increase ventilation, reducing CO₂","A fall in blood glucose stimulating glucagon secretion, which raises blood glucose back toward normal","A rise in plasma TSH causing increased T₃/T₄ secretion, which then suppresses TSH release from the pituitary","Progressive uterine contractions stimulated by oxytocin release as the fetal head descends","A rise in body temperature triggering sweating and vasodilation, which dissipate heat and restore temperature"], ans:3, exp:"Option D describes positive feedback — fetal descent stretches the cervix → oxytocin release → stronger uterine contractions → more descent → more oxytocin. This loop amplifies until delivery removes the stimulus. Options A, B, C, and E all describe negative feedback: the response opposes and corrects the original deviation. The TSH axis (option C) is a classic negative feedback: high T₃/T₄ suppresses TRH and TSH." },
+  { q:"In a homeostatic control system, the effector is best defined as:", opts:["The sensory structure that detects deviation of a variable from its set point","The neural or hormonal pathway that carries information from receptor to control centre","The structure or organ that carries out the corrective response directed by the control centre","The baseline value around which a physiological variable is maintained by feedback mechanisms","The integrating centre that compares the sensed value to the set point and initiates the response"], ans:2, exp:"In a control system: the receptor (sensor) detects change → the control centre (integrating centre) compares the signal to the set point and determines the response → the effector carries out the correction. Examples: the heart and blood vessels are effectors in blood pressure regulation; sweat glands and cutaneous vessels are effectors in temperature regulation. Option A describes the receptor. Option E describes the control centre. Option D describes the set point." },
+  { q:"A patient has a blood pH of 7.28 and a plasma bicarbonate of 14 mEq/L. The respiratory system has compensated by lowering PaCO₂ to 28 mmHg. Which acid-base disturbance is present?", opts:["Respiratory acidosis partially compensated by metabolic alkalosis","Metabolic alkalosis partially compensated by respiratory acidosis","Mixed respiratory and metabolic acidosis without compensation","Metabolic acidosis partially compensated by respiratory alkalosis","Respiratory alkalosis partially compensated by metabolic acidosis"], ans:3, exp:"pH 7.28 = acidosis. HCO₃⁻ 14 mEq/L [normal 22–26] = primary metabolic acidosis. PaCO₂ 28 mmHg [normal 35–45] = low, indicating respiratory compensation (hyperventilation blowing off CO₂ to raise pH back toward 7.4). This is metabolic acidosis with partial respiratory compensation. The compensation is partial — pH has not returned to 7.4. This pattern fits the ROME mnemonic: Metabolic = Equal direction (pH and HCO₃⁻ both fall)." },
+  { q:"Diarrhoea causes metabolic acidosis primarily because:", opts:["Bacterial toxins inhibit renal tubular H⁺ secretion, impairing the kidney's ability to excrete acid","Dehydration concentrates plasma solutes and directly lowers blood pH","Loss of bicarbonate-rich intestinal and pancreatic secretions reduces plasma HCO₃⁻","Increased bowel motility generates excess lactic acid via anaerobic metabolism in enterocytes","Fluid loss stimulates aldosterone, which increases H⁺ reabsorption in the collecting duct"], ans:2, exp:"Intestinal and pancreatic secretions are rich in bicarbonate [HCO₃⁻]. Severe diarrhoea causes massive loss of these bicarbonate-containing fluids → plasma HCO₃⁻ falls → metabolic acidosis with a normal anion gap (hyperchloraemic). In contrast, vomiting causes metabolic alkalosis through HCl loss. The renal response to diarrhoea-induced acidosis is to increase H⁺ secretion and HCO₃⁻ reabsorption as compensation — not to inhibit it." },
+  { q:"Which buffer system is the most important buffer in the extracellular fluid and is also tightly linked to both respiratory and renal regulation of pH?", opts:["Phosphate buffer system, which is the dominant buffer in plasma and interstitial fluid","Haemoglobin buffer system, which provides the primary defence in the extracellular space","Bicarbonate buffer system, which operates through the CO₂-H₂CO₃-HCO₃⁻ equilibrium and is regulated by lung and kidney","Protein buffer system, which is the most abundant buffer in the entire body by total quantity","Ammonia buffer system, which neutralises excess H⁺ in the renal tubular lumen"], ans:2, exp:"The bicarbonate buffer system (H₂CO₃ ⇌ H⁺ + HCO₃⁻) is the most important ECF buffer because it is open — CO₂ is regulated by the lungs (respiratory component) and HCO₃⁻ by the kidneys (renal component). This dual regulation makes it highly responsive and effective. The phosphate system is important in renal tubules and intracellularly. Proteins are the most abundant buffer in total body content but are predominantly intracellular. Haemoglobin is the dominant protein buffer in blood." },
+  { q:"In chronic obstructive pulmonary disease, CO₂ retention causes a primary respiratory acidosis. The renal compensation for this disorder involves:", opts:["Increasing alveolar ventilation to blow off the excess CO₂ accumulated in the blood","Excreting bicarbonate in the urine to lower the elevated plasma HCO₃⁻ caused by CO₂ retention","Retaining HCO₃⁻ and secreting H⁺ into the tubular lumen, raising plasma HCO₃⁻ to partially restore pH","Stimulating erythropoiesis to increase haemoglobin content and buffer more H⁺ in the blood","Reducing plasma K⁺ by shifting K⁺ intracellularly to exchange for H⁺ ions as a buffer mechanism"], ans:2, exp:"In respiratory acidosis (↑CO₂), the kidneys compensate by excreting H⁺ (as NH₄⁺ and titratable acid) and retaining HCO₃⁻ — raising plasma HCO₃⁻ to buffer the excess H⁺ and move pH towards normal. This renal compensation takes hours to days (unlike the respiratory response, which is immediate but cannot compensate for itself). Ventilation is the primary corrective mechanism, but the kidneys provide the compensatory response when the respiratory system itself is the problem." },
+  { q:"A patient with persistent vomiting develops a metabolic alkalosis. Which of the following most accurately describes the primary mechanism?", opts:["Loss of potassium-rich gastric fluid causes intracellular K⁺ depletion, which drives H⁺ into cells and raises plasma pH","Dehydration from vomiting reduces plasma volume, concentrating bicarbonate and alkalinising the blood","Loss of hydrochloric acid from gastric secretions removes H⁺ from the extracellular fluid, raising plasma HCO₃⁻","Stimulation of the vagus nerve during vomiting reduces respiratory rate, causing CO₂ retention","Vomiting-induced hypovolaemia activates aldosterone, which directly secretes bicarbonate into the blood"], ans:2, exp:"Gastric juice contains hydrochloric acid (HCl). Vomiting ejects HCl → plasma loses H⁺ → HCO₃⁻ is left unopposed in the ECF → plasma HCO₃⁻ rises → metabolic alkalosis. For every H⁺ secreted into the stomach, one HCO₃⁻ is released into the bloodstream — an 'alkaline tide.' Option A (hypokalaemia) can perpetuate alkalosis but is not the primary mechanism. Option B (concentration alkalosis) is a minor contributor. Option D is incorrect — vomiting does not reduce respiratory rate to cause CO₂ retention." },
+  { q:"Compensation in acid-base disorders is defined as the secondary physiological response that partially offsets the primary pH change. Which statement correctly describes the limitations of compensation?", opts:["Compensation always fully returns pH to exactly 7.40, after which no further regulation is needed","Respiratory compensation is faster than chemical buffering but slower than the renal response","Compensation moves pH back towards 7.40 but never fully corrects it to the normal set point","Compensation occurs only in metabolic disorders; respiratory disorders resolve independently without renal input","Renal compensation is complete within 30 minutes, making it the most rapid compensatory mechanism"], ans:2, exp:"A fundamental rule of acid-base physiology: compensation is always partial — it moves pH back towards 7.40 but never fully restores it. If a patient with primary metabolic acidosis has a pH of exactly 7.40, suspect a mixed disorder (e.g., coexisting respiratory alkalosis). Respiratory compensation for metabolic disorders occurs within minutes; renal compensation for respiratory disorders takes 3–5 days. Chemical buffers respond in seconds — they are the fastest but not a form of 'compensation' in the strict sense." },
+  { q:"Which of the following structures anchors basal epithelial cells to the extracellular matrix of the basement membrane using integrin transmembrane proteins?", opts:["Tight junction, which seals the apical lateral membrane against paracellular flux","Desmosome, which provides spot-weld adhesion between adjacent epithelial cell membranes","Adherens junction, which links cadherin proteins to the actin cytoskeleton at the lateral membrane","Gap junction, which forms connexon channels for direct cytoplasmic communication","Hemidesmosome, which links intracellular intermediate filaments to integrin receptors binding laminin in the matrix"], ans:4, exp:"Hemidesmosomes are half-desmosomes located at the basal surface of epithelial cells. They attach the cell to the basement membrane through integrins (particularly α6β4) that bind laminin in the extracellular matrix, linked intracellularly to keratin intermediate filaments. Mutations or autoantibodies targeting hemidesmosomes (e.g., bullous pemphigoid — anti-BP180/BP230) cause subepidermal blistering, in contrast to pemphigus (intraepidermal). The other options describe junctions involved in cell-cell adhesion, not cell-matrix adhesion." },
+  { q:"Red blood cells obtain their ATP exclusively from anaerobic glycolysis. Which of the following correctly explains why this limitation makes them vulnerable to oxidative haemolysis in G6PD deficiency?", opts:["Without aerobic respiration, RBCs cannot produce the cytochrome enzymes needed for direct antioxidant defence","Anaerobic glycolysis does not generate acetyl-CoA, which is required for membrane phospholipid repair","The only source of NADPH in RBCs is the pentose phosphate pathway, which requires G6PD; without NADPH, reduced glutathione cannot be regenerated to neutralise oxidative stress","Without mitochondria, RBCs cannot perform beta-oxidation of the fatty acid products of membrane lipid peroxidation","Anaerobic glycolysis generates excess lactic acid, which directly oxidises haemoglobin to methaemoglobin"], ans:2, exp:"RBCs lack mitochondria and cannot use the TCA cycle or oxidative phosphorylation. Their only source of NADPH is the pentose phosphate pathway (hexose monophosphate shunt), whose rate-limiting enzyme is G6PD. NADPH regenerates glutathione reductase's substrate (GSSG → GSH). Without reduced glutathione, oxidative stress (from drugs, infections, fava beans) causes Heinz body formation and membrane haemolysis. Options A, B, D, and E all misattribute the vulnerability to other pathways that RBCs do not rely on." },
+  { q:"All of the following characteristics apply to red blood cells EXCEPT:", opts:["They lack a nucleus, having expelled it during maturation in the bone marrow","They derive all their ATP from anaerobic glycolysis via the Embden-Meyerhof pathway","Their biconcave disc shape maximises surface area-to-volume ratio for efficient gas exchange","They retain functional ribosomes that allow synthesis of haemoglobin throughout their lifespan","They lack mitochondria and therefore cannot perform aerobic respiration or the TCA cycle"], ans:3, exp:"Mature red blood cells are anucleate AND lack ribosomes — they have no capacity for protein synthesis after maturation. Reticulocytes (immature RBCs) do contain residual ribosomes and can synthesise haemoglobin, but mature RBCs lose these during final maturation. Options A, B, C, and E are all correct. The biconcave disc shape (option C) is accurate — it gives a high surface area (~140 µm²) for a small volume, facilitating O₂ and CO₂ exchange." }
 ];
 
 const NILE_BIOCHEM_Qs = [
@@ -7178,7 +7220,7 @@ const COURSES = [
         { id:"ana202_abdomen", name:"Gross Anatomy of the Abdomen", questions:IU_ANA202_ABDOMEN_Qs, available:true, subject:"anatomy", anatomyType:"Gross Anatomy", lecturer:"Dr. Emmanuel O. Bienonwu" },
         { id:"ana202_inguinal", name:"Inguinal Region & Peritoneum", questions:IU_ANA202_INGUINAL_PERITONEUM_Qs, available:true, subject:"anatomy", anatomyType:"Gross Anatomy", lecturer:"Dr. Emmanuel O. Bienonwu" },
         { id:"ana202_cranial_base", name:"Cranial Base", questions:IU_ANA301_CRANIAL_BASE_Qs, available:true, subject:"anatomy", anatomyType:"Gross Anatomy", lecturer:"Dr. Emmanuel O. Bienonwu" },
-        { id:"physiology", name:"Basal Ganglia", questions:PHYSIO_Qs, available:true, subject:"physiology", lecturer:"Unnamed" },
+        { id:"general_physio", name:"General Physiology", questions:IU_GENERAL_PHYSIO_Qs, available:true, subject:"physiology" },
         { id:"biochemistry", name:"Biochemical Aspects of Cancer and Cancer Therapy", questions:BIOCHEM_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
         { id:"bch201_carbohydrates", name:"Carbohydrates: Structure, Properties & Functions", questions:BCH_CARB_AA_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
         { id:"bch205_aa_peptides", name:"Amino Acids & Peptides", questions:BCH_AA_PEP_Qs, available:true, subject:"biochem", lecturer:"Unnamed" },
@@ -7193,7 +7235,7 @@ const COURSES = [
       ]},
       { id:"300L", label:"300 Level", blocks:[
         { id:"anatomy_300", name:"Anatomy", questions:[], available:false, subject:"anatomy" },
-        { id:"physiology_300", name:"Physiology",   questions:[], available:false, subject:"physiology" },
+        
         { id:"biochemistry_300",name:"Biochemistry",questions:[], available:false, subject:"biochem" },
       ]},
     ],
@@ -7689,15 +7731,16 @@ function App(){
   // ── Final Lap / Reading view state ──
   const [readingTheme,setReadingTheme]=useState("light"); // "light"|"sepia"|"dark"
   const [readingFontStep,setReadingFontStep]=useState(1); // 0=sm 1=md 2=lg
+  const [readingContext,setReadingContext]=useState("psych"); // "psych"|"physiology"
+  const [tocOpen,setTocOpen]=useState(false);
   const [paywallVisible,setPaywallVisible]=useState(false);
-  const [paywallDismissed,setPaywallDismissed]=useState(false);
-  const [paywallShownOnce,setPaywallShownOnce]=useState(false);
   const [showPayDetails,setShowPayDetails]=useState(false);
   const [payCopied,setPayCopied]=useState(false);
-  const [selectedPlan,setSelectedPlan]=useState(null); // "single"|"bundle"|"triple"
   const [accessCode,setAccessCode]=useState("");
   const [accessErr,setAccessErr]=useState("");
-  const paywallTriggerRef=useRef(null);
+  const [accessLoading,setAccessLoading]=useState(false);
+  const paywallShownRef=useRef(false);
+  const paywallDismissedRef=useRef(false);
 
   // ── School-based course filtering ──
   const currentSchool = selectedSchool;
@@ -7722,35 +7765,41 @@ function App(){
   // Keep paused ref in sync
   useEffect(()=>{ pausedRef.current=paused; },[paused]);
 
-  // Reading view paywall scroll trigger
+  // Reading view — progress bar + scroll-driven paywall
   useEffect(()=>{
     if(view!=="reading_view"){ return; }
-    let lastY=window.scrollY;
+    paywallShownRef.current=false;
+    paywallDismissedRef.current=false;
+    setPaywallVisible(true); // always mounted; CSS transform keeps it off-screen
+    const getPw=()=>document.querySelector(".rdr-paywall");
     const onScroll=()=>{
-      const currentY=window.scrollY;
-      const scrollingDown=currentY>lastY;
-      lastY=currentY;
-      // update progress bar
       const docH=document.documentElement.scrollHeight-window.innerHeight;
-      const pct=docH>0?Math.min(100,(currentY/docH)*100):0;
+      const pct=docH>0?Math.min(100,(window.scrollY/docH)*100):0;
       const bar=document.getElementById("rdrProgressBar");
       if(bar) bar.style.width=pct+"%";
-      // paywall trigger
-      const trigger=document.getElementById("rdrPaywallTrigger");
-      if(trigger){
-        const rect=trigger.getBoundingClientRect();
-        if(scrollingDown && rect.top < window.innerHeight-100 && !showPayDetails){
-          setPaywallVisible(true);
-        }
-        // hide paywall when scrolling back up above trigger
-        if(!scrollingDown && rect.top > window.innerHeight+80){
-          setPaywallVisible(false);
+      // Scroll-driven paywall — follows finger like it's being dragged up
+      if(!paywallDismissedRef.current){
+        const trigger=document.getElementById("rdrPaywallTrigger");
+        const pw=getPw();
+        if(trigger&&pw){
+          const rect=trigger.getBoundingClientRect();
+          const windowH=window.innerHeight;
+          // scrolledPast > 0 means trigger has moved above viewport bottom
+          const scrolledPast=windowH-rect.bottom;
+          // Start appearing 40px before trigger hits viewport bottom; full reveal after 200px of scroll
+          const progress=Math.max(0,Math.min(1,(scrolledPast+40)/220));
+          pw.style.transition="none";
+          pw.style.transform="translateY("+(( 1-progress)*110)+"%)";
+          pw.style.pointerEvents=progress>0.05?"all":"none";
+          if(progress>0&&!paywallShownRef.current) paywallShownRef.current=true;
         }
       }
     };
     window.addEventListener("scroll",onScroll,{passive:true});
-    return ()=>window.removeEventListener("scroll",onScroll);
-  },[view, showPayDetails]);
+    return ()=>{
+      window.removeEventListener("scroll",onScroll);
+    };
+  },[view]);
 
   // Sub device check handled at block entry
 
@@ -8630,7 +8679,26 @@ function App(){
         e("div",{style:{height:2,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"44)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            e("div",{style:{height:1,background:"#ebebeb",margin:"0 0 4px"}}),
+            /* ── Physiology Exam Notes — Final Lap-style card ── */
+            e("div",{className:"final-lap-card fade-up",style:{animationDelay:"0ms"},
+              onClick:()=>{ setReadingContext("physiology"); paywallDismissedRef.current=false; setShowPayDetails(false);  setReadingFontStep(1); pushView("reading_view"); }},
+              e("div",{className:"final-lap-card-top",style:{background:"linear-gradient(135deg,#fefcff,#f0f7ff)"}},
+                e("div",{style:{display:"flex",alignItems:"center",gap:6,marginBottom:8}},
+                  e("div",{className:"final-lap-badge",style:{background:"rgba(6,95,212,.1)",border:"1px solid rgba(6,95,212,.2)",color:"#065fd4",marginBottom:0}},"✦ Premium"),
+                  e("div",{style:{display:"inline-flex",alignItems:"center",background:"rgba(46,125,50,.1)",border:"1px solid rgba(46,125,50,.2)",color:"#2e7d32",fontSize:".6rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",padding:"2px 9px",borderRadius:20,lineHeight:1,flexShrink:0}},"Frequently Updated")
+                ),
+                e("div",{className:"final-lap-title"},"Physiology Exam Notes"),
+                e("div",{className:"final-lap-subtitle"},"Exam-focused notes from Sembulingam")
+              ),
+              e("div",{className:"final-lap-card-bottom",style:{background:"#fafcff",borderTop:"1px solid rgba(6,95,212,.1)"}},
+                e("div",{className:"final-lap-pills"},
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Sembulingam"),
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Physiology")
+                ),
+                e("span",{className:"final-lap-arrow",style:{color:"#065fd4"}},"→")
+              )
+            ),
+            e("div",{style:{height:1,background:"#ebebeb",margin:"4px 0"}}),
             SUBJECTS.map((subj,si)=>{
               const subjBlocks=course.levels.flatMap(lv=>lv.blocks.filter(b=>b.subject===subj.id));
               const liveBlocks=subjBlocks.filter(b=>b.available&&b.questions.length>0);
@@ -8646,7 +8714,7 @@ function App(){
                   opacity:hasContent?1:.5},
                 onMouseEnter:ev=>{if(hasContent){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-                onClick:()=>{if(hasContent){setPreclinSubject(subj);setPreclinLevel(null);}}},
+                onClick:()=>{if(hasContent){const activeLvs=course.levels.filter(lv=>lv.blocks.some(b=>b.subject===subj.id&&b.available&&b.questions.length>0));setPreclinSubject(subj);setPreclinLevel(activeLvs.length===1?activeLvs[0]:null);}}},
                 e("div",{style:{flex:1}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:th.text}},subj.label),
@@ -9443,6 +9511,7 @@ function App(){
                       e("option",{value:"ABU"},"ABU — Ahmadu Bello Univ."),
                       e("option",{value:"GEN"},"GEN — General Question Bank"),
                       e("option",{value:"SUB"},"SUB — Subspecialties (IU)"),
+                      e("option",{value:"PEN"},"PEN — Physiology Exam Notes"),
                       e("option",{value:"DEMO"},"DEMO — Demo / Test")
                     )
                   ),
@@ -9621,7 +9690,7 @@ function App(){
   if(view==="final_lap"){
     const accent="#7c3aed";
     const subCards=[
-      { label:"Exam Notes", desc:"Exam-focused reading notes for every topic", live:true, onClick:()=>{ setPaywallVisible(false);setPaywallDismissed(false);setShowPayDetails(false);setSelectedPlan(null);setReadingFontStep(1);pushView("reading_view"); } },
+      { label:"Exam Notes", desc:"Exam-focused reading notes for every topic", live:true, onClick:()=>{ setReadingContext("psych");paywallDismissedRef.current=false;setShowPayDetails(false);setReadingFontStep(1);pushView("reading_view"); } },
       { label:"Past Questions", desc:"Solved past exam questions with explanations", live:false, onClick:null },
       { label:"Practice MCQs", desc:"Junior + senior posting MCQs", live:false, onClick:null },
       { label:"Picture Tests", desc:"Picture based MCQs", live:false, onClick:null },
@@ -9668,8 +9737,12 @@ function App(){
     const cycleTheme=()=>setReadingTheme(t=>t==="light"?"sepia":t==="sepia"?"dark":"light");
     const cycleFontSize=()=>setReadingFontStep(f=>(f+1)%3);
     const themeIcon=readingTheme==="dark"?"🌙":readingTheme==="sepia"?"☕":"☀️";
+    const isPhysiology=readingContext==="physiology";
+    const rdrTopbarSubject=isPhysiology?"Preclinicals · Physiology":"Psychiatry · Final Lap";
+    const rdrTopbarTitle=isPhysiology?"Physiology Exam Notes":"Exam Notes";
+    const rdrPaywallMsg=isPhysiology?"Unlock the full Physiology notes — all topics from Sembulingam.":"Unlock the full Psychiatry notes — all 11 topics.";
 
-    const contentHTML=`
+    const psychContentHTML=`
       <div class="rdr-topic">
         <div class="rdr-topic-hdr">
           <div class="rdr-topic-num">01</div>
@@ -9737,15 +9810,174 @@ function App(){
       </div>
     `;
 
+    const physioContentHTML=`
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">01</div>
+          <div><div class="rdr-topic-title">The Cell</div><div class="rdr-topic-sub">General Physiology</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">The cell is the basic structural and functional unit of the body. A typical cell has three main compartments: the <strong>cell membrane</strong> (boundary and transport), the <strong>nucleus</strong> (genetic control), and the <strong>cytoplasm</strong> (metabolic activity). Understanding organelle function is the basis of almost every metabolic and pharmacological MCQ.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Organelles and Functions</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Organelle</th><th>Key Function</th><th>Exam Relevance</th></tr></thead><tbody>
+            <tr><td><strong>Mitochondria</strong></td><td>ATP production via oxidative phosphorylation; Krebs cycle</td><td>Site of aerobic respiration; absent in RBCs</td></tr>
+            <tr><td><strong>Rough ER</strong></td><td>Synthesis and folding of secretory and membrane proteins</td><td>Studded with ribosomes — "rough"</td></tr>
+            <tr><td><strong>Smooth ER</strong></td><td>Lipid synthesis, steroid hormone synthesis, drug detoxification</td><td>Abundant in liver, adrenal cortex, gonads</td></tr>
+            <tr><td><strong>Golgi apparatus</strong></td><td>Processing, packaging, and secretion of proteins</td><td>Post-translational modification; glycosylation</td></tr>
+            <tr><td><strong>Ribosomes</strong></td><td>Protein synthesis (translation of mRNA)</td><td>Free = cytoplasmic proteins; bound = secretory proteins</td></tr>
+            <tr><td><strong>Lysosomes</strong></td><td>Intracellular digestion via hydrolytic enzymes [pH 5]</td><td>Lysosomal storage diseases (e.g. Gaucher, Tay-Sachs)</td></tr>
+            <tr><td><strong>Peroxisomes</strong></td><td>Oxidation of fatty acids; breakdown of H₂O₂ via catalase</td><td>Absent → Zellweger syndrome</td></tr>
+            <tr><td><strong>Nucleus</strong></td><td>Contains DNA; site of transcription (DNA → mRNA)</td><td>Nuclear envelope has pores for mRNA export</td></tr>
+            <tr><td><strong>Cytoskeleton</strong></td><td>Cell shape, movement, organelle positioning</td><td>Microfilaments (actin), microtubules (tubulin), intermediate filaments</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Cell Membrane Structure</div>
+          <p class="rdr-p">The cell membrane is a <strong>fluid mosaic</strong> — a phospholipid bilayer [7.5–10 nm thick] with embedded and peripheral proteins. Hydrophilic phosphate heads face outward; hydrophobic fatty acid tails face inward. <strong>Cholesterol</strong> is inserted between phospholipids and acts as a fluidity buffer — it prevents the membrane becoming too rigid in cold and too fluid in heat.</p>
+          <ul class="rdr-list">
+            <li><strong>Integral proteins:</strong> span the full bilayer; include ion channels, transporters, receptors</li>
+            <li><strong>Peripheral proteins:</strong> attached to surface only; include enzymes and structural proteins</li>
+            <li><strong>Glycocalyx:</strong> carbohydrate coat on outer surface; role in cell recognition and immunity</li>
+          </ul>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p>Red blood cells have <strong>no mitochondria, no nucleus, and no ribosomes</strong> — they cannot perform aerobic respiration, cannot divide, and cannot synthesise proteins. Their ATP comes entirely from anaerobic glycolysis. This is why G6PD deficiency causes haemolysis — RBCs cannot regenerate NADPH any other way.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>MERGE</strong> — organelles present in most cells: <strong>M</strong>itochondria, <strong>E</strong>R (rough + smooth), <strong>R</strong>ibosomes, <strong>G</strong>olgi, <strong>E</strong>ndomembrane system. RBCs lack all of these functional organelles.</p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — The Cell</h4><ul>
+          <li>Mitochondria = ATP factory; absent in RBCs which rely on anaerobic glycolysis only</li>
+          <li>Rough ER synthesises secretory proteins; smooth ER handles lipids and detox</li>
+          <li>Golgi packages and glycosylates proteins before secretion</li>
+          <li>Lysosomes contain hydrolytic enzymes at pH 5 — dysfunction causes storage diseases</li>
+          <li>Cell membrane: fluid mosaic model — phospholipid bilayer + proteins; cholesterol regulates fluidity</li>
+          <li>Glycocalyx (outer carbohydrate coat) mediates cell recognition and immune interactions</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">02</div>
+          <div><div class="rdr-topic-title">Cell Junctions</div><div class="rdr-topic-sub">General Physiology</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Cell junctions are specialised contact points between adjacent cells or between cells and the extracellular matrix. They serve three purposes: <strong>sealing</strong> (preventing leakage), <strong>anchoring</strong> (mechanical strength), and <strong>communicating</strong> (direct cell-to-cell signalling). The type of junction determines the barrier and signalling properties of an epithelium.</p>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Types of Cell Junctions</div>
+          <div class="rdr-tbl-wrap"><table><thead><tr><th>Junction</th><th>Also Called</th><th>Function</th><th>Key Features</th><th>Location</th></tr></thead><tbody>
+            <tr><td><strong>Tight junction</strong></td><td>Zonula occludens</td><td>Seal — blocks paracellular transport</td><td>Fusion of outer leaflets; claudins and occludins</td><td>Gut epithelium, blood-brain barrier</td></tr>
+            <tr><td><strong>Adherens junction</strong></td><td>Zonula adherens</td><td>Mechanical adhesion between cells</td><td>Linked to actin cytoskeleton via cadherins</td><td>Below tight junctions in epithelium</td></tr>
+            <tr><td><strong>Desmosome</strong></td><td>Macula adherens</td><td>Spot welds — resist mechanical stress</td><td>Linked to intermediate filaments (keratin); desmoglein</td><td>Skin, cardiac muscle, cervix</td></tr>
+            <tr><td><strong>Gap junction</strong></td><td>Nexus</td><td>Direct cell-to-cell communication</td><td>Connexons (6 connexins); allows ions and small molecules [&lt;1000 Da]</td><td>Cardiac muscle, smooth muscle, liver</td></tr>
+            <tr><td><strong>Hemidesmosome</strong></td><td>—</td><td>Anchors cell to basement membrane</td><td>Integrins; links to intermediate filaments</td><td>Basal epithelial cells</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+          <p><strong>Gap junctions are the only junctions that allow direct cell-to-cell communication.</strong> This is why cardiac myocytes contract synchronously — gap junctions propagate the action potential from cell to cell. Destroying desmosomes (e.g. pemphigus vulgaris — anti-desmoglein antibodies) causes skin blistering because cells lose their spot welds.</p>
+        </div>
+        <div class="rdr-callout mnemonic"><div class="rdr-callout-lbl">Mnemonic</div>
+          <p><strong>TADGH</strong> — from apical to basal in epithelium: <strong>T</strong>ight junction → <strong>A</strong>dherens junction → <strong>D</strong>esmosome → <strong>G</strong>ap junction → <strong>H</strong>emisdesmosome (at base). Or: <em>"Tight Adhesions Don't Go Here"</em></p>
+        </div>
+        <div class="rdr-summary"><h4>Key Points — Cell Junctions</h4><ul>
+          <li>Tight junctions (zonula occludens) — seal paracellular space; critical at blood-brain barrier and gut</li>
+          <li>Adherens junctions — mechanical adhesion via cadherins linked to actin</li>
+          <li>Desmosomes (macula adherens) — spot welds via desmoglein linked to keratin; absent → pemphigus blistering</li>
+          <li>Gap junctions (nexus) — only junction for direct intercellular communication; connexons pass ions and molecules &lt;1000 Da</li>
+          <li>Hemidesmosomes — anchor basal epithelial cells to basement membrane via integrins</li>
+          <li>Order apical to basal: Tight → Adherens → Desmosome → Gap → Hemidesmosome</li>
+        </ul></div>
+      </div>
+      <div class="rdr-divider"></div>
+
+      <div class="rdr-topic">
+        <div class="rdr-topic-hdr">
+          <div class="rdr-topic-num">03</div>
+          <div><div class="rdr-topic-title">Transport Through the Cell Membrane</div><div class="rdr-topic-sub">General Physiology</div></div>
+        </div>
+        <div class="rdr-section"><div class="rdr-section-hdr">Overview</div>
+          <p class="rdr-p">Transport across the cell membrane is either <strong>passive</strong> (no energy required, moves down a gradient) or <strong>active</strong> (energy required, moves against a gradient). The type of transport determines which substances enter and leave the cell and at what rate — understanding this underpins drug absorption, kidney physiology, and nerve conduction.</p>
+        </div>
+        <div id="rdrPaywallTrigger" style="height:1px;margin:0"></div>
+        <div style="filter:blur(5px);opacity:0.28;pointer-events:none;user-select:none">
+          <div class="rdr-section"><div class="rdr-section-hdr">Passive Transport</div>
+            <div class="rdr-tbl-wrap"><table><thead><tr><th>Type</th><th>Energy</th><th>Carrier?</th><th>Examples</th></tr></thead><tbody>
+              <tr><td><strong>Simple diffusion</strong></td><td>None</td><td>No</td><td>O₂, CO₂, N₂, lipid-soluble drugs, alcohols, urea</td></tr>
+              <tr><td><strong>Facilitated diffusion</strong></td><td>None</td><td>Yes (channel or transporter)</td><td>Glucose (GLUT1-5), fructose, water (aquaporins)</td></tr>
+              <tr><td><strong>Osmosis</strong></td><td>None</td><td>Via aquaporins</td><td>Water movement down osmotic gradient</td></tr>
+            </tbody></table></div>
+            <p class="rdr-p"><strong>Fick's Law:</strong> Rate of diffusion is proportional to surface area × concentration gradient × membrane permeability, inversely proportional to thickness...</p>
+          </div>
+          <div class="rdr-section"><div class="rdr-section-hdr">Active Transport</div>
+            <ul class="rdr-list">
+              <li><strong>Primary active transport:</strong> ATP-driven directly — Na⁺/K⁺-ATPase (3 Na⁺ out, 2 K⁺ in), Ca²⁺-ATPase, H⁺/K⁺-ATPase</li>
+              <li><strong>Secondary active transport:</strong> piggybacks on the Na⁺ gradient — cotransport (symport) and countertransport (antiport)...</li>
+            </ul>
+          </div>
+          <div class="rdr-callout pearl"><div class="rdr-callout-lbl">Exam Pearl</div>
+            <p>The Na⁺/K⁺-ATPase is electrogenic — 3 Na⁺ out, 2 K⁺ in. Digoxin inhibits it, raising intracellular Ca²⁺ and increasing cardiac contractility...</p>
+          </div>
+        </div>
+      </div>
+    `;
+
+
+    const contentHTML=isPhysiology?physioContentHTML:psychContentHTML;
+
+    const physioTOC=[
+      {section:"Section 1 — General Physiology",topics:[
+        {num:"01",title:"The Cell"},{num:"02",title:"Cell Junctions"},
+        {num:"03",title:"Transport Through the Cell Membrane",locked:true},
+        {num:"04",title:"Homeostasis",locked:true},{num:"05",title:"Acid-Base Balance",locked:true}
+      ]},
+      {section:"Section 2 — Blood and Body Fluids",topics:[
+        {num:"06",title:"Body Fluids",locked:true},{num:"07",title:"Blood",locked:true},
+        {num:"08",title:"Plasma Proteins",locked:true},{num:"09",title:"Red Blood Cells",locked:true},
+        {num:"10",title:"Erythropoiesis",locked:true},{num:"11",title:"Haemoglobin and Iron Metabolism",locked:true},
+        {num:"12",title:"Erythrocyte Sedimentation Rate",locked:true},{num:"13",title:"PCV and Blood Indices",locked:true},
+        {num:"14",title:"Anaemia",locked:true},{num:"15",title:"Haemolysis and Fragility",locked:true},
+        {num:"16",title:"White Blood Cells",locked:true},{num:"17",title:"Immunity",locked:true},
+        {num:"18",title:"Platelets",locked:true},{num:"19",title:"Haemostasis",locked:true},
+        {num:"20",title:"Coagulation of Blood",locked:true},{num:"21",title:"Blood Groups",locked:true},
+        {num:"22",title:"Blood Transfusion",locked:true},{num:"23",title:"Blood Volume",locked:true},
+        {num:"24",title:"Reticuloendothelial System",locked:true},{num:"25",title:"The Spleen",locked:true},
+        {num:"26",title:"Lymphatic System and Lymph",locked:true},{num:"27",title:"Tissue Fluid and Oedema",locked:true}
+      ]}
+    ];
+    const psychTOC=[
+      {section:"Psychiatry — Final Lap",topics:[
+        {num:"01",title:"Mental Status Examination"},{num:"02",title:"Schizophrenia",locked:true}
+      ]}
+    ];
+    const tocData=isPhysiology?physioTOC:psychTOC;
+
+    const scrollToTopic=(num)=>{
+      setTocOpen(false);
+      setTimeout(()=>{
+        const els=document.querySelectorAll(".rdr-topic-num");
+        for(const el of els){
+          if(el.textContent.trim()===num){
+            el.closest(".rdr-topic").scrollIntoView({behavior:"smooth",block:"start"});
+            return;
+          }
+        }
+      },150);
+    };
+
+    const tocBg=readingTheme==="dark"?"#1e293b":readingTheme==="sepia"?"#fdf6ec":"#fff";
+    const tocColor=readingTheme==="dark"?"#d1d5db":readingTheme==="sepia"?"#3a2e1e":"#1a1a2e";
+
     return e("div",{className:"rdr-wrap "+themeClass,style:{minHeight:"100vh",position:"relative"}},
       e("div",{className:"rdr-topbar"},
         e("div",{className:"rdr-topbar-inner"},
-          e("button",{className:"rdr-back",onClick:()=>{ setPaywallVisible(false); popView(); }},"← Back"),
+          e("button",{className:"rdr-back",onClick:()=>{ setPaywallVisible(false); setTocOpen(false); popView(); }},"← Back"),
           e("div",{className:"rdr-title-area"},
-            e("div",{className:"rdr-subject"},"Psychiatry · Final Lap"),
-            e("div",{className:"rdr-title"},"Exam Notes")
+            e("div",{className:"rdr-subject"},rdrTopbarSubject),
+            e("div",{className:"rdr-title"},rdrTopbarTitle)
           ),
           e("div",{className:"rdr-ctrls"},
+            e("button",{className:"rdr-ctrl"+(tocOpen?" active":""),onClick:()=>setTocOpen(o=>!o),title:"Table of contents",style:{fontSize:"1rem",letterSpacing:"-.5px"}},"≡"),
             e("button",{className:"rdr-ctrl",onClick:cycleTheme,title:"Change theme"},themeIcon),
             e("button",{className:"rdr-ctrl",onClick:cycleFontSize,title:"Font size"},"Aa")
           )
@@ -9754,33 +9986,61 @@ function App(){
           e("div",{id:"rdrProgressBar",className:"rdr-progress"})
         )
       ),
+      /* TOC overlay + drawer */
+      e("div",{className:"rdr-toc-overlay"+(tocOpen?" open":""),onClick:()=>setTocOpen(false)}),
+      e("div",{className:"rdr-toc"+(tocOpen?" open":""),style:{background:tocBg,color:tocColor}},
+        e("div",{className:"rdr-toc-head",style:{background:tocBg}},
+          e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between"}},
+            e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1rem"}},isPhysiology?"Physiology Notes":"Psychiatry Notes"),
+            e("button",{onClick:()=>setTocOpen(false),style:{background:"none",border:"none",color:tocColor,fontSize:"1.2rem",cursor:"pointer",padding:"0 2px",opacity:.6}},"×")
+          ),
+          e("p",{style:{fontSize:".7rem",color:"var(--rdr-muted)",marginTop:3}},isPhysiology?"2 sections · Sembulingam":"Tap any topic to jump")
+        ),
+        tocData.map((sec,si)=>e("div",{key:si},
+          e("div",{className:"rdr-toc-section"},sec.section),
+          sec.topics.map((t,ti)=>e("div",{key:ti,className:"rdr-toc-item",
+            style:{borderLeftColor:!t.locked?"var(--rdr-subhead)":"transparent"},
+            onClick:()=>scrollToTopic(t.num)},
+            e("span",{className:"rdr-toc-num"},t.num),
+            e("span",{style:{flex:1,opacity:t.locked?.7:1}},t.title),
+            t.locked&&e("span",{className:"rdr-toc-locked"},"🔒")
+          ))
+        ))
+      ),
       e("div",{className:"rdr-body "+fontClasses[readingFontStep],dangerouslySetInnerHTML:{__html:contentHTML}}),
-      e("div",{className:"rdr-paywall"+(paywallVisible?" show":"")},
+      view==="reading_view"&&e("div",{className:"rdr-paywall"},
         e("div",{className:"rdr-pw-fade"}),
         e("div",{className:"rdr-pw-card"},
           e("div",{className:"rdr-pw-inner"},
             e("h3",{className:"rdr-pw-h3"},"Continue reading"),
-            e("p",{className:"rdr-pw-p"},"Unlock the full Psychiatry notes — all 11 topics."),
-            e("div",{className:"rdr-pw-prices"},
-              e("div",{className:"rdr-pw-price"+(selectedPlan==="single"?" sel":""),onClick:()=>setSelectedPlan("single")},
-                e("div",{className:"rdr-pw-plabel"},"Psychiatry"),
-                e("div",{className:"rdr-pw-amount"},"\u20a65,000")
+            e("p",{className:"rdr-pw-p"},rdrPaywallMsg),
+            /* ── Price: 3 options for psych, single for physiology ── */
+            !isPhysiology&&e("div",{className:"rdr-pw-prices"},
+              e("div",{className:"rdr-pw-price sel"},
+                e("div",{className:"rdr-pw-plabel"},"Psychiatry Notes"),
+                e("div",{className:"rdr-pw-amount"},"₦5,000")
               ),
-              e("div",{className:"rdr-pw-price bundle"+(selectedPlan==="bundle"?" sel":""),onClick:()=>setSelectedPlan("bundle")},
+              e("div",{className:"rdr-pw-price bundle"},
                 e("div",{className:"rdr-pw-badge"},"BEST VALUE"),
                 e("div",{className:"rdr-pw-plabel"},"Psych + 1 Course"),
-                e("div",{className:"rdr-pw-amount"},"\u20a69,000"),
-                e("div",{className:"rdr-pw-psub"},"Save \u20a61,000")
+                e("div",{className:"rdr-pw-amount"},"₦9,000"),
+                e("div",{className:"rdr-pw-psub"},"Save ₦1,000")
               ),
-              e("div",{className:"rdr-pw-price"+(selectedPlan==="triple"?" sel":""),onClick:()=>setSelectedPlan("triple")},
+              e("div",{className:"rdr-pw-price"},
                 e("div",{className:"rdr-pw-plabel"},"All 3 Courses"),
-                e("div",{className:"rdr-pw-amount"},"\u20a612,000")
+                e("div",{className:"rdr-pw-amount"},"₦12,000")
+              )
+            ),
+            isPhysiology&&e("div",{style:{textAlign:"center",margin:"0 0 16px"}},
+              e("div",{style:{display:"inline-block",border:"2px solid #065fd4",borderRadius:8,padding:"14px 28px",background:"linear-gradient(135deg,#f0f7ff,#e8f0fe)"}},
+                e("div",{className:"rdr-pw-plabel",style:{color:"#065fd4"}},"Physiology Exam Notes"),
+                e("div",{className:"rdr-pw-amount",style:{color:"#065fd4"}},"₦5,000")
               )
             ),
             e("div",{className:"rdr-pw-acts"},
               e("button",{className:"rdr-pw-btn-pay",onClick:()=>setShowPayDetails(true)},
                 showPayDetails?"Payment details ↓":"Get Access →"),
-              e("button",{className:"rdr-pw-btn-dismiss",onClick:()=>{ setPaywallVisible(false); setShowPayDetails(false); setAccessErr(""); }},"Maybe later")
+              e("button",{className:"rdr-pw-btn-dismiss",onClick:()=>{ paywallDismissedRef.current=true; const pw=document.querySelector(".rdr-paywall"); if(pw){pw.style.transition="transform .4s cubic-bezier(.4,0,.2,1)";pw.style.transform="translateY(110%)";pw.style.pointerEvents="none";} setShowPayDetails(false); setAccessErr(""); }},"Maybe later")
             ),
             showPayDetails&&e("div",{className:"rdr-pw-payment"},
               e("div",{className:"rdr-pw-bank-row"},
@@ -9797,9 +10057,18 @@ function App(){
                 e("input",{type:"text",placeholder:"Paste access code here",value:accessCode,
                   onChange:ev=>{setAccessCode(ev.target.value);setAccessErr("");},
                   style:{flex:1,padding:"9px 12px",border:"1.5px solid "+(accessErr?"#ef5350":"var(--rdr-border)"),borderRadius:5,fontSize:".88rem",fontFamily:"Georgia,serif",background:"transparent",color:"inherit",outline:"none"}}),
-                e("button",{
-                  onClick:()=>{ if(accessCode.trim().length>3){ setPaywallVisible(false); setShowPayDetails(false); } else setAccessErr("Invalid code"); },
-                  style:{background:"#1a1a2e",color:"#c9a84c",border:"none",borderRadius:5,padding:"9px 16px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:"pointer",whiteSpace:"nowrap"}},"Continue →")
+                e("button",{disabled:accessLoading,
+                  onClick:async()=>{
+                    const code=accessCode.trim().toUpperCase();
+                    if(code.length<4){setAccessErr("Enter a valid code");return;}
+                    if(isPhysiology&&!code.startsWith("PEN")){setAccessErr("Invalid code for Physiology notes");return;}
+                    setAccessLoading(true);setAccessErr("");
+                    const res=window._fbValidateCode?await window._fbValidateCode(code,"physiology-reader"):{ok:false,error:"network"};
+                    setAccessLoading(false);
+                    if(res.ok){ paywallDismissedRef.current=true; const pw=document.querySelector(".rdr-paywall"); if(pw){pw.style.transition="transform .4s cubic-bezier(.4,0,.2,1)";pw.style.transform="translateY(110%)";pw.style.pointerEvents="none";} setShowPayDetails(false); }
+                    else setAccessErr(res.error==="used"?"Code already used":res.error==="expired"?"Code expired":"Invalid code");
+                  },
+                  style:{background:accessLoading?"#aaa":"#1a1a2e",color:"#c9a84c",border:"none",borderRadius:5,padding:"9px 16px",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:accessLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},"Continue →")
               ),
               accessErr&&e("p",{style:{fontSize:".72rem",color:"#ef5350",marginTop:5}},accessErr)
             )
