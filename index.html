@@ -336,6 +336,8 @@ const GB_FREE_KEY  = "medq_gb_free";   // number of free GB questions answered
 const GB_ACCESS_KEY = "medq_gb_access"; // {name, expiresAt} if paid
 const SUB_FREE_KEY   = "medq_sub_free";   // subspecialties free Qs used
 const SUB_ACCESS_KEY = "medq_sub_access"; // {expiresAt,code} if paid
+const STP_FREE_KEY   = "medq_stp_free";   // steeplechase free Qs used
+const STP_ACCESS_KEY = "medq_stp_access"; // {expiresAt,code} if paid
 const PHYSIO_UNLOCK_KEY = "medq_physio_unlocked"; // saved access code if paid
 const PSYCH_UNLOCK_KEY  = "medq_psych_unlocked";  // saved access code if paid
 
@@ -7153,6 +7155,34 @@ const RADIOLOGY_Qs = [
   }
 ];
 
+const ANATOMY_STEEPLECHASE_Qs = [
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ul_humerus_posterior.jpg", q:"This is the posterior surface of the humerus. Which nerve is at risk of injury when this bone is fractured at the level of the groove on this surface?", opts:["Musculocutaneous nerve","Median nerve","Radial nerve","Ulnar nerve","Axillary nerve"], ans:2, exp:"The radial groove (spiral groove) on the posterior humerus transmits the radial nerve and profunda brachii artery. Midshaft humeral fractures at this level damage the radial nerve, causing wrist drop and loss of sensation over the dorsum of the hand. The axillary nerve is at risk in surgical neck fractures, not at the radial groove level." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ul_humerus_anterior.jpg", q:"This is the anterior surface of the humerus. Which structure occupies the groove between the two tubercles visible on this bone?", opts:["Supraspinatus tendon","Long head of biceps tendon","Short head of biceps tendon","Subscapularis tendon","Coracobrachialis tendon"], ans:1, exp:"The intertubercular (bicipital) groove between the greater and lesser tubercles lodges the tendon of the long head of biceps brachii. Subscapularis inserts into the lesser tubercle; supraspinatus, infraspinatus and teres minor insert into the greater tubercle. The short head of biceps and coracobrachialis arise from the coracoid process, not the humerus." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ul_radius_ulna.jpg", q:"This image shows the radius and ulna in articulation. Which movement occurs specifically at the proximal radioulnar joint between these two bones?", opts:["Flexion and extension","Abduction and adduction","Pronation and supination","Circumduction","Gliding"], ans:2, exp:"The proximal radioulnar joint is a pivot joint where the head of the radius rotates within the radial notch of the ulna, producing pronation and supination. Flexion and extension occur at the humeroulnar and humeroradial joints. The distal radioulnar joint also participates in pronation/supination." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ul_carpal_bones.jpg", q:"This image shows the articulated carpal bones from the dorsal view. Which carpal bone forms the floor of the anatomical snuffbox?", opts:["Trapezium","Capitate","Lunate","Scaphoid","Trapezoid"], ans:3, exp:"The scaphoid forms the floor of the anatomical snuffbox along with the trapezium. It is the most commonly fractured carpal bone; tenderness in the snuffbox after a fall on an outstretched hand indicates scaphoid fracture until proven otherwise. The lunate is the most commonly dislocated carpal bone." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ul_scapula_posterior.jpg", q:"This is the posterior surface of the scapula. Which muscle occupies the infraspinous fossa visible on this bone?", opts:["Supraspinatus","Teres major","Subscapularis","Infraspinatus","Teres minor"], ans:3, exp:"Infraspinatus occupies the infraspinous fossa and laterally rotates the arm; it is one of the four rotator cuff muscles (SITS). Supraspinatus fills the supraspinous fossa above the spine of the scapula. Subscapularis occupies the subscapular (costal) fossa on the anterior surface." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ll_femur_anterior.jpg", q:"This is the anterior view of the femur. Which bony landmark on this surface is the insertion of the iliopsoas muscle?", opts:["Greater trochanter","Intertrochanteric line","Lesser trochanter","Gluteal tuberosity","Pectineal line"], ans:2, exp:"The iliopsoas (psoas major and iliacus) inserts into the lesser trochanter of the femur. The greater trochanter receives gluteus medius, gluteus minimus and the short external rotators. The gluteal tuberosity on the posterior surface receives gluteus maximus." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ll_femur_posterior.jpg", q:"This is the posterior surface of the femur. Which ridge running longitudinally on this surface serves as a major site of muscle attachment?", opts:["Intertrochanteric crest","Gluteal tuberosity","Pectineal line","Linea aspera","Spiral line"], ans:3, exp:"The linea aspera is the prominent longitudinal ridge on the posterior femur with medial and lateral lips. It serves as attachment for the adductors, vastus medialis, vastus lateralis and short head of biceps femoris. The intertrochanteric crest runs between the trochanters posteriorly." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ll_tibia_anterior.jpg", q:"This is the anterior view of the tibia. Which structure attaches to the bony prominence on the upper anterior shaft of this bone?", opts:["Medial collateral ligament","Patellar ligament","Anterior cruciate ligament","Posterior cruciate ligament","Iliotibial tract"], ans:1, exp:"The patellar ligament attaches to the tibial tuberosity on the upper anterior shaft of the tibia. It is the continuation of the quadriceps tendon below the patella. The ACL attaches to the anterior intercondylar area. Osgood-Schlatter disease involves traction apophysitis at the tibial tuberosity in adolescents." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ll_fibula.jpg", q:"This image shows the fibula. Which nerve winds around the neck of this bone, making it vulnerable to injury at this site?", opts:["Tibial nerve","Sural nerve","Saphenous nerve","Deep fibular nerve","Common fibular nerve"], ans:4, exp:"The common fibular (peroneal) nerve winds around the neck of the fibula before dividing into deep and superficial branches. It is vulnerable to injury here from fibular neck fractures or external compression. Injury causes foot drop and sensory loss over the dorsum of the foot." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ll_foot_bones.jpg", q:"This image shows the bones of the foot from above. Which tarsal bone articulates with both the tibia and fibula to form the ankle joint?", opts:["Calcaneus","Navicular","Cuboid","Talus","Medial cuneiform"], ans:3, exp:"The talus articulates superiorly with the tibia and fibula at the talocrural (ankle) joint, a hinge joint. The calcaneus is the largest tarsal bone and forms the heel; it articulates with the talus at the subtalar joint below. The navicular lies anterior to the talus on the medial side." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ta_rib_typical.jpg", q:"This image shows the inferior aspect of a typical rib. In what order are the neurovascular structures arranged within the costal groove, from superior to inferior?", opts:["Nerve, artery, vein","Vein, artery, nerve","Artery, nerve, vein","Artery, vein, nerve","Vein, nerve, artery"], ans:1, exp:"The neurovascular bundle runs in the costal groove in the order VAN (Vein, Artery, Nerve) from superior to inferior. This is clinically critical during thoracocentesis — the needle is inserted just above the upper border of the lower rib to avoid the bundle running below the upper rib." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ta_rib_atypical_1st.jpg", q:"This image shows the superior surface of the first rib. Which muscle attaches to the scalene tubercle visible on the inner border of this bone?", opts:["Scalenus medius","Scalenus posterior","Scalenus anterior","Serratus anterior","Subclavius"], ans:2, exp:"Scalenus anterior inserts into the scalene tubercle on the inner border of the first rib. The subclavian vein lies anterior to this tubercle; the subclavian artery and brachial plexus trunks lie in the groove posterior to it. Scalenus medius inserts into the upper surface of the first rib behind the subclavian groove." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ta_sternum.jpg", q:"This image shows the sternum. At which vertebral level does the sternal angle (angle of Louis) lie?", opts:["T2/T3 intervertebral disc","T3/T4 intervertebral disc","T4/T5 intervertebral disc","T5/T6 intervertebral disc","T3 vertebral body"], ans:2, exp:"The sternal angle (manubriosternal junction) lies at the level of the T4/T5 intervertebral disc. It marks: articulation of the 2nd costal cartilage (rib counting landmark), bifurcation of the trachea, beginning and end of the aortic arch, and the upper border of the cardiac silhouette on CXR." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ta_thoracic_vertebra.jpg", q:"This image shows a thoracic vertebra. Which feature distinguishes it from a lumbar vertebra?", opts:["Presence of a vertebral foramen","Presence of a spinous process","Presence of costal facets for rib articulation","Presence of a vertebral body","Presence of transverse processes"], ans:2, exp:"Thoracic vertebrae are uniquely identified by costal facets — demi-facets on the vertebral body and facets on the transverse processes — for articulation with rib heads and tubercles respectively. Lumbar vertebrae lack costal facets entirely and have large kidney-shaped bodies with broad horizontal spinous processes." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/ta_lumbar_vertebra.jpg", q:"This image shows a lumbar vertebra. Which of the following correctly describes the spinous process of this vertebra?", opts:["Long, slender and downward sloping","Short, broad and horizontal","Bifid and horizontally projecting","Long, pointed and posteriorly directed","Short, rounded and upward sloping"], ans:1, exp:"Lumbar vertebrae have short, broad, hatchet-shaped spinous processes that project horizontally, creating accessible interspinous spaces for lumbar puncture. Thoracic vertebrae have long, slender, downward-sloping spinous processes. Cervical vertebrae (C3-C6) have characteristically bifid spinous processes." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/pp_hip_bone_lateral.jpg", q:"This is the lateral view of the hip bone. Which three bones fuse at the acetabulum to form this structure?", opts:["Ilium, ischium and sacrum","Ilium, ischium and pubis","Ilium, pubis and sacrum","Ischium, pubis and coccyx","Ilium, ischium and coccyx"], ans:1, exp:"The hip (innominate) bone is formed by fusion of the ilium (superior), ischium (posteroinferior) and pubis (anteroinferior) at the Y-shaped triradiate cartilage within the acetabulum. Fusion is complete by approximately 16-18 years. The acetabulum articulates with the femoral head to form the hip joint." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/pp_hip_bone_medial.jpg", q:"This is the medial surface of the hip bone. Which ligament converts the greater sciatic notch on this bone into the greater sciatic foramen?", opts:["Sacrotuberous ligament","Sacrospinous ligament","Inguinal ligament","Iliolumbar ligament","Obturator membrane"], ans:1, exp:"The sacrospinous ligament, running from the ischial spine to the lateral sacrum and coccyx, converts the greater sciatic notch into the greater sciatic foramen. The sacrotuberous ligament converts the lesser sciatic notch into the lesser sciatic foramen. The piriformis is the key structure exiting through the greater sciatic foramen." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/pp_sacrum_anterior.jpg", q:"This is the anterior surface of the sacrum. How many pairs of anterior sacral foramina are visible on this surface?", opts:["Two pairs","Three pairs","Four pairs","Five pairs","Six pairs"], ans:2, exp:"There are four pairs of anterior (pelvic) sacral foramina, transmitting the anterior primary rami of S1-S4. The posterior sacral foramina transmit the posterior primary rami of the same nerves. The S5 nerve exits through the sacral hiatus at the inferior end of the sacral canal." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/pp_sacrum_posterior.jpg", q:"This is the posterior surface of the sacrum. Which structure at the inferior end of this surface serves as the landmark for caudal epidural anaesthesia?", opts:["Sacral promontory","Posterior superior iliac spine","Sacral cornu","Sacral hiatus","Median sacral crest"], ans:3, exp:"The sacral hiatus is a U-shaped gap at the inferior end of the sacral canal, formed by failure of S4-S5 laminae to fuse. Flanked by the sacral cornua, it is the entry point for caudal epidural anaesthesia. The sacral promontory is on the anterior surface and is a key obstetric landmark for pelvic inlet measurements." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/pp_pelvis_articulated.jpg", q:"This image shows the articulated pelvis. Which diameter of the pelvic inlet represents the shortest anteroposterior measurement and is most critical in obstetric assessment?", opts:["Diagonal conjugate","True (anatomical) conjugate","Obstetric conjugate","Transverse diameter","Oblique diameter"], ans:2, exp:"The obstetric conjugate (~10-11 cm) is the shortest AP diameter of the pelvic inlet, measured from the sacral promontory to the posterior surface of the pubic symphysis. It determines whether the fetal head can engage. The diagonal conjugate is measured per vaginum and is slightly longer. The true conjugate is from promontory to the upper border of the symphysis." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/hn_skull_lateral.jpg", q:"This is the lateral view of the skull. Which point marks the junction of the frontal, parietal, temporal and greater wing of the sphenoid bones?", opts:["Bregma","Lambda","Pterion","Asterion","Nasion"], ans:2, exp:"The pterion is the H-shaped sutural junction of four bones: frontal, parietal, temporal and the greater wing of sphenoid. It is the thinnest part of the calvarium and overlies the anterior division of the middle meningeal artery; a blow here can cause extradural haemorrhage. Bregma is the coronal-sagittal suture junction; lambda is the sagittal-lambdoid junction." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/hn_skull_base_internal.jpg", q:"This image shows the internal surface of the skull base. Which foramen in the middle cranial fossa transmits the middle meningeal artery?", opts:["Foramen ovale","Foramen rotundum","Foramen spinosum","Foramen lacerum","Superior orbital fissure"], ans:2, exp:"The foramen spinosum in the greater wing of the sphenoid transmits the middle meningeal artery (and meningeal branch of V3). Foramen ovale transmits V3 (mandibular nerve); foramen rotundum transmits V2 (maxillary nerve); the superior orbital fissure transmits cranial nerves III, IV, V1 and VI." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/hn_skull_base_external.jpg", q:"This is the external surface of the skull base. Which structure passes through the carotid canal visible on this surface?", opts:["Internal jugular vein","Internal carotid artery","External carotid artery","Vertebral artery","Basilar artery"], ans:1, exp:"The carotid canal in the petrous temporal bone transmits the internal carotid artery and its accompanying sympathetic plexus. The internal jugular vein exits the skull through the jugular foramen. The vertebral arteries enter the skull through the foramen magnum and unite to form the basilar artery." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/hn_mandible.jpg", q:"This image shows the mandible. Through which foramen on the lateral surface of this bone does the mental nerve emerge?", opts:["Mandibular foramen","Inferior alveolar foramen","Mental foramen","Incisive foramen","Greater palatine foramen"], ans:2, exp:"The mental foramen on the lateral surface of the mandibular body (typically below the 2nd premolar) transmits the mental nerve and vessels. The mental nerve is the terminal branch of the inferior alveolar nerve (V3), supplying sensation to the chin and lower lip. The mandibular foramen is on the medial surface and admits the inferior alveolar nerve." },
+  { img:"https://raw.githubusercontent.com/PJCodeplus/medq/main/assets/steeplechase/hn_cervical_vertebra_atlas_axis.jpg", q:"This image shows the atlas and axis vertebrae. Which unique feature of the axis projects superiorly through the ring of the atlas?", opts:["Transverse process","Superior articular facet","Anterior arch","Dens (odontoid process)","Posterior tubercle"], ans:3, exp:"The dens (odontoid process) of the axis projects superiorly through the anterior ring of the atlas, held against the anterior arch by the transverse ligament. It represents the embryological body of the atlas that fused onto the axis. Fracture of the dens or rupture of the transverse ligament risks cord compression and can be immediately fatal." },
+];
+
 const COURSES = [
   { id:"internal", name:"Internal Medicine", emoji:"🩺", bg:"linear-gradient(135deg,#0f2744,#1a3a5c)", accent:"#c9a84c", school:"IU",
     blocks:[
@@ -7728,6 +7758,14 @@ function App(){
   const [subCodeError,setSubCodeError]=useState("");
   const [subCodeLoading,setSubCodeLoading]=useState(false);
 
+  // ── Steeplechase paywall ──
+  const [stpFreeCount,setStpFreeCount]=useState(()=>Number(ls.get(STP_FREE_KEY)||0));
+  const [stpAccess,setStpAccess]=useState(()=>{try{return JSON.parse(ls.get(STP_ACCESS_KEY)||"null");}catch{return null;}});
+  const [showStpPaywall,setShowStpPaywall]=useState(false);
+  const [stpCodeInput,setStpCodeInput]=useState("");
+  const [stpCodeError,setStpCodeError]=useState("");
+  const [stpCodeLoading,setStpCodeLoading]=useState(false);
+
   // ── School selector ──
   const [selectedSchool,setSelectedSchool]=useState(()=>ls.get(SCHOOL_KEY)||null);
   const schools=[
@@ -7914,6 +7952,8 @@ function App(){
   };
   const validSubAccess = acc => { if(!acc)return false; try{return new Date(acc.expiresAt)>new Date();}catch{return false;} };
   const isSub = () => course?.id==="subspecialties";
+  const validStpAccess = acc => { if(!acc)return false; try{return new Date(acc.expiresAt)>new Date();}catch{return false;} };
+  const isStp = () => block?.isSteeplechase===true;
 
   const pickAnswer=i=>{
     if(picked!==null)return;
@@ -7932,6 +7972,10 @@ function App(){
     if(isSub()&&!validSubAccess(subAccess)){
       const nc=subFreeCount+1; setSubFreeCount(nc); ls.set(SUB_FREE_KEY,String(nc));
     }
+    // Track steeplechase free questions
+    if(isStp()&&!validStpAccess(stpAccess)){
+      const nc=stpFreeCount+1; setStpFreeCount(nc); ls.set(STP_FREE_KEY,String(nc));
+    }
   };
 
   const nextQ=()=>{
@@ -7943,6 +7987,10 @@ function App(){
     // Sub paywall — mirrors General Bank, triggers at 10
     if(isSub()&&!validSubAccess(subAccess)&&subFreeCount>=10){
       setShowSubPaywall(true); return;
+    }
+    // Steeplechase paywall — triggers at 5
+    if(isStp()&&!validStpAccess(stpAccess)&&stpFreeCount>=5){
+      setShowStpPaywall(true); return;
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -8170,6 +8218,69 @@ function App(){
 
 
   // ═══════════ SUBSPECIALTIES PAYWALL (mirrors General Bank) ═══════════
+  if(showStpPaywall) return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+    e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
+      e("div",{style:{background:"linear-gradient(135deg,#1b2f1b,#2e5038)",padding:"28px 28px 22px",textAlign:"center"}},
+        e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🦴"),
+        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free preview complete"),
+        e("p",{style:{color:"rgba(165,214,167,.8)",fontSize:".82rem",lineHeight:1.6}},"Unlock the full Steeplechase question bank to continue.")
+      ),
+      e("div",{style:{height:3,background:"linear-gradient(90deg,#4caf50,#a5d6a7,#4caf50)"}}),
+      e("div",{style:{padding:"24px 28px 32px"}},
+        e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:20}},
+          "Purchase access and send your receipt to WhatsApp to get your code."),
+        e("div",{style:{border:"2px solid #4caf50",borderRadius:8,padding:"16px 14px",textAlign:"center",background:"#f0faf0",marginBottom:20}},
+          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.7rem",fontWeight:900,color:"#1a2535"}},"₦3,000"),
+          e("div",{style:{fontSize:".72rem",color:th.textMuted,marginTop:4}},"30-day access")
+        ),
+        e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"14px 16px",marginBottom:20}},
+          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#8a6f30",marginBottom:8}},"Payment Details"),
+          e("div",{style:{fontSize:".88rem",color:"#333",lineHeight:2}},
+            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
+            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
+            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
+          ),
+          e("p",{style:{fontSize:".78rem",color:th.textMuted,marginTop:8,lineHeight:1.5}},
+            "Send receipt to WhatsApp: ",
+            e("strong",{style:{color:"#1a2535"}},"09161452645"),
+            ". Your access code will be sent to you.")
+        ),
+        e("div",{style:{marginBottom:16}},
+          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
+          e("div",{style:{display:"flex",gap:8}},
+            e("input",{type:"text",placeholder:"e.g. STP-XXXX-XXXX",value:stpCodeInput,
+              onChange:ev=>{setStpCodeInput(ev.target.value.toUpperCase());setStpCodeError("");},
+              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setStpCodeInput(clean);setStpCodeError("");},
+              onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("stp_redeem_btn")?.click();},
+              style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(stpCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
+            e("button",{id:"stp_redeem_btn",disabled:stpCodeLoading||!stpCodeInput.trim(),
+              onClick:async()=>{
+                if(!stpCodeInput.trim())return;
+                setStpCodeLoading(true); setStpCodeError("");
+                const res=await window._fbValidateCode(stpCodeInput.trim(),studentName||"Student");
+                setStpCodeLoading(false);
+                if(res.ok){
+                  const access={name:studentName||"Student",expiresAt:res.expiresAt,code:stpCodeInput.trim()};
+                  setStpAccess(access); ls.set(STP_ACCESS_KEY,JSON.stringify(access));
+                  setStpFreeCount(0); ls.set(STP_FREE_KEY,"0");
+                  setShowStpPaywall(false);
+                  setQIdx(q=>q); setPicked(null); setShowFb(false);
+                } else {
+                  setStpCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
+                }
+              },
+              style:{padding:"11px 18px",background:stpCodeLoading?"#aaa":"#1b2f1b",color:"#a5d6a7",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:stpCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+              stpCodeLoading?"…":"Redeem")
+          ),
+          stpCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},stpCodeError)
+        ),
+        e("button",{onClick:()=>{setShowStpPaywall(false);endQuiz(false);},
+          style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".85rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
+          "End session & see results")
+      )
+    )
+  );
+
   if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
     e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
       e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
@@ -8709,23 +8820,26 @@ function App(){
         e("div",{style:{height:2,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"44)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            /* ── Physiology Exam Notes — Final Lap-style card ── */
+            /* ── Steeplechase — Premium card ── */
             e("div",{className:"final-lap-card fade-up",style:{animationDelay:"0ms"},
-              onClick:()=>{ setReadingContext("physiology"); paywallDismissedRef.current=false; setShowPayDetails(false);  setReadingFontStep(1); pushView("reading_view"); }},
-              e("div",{className:"final-lap-card-top",style:{background:"linear-gradient(135deg,#fefcff,#f0f7ff)"}},
+              onClick:()=>{
+                const stpBlock={id:"steeplechase",name:"Anatomy Steeplechase",questions:ANATOMY_STEEPLECHASE_Qs,available:true,isSteeplechase:true};
+                setCourse(course); setBlock(stpBlock); setQCount(Math.min(20,ANATOMY_STEEPLECHASE_Qs.length)); pushView("setup");
+              }},
+              e("div",{className:"final-lap-card-top",style:{background:"linear-gradient(135deg,#fffdf5,#fef9ec)"}},
                 e("div",{style:{display:"flex",alignItems:"center",gap:6,marginBottom:8}},
-                  e("div",{className:"final-lap-badge",style:{background:"rgba(6,95,212,.1)",border:"1px solid rgba(6,95,212,.2)",color:"#065fd4",marginBottom:0}},"✦ Premium"),
+                  e("div",{className:"final-lap-badge",style:{background:"rgba(201,168,76,.12)",border:"1px solid rgba(201,168,76,.25)",color:"#8a6f30",marginBottom:0}},"✦ Premium"),
                   e("div",{style:{display:"inline-flex",alignItems:"center",background:"rgba(46,125,50,.1)",border:"1px solid rgba(46,125,50,.2)",color:"#2e7d32",fontSize:".6rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",padding:"2px 9px",borderRadius:20,lineHeight:1,flexShrink:0}},"Frequently Updated")
                 ),
-                e("div",{className:"final-lap-title"},"Physiology Exam Notes"),
-                e("div",{className:"final-lap-subtitle"},"Exam-focused notes from Sembulingam")
+                e("div",{className:"final-lap-title"},"Anatomy Steeplechase"),
+                e("div",{className:"final-lap-subtitle"},"Picture-based tests to prepare you for your practical steeplechase exam")
               ),
-              e("div",{className:"final-lap-card-bottom",style:{background:"#fafcff",borderTop:"1px solid rgba(6,95,212,.1)"}},
+              e("div",{className:"final-lap-card-bottom",style:{background:"#fffdf5",borderTop:"1px solid rgba(201,168,76,.15)"}},
                 e("div",{className:"final-lap-pills"},
-                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Sembulingam"),
-                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Physiology")
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(201,168,76,.1)",color:"#8a6f30",border:"1px solid rgba(201,168,76,.18)"}},"Osteology"),
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(201,168,76,.1)",color:"#8a6f30",border:"1px solid rgba(201,168,76,.18)"}},"Picture Tests")
                 ),
-                e("span",{className:"final-lap-arrow",style:{color:"#065fd4"}},"→")
+                e("span",{className:"final-lap-arrow",style:{color:"#c9a84c"}},"→")
               )
             ),
             e("div",{style:{height:1,background:"#ebebeb",margin:"4px 0"}}),
@@ -8744,7 +8858,7 @@ function App(){
                   opacity:hasContent?1:.5},
                 onMouseEnter:ev=>{if(hasContent){ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";}},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-                onClick:()=>{if(hasContent){const activeLvs=course.levels.filter(lv=>lv.blocks.some(b=>b.subject===subj.id&&b.available&&b.questions.length>0));setPreclinSubject(subj);setPreclinLevel(activeLvs.length===1?activeLvs[0]:null);}}},
+                onClick:()=>{if(hasContent){const allBlocks=course.levels.flatMap(lv=>lv.blocks.filter(b=>b.subject===subj.id));const syntheticLevel={id:"all_"+subj.id,label:subj.label,blocks:allBlocks};setPreclinSubject(subj);setPreclinLevel(syntheticLevel);}}},
                 e("div",{style:{flex:1}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:th.text}},subj.label),
@@ -8772,6 +8886,26 @@ function App(){
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"28px 20px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            /* ── Physiology Exam Notes card — only shown under Physiology ── */
+            preclinSubject?.id==="physiology"&&e("div",{className:"final-lap-card fade-up",style:{animationDelay:"0ms"},
+              onClick:()=>{ setReadingContext("physiology"); paywallDismissedRef.current=false; setShowPayDetails(false); setReadingFontStep(1); pushView("reading_view"); }},
+              e("div",{className:"final-lap-card-top",style:{background:"linear-gradient(135deg,#fefcff,#f0f7ff)"}},
+                e("div",{style:{display:"flex",alignItems:"center",gap:6,marginBottom:8}},
+                  e("div",{className:"final-lap-badge",style:{background:"rgba(6,95,212,.1)",border:"1px solid rgba(6,95,212,.2)",color:"#065fd4",marginBottom:0}},"✦ Premium"),
+                  e("div",{style:{display:"inline-flex",alignItems:"center",background:"rgba(46,125,50,.1)",border:"1px solid rgba(46,125,50,.2)",color:"#2e7d32",fontSize:".6rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",padding:"2px 9px",borderRadius:20,lineHeight:1,flexShrink:0}},"Frequently Updated")
+                ),
+                e("div",{className:"final-lap-title"},"Physiology Exam Notes"),
+                e("div",{className:"final-lap-subtitle"},"Exam-focused notes from Sembulingam")
+              ),
+              e("div",{className:"final-lap-card-bottom",style:{background:"#fafcff",borderTop:"1px solid rgba(6,95,212,.1)"}},
+                e("div",{className:"final-lap-pills"},
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Sembulingam"),
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Physiology")
+                ),
+                e("span",{className:"final-lap-arrow",style:{color:"#065fd4"}},"→")
+              )
+            ),
+            preclinSubject?.id==="physiology"&&e("div",{style:{height:1,background:"#ebebeb",margin:"4px 0"}}),
             allSubjectQs.length>0&&e("div",{className:"fade-up",
               style:{background:th.surface,borderRadius:6,padding:"17px 20px",
                 display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
@@ -8825,11 +8959,33 @@ function App(){
     // ── PRECLINICAL: screen 3 — topic list for selected subject + level ──────
     if(course.isPreclinical && preclinSubject && preclinLevel){
       const ANATOMY_TYPES=["Gross Anatomy","Histology","Embryology"];
+      const allSubjQs=preclinLevel.blocks.filter(b=>b.subject===preclinSubject.id&&b.available&&b.questions.length>0).flatMap(b=>b.questions);
       return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
-        preclinHeader(preclinSubject.label,preclinLevel.label,()=>setPreclinLevel(null)),
+        preclinHeader(preclinSubject.label,null,()=>{setPreclinSubject(null);setPreclinLevel(null);}),
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            /* ── All Subject Questions unified card ── */
+            allSubjQs.length>0&&e("div",{className:"fade-up",
+              style:{background:"linear-gradient(135deg,"+(course.accent||"#c9a84c")+"18,"+(course.accent||"#c9a84c")+"06)",
+                borderRadius:8,padding:"20px 22px",display:"flex",alignItems:"center",
+                justifyContent:"space-between",gap:12,
+                boxShadow:"0 3px 16px rgba(15,39,68,.1)",cursor:"pointer",
+                border:"1.5px solid "+(course.accent||"#c9a84c")+"44",
+                borderLeft:"4px solid "+(course.accent||"#c9a84c"),
+                transition:"transform .18s,box-shadow .18s"},
+              onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
+              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
+              onClick:()=>{
+                const unified={id:"unified_"+preclinSubject.id,name:"All "+preclinSubject.label+" Questions",questions:allSubjQs,available:true,isUnified:true};
+                setBlock(unified);setQCount(Math.min(20,allSubjQs.length));pushView("setup");
+              }},
+              e("div",{style:{flex:1}},
+                e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"All "+preclinSubject.label+" Questions"),
+                e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},allSubjQs.length+" questions total")
+              ),
+              e("span",{style:{color:course.accent||"#c9a84c",fontSize:"1.4rem"}},"→")
+            ),
             preclinSubject.id==="anatomy"
               ? ANATOMY_TYPES.map((atype,ati)=>{
                   const typeBlocks=preclinLevel.blocks
@@ -9542,6 +9698,7 @@ function App(){
                       e("option",{value:"GEN"},"GEN — General Question Bank"),
                       e("option",{value:"SUB"},"SUB — Subspecialties (IU)"),
                       e("option",{value:"PEN"},"PEN — Physiology Exam Notes"),
+                      e("option",{value:"STP"},"STP — Steeplechase"),
                       e("option",{value:"DEMO"},"DEMO — Demo / Test")
                     )
                   ),
