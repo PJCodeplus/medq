@@ -82,7 +82,7 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 .rdr-progress{height:100%;background:linear-gradient(90deg,#c9a84c,#a78bfa);width:0%;transition:width .15s}
 
 /* Body */
-.rdr-body{max-width:680px;margin:0 auto;padding:32px 18px 140px;font-size:.97rem;line-height:1.8}
+.rdr-body{max-width:680px;margin:0 auto;padding:32px 18px 40px;font-size:.97rem;line-height:1.8}
 .rdr-body.fs-sm{font-size:.87rem}
 .rdr-body.fs-md{font-size:.97rem}
 .rdr-body.fs-lg{font-size:1.08rem}
@@ -135,10 +135,10 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 /* ── PAYWALL ── */
 @keyframes rdrSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 .rdr-paywall{position:fixed;bottom:0;left:0;right:0;z-index:500;pointer-events:all;transform:translateY(110%);will-change:transform}
-.rdr-paywall.is-inline{position:static;pointer-events:auto;margin-top:-40px;opacity:0;transition:opacity .5s ease}
+.rdr-paywall.is-inline{position:static;pointer-events:auto;margin-top:-120px;opacity:0;transition:opacity .5s ease}
 .rdr-paywall.is-inline.pw-visible{opacity:1}
 .rdr-paywall.is-inline.pw-visible .rdr-pw-card{animation:rdrSlideUp .4s cubic-bezier(.4,0,.2,1) both}
-.rdr-pw-fade{height:200px;background:linear-gradient(to bottom,transparent,var(--pw-bg,#fafafa));pointer-events:none}
+.rdr-pw-fade{height:180px;background:linear-gradient(to bottom,transparent,var(--pw-bg,#fafafa));pointer-events:none}
 .rdr-paywall.is-inline .rdr-pw-fade{margin-top:-160px;position:relative}
 
 .rdr-pw-card{background:var(--pw-card,#fff);border-top:3px solid;border-image:linear-gradient(90deg,#c9a84c,#7c3aed,#c9a84c) 1;box-shadow:0 -12px 50px rgba(15,39,68,.18);padding:20px 20px 28px}
@@ -8965,6 +8965,26 @@ function App(){
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+course.accent+","+course.accent+"88)"}}),
         e("div",{style:{maxWidth:720,margin:"0 auto",padding:"20px 20px 28px"}},
           e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            /* ── Physiology Exam Notes card — only under Physiology ── */
+            preclinSubject.id==="physiology"&&e("div",{className:"final-lap-card fade-up",style:{animationDelay:"0ms"},
+              onClick:()=>{ setReadingContext("physiology"); paywallDismissedRef.current=false; setShowPayDetails(false); setReadingFontStep(1); pushView("reading_view"); }},
+              e("div",{className:"final-lap-card-top",style:{background:"linear-gradient(135deg,#fefcff,#f0f7ff)"}},
+                e("div",{style:{display:"flex",alignItems:"center",gap:6,marginBottom:8}},
+                  e("div",{className:"final-lap-badge",style:{background:"rgba(6,95,212,.1)",border:"1px solid rgba(6,95,212,.2)",color:"#065fd4",marginBottom:0}},"✦ Premium"),
+                  e("div",{style:{display:"inline-flex",alignItems:"center",background:"rgba(46,125,50,.1)",border:"1px solid rgba(46,125,50,.2)",color:"#2e7d32",fontSize:".6rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",padding:"2px 9px",borderRadius:20,lineHeight:1,flexShrink:0}},"Frequently Updated")
+                ),
+                e("div",{className:"final-lap-title"},"Physiology Exam Notes"),
+                e("div",{className:"final-lap-subtitle"},"Exam-focused notes from Sembulingam")
+              ),
+              e("div",{className:"final-lap-card-bottom",style:{background:"#fafcff",borderTop:"1px solid rgba(6,95,212,.1)"}},
+                e("div",{className:"final-lap-pills"},
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Sembulingam"),
+                  e("div",{className:"final-lap-pill",style:{background:"rgba(6,95,212,.08)",color:"#065fd4",border:"1px solid rgba(6,95,212,.12)"}},"Physiology")
+                ),
+                e("span",{className:"final-lap-arrow",style:{color:"#065fd4"}},"\u2192")
+              )
+            ),
+            preclinSubject.id==="physiology"&&e("div",{style:{height:1,background:"#ebebeb",margin:"4px 0"}}),
             /* ── All Subject Questions unified card ── */
             allSubjQs.length>0&&e("div",{className:"fade-up",
               style:{background:"linear-gradient(135deg,"+(course.accent||"#c9a84c")+"18,"+(course.accent||"#c9a84c")+"06)",
