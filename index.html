@@ -14871,7 +14871,7 @@ function App(){
             allJuniorQs.length>1&&e("div",{className:"fade-up",
               style:{background:"linear-gradient(135deg,#c9a84c18,#c9a84c06)",borderRadius:8,padding:"20px 22px",
                 border:"1.5px solid #c9a84c33",cursor:"pointer",transition:"box-shadow .18s"},
-              onClick:()=>{ setQs(allJuniorQs.sort(()=>Math.random()-.5)); setQIdx(0); setSelected(null); setShowExp(false); setScore(0); setTotal(allJuniorQs.length); pushView("quiz"); }},
+              onClick:()=>{ setQs([...allJuniorQs].sort(()=>Math.random()-.5)); setQIdx(0); setPicked(null); setShowFb(false); correctRef.current=0; answeredRef.current=0; userAnswersRef.current=[]; pushView("quiz"); }},
               e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between"}},
                 e("div",null,
                   e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#8a6430",marginBottom:4}},"All Junior Posting Questions"),
@@ -14895,7 +14895,7 @@ function App(){
                     topicBlocks.map((b,bi)=>
                       e("div",{key:bi,className:"fl-sub-card fade-up",
                         style:{animationDelay:(ci*50+bi*30)+"ms"},
-                        onClick:()=>{ setQs([...b.questions].sort(()=>Math.random()-.5)); setQIdx(0); setSelected(null); setShowExp(false); setScore(0); setTotal(b.questions.length); pushView("quiz"); }},
+                        onClick:()=>{ setQs([...b.questions].sort(()=>Math.random()-.5)); setQIdx(0); setPicked(null); setShowFb(false); correctRef.current=0; answeredRef.current=0; userAnswersRef.current=[]; pushView("quiz"); }},
                         e("div",{style:{flex:1,minWidth:0}},
                           e("span",{className:"fl-sub-label"},b.name),
                           e("p",{className:"fl-sub-desc"},b.questions.length+" questions")
