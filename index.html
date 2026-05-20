@@ -14871,7 +14871,7 @@ function App(){
             allJuniorQs.length>1&&e("div",{className:"fade-up",
               style:{background:"linear-gradient(135deg,#c9a84c18,#c9a84c06)",borderRadius:8,padding:"20px 22px",
                 border:"1.5px solid #c9a84c33",cursor:"pointer",transition:"box-shadow .18s"},
-              onClick:()=>{ const _qs=[...allJuniorQs].sort(()=>Math.random()-.5); qsRef.current=_qs; courseRef.current=course; blockRef.current={name:"All Junior Posting Questions"}; topicRef.current=null; setQs(_qs); setQIdx(0); setPicked(null); setShowFb(false); setEndConfirm(false); correctRef.current=0; answeredRef.current=0; userAnswersRef.current=[]; setRetakeMode(false); pushView("quiz"); }},
+              onClick:()=>{ setBlock({name:"All Junior Posting Questions",questions:allJuniorQs,_isJunior:true}); setQCount(Math.min(allJuniorQs.length,20)); pushView("setup"); }},
               e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between"}},
                 e("div",null,
                   e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:"#8a6430",marginBottom:4}},"All Junior Posting Questions"),
@@ -14895,7 +14895,7 @@ function App(){
                     topicBlocks.map((b,bi)=>
                       e("div",{key:bi,className:"fl-sub-card fade-up",
                         style:{animationDelay:(ci*50+bi*30)+"ms"},
-                        onClick:()=>{ const _qs=[...b.questions].sort(()=>Math.random()-.5); qsRef.current=_qs; courseRef.current=course; blockRef.current=b; topicRef.current={label:b.topic||b.name}; setQs(_qs); setQIdx(0); setPicked(null); setShowFb(false); setEndConfirm(false); correctRef.current=0; answeredRef.current=0; userAnswersRef.current=[]; setRetakeMode(false); pushView("quiz"); }},
+                        onClick:()=>{ setBlock({...b,_isJunior:true}); setQCount(Math.min(b.questions.length,20)); pushView("setup"); }},
                         e("div",{style:{flex:1,minWidth:0}},
                           e("span",{className:"fl-sub-label"},b.name),
                           e("p",{className:"fl-sub-desc"},b.questions.length+" questions")
@@ -15913,9 +15913,16 @@ function App(){
           {label:"Past Questions",desc:"Past questions with explanations",live:false},
           {label:"Picture MCQs",desc:"Image-based MCQs",live:false},
         ]
-      : [
+      : isSurgery
+      ? [
           {label:"Junior Posting MCQs",desc:"High yield junior posting MCQs",live:false},
           {label:"Senior Posting MCQs",desc:"High yield senior posting MCQs",live:true,action:"senior_posting"},
+          {label:"Past Questions",desc:"Past questions with explanations",live:false},
+          {label:"Picture MCQs",desc:"Image-based MCQs",live:false},
+        ]
+      : [
+          {label:"Junior Posting MCQs",desc:"High yield junior posting MCQs",live:false},
+          {label:"Senior Posting MCQs",desc:"High yield senior posting MCQs",live:false},
           {label:"Past Questions",desc:"Past questions with explanations",live:false},
           {label:"Picture MCQs",desc:"Image-based MCQs",live:false},
         ];
@@ -15956,8 +15963,9 @@ function App(){
         e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
           tflCards.map((sc,i)=>{
             const isLiveAndUnlocked=isUnlocked&&sc.live;
-            const isComingSoon=isUnlocked&&!sc.live;
+            const isComingSoon=!sc.live; // coming soon for everyone — no content yet
             const handleClick=()=>{
+              if(isComingSoon) return; // no content — do nothing
               if(!isUnlocked){ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); return; }
               if(sc.action==="senior_posting"){ setShowSeniorPosting(true); pushView("blocks"); }
               if(sc.action==="junior_posting"){ setShowJuniorPosting(true); pushView("blocks"); }
@@ -15972,7 +15980,7 @@ function App(){
                 ),
                 e("p",{className:"fl-sub-desc"},sc.desc)
               ),
-              (isLiveAndUnlocked||!isUnlocked)&&e("span",{style:{color:accentCol,fontSize:"1rem",flexShrink:0}},"→")
+              isLiveAndUnlocked&&e("span",{style:{color:accentCol,fontSize:"1rem",flexShrink:0}},"→")
             );
           })
         )
