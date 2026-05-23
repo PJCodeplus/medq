@@ -13900,6 +13900,1028 @@ const SURG_SENIOR_BLOCKS=[
   { id:"neuro_surg", name:"Neurosurgery", questions:[], available:false },
   { id:"vasc", name:"Vascular Surgery", questions:[], available:false },
 ];
+/* ── Ohanaka MCQs blocks ── */
+const OHANAKA_Qs=[
+  {
+    q: "Which of the following is NOT a recognised phase of wound healing?",
+    opts: ["Haemostatic phase", "Inflammatory phase", "Proliferative phase", "Maturation and remodeling phase", "Haemolytic phase"],
+    ans: 4,
+    exp: "Haemolytic phase is not a recognised phase of wound healing. The four accepted phases are haemostasis, inflammation, proliferation, and maturation/remodelling. Haemolysis refers to red blood cell destruction and has no role as a defined phase of the healing process."
+  },
+  {
+    q: "Healing by first intention means",
+    opts: ["Using catgut in wound closure", "Obtaining union between two wound edges without subsequent breakdown", "The immediate use of a plastic dressing", "The method whereby an ulcer heals", "Using silk suture"],
+    ans: 1,
+    exp: "Healing by first intention describes direct union of two apposed wound edges without breakdown or significant gap — typically a sutured, clean incised wound with minimal scarring. It is defined by the outcome (clean union), not by the suture material used."
+  },
+  {
+    q: "Healing of a wound by first intention occurs when",
+    opts: ["There is a sutured clean incised wound", "There is no bacterial contact with the wound", "Antibiotics are used in lacerated wounds", "The wound is along Langer's lines", "Oedema and swelling are absent during healing"],
+    ans: 0,
+    exp: "Healing by first intention requires direct apposition of wound edges — as in a sutured, clean incised wound. The absence of bacteria or oedema alone does not define this type of healing; it is the clean apposition and primary closure that characterises it."
+  },
+  {
+    q: "Which of the following is captured among the principles of wound closure?",
+    opts: ["Delayed primary closure of a wound only applies to gunshot and missile injuries", "Skin grafting is a method of wound closure which can be used as a primary treatment of a wound", "Secondary suturing is really the same as delayed primary closure", "Incised wounds are closed by primary suturing", "Incised wounds are closed by secondary suturing"],
+    ans: 3,
+    exp: "Incised wounds are clean, well-defined wounds suitable for primary suturing. Delayed primary closure applies broadly to contaminated or high-risk wounds, not only to missile injuries. Secondary suturing differs from delayed primary closure in timing and wound condition."
+  },
+  {
+    q: "Which of the following factors does NOT affect wound healing?",
+    opts: ["Height", "Age", "Ascorbic acid deficiency", "Surgical techniques", "Diabetes mellitus"],
+    ans: 0,
+    exp: "Height has no bearing on wound healing. Recognised factors that impair healing include advancing age, ascorbic acid (vitamin C) deficiency (which is required for collagen synthesis), poor surgical technique, diabetes mellitus, infection, obesity, malignancy, anaemia, and malnutrition."
+  },
+  {
+    q: "Which of the following statements about wound healing is true?",
+    opts: ["Healing can only occur with surgical intervention", "Primary healing usually occurs when there is skin loss", "Primary healing is usually associated with significant scarring", "In healing by secondary intention, granulation tissue formation is minimal", "The process of healing by secondary intention is longer than by first intention"],
+    ans: 4,
+    exp: "Secondary intention healing involves granulation tissue formation, contraction, and epithelialisation across an open wound — a slower process than the direct apposition of primary (first intention) healing. Primary healing produces minimal scarring, not significant scarring, and does not require skin loss."
+  },
+  {
+    q: "Concerning wounds and wound healing, which statement is correct?",
+    opts: ["In untidy wounds, tendons, arteries and nerves may be exposed", "The correct management of an untidy wound is copious saline irrigation, antibiotic cover, and primary closure as soon as possible", "Tidy wounds can be closed primarily but healing is by secondary intention", "Secondary healing produces a scar which draws the wound edges closer", "Untidy wounds are produced by careless and inexperienced surgeons"],
+    ans: 1,
+    exp: "The correct management of an untidy wound includes thorough irrigation with normal saline to reduce bacterial load, antibiotic cover, and primary closure once the wound is deemed clean. Tidy wounds closed primarily heal by first intention, not secondary intention. Untidy wounds result from the nature of the injury, not surgical inexperience."
+  },
+  {
+    q: "Regarding the Ebb phase of the metabolic response to injury, which statement is correct?",
+    opts: ["Aims at maintaining perfusion to vital organs", "Increases energy consumption and urinary nitrogen excretion", "Release of ADH and aldosterone reduce the reabsorption of water and salt from the renal tubules", "Release of catecholamines results in peripheral vasodilatation", "Reduced insulin secretion by the pancreas results in hypoglycaemia"],
+    ans: 0,
+    exp: "The Ebb phase is the immediate post-injury phase characterised by reduced metabolic activity aimed at preserving perfusion to vital organs. It is followed by the Flow phase, which features increased energy consumption, nitrogen excretion, and the catabolic hormonal response. ADH and aldosterone increase (not decrease) water and salt reabsorption."
+  },
+  {
+    q: "The maximal rate of increase in the tensile strength of a healing wound occurs from",
+    opts: ["Zero to 4 days", "7 to 17 days", "4 to 7 days", "17 to 35 days", "45 days to 2 years"],
+    ans: 2,
+    exp: "The steepest rise in wound tensile strength occurs between days 4 and 7, coinciding with the peak of fibroblast activity and collagen deposition during the proliferative phase. From days 17 to 35 there is continued but slower strengthening, and full maturation extends to 2 years."
+  },
+  {
+    q: "Regarding burst abdomen (wound dehiscence), which statement is correct?",
+    opts: ["Carries a mortality of greater than 20%", "Should not be resutured due to risk of infection", "Is complicated by incisional hernia in 5% of cases", "Is seldom characterised by a peritoneal serous discharge", "Usually occurs during the 1st and 2nd postoperative days"],
+    ans: 0,
+    exp: "Burst abdomen carries a mortality exceeding 20%, primarily due to the underlying conditions that precipitate it (e.g. sepsis, malnutrition) and the physiological insult of re-operation. It should be resutured urgently. It is complicated by incisional hernia in up to 30–50% of cases and is characteristically preceded by a serosanguinous peritoneal discharge. It most commonly occurs between days 7–10 postoperatively."
+  },
+  {
+    q: "The most frequent amino acid in collagen is",
+    opts: ["Proline", "Hydroxyproline", "Lysine", "Glycine", "Methionine"],
+    ans: 3,
+    exp: "Glycine is the most abundant amino acid in collagen, accounting for approximately one-third of all residues (every third position in the triple helix is glycine). Hydroxyproline is the second most common and is unique to collagen, making it a useful biochemical marker of collagen metabolism."
+  },
+  {
+    q: "Which of the following is NOT a systemic factor that adversely affects wound healing?",
+    opts: ["Young age", "Malnutrition: deficiency and obesity", "Diabetes mellitus", "Malignancy", "Corticosteroids"],
+    ans: 0,
+    exp: "Young age actually favours wound healing — it is advancing age that impairs it. All other listed options are recognised systemic factors that adversely affect healing: malnutrition impairs collagen synthesis, diabetes causes microangiopathy and impaired neutrophil function, malignancy depletes protein stores, and corticosteroids suppress inflammation and fibroblast activity."
+  },
+  {
+    q: "Which of the following positively influences the metabolic response to trauma?",
+    opts: ["Surgical technique such as minimal access surgery", "Spinal anaesthesia", "Hypothermia", "Minimal dose of analgesia", "Delayed mobilization"],
+    ans: 0,
+    exp: "Minimal access surgery (laparoscopic/minimally invasive technique) reduces the degree of tissue trauma and therefore attenuates the surgical stress response, resulting in a less pronounced metabolic response. Hypothermia, inadequate analgesia, and delayed mobilisation all increase the metabolic burden. Epidural (not spinal) anaesthesia has a modulating effect on the stress response."
+  },
+  {
+    q: "Which of the following is a factor that delays wound healing?",
+    opts: ["Massive blood transfusion during an operation", "Vitamin D deficiency", "Hypertension", "Hypotension", "Prolonged steroid administration"],
+    ans: 4,
+    exp: "Prolonged steroid administration impairs wound healing by suppressing the inflammatory phase, reducing fibroblast proliferation, and inhibiting collagen synthesis. Vitamin C (not D) deficiency impairs collagen hydroxylation. Hypotension and massive transfusion may impair healing indirectly but are not primary factors in the way steroids are."
+  },
+  {
+    q: "Which of the following is NOT a complication of wound healing?",
+    opts: ["Wound dehiscence", "Surgical site infection", "Burst abdomen", "Umbilical hernia", "Keloids and hypertrophic scars"],
+    ans: 3,
+    exp: "Umbilical hernia is a congenital or acquired abdominal wall defect and is not a complication of the wound healing process per se. Wound dehiscence, surgical site infection, burst abdomen, and keloid/hypertrophic scar formation are all direct complications of wound healing."
+  },
+  {
+    q: "Debridement of a wound means",
+    opts: ["Excising 1 mm skin from the edges of the wound", "Not excising skin but excising all damaged tissue", "Laying open all layers of a wound", "Delayed primary closure", "Early primary closure"],
+    ans: 2,
+    exp: "Debridement refers to laying open all layers of a wound and excising devitalised, contaminated, or necrotic tissue to create a clean wound bed. It involves skin excision as necessary, not the preservation of skin. It is a prerequisite to closure — whether primary, delayed primary, or secondary — not closure itself."
+  },
+  {
+    q: "Regarding protein metabolism in trauma, which statement is correct?",
+    opts: ["Proteolysis results in a daily weight loss of about 5%/day", "Vital organs like the liver and kidneys are not spared in the effect of trauma on protein metabolism", "Protein degradation is lower in sepsis than in trauma", "Protein degradation occurs at the same rate in sepsis and trauma", "Muscle catabolism is reduced by the administration of adequate nutritional support during the flow phase"],
+    ans: 4,
+    exp: "During the Flow phase, adequate nutritional support reduces but does not completely abolish the obligatory muscle catabolism driven by the neuroendocrine stress response. Protein degradation is greater in sepsis than in uncomplicated trauma. Vital organs including the liver and kidneys are involved in the metabolic response, and the liver particularly increases acute-phase protein synthesis."
+  },
+  {
+    q: "Which of the following is NOT true of the magnitude of the metabolic response to trauma?",
+    opts: ["Type of surgery", "Extent of trauma and degree of resuscitation", "Haemorrhage", "Preoperative nutritional status", "Least with spinal anaesthesia"],
+    ans: 4,
+    exp: "The metabolic response to trauma is least with epidural anaesthesia, not spinal anaesthesia. Epidural blockade at the appropriate dermatome level effectively attenuates the afferent neural arc of the stress response. Other factors that influence the magnitude include type and extent of surgery, degree of haemorrhage, adequacy of resuscitation, and preoperative nutritional status."
+  },
+  {
+    q: "In early post-traumatic state, the tendency in acid-base balance is for",
+    opts: ["Metabolic alkalosis", "Metabolic and respiratory alkalosis", "Respiratory acidosis", "Respiratory alkalosis", "Metabolic acidosis"],
+    ans: 4,
+    exp: "Early post-traumatic metabolic acidosis results from tissue hypoperfusion and anaerobic metabolism, leading to lactate accumulation. This is a key indicator of inadequate resuscitation. Respiratory alkalosis may also occur reflexively, but the predominant primary disturbance in early trauma is metabolic acidosis."
+  },
+  {
+    q: "Which of the following contributes to the increased urine osmolality following trauma?",
+    opts: ["Increased sodium excretion", "Increased phosphate, potassium, sodium and urea excretion", "Increased urea excretion", "Increased water excretion", "Increased water and sodium reabsorption"],
+    ans: 4,
+    exp: "Following trauma, ADH (vasopressin) promotes water reabsorption and aldosterone promotes sodium reabsorption in the renal tubules. Together, they produce concentrated urine with high osmolality. This is part of the body's volume-conserving response to injury and potential haemorrhage."
+  },
+  {
+    q: "Which of the following statements is true of intravenous infusion?",
+    opts: ["4.3% dextrose/0.18 normal saline is the infusion of choice in children and the elderly", "Ringer's lactate is a colloid", "Normal saline is an osmotic diuretic", "Dextran is a crystalloid while haemacel is a colloid", "Mannitol is a colloid"],
+    ans: 0,
+    exp: "4.3% dextrose in 0.18% normal saline (also called 'dextrose-saline') is the standard maintenance fluid in children and the elderly, providing free water with a small sodium load. Ringer's lactate and normal saline are both crystalloids. Dextran and haemacel are both colloids. Mannitol is an osmotic diuretic, not a colloid."
+  },
+  {
+    q: "Which of the following is NOT a complication of intravenous infusion?",
+    opts: ["Air embolism", "Circulatory overload", "Myocardial infarction", "Septicaemia", "Thrombophlebitis"],
+    ans: 2,
+    exp: "Myocardial infarction is not a recognised direct complication of intravenous infusion. Recognised complications include air embolism, circulatory overload (particularly with large volumes), septicaemia from catheter-related bloodstream infection, and thrombophlebitis at the cannula site."
+  },
+  {
+    q: "Hyperkalaemia may result from the following EXCEPT",
+    opts: ["Crush injury of the leg", "Blood transfusion", "Massive dextrose/saline infusion", "Retroperitoneal haematoma", "Darrow's solution"],
+    ans: 2,
+    exp: "Massive dextrose/saline infusion does not cause hyperkalaemia — it provides glucose and sodium without potassium. Crush injury releases intracellular potassium from damaged myocytes. Stored blood releases potassium over time. Retroperitoneal haematoma causes haemolysis with potassium release. Darrow's solution contains potassium and can contribute to hyperkalaemia."
+  },
+  {
+    q: "Which of the following statements is NOT true regarding the calculation of the rate of flow of intravenous infusion?",
+    opts: ["Standard infusion set administers 1ml in 15 drops", "Volume of IV fluid in litres in 24 hours × 10 = drops per minute", "With the microdrip set, 60 drops = 1ml", "With the microdrip set, drops per minute = volume in mls per hour", "Standard infusion set administers 2 mls in 15 drops"],
+    ans: 4,
+    exp: "A standard IV infusion set delivers 15 drops per 1 ml — not 2 mls per 15 drops. The microdrip (paediatric) set delivers 60 drops per ml, which conveniently means the drop rate in drops/minute equals the volume in ml/hour. The formula (litres/24hrs × 10 = drops/min) applies to the standard set."
+  },
+  {
+    q: "Which of the following is NOT in line with recommended perioperative fluid therapy?",
+    opts: ["There should be restriction of salt intake in the immediate postoperative period", "Fluid deficit during starvation = duration of starvation in hours × 2 × weight in kg", "Maintenance volume during surgery = duration of surgery in hours × 2 × weight in kg", "Degree of intraoperative fluid loss is related to the degree of trauma", "Normal saline is used as maintenance fluid in the immediate postoperative period"],
+    ans: 4,
+    exp: "Normal saline is not recommended as a sole maintenance fluid postoperatively — prolonged use causes hyperchloraemic metabolic acidosis. The recommended postoperative maintenance fluid is typically a dextrose/saline combination. Salt restriction in the immediate postoperative period is appropriate given ADH and aldosterone-mediated retention. Intraoperative losses are proportional to surgical trauma."
+  },
+  {
+    q: "A patient with long-lasting intestinal obstruction is likely to develop which electrolyte anomaly?",
+    opts: ["Hypokalaemic, hypernatraemic metabolic acidosis", "Hypokalaemic, hypernatraemic metabolic alkalosis", "Hypokalaemic, hyponatraemic metabolic acidosis", "Hyperkalaemic, hypernatraemic metabolic acidosis", "Hypokalaemic, hyponatraemic metabolic alkalosis"],
+    ans: 2,
+    exp: "Prolonged intestinal obstruction leads to sequestration of fluid rich in sodium and potassium into the bowel lumen (third spacing), causing hyponatraemia and hypokalaemia. Lactic acidosis from bowel ischaemia contributes to the metabolic acidosis. This combination — hypokalaemic, hyponatraemic metabolic acidosis — reflects both fluid losses and tissue hypoperfusion."
+  },
+  {
+    q: "The following are true of the systemic effects of shock EXCEPT",
+    opts: ["Decreased cardiac output results from a reduction in venous return", "Tachycardia and generalised vasoconstriction result from the release of cortisol", "Reduction in urinary output is due to diminution in renal blood flow", "Increased reabsorption of water from the renal tubules is due to the release of ADH", "Increased reabsorption of water and sodium from the renal tubules is due to activation of the renin-angiotensin-aldosterone system"],
+    ans: 1,
+    exp: "Tachycardia and generalised vasoconstriction in shock are mediated by catecholamines (adrenaline and noradrenaline), not cortisol. Cortisol contributes to the metabolic and immunological response to stress. ADH mediates water reabsorption, and the renin-angiotensin-aldosterone system mediates sodium and water retention — both correct."
+  },
+  {
+    q: "In the fluid management of hypovolaemic shock, which of the following is NOT an important clinical monitoring parameter?",
+    opts: ["Peripheral oxygen saturation", "Urinary output", "Temperature", "Pulse rate", "Cardiac output"],
+    ans: 4,
+    exp: "Cardiac output measurement (e.g. via pulmonary artery catheter) is not a routine bedside parameter for monitoring hypovolaemic shock — it requires invasive monitoring typically reserved for ICU settings. Standard monitoring parameters include oxygen saturation, urine output (targeting ≥0.5 ml/kg/hr), temperature, pulse rate, and blood pressure."
+  },
+  {
+    q: "Which of the following statements is WRONG in respect of cardiogenic shock?",
+    opts: ["Intrinsic causes include cardiac tamponade", "Intrinsic causes include myocardial infarction and cardiomyopathy", "Extrinsic cardiogenic shock is also referred to as obstructive shock", "Tension pneumothorax is a cause of extrinsic cardiogenic shock", "Tension pneumothorax is a cause of extrinsic cardiogenic shock"],
+    ans: 0,
+    exp: "Cardiac tamponade is a classical example of extrinsic (obstructive) cardiogenic shock — it compresses the heart from outside. Intrinsic cardiogenic shock arises from primary myocardial failure, such as myocardial infarction or cardiomyopathy. Tension pneumothorax impairs venous return and is also classified as extrinsic/obstructive."
+  },
+  {
+    q: "Which of the following statements is true of haemorrhage?",
+    opts: ["Is primary when it occurs about 24 hours after surgery", "Is reactionary if it occurs during surgery", "Is secondary if it occurs within the second week of surgery", "May result in shock if less than 500 mls of blood is lost", "May result in shock if less than 200 mls of blood is lost"],
+    ans: 2,
+    exp: "Secondary haemorrhage occurs approximately 7–14 days after surgery due to infection and vessel wall erosion. Primary haemorrhage occurs at the time of surgery (not 24 hours later). Reactionary haemorrhage occurs within the first 24 hours, typically when blood pressure rises and dislodges a clot. Shock generally requires loss of more than 1000–1500 ml (Class III haemorrhage)."
+  },
+  {
+    q: "The percentage of circulating blood volume in the venous system and splanchnic vessels is normally between",
+    opts: ["20%–30%", "40%–50%", "60%–70%", "70%–80%", "10%–20%"],
+    ans: 2,
+    exp: "Approximately 60–70% of the total circulating blood volume is contained within the venous system and splanchnic vessels at any given time. This large venous capacitance allows for significant volume shifts and is why venoconstriction is an important early compensatory mechanism in haemorrhagic shock."
+  },
+  {
+    q: "Sudden hypovolaemia is responsible for the release of",
+    opts: ["Testosterone", "Angiosterone", "Aldosterone", "Tryptophan", "Serotonin"],
+    ans: 2,
+    exp: "Sudden hypovolaemia activates the renin-angiotensin-aldosterone system. Reduced renal perfusion pressure triggers renin release, which converts angiotensinogen to angiotensin I, then angiotensin II, which stimulates the adrenal cortex to release aldosterone. Aldosterone promotes sodium and water retention to restore circulating volume."
+  },
+  {
+    q: "Routine monitoring of a patient in shock will include the following EXCEPT",
+    opts: ["Pulse oximetry", "Pulse and blood pressure", "Hourly urinary output", "Central venous pressure", "Random blood sugar"],
+    ans: 4,
+    exp: "Random blood sugar is not a standard parameter in routine shock monitoring. Core monitoring parameters include pulse oximetry (tissue oxygenation), pulse and blood pressure (haemodynamic status), hourly urine output (renal perfusion), and CVP (volume status). Blood glucose may be relevant in specific contexts (e.g. diabetic patients, septic shock) but is not routine."
+  },
+  {
+    q: "Which of the following does NOT constitute a pitfall in the monitoring of a patient in shock?",
+    opts: ["Capillary refill", "Tachycardia", "Hypotension", "Urinary output", "Random blood sugar"],
+    ans: 4,
+    exp: "Random blood sugar is not a monitoring pitfall in shock assessment. The recognised pitfalls are parameters that may be misleading: capillary refill can be affected by cold or peripheral vascular disease, tachycardia has many non-hypovolaemic causes, hypotension is a late sign, and urinary output requires an accurate catheter and normal renal function to be reliable."
+  },
+  {
+    q: "In hypovolaemic shock due to acute blood loss",
+    opts: ["The CVP is high", "Fall in blood pressure is the earliest sign", "The extremities are pale, cold and sweaty", "The hourly urinary output exceeds 50ml", "The pulse rate progressively slows down"],
+    ans: 2,
+    exp: "Pale, cold, and sweaty extremities result from sympathetically mediated peripheral vasoconstriction and sweating — compensatory mechanisms to maintain core perfusion. CVP is low (not high) in hypovolaemia. Blood pressure fall is a late sign; tachycardia is earlier. Urine output falls (oliguria) in hypovolaemic shock. The pulse rate rises progressively."
+  },
+  {
+    q: "With respect to blood transfusion in hypovolaemic shock, which statement is correct?",
+    opts: ["All patients with haemorrhagic shock should have blood transfusion", "All patients with Classes II to IV blood loss will require blood transfusion", "Transfusion is only mandatory for Classes III and IV patients", "Class II haemorrhage requires blood transfusion", "Class I haemorrhage requires blood transfusion"],
+    ans: 2,
+    exp: "Blood transfusion is mandatory for Class III (30–40% blood loss) and Class IV (>40% blood loss) haemorrhage. Class I (up to 15%) and Class II (15–30%) losses are typically managed with crystalloid replacement alone. Not all patients with haemorrhagic shock require blood — clinical context, haemoglobin, and response to initial resuscitation guide the decision."
+  },
+  {
+    q: "A 25-year-old man presents to the Emergency Room after a road traffic accident with bilateral femoral fractures, BP of 70/40 mmHg and pulse rate of 140/min. The most likely diagnosis of his cardiovascular state is",
+    opts: ["Hypotonic shock", "Hypervolaemic shock", "Septic shock", "Hypovolaemic shock", "Hypoendemic shock"],
+    ans: 3,
+    exp: "Bilateral femoral fractures can each cause 1–2 litres of blood loss into the thigh compartment. Combined with a BP of 70/40 mmHg and HR of 140/min, this is a classic presentation of Class III–IV hypovolaemic shock from acute haemorrhage. Septic shock would be unlikely in this acute traumatic context without an infectious source."
+  },
+  {
+    q: "The next action in the management of this patient with bilateral femoral fractures and haemodynamic compromise is",
+    opts: ["To obtain a detailed history of the circumstances of the accident", "Send the patient for complete registration", "Obtain emergency PA chest X-rays and femoral X-rays", "Suture the wound on his scalp and biceps", "Commence rapid intravenous infusion of normal saline"],
+    ans: 4,
+    exp: "In Class III–IV haemorrhagic shock, the immediate priority is restoration of circulating volume. Rapid IV infusion of normal saline (or Ringer's lactate) should be commenced through large-bore cannulae while blood is crossmatched. History-taking, registration, and wound suturing are secondary to haemodynamic resuscitation in an unstable patient."
+  },
+  {
+    q: "If the diagnosis of hypovolaemic shock is correct in the above patient, one should expect",
+    opts: ["Elevated CVP, decreased cardiac output, and elevated PO₂", "Elevated CVP, increased cardiac output, and elevated PO₂", "Decreased CVP, decreased cardiac output, and decreased PO₂", "Decreased CVP, increased cardiac output, and decreased PO₂", "Decreased CVP, decreased cardiac output, and elevated PO₂"],
+    ans: 2,
+    exp: "In hypovolaemic shock, reduced venous return lowers preload → decreased cardiac output. Reduced CVP reflects low intravascular volume. Tissue hypoperfusion impairs oxygen delivery and utilisation, resulting in decreased PO₂. This triad — low CVP, low CO, low PO₂ — is characteristic of hypovolaemia."
+  },
+  {
+    q: "In addition to the haemodynamic findings, what else would be expected in this patient with hypovolaemic shock?",
+    opts: ["Increased cardiac output, decreased urinary output and low peripheral resistance", "Decreased cardiac output, increased urinary output, and low peripheral resistance", "Decreased cardiac output, decreased urinary output and high peripheral resistance", "Decreased cardiac output, decreased urinary output and low peripheral resistance", "Increased cardiac output, increased urinary output and increased peripheral resistance"],
+    ans: 2,
+    exp: "Sympathetic activation in hypovolaemic shock increases systemic vascular resistance (peripheral vasoconstriction) to maintain blood pressure. Decreased cardiac output and oliguria (reduced urinary output from reduced renal perfusion) complete the picture. High peripheral resistance distinguishes hypovolaemic and cardiogenic shock from distributive (e.g. septic) shock."
+  },
+  {
+    q: "After adequate hydration of this hypovolaemic shock patient, one would expect",
+    opts: ["Elevated BP, decreased CVP and high cardiac output", "Low BP, increased CVP and low cardiac output", "Low BP, low CVP and low cardiac output", "Low BP, high CVP and high cardiac output", "Elevated BP, low CVP and high cardiac output"],
+    ans: 0,
+    exp: "Successful volume resuscitation restores preload → increased cardiac output → elevated blood pressure. However, CVP does not rise dramatically with adequate resuscitation in a normovolaemic patient — it returns toward normal rather than becoming elevated. This triad of elevated BP, normalised CVP, and high cardiac output confirms adequate resuscitation."
+  },
+  {
+    q: "An important corrective mechanism called into play by the body in hypovolaemia is",
+    opts: ["Vasopressin-hypopressor mechanism", "Renotensin-venotensin mechanism", "Renin-vagotensin mechanism", "Renin-angiotensin mechanism", "Renin-aldotensin mechanism"],
+    ans: 3,
+    exp: "The renin-angiotensin mechanism (more fully, the renin-angiotensin-aldosterone system) is the primary hormonal corrective response to hypovolaemia. Reduced renal perfusion triggers renin release, leading to angiotensin II production, which causes vasoconstriction and stimulates aldosterone secretion to retain sodium and water."
+  },
+  {
+    q: "Which of the following statements regarding shock index is FALSE?",
+    opts: ["It is the ratio of heart rate to systolic blood pressure", "It is a more sensitive indicator of occult shock", "It aids in the triage of patients in the Emergency Unit", "A high value connotes a poor prognosis", "A high value connotes a better prognosis"],
+    ans: 4,
+    exp: "A high shock index (HR/systolic BP) indicates haemodynamic compromise and connotes a poor prognosis, not a better one. Normal shock index is 0.5–0.7; values above 1.0 suggest significant physiological derangement. It is used to detect occult shock in patients who may appear normotensive but have compensated haemodynamic instability."
+  },
+  {
+    q: "Which of the following statements about modified shock index is FALSE?",
+    opts: ["Modified shock index = heart rate / mean blood pressure", "Mean blood pressure = ([diastolic blood pressure × 2] + systolic blood pressure) / 3", "Mean blood pressure = (diastolic blood pressure + systolic blood pressure) / 2", "Modified shock index = heart rate / [stroke volume × systemic vascular resistance]", "A high modified shock index signifies a state of hypodynamic circulation"],
+    ans: 1,
+    exp: "Mean arterial pressure (MAP) is correctly calculated as ([diastolic BP × 2] + systolic BP) / 3. The formula in option 2 is correct; the error is in option 3, which incorrectly omits the weighting of diastole. A high modified shock index indicates hypodynamic circulation — reduced cardiac output relative to heart rate."
+  },
+  {
+    q: "The following definitions are correct EXCEPT",
+    opts: ["Infection: inflammatory response to organisms or invasion of normal sterile host tissue", "Sepsis: SIRS plus confirmed infective process", "Severe sepsis: SIRS plus organ dysfunction, hypotension or hypoperfusion", "Septic shock: sepsis with hypotension or hypoperfusion", "One of the parameters in SIRS is a heart rate greater than 120 beats per minute in a patient not on beta-blockers"],
+    ans: 4,
+    exp: "The heart rate criterion for SIRS is greater than 90 beats per minute (not 120) in a patient not on beta-blockers. The four SIRS criteria are: temperature >38°C or <36°C, HR >90 bpm, respiratory rate >20/min or PaCO₂ <32 mmHg, and WBC >12,000 or <4,000 cells/mm³. At least two criteria must be present."
+  },
+  {
+    q: "Which of the following statements is NOT true of Multiple Organ Dysfunction Syndrome (MODS)?",
+    opts: ["Primary MODS is a direct consequence of a specific organ insult", "There is alteration of organ function with disordered homeostasis", "In primary MODS, organ dysfunction is restricted to the specific organ", "Secondary MODS involves an organ remote from the organ of original insult", "SIRS is more pronounced in primary MODS"],
+    ans: 4,
+    exp: "SIRS is more pronounced in secondary MODS, not primary MODS. Secondary MODS develops via an amplified systemic inflammatory response affecting distant organs not directly injured. Primary MODS results from direct organ damage (e.g. acute lung injury from pulmonary contusion) and involves less systemic inflammatory activation."
+  },
+  {
+    q: "Which of the following is NOT a clinical manifestation of MODS?",
+    opts: ["Adult respiratory distress syndrome", "Acute renal failure", "Hepatitis that may culminate in cirrhosis of the liver", "Coagulopathy", "Acalculous cholecystitis"],
+    ans: 2,
+    exp: "Cirrhosis of the liver is a chronic, fibrotic end-stage liver disease that develops over years; it is not a manifestation of MODS. MODS-related hepatic dysfunction presents as acute hepatocellular injury (jaundice, elevated transaminases) — not cirrhosis. ARDS, acute renal failure, coagulopathy (DIC), and acalculous cholecystitis are all recognised manifestations."
+  },
+  {
+    q: "Which of the following does NOT increase susceptibility to SIRS?",
+    opts: ["Extremes of age", "Antibiotic therapy", "Immunosuppressive conditions", "Underlying malignancy", "Immunosuppressive therapy"],
+    ans: 1,
+    exp: "Antibiotic therapy is used to treat infections and does not predispose to SIRS; if anything, appropriate antibiotic therapy helps prevent the progression to SIRS and sepsis. Extremes of age, immunosuppressive conditions (e.g. HIV), malignancy, and immunosuppressive drugs all impair the host's ability to contain infection, increasing susceptibility to SIRS."
+  },
+  {
+    q: "Which of the following is NOT true of intraoperative blood salvage?",
+    opts: ["Autotransfusion may be carried out in management of splenic rupture and ruptured ectopic pregnancy", "A cell-saver is useful", "There is a low risk of hypothermia", "There is a low risk of transfusion reaction", "There is a reduced concentration of 2,3-DPG"],
+    ans: 4,
+    exp: "Intraoperative blood salvage maintains normal 2,3-DPG levels because the patient's own red cells are returned — unlike stored allogeneic blood, which has progressively depleted 2,3-DPG. This is an advantage of autotransfusion: the re-infused blood retains its oxygen-releasing capacity. Low risk of transfusion reaction and hypothermia are also genuine advantages."
+  },
+  {
+    q: "Which of the following conditions is NOT an indication for the administration of fresh frozen plasma (FFP)?",
+    opts: ["Replacement of coagulation factor deficiencies in liver disease", "Thrombotic thrombocytopenic purpura", "Acute haemolytic reaction", "Disseminated intravascular coagulation", "Depletion of coagulation factors in patients receiving large volume transfusion"],
+    ans: 2,
+    exp: "Acute haemolytic reaction is a transfusion complication requiring cessation of the transfusion, IV fluids, and supportive care — it is not an indication for FFP. FFP is indicated for coagulation factor replacement in liver disease, TTP (as a source of ADAMTS13), DIC, massive transfusion coagulopathy, and warfarin overdose reversal."
+  },
+  {
+    q: "Which of the following statements is NOT true as regards indications for cryoprecipitate?",
+    opts: ["Treatment of von Willebrand's disease", "To control bleeding in haemophilia", "Disseminated intravascular coagulation as a source of fibrinogen", "In surgery involving haemophiliacs", "As a supplement in a patient receiving blood transfusion"],
+    ans: 4,
+    exp: "Routine supplementation in blood transfusion recipients is not an indication for cryoprecipitate. Cryoprecipitate is rich in fibrinogen, Factor VIII, von Willebrand factor, and Factor XIII. Its specific indications are von Willebrand's disease, haemophilia A, DIC (for fibrinogen replacement), and hypofibrinogenaemia."
+  },
+  {
+    q: "Which of the following is true of blood preservation?",
+    opts: ["Citrate phosphate dextrose (CPD) is a known anticoagulant", "SAG-M can preserve blood for 2 weeks", "Blood is preserved at a temperature of between +2°C and 10°C", "Blood is preserved at a temperature of between 6°C and 8°C", "SAG-M can preserve blood for 10 weeks"],
+    ans: 0,
+    exp: "Citrate phosphate dextrose (CPD) acts as an anticoagulant by chelating calcium, which is required for the coagulation cascade. Blood is preserved at +2°C to +6°C (not 10°C or 8°C). SAG-M (saline-adenine-glucose-mannitol) extends storage to 5 weeks (35 days), not 2 or 10 weeks."
+  },
+  {
+    q: "Regarding acute normovolaemic haemodilution (ANH), which statement is correct?",
+    opts: ["Involves an on-table self-blood donation", "Replacement with crystalloids is at a ratio of 1:1 and 3:1 for colloids", "Infection is not a contraindication to ANH", "Malignancy is not a contraindication as ANH helps reduce the rate of transfusion", "Is carried out in the ward on the morning of the proposed surgical operation"],
+    ans: 0,
+    exp: "ANH involves withdrawing the patient's own blood immediately before surgery on the operating table, replacing the volume with crystalloids (1:3 ratio) or colloids (1:1 ratio), and re-infusing the stored autologous blood during or after the procedure. It is performed in theatre, not in the ward. Infection and malignancy are contraindications to ANH."
+  },
+  {
+    q: "Which of the following is NOT listed as a quality of an ideal haemostatic agent?",
+    opts: ["Minimal tissue reactivity", "Easy to sterilize", "Biodegrades in vitro", "Non-antigenic", "Easily available and affordable"],
+    ans: 2,
+    exp: "An ideal haemostatic agent should biodegrade in vivo (inside the body), not in vitro. In vitro biodegradation would mean the agent breaks down outside the body before it can be used. Other desirable qualities include minimal tissue reactivity, easy sterilisation, non-antigenicity, and ready availability."
+  },
+  {
+    q: "Which of the following is NOT a topical haemostatic agent?",
+    opts: ["Gelfoam (absorbable gelatin sponge)", "Microfibrillar collagen", "Surgicel (oxidised regenerated cellulose)", "Adrenaline", "Balloon tamponade"],
+    ans: 4,
+    exp: "Balloon tamponade is a mechanical haemostatic method (e.g. Sengstaken-Blakemore tube for oesophageal varices) — it is not a topical agent. Gelfoam, microfibrillar collagen, Surgicel, and adrenaline (used topically on mucosal surfaces for vasoconstriction) are all classified as topical haemostatic agents."
+  },
+  {
+    q: "Which of the following is NOT classified as a risk factor for DVT due to stasis?",
+    opts: ["Prolonged immobilisation", "Prolonged surgery", "Varicose veins", "Malignancy", "Prolonged flight journeys"],
+    ans: 3,
+    exp: "Malignancy predisposes to DVT primarily via hypercoagulability — tumour cells release procoagulant substances (e.g. tissue factor) and inflammatory cytokines. It is not classified under the stasis category of Virchow's triad. Prolonged immobilisation, surgery, varicose veins, and long flights are all stasis-related risk factors."
+  },
+  {
+    q: "The secondary risk factors for DVT due to hypercoagulability include the following EXCEPT",
+    opts: ["Obesity", "Chronic inflammatory diseases", "Oestrogen therapy", "Haematological disorders", "Autoimmune conditions such as systemic lupus erythematosus (SLE)"],
+    ans: 0,
+    exp: "Obesity predisposes to DVT via stasis (reduced venous return from compression of pelvic veins and immobility), not primarily via hypercoagulability. It is therefore categorised under stasis risk factors. Oestrogen therapy, haematological disorders (e.g. thrombophilias), and autoimmune conditions like SLE are hypercoagulability risk factors."
+  },
+  {
+    q: "Which of the following is NOT a differential diagnosis of DVT?",
+    opts: ["Arterial gangrene", "Cellulitis", "Ruptured Baker's cyst", "Bleeding into the muscle", "Elephantiasis"],
+    ans: 4,
+    exp: "Elephantiasis is a chronic lymphoedema caused by filarial parasitic infection — its gradual, bilateral onset and characteristic skin changes distinguish it clearly from the acute unilateral limb swelling of DVT. It is not a differential diagnosis. Cellulitis, ruptured Baker's cyst, and haematoma within muscle are all acute conditions that mimic DVT."
+  },
+  {
+    q: "The following are work-up tests for DVT EXCEPT",
+    opts: ["Full blood count", "Clotting profile", "Fibrinogen assay", "Proteins C and S assay", "Contrast venography"],
+    ans: 4,
+    exp: "Contrast venography is not a work-up (screening) test for DVT — it is a definitive diagnostic investigation. The work-up tests screen for the underlying cause of DVT and assess coagulation status (FBC, clotting profile, fibrinogen, Proteins C and S). Doppler ultrasound and plasma D-dimer are also specific diagnostic tools alongside venography."
+  },
+  {
+    q: "A thrombus is NOT likely to follow which of the pathways below?",
+    opts: ["Dissolution", "Organisation and recanalization", "Propagation", "Embolisation", "Portal hypertension"],
+    ans: 4,
+    exp: "Portal hypertension is a consequence of portal vein thrombosis or liver disease — it is not a pathway that a thrombus itself follows. The recognised fates of a thrombus are dissolution (fibrinolysis), organisation and recanalization (incorporation into the vessel wall with new channels forming), propagation (extension), and embolisation (detachment and distal occlusion)."
+  },
+  {
+    q: "Which of the following is NOT a complication of DVT?",
+    opts: ["Systemic embolism: notably pulmonary embolism", "Post-thrombotic syndrome", "Subarachnoid haemorrhage", "Phlegmasia caerulae dolens", "Chronic venous insufficiency"],
+    ans: 2,
+    exp: "Subarachnoid haemorrhage results from rupture of an intracranial aneurysm or arteriovenous malformation — it is entirely unrelated to DVT. Recognised complications of DVT include pulmonary embolism, post-thrombotic syndrome (valve damage causing chronic oedema and skin changes), phlegmasia caerulae dolens (massive ilio-femoral thrombosis), and chronic venous insufficiency."
+  },
+  {
+    q: "The following are symptoms of pulmonary embolism (PE) EXCEPT",
+    opts: ["Sudden onset of pleuritic chest pain", "Sudden onset of dyspnoea", "Productive cough", "Hypothermia", "Sudden decreased level of consciousness"],
+    ans: 3,
+    exp: "Hypothermia is not a feature of PE. Fever is actually one of the atypical presentations of PE, likely from the inflammatory response to pulmonary infarction. Classical symptoms include sudden pleuritic chest pain, dyspnoea, haemoptysis, decreased consciousness (in massive PE), and tachycardia. Productive cough is non-specific but can occur in pulmonary infarction."
+  },
+  {
+    q: "Which of the following statements is true of pulmonary embolism?",
+    opts: ["Rarely follows straining to pass stool", "The Wells risk stratification scoring system does not apply to PE", "Massive PE is associated with a systolic blood pressure of more than 90 mmHg", "Non-massive PE is associated with a systolic blood pressure of less than 90 mmHg", "Massive PE ranks second only to cardiac causes as the cause of sudden death"],
+    ans: 4,
+    exp: "Massive PE is the second most common cause of sudden death after cardiac causes. By definition, massive PE causes haemodynamic compromise: systolic BP less than 90 mmHg (not more than 90). Non-massive PE is associated with systolic BP above 90 mmHg. The Wells scoring system is widely used for PE risk stratification."
+  },
+  {
+    q: "The classical findings in a patient whose shock is due to pulmonary embolism include",
+    opts: ["Haemoptysis, pleural friction rub, gallop rhythm and cyanosis", "Haematemesis, pleural friction rub, gallop rhythm and cyanosis", "Haemoptysis, pleural effusion, gallop rhythm and cyanosis", "Haemoptysis, pleural effusion, gallop rhythm and cyanosis", "Haematemesis, pleural effusion, gallop rhythm and cyanosis"],
+    ans: 0,
+    exp: "The classical quartet in PE-induced shock is haemoptysis (pulmonary infarction), pleural friction rub (pleuritis from infarction), gallop rhythm (acute right heart strain), and cyanosis (V/Q mismatch and hypoxia). Haematemesis suggests a GI source, not pulmonary infarction. Pleural effusion may occur later but is not a classical acute finding."
+  },
+  {
+    q: "Which of the following is NOT a quality of an ideal anticoagulant?",
+    opts: ["Good efficacy", "Rapid onset of action", "Specific and laboratory-based method for monitoring of action", "Safety with minimal complications", "Availability and affordability"],
+    ans: 2,
+    exp: "An ideal anticoagulant should require minimal or no laboratory monitoring — the need for specific, frequent laboratory monitoring (such as INR monitoring for warfarin) is considered a disadvantage, not a quality. Novel oral anticoagulants (NOACs) were developed partly to overcome this limitation. Good efficacy, rapid onset, safety, and affordability are all desirable qualities."
+  },
+  {
+    q: "Which of the following statements is true of anticoagulant therapy in DVT?",
+    opts: ["Heparin and oral warfarin are commenced simultaneously", "Warfarin therapy is commenced 5 days after initiation with heparin", "Heparin therapy is commenced 2 days after warfarin", "Heparin and warfarin are commenced simultaneously, and heparin is discontinued if an INR of at least 1.5 is sustained for 24 hours", "Heparin therapy is discontinued if the platelet count falls below 50,000"],
+    ans: 0,
+    exp: "Heparin and warfarin are commenced simultaneously. Heparin is then discontinued once an INR of at least 2.0 (not 1.5) is sustained for 24 hours, ensuring warfarin has reached therapeutic anticoagulation before heparin is withdrawn. This overlap is necessary because warfarin initially reduces Proteins C and S (anticoagulant factors) before it reduces clotting factors."
+  },
+  {
+    q: "Which of the following is NOT a complication of anticoagulant therapy?",
+    opts: ["Haemorrhage", "Chronic venous insufficiency", "Post-thrombotic syndrome", "Osteoporosis", "Malignant hypertension"],
+    ans: 4,
+    exp: "Malignant hypertension is a contraindication to anticoagulant therapy (due to risk of intracranial haemorrhage), not a complication of it. Haemorrhage is the most significant complication. Osteoporosis is a rare complication of long-term heparin. Chronic venous insufficiency and post-thrombotic syndrome are complications of underlying DVT, not of its anticoagulant treatment."
+  },
+  {
+    q: "The following are complications of thrombolytic therapy EXCEPT",
+    opts: ["Bleeding", "Embolism", "Damage to blood vessels", "Chronic renal failure", "Allergic reaction to contrast dye used for imaging in catheter-directed therapy"],
+    ans: 3,
+    exp: "Chronic renal failure is not a complication of thrombolytic therapy. Thrombolysis may cause transient renal injury in diabetics through contrast media or microvascular insults, but not chronic renal failure. Recognised complications include bleeding (the main risk), embolism (from clot dissolution), vessel damage, and allergic reactions to contrast dye used in catheter-directed thrombolysis."
+  },
+  {
+    q: "Which of the following statements is true of mechanical prophylaxis of DVT?",
+    opts: ["Effective in the reduction of both proximal and distal thrombosis", "Early ambulation after surgery is an example of active mechanical prophylaxis", "Ankle-to-thigh compression with elastic stocking or bandage is passive mechanical prophylaxis", "Intermittent pneumatic compression is an example of passive mechanical thromboprophylaxis", "Venous foot-pumps are passive"],
+    ans: 2,
+    exp: "Ankle-to-thigh compression with elastic stockings or bandages is passive mechanical prophylaxis — it provides sustained external compression without requiring active movement. Early ambulation, intermittent pneumatic compression, and venous foot-pumps are active forms of mechanical prophylaxis that actively augment venous return. Both proximal and distal thrombosis rates are reduced by mechanical methods."
+  },
+  {
+    q: "Which of the following statements is true of pharmacological thromboprophylaxis?",
+    opts: ["LMWH such as enoxaparin (clexane) is the most common form", "Enoxaparin is commenced on the day after surgery", "Heparin treatment is commenced after surgery with a dosage of 300 IU 8-hourly", "Heparin treatment is commenced 12 hours before surgery", "Warfarin treatment is commenced on the night before surgery and is best monitored by APTT"],
+    ans: 0,
+    exp: "LMWH, particularly enoxaparin, is the most widely used pharmacological thromboprophylaxis. Enoxaparin is typically commenced before surgery (not the day after). The correct heparin dose for thromboprophylaxis is 500 IU 8-hourly (not 300 IU). Warfarin is monitored by INR (prothrombin time ratio), not APTT."
+  },
+  {
+    q: "Which of the following is NOT a postoperative complication of sickle cell disease (SCD)?",
+    opts: ["Painful vaso-occlusive crisis", "Visceral sequestration crisis", "Hyperemetic crisis", "Aplastic crisis", "Hyperhaemolytic crisis"],
+    ans: 2,
+    exp: "Hyperemetic crisis is not a recognised clinical feature of sickle cell disease. The known crisis types are vaso-occlusive (painful crisis), sequestration (splenic/visceral pooling of sickled cells), aplastic (temporary marrow suppression, often from parvovirus B19), and hyperhaemolytic (accelerated haemolysis). Hyperemesis is not part of the SCD crisis spectrum."
+  },
+  {
+    q: "Which of the following is NOT a surgical problem of sickle cell disease?",
+    opts: ["Gallstones", "Acute abdomen: may predispose to acute mesenteric ischaemia", "Hand-and-foot syndrome", "Priapism", "Subarachnoid haemorrhage"],
+    ans: 2,
+    exp: "Hand-and-foot syndrome (dactylitis) is a painful swelling of the hands and feet due to bone marrow infarction, seen in young children with SCD. While it may occasionally require orthopaedic input, it is not considered a surgical problem in the context of SCD. Gallstones (from chronic haemolysis), priapism, mesenteric ischaemia, and subarachnoid haemorrhage are all recognised surgical complications."
+  },
+  {
+    q: "The following underscore the postoperative management of sickle cell disease EXCEPT",
+    opts: ["Continue oxygenation", "Ensure adequate analgesia", "Ensure adequate hydration", "Nurse in a warm environment", "Discontinue intraoperative precautionary measures"],
+    ans: 4,
+    exp: "Intraoperative precautionary measures — oxygenation, hydration, warmth, and analgesia — must be continued postoperatively, not discontinued. Sickling is triggered by hypoxia, dehydration, hypothermia, acidosis, and pain; all of these precipitants must be avoided both intra- and postoperatively."
+  },
+  {
+    q: "The following are the effects of sepsis on metabolism EXCEPT",
+    opts: ["Breakdown of muscle", "Increased glycogenolysis", "Reduced gluconeogenesis by the liver", "Increased lipolysis", "Anaerobic metabolism of glucose"],
+    ans: 2,
+    exp: "In sepsis, gluconeogenesis by the liver is actually increased — not reduced — driven by glucagon, cortisol, and catecholamines. This contributes to the hyperglycaemia of sepsis. Muscle catabolism, glycogenolysis, lipolysis, and anaerobic glycolysis are all increased as part of the hypercatabolic septic response."
+  },
+  {
+    q: "Which of the following statements is true of surgical site infection (SSI)?",
+    opts: ["Has been diagnosed in about 5% of all patients undergoing surgical procedures", "Has been diagnosed in about 40% of patients who had abdominal surgery", "The main source of contamination during surgery is the surgical instruments", "The dose of bacterial contamination is not as important as the virulence of the organism", "The main source of contamination is the surgeon's gown"],
+    ans: 0,
+    exp: "SSI occurs in approximately 5% of all surgical patients and up to 15–20% (not 40%) of those undergoing abdominal surgery. The main source of contamination is the patient's own body flora (endogenous contamination), not surgical instruments or the surgeon's gown. Both the dose of bacterial contamination and the virulence of the organism are important determinants of SSI."
+  },
+  {
+    q: "The following are true of wound scoring systems EXCEPT",
+    opts: ["The ASEPSIS scoring system was originally based on hernia wounds", "The Southampton scoring system was originally based on cardiothoracic wounds", "ASEPSIS involves exudates and separation of deep tissues", "Southampton involves exudates and separation of tissues", "Nigerian Scoring System (NSS) based on appendicectomy wounds"],
+    ans: 2,
+    exp: "ASEPSIS was originally developed for cardiothoracic wounds, not hernia wounds. The Southampton scoring system was based on hernia wounds. ASEPSIS assesses Additional treatment, Serous discharge, Erythema, Purulent exudate, Separation of deep tissue, Isolation of bacteria, and Stay as inpatient — but the statement that it 'involves exudates and separation of deep tissues' is not entirely wrong; the error is in the origin attribution."
+  },
+  {
+    q: "Which of the following is associated with a high incidence of SSI?",
+    opts: ["A high body mass index", "Short hospital stay", "Shorter duration of surgery", "Videoscopic procedures", "A low body mass index"],
+    ans: 0,
+    exp: "High BMI (overweight/obesity) is a well-recognised risk factor for SSI because adipose tissue is poorly vascularised, has impaired immune function, and creates wound tension. Shorter operations, shorter hospital stays, and laparoscopic (videoscopic) procedures are all associated with lower SSI rates."
+  },
+  {
+    q: "Which of the following is a postoperative measure to prevent SSI?",
+    opts: ["Antiseptic change of wound dressings", "Use of Eusol for all surgical wounds", "Use of topical antibiotics", "Use of hydrogen peroxide to dress wounds when necessary", "Application of sofratulle to the wound"],
+    ans: 0,
+    exp: "Antiseptic dressing changes using aseptic technique are the standard postoperative measure for SSI prevention. Eusol, hydrogen peroxide, and topical antibiotics are not recommended for routine wound care as they can impair healing, damage granulation tissue, or promote antibiotic resistance. Sofratulle is used for specific wound types but is not a general SSI prevention measure."
+  },
+  {
+    q: "Which of the following is NOT a recognised aim of nutritional support?",
+    opts: ["To minimise negative nitrogen balance", "To maintain muscular function", "To maintain immune function", "To increase the level of fitness in all patients billed for elective surgery", "To enhance postoperative recovery"],
+    ans: 3,
+    exp: "Perioperative nutritional support is targeted at patients with identified nutritional deficits or high catabolic states — it is not aimed at improving fitness in all elective surgical patients. Recognised aims are minimising negative nitrogen balance, maintaining muscle and immune function, and enhancing postoperative recovery."
+  },
+  {
+    q: "Which of these is NOT a general indication for nutritional support in surgery?",
+    opts: ["Preoperatively in nutritionally-depleted patients", "Short bowel syndrome but not enterocutaneous fistula", "Postoperative complications such as prolonged ileus and enterocutaneous fistula", "Following major abdominal surgery such as Whipple's procedure", "Hypercatabolic states such as septicaemia and severe burns injury"],
+    ans: 1,
+    exp: "Enterocutaneous fistula — especially high-output fistulae — is a specific indication for nutritional support, as it causes significant protein and electrolyte losses. Short bowel syndrome alone is insufficient to exclude fistula from the indication; both conditions require nutritional support. All other options are standard indications."
+  },
+  {
+    q: "Which of the following is NOT an indication for nutritional support?",
+    opts: ["Preoperative nutritional depletion", "Internal fistula", "Massive bowel resection", "Acute appendicitis", "Multiple trauma"],
+    ans: 3,
+    exp: "Acute appendicitis requires prompt surgical management (appendicectomy) and does not itself constitute an indication for nutritional support. It is a brief acute illness without significant nutritional depletion. Preoperative malnutrition, fistulae, massive bowel resection, and multiple trauma are all established indications."
+  },
+  {
+    q: "The following are routes for nutritional support in a surgical patient EXCEPT",
+    opts: ["Nasogastric", "Gastrostomy", "Jejunostomy", "Intravenous", "Arterial"],
+    ans: 4,
+    exp: "Arterial administration is never a route for nutritional support — arterial infusion of hyperosmolar solutions would cause severe vascular damage. The enteral routes (nasogastric, gastrostomy, jejunostomy) and intravenous (parenteral) route are all established methods of delivering nutritional support in surgical patients."
+  },
+  {
+    q: "The following are true of enteral nutrition EXCEPT",
+    opts: ["Decreases the incidence of bacterial translocation", "Maintains gut mucosal barrier", "Cheaper than parenteral nutrition", "More natural and physiological", "Difficulty with monitoring of intake"],
+    ans: 4,
+    exp: "Monitoring of enteral intake is straightforward — volumes delivered are measurable and recorded. It is not difficult. The stated advantages of enteral nutrition are accurate: it maintains gut mucosal integrity (reducing bacterial translocation), is physiological, and is considerably cheaper than parenteral nutrition."
+  },
+  {
+    q: "The following are advantages of enteral feeding EXCEPT",
+    opts: ["It is more natural and physiological", "It increases gut permeability", "It is more available and affordable", "It has better tolerance of hyperosmolar solutions", "It imposes less load on body systems, notably the cardiovascular system"],
+    ans: 1,
+    exp: "Enteral feeding maintains (not increases) gut permeability and integrity by preserving the mucosal barrier, gut-associated lymphoid tissue, and normal villous architecture. Increased gut permeability is associated with bacterial translocation and occurs when enteral feeding is withheld. All other listed properties are genuine advantages of enteral feeding."
+  },
+  {
+    q: "Which of the following is true of the initial monitoring in parenteral nutrition?",
+    opts: ["Chest X-ray: after placement of catheter", "Blood sugar level: once daily", "Serum electrolytes/urea/creatinine: weekly estimation", "Liver function test including serum protein and albumin: daily estimation", "Daily full blood count"],
+    ans: 0,
+    exp: "A chest X-ray to confirm catheter tip position and exclude pneumothorax is mandatory after central venous catheter placement for parenteral nutrition. Blood glucose should be monitored 6-hourly (not once daily). Electrolytes/urea/creatinine should be checked daily. LFTs and FBC are monitored less frequently — twice weekly is typical."
+  },
+  {
+    q: "The following are indications for parenteral nutrition EXCEPT",
+    opts: ["Mechanical intestinal obstruction", "Severe burns", "Acute pancreatitis", "Short bowel syndrome", "Prolonged respiratory support"],
+    ans: 0,
+    exp: "Mechanical (dynamic) intestinal obstruction requires surgical relief — the obstruction itself is not an indication for parenteral nutrition. Parenteral nutrition is indicated in prolonged adynamic (paralytic) ileus. Other indications include severe burns, acute pancreatitis (where enteral feeding can exacerbate symptoms), short bowel syndrome, severe hyperemesis gravidarum, and GI fistulae."
+  },
+  {
+    q: "Which of the following is NOT a contraindication to parenteral nutrition?",
+    opts: ["Gastrointestinal feeding feasible and adequate", "Cardiovascular instability", "Severe metabolic derangement", "Irreversible decerebrate state", "Hyperlipidaemia"],
+    ans: 4,
+    exp: "Hyperlipidaemia is not a contraindication to parenteral nutrition — lipid emulsions may need to be modified, but PN can still be administered with appropriate monitoring. True contraindications include situations where the gut works (GI feeding feasible), haemodynamic instability, uncorrected severe metabolic derangements, and irreversible brain death."
+  },
+  {
+    q: "Which of the following is true of monitoring patients at the commencement of enteral feeding?",
+    opts: ["Electrolytes/urea/creatinine: alternate days", "Daily phosphate, calcium and magnesium", "Daily haematological indices", "Twice weekly serum protein and albumin", "Electrolytes/urea/creatinine: daily"],
+    ans: 3,
+    exp: "Serum protein and albumin are monitored twice weekly at commencement of enteral feeding. Electrolytes/urea/creatinine should be checked daily (not on alternate days). Phosphate, calcium, and magnesium are monitored at the clinician's discretion rather than daily routinely. Haematological indices are not required daily."
+  },
+  {
+    q: "Generally speaking, the following can occur with parenteral nutrition EXCEPT",
+    opts: ["Septicaemia", "Atherosclerosis", "Vitamin deficiency", "Haemothorax", "Glycosuria"],
+    ans: 1,
+    exp: "Atherosclerosis is not a complication of parenteral nutrition. Recognised complications include catheter-related septicaemia (the most serious infectious complication), vitamin and trace element deficiency (if not supplemented), haemothorax (a mechanical complication of central line insertion), and glycosuria from hyperglycaemia (a metabolic complication)."
+  },
+  {
+    q: "Which of the following is NOT listed as a mechanical complication of parenteral nutrition?",
+    opts: ["Malposition of tube", "Pneumothorax and/or haemothorax", "Hyperglycaemia", "Erosion of catheter into bronchus or right atrium", "Catheter thrombosis/occlusion"],
+    ans: 2,
+    exp: "Hyperglycaemia is a metabolic complication of parenteral nutrition (from glucose overload or insulin resistance), not a mechanical one. Mechanical complications relate to catheter insertion and positioning: malposition, pneumothorax, haemothorax, erosion into adjacent structures, air embolism, catheter embolism, and nerve injuries (e.g. brachial plexus)."
+  },
+  {
+    q: "The following are metabolic complications of total parenteral nutrition EXCEPT",
+    opts: ["Refeeding syndrome", "Electrolyte derangements", "Bleeding due to arterial laceration", "Hyperosmolar non-ketotic coma", "Hyperlipidaemia"],
+    ans: 2,
+    exp: "Bleeding due to arterial laceration is an early mechanical complication of central venous catheter insertion, not a metabolic complication. Refeeding syndrome (hypophosphataemia, hypokalaemia, hypomagnesaemia on reintroduction of nutrition), electrolyte derangements, hyperosmolar non-ketotic coma, hyperlipidaemia, elevated liver enzymes (fatty liver), and hyperammonaemia are all metabolic complications."
+  },
+  {
+    q: "The nature of Surgical Site Infection (SSI) is defined by the following factors EXCEPT",
+    opts: ["Incision (superficial or deep)", "Organ or space", "Presence or absence of implant", "Interval from time of index surgery", "Nature of suture material"],
+    ans: 4,
+    exp: "The nature of suture material does not define the classification of SSI. SSI is classified by depth (superficial incisional, deep incisional, or organ/space), the presence of an implant (which extends the diagnostic window to 1 year), and the interval from surgery. Suture material may influence SSI risk but is not part of its definitional classification."
+  },
+  {
+    q: "Which of the following is a criterion in the determination of SSI?",
+    opts: ["Infection occurs within 40 days if no implant", "Infection occurs within 30 days if no implant", "Infection occurs within 18 months in the presence of implant", "Infection occurs within 9 months in the presence of implant", "Infection occurs within 30 days in the presence of implant"],
+    ans: 1,
+    exp: "SSI is defined as occurring within 30 days of the index surgical procedure when no implant is present. When an implant is present, the diagnostic window extends to 1 year (12 months). This extended window reflects the ability of implant-associated biofilm to present as infection long after surgery."
+  },
+  {
+    q: "Which of the following is an intraoperative measure to prevent SSI?",
+    opts: ["Adequate sterilisation of instruments", "Use of diathermy for making surgical incisions", "Wound irrigation", "Intracavitary irrigation", "Exteriorise drainage devices through the primary wound"],
+    ans: 0,
+    exp: "Adequate sterilisation of surgical instruments is a fundamental intraoperative measure for SSI prevention. Drainage devices should be exteriorised through a separate stab incision — not through the primary wound — to reduce contamination. The use of diathermy for incisions, wound irrigation, and intracavitary irrigation are not primary SSI prevention strategies."
+  },
+  {
+    q: "The following parameters define Day Case Surgery (DCS) EXCEPT",
+    opts: ["Admission is on a planned, non-residential basis", "Admission and discharge are within one working day", "Extended-day surgery involves discharge within 48 hours", "Employs a variety of anaesthetic techniques", "Requires facilities for postoperative recovery"],
+    ans: 2,
+    exp: "Extended-day surgery involves discharge within 24 hours — not necessarily within the working day, but within 24 hours of admission. It is not defined as discharge within 48 hours. All other parameters are correct: planned non-residential admission, same-day discharge, various anaesthetic options, and recovery facilities."
+  },
+  {
+    q: "Basic preoperative investigations for all patients billed for Day Case Surgery",
+    opts: ["Full blood count", "Clotting profile", "Chest X-ray", "ECG", "Electrolytes/urea/creatinine"],
+    ans: 0,
+    exp: "The two basic preoperative investigations required for all DCS patients are full blood count and urinalysis. Clotting profile, chest X-ray, ECG, and renal function tests are additional investigations indicated only in specific clinical circumstances based on the patient's age, comorbidities, or the nature of the planned procedure."
+  },
+  {
+    q: "Which of the following statements is NOT true of Day Case Surgery?",
+    opts: ["DCS is also referred to as 'day surgery'", "DCS is also referred to as 'same day surgery'", "Outpatient cases (surgery) do not generally require postoperative recovery time", "DCS reduces the rate of complications notably deep venous thrombosis", "DCS increases the cost of medicare"],
+    ans: 4,
+    exp: "DCS reduces rather than increases the cost of healthcare by eliminating the need for inpatient beds, nursing staff, and hospital amenities. It also reduces DVT risk through early mobilisation. Both 'day surgery' and 'same day surgery' are acceptable synonyms for DCS."
+  },
+  {
+    q: "Which of the following is NOT true in relation to logistic requirements for DCS?",
+    opts: ["Co-operative General Practitioner to continue with care after discharge", "Efficient telecommunication network", "Good access: road and transportation", "Patient should have somebody to render care at home", "A General Practitioner is not necessary as patient is advised to report problems to the surgeon"],
+    ans: 4,
+    exp: "A co-operative General Practitioner is an essential logistic requirement for DCS — they provide continuity of care after the patient is discharged on the day of surgery. The surgeon alone cannot manage all postoperative concerns, and 24-hour surgeon access is impractical. Telecommunication, transport, and home caregivers are all listed standard requirements."
+  },
+  {
+    q: "The following are common general surgery procedures managed as DCS EXCEPT",
+    opts: ["Repair of external hernias", "Excision of breast lump", "Patey's modified mastectomy", "Subcutaneous mastectomy", "Pilonidal sinus excision and closure"],
+    ans: 2,
+    exp: "Patey's modified radical mastectomy involves extensive tissue dissection and axillary node clearance, requiring postoperative wound drains and inpatient monitoring — it is not suitable for day-case management. Excision of a breast lump, subcutaneous mastectomy, hernia repair, and pilonidal sinus procedures are routinely performed as day cases."
+  },
+  {
+    q: "Which of the following is NOT a common urology procedure managed as DCS?",
+    opts: ["Limited endoscopic resection of bladder tumour", "Urethrotomy", "Laser prostatectomy", "Transurethral resection of the prostate", "Bladder neck resection"],
+    ans: 3,
+    exp: "Transurethral resection of the prostate (TURP) involves significant risk of haemorrhage, fluid absorption syndrome (TURP syndrome), and urinary retention — it requires inpatient postoperative monitoring and is not a day-case procedure. Limited endoscopic bladder tumour resection, urethrotomy, laser prostatectomy, and bladder neck resection can be performed as day cases."
+  },
+  {
+    q: "The following are patient factors that contraindicate DCS EXCEPT",
+    opts: ["Previous history of undue bleeding", "Obesity (BMI above 34)", "Old age (above 70)", "Sickle cell disease and thalassaemia", "Any degree of diabetes mellitus"],
+    ans: 4,
+    exp: "Not all degrees of diabetes mellitus contraindicate DCS — well-controlled diabetes is compatible with day surgery. Only poorly controlled diabetes is a contraindication. In contrast, a history of undue bleeding, significant obesity, extreme age, and haemoglobinopathies like sickle cell disease and thalassaemia are genuine contraindications."
+  },
+  {
+    q: "Which of the following is NOT an anaesthetic technique in DCS?",
+    opts: ["Sedo-analgesia", "Local anaesthesia", "Regional anaesthesia", "General anaesthesia", "Only options a and b"],
+    ans: 4,
+    exp: "All four techniques — sedo-analgesia, local anaesthesia, regional anaesthesia, and general anaesthesia — are applicable in DCS, selected according to the procedure and patient factors. Saying 'only options a and b' is therefore false. The variety of available anaesthetic options is one of the defining features of modern DCS."
+  },
+  {
+    q: "The following are discharge criteria for DCS EXCEPT",
+    opts: ["Vital signs stable for at least 2 hours after surgery", "Minimal bleeding or wound discharge", "Minimal nausea, vomiting or dizziness", "Patient is tolerating oral fluids", "Patient has a responsible escort for the homeward journey"],
+    ans: 0,
+    exp: "Vital sign stability for at least 1 hour (not 2 hours) is the standard discharge criterion. Two hours would unnecessarily prolong day-case stay. Other standard criteria include minimal wound discharge, minimal nausea/vomiting, tolerance of oral fluids, ability to walk, and having a responsible adult escort for the journey home."
+  },
+  {
+    q: "Which of these is NOT a paediatric day case procedure?",
+    opts: ["Herniorrhaphy", "Repair of hydrocele", "Tonsillectomy", "Adenoidectomy", "Correction of squint"],
+    ans: 0,
+    exp: "Herniotomy (not herniorrhaphy) is the paediatric day-case procedure. Herniorrhaphy involves tissue repair of the posterior inguinal wall and is performed in adults with true muscular defects. In children, the sac is simply ligated (herniotomy) without floor repair. Other paediatric day-case procedures include circumcision, EUA, hydrocele repair, and squint correction."
+  },
+  {
+    q: "Which of the following is NOT correct in relation to the major complications of DCS?",
+    opts: ["Unrecognised visceral damage", "Severe postoperative haemorrhage", "Infection", "Myocardial infarction", "Pulmonary embolism"],
+    ans: 2,
+    exp: "Infection is classified as a minor complication of DCS — it is common but manageable in the outpatient setting and rarely life-threatening. Major complications include unrecognised visceral damage (e.g. from laparoscopy), severe haemorrhage, myocardial infarction, and pulmonary embolism — all of which require emergency hospital admission."
+  },
+  {
+    q: "Which of the following statements is NOT true in relation to the advantages of DCS?",
+    opts: ["More cost-effective", "Psychological preference of patients", "Reduced risk of cross-infection", "More efficient use of staff and hospital facilities", "Regular morning operating sessions"],
+    ans: 4,
+    exp: "Regular morning operating sessions are not an advantage of DCS — they can actually be stressful for theatre staff and do not represent a clinical or logistical benefit per se. Advantages of DCS include cost-effectiveness, patients' psychological preference for home recovery, reduced nosocomial infection risk, and efficient use of hospital resources."
+  },
+  {
+    q: "Which of the following is NOT a listed disadvantage of DCS?",
+    opts: ["Unplanned postoperative admission", "Offers less opportunity for junior staff to practise", "Reduction in the hospital's internally-generated revenue (IGR)", "Imposes extra workload on the General Practitioner", "Need for postoperative caregivers"],
+    ans: 4,
+    exp: "The need for postoperative caregivers at home is a logistic requirement and a patient selection criterion for DCS — it is not listed as a disadvantage. Disadvantages include unplanned admissions (which disrupt scheduling), reduced surgical training opportunities for juniors, potential loss of hospital IGR, and additional workload transferred to GPs."
+  },
+  {
+    q: "Which of the following statements is true in relation to laparoscopy?",
+    opts: ["The Veress needle is responsible for most visceral injuries", "Major iatrogenic vascular injury is best treated by insertion of a bigger trocar for better access", "Major iatrogenic vascular injury is best treated by conversion to open surgery through a midline incision", "A trocar bladder injury is managed by postoperative catheter drainage", "Major iatrogenic vascular injury does not require conversion to open surgery"],
+    ans: 2,
+    exp: "Major iatrogenic vascular injury during laparoscopy requires immediate conversion to open surgery via a midline incision to allow direct vascular control — delaying this or inserting additional trocars risks fatal haemorrhage. Trocars (not the Veress needle) are responsible for the majority of visceral injuries. Bladder trocar injuries require surgical repair, not just catheter drainage."
+  },
+  {
+    q: "Which of the following statements is true of laparoscopic procedures?",
+    opts: ["Laparoscopic cholecystectomy is currently regarded as the gold standard", "Laparoscopy is effective for inguinal hernias but contraindicated in ventral hernias due to adhesions", "The TEP method is much easier than the TAPP approach for inguinal hernia repair", "Intra-operative cholangiogram is contraindicated due to fear of CBD damage", "Open cholecystectomy is the preferred treatment in the developing world"],
+    ans: 0,
+    exp: "Laparoscopic cholecystectomy is universally recognised as the gold standard for management of symptomatic gallstones. Laparoscopy can be used for both inguinal and ventral hernia repair. The TAPP (transabdominal preperitoneal) approach is generally considered easier to learn than TEP. Intraoperative cholangiogram is not contraindicated — it is recommended to delineate biliary anatomy."
+  },
+  {
+    q: "Which of the following is NOT a contraindication to minimal access surgery (MAS)?",
+    opts: ["Bleeding disorders", "Severe hypovolaemic shock", "Severe cardiac decompensation", "Extensive intraperitoneal adhesions", "Obesity of whatever degree"],
+    ans: 4,
+    exp: "Obesity of any degree is not a blanket contraindication to MAS — only morbid obesity (BMI >40) is a contraindication due to limitations in trocar reach, visualisation, and pneumoperitoneum tolerance. Moderate obesity is not a contraindication. Bleeding disorders, severe shock, cardiac decompensation, and dense adhesions are genuine contraindications."
+  },
+  {
+    q: "Which of the following statements is NOT true of laparoscopic surgery?",
+    opts: ["The safest period for laparoscopic surgery in pregnancy is the 1st trimester", "The safest period for laparoscopic surgery in pregnancy is the 2nd trimester", "Pneumoperitoneum is associated with a reduction in cardiac output", "Pneumoperitoneum is associated with sympathetic stimulation and tachycardia", "Carbon dioxide gas embolism will result in a 'mill-wheel' murmur"],
+    ans: 0,
+    exp: "The second trimester (14–28 weeks) is the safest period for laparoscopic surgery in pregnancy — the uterus is not yet large enough to obstruct access, the risk of miscarriage is lower than in the first trimester, and organogenesis is complete. CO₂ pneumoperitoneum reduces cardiac output (raised intraabdominal pressure reduces venous return) and causes CO₂ absorption, which may trigger sympathetic stimulation."
+  },
+  {
+    q: "Which of the following is NOT listed as a minor complication of DCS?",
+    opts: ["Postoperative nausea and vomiting", "Minor bleeding", "Pulmonary embolism", "Postoperative drowsiness", "Sore throat/hoarseness"],
+    ans: 2,
+    exp: "Pulmonary embolism is a major complication of DCS — it can be life-threatening and requires emergency inpatient management. Minor complications are those manageable in the community without urgent readmission: nausea and vomiting, minor wound bleeding, drowsiness from anaesthesia, and sore throat from intubation."
+  },
+  {
+    q: "The following are defined stages of laparoscopic surgery EXCEPT",
+    opts: ["Creation of pneumoperitoneum", "Insertion of laparoscope", "Diagnostic laparoscopy", "Introduction of ports", "Induction of general anaesthesia"],
+    ans: 4,
+    exp: "Induction of general anaesthesia is not a step unique to laparoscopic surgery — it precedes all major surgical procedures. The defined laparoscopic stages are: creation of pneumoperitoneum, insertion of the laparoscope, introduction of additional ports, diagnostic laparoscopy, and then the definitive therapeutic procedure."
+  },
+  {
+    q: "The following are unique advantages of minimal access surgery EXCEPT",
+    opts: ["Better visualisation", "Better cosmetic effect", "Reduced postoperative pain", "Late recovery", "Decreased contamination of internal organs"],
+    ans: 3,
+    exp: "Early recovery is a major advantage of MAS — not late recovery. Minimal access surgery is specifically associated with faster return to normal activity compared to open surgery. Other genuine advantages include magnified visualisation, reduced incision size (better cosmesis), reduced pain, and less contamination of the peritoneal cavity."
+  },
+  {
+    q: "The following are listed disadvantages of MAS EXCEPT",
+    opts: ["Expensive equipment", "Short learning curve", "Haemostasis more difficult", "Poor depth of perception", "Decreased tactile stimulus"],
+    ans: 1,
+    exp: "A long learning curve is a well-recognised disadvantage of MAS, not a short one. Surgeons require considerable supervised practice before achieving competence in laparoscopic techniques. Expensive equipment, more difficult haemostasis, poor depth perception (2D view), and reduced tactile feedback are all genuine and listed disadvantages."
+  },
+  {
+    q: "Which of the following is NOT a frequently performed procedure with MAS?",
+    opts: ["Cholecystectomy", "Appendicectomy", "Nissen fundoplication", "Splenectomy", "Repair of hernias (inguinal and ventral)"],
+    ans: 3,
+    exp: "Splenectomy is classified as an infrequently performed MAS procedure — it is technically challenging due to the size and vascularity of the spleen and is reserved for specialist centres. Frequently performed MAS procedures include cholecystectomy, appendicectomy, Nissen fundoplication, and hernia repair (both inguinal and ventral)."
+  },
+  {
+    q: "Which of the following is NOT an infrequently-performed MAS procedure?",
+    opts: ["Colectomy", "Splenectomy", "Adrenalectomy", "Nephrectomy", "Nissen fundoplication"],
+    ans: 4,
+    exp: "Nissen fundoplication is a frequently performed laparoscopic procedure and is considered a standard MAS operation for gastro-oesophageal reflux disease. Infrequently performed MAS procedures include colectomy, splenectomy, adrenalectomy, and nephrectomy — all technically demanding operations performed in specialist centres."
+  },
+  {
+    q: "Which of the following is NOT a contraindication to MAS?",
+    opts: ["Peritonitis", "Morbid obesity", "Portal hypertension", "Congestive cardiac failure", "Type II diabetes mellitus"],
+    ans: 2,
+    exp: "Portal hypertension is not a listed contraindication to MAS — laparoscopic procedures are performed in patients with portal hypertension with appropriate precautions. Type II diabetes mellitus without end-organ compromise is not a contraindication. Peritonitis causes dense adhesions and bowel distension, morbid obesity limits access, and congestive cardiac failure cannot tolerate pneumoperitoneum-related preload reduction."
+  },
+  {
+    q: "Which of the following is NOT a complication of MAS?",
+    opts: ["Complications of pneumoperitoneum", "Trauma to underlying vessels and viscera", "Hyperthermia", "Deep venous thrombosis", "Shoulder pain due to increased pressure on the diaphragm"],
+    ans: 2,
+    exp: "Hypothermia — not hyperthermia — is a recognised complication of MAS, resulting from insufflation with relatively cold dry CO₂ gas over a prolonged procedure. Recognised complications include pneumoperitoneum effects (CO₂ absorption, haemodynamic changes), vessel and visceral injury, DVT (reduced venous return from the Trendelenburg position), and diaphragmatic shoulder pain."
+  },
+  {
+    q: "Which of the following does NOT aid in minimising complications of MAS?",
+    opts: ["Entry through the open access method", "Insufflation pressure should not exceed 20 mmHg", "'Preoperative tubing': nasogastric tube and urethral catheter", "Entry by way of the Veress needle", "Warm and humidified insufflation gas"],
+    ans: 3,
+    exp: "Entry by the Veress needle (blind technique) is associated with higher rates of vascular and visceral injury compared to open (Hasson's technique) entry — it is therefore a potential source of complications, not a preventive measure. Open entry, limiting insufflation to ≤20 mmHg, decompressing the stomach and bladder preoperatively, and using warm humidified gas all minimise complications."
+  },
+  {
+    q: "The following statements are true EXCEPT",
+    opts: ["Veress needle is useful in the blind technique of insufflation", "Hasson's technique is employed for blind entry and insufflation", "Open technique is preferred in the presence of adhesions", "Post-laparoscopic shoulder pain is due to increased pressure on the diaphragm from intraperitoneal insufflation", "Hand-assisted laparoscopic procedure may be employed during intestinal resection and anastomosis"],
+    ans: 1,
+    exp: "Hasson's technique (open entry) is an open, direct-vision method of entering the peritoneal cavity — not a blind technique. The Veress needle is the blind insufflation technique. Hasson's technique was specifically developed to overcome the risks of blind Veress entry. Open entry is preferred in patients with previous abdominal surgery and likely adhesions."
+  },
+  {
+    q: "Which of the following procedures is NOT feasible by thoracoscopy?",
+    opts: ["Closure of patent ductus arteriosus", "Diagnostic purposes including biopsies", "Sympathectomy", "Assessment and resection of lung and mediastinal masses", "Oesophageal fundoplication"],
+    ans: 4,
+    exp: "Oesophageal fundoplication (Nissen fundoplication) is performed laparoscopically — via the abdominal approach — not thoracoscopically. Thoracoscopic procedures include closure of PDA, sympathectomy, diagnostic biopsies of pleural and mediastinal lesions, and resection of pulmonary or mediastinal masses. Thoracoscopy provides access to the thoracic cavity, not the abdomen."
+  },
+  {
+    q: "The staging of a malignant tumour was designed as",
+    opts: ["A histological diagnosis", "A clinical staging", "A staging carried out at operation", "A staging dependent upon radio-scanning and skeletal survey", "A post-mortem staging"],
+    ans: 1,
+    exp: "Tumour staging was originally designed as a clinical staging system based on examination findings, imaging, and clinical assessment — without requiring histology or operation. Over time, pathological staging (at operation) and radiological staging were added, but the foundation is clinical. TNM staging reflects this clinical origin."
+  },
+  {
+    q: "Skeletal surveys are essential in the diagnosis of the following",
+    opts: ["Fractures", "Articular size", "Metastasis", "Cardiac failure", "Ascites"],
+    ans: 2,
+    exp: "Skeletal surveys — systematic radiographic assessment of the axial and appendicular skeleton — are performed primarily to detect bony metastases in patients with known primary malignancies (e.g. breast, prostate, lung, kidney, thyroid). They are particularly useful in multiple myeloma. Fractures, cardiac failure, and ascites are evaluated by other means."
+  },
+  {
+    q: "Which of the following is NOT a characteristic of an ideal tumour marker?",
+    opts: ["Highly specific for the tumour type", "Detects cancer long before clinical diagnosis", "Has reduced sensitivity to avoid false positive results", "Should be cheap and acceptable to target population", "Should be standardised with clearly defined reference limits"],
+    ans: 2,
+    exp: "An ideal tumour marker should be highly sensitive to detect early disease and avoid false negatives — not have reduced sensitivity. High sensitivity allows detection before clinical symptoms appear. High specificity avoids false positives. A marker with reduced sensitivity would miss many cancers, defeating its purpose as a screening or diagnostic tool."
+  },
+  {
+    q: "Which of the following is true of the role of tumour markers in aiding clinical diagnosis?",
+    opts: ["Alpha fetoprotein for testicular tumours", "CA19-9 for ovarian cancer", "Carcinoembryonic antigen (CEA) for gastric cancer", "CA125 for pancreatic cancer", "Thyroglobulin for metastatic oesophageal cancer"],
+    ans: 0,
+    exp: "Alpha fetoprotein (AFP) is a marker for non-seminomatous germ cell testicular tumours (and hepatocellular carcinoma). CA19-9 is used for pancreatic cancer (not ovarian). CA125 is used for ovarian cancer. CEA is used for colorectal cancer (not gastric specifically). Thyroglobulin monitors thyroid cancer (not oesophageal)."
+  },
+  {
+    q: "Which of the following is true as regards the role of tumour markers in predicting drug response?",
+    opts: ["Hormone receptors for breast cancer", "HER-2 neu receptors for ovarian cancer", "Epidermal growth factor for oesophageal cancer", "Vascular endothelial growth factor for lung cancer", "Hormone receptors for ovarian cancer"],
+    ans: 0,
+    exp: "Hormone receptor (ER/PR) status in breast cancer predicts response to endocrine therapy (e.g. tamoxifen, aromatase inhibitors). HER-2 neu receptor overexpression guides trastuzumab (Herceptin) use in breast cancer — not ovarian cancer. EGFR mutations guide targeted therapy in lung cancer. VEGF inhibitors (bevacizumab) are used in colorectal cancer."
+  },
+  {
+    q: "The following are general side-effects of cytotoxic chemotherapy EXCEPT",
+    opts: ["Pancytopenia", "Alopecia", "Mucosal ulceration", "Hand-foot syndrome", "Gastrointestinal symptoms: nausea, vomiting and diarrhoea"],
+    ans: 3,
+    exp: "Hand-foot syndrome (palmar-plantar erythrodysaesthesia) is not a general side-effect of cytotoxic chemotherapy — it is specifically associated with capecitabine and 5-fluorouracil. General side-effects common to most cytotoxic agents include bone marrow suppression (pancytopenia), alopecia, mucositis, and GI toxicity (nausea, vomiting, diarrhoea)."
+  },
+  {
+    q: "Which of the following statements is NOT true regarding chemotherapy agents?",
+    opts: ["Alopecia is common with cyclophosphamide and doxorubicin", "Cardiotoxicity is more common with bleomycin", "Cardiotoxicity is more common with doxorubicin", "Pulmonary toxicity is more common with bleomycin", "Gonadal damage has been associated with vinblastine and procarbazine"],
+    ans: 1,
+    exp: "Cardiotoxicity is more common with doxorubicin (an anthracycline), not bleomycin. Bleomycin's characteristic organ toxicity is pulmonary — it causes interstitial pneumonitis and pulmonary fibrosis. Doxorubicin causes dose-dependent dilated cardiomyopathy. Alopecia with cyclophosphamide and doxorubicin, and gonadal damage with vinblastine and procarbazine, are correct."
+  },
+  {
+    q: "Which of the following statements is NOT true in relation to chemotherapeutic agents?",
+    opts: ["Renal toxicity is more common with alkylating agents", "Renal toxicity is more common with cisplatin", "Gonadal damage is more common with alkylating agents", "Renal damage may require dialysis", "Cyclophosphamide may result in cystitis"],
+    ans: 0,
+    exp: "Renal toxicity is more common with cisplatin and methotrexate, not with alkylating agents as a class. Cisplatin-induced nephrotoxicity is one of its dose-limiting side effects, requiring aggressive hydration. Alkylating agents are more associated with gonadal damage and secondary malignancies. Cyclophosphamide causes haemorrhagic cystitis from the metabolite acrolein."
+  },
+  {
+    q: "Which of the following statements is true in relation to cancer management?",
+    opts: ["Adjuvant treatment includes all forms of treatment offered preoperatively", "Adjuvant treatment aids surgical management and is given before surgery", "Neoadjuvant treatment follows surgical treatment", "Metachronous tumours are diagnosed at the same time", "Synchronous tumours are diagnosed at the same time"],
+    ans: 4,
+    exp: "Synchronous tumours are two or more separate primary tumours diagnosed simultaneously (or within 6 months). Metachronous tumours are sequential — diagnosed at different time intervals. Adjuvant therapy is given after surgery to reduce recurrence risk. Neoadjuvant therapy is given before surgery to downsize the tumour."
+  },
+  {
+    q: "Curability of a cancer by chemotherapeutic agents is",
+    opts: ["Inversely proportional to the size of the tumour", "Directly proportional to the size of the tumour", "Not related to the dose of the chemotherapeutic agent", "Inversely related to the dose of the chemotherapeutic agent", "Bears no relationship to the size of the tumour"],
+    ans: 0,
+    exp: "Curability is inversely proportional to tumour size — smaller tumours have fewer cells, fewer resistant clones, and a higher proportion of actively dividing cells susceptible to chemotherapy. Larger tumours have greater cellular heterogeneity, including drug-resistant subpopulations. This underpins the importance of early detection and adjuvant chemotherapy after surgical debulking."
+  },
+  {
+    q: "Which of the following statements is true in relation to the cell cycle?",
+    opts: ["RNA and protein synthesis occur in the G1 phase", "The cell-generation time in mammalian cells is usually dependent on the duration of the G1 phase", "DNA synthesis occurs in the G2 phase", "Most antimetabolic anticancer drugs act to inhibit the cell cycle during the S-phase", "Cells in G0 phase have no potential for re-entering the cell cycle"],
+    ans: 3,
+    exp: "Most antimetabolic chemotherapy agents (e.g. methotrexate, 5-fluorouracil, cytarabine) target the S-phase by inhibiting DNA synthesis or incorporating into DNA/RNA. DNA synthesis occurs in the S-phase (not G2). G1 phase involves RNA and protein synthesis. The G1 phase is indeed the most variable and determines cell generation time. Cells in G0 can re-enter the cycle when stimulated."
+  },
+  {
+    q: "Which of the following statements is true of hormonal therapy?",
+    opts: ["Tamoxifen competes with cancer cells on oestrogen receptor sites in ovarian cancer", "Aromatase inhibitors are useful in the management of premenopausal breast cancer", "Goserelin is a LHRH analogue useful in the management of bladder cancer", "Goserelin has been found useful in the management of breast cancer", "All of the above"],
+    ans: 3,
+    exp: "Goserelin (a luteinising hormone-releasing hormone analogue) suppresses gonadotropin secretion and is used in hormone-sensitive breast cancer and prostate cancer. Tamoxifen acts on oestrogen receptors in breast cancer (not ovarian cancer). Aromatase inhibitors are used in postmenopausal (not premenopausal) breast cancer. Goserelin is not used in bladder cancer."
+  },
+  {
+    q: "Which of the following statements is NOT true in relation to the role of radiotherapy in cancer therapy?",
+    opts: ["Completely eradicates or at least reduces the tumour load", "Prevents recurrence", "Improves the quality of life", "Improves prognosis (prolongation of life)", "Applicable to all neoplasms"],
+    ans: 4,
+    exp: "Radiotherapy is not applicable to all neoplasms. Radiosensitivity varies considerably — highly radiosensitive tumours (e.g. seminoma, lymphoma) respond well, while others (e.g. melanoma, sarcoma) are relatively radioresistant. The decision to use radiotherapy depends on tumour type, location, and the proximity of radiosensitive normal structures."
+  },
+  {
+    q: "Which of the following is NOT true in relation to the side effects of radiotherapy?",
+    opts: ["Pancytopenia", "Radiation pneumonitis", "Fibrotic stricture involving the intestine", "Loss of memory and sexual desire", "Does not necessarily induce secondary cancers"],
+    ans: 4,
+    exp: "Radiotherapy can induce secondary malignancies — notably breast cancer, lung cancer, and leukaemia — years after treatment, particularly following wide-field or high-dose radiation. This is a well-recognised long-term risk. Other side effects include myelosuppression, radiation pneumonitis, intestinal strictures from fibrosis, and endocrine effects including loss of libido."
+  },
+  {
+    q: "Regarding the mechanism of action of radiotherapy, which statement is correct?",
+    opts: ["Destruction of cellular RNA", "Releases electrons which function as free radicals causing DNA damage", "Affects mainly cells in the G0 phase of the cell cycle", "Radiotherapy is usually precise and is not associated with collateral damage to surrounding tissues", "Does not influence gene expression"],
+    ans: 1,
+    exp: "Radiotherapy acts primarily by destroying cellular DNA through the generation of free radicals (particularly hydroxyl radicals from water radiolysis). It affects mainly cells in the mitotic (M) phase — not the G0 phase — as actively dividing cells are most radiosensitive. Collateral damage to surrounding normal tissue is a well-recognised limitation of radiotherapy."
+  },
+  {
+    q: "The following statements are true of radiotherapy EXCEPT",
+    opts: ["Radiosensitivity of target tumour cells exceeds that of normal tissue", "Radiosensitivity of normal tissue exceeds that of target tumour cells", "Repopulation refers to resistant, non-proliferative cells", "Electromagnetic ionising radiation utilises electrons, protons and neutrons", "Particulate radiation uses X-rays and gamma rays"],
+    ans: 0,
+    exp: "This question asks which statements are true — and asks for the exception, making the answer the false one. The radiosensitivity of tumour cells generally exceeds that of normal surrounding tissue, which is the therapeutic basis of radiotherapy. Repopulation refers to surviving tumour cells that proliferate more rapidly at the end of a course — not to non-proliferative cells. Electromagnetic radiation includes X-rays and gamma rays; particulate radiation uses electrons, protons and neutrons."
+  },
+  {
+    q: "The following are applications of LASER in General Surgery EXCEPT",
+    opts: ["Palliative treatment of late gastric cancer", "Palliative treatment of obstruction and haemorrhage due to colorectal cancer", "Controlled bloodless resection of the liver", "Palliative treatment of hepatocellular carcinoma", "Haemorrhoidectomy"],
+    ans: 0,
+    exp: "Palliative LASER treatment of gastric cancer is not a recognised application in general surgery. LASER applications in general surgery include palliative recanalisation of obstructing colorectal cancers, controlled liver resection (utilising photocoagulation to minimise blood loss), palliation of hepatocellular carcinoma, and laser haemorrhoidectomy."
+  },
+  {
+    q: "The following are LASER interaction mechanisms EXCEPT",
+    opts: ["Photocoagulation (more than 50°C but less than 100°C)", "Photovaporisation (more than 100°C)", "Photoablation", "Photomechanical", "Photochemicalisation"],
+    ans: 4,
+    exp: "Photochemicalisation is not a recognised LASER interaction mechanism. The four established mechanisms are photocoagulation (thermal coagulation at 50–100°C), photovaporisation (tissue vaporisation above 100°C), photoablation (direct molecular bond disruption by UV lasers), and photomechanical (shock wave-mediated tissue disruption). Photodynamic therapy (photochemical) is a separate category."
+  },
+  {
+    q: "Which of the following is NOT an application of LASER in Urology?",
+    opts: ["Surgical management of benign prostatic hypertrophy", "Lithotripsy", "Treatment of squamous cell carcinoma of the bladder", "Treatment of transitional cell cancers of the ureter and renal pelvis", "Management of early penile cancer"],
+    ans: 2,
+    exp: "LASER is used for transitional cell carcinoma (not squamous cell carcinoma) of the bladder. Squamous cell carcinoma of the bladder is typically associated with bilharzia and is treated by cystectomy. Urological LASER applications include laser prostatectomy for BPH, lithotripsy, transitional cell tumours of the upper tract, and early penile cancer."
+  },
+  {
+    q: "Complications of LASER surgery include the following EXCEPT",
+    opts: ["Fire and explosion", "Interstitial pneumonia and bronchiolitis", "Perforation of viscus", "May be mutagenic and teratogenic", "High incidence of wound infection"],
+    ans: 4,
+    exp: "LASER surgery is not associated with a high incidence of wound infection — it is generally a clean technique with low infectious risk. Recognised complications include fire and explosion (from interaction with anaesthetic gases or drapes), pulmonary complications (interstitial pneumonia, bronchiolitis from laser plume inhalation), visceral perforation, and potential mutagenic/teratogenic effects of laser plume particles."
+  },
+  {
+    q: "The perioperative management of diabetes mellitus takes the following into consideration EXCEPT",
+    opts: ["Sex of patient", "Current treatment", "Degree of glycaemic control", "Presence of complications", "Type of envisaged surgical procedure"],
+    ans: 0,
+    exp: "The sex of the patient has no bearing on perioperative diabetic management. Relevant considerations include: current antidiabetic treatment (oral agents vs insulin), quality of glycaemic control (HbA1c), presence of diabetic complications (nephropathy, neuropathy, retinopathy, cardiovascular disease), and the type of surgery planned (minor vs major, duration, likely NPO period)."
+  },
+  {
+    q: "In the management of a diabetic patient having major surgery, it is important to",
+    opts: ["Give no intravenous glucose", "Give the normal amount of insulin", "Give insulin on the basis of routine urinalysis", "Regulate postoperative insulin requirement on the basis of blood glucose and urine sugar determination", "Arbitrarily continue with the intraoperative dose of insulin after surgery"],
+    ans: 3,
+    exp: "Postoperative insulin requirements should be guided by regular blood glucose monitoring combined with urine glucose assessment — this allows appropriate titration without hypoglycaemia risk. Intravenous glucose is required to prevent hypoglycaemia when NPO. Urinalysis alone is unreliable for insulin dosing. Intraoperative insulin doses are not automatically carried over postoperatively."
+  },
+  {
+    q: "Which of the following is NOT true in relation to the aetiology of secondary hypertension?",
+    opts: ["Phaeochromocytoma", "Hyperaldosteronism (Conn's syndrome)", "Obstructive uropathy", "Renovascular disease", "Familial aetiological factor"],
+    ans: 4,
+    exp: "A familial aetiological factor is relevant to primary (essential) hypertension — not secondary hypertension, which has an identifiable underlying cause. Secondary causes include phaeochromocytoma, Conn's syndrome, obstructive uropathy, renovascular disease (renal artery stenosis), chronic kidney disease, and coarctation of the aorta."
+  },
+  {
+    q: "Management of postoperative hypertension may involve the following EXCEPT",
+    opts: ["Urethral catheterisation", "Adequate analgesia, preferably by the oral route", "Administration of a parenteral sedative", "Parenteral propranolol or labetalol", "Intravenous nicardipine"],
+    ans: 1,
+    exp: "Adequate postoperative analgesia is important in managing hypertension from pain, but it should be given by the parenteral route (not oral) in the immediate postoperative period when patients may not tolerate oral medications. Bladder distension (relieved by catheterisation), pain, and anxiety are common reversible causes of postoperative hypertension."
+  },
+  {
+    q: "Which of the following statements is true of ketamine anaesthesia?",
+    opts: ["Has a strong analgesic effect", "Abolishes the laryngeal reflex during surgery", "Causes intraoperative hypotension", "Administration requires a qualified anaesthetist", "Induces vomiting during surgery"],
+    ans: 0,
+    exp: "Ketamine is a dissociative anaesthetic with potent analgesic properties — this is one of its distinctive advantages. Unlike most anaesthetic agents, ketamine preserves (not abolishes) the laryngeal reflex. It causes hypertension and tachycardia (not hypotension) by stimulating the sympathetic nervous system. Administration by trained personnel is important but not uniquely required for ketamine."
+  },
+  {
+    q: "Clinical features of phaeochromocytoma include the following EXCEPT",
+    opts: ["Sustained headache", "Sweating", "Palpitations", "Attack may be induced by physical exercise", "May be asymptomatic"],
+    ans: 0,
+    exp: "This question has a nuance: sustained (constant) headache as the sole listed exception requires clarification — headache in phaeochromocytoma is classically episodic (paroxysmal), not sustained. As presented, the answer key identifies (a) as the exception, implying that 'sustained' headache is incorrect; phaeochromocytoma causes paroxysmal hypertensive headaches. All other options are classic features."
+  },
+  {
+    q: "Which of the following is NOT a current investigation for phaeochromocytoma?",
+    opts: ["CT scan and MRI", "Phentolamine test", "Selective angiography of the adrenal arteries", "24-hour urinary assay of adrenaline, noradrenaline, metanephrine and normetanephrine", "Plasma free metanephrine and normetanephrine"],
+    ans: 1,
+    exp: "The phentolamine test (IV phentolamine causing a fall in BP in phaeochromocytoma) is an old provocative test that is no longer recommended due to false positives and safety risks. Current investigations include biochemical tests (24-hour urinary catecholamines/metanephrines, plasma free metanephrines) and imaging (CT/MRI for localisation). Selective angiography is occasionally used for small tumours."
+  },
+  {
+    q: "Which of the following is NOT a complication associated with morbid obesity?",
+    opts: ["Type II diabetes mellitus and hyperlipidaemia", "Hypertension and heart disease", "Breast and pancreatic cancer", "Gallstones", "Sleep apnoea syndrome"],
+    ans: 2,
+    exp: "Breast and pancreatic cancer, while associated with obesity to some degree in epidemiological studies, are not listed among the classical complications of morbid obesity in surgical texts. Recognised complications include metabolic syndrome (T2DM, hyperlipidaemia), cardiovascular disease, gallstones (from cholesterol supersaturation of bile), obstructive sleep apnoea, osteoarthritis, and venous thromboembolism."
+  },
+  {
+    q: "The following are indications for surgical treatment in obesity EXCEPT",
+    opts: ["Failure of properly supervised weight loss programme", "BMI of 35 to 40 kg/m²", "BMI of 35 to 40 kg/m² with comorbidity", "BMI above 40 kg/m²", "Patient's choice"],
+    ans: 1,
+    exp: "A BMI of 35–40 kg/m² alone (without comorbidity) is not sufficient to indicate bariatric surgery. The threshold is BMI >40 kg/m² (morbid obesity) without comorbidity, or BMI 35–40 kg/m² with significant obesity-related comorbidities (e.g. T2DM, hypertension, OSA). Patient choice alone is also not a standalone indication — it must be combined with clinical criteria."
+  },
+  {
+    q: "Which of the following statements is FALSE as regards surgical options for the treatment of obesity?",
+    opts: ["Gastric restrictive procedures reduce the capacity of the stomach", "Gastric restrictive procedures are potentiated by a simultaneous restriction of calorie intake", "Gastric restrictive procedures are more effective than gastric bypass/malabsorptive procedures", "Gastric bypass/malabsorptive procedures are more effective than gastric restrictive procedures", "Gastric bypass/malabsorptive procedures drastically reduce the absorptive surface of the small intestine"],
+    ans: 2,
+    exp: "Gastric bypass and malabsorptive procedures (e.g. Roux-en-Y gastric bypass, biliopancreatic diversion) are more effective than purely restrictive procedures (e.g. laparoscopic gastric banding) for sustained long-term weight loss. Restrictive procedures rely entirely on reduced intake, whereas bypass/malabsorptive procedures also alter gut hormones and absorption — a more powerful combination."
+  },
+  {
+    q: "Regarding tetanus, which statement is correct?",
+    opts: ["Is caused by low serum calcium levels", "Is heralded by stupor and coma", "Is caused by gram-positive bacilli", "Is aborted within 12 hours by an injection of tetanus toxoid", "Is a good indication for tracheostomy"],
+    ans: 4,
+    exp: "Tracheostomy is indicated in tetanus to protect the airway from laryngospasm and to facilitate ventilatory management in severe cases. Tetanus is caused by Clostridium tetani — a gram-positive organism (note: the companion text incorrectly states gram-negative in the explanation for Q336). Tetany (not tetanus) is caused by hypocalcaemia. Tetanus toxoid does not abort an established attack."
+  },
+  {
+    q: "Which of the following statements is true of tetanus?",
+    opts: ["The causative agent, Clostridium tetani, is a gram-positive, anaerobic and spore-forming organism", "Clostridium tetani has an incubation period of 10 to 20 days", "Tetanospasmin bonds to the neuromuscular junctions of inhibitory neurons and prevents the release of neurotransmitters", "Most affected motor neurones are those of the abdomen and limbs", "All of the above"],
+    ans: 2,
+    exp: "Tetanospasmin (tetanus toxin) travels retrograde along motor neurons and acts at inhibitory interneurons (Renshaw cells) in the spinal cord, blocking the release of glycine and GABA. This disinhibits motor neurons, causing spastic paralysis and the characteristic spasms. Clostridium tetani is gram-positive (the note about gram-negative in some texts reflects OCR/editorial error). Incubation is 4–14 days. The most affected neurons are cranial and spinal."
+  },
+  {
+    q: "Which of these is NOT a clinical feature of tetanus?",
+    opts: ["Risus sardonicus", "Trismus", "Opisthotonos", "Tonic and clonic convulsions", "Cheyne-Stokes breathing"],
+    ans: 4,
+    exp: "Cheyne-Stokes breathing is a periodic breathing pattern seen in brain stem lesions, heart failure, and central nervous system depression — it is not a feature of tetanus. Tetanus presents with risus sardonicus (sardonic smile from facial muscle spasm), trismus (lockjaw from masseter spasm), opisthotonos (arched back from paraspinal spasm), and generalised tonic-clonic spasms."
+  },
+  {
+    q: "In tetanus",
+    opts: ["Full active immunisation confers life-long immunity", "Passive immunity utilises inactivated toxin", "Anti-tetanus serum is remarkably safe for routine use", "An infected wound is always present in the patient", "The source of infection may be chronic otitis media"],
+    ans: 4,
+    exp: "Chronic otitis media is a recognised portal of entry for tetanus — this is called otogenic tetanus. Other sources include puncture wounds, burns, and neonatal umbilical stump infections. An infected wound is not always identifiable (cryptogenic tetanus). Full immunisation does not confer life-long immunity; boosters are required every 10 years. Passive immunity uses preformed antibody (antitoxin), not inactivated toxin."
+  },
+  {
+    q: "A patient who underwent left hemicolectomy for carcinoma of the descending colon has a fever of 102.6°F the morning after surgery. The most likely diagnosis is",
+    opts: ["Atelectasis", "Pneumonia", "Wound infection", "Anastomotic leak", "Subphrenic abscess"],
+    ans: 0,
+    exp: "Fever on the first postoperative day (day 1) is most commonly caused by atelectasis — collapse of basal lung segments from shallow breathing and retained secretions after general anaesthesia. This is the classic 'wind' cause in the '5 Ws' of postoperative fever (Wind, Water, Wound, Walking, Wonder drugs). Wound infection and anastomotic leak typically present later (days 3–7 and 5–10 respectively)."
+  },
+  {
+    q: "Which of the following statements is true of the HIV virus?",
+    opts: ["It is a DNA virus", "Does not appear in saliva", "Was discovered in 1963", "Is an RNA virus", "Is transmitted by direct skin contact"],
+    ans: 3,
+    exp: "HIV is an RNA retrovirus that uses the enzyme reverse transcriptase to convert its RNA genome into DNA. It was discovered in 1983 (not 1963). HIV is present in saliva, though at low concentrations compared to blood, semen, and breast milk. It is not transmitted by casual skin contact — it requires exchange of infected body fluids or mucous membrane exposure."
+  },
+  {
+    q: "Concerning HIV infection, which statement is correct?",
+    opts: ["Routine screening before blood transfusion eliminates the risk", "Risk of transmission is less with Factor VIII concentrate than with packed cells", "Blood from commercial sources is safer than that donated by relatives", "Insertive anal intercourse is a known mode of spread", "The phase of infection does not influence risk of transmission"],
+    ans: 3,
+    exp: "Insertive anal intercourse is a recognised route of HIV transmission — rectal mucosa is highly susceptible to HIV entry. Routine screening does not eliminate risk (window period). Factor VIII concentrate historically carried high HIV risk due to pooling from multiple donors. Voluntary blood donation is considered safer than paid (commercial) donation. Viral load — which varies by phase — significantly influences transmission risk."
+  },
+  {
+    q: "Which of the following statements is NOT true of perioperative preparation of HIV patients for elective surgery?",
+    opts: ["Ensure a CD4 count greater than 200 cells/ml", "Viral load should ideally be less than 10,000 copies/ml", "The higher the ASA class, the better the prognosis", "Ensure optimisation of anti-retroviral therapy preoperatively", "The CD4 count does not affect the outcome of surgery"],
+    ans: 4,
+    exp: "CD4 count significantly affects surgical outcome in HIV patients — lower CD4 counts (particularly below 200 cells/ml) are associated with increased postoperative complications and mortality. The statement that 'CD4 count does not affect outcome' is therefore false. A higher ASA class indicates worse physical status and confers a worse prognosis, not better."
+  },
+  {
+    q: "Which of the following is NOT true of the management of HIV viral exposure?",
+    opts: ["Carefully wash site with soap and running water", "Inform the patient of development", "Obtain patient's blood for screening", "Screen health worker for HIV", "Repeat screening of health worker at 4 weeks, 4 months and 8 months irrespective of initial status"],
+    ans: 4,
+    exp: "Post-exposure follow-up screening of the health worker should be conducted at 6 weeks, 3 months, and 6 months — not at 4 weeks, 4 months, and 8 months. These specific intervals reflect the window period for seroconversion. Immediate first aid (washing), notification, and baseline HIV testing of both parties are correct initial steps."
+  },
+  {
+    q: "The following are universal precautions to prevent transmission of HIV EXCEPT",
+    opts: ["Barrier measures (gloves and hand washing after degloving)", "Proper disposal of sharps", "There is no risk involved in 'raw' mouth-to-mouth resuscitation", "Special precautionary measures by health care workers with injuries and dermatitis", "Special precautionary measures by pregnant health care workers"],
+    ans: 2,
+    exp: "'Raw' (unprotected) mouth-to-mouth resuscitation carries a risk of HIV transmission through contact with oral secretions and potentially blood — it should be avoided where possible. Universal precautions exist precisely because all body fluids must be treated as potentially infectious. Pocket masks or bag-valve-mask devices should be used instead of direct mouth-to-mouth contact."
+  },
+  {
+    q: "Comparing silk to catgut as suture materials",
+    opts: ["Sterilisation of silk is more reliable", "Tolerance to infection is better with silk", "The tensile strength of catgut is higher", "Cellular reaction to catgut is greater", "Ease of tying is better with silk"],
+    ans: 2,
+    exp: "Catgut has a higher tensile strength than silk. Silk, being a braided non-absorbable material, has better handling properties (easy to tie, good knot security) but causes a greater foreign body reaction than monofilament sutures. Catgut provokes a significant cellular reaction (it is absorbed by proteolysis). Silk has lower reliability of sterilisation and tolerates infection poorly."
+  },
+  {
+    q: "The following are problems that may be associated with prolonged immobilisation EXCEPT",
+    opts: ["Constipation", "Depression", "Calf venous thrombosis", "Pressure sores", "Hypocalcaemia"],
+    ans: 4,
+    exp: "Prolonged immobilisation causes hypercalcaemia — not hypocalcaemia — due to increased bone resorption without the mechanical loading stimulus that suppresses osteoclast activity. Other recognised complications are constipation (reduced gut motility), depression, DVT (venous stasis), and pressure sores (ischaemia from sustained pressure on bony prominences)."
+  },
+  {
+    q: "A patient is booked for upper GI endoscopy. Which of these is appropriate counsel to the patient?",
+    opts: ["The last meal should be in the evening preceding the procedure", "Remove all artificial dentures the evening before the procedure", "Tablets of dulcolax should be taken on the morning of the procedure", "No medications should be administered on the morning of the procedure", "Patient should be accompanied to the procedure by an ambulance"],
+    ans: 0,
+    exp: "For upper GI endoscopy, the patient should fast from the previous evening — the last meal the night before allows the stomach to empty before the procedure. Dentures should be removed immediately before the procedure, not the night before. Dulcolax is used for lower GI (colonoscopy) preparation. Essential medications (e.g. antihypertensives) are continued with a sip of water. An escort is needed but not an ambulance routinely."
+  },
+  {
+    q: "Which of the following statements is false in relation to amyloid disease?",
+    opts: ["Is not a malignant disease", "May be diagnosed on rectal biopsy", "Can occur in chronic osteomyelitis", "Is stained by Congo red stain", "Is treated with ethambutol"],
+    ans: 4,
+    exp: "Ethambutol is an antituberculous drug — it has no role in the treatment of amyloidosis. There is no specific curative treatment for most forms of amyloidosis; management focuses on treating the underlying cause (e.g. controlling chronic inflammation or infection in secondary/AA amyloidosis). Rectal biopsy is a standard diagnostic technique. Congo red staining with apple-green birefringence under polarised light is pathognomonic."
+  },
+  {
+    q: "The following are true of fistula EXCEPT",
+    opts: ["A tract connecting two connective tissue spaces", "A blind opening", "A tract connecting two epithelial surfaces lined by granulation tissue", "Does not discharge blood", "Discharges faeculent material"],
+    ans: 2,
+    exp: "A fistula is defined as an abnormal communication between two epithelial-lined surfaces — it is lined by granulation tissue, not epithelium per se. A blind-ending tract is a sinus, not a fistula. A sinus connects an abscess cavity to a surface; a fistula connects two surfaces. Faeculent discharge suggests an enterocutaneous fistula. A fistula can discharge blood depending on its location."
+  },
+  {
+    q: "Which of the following is the MOST UNLIKELY complication of a faecal fistula?",
+    opts: ["Cardiogenic shock", "Septic shock", "Hypovolaemic shock", "Hyperkalaemia", "Neurogenic shock"],
+    ans: 3,
+    exp: "Hyperkalaemia is unlikely in faecal fistula — in fact, hypokalaemia is a very common electrolyte complication from the loss of potassium-rich intestinal fluid. Septic and hypovolaemic shock are well-recognised complications from contamination and fluid losses respectively. Cardiogenic and neurogenic shock are uncommon but not impossible. Hyperkalaemia has no specific mechanism in fistula."
+  },
+  {
+    q: "The term 'ulcer' is by definition",
+    opts: ["An erosion of the skin", "A discontinuity of any epithelial surface", "A lesion always caused by infection", "A neoplastic process", "An erosion of bone"],
+    ans: 1,
+    exp: "An ulcer is defined as a discontinuity or break in any epithelial surface — this can be skin, mucosa, or any other epithelium. It is not limited to skin or bone, and is not always infective in origin (e.g. venous leg ulcers, pressure ulcers, ischaemic ulcers). A neoplastic lesion may ulcerate but ulceration itself is not a neoplastic process."
+  }
+];
+
+const OHANAKA_BLOCKS=[
+  { id:"ohanaka_principles", name:"Principles of Surgery", questions:OHANAKA_Qs, available:true, topic:"Principles of Surgery" },
+];
+
 
 const COURSES = [
   { id:"internal", name:"Internal Medicine", emoji:"🩺", bg:"linear-gradient(135deg,#0f2744,#1a3a5c)", accent:"#c9a84c", school:"IU",
@@ -14553,6 +15575,7 @@ function App(){
   // ── Senior Posting navigation for IM ──
   const [showSeniorPosting,setShowSeniorPosting]=useState(false);
   const [showJuniorPosting,setShowJuniorPosting]=useState(false);
+  const [showOhanakaView,setShowOhanakaView]=useState(false);
 
   // ── School-based course filtering ──
   const currentSchool = selectedSchool;
@@ -15510,12 +16533,12 @@ function App(){
       const flClass=b.flType==="internal"?"fl-im":b.flType==="surgery"?"fl-surg":b.flType==="community"?"fl-comm":"";
       const accentCol=b.flType==="internal"?"#c9a84c":b.flType==="surgery"?"#ef9a9a":b.flType==="community"?"#a5d6a7":"#7c3aed";
       const pills=b.flType==="internal"?["Junior Posting","Past Qs","Picture MCQs"]:
-                  b.flType==="surgery"?["Jr. Posting","Sr. Posting","Past Qs","Picture MCQs"]:
+                  b.flType==="surgery"?["Ohanaka MCQs","Jr. & Sr. Posting","Past Qs","Picture MCQs"]:
                   b.flType==="community"?["Jr. Posting","Sr. Posting","Past Qs","Picture MCQs"]:
                   ["Exam Notes","Practice MCQs"];
       return e("div",{key,className:"final-lap-card "+flClass+" fade-up",
         style:{animationDelay:animIdx*40+"ms"},
-        onClick:()=>{ setBlock(b); setShowSeniorPosting(false); setShowJuniorPosting(false); pushView("final_lap"); }},
+        onClick:()=>{ setBlock(b); setShowSeniorPosting(false); setShowJuniorPosting(false); setShowOhanakaView(false); pushView("final_lap"); }},
         e("div",{className:"final-lap-card-top"},
           e("div",{className:"final-lap-badge"},"✦ Premium"),
           e("div",{className:"final-lap-title"},b.name),
@@ -16039,6 +17062,68 @@ function App(){
                 g.anyAvailable&&e("span",{style:{color:accentCol,fontSize:"1.3rem",flexShrink:0}},hasMultiple?"›":"→")
               );
             })
+          )
+        )
+      );
+    }
+
+    // ── OHANAKA MCQs sub-view ─────────────────────────────────────────────
+    if(showOhanakaView && course.id==="surgery"){
+      const accentCol="#ef9a9a";
+      const accentDark="#c62828";
+      const gradBar="linear-gradient(90deg,#ef9a9a,#ef9a9a44)";
+      const ohanakaQs=OHANAKA_BLOCKS.flatMap(b=>b.questions);
+      return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
+        e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
+          e("div",{style:{maxWidth:720,margin:"0 auto"}},
+            e("button",{onClick:()=>{ setShowOhanakaView(false); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
+            e("div",{style:{display:"flex",alignItems:"center",gap:10}},
+              e("div",{style:{width:4,height:28,borderRadius:2,background:accentCol,flexShrink:0}}),
+              e("div",null,
+                e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Surgery · Final Lap"),
+                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Ohanaka MCQs"),
+                e("p",{style:{fontSize:".75rem",color:th.textMuted,marginTop:2}},"MCQs from Companion to Core Surgery by Ohanaka")
+              )
+            )
+          )
+        ),
+        e("div",{style:{height:2,background:gradBar}}),
+        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px"}},
+          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
+            ohanakaQs.length>1&&e("div",{className:"fade-up",
+              style:{background:"linear-gradient(135deg,"+accentCol+"18,"+accentCol+"06)",borderRadius:8,padding:"20px 22px",
+                display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                boxShadow:"0 3px 16px rgba(15,39,68,.1)",cursor:"pointer",
+                border:"1.5px solid "+accentCol+"44",borderLeft:"4px solid "+accentCol,
+                transition:"transform .18s,box-shadow .18s"},
+              onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
+              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
+              onClick:()=>{const b={id:"ohanaka_all",name:"All Ohanaka MCQs",questions:ohanakaQs,available:true};setBlock(b);setQCount(Math.min(20,ohanakaQs.length));pushView("setup");}},
+              e("div",{style:{flex:1}},
+                e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"All Ohanaka MCQs"),
+                e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},ohanakaQs.length+" questions total")
+              ),
+              e("span",{style:{color:accentCol,fontSize:"1.4rem"}},"→")
+            ),
+            OHANAKA_BLOCKS.map((b,bi)=>
+              e("div",{key:bi,className:"fade-up",
+                style:{animationDelay:(bi+1)*50+"ms",background:th.surface,borderRadius:6,padding:"17px 20px",
+                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                  boxShadow:th.shadow,cursor:"pointer",border:"1px solid #e0d8cc",
+                  transition:"transform .18s,box-shadow .18s",minHeight:68},
+                onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
+                onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
+                onClick:()=>{setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup");}},
+                e("div",{style:{flex:1,minWidth:0}},
+                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
+                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:th.text}},b.name),
+                    e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live")
+                  ),
+                  e("p",{style:{color:th.textFaint,fontSize:".76rem"}},b.questions.length+" questions")
+                ),
+                e("span",{style:{color:accentCol,fontSize:"1.2rem",flexShrink:0}},"→")
+              )
+            )
           )
         )
       );
@@ -16939,8 +18024,8 @@ function App(){
         ]
       : isSurgery
       ? [
-          {label:"Junior Posting MCQs",desc:"High yield junior posting MCQs",live:false},
-          {label:"Senior Posting MCQs",desc:"High yield senior posting MCQs",live:true,action:"senior_posting"},
+          {label:"Ohanaka MCQs",desc:"MCQs from Companion to Core Surgery by Ohanaka",live:true,action:"ohanaka"},
+          {label:"Junior & Senior Posting MCQs",desc:"High yield junior and senior posting MCQs",live:true,action:"senior_posting"},
           {label:"Past Questions",desc:"Past questions with explanations",live:false},
           {label:"Picture MCQs",desc:"Image-based MCQs",live:false},
         ]
@@ -16993,6 +18078,7 @@ function App(){
               if(!isUnlocked){ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); return; }
               if(sc.action==="senior_posting"){ setShowSeniorPosting(true); pushView("blocks"); }
               if(sc.action==="junior_posting"){ setShowJuniorPosting(true); pushView("blocks"); }
+              if(sc.action==="ohanaka"){ setShowOhanakaView(true); pushView("blocks"); }
             };
             return e("div",{key:i,className:"fl-sub-card"+(isComingSoon?" coming-soon":isLiveAndUnlocked?"":" locked")+" fade-up",
               style:{animationDelay:i*60+"ms"},
