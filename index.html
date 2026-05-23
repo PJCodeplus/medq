@@ -17069,59 +17069,67 @@ function App(){
 
     // ── OHANAKA MCQs sub-view ─────────────────────────────────────────────
     if(showOhanakaView && course.id==="surgery"){
-      const accentCol="#ef9a9a";
-      const accentDark="#c62828";
-      const gradBar="linear-gradient(90deg,#ef9a9a,#ef9a9a44)";
       const ohanakaQs=OHANAKA_BLOCKS.flatMap(b=>b.questions);
-      return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
-        e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
-          e("div",{style:{maxWidth:720,margin:"0 auto"}},
-            e("button",{onClick:()=>{ setShowOhanakaView(false); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
-            e("div",{style:{display:"flex",alignItems:"center",gap:10}},
-              e("div",{style:{width:4,height:28,borderRadius:2,background:accentCol,flexShrink:0}}),
-              e("div",null,
-                e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Surgery · Final Lap"),
-                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Ohanaka MCQs"),
-                e("p",{style:{fontSize:".75rem",color:th.textMuted,marginTop:2}},"MCQs from Companion to Core Surgery by Ohanaka")
-              )
+      const optLetters=["A","B","C","D","E"];
+      return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
+        /* ── sticky topbar (same pattern as reading view) ── */
+        e("div",{className:"rdr-topbar"},
+          e("div",{className:"rdr-topbar-inner"},
+            e("button",{className:"rdr-back",onClick:()=>{ setShowOhanakaView(false); popView(); }},"← Back"),
+            e("div",{className:"rdr-title-area"},
+              e("div",{className:"rdr-subject"},"Surgery · Final Lap"),
+              e("div",{className:"rdr-title"},"Ohanaka MCQs — Scroll Review")
             )
-          )
+          ),
+          e("div",{className:"rdr-progress-wrap"})
         ),
-        e("div",{style:{height:2,background:gradBar}}),
-        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px"}},
-          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            ohanakaQs.length>1&&e("div",{className:"fade-up",
-              style:{background:"linear-gradient(135deg,"+accentCol+"18,"+accentCol+"06)",borderRadius:8,padding:"20px 22px",
-                display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
-                boxShadow:"0 3px 16px rgba(15,39,68,.1)",cursor:"pointer",
-                border:"1.5px solid "+accentCol+"44",borderLeft:"4px solid "+accentCol,
-                transition:"transform .18s,box-shadow .18s"},
-              onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
-              onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
-              onClick:()=>{const b={id:"ohanaka_all",name:"All Ohanaka MCQs",questions:ohanakaQs,available:true};setBlock(b);setQCount(Math.min(20,ohanakaQs.length));pushView("setup");}},
-              e("div",{style:{flex:1}},
-                e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"All Ohanaka MCQs"),
-                e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},ohanakaQs.length+" questions total")
-              ),
-              e("span",{style:{color:accentCol,fontSize:"1.4rem"}},"→")
-            ),
-            OHANAKA_BLOCKS.map((b,bi)=>
-              e("div",{key:bi,className:"fade-up",
-                style:{animationDelay:(bi+1)*50+"ms",background:th.surface,borderRadius:6,padding:"17px 20px",
-                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
-                  boxShadow:th.shadow,cursor:"pointer",border:"1px solid #e0d8cc",
-                  transition:"transform .18s,box-shadow .18s",minHeight:68},
-                onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
-                onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-                onClick:()=>{setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup");}},
-                e("div",{style:{flex:1,minWidth:0}},
-                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
-                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:th.text}},b.name),
-                    e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Live")
-                  ),
-                  e("p",{style:{color:th.textFaint,fontSize:".76rem"}},b.questions.length+" questions")
+        /* ── scroll body ── */
+        e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
+          /* header blurb */
+          e("div",{style:{marginBottom:28,paddingBottom:18,borderBottom:"1px solid #e4e4e4"}},
+            e("p",{style:{fontSize:".8rem",color:"#888",lineHeight:1.7}},
+              ohanakaQs.length+" questions · Companion to Core Surgery by Ohanaka · Correct answers highlighted in green · Explanations shown inline"
+            )
+          ),
+          /* questions */
+          ohanakaQs.map((q,qi)=>
+            e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
+              /* question stem */
+              e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
+                e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginRight:8,verticalAlign:"middle"}},
+                  "Q"+(qi+1)
                 ),
-                e("span",{style:{color:accentCol,fontSize:"1.2rem",flexShrink:0}},"→")
+                q.q
+              ),
+              /* options */
+              e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
+                q.opts.map((opt,oi)=>{
+                  const isCorrect=oi===q.ans;
+                  return e("div",{key:oi,style:{
+                    display:"flex",alignItems:"flex-start",gap:10,
+                    padding:"9px 13px",borderRadius:6,
+                    background:isCorrect?"#e8f5ee":"#f7f5f2",
+                    border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db"),
+                    transition:"none"
+                  }},
+                    e("span",{style:{
+                      flexShrink:0,width:22,height:22,borderRadius:"50%",
+                      display:"flex",alignItems:"center",justifyContent:"center",
+                      fontSize:".65rem",fontWeight:700,letterSpacing:".04em",
+                      background:isCorrect?"#2e7d32":"#e0d8cc",
+                      color:isCorrect?"#fff":"#888",marginTop:1
+                    }},optLetters[oi]),
+                    e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
+                  );
+                })
+              ),
+              /* explanation */
+              e("div",{style:{
+                background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid #ef9a9a",
+                borderRadius:6,padding:"10px 14px"
+              }},
+                e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginBottom:5}},"Explanation"),
+                e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
               )
             )
           )
