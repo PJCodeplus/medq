@@ -14991,7 +14991,6 @@ const COURSES = [
     ]
   },
   { id:"psychiatry", name:"Psychiatry", emoji:"🧠", bg:"linear-gradient(135deg,#1a1a2e,#2d2b55)", accent:"#ce93d8", school:"IU", blocks:[
-    { id:"final_lap_psych", name:"The Final Lap", isFinalLap:true, available:true },
     {id:"psych1",name:"Psychiatry",questions:[],available:false},
   ] },
   { id:"preclinical", name:"Preclinicals", emoji:"🔬", bg:"linear-gradient(135deg,#1a1a2e,#2d1b4e)", accent:"#ce93d8", school:"IU",
@@ -17152,7 +17151,7 @@ function App(){
                   backgroundPosition:"right 10px center",
                   minWidth:160
                 }},
-                e("option",{value:"scroll"},"Scroll Mode"),
+                e("option",{value:"scroll"},"Continuous View"),
                 e("option",{value:"practice"},"Practice Mode")
               )
             )
@@ -18021,50 +18020,6 @@ function App(){
     const isSurgery=flType==="surgery";
     const isCommunity=flType==="community";
     const isTflCourse=isInternal||isSurgery||isCommunity;
-
-    // Psychiatry Final Lap (legacy — keep working)
-    if(!isTflCourse){
-      const accent="#7c3aed";
-      const subCards=[
-        { label:"Exam Notes", desc:"High yield exam notes for every topic", live:true, onClick:()=>{ setReadingContext("psych");paywallDismissedRef.current=false;setShowPayDetails(false);setReadingFontStep(1);pushView("reading_view"); } },
-        { label:"Past Questions", desc:"Past questions with explanations", live:false, onClick:null },
-        { label:"Practice MCQs", desc:"High yield junior + senior posting MCQs", live:false, onClick:null },
-        { label:"Picture Tests", desc:"Image-based MCQs", live:false, onClick:null },
-      ];
-      return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
-        e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
-          e("div",{style:{maxWidth:720,margin:"0 auto"}},
-            e("button",{onClick:()=>popView(),style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
-            e("div",{style:{display:"flex",alignItems:"center",gap:10}},
-              e("div",{style:{width:4,height:28,borderRadius:2,background:"#7c3aed",flexShrink:0}}),
-              e("div",null,
-                e("span",{style:{fontSize:".6rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"#7c3aed",display:"block",marginBottom:2}},"Final Lap"),
-                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.6rem)",fontWeight:900,color:th.text}},course?.name||"Psychiatry")
-              )
-            )
-          )
-        ),
-        e("div",{style:{height:2,background:"linear-gradient(90deg,#7c3aed,#7c3aed44)"}}),
-        e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px 40px"}},
-          e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-            subCards.map((sc,i)=>
-              e("div",{key:i,className:"fl-sub-card fade-up"+(!sc.live?" coming-soon":""),
-                style:{animationDelay:i*60+"ms"},
-                onClick:sc.onClick||undefined},
-                e("div",{style:{flex:1,minWidth:0}},
-                  e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:2,flexWrap:"wrap"}},
-                    e("span",{className:"fl-sub-label"},sc.label),
-                    !sc.live&&e("span",{className:"fl-sub-status soon"},"Coming Soon")
-                  ),
-                  e("p",{className:"fl-sub-desc"},sc.desc)
-                ),
-                sc.live&&e("span",{style:{color:"#7c3aed",fontSize:"1.2rem",flexShrink:0}},"→")
-              )
-            )
-          )
-        )
-      );
-    }
 
     // ── Internal Medicine / Surgery / Community Medicine Final Lap ──
     const accentCol=isInternal?"#c9a84c":isSurgery?"#ef9a9a":"#a5d6a7";
