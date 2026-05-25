@@ -20186,6 +20186,10 @@ function App(){
   const [reviewMode,setReviewMode]=useState(false);
   const [reviewIdx,setReviewIdx]=useState(null);
   const [retakeMode,setRetakeMode]=useState(false);
+  const [examMode,setExamMode]=useState(false);
+  const examModeRef=useRef(false);
+  const [examTimeLeft,setExamTimeLeft]=useState(0); // seconds remaining
+  const examTimerRef=useRef(null); // interval id
   const [attempts,setAttempts]=useState([]);
   const [loadingAdmin,setLoadingAdmin]=useState(false);
   const [adminPw,setAdminPw]=useState("");
@@ -20376,6 +20380,7 @@ function App(){
   // Sub device check handled at block entry
 
   const endQuiz = useCallback(()=>{
+    if(examTimerRef.current){ clearInterval(examTimerRef.current); examTimerRef.current=null; }
     const r={
       studentName:nameRef.current, course:courseRef.current?.name||"",
       block:blockRef.current?.name||"", topicName:topicRef.current?.label||blockRef.current?.topic||"",
@@ -20425,6 +20430,26 @@ function App(){
     setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setEndConfirm(false);
     correctRef.current=0; answeredRef.current=0;
     setRetakeMode(!!retakeQs);
+    examModeRef.current=examMode;
+    if(examMode){
+      const totalSecs=shuffled.length*60;
+      setExamTimeLeft(totalSecs);
+      if(examTimerRef.current) clearInterval(examTimerRef.current);
+      examTimerRef.current=setInterval(()=>{
+        setExamTimeLeft(prev=>{
+          if(prev<=1){
+            clearInterval(examTimerRef.current);
+            examTimerRef.current=null;
+            endQuizRef.current&&endQuizRef.current();
+            return 0;
+          }
+          return prev-1;
+        });
+      },1000);
+    } else {
+      if(examTimerRef.current){ clearInterval(examTimerRef.current); examTimerRef.current=null; }
+      setExamTimeLeft(0);
+    }
     pushView("quiz");
   };
 
@@ -20443,7 +20468,7 @@ function App(){
     if(i===qs[qIdx].ans)correctRef.current++;
     answeredRef.current++;
     userAnswersRef.current.push({qIdx,picked:i,correct:i===qs[qIdx].ans});
-    setShowFb(true);
+    if(!examModeRef.current) setShowFb(true);
     // Track GB free questions
     if(currentSchool==="GENERAL" && !validGbAccess(gbAccess)){
       const newCount=gbFreeCount+1;
@@ -22221,15 +22246,16 @@ function App(){
             e("p",{style:{fontSize:".74rem",color:th.textFaint,marginTop:5,fontStyle:"italic"}},"Drag slider to choose how many questions to attempt")
           ),
 
-          /* Summary */
-          e("div",{style:{background:"linear-gradient(135deg,"+(course.accent||"#c9a84c")+"18,"+(course.accent||"#c9a84c")+"08)",border:"1.5px solid "+(course.accent||"#c9a84c")+"33",borderRadius:6,padding:"14px 18px",marginBottom:22,display:"flex",justifyContent:"center",alignItems:"center"}},
-            e("div",{style:{textAlign:"center"}},
-              e("p",{style:{color:"#888",fontSize:".68rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Questions"),
-              e("p",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.4rem,4vw,1.8rem)",fontWeight:900,color:th.text}},clampedQ)
+          /* Exam mode row */
+          e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,marginBottom:14}},
+            e("div",{style:{display:"flex",alignItems:"center",gap:7,cursor:"pointer",userSelect:"none",flexShrink:0},
+              onClick:()=>setExamMode(v=>!v)},
+              e("div",{style:{position:"relative",width:34,height:20,borderRadius:10,background:examMode?"#c9a84c":"#d5cfc4",transition:"background .2s",flexShrink:0}},
+                e("div",{style:{position:"absolute",top:2,left:examMode?16:2,width:16,height:16,borderRadius:"50%",background:"#fff",boxShadow:"0 1px 3px rgba(0,0,0,.25)",transition:"left .18s"}})
+              ),
+              e("span",{style:{fontSize:".75rem",color:examMode?"#8a6430":"#888",fontWeight:examMode?600:400,transition:"color .2s"}},"Exam mode"+(examMode?" · "+clampedQ+" min":""))
             )
           ),
-
-          /* Buttons */
           e("div",{style:{display:"flex",gap:10}},
             e("button",{onClick:()=>popView(),style:{flex:1,padding:"13px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".9rem",color:"#666",minHeight:50}},"← Back"),
             e("button",{onClick:()=>{
@@ -22316,6 +22342,11 @@ function App(){
   if(view==="quiz"){
     const q=qs[qIdx];
     const progress=(qIdx/qs.length)*100;
+    const isExam=examModeRef.current;
+    const timerMins=Math.floor(examTimeLeft/60);
+    const timerSecs=examTimeLeft%60;
+    const timerStr=timerMins+":"+(timerSecs<10?"0":"")+timerSecs;
+    const timerUrgent=isExam&&examTimeLeft<=120;
     return e("div",{style:{minHeight:"100vh",background:th.pageBg,paddingBottom:40}},
       /* Top bar */
       e("div",{style:{background:"#fff",padding:"0 16px",position:"sticky",top:0,zIndex:100,boxShadow:"0 1px 0 #e0d8cc,0 2px 8px rgba(0,0,0,.06)"}},
@@ -22327,12 +22358,17 @@ function App(){
             ),
             e("p",{style:{textAlign:"center",color:th.textFaint,fontSize:".63rem",marginTop:3}},(qIdx+1)+" / "+qs.length)
           ),
-          /* Score + End */
+          /* Timer (exam mode) or Score (normal) + End */
           e("div",{style:{display:"flex",alignItems:"center",gap:8}},
-            e("div",{style:{textAlign:"right"}},
-              e("p",{style:{color:th.textFaint,fontSize:".6rem",letterSpacing:".08em",textTransform:"uppercase"}},"Score"),
-              e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,color:"#c9a84c",fontSize:"1rem"}},correctRef.current+"/"+answeredRef.current)
-            ),
+            isExam
+              ? e("div",{style:{textAlign:"right",minWidth:58}},
+                  e("p",{style:{color:th.textFaint,fontSize:".6rem",letterSpacing:".08em",textTransform:"uppercase"}},"Time"),
+                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,color:timerUrgent?"#c62828":"#c9a84c",fontSize:"1rem",transition:"color .3s"}},timerStr)
+                )
+              : e("div",{style:{textAlign:"right"}},
+                  e("p",{style:{color:th.textFaint,fontSize:".6rem",letterSpacing:".08em",textTransform:"uppercase"}},"Score"),
+                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,color:"#c9a84c",fontSize:"1rem"}},correctRef.current+"/"+answeredRef.current)
+                ),
             e("button",{onClick:()=>{setFlagModal(true);setFlagComment("");setFlagDone(false);},
               title:"Flag this question",
               style:{background:"rgba(220,50,50,.08)",border:"1px solid rgba(220,50,50,.25)",
@@ -22389,9 +22425,15 @@ function App(){
               q.opts.map((opt,i)=>{
                 let bg="#f7f3ed",border="1.5px solid #ddd6c6",color="#1a1a2e",circBg="#c9a84c";
                 if(picked!==null){
-                  if(i===q.ans){bg="#e8f5ee";border="1.5px solid #66bb6a";color="#1b5e20";circBg="#2e7d32";}
-                  else if(i===picked){bg="#fdecea";border="1.5px solid #ef9a9a";color="#b71c1c";circBg="#c62828";}
-                  else{bg="#f7f3ed";color="#bbb";border="1.5px solid #ece6dc";circBg="#bbb";}
+                  if(isExam){
+                    // Exam mode: only highlight selected option subtly, no correct/wrong colour
+                    if(i===picked){bg="#ede8df";border="1.5px solid #c9a84c";color="#1a1a2e";circBg="#1a1a2e";}
+                    else{bg="#f7f3ed";color="#bbb";border="1.5px solid #ece6dc";circBg="#bbb";}
+                  } else {
+                    if(i===q.ans){bg="#e8f5ee";border="1.5px solid #66bb6a";color="#1b5e20";circBg="#2e7d32";}
+                    else if(i===picked){bg="#fdecea";border="1.5px solid #ef9a9a";color="#b71c1c";circBg="#c62828";}
+                    else{bg="#f7f3ed";color="#bbb";border="1.5px solid #ece6dc";circBg="#bbb";}
+                  }
                 }
                 return e("button",{key:i,disabled:picked!==null,onClick:()=>pickAnswer(i),
                   style:{display:"flex",alignItems:"flex-start",gap:12,padding:"12px 16px",background:bg,border,borderRadius:4,cursor:picked===null?"pointer":"default",textAlign:"left",fontSize:"clamp(.88rem,2vw,.97rem)",color,lineHeight:1.6,transition:"all .15s",width:"100%",minHeight:52},
@@ -22403,6 +22445,7 @@ function App(){
                 );
               })
             ),
+            /* Feedback (normal mode only) */
             showFb&&e("div",{className:"fade-up",style:{marginTop:18,borderRadius:4,padding:"14px 18px",background:picked===q.ans?"#e8f5ee":"#fdecea",borderLeft:"4px solid "+(picked===q.ans?"#66bb6a":"#ef9a9a")}},
               e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"clamp(.93rem,2vw,1rem)",color:picked===q.ans?"#1b5e20":"#b71c1c",marginBottom:6}},
                 picked===q.ans?"✓ Correct!":"✗ Incorrect — Answer: "+LETTERS[q.ans]+": "+q.opts[q.ans]
@@ -22412,7 +22455,8 @@ function App(){
                 q.exp
               )
             ),
-            showFb&&e("button",{className:"fade-up",onClick:nextQ,
+            /* Next button — shown after picking (feedback mode) or after picking (exam mode: immediate) */
+            (showFb||isExam&&picked!==null)&&e("button",{className:"fade-up",onClick:nextQ,
               style:{width:"100%",marginTop:14,padding:"14px",background:(course&&course.accent)||"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",letterSpacing:".04em",minHeight:52},
               onMouseEnter:ev=>ev.currentTarget.style.opacity=".88",
               onMouseLeave:ev=>ev.currentTarget.style.opacity="1"},
@@ -22495,6 +22539,9 @@ function App(){
       e("div",{className:"scale-in",style:{background:th.surface,borderRadius:8,boxShadow:"0 6px 30px rgba(0,0,0,.12)",width:"100%",maxWidth:520,overflow:"hidden",border:"1px solid #e0d8cc"}},
         e("div",{style:{background:"linear-gradient(135deg,"+(result.courseAccent||"#c9a84c")+"22,"+(result.courseAccent||"#c9a84c")+"08,transparent)",borderBottom:"1.5px solid #e0d8cc",padding:"clamp(24px,5vw,36px) clamp(20px,5vw,32px)",textAlign:"center"}},
           e("p",{style:{color:"#999",fontSize:".7rem",letterSpacing:".15em",textTransform:"uppercase",marginBottom:5}},result.course+" · "+result.block),
+          examModeRef.current&&e("div",{style:{display:"inline-flex",alignItems:"center",background:"#f5edcc",color:"#8a6430",fontSize:".6rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",padding:"2px 8px",borderRadius:10,marginBottom:6}},
+            "Exam Mode"
+          ),
           e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,3vw,1.6rem)",fontWeight:900,color:th.text,marginBottom:8}},"Test Complete"),
           e("div",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(3rem,8vw,4rem)",fontWeight:900,color:"#c9a84c",lineHeight:1}},pct+"%"),
           e("p",{style:{color:th.textMuted,marginTop:4,fontWeight:300,fontSize:"clamp(.85rem,2vw,.95rem)"}},result.score+" correct out of "+result.total)
