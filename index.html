@@ -20422,7 +20422,7 @@ function App(){
   const beginQuiz=(retakeQs)=>{
     const name=studentName.trim();
     ls.set(NAME_KEY,name);
-    inTflRef.current=!!(block && block._isTfl);
+    inTflRef.current=inTflRef.current||!!(block && block._isTfl);
     const pool=retakeQs||shuffleArr(block.questions).slice(0,qCount);
     const shuffled=pool.map(shuffleOpts);
     qsRef.current=shuffled; courseRef.current=course; blockRef.current=block; topicRef.current=topic; nameRef.current=name;
@@ -21976,7 +21976,8 @@ function App(){
                   if(ohanakaDropdown==="scroll"){
                     setOhanakaBlock(b); setOhanakaMode("scroll");
                   } else {
-                    setBlock(b); setQCount(Math.min(20,b.questions.length)); pushView("setup");
+                    inTflRef.current=true;
+                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                   }
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
@@ -22898,11 +22899,9 @@ function App(){
       ),
       e("div",{style:{height:2,background:gradBg}}),
       e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px 40px"}},
-        !isUnlocked&&e("div",{className:"fade-up",style:{background:isInternal?"linear-gradient(135deg,#fdf9ef,#f5edcc)":isSurgery?"linear-gradient(135deg,#fff8f8,#fdecec)":"linear-gradient(135deg,#f4fbf5,#e5f7e6)",borderRadius:8,padding:"14px 18px",marginBottom:16,border:"1.5px solid "+accentCol+"44",display:"flex",alignItems:"center",gap:12}},
-          e("span",{style:{fontSize:"1.4rem",flexShrink:0}},"🎁"),
+        !isUnlocked&&e("div",{className:"fade-up",style:{background:isInternal?"linear-gradient(135deg,#fdf9ef,#f5edcc)":isSurgery?"linear-gradient(135deg,#fff8f8,#fdecec)":"linear-gradient(135deg,#f4fbf5,#e5f7e6)",borderRadius:8,padding:"12px 16px",marginBottom:16,border:"1.5px solid "+accentCol+"44",display:"flex",alignItems:"center",gap:12}},
           e("div",{style:{flex:1}},
-            e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".92rem",color:accentDark,marginBottom:2}},"10 free questions to try"),
-            e("p",{style:{fontSize:".76rem",color:"#666",lineHeight:1.5}},"Explore any section — you can attempt 10 questions for free. Unlock all Final Lap content for "+courseName+" at ₦3,500 or the full bundle (IM + Surgery + Comm. Med) for ₦8,000.")
+            e("p",{style:{fontSize:".76rem",color:"#666",lineHeight:1.5}},"Unlock all Final Lap content for "+courseName+" at ₦3,500 or the full bundle (IM + Surgery + Comm. Med) for ₦8,000.")
           ),
           e("button",{onClick:()=>{ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },
             style:{flexShrink:0,background:accentDark,color:"#fff",border:"none",borderRadius:4,padding:"7px 14px",fontSize:".76rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},
@@ -22911,9 +22910,9 @@ function App(){
         e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
           tflCards.map((sc,i)=>{
             const isLiveAndUnlocked=isUnlocked&&sc.live;
-            const isComingSoon=!sc.live; // coming soon for everyone — no content yet
+            const isComingSoon=!sc.live;
             const handleClick=()=>{
-              if(isComingSoon) return; // no content — do nothing
+              if(isComingSoon) return;
               if(sc.action==="senior_posting"){ inTflRef.current=true; setShowSeniorPosting(true); pushView("blocks"); }
               if(sc.action==="junior_posting"){ inTflRef.current=true; setShowJuniorPosting(true); pushView("blocks"); }
               if(sc.action==="ohanaka"){ inTflRef.current=true; setShowOhanakaView(true); setOhanakaMode(null); pushView("blocks"); }
