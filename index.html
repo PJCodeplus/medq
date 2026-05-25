@@ -13889,10 +13889,8 @@ const IM_SENIOR_BLOCKS=[
 ];
 /* ── Surgery Final Lap blocks ── */
 const SURG_SENIOR_BLOCKS=[
-  { id:"surg_thyroid", name:"Surgery of the Thyroid", questions:SURGERY_THYROID_Qs, available:true, topic:"Surgery of the Thyroid" },
-  { id:"surg_endocrine", name:"Endocrine Surgery", questions:ENDOCRINE_SURGERY_Qs, available:true, topic:"Endocrine Surgery" },
+  { id:"surg_endocrine", name:"Endocrine Surgery", questions:[...SURGERY_THYROID_Qs,...SURGERY_BREAST_Qs,...ENDOCRINE_SURGERY_Qs], available:true, topic:"Endocrine Surgery" },
   { id:"surg_head_neck", name:"Head & Neck Surgery", questions:SURGERY_HEAD_NECK_Qs, available:true, topic:"Head & Neck Surgery" },
-  { id:"surg_breast", name:"Breast Surgery", questions:SURGERY_BREAST_Qs, available:true, topic:"Breast Surgery" },
   { id:"surg_biliary", name:"Hepatobiliary Surgery", questions:SURGERY_BILIARY_Qs, available:true, topic:"Hepatobiliary Surgery" },
   { id:"gen_surg", name:"General Surgery", questions:[], available:false },
   { id:"urol", name:"Urology", questions:[], available:false },
@@ -20316,6 +20314,9 @@ function App(){
   const [tflCodeError,setTflCodeError]=useState("");
   const [tflCodeLoading,setTflCodeLoading]=useState(false);
   const [tflPayCopied,setTflPayCopied]=useState(false);
+  const TFL_FREE_KEY="medq_tfl_free_count";
+  const [tflFreeCount,setTflFreeCount]=useState(()=>{ try{return parseInt(ls.get(TFL_FREE_KEY)||"0");}catch{return 0;} });
+  const [showTflQuizPaywall,setShowTflQuizPaywall]=useState(false);
 
   // ── Senior Posting navigation for IM ──
   const [showSeniorPosting,setShowSeniorPosting]=useState(false);
@@ -20324,6 +20325,9 @@ function App(){
   const [ohanakaMode,setOhanakaMode]=useState(null); // null=block list, "scroll"=scroll review, (practice goes to setup)
   const [ohanakaBlock,setOhanakaBlock]=useState(null); // the selected OHANAKA_BLOCKS entry
   const [ohanakaDropdown,setOhanakaDropdown]=useState("scroll"); // "scroll" or "practice" — default scroll mode
+  const inTflRef=useRef(false); // true when quiz was launched from a Final Lap card (locked)
+  const ohanakaScrollSeenRef=useRef(0); // session total questions revealed in scroll view (global across blocks)
+  const OHANAKA_SCROLL_FREE=10; // free questions in scroll/continuous view
 
   // ── School-based course filtering ──
   const currentSchool = selectedSchool;
@@ -20413,6 +20417,7 @@ function App(){
   const beginQuiz=(retakeQs)=>{
     const name=studentName.trim();
     ls.set(NAME_KEY,name);
+    inTflRef.current=!!(block && block._isTfl);
     const pool=retakeQs||shuffleArr(block.questions).slice(0,qCount);
     const shuffled=pool.map(shuffleOpts);
     qsRef.current=shuffled; courseRef.current=course; blockRef.current=block; topicRef.current=topic; nameRef.current=name;
@@ -20453,6 +20458,11 @@ function App(){
     if(isStp()&&!validStpAccess(stpAccess)){
       const nc=stpFreeCount+1; setStpFreeCount(nc); ls.set(STP_FREE_KEY,String(nc));
     }
+    // Track TFL free questions (all Final Lap content when not unlocked)
+    const tflUnlocked=courseRef.current?.id==="internal"?tflIntUnlocked:courseRef.current?.id==="surgery"?tflSurgUnlocked:courseRef.current?.id==="community"?tflCommUnlocked:true;
+    if(inTflRef.current && !tflUnlocked){
+      const nc=tflFreeCount+1; setTflFreeCount(nc); ls.set(TFL_FREE_KEY,String(nc));
+    }
   };
 
   const nextQ=()=>{
@@ -20468,6 +20478,11 @@ function App(){
     // Steeplechase paywall — triggers at 5
     if(isStp()&&!validStpAccess(stpAccess)&&stpFreeCount>=5){
       setShowStpPaywall(true); return;
+    }
+    // TFL paywall — fires after 10 free questions across all Final Lap content
+    if(inTflRef.current){
+      const tflUnlocked=courseRef.current?.id==="internal"?tflIntUnlocked:courseRef.current?.id==="surgery"?tflSurgUnlocked:courseRef.current?.id==="community"?tflCommUnlocked:true;
+      if(!tflUnlocked && tflFreeCount>=10){ setTflPaywallFor(courseRef.current?.id==="internal"?"internal":courseRef.current?.id==="surgery"?"surgery":"community"); setTflCodeInput(""); setTflCodeError(""); setShowTflPaywall(true); return; }
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -20683,6 +20698,7 @@ function App(){
                     if(isInt||isBundle){setTflIntUnlocked(true);try{localStorage.setItem(TFL_INT_KEY,code);}catch{}}
                     if(isSurg||isBundle){setTflSurgUnlocked(true);try{localStorage.setItem(TFL_SURG_KEY,code);}catch{}}
                     if(isComm||isBundle){setTflCommUnlocked(true);try{localStorage.setItem(TFL_COMM_KEY,code);}catch{}}
+                    setTflFreeCount(0); try{ls.set(TFL_FREE_KEY,"0");}catch{} ohanakaScrollSeenRef.current=0;
                     setShowTflPaywall(false);setTflCodeInput("");setTflCodeError("");
                     if(tflPaywallOnUnlock) tflPaywallOnUnlock();
                   } else {
@@ -21735,7 +21751,7 @@ function App(){
               e("div",{style:{width:4,height:28,borderRadius:2,background:accentCol,flexShrink:0}}),
               e("div",null,
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},courseLabel),
-                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"All Senior Posting Questions")
+                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},course.id==="surgery"?"Junior & Senior Posting MCQs":"All Senior Posting Questions")
               )
             )
           )
@@ -21837,27 +21853,47 @@ function App(){
             e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
               e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
             ),
-            qs.map((q,qi)=>
-              e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                  e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                  q.q
+(()=>{
+              const freeLimit=OHANAKA_SCROLL_FREE;
+              // Track how many new questions this block reveals into the session total
+              const sessionSeen=ohanakaScrollSeenRef.current;
+              const visibleCount=tflSurgUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
+              // Update the session counter once per block open
+              if(!tflSurgUnlocked && visibleCount>0){
+                ohanakaScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
+              }
+              const visibleQs=qs.slice(0,visibleCount);
+              const hitLimit=!tflSurgUnlocked&&visibleCount<qs.length;
+              return e(React.Fragment,null,
+                visibleQs.map((q,qi)=>
+                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
+                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
+                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
+                      q.q
+                    ),
+                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
+                      q.opts.map((opt,oi)=>{
+                        const isCorrect=oi===q.ans;
+                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
+                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
+                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
+                        );
+                      })
+                    ),
+                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid #ef9a9a",borderRadius:6,padding:"10px 14px"}},
+                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginBottom:5}},"Explanation"),
+                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
+                    )
+                  )
                 ),
-                e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                  q.opts.map((opt,oi)=>{
-                    const isCorrect=oi===q.ans;
-                    return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                      e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                      e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                    );
-                  })
-                ),
-                e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid #ef9a9a",borderRadius:6,padding:"10px 14px"}},
-                  e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginBottom:5}},"Explanation"),
-                  e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
+                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#fff8f8,#fdecec)",border:"1.5px solid rgba(239,154,154,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
+                  e("p",{style:{fontSize:"1.6rem",marginBottom:8}},"🔒"),
+                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#c62828",marginBottom:6}},freeLimit+" free questions reached"),
+                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions across all Ohanaka blocks this session. Unlock full access to continue reading."),
+                  e("button",{onClick:()=>{ setTflPaywallFor("surgery");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:"#c62828",color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Surgery Final Lap →")
                 )
-              )
-            )
+              );
+            })()
           )
         );
       }
@@ -22797,11 +22833,7 @@ function App(){
         ];
 
     const handleTflCardClick=()=>{
-      if(isUnlocked) return; // already handled inline — locked state shows paywall
-      setTflPaywallFor(forKey);
-      setTflPaywallOnUnlock(null);
-      setTflCodeInput("");setTflCodeError("");
-      setShowTflPaywall(true);
+      // Paywall fires during quiz after 10 questions, not here
     };
 
     return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
@@ -22819,15 +22851,15 @@ function App(){
       ),
       e("div",{style:{height:2,background:gradBg}}),
       e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px 40px"}},
-        !isUnlocked&&e("div",{className:"fade-up",style:{background:isInternal?"linear-gradient(135deg,#fdf9ef,#f5edcc)":isSurgery?"linear-gradient(135deg,#fff8f8,#fdecec)":"linear-gradient(135deg,#f4fbf5,#e5f7e6)",borderRadius:8,padding:"16px 20px",marginBottom:16,border:"1.5px solid "+accentCol+"44",display:"flex",alignItems:"center",gap:14}},
-          e("span",{style:{fontSize:"1.6rem",flexShrink:0}},"🔒"),
-          e("div",null,
-            e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".95rem",color:accentDark,marginBottom:3}},"Premium Content"),
-            e("p",{style:{fontSize:".78rem",color:"#666",lineHeight:1.5}},"Unlock all Final Lap content for "+courseName+" at ₦3,500, or get the full bundle (IM + Surgery + Comm. Med) for ₦8,000."),
-            e("button",{onClick:handleTflCardClick,
-              style:{marginTop:10,background:accentDark,color:"#fff",border:"none",borderRadius:4,padding:"8px 18px",fontSize:".82rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},
-              "Unlock Now →")
-          )
+        !isUnlocked&&e("div",{className:"fade-up",style:{background:isInternal?"linear-gradient(135deg,#fdf9ef,#f5edcc)":isSurgery?"linear-gradient(135deg,#fff8f8,#fdecec)":"linear-gradient(135deg,#f4fbf5,#e5f7e6)",borderRadius:8,padding:"14px 18px",marginBottom:16,border:"1.5px solid "+accentCol+"44",display:"flex",alignItems:"center",gap:12}},
+          e("span",{style:{fontSize:"1.4rem",flexShrink:0}},"🎁"),
+          e("div",{style:{flex:1}},
+            e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".92rem",color:accentDark,marginBottom:2}},"10 free questions to try"),
+            e("p",{style:{fontSize:".76rem",color:"#666",lineHeight:1.5}},"Explore any section — you can attempt 10 questions for free. Unlock all Final Lap content for "+courseName+" at ₦3,500 or the full bundle (IM + Surgery + Comm. Med) for ₦8,000.")
+          ),
+          e("button",{onClick:()=>{ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },
+            style:{flexShrink:0,background:accentDark,color:"#fff",border:"none",borderRadius:4,padding:"7px 14px",fontSize:".76rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},
+            "Unlock →")
         ),
         e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
           tflCards.map((sc,i)=>{
@@ -22835,12 +22867,11 @@ function App(){
             const isComingSoon=!sc.live; // coming soon for everyone — no content yet
             const handleClick=()=>{
               if(isComingSoon) return; // no content — do nothing
-              if(!isUnlocked){ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); return; }
-              if(sc.action==="senior_posting"){ setShowSeniorPosting(true); pushView("blocks"); }
-              if(sc.action==="junior_posting"){ setShowJuniorPosting(true); pushView("blocks"); }
-              if(sc.action==="ohanaka"){ setShowOhanakaView(true); setOhanakaMode(null); pushView("blocks"); }
+              if(sc.action==="senior_posting"){ inTflRef.current=true; setShowSeniorPosting(true); pushView("blocks"); }
+              if(sc.action==="junior_posting"){ inTflRef.current=true; setShowJuniorPosting(true); pushView("blocks"); }
+              if(sc.action==="ohanaka"){ inTflRef.current=true; setShowOhanakaView(true); setOhanakaMode(null); pushView("blocks"); }
             };
-            return e("div",{key:i,className:"fl-sub-card"+(isComingSoon?" coming-soon":isLiveAndUnlocked?"":" locked")+" fade-up",
+            return e("div",{key:i,className:"fl-sub-card"+(isComingSoon?" coming-soon":"")+" fade-up",
               style:{animationDelay:i*60+"ms"},
               onClick:handleClick},
               e("div",{style:{flex:1,minWidth:0}},
