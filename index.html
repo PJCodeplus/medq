@@ -20176,6 +20176,7 @@ function App(){
   const [course,setCourse]=useState(null);
   const [block,setBlock]=useState(null);
   const [qCount,setQCount]=useState(10);
+  const [startFrom,setStartFrom]=useState(1);
   const [studentName,setStudentName]=useState(()=>ls.get(NAME_KEY)||"");
   const [qs,setQs]=useState([]);
   const [qIdx,setQIdx]=useState(0);
@@ -20188,6 +20189,7 @@ function App(){
   const [retakeMode,setRetakeMode]=useState(false);
   const [examMode,setExamMode]=useState(false);
   const examModeRef=useRef(false);
+  const startFromRef=useRef(1); // absolute question number offset
   const [examTimeLeft,setExamTimeLeft]=useState(0); // seconds remaining
   const examTimerRef=useRef(null); // interval id
   const [attempts,setAttempts]=useState([]);
@@ -20423,14 +20425,20 @@ function App(){
     const name=studentName.trim();
     ls.set(NAME_KEY,name);
     inTflRef.current=inTflRef.current||!!(block && block._isTfl);
-    const pool=retakeQs||shuffleArr(block.questions).slice(0,qCount);
-    const shuffled=pool.map(shuffleOpts);
+    const pool=retakeQs||(()=>{
+      const all=block.questions;
+      const start=Math.max(0,Math.min(startFrom-1,all.length-1));
+      return all.slice(start,start+qCount);
+    })();
+    const shuffled=pool; // no shuffle — questions keep their original order
     qsRef.current=shuffled; courseRef.current=course; blockRef.current=block; topicRef.current=topic; nameRef.current=name;
     userAnswersRef.current=[];
     setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setEndConfirm(false);
     correctRef.current=0; answeredRef.current=0;
     setRetakeMode(!!retakeQs);
     examModeRef.current=examMode;
+    startFromRef.current=retakeQs?1:startFrom;
+    if(!retakeQs) setStartFrom(1); // reset for next visit to setup
     if(examMode){
       const totalSecs=shuffled.length*60;
       setExamTimeLeft(totalSecs);
@@ -22247,6 +22255,30 @@ function App(){
             e("p",{style:{fontSize:".74rem",color:th.textFaint,marginTop:5,fontStyle:"italic"}},"Drag slider to choose how many questions to attempt")
           ),
 
+          /* Start from question */
+          e("div",{style:{marginBottom:20}},
+            e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:7}},
+              e("label",{style:{fontSize:".78rem",color:"#555",letterSpacing:".08em",textTransform:"uppercase",fontWeight:600}},"Start from Question"),
+              startFrom>1&&e("button",{onClick:()=>setStartFrom(1),style:{background:"none",border:"none",fontSize:".72rem",color:"#aaa",cursor:"pointer",padding:0}},"Reset to 1")
+            ),
+            e("div",{style:{display:"flex",alignItems:"center",gap:10}},
+              e("input",{type:"number",min:1,max:maxQ,value:startFrom,
+                onChange:ev=>{
+                  const v=Math.max(1,Math.min(Number(ev.target.value)||1,maxQ));
+                  setStartFrom(v);
+                },
+                style:{width:80,padding:"9px 12px",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".95rem",fontFamily:"Georgia,serif",fontWeight:700,color:th.text,background:th.inputBg,outline:"none",textAlign:"center",WebkitAppearance:"none",MozAppearance:"textfield"},
+                onFocus:ev=>ev.target.style.borderColor="#c9a84c",
+                onBlur:ev=>ev.target.style.borderColor="#d5cfc4"
+              }),
+              e("p",{style:{fontSize:".76rem",color:th.textFaint,lineHeight:1.5}},
+                startFrom>1
+                  ? "Continuing from Q"+startFrom+" — ends at Q"+Math.min(maxQ,startFrom-1+clampedQ)
+                  : "Questions 1 – "+Math.min(maxQ,clampedQ)+" of "+maxQ
+              )
+            )
+          ),
+
           /* Exam mode row */
           e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,marginBottom:14}},
             e("div",{style:{display:"flex",alignItems:"center",gap:7,cursor:"pointer",userSelect:"none",flexShrink:0},
@@ -22357,7 +22389,7 @@ function App(){
             e("div",{style:{background:"#f0ece5",borderRadius:10,height:5,overflow:"hidden"}},
               e("div",{style:{width:progress+"%",height:"100%",background:"linear-gradient(90deg,#c9a84c,#e8c97a)",borderRadius:10,transition:"width .4s ease"}})
             ),
-            e("p",{style:{textAlign:"center",color:th.textFaint,fontSize:".63rem",marginTop:3}},(qIdx+1)+" / "+qs.length)
+            e("p",{style:{textAlign:"center",color:th.textFaint,fontSize:".63rem",marginTop:3}},"Q"+(startFromRef.current+qIdx)+" / "+(startFromRef.current-1+qs.length))
           ),
           /* Timer (exam mode) or Score (normal) + End */
           e("div",{style:{display:"flex",alignItems:"center",gap:8}},
@@ -22413,7 +22445,7 @@ function App(){
       e("div",{key:qIdx,className:"slide-in",style:{maxWidth:760,margin:"0 auto",padding:"20px 16px"}},
         e("div",{style:{background:th.surface,borderRadius:6,overflow:"hidden",boxShadow:"0 2px 14px rgba(15,39,68,.08)",border:"1.5px solid #e0d8cc"}},
           e("div",{style:{background:"linear-gradient(135deg,"+((course&&course.accent)||"#c9a84c")+"18,"+((course&&course.accent)||"#c9a84c")+"08)",padding:"clamp(16px,3vw,24px) clamp(16px,3vw,28px)",borderBottom:"1px solid #ede8df"}},
-            e("p",{style:{color:(course&&course.accent)||"#c9a84c",fontSize:".68rem",letterSpacing:".15em",textTransform:"uppercase",fontWeight:600,marginBottom:8}},"Question "+(qIdx+1)+" of "+qs.length),
+            e("p",{style:{color:(course&&course.accent)||"#c9a84c",fontSize:".68rem",letterSpacing:".15em",textTransform:"uppercase",fontWeight:600,marginBottom:8}},"Question "+(startFromRef.current+qIdx)+" of "+(startFromRef.current-1+qs.length)),
             e("p",{style:{color:"#1a1a2e",fontSize:"clamp(.92rem,2vw,1.05rem)",lineHeight:1.82,fontWeight:400}},q.q)
           ),
           q.img&&e("div",{style:{background:"#f7f3ed",padding:"0 clamp(16px,3vw,28px) clamp(12px,2vw,18px)",textAlign:"center"}},
