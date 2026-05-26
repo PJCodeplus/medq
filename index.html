@@ -14900,7 +14900,6 @@ const IM_JUNIOR_BLOCKS=[
 
 /* ── Senior Posting blocks (IM free content) ── */
 const IM_SENIOR_BLOCKS=[
-  { id:"mid_posting", name:"Mid Posting Prep", questions:MID_POSTING_Qs, available:true, topic:"Mid Posting Prep" },
   { id:"nephro_b1", name:"Block 1", questions:NEPHRO_B1_Qs, available:true, topic:"Nephrology" },
   { id:"nephro_b2", name:"Block 2", questions:NEPHRO_B2_Qs, available:true, topic:"Nephrology" },
   { id:"cardio_b1", name:"Block 1", questions:CARDIO_S1_Qs, available:true, topic:"Cardiology" },
@@ -23987,7 +23986,7 @@ function App(){
             const isComingSoon=!sc.live;
             const handleClick=()=>{
               if(isComingSoon) return;
-              if(sc.action==="senior_posting"){ inTflRef.current=true; setShowSeniorPosting(true); pushView("blocks"); }
+              if(sc.action==="senior_posting"){ setShowSeniorPosting(true); pushView("blocks"); }
               if(sc.action==="junior_posting"){ inTflRef.current=true; setShowJuniorPosting(true); pushView("blocks"); }
               if(sc.action==="ohanaka"){ inTflRef.current=true; setShowOhanakaView(true); setOhanakaMode(null); pushView("blocks"); }
             };
