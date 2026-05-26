@@ -4948,6 +4948,1045 @@ const HAEM_DVT_Qs = [
 ];
 
 /* ═══════════ RESPIRATORY ═══════════ */
+const ASTHMA_Qs = [
+  {
+    q: "A 24-year-old atopic man has a 5-year history of recurrent wheeze that worsens during cold weather and exercise but resolves spontaneously. Spirometry shows reversible obstructive pattern. Which mechanism best explains why his airways constrict so readily in response to these triggers?",
+    opts: [
+      "IgE-mediated mast cell degranulation releasing histamine and prostaglandins",
+      "Mucus hypersecretion causing fixed, irreversible airflow obstruction",
+      "Airway hyperresponsiveness resulting from chronic airway inflammation",
+      "Airway remodelling with subepithelial fibrosis causing structural narrowing",
+      "Eosinophil-mediated epithelial destruction with basement membrane thickening"
+    ],
+    ans: 2,
+    exp: "Airway hyperresponsiveness from chronic airway inflammation is correct because the chronically inflamed asthmatic airway contracts excessively in response to stimuli — such as cold air and exercise — that would cause little or no bronchoconstriction in a normal airway. Recurrent inflammation over time also leads to remodelling and fibrosis, which progressively reduces responsiveness to bronchodilators. IgE-mediated mast cell degranulation plays a role in allergen-triggered episodes but does not specifically explain why the airway is hyperresponsive to non-allergenic physical triggers like cold and exercise. Mucus hypersecretion contributes to airway narrowing but does not cause the fixed obstruction described, and in this patient obstruction is reversible. Airway remodelling with fibrosis is a consequence of prolonged disease and would reduce, not explain, trigger-induced bronchoconstriction. Eosinophil-mediated epithelial destruction is part of the inflammatory picture but is not the primary mechanism underlying hyperresponsiveness to physical triggers."
+  },
+  {
+    q: "A 38-year-old woman with known asthma takes ibuprofen for a headache and develops severe wheeze and dyspnea within an hour. She has had similar reactions to other NSAIDs in the past. Which mechanism best explains her reaction?",
+    opts: [
+      "Histamine release from IgE cross-linking on sensitised mast cells",
+      "Direct beta-2 adrenoceptor blockade by ibuprofen causing bronchoconstriction",
+      "Anticholinergic-mediated increase in bronchial smooth muscle tone",
+      "Shunting of arachidonic acid metabolism to cysteinyl leukotriene production",
+      "Complement activation causing neutrophil-mediated bronchial inflammation"
+    ],
+    ans: 3,
+    exp: "Shunting of arachidonic acid to cysteinyl leukotriene production is correct. NSAIDs inhibit the cyclo-oxygenase (COX) pathway, which normally metabolises arachidonic acid into prostaglandins. When this pathway is blocked, arachidonic acid is shunted into the lipoxygenase pathway, leading to excess production of cysteinyl leukotrienes — potent bronchoconstrictors. This is the mechanism of aspirin-sensitive (NSAID-exacerbated) asthma. IgE-mediated mast cell degranulation is the mechanism of allergen-induced asthma and requires prior IgE sensitisation to a specific allergen; NSAIDs trigger this reaction pharmacologically, not immunologically via IgE. Ibuprofen has no beta-2 blocking activity, making direct beta-2 antagonism incorrect. Anticholinergic activity would cause bronchodilation, not bronchoconstriction. Complement-neutrophil mediated inflammation is not the mechanism of NSAID-sensitive asthma."
+  },
+  {
+    q: "A 45-year-old woman with well-controlled asthma is started on atenolol by her cardiologist for hypertension. Two days later she develops worsening wheeze and dyspnoea that does not respond to her usual salbutamol inhaler. Which mechanism best explains her deterioration?",
+    opts: [
+      "Atenolol activates mast cell degranulation via histaminergic receptors",
+      "Beta-2 receptor blockade antagonises bronchodilation and worsens resting airway tone",
+      "Atenolol inhibits the cyclo-oxygenase pathway, causing excess cysteinyl leukotriene production",
+      "Beta-1 receptor blockade causes reflex bronchospasm through the vagus nerve",
+      "Atenolol reduces adrenal catecholamine output, causing progressive airway hyperresponsiveness"
+    ],
+    ans: 1,
+    exp: "Beta-2 receptor blockade antagonising bronchodilation is correct. Although atenolol is relatively cardioselective (beta-1 predominant), it retains some beta-2 blocking activity, particularly at higher doses. In asthmatic patients who depend on endogenous catecholamine-mediated beta-2 stimulation to maintain bronchodilation, this beta-2 blockade worsens resting airway tone and blunts the response to salbutamol — a beta-2 agonist — explaining both the bronchospasm and the failure to respond to the reliever inhaler. Atenolol has no direct histaminergic activity on mast cells. Atenolol does not inhibit COX; that is the mechanism for NSAID-sensitive asthma. Reflex vagal bronchospasm from beta-1 blockade is not the primary mechanism described; the key issue is loss of beta-2-mediated bronchodilation. Adrenal catecholamine suppression is not a recognized mechanism by which beta-blockers worsen asthma."
+  },
+  {
+    q: "A 19-year-old student presents with a 6-month history of recurrent wheeze and chest tightness, worse at night. Spirometry before and after inhaled salbutamol shows an 18% improvement in FEV1. Which statement best describes what this finding means for the diagnosis of asthma?",
+    opts: [
+      "An 18% FEV1 improvement surpasses the diagnostic threshold for reversible obstruction",
+      "An 18% FEV1 improvement falls below the diagnostic threshold and argues against asthma",
+      "FEV1 reversibility alone is insufficient; skin prick testing is required to confirm the diagnosis",
+      "A 6-minute exercise test must be completed before the diagnosis of asthma can be made",
+      "Chest X-ray demonstrating hyperinflation is required to confirm the diagnosis"
+    ],
+    ans: 0,
+    exp: "An FEV1 improvement of 18% surpasses the diagnostic threshold and supports the diagnosis because the criterion for a significant bronchodilator response in asthma is FEV1 improvement of ≥15% following bronchodilator use. An 18% improvement satisfies this criterion and, combined with the clinical history of nocturnal wheeze and chest tightness, is consistent with asthma. The threshold is not below 18%, so stating the improvement argues against asthma is incorrect. Skin prick testing helps identify atopic triggers but is not required to make a clinical diagnosis of asthma. A 6-minute exercise test is an alternative diagnostic approach — useful when bronchodilator reversibility is equivocal — but is not mandatory when bronchodilator response is already positive. Chest X-ray is a supplementary investigation; it is frequently normal in asthma and is not required to confirm the diagnosis."
+  },
+  {
+    q: "A 28-year-old nurse records her peak expiratory flow (PEF) twice daily for two weeks. Her readings are consistently lower at 6 AM than at 2 PM, with a diurnal variation of 24% on each of 6 measurement days. Which statement best describes this finding in relation to asthma diagnosis?",
+    opts: [
+      "The variation exceeds the threshold of >20% on ≥3 days per week and supports the diagnosis",
+      "The variation must persist for at least 4 weeks before it carries diagnostic significance",
+      "Diurnal PEF variation is only diagnostically meaningful when accompanied by a positive bronchodilator response",
+      "A diurnal variation of >15% on ≥3 days per week is the accepted diagnostic threshold",
+      "The variation must be confirmed by skin prick testing before asthma can be diagnosed"
+    ],
+    ans: 0,
+    exp: "A diurnal PEF variation exceeding 20% on ≥3 days per week over a measurement period supports the diagnosis of asthma. This patient demonstrates 24% variation — above the 20% threshold — on 6 of her measurement days, meeting the criterion. A 4-week minimum observation period is not required by the diagnostic criteria; consistent variation over the period studied is sufficient. While both bronchodilator reversibility and diurnal variation are useful diagnostic tools, either one in the appropriate clinical context can support the diagnosis without the other being mandatory. The threshold of >15% would not be correct; the accepted criterion is >20%. Skin prick testing identifies allergic sensitisation and is not a required step in confirming the PEF-based diagnosis of asthma."
+  },
+  {
+    q: "A 22-year-old man presents with wheeze and chest tightness occurring roughly once every two weeks, with no nocturnal symptoms in the past month. Between episodes he is completely symptom-free and spirometry is normal. Which is the most appropriate initial management?",
+    opts: [
+      "Inhaled beclomethasone twice daily as a regular preventer",
+      "Salmeterol inhaler twice daily as a long-acting bronchodilator",
+      "Salbutamol inhaler used as needed, with no regular preventer required",
+      "Montelukast 10 mg once daily as a leukotriene receptor antagonist",
+      "Prednisolone 30 mg daily for 5 days to abort the exacerbation cycle"
+    ],
+    ans: 2,
+    exp: "Salbutamol as needed is correct because this patient's symptom frequency — less than once per week with no nocturnal episodes — places him at Step 1 of asthma management, where occasional use of a short-acting beta-2 agonist such as salbutamol or terbutaline is appropriate. Regular preventer therapy is not yet indicated. Inhaled beclomethasone is a Step 2 intervention introduced when patients use their beta-2 agonist more than 3 times per week, have had a recent exacerbation, or have nocturnal symptoms ≥1 night per week — none of which applies here. Salmeterol, a long-acting beta-2 agonist, is a Step 3 add-on therapy and is inappropriate as initial treatment. Montelukast is also a Step 3 add-on, less effective than salmeterol as add-on therapy. Oral prednisolone is a high-step intervention reserved for severe persistent or uncontrolled disease and is entirely inappropriate for this mild intermittent presentation."
+  },
+  {
+    q: "A 30-year-old woman with asthma uses her salbutamol inhaler 4 times per week and had an acute exacerbation requiring hospital review 8 months ago. She has no regular preventer therapy. Which finding most strongly supports starting an inhaled corticosteroid at this stage?",
+    opts: [
+      "Age under 40 years with a documented atopic history",
+      "Normal spirometry between symptomatic episodes",
+      "Absence of nocturnal awakenings in the past month",
+      "Use of her beta-2 agonist more than 3 times per week",
+      "Absence of eosinophilia on full blood count"
+    ],
+    ans: 3,
+    exp: "Use of a beta-2 agonist more than 3 times per week is correct because this is one of the specific Step 2 criteria that indicate the need for regular inhaled corticosteroid (ICS) therapy. The other Step 2 criteria include: symptoms ≥3 times per week, nocturnal awakening ≥1 night per week, and an exacerbation within the past 2 years — this patient also satisfies the last criterion, but the question asks what most strongly supports starting ICS, and the frequency of reliever use is the clearest signal of inadequately controlled disease requiring a preventer. Age and atopy identify risk factors but are not indications to step up treatment in isolation. Normal spirometry between episodes is expected in mild-to-moderate asthma and does not change the decision to add a preventer. Absence of nocturnal awakenings and absence of eosinophilia are negative findings that do not guide the decision to add ICS."
+  },
+  {
+    q: "A 35-year-old man remains symptomatic on regular inhaled beclomethasone at a standard dose and as-needed salbutamol. He has wheeze 3 to 4 times weekly and one nocturnal awakening per week. Which is the most appropriate next step in management?",
+    opts: [
+      "Add oral prednisolone 20 mg as a daily controller",
+      "Add a long-acting beta-2 agonist such as salmeterol",
+      "Replace salbutamol with ipratropium bromide as the rescue inhaler",
+      "Add oral theophylline as the preferred first-choice add-on therapy",
+      "Start subcutaneous anti-IgE therapy with omalizumab"
+    ],
+    ans: 1,
+    exp: "Adding a long-acting beta-2 agonist (LABA) such as salmeterol is the correct Step 3 add-on therapy. When patients remain symptomatic on standard-dose ICS alone, the first add-on agent recommended is a LABA, which reduces exacerbations and improves symptom control. Oral prednisolone is a Step 5 intervention for continuous or frequent use; initiating it at this stage would be disproportionate and inappropriate. Ipratropium bromide is an anticholinergic used as a rescue agent in acute severe asthma and is not a standard substitute for salbutamol in chronic management. Oral theophylline may be considered at Step 3 but is less effective than LABA as add-on therapy and carries a narrow therapeutic index, making LABA the preferred first choice. Anti-IgE therapy with omalizumab is a specialist add-on reserved for severe allergic asthma at a much higher step than this patient currently occupies."
+  },
+  {
+    q: "A patient on regular inhaled corticosteroids asks whether montelukast or salmeterol is the more effective add-on therapy at Step 3. Which statement best reflects the clinical evidence summarised in this teaching material?",
+    opts: [
+      "Montelukast and salmeterol are equally effective as add-on therapy to inhaled corticosteroids",
+      "Montelukast is preferred because it carries fewer cardiovascular risks than salmeterol",
+      "Both agents should be used together before considering an increase in ICS dose",
+      "Montelukast is preferred for exercise-induced asthma but salmeterol is first-line for nocturnal symptoms",
+      "Salmeterol is more effective than montelukast as add-on therapy to inhaled corticosteroids"
+    ],
+    ans: 4,
+    exp: "Salmeterol is more effective than montelukast as add-on therapy to inhaled corticosteroids is correct. While leukotriene receptor antagonists such as montelukast are a valid Step 3 option, the lecture material explicitly states they are less effective than LABA as add-on therapy. This reflects the broader evidence base showing that adding a LABA to ICS provides superior symptom control and exacerbation reduction compared to adding a leukotriene modifier. Describing them as equally effective is therefore incorrect. Montelukast is not preferred on safety grounds over salmeterol in this context; cardiovascular concerns about LABAs apply primarily to LABA monotherapy without ICS, not to combination use. Using both together before stepping up ICS is not the standard approach — LABA is tried first, and if insufficient, the dose of ICS or a further agent is added. The characterisation of montelukast as preferred for exercise-induced asthma specifically is an oversimplification and not supported by the step-based framework taught here."
+  },
+  {
+    q: "A 55-year-old woman with severe persistent asthma remains symptomatic despite high-dose inhaled corticosteroids, a LABA, a leukotriene receptor antagonist, and theophylline. Her clinician decides to add oral corticosteroids. Which principle should guide the dosing of oral prednisolone at this stage?",
+    opts: [
+      "Use the highest tolerated dose to achieve rapid disease control",
+      "Use IV hydrocortisone rather than oral prednisolone for its superior bioavailability at this stage",
+      "Use oral prednisolone at the lowest effective dose to minimise systemic side effects",
+      "Reserve oral prednisolone for patients whose FEV1 is below 50% predicted only",
+      "Oral prednisolone should only be started if hospital admission is simultaneously planned"
+    ],
+    ans: 2,
+    exp: "Using oral prednisolone at the lowest effective dose is correct. Step 5 of the stepwise management approach specifies continuous or frequent oral corticosteroid use at the lowest possible dose that maintains disease control. This principle exists because long-term systemic corticosteroids carry significant adverse effects — including adrenal suppression, osteoporosis, hyperglycaemia, and cataracts — and the dose should be minimised accordingly. Using the highest tolerated dose prioritises speed of control over safety and is contrary to the guiding principle at Step 5. IV hydrocortisone has no bioavailability advantage over oral prednisolone in chronic management; IV routes are reserved for acute severe presentations. Restricting oral steroids to patients with FEV1 below 50% is not the stated criterion; the indication is uncontrolled disease despite all prior steps. Hospital admission is not a prerequisite for starting Step 5 therapy; this step is used in outpatients with refractory disease."
+  },
+  {
+    q: "A 27-year-old man arrives in the emergency department unable to complete a sentence in one breath. His respiratory rate is 28 breaths/minute, heart rate is 115 bpm, and peak expiratory flow is 45% of his predicted value. Which category best describes his presentation?",
+    opts: [
+      "Mild intermittent asthma",
+      "Moderate acute asthma",
+      "Life-threatening asthma",
+      "Acute severe asthma",
+      "Near-fatal asthma"
+    ],
+    ans: 3,
+    exp: "Acute severe asthma is correct. The diagnostic criteria for acute severe asthma are: PEF less than 50% of predicted, respiratory rate ≥25 breaths/minute, heart rate ≥110 bpm, and inability to complete sentences in one breath. This patient meets all four criteria — PEF 45%, RR 28, HR 115, and inability to complete sentences. Mild intermittent asthma refers to a chronic symptom pattern and is not an acute severity category. Moderate acute asthma does not carry specific published criteria in this classification but would not be applied when all four acute severe criteria are met. Life-threatening asthma is a more severe category defined by features including PEF less than 33% of expected, SpO2 below 92%, silent chest, cyanosis, bradycardia, or altered consciousness — none of which are described here. Near-fatal asthma is defined by raised PaCO2 and/or the need for mechanical ventilation, which is not the case here."
+  },
+  {
+    q: "A 40-year-old woman arrives by ambulance in severe respiratory distress. On examination she has a silent chest, SpO2 of 88%, bradycardia of 52 bpm, and appears confused. Her PEF is 30% of her predicted value. Which is the most appropriate classification of her presentation?",
+    opts: [
+      "Life-threatening asthma",
+      "Near-fatal asthma",
+      "Acute severe asthma",
+      "Status asthmaticus requiring Step 5 therapy",
+      "Moderate asthma with secondary respiratory failure"
+    ],
+    ans: 0,
+    exp: "Life-threatening asthma is correct. The criteria for life-threatening asthma include PEF less than 33% of expected, SpO2 below 92%, normal or raised PaCO2, silent chest, cyanosis, feeble respiratory effort, bradycardia or arrhythmias, hypotension, exhaustion, confusion, or coma. This patient has multiple features: PEF 30% (below 33%), SpO2 88% (below 92%), silent chest, bradycardia, and confusion — a clear picture of life-threatening disease. Near-fatal asthma is defined specifically by a raised PaCO2 and/or the need for mechanical ventilation, and while this patient may deteriorate to that point, it has not yet been established from the information given. Acute severe asthma requires PEF less than 50% and specific vital sign criteria but lacks the additional sinister features — silence, desaturation, bradycardia, confusion — that define the life-threatening category. Status asthmaticus and Step 5 therapy are not recognised emergency severity classifications. Moderate asthma with respiratory failure does not exist as a formal category and does not apply here."
+  },
+  {
+    q: "A 52-year-old man with a long history of asthma is brought to the emergency room in coma. His PaCO2 is 7.8 kPa and he requires bag-mask ventilation on arrival. Which is the correct classification of his presentation?",
+    opts: [
+      "Life-threatening asthma",
+      "Moderate acute asthma",
+      "Acute severe asthma",
+      "Status asthmaticus",
+      "Near-fatal asthma"
+    ],
+    ans: 4,
+    exp: "Near-fatal asthma is correct. Near-fatal asthma is defined by a raised PaCO2 (above 6 kPa) and/or the requirement for mechanical ventilation with raised inflation pressures. This patient has both: a PaCO2 of 7.8 kPa and the need for bag-mask ventilation. These criteria specifically define the near-fatal category. Life-threatening asthma refers to a cluster of sinister clinical and physiological features — silent chest, SpO2 below 92%, bradycardia, confusion — but does not by itself require raised PaCO2 or ventilatory support; this patient has gone beyond that threshold. Moderate acute asthma does not account for the raised PaCO2 or the need for ventilation. Acute severe asthma is characterised by PEF below 50%, tachycardia, tachypnoea, and inability to complete sentences; it does not involve ventilatory failure. Status asthmaticus is not a formally defined severity category in this classification system and does not replace near-fatal asthma when hypercapnia and mechanical ventilation are present."
+  },
+  {
+    q: "A 32-year-old man presents to the emergency department with acute severe asthma. His SpO2 is 89% on room air and he is in obvious respiratory distress. Which combination represents the most appropriate immediate management?",
+    opts: [
+      "IV aminophylline loading dose and high-flow oxygen",
+      "Nebulized salbutamol, high-flow oxygen, and systemic corticosteroids",
+      "Nebulized ipratropium bromide alone and arterial blood gas measurement",
+      "IV magnesium sulphate and low-flow oxygen to avoid oxygen toxicity",
+      "Oral prednisolone and salbutamol via metered-dose inhaler"
+    ],
+    ans: 1,
+    exp: "Nebulized salbutamol, high-flow oxygen, and systemic corticosteroids is the correct immediate triple strategy. Nebulized salbutamol 5 mg provides rapid bronchodilation. High-flow oxygen is given to maintain SpO2 above 92% — this patient is at 89% and requires correction. Systemic corticosteroids (oral prednisolone 40 mg or IV hydrocortisone 200 mg stat) are started immediately to reduce airway inflammation; their effect takes hours but early administration shortens the attack. IV aminophylline is a later consideration if the patient fails to respond to first-line treatment and is never the opening agent; it is not given before nebulized bronchodilators. Ipratropium alone is insufficient as initial therapy and is added to nebulized salbutamol in resistant cases, not used as a sole first-line agent. IV magnesium sulphate is reserved for patients who fail to respond adequately to initial therapy, not as an immediate first agent. Low-flow oxygen is incorrect and potentially dangerous in acute asthma — hypoxia is life-threatening and must be corrected with high-flow oxygen regardless of concerns about hypoxic drive (which apply to COPD, not asthma). Oral prednisolone and MDI salbutamol are inadequate delivery routes in a patient with acute severe asthma who is in significant distress."
+  },
+  {
+    q: "A 29-year-old woman with acute severe asthma has received nebulized salbutamol, ipratropium, and IV hydrocortisone but remains hypoxic with SpO2 of 90% and persistent wheeze after 30 minutes. Which additional agent should now be considered?",
+    opts: [
+      "IV magnesium sulphate 1.2–2.0 g over 20 minutes",
+      "IV aminophylline 500 mg by slow intravenous infusion",
+      "IV adrenaline 1:10,000 by slow intravenous push",
+      "Subcutaneous terbutaline 0.25 mg as a bronchodilator",
+      "Oral montelukast 10 mg as a stat dose"
+    ],
+    ans: 0,
+    exp: "IV magnesium sulphate 1.2–2.0 g over 20 minutes is correct for a patient who fails to respond adequately to initial nebulized bronchodilators and systemic corticosteroids. Magnesium sulphate acts as a smooth muscle relaxant, producing bronchodilation through calcium antagonism. It is a recognised second-line agent in acute severe asthma that does not respond to first-line treatment. IV aminophylline can be considered in refractory cases but carries a narrow therapeutic window with significant toxicity risks (arrhythmias, seizures), and when used, it is given as a loading dose of 5 mg/kg, not as a 500 mg stat bolus — which could be dangerously excessive. IV adrenaline in this concentration and route is not a standard treatment for acute severe asthma in adults. Subcutaneous terbutaline is an alternative bronchodilator delivery route sometimes used when nebulization is not possible but is not the next step when IV access is available and the patient has already received nebulized treatment. Oral montelukast has no role in the acute management of severe asthma."
+  },
+  {
+    q: "A 36-year-old man with life-threatening asthma fails to respond to maximal medical therapy. Blood gas shows PaO2 7.0 kPa, PaCO2 7.5 kPa, pH 7.20 and falling. He is becoming increasingly confused. Which finding most clearly indicates the need for assisted ventilation at this stage?",
+    opts: [
+      "SpO2 below 92% despite high-concentration supplemental oxygen",
+      "Absent breath sounds on auscultation of both lung fields",
+      "PaCO2 above 6 kPa with falling pH and clinical deterioration",
+      "Heart rate above 110 bpm in the presence of confusion",
+      "PaO2 below 8 kPa on arterial blood gas sampling"
+    ],
+    ans: 2,
+    exp: "PaCO2 above 6 kPa with falling pH and clinical deterioration is the most definitive indication for assisted ventilation here. The indications for ventilation in acute severe asthma include PaCO2 above 6 kPa, pH low and falling, PaO2 below 8 kPa, coma, respiratory arrest, and clinical exhaustion, confusion, or drowsiness. This patient meets multiple criteria, but the combination of hypercapnia (PaCO2 7.5 kPa) with an actively falling pH (7.20 and decreasing) and worsening consciousness is the clearest signal that ventilatory failure is imminent. SpO2 below 92% despite oxygen is a concerning feature but alone does not mandate intubation — it must be interpreted in the context of the blood gas picture. Absent breath sounds are an ominous clinical sign indicating minimal air movement but are not a blood-gas-confirmed criterion for ventilation in isolation. Tachycardia with confusion suggests deterioration but does not independently constitute the ventilation threshold. PaO2 below 8 kPa is a recognised criterion but the decision to ventilate is strongest when hypoxia is combined with hypercapnia, acidosis, and clinical deterioration — as is the case here."
+  },
+  {
+    q: "A 24-year-old atopic woman with asthma is exposed to house dust mite allergen and develops wheeze and dyspnea within 15 minutes. Six hours later, she develops a second, more prolonged wave of symptoms. Which mechanism best explains the early phase response that occurred within the first 15 minutes?",
+    opts: [
+      "T-lymphocyte activation with cytokine-mediated eosinophil recruitment to the airway",
+      "Complement activation causing neutrophil-mediated bronchospasm",
+      "IgG-mediated immune complex deposition in bronchial mucosa",
+      "IgE-mediated mast cell degranulation releasing histamine and leukotrienes",
+      "Natural killer cell activation releasing interferon-gamma and causing airway inflammation"
+    ],
+    ans: 3,
+    exp: "IgE-mediated mast cell degranulation releasing histamine and leukotrienes is correct for the early phase response. In atopic asthma, allergen exposure cross-links IgE antibodies bound to mast cells on the airway mucosa, triggering rapid degranulation and release of histamine, prostaglandins, and leukotrienes. These mediators cause immediate bronchoconstriction within minutes — the early phase. The late phase, occurring 4–8 hours later, involves T-lymphocyte-driven recruitment of eosinophils and other inflammatory cells, producing a second, more prolonged wave of airway inflammation and obstruction. T-lymphocyte and eosinophil recruitment therefore explains the late phase, not the immediate 15-minute response. Complement activation with neutrophil-mediated bronchospasm is not the mechanism for IgE-mediated early phase asthma. IgG immune complex deposition is associated with hypersensitivity pneumonitis (type III reaction), not allergic asthma (type I). Natural killer cell activation with interferon-gamma release is a component of antiviral innate immunity and is not the mechanism of allergen-induced early asthma."
+  },
+  {
+    q: "A 42-year-old woman with aspirin-sensitive asthma develops a severe exacerbation after taking naproxen for joint pain. Which class of drug would be most appropriate as a long-term controller given her documented NSAID sensitivity?",
+    opts: [
+      "Regular low-dose aspirin for desensitisation",
+      "Inhaled anticholinergic as the primary preventer",
+      "Leukotriene receptor antagonist as long-term controller",
+      "Short-acting beta-2 agonist as the only long-term therapy",
+      "Oral theophylline as long-term controller therapy"
+    ],
+    ans: 2,
+    exp: "A leukotriene receptor antagonist such as montelukast is particularly appropriate in aspirin-sensitive asthma because the underlying mechanism of this condition is excess cysteinyl leukotriene production from arachidonic acid shunting when the COX pathway is inhibited. Blocking the leukotriene receptor directly antagonises the mediator responsible for the bronchoconstriction. This makes leukotriene receptor antagonists both mechanistically rational and clinically effective in this subgroup. Regular low-dose aspirin for desensitisation is a specialist intervention performed in controlled settings for patients with aspirin-sensitive disease who require aspirin for another indication; it is not a standard asthma controller recommendation. Inhaled anticholinergics such as ipratropium are bronchodilators used in acute management and are not established long-term preventers for chronic asthma. A short-acting beta-2 agonist alone provides only symptom relief without addressing airway inflammation and is not appropriate as the sole long-term therapy. Oral theophylline is a recognised controller used at higher treatment steps but is not the preferred agent given its narrow therapeutic index and the specific relevance of leukotriene antagonism in this patient."
+  },
+  {
+    q: "A researcher comparing asthma prevalence between rural and urban Nigerian communities finds significantly lower rates among children raised on farms in the first year of life. Early attendance at daycare within the first 6 months also appears protective. Which mechanism best explains these observations?",
+    opts: [
+      "Farm environments reduce IgE production by increasing serum immunoglobulin G levels",
+      "Early and diverse microbial exposure promotes immune tolerance, reducing atopic sensitisation",
+      "Rural diets with lower processed food content reduce systemic inflammatory markers",
+      "Farm children have substantially fewer exposures to indoor aeroallergens such as house dust mite",
+      "Physical activity inherent to farm life improves lung function and reduces airway hyperresponsiveness"
+    ],
+    ans: 1,
+    exp: "Early and diverse microbial exposure promoting immune tolerance is the mechanism underlying the hygiene hypothesis — the most widely accepted explanation for the inverse relationship between early microbial contact and atopic disease. Exposure to diverse microorganisms in the first year of life promotes the maturation of regulatory immune pathways, shifting immune responses away from the Th2-dominant atopic phenotype toward Th1-mediated immunity and tolerance. Farm environments, early daycare attendance, and early viral infections all share this feature of high microbial diversity and load. Increasing serum IgG at the expense of IgE is a partial description of the immune shift but does not fully explain the mechanism; simply raising IgG is not the primary driver. Dietary differences may contribute to population-level inflammation but are not the established explanation for the farm effect and daycare protection described. While farm children may encounter different allergen profiles, the protective effect has been demonstrated even in the presence of significant allergen exposure, indicating that allergen avoidance alone does not explain the observation. Physical activity and improved lung function do not explain the protective effect of farm or daycare environments in the first months of life."
+  },
+  {
+    q: "An 18-year-old girl presents with a 3-month history of dry cough worse at night and after exercise. She has no wheeze or breathlessness. Chest examination is normal. Spirometry shows a 16% improvement in FEV1 after inhaled salbutamol. Which is the most likely diagnosis?",
+    opts: [
+      "Cough variant asthma",
+      "Rhinitis with post-nasal drip",
+      "Gastro-oesophageal reflux",
+      "Vocal cord dysfunction",
+      "Pertussis"
+    ],
+    ans: 0,
+    exp: "Cough variant asthma is correct. This presentation — chronic dry cough worse at night and with exertion, without wheeze or dyspnoea, combined with significant FEV1 reversibility — is the classic description of cough variant asthma, a recognised subtype in which cough is the predominant or sole symptom. The 16% FEV1 improvement exceeds the 15% diagnostic threshold for reversible obstruction, confirming the asthmatic physiology underlying the cough. Rhinitis with post-nasal drip causes chronic cough and can coexist with asthma, but it would not explain the spirometric reversibility demonstrated here. Gastro-oesophageal reflux causes chronic cough, typically worse when lying down after meals, but does not produce reversible airflow obstruction on spirometry. Vocal cord dysfunction mimics asthma with inspiratory wheeze and cough, but is characterised by inspiratory stridor rather than expiratory obstruction and would not show reversible FEV1 changes in this manner. Pertussis causes prolonged paroxysmal cough in unvaccinated or under-vaccinated individuals and may persist for weeks; however, it would not produce a reversible obstructive pattern on spirometry and is typically associated with a characteristic whoop, post-tussive vomiting, or a known contact."
+  },
+  {
+    q: "A 30-year-old atopic man with recurrent wheeze and breathlessness has a full blood count showing an eosinophil count of 0.85 × 10⁹/L (normal <0.4 × 10⁹/L). Spirometry shows a reversible obstructive pattern. Which investigation result is most consistent with atopic asthma in this context?",
+    opts: [
+      "Elevated serum IgA on immunoglobulin electrophoresis",
+      "Raised ESR and CRP indicating acute phase inflammation",
+      "Thrombocytosis on the full blood count",
+      "Peripheral blood eosinophilia on the full blood count",
+      "Lymphocytosis on the differential white cell count"
+    ],
+    ans: 3,
+    exp: "Peripheral blood eosinophilia is the investigation result most consistent with atopic asthma. Eosinophils are key effector cells in the pathogenesis of allergic asthma, driven by Th2 cytokines including IL-4, IL-5, and IL-13. A raised eosinophil count (above 0.4 × 10⁹/L) in the context of reversible airflow obstruction and atopic history supports the diagnosis of eosinophilic asthma. Elevated serum IgA is not a feature of asthma; raised IgA might suggest another diagnosis such as IgA nephropathy or certain infections. Raised ESR and CRP are non-specific markers of inflammation that may be mildly elevated in acute asthma exacerbations but are not characteristic diagnostic findings in chronic atopic asthma. Thrombocytosis is not a recognised feature of asthma. Lymphocytosis does not characterise the haematological profile of atopic asthma; eosinophilia — not lymphocytosis — is the relevant differential white cell finding."
+  },
+  {
+    q: "A 25-year-old student with moderate persistent asthma takes budesonide/formoterol as maintenance therapy and carries a salbutamol inhaler for emergencies. He begins wheezing during a lecture. Which is the correct advice regarding which inhaler to use for immediate relief?",
+    opts: [
+      "Use budesonide/formoterol immediately as the combination provides the fastest bronchodilation",
+      "Double the budesonide/formoterol dose for 48 hours during any acute symptom flare",
+      "Use salbutamol as it is the rapid-acting beta-2 agonist indicated for immediate symptom relief",
+      "Use neither inhaler and contact emergency services if symptoms occur outside a clinic setting",
+      "Use ipratropium bromide, as anticholinergic agents have a faster onset than beta-2 agonists in stable asthma"
+    ],
+    ans: 2,
+    exp: "Using salbutamol is correct because it is a rapid-acting beta-2 agonist (reliever) classified as a life-saving bronchodilator with a fast onset of action, making it the appropriate agent for immediate symptom relief. Rapid-acting inhaled beta-2 agonists such as salbutamol (albuterol) are the standard first-line relievers for acute symptoms. Budesonide/formoterol is a combined ICS/LABA maintenance therapy. While formoterol itself has a relatively fast onset among LABAs, the combination inhaler is classified as a controller, not a reliever, and is used on a maintenance schedule — not as a rescue medication. Doubling the maintenance dose for 48 hours is not standard management for an acute wheeze episode in a patient with a reliever inhaler available. Withholding any inhaler and calling emergency services is inappropriate for a mild-to-moderate wheeze that can be addressed with the rescue inhaler. Ipratropium bromide is an anticholinergic bronchodilator used in acute severe asthma as an add-on to beta-2 agonists; it has a slower onset than salbutamol and is not used as the primary reliever in community settings."
+  },
+  {
+    q: "A 48-year-old woman remains symptomatic on moderate-dose inhaled corticosteroids and salmeterol. She has daily wheeze and two nocturnal awakenings per week. Which is the most appropriate next step at Step 4 of the management ladder?",
+    opts: [
+      "Increase the ICS dose and add a leukotriene antagonist or theophylline",
+      "Start continuous oral prednisolone as the immediate next step",
+      "Switch the LABA to a short-acting beta-2 agonist and add ipratropium bromide",
+      "Start anti-IgE therapy with omalizumab as the preferred fourth-line agent",
+      "Reduce the ICS to the lowest dose and rely on LABA monotherapy"
+    ],
+    ans: 0,
+    exp: "Increasing the ICS dose and adding a leukotriene antagonist or theophylline is the Step 4 approach when symptoms persist despite Step 3 therapy (ICS plus LABA). Step 4 involves increasing the ICS dose and adding a fourth drug — an oral leukotriene receptor antagonist, oral theophylline, or a slow-release beta-2 agonist — to achieve better control before committing to continuous oral steroids. Continuous oral prednisolone is the Step 5 intervention, reserved for patients who remain uncontrolled despite the Step 4 regimen; initiating it directly from the current position would skip a therapeutic step. Switching from LABA to short-acting beta-2 agonist plus ipratropium would be a step down in bronchodilator coverage and is inappropriate in an inadequately controlled patient. Omalizumab (anti-IgE) is a specialist biologic used in severe allergic asthma that remains uncontrolled despite Step 4 measures; it is not a standard Step 4 first addition. Reducing the ICS and relying on LABA monotherapy is both ineffective and unsafe; LABA should never be used without ICS in asthma."
+  },
+  {
+    q: "A 31-year-old man is admitted with acute severe asthma and is started on nebulized salbutamol. His SpO2 is 90% on room air. Which oxygen delivery approach is most appropriate?",
+    opts: [
+      "Low-flow oxygen at 1–2 L/min to avoid suppressing the hypoxic respiratory drive",
+      "No supplemental oxygen until arterial blood gas confirms the degree of hypoxia",
+      "Heliox as first-line oxygen therapy in acute severe asthma",
+      "High-flow oxygen titrated to maintain SpO2 above 92% in all cases",
+      "100% oxygen via non-rebreather mask regardless of SpO2 value"
+    ],
+    ans: 3,
+    exp: "High-flow oxygen titrated to maintain SpO2 above 92% is correct. In acute severe asthma, maintaining SpO2 above 92% is an explicit management target, and high-flow oxygen should be administered to achieve this. Hypoxia in asthma is primarily from ventilation-perfusion mismatch and must be corrected promptly. Low-flow oxygen at 1–2 L/min is inadequate and the concern about suppressing hypoxic drive applies specifically to patients with chronic hypercapnia — predominantly those with severe COPD — not to asthma, where hypercapnia in an acute attack signals impending respiratory failure rather than chronic adaptation. Withholding oxygen until blood gas results are available is dangerous; SpO2 of 90% already indicates significant hypoxia and oxygen must not be delayed. Heliox may be used in selected refractory cases in specialist settings but is not standard first-line oxygen therapy for acute severe asthma. While 100% oxygen may sometimes be administered via non-rebreather mask in the sickest patients, the standard principle is to titrate to the SpO2 target of >92% rather than defaulting to the maximum concentration for all patients."
+  },
+  {
+    q: "A 65-year-old lifelong smoker presents with chronic progressive dyspnea and wheeze. Spirometry shows a fixed reduced FEV1/FVC ratio with less than 12% improvement in FEV1 after bronchodilator use. His 28-year-old nephew was recently diagnosed with asthma. Which feature most reliably distinguishes the older patient's condition from asthma?",
+    opts: [
+      "The presence of bilateral wheeze on chest auscultation",
+      "Largely irreversible airflow obstruction on spirometry",
+      "Reduced FEV1 on post-bronchodilator spirometry",
+      "History of wheeze specifically triggered by cold air",
+      "The patient's age and cumulative smoking history"
+    ],
+    ans: 1,
+    exp: "Largely irreversible airflow obstruction on spirometry is the most reliable distinguishing feature. A cornerstone of the asthma definition is variable expiratory airflow limitation — airflow obstruction that is at least partially reversible with bronchodilator use (FEV1 increase ≥15%). In this patient, the FEV1 improvement is below 12%, indicating fixed obstruction, which is characteristic of COPD rather than asthma. This is the fundamental spirometric distinction between the two conditions. Wheeze is common to both asthma and COPD and does not differentiate them; a wheeze can be heard in any condition causing significant airflow limitation. Reduced FEV1 is present in both obstructive conditions and therefore does not distinguish one from the other. Cold air can trigger bronchoconstriction in both asthma and hyperresponsive COPD airways and is not a reliable distinguishing feature. Age is an imperfect discriminator — while COPD is more common in older smokers, asthma can occur at any age, and age alone does not reliably separate the diagnoses."
+  }
+];
+
+const COPD_Qs = [
+  {
+    q: "A 62-year-old man with a 40 pack-year smoking history presents with progressive breathlessness. Spirometry shows FEV1/FVC of 0.58 and FEV1 of 62% predicted. He has minimal sputum. Which pathological mechanism best explains his reduced FEV1?",
+    opts: [
+      "Goblet cell hyperplasia causing luminal mucus plugging",
+      "Loss of elastic recoil leading to early airway collapse on expiration",
+      "Bronchial smooth muscle hypertrophy with reversible bronchospasm",
+      "Submucosal oedema from chronic neutrophilic inflammation",
+      "Increased airway resistance from hypertrophied mucus glands"
+    ],
+    ans: 1,
+    exp: "Loss of elastic recoil is correct because emphysema — the dominant pathology in this patient given minimal sputum — destroys alveolar walls distal to the terminal bronchioles, removing the tethering forces that hold small airways open. Without this support, airways collapse early during expiration, trapping air and reducing expiratory flow (FEV1). Goblet cell hyperplasia and hypertrophied mucus glands are hallmarks of chronic bronchitis, which presents with copious sputum — not this patient's picture. Reversible bronchospasm is the mechanism of asthma, distinguishable by its reversibility on bronchodilator testing. Submucosal oedema contributes to airway resistance but is not the primary mechanism of reduced FEV1 in emphysematous COPD."
+  },
+  {
+    q: "A 55-year-old woman is diagnosed with chronic bronchitis. Which clinical definition correctly identifies this condition?",
+    opts: [
+      "Cough with sputum on most days for 3 months in each of 2 consecutive years",
+      "Daily productive cough for at least 6 months in a single year",
+      "Cough with sputum for at least 3 months in any one year over 5 years",
+      "Persistent wheeze with mucus hypersecretion for more than 1 year",
+      "Productive cough associated with FEV1/FVC below 0.7 for 12 months"
+    ],
+    ans: 0,
+    exp: "Cough with sputum on most days for 3 months in each of 2 consecutive years is the established clinical definition of chronic bronchitis. This time-based definition distinguishes it from transient or seasonal cough. Daily productive cough for 6 months in a single year and 3 months over 5 years do not meet the accepted definition — the critical criterion is the 3-month threshold in 2 consecutive years. Wheeze and FEV1/FVC criteria describe COPD as a broader diagnosis, not chronic bronchitis specifically. Note that chronic bronchitis is a clinical diagnosis, while emphysema is a histological one."
+  },
+  {
+    q: "A 68-year-old male smoker is breathless but not cyanosed. His ABG shows PaO2 of 10.2 kPa and PaCO2 of 4.8 kPa. His haematocrit is normal and he produces minimal sputum. Which clinical phenotype does he represent, and what is the primary underlying pathology?",
+    opts: [
+      "Blue bloater; primary pathology is chronic bronchitis",
+      "Pink puffer; primary pathology is emphysema",
+      "Pink puffer; primary pathology is chronic bronchitis",
+      "Blue bloater; primary pathology is emphysema",
+      "Blue bloater; primary pathology is asthma with fixed obstruction"
+    ],
+    ans: 1,
+    exp: "Pink puffer with emphysema as the primary pathology is correct. Pink puffers maintain near-normal PaO2 by increasing alveolar ventilation — hence breathless but not cyanosed. PaCO2 is normal or low due to this compensatory hyperventilation. Haematocrit remains normal because polycythaemia is not triggered. Minimal sputum points away from chronic bronchitis and toward emphysema as the dominant pathology. Blue bloaters hypoventilate — they have low PaO2, high PaCO2, elevated haematocrit from chronic hypoxia, and copious sputum from chronic bronchitis as the dominant pathology. Blue bloater with asthma is incorrect because asthma causes reversible bronchospasm, not the chronic hypercapnia and polycythaemia that define the blue bloater phenotype. The distinction between phenotypes matters clinically because blue bloaters rely on hypoxic drive and are at risk of oxygen-induced hypercapnia."
+  },
+  {
+    q: "A 70-year-old man with known COPD is brought in confused and cyanosed with copious sputum. Administering high-flow oxygen worsens his hypercapnia. Which physiological mechanism best explains this risk?",
+    opts: [
+      "High-flow oxygen causes bronchospasm, increasing airway resistance",
+      "Increased oxygen abolishes hypoxic pulmonary vasoconstriction throughout the lung",
+      "The patient relies on hypoxic drive to maintain respiratory effort",
+      "Excess oxygen causes free radical injury to the respiratory centre",
+      "High PaO2 directly stimulates peripheral chemoreceptors to reduce respiratory rate"
+    ],
+    ans: 2,
+    exp: "Reliance on hypoxic drive is correct. In blue bloaters, chronic CO2 retention desensitises the central chemoreceptors to PaCO2 as a respiratory stimulus. These patients instead depend on the hypoxic drive via peripheral chemoreceptors (carotid and aortic bodies) to maintain ventilatory effort. Administering uncontrolled high-flow oxygen relieves this hypoxic stimulus, removing the drive to breathe and resulting in hypoventilation and worsening hypercapnia. This is why controlled oxygen at 24–28% concentration targeting SpO2 88–92% is used in acute COPD exacerbations. Bronchospasm is not the mechanism here. Free radical injury to the respiratory centre is not an established mechanism. Peripheral chemoreceptors are stimulated by hypoxia, not by high PaO2."
+  },
+  {
+    q: "A 58-year-old man with COPD has spirometry showing FEV1/FVC of 0.62 and FEV1 of 44% predicted. According to the GOLD classification, which stage is this?",
+    opts: [
+      "Stage I — Mild",
+      "Stage II — Moderate",
+      "Stage III — Severe",
+      "Stage IV — Very Severe",
+      "Cannot be staged without post-bronchodilator spirometry"
+    ],
+    ans: 2,
+    exp: "Stage III — Severe is correct. GOLD staging requires FEV1/FVC below 0.7 (confirmed here at 0.62) and then classifies severity by FEV1 % predicted: Stage I (≥80%), Stage II (50–79%), Stage III (30–49%), Stage IV (<30% predicted, or <50% with respiratory failure). This patient's FEV1 of 44% predicted falls in the 30–49% range, placing him at Stage III. Stage II requires FEV1 of 50–79%, which this patient does not meet. Stage IV requires FEV1 below 30% predicted. The staging thresholds use FEV1/FVC <0.7 as the fixed entry criterion — not a post-bronchodilator reversibility test, which is relevant for distinguishing COPD from asthma."
+  },
+  {
+    q: "A 45-year-old non-smoker presents with progressive dyspnoea and emphysema on CT chest. He has no occupational exposure history. Which underlying risk factor should be excluded first?",
+    opts: [
+      "Chronic asthma with airway remodelling",
+      "Alpha-1-antitrypsin deficiency",
+      "Recurrent childhood respiratory infections",
+      "Chronic exposure to indoor biomass fuel",
+      "Primary ciliary dyskinesia"
+    ],
+    ans: 1,
+    exp: "Alpha-1-antitrypsin (AAT) deficiency is the most important risk factor to exclude in a non-smoking young patient with emphysema. AAT is a protease inhibitor that protects lung parenchyma from neutrophil elastase; its deficiency allows unchecked proteolytic destruction of alveolar walls. COPD from AAT deficiency classically affects younger patients and has a panacinar distribution. Asthma causes airway remodelling with obstruction but not emphysema per se. Biomass fuel exposure is a valid COPD risk factor but less likely without any exposure history stated. Recurrent childhood infections may contribute to airway disease but are not the priority exclusion here. Primary ciliary dyskinesia causes bronchiectasis and sinusitis, not emphysema."
+  },
+  {
+    q: "A 66-year-old man with COPD has spirometry: FEV1/FVC 0.58, FEV1 76% predicted, total lung capacity increased, residual volume increased. Which lung function pattern does this confirm?",
+    opts: [
+      "Restrictive pattern with air trapping",
+      "Obstructive pattern with air trapping and hyperinflation",
+      "Mixed obstructive-restrictive pattern",
+      "Normal spirometry with isolated hyperinflation",
+      "Obstructive pattern with reduced total lung capacity"
+    ],
+    ans: 1,
+    exp: "Obstructive pattern with air trapping and hyperinflation is correct. The hallmarks of COPD on lung function testing are: FEV1/FVC below 0.7 (confirming obstruction), reduced FEV1, and — due to early airway closure — increased residual volume and total lung capacity (air trapping and hyperinflation). A restrictive pattern is characterised by reduced TLC, not increased — the opposite of what is seen here. A mixed pattern would require a reduced TLC alongside reduced FEV1/FVC, which is not present. Isolated hyperinflation without obstruction (normal FEV1/FVC) would suggest a different aetiology. Obstructive patterns in COPD produce increased or preserved TLC, never reduced."
+  },
+  {
+    q: "A patient with COPD undergoes a chest X-ray. Which finding would most specifically raise concern for the development of cor pulmonale?",
+    opts: [
+      "Flattened hemidiaphragms",
+      "Reduced peripheral vascular markings",
+      "Dilated pulmonary trunk",
+      "Hyperinflation with more than 6 anterior ribs above the diaphragm",
+      "Bullae at the lung apices"
+    ],
+    ans: 2,
+    exp: "A dilated pulmonary trunk on chest X-ray is the finding most specifically associated with pulmonary hypertension and consequent cor pulmonale. Cor pulmonale — right heart failure secondary to chronic hypoxic pulmonary vasoconstriction — leads to increased pulmonary arterial pressure, pulmonary arterial dilatation, and right ventricular hypertrophy detectable on ECG. Flattened hemidiaphragms and hyperinflation indicate emphysematous air trapping but are not specific to cor pulmonale. Reduced peripheral vascular markings reflect parenchymal destruction from emphysema. Bullae indicate centrilobular emphysema and raise the risk of pneumothorax, not cor pulmonale specifically."
+  },
+  {
+    q: "A 64-year-old man with severe COPD is being assessed for long-term oxygen therapy (LTOT). Which set of criteria most accurately identifies him as a candidate under the primary indication?",
+    opts: [
+      "PaO2 below 8.0 kPa at rest while receiving bronchodilators and steroids",
+      "PaO2 below 7.3 kPa while clinically stable and a non-smoker",
+      "SpO2 below 90% on exertion despite maximal inhaled therapy",
+      "PaCO2 above 6.0 kPa with PaO2 below 8.0 kPa during an acute exacerbation",
+      "FEV1 below 30% predicted with nocturnal desaturations on oximetry"
+    ],
+    ans: 1,
+    exp: "LTOT is indicated under the primary criterion in clinically stable non-smokers with PaO2 below 7.3 kPa despite maximal medical treatment. Clinical stability is essential — ABGs taken during an acute exacerbation do not reflect the baseline and should not be used to make this decision. Non-smoking status is required because supplemental oxygen in a smoker poses a fire hazard and negates the survival benefit. PaO2 below 8.0 kPa is the threshold for the secondary indication only when accompanied by complications such as pulmonary hypertension, polycythaemia, peripheral oedema, or nocturnal hypoxia — not as a standalone criterion. Exertional desaturation alone is not a standard LTOT indication. Acute exacerbation ABGs should not trigger LTOT until stability is re-established."
+  },
+  {
+    q: "A COPD patient is commenced on LTOT. The aim is to maintain PaO2 at or above 8.0 kPa for at least how many hours per day, and what is the expected improvement in 3-year survival?",
+    opts: [
+      "12 hours per day; 50% improvement in 3-year survival",
+      "15 hours per day; 50% improvement in 3-year survival",
+      "18 hours per day; 40% improvement in 3-year survival",
+      "24 hours per day; 60% improvement in 3-year survival",
+      "15 hours per day; 25% improvement in 3-year survival"
+    ],
+    ans: 1,
+    exp: "LTOT aims to maintain PaO2 at or above 8.0 kPa for at least 15 hours per day, which improves 3-year survival by approximately 50%. Shorter durations of 12 hours per day are insufficient to sustain the required oxygenation benefit throughout the day and night. While 24 hours per day would maximise benefit, 15 hours per day is the established minimum standard. The 50% improvement in 3-year survival is the figure cited in this material; treatment of oedema with diuretics and management of pulmonary hypertension are adjuncts but do not independently produce this survival benefit."
+  },
+  {
+    q: "A 60-year-old COPD patient with FEV1 of 72% predicted remains symptomatic on a short-acting beta-2 agonist used as needed. What is the most appropriate next step in pharmacological management?",
+    opts: [
+      "Add inhaled corticosteroid monotherapy",
+      "Start oral prednisolone 30 mg daily",
+      "Add an inhaled long-acting antimuscarinic (tiotropium) or long-acting beta-2 agonist",
+      "Initiate combination ICS plus long-acting beta-2 agonist (Symbicort)",
+      "Add theophylline and refer to a specialist"
+    ],
+    ans: 2,
+    exp: "Adding an inhaled long-acting antimuscarinic such as tiotropium, or a long-acting beta-2 agonist, is the appropriate next step for a mild-to-moderate COPD patient (FEV1 50–79%) who remains symptomatic on a short-acting bronchodilator. This follows the stepwise management approach. Inhaled corticosteroid monotherapy has no role in COPD — steroids are only used in combination with a LABA for severe COPD with frequent exacerbations. Oral prednisolone is reserved for acute exacerbations, not step-up maintenance therapy. Combination ICS plus LABA (Symbicort) is the appropriate step for severe COPD, not moderate. Theophylline and specialist referral are considered only when symptoms persist despite combination therapy at the severe stage."
+  },
+  {
+    q: "A patient with severe COPD remains breathless despite tiotropium alone. Which treatment regimen is most appropriate as the next step?",
+    opts: [
+      "Add a short-acting beta-2 agonist as maintenance bronchodilator therapy",
+      "Switch to oral theophylline and add an inhaled corticosteroid",
+      "Add combination long-acting beta-2 agonist plus inhaled corticosteroid (e.g., Symbicort)",
+      "Initiate triple therapy with tiotropium, ICS, and LABA immediately",
+      "Refer directly for lung volume reduction surgery"
+    ],
+    ans: 2,
+    exp: "Adding combination inhaled corticosteroid plus long-acting beta-2 agonist — such as Symbicort (budesonide and formoterol) — is the appropriate next step for severe COPD remaining symptomatic on tiotropium alone. At the severe stage, this combination reduces exacerbation frequency and improves symptoms. Rescue short-acting beta-2 agonists are appropriate at all stages but do not constitute step-up maintenance therapy. Triple therapy (tiotropium plus ICS plus LABA) is reserved for patients who remain symptomatic despite the ICS/LABA combination — it is the next rung, not this one. Theophylline and home nebulisers are additional options only when symptoms persist on triple therapy. Lung volume reduction surgery is for selected patients with upper lobe emphysema and no pulmonary hypertension — not a routine pharmacological step-up alternative."
+  },
+  {
+    q: "A 72-year-old man with COPD presents with worsening dyspnoea, increased cough, and purulent sputum. He is started on nebulised salbutamol and ipratropium. At what threshold should controlled oxygen therapy be commenced?",
+    opts: [
+      "SpO2 below 94% or PaO2 below 9 kPa",
+      "Immediately upon presentation in all COPD exacerbations",
+      "SpO2 below 88% or PaO2 below 7 kPa",
+      "Only when respiratory rate exceeds 30 breaths per minute",
+      "When PaCO2 rises above 6 kPa regardless of SpO2"
+    ],
+    ans: 2,
+    exp: "Controlled oxygen is indicated when SpO2 is below 88% or PaO2 is below 7 kPa, delivered at 24–28% concentration with a target SpO2 of 88–92%. This conservative threshold exists because many COPD patients rely on hypoxic drive; higher oxygen concentrations can abolish this drive and worsen hypercapnia. Commencing oxygen routinely in all COPD patients risks CO2 retention in those with blunted chemoreceptor sensitivity. SpO2 below 94% or PaO2 below 9 kPa are appropriate targets for patients without hypercapnic risk (Type 1 failure), not in COPD exacerbation. Respiratory rate alone is not the trigger for oxygen therapy, though RR above 30 is a trigger for non-invasive ventilation consideration. Rising PaCO2 despite treatment triggers NIV, not oxygen commencement."
+  },
+  {
+    q: "A patient admitted with acute COPD exacerbation has a respiratory rate of 34 per minute and an arterial pH of 7.30 despite nebulised bronchodilators and controlled oxygen. What is the most appropriate next intervention?",
+    opts: [
+      "Immediate intubation and mechanical ventilation",
+      "IV aminophylline and repeat ABG in 2 hours",
+      "Non-invasive positive pressure ventilation",
+      "Increase inspired oxygen concentration to 60%",
+      "Urgent CT pulmonary angiography to exclude pulmonary embolism"
+    ],
+    ans: 2,
+    exp: "Non-invasive positive pressure ventilation (NIPPV) is indicated when respiratory rate exceeds 30 per minute, pH falls below 7.35, or PaCO2 is rising despite optimal medical therapy. This patient meets two criteria (RR 34 and pH 7.30). NIPPV reduces the work of breathing, improves alveolar ventilation, and corrects acidosis without the risks of invasive ventilation. Immediate intubation is reserved for patients who fail NIPPV or have a pH below 7.26 with rising PaCO2 despite NIPPV — this patient's pH of 7.30 has not yet crossed that threshold. IV aminophylline may be considered if there is no response to bronchodilators, but is not the priority when NIV criteria are met. Increasing FiO2 to 60% risks worsening hypercapnia in this patient. CT-PA is not indicated without clinical suspicion of pulmonary embolism."
+  },
+  {
+    q: "An acute COPD exacerbation patient fails to improve on NIPPV. Serial ABGs show pH 7.24 and a rising PaCO2 despite optimum non-invasive support. What is the most appropriate next step?",
+    opts: [
+      "Increase NIPPV pressure settings and recheck ABG in 4 hours",
+      "Commence high-flow oxygen at 60% FiO2 to correct hypoxaemia",
+      "Intubation and invasive mechanical ventilation",
+      "Administer IV magnesium sulphate",
+      "Emergency bronchoscopy to clear retained secretions"
+    ],
+    ans: 2,
+    exp: "Intubation and invasive mechanical ventilation is indicated when pH falls below 7.26 and PaCO2 continues to rise despite non-invasive ventilation. This patient has deteriorated below that threshold, confirming NIV failure. Escalating NIPPV pressures and waiting is inappropriate given active deterioration and severe acidosis — delay risks respiratory arrest. High-flow oxygen worsens hypercapnia in COPD and is absolutely contraindicated here. IV magnesium sulphate has a role in acute severe asthma, not in hypercapnic COPD exacerbation. Emergency bronchoscopy has no established role in acute COPD exacerbation management."
+  },
+  {
+    q: "A 55-year-old woman admitted with an acute COPD exacerbation has purulent sputum and a low-grade fever. Which organisms are most commonly responsible for infective exacerbations in COPD?",
+    opts: [
+      "Staphylococcus aureus and Klebsiella pneumoniae",
+      "Haemophilus influenzae and Streptococcus pneumoniae",
+      "Pseudomonas aeruginosa and Legionella pneumophila",
+      "Moraxella catarrhalis and Mycoplasma pneumoniae",
+      "Escherichia coli and Streptococcus pyogenes"
+    ],
+    ans: 1,
+    exp: "Haemophilus influenzae and Streptococcus pneumoniae are the organisms most commonly associated with infective exacerbations of COPD. Both colonise the damaged, mucus-laden airways of COPD patients and are responsible for the majority of bacterial exacerbations — hence the recommendation for pneumococcal vaccination in COPD management. Staphylococcus aureus and Klebsiella are associated with hospital-acquired pneumonia rather than community COPD exacerbations. Pseudomonas and Legionella are associated with immunocompromised patients or specific environmental exposures. Moraxella catarrhalis is a recognised cause of COPD exacerbation but was not highlighted in this material; Mycoplasma is more typical of community-acquired atypical pneumonia in younger patients. E. coli and Streptococcus pyogenes are not primary respiratory pathogens in COPD."
+  },
+  {
+    q: "A 57-year-old man with COPD sits leaning forward with his arms outstretched resting on his knees, fixing his shoulder girdle. Which term describes this posture, and what is its physiological benefit?",
+    opts: [
+      "Orthopnoeic posture; reduces venous return and cardiac preload",
+      "Tripod posture; fixes the shoulder girdle so accessory muscles act on the thorax",
+      "Kyphotic posture; opens the posterior lung zones to improve ventilation",
+      "Opisthotonic posture; relieves diaphragmatic splinting from abdominal pressure",
+      "Decubitus posture; reduces work of breathing by offloading the diaphragm"
+    ],
+    ans: 1,
+    exp: "Tripod posture — leaning forward with the shoulder girdle fixed on outstretched arms — allows accessory muscles of inspiration (pectoralis major, serratus anterior, sternocleidomastoid) to pull on the thorax rather than the limbs, improving their mechanical advantage and increasing tidal volume with less effort. This is a characteristic adaptation to severe airflow obstruction in COPD. Orthopnoeic posture (upright sitting) reduces dyspnoea in left heart failure and bilateral effusions by lowering venous return — a different mechanism from shoulder-girdle fixation. Kyphotic posture is an anatomical descriptor for thoracic spinal curvature, not a voluntary respiratory adaptation. Opisthotonic posture (backward arching) is a sign of meningism or tetanus. Decubitus means lying down and does not describe this position."
+  },
+  {
+    q: "A 69-year-old woman with COPD develops bilateral ankle oedema and a raised JVP. ECG shows tall peaked P waves and right axis deviation. What complication has she developed?",
+    opts: [
+      "Biventricular cardiac failure from ischaemic heart disease",
+      "Massive pulmonary embolism with acute right heart strain",
+      "Cor pulmonale",
+      "Nephrotic syndrome causing peripheral oedema",
+      "Constrictive pericarditis"
+    ],
+    ans: 2,
+    exp: "Cor pulmonale is right heart failure secondary to chronic lung disease. In COPD, chronic hypoxia causes sustained pulmonary vasoconstriction, raising pulmonary artery pressure. The right ventricle hypertrophies to compensate and eventually fails, producing raised JVP, peripheral oedema, and hepatomegaly. ECG changes include right atrial enlargement (tall peaked P waves — P pulmonale) and right ventricular hypertrophy (right axis deviation, dominant R wave in V1). Biventricular failure from ischaemic disease would produce left-sided signs such as S3, pulmonary oedema, and LV strain on ECG, which are not described here. Massive PE causes acute right heart strain — typically presenting acutely, not as a chronic finding. Nephrotic syndrome causes oedema without elevated JVP or ECG changes. Constrictive pericarditis produces elevated JVP with a distinctive X and Y descent pattern and a pericardial knock."
+  },
+  {
+    q: "A patient with COPD develops sudden pleuritic chest pain and worsening dyspnoea. Examination reveals absent breath sounds on the right and a hyper-resonant percussion note. Which complication is most likely, and what is the most common structural cause in COPD?",
+    opts: [
+      "Pleural effusion; caused by right heart failure",
+      "Massive pulmonary embolism; caused by polycythaemia-driven thrombosis",
+      "Pneumothorax; caused by rupture of a bulla",
+      "Consolidation; caused by mucus plugging and lobar atelectasis",
+      "Haemothorax; caused by erosion of a pulmonary vessel by a bulla"
+    ],
+    ans: 2,
+    exp: "Pneumothorax from rupture of a bulla is the correct answer. Emphysema produces bullae — large air-filled spaces from destruction and coalescence of alveolar walls. These can rupture spontaneously, particularly with rises in intrathoracic pressure, producing a pneumothorax. Clinical features are sudden pleuritic chest pain, dyspnoea, reduced or absent breath sounds, and a hyper-resonant percussion note on the affected side — all present here. Pleural effusion produces a stony dull percussion note, not hyper-resonance. Massive PE does not produce absent breath sounds or percussion changes. Consolidation produces a dull percussion note with bronchial breathing — the opposite of hyper-resonance. Haemothorax is uncommon in COPD and would also produce dullness on percussion."
+  },
+  {
+    q: "A 74-year-old man with severe COPD has upper lobe emphysema confirmed on CT and no evidence of pulmonary hypertension. Which surgical procedure is most appropriate to discuss?",
+    opts: [
+      "Bullectomy, regardless of age or distribution of emphysema",
+      "Lung transplant as the first-line surgical option",
+      "Lung volume reduction surgery",
+      "Pleurodesis to reduce risk of future pneumothorax",
+      "Video-assisted thoracoscopic decortication"
+    ],
+    ans: 2,
+    exp: "Lung volume reduction surgery (LVRS) is indicated for patients with predominantly upper lobe emphysema and no pulmonary hypertension. The rationale is that resecting hyperinflated, non-functional upper lobe tissue allows the remaining, better-preserved lung to expand more effectively and restores diaphragmatic mechanics by reducing hyperinflation. Bullectomy is specifically for younger patients with discrete large bullae — not for the diffuse upper lobe emphysema described here. Lung transplant is reserved for selected end-stage COPD patients and is not offered before LVRS. Pleurodesis reduces recurrent pneumothorax risk but does not treat emphysema itself. VATS decortication is used for pleural disease such as empyema or organised haemothorax, not emphysema."
+  },
+  {
+    q: "A 61-year-old man with COPD has an ABG showing PaO2 of 7.6 kPa and PaCO2 of 7.8 kPa on room air. Which type of respiratory failure does this represent, and what is the primary mechanism in COPD?",
+    opts: [
+      "Type 1 respiratory failure; V/Q mismatch from alveolar destruction",
+      "Type 2 respiratory failure; alveolar hypoventilation causing CO2 retention",
+      "Type 1 respiratory failure; diffusion impairment from emphysema",
+      "Type 2 respiratory failure; pulmonary hypertension reducing effective cardiac output",
+      "Neither type; both values fall within acceptable limits for severe COPD"
+    ],
+    ans: 1,
+    exp: "Type 2 respiratory failure is defined as PaO2 below 8 kPa with PaCO2 above 6 kPa — both criteria are met here (PaO2 7.6, PaCO2 7.8). The mechanism is alveolar hypoventilation: in blue bloater-type COPD, blunted central chemoreceptor sensitivity to CO2, increased dead space, and airway obstruction reduce effective alveolar ventilation, causing CO2 to accumulate. Type 1 respiratory failure is PaO2 below 8 kPa with PaCO2 normal or low (below 6 kPa) — it reflects hypoxaemia without hypercapnia, as seen in conditions causing V/Q mismatch where ventilatory compensation preserves or reduces CO2. This patient's elevated PaCO2 places him firmly in Type 2. Neither value is within acceptable limits — both the hypoxaemia and hypercapnia require urgent management."
+  },
+  {
+    q: "A COPD patient's chest radiograph shows marked hyperinflation. How many anterior ribs visible above the diaphragm defines radiological hyperinflation in COPD?",
+    opts: [
+      "More than 4 anterior ribs above the diaphragm",
+      "More than 5 anterior ribs above the diaphragm",
+      "More than 6 anterior ribs above the diaphragm",
+      "More than 7 anterior ribs above the diaphragm",
+      "More than 8 anterior ribs above the diaphragm"
+    ],
+    ans: 2,
+    exp: "More than 6 anterior ribs visible above the diaphragm is the radiological criterion for hyperinflation on chest X-ray. In COPD, air trapping from early airway closure causes chronic lung hyperexpansion, pushing the diaphragm inferiorly and flattening it, allowing more ribs to be counted above it than normal. Other chest X-ray features of COPD include flat hemidiaphragms, reduced peripheral vascular markings, a narrow mediastinum, dilated pulmonary trunk, and bullae. The threshold of 6 is the taught standard; fewer than this on a standard inspiratory film represents a normal or near-normal diaphragmatic position."
+  },
+  {
+    q: "A 63-year-old COPD patient presents with confusion, bilateral headache, and papilloedema. His ABG shows markedly elevated PaCO2. Which mechanism best explains his neurological signs?",
+    opts: [
+      "Cerebral vasoconstriction from hypoxia reducing neuronal perfusion",
+      "Cerebral vasodilatation from hypercapnia increasing intracranial pressure",
+      "Metabolic acidosis causing diffuse neuronal membrane dysfunction",
+      "Polycythaemia causing cerebral venous sinus thrombosis",
+      "Paradoxical cerebral emboli through a patent foramen ovale"
+    ],
+    ans: 1,
+    exp: "Hypercapnia causes cerebral vasodilatation because CO2 is a potent vasodilator of cerebral vessels. The resulting increase in cerebral blood flow raises intracranial pressure, producing headache, papilloedema, and — in severe cases — confusion, impaired consciousness, and coma. This is a recognised complication of Type 2 respiratory failure and CO2 retention in severe COPD. Cerebral vasoconstriction from hypoxia is the opposite of the vascular response here — both hypoxia and hypercapnia cause vasodilatation, but hypercapnia is the dominant driver of the neurological features described. Metabolic acidosis occurs downstream of hypercapnia but does not directly cause cerebral vasodilatation or papilloedema. Polycythaemia raises thrombotic risk but does not explain acute papilloedema in this context. Paradoxical emboli require a right-to-left cardiac shunt, not present in uncomplicated COPD."
+  },
+  {
+    q: "A 57-year-old coal miner with a 20 pack-year smoking history is diagnosed with COPD. Which of the following is the most common risk factor for COPD overall, and what proportion of cases does it account for?",
+    opts: [
+      "Biomass fuel exposure; approximately 50% of cases globally",
+      "Cigarette smoking; approximately 95% of cases",
+      "Alpha-1-antitrypsin deficiency; approximately 20% of cases",
+      "Occupational dust exposure; approximately 40% of cases",
+      "Recurrent respiratory infections in childhood; approximately 30% of cases"
+    ],
+    ans: 1,
+    exp: "Cigarette smoking is the dominant risk factor for COPD, accounting for approximately 95% of cases. The mechanisms include direct irritant effects causing mucus hypersecretion and goblet cell hyperplasia, oxidative damage to lung parenchyma, impaired mucociliary clearance, and activation of neutrophils releasing proteases that destroy alveolar walls. Alpha-1-antitrypsin deficiency accounts for a small minority of cases and is important because it explains COPD in non-smokers and younger patients. Biomass fuel exposure (wood, animal dung, crop residues) is a significant cause globally but not the dominant aetiology in this material's context. Occupational dusts such as coal and silica contribute but are dwarfed by smoking as a cause. Recurrent infections are more often a consequence of COPD than a primary cause."
+  },
+  {
+    q: "A COPD patient with cor pulmonale has worsening bilateral ankle oedema. His PaO2 is 7.8 kPa and he has polycythaemia. Under the secondary LTOT indication, what additional criterion must be present alongside a PaO2 of 7.3–8.0 kPa?",
+    opts: [
+      "FEV1 below 30% predicted on post-bronchodilator spirometry",
+      "Presence of at least one complication: pulmonary hypertension, polycythaemia, oedema, or nocturnal hypoxia",
+      "SpO2 below 90% during a 6-minute walk test",
+      "PaCO2 above 6.5 kPa on resting ABG",
+      "Three or more hospitalisations for exacerbation in the past year"
+    ],
+    ans: 1,
+    exp: "The secondary LTOT indication applies when PaO2 is in the range 7.3–8.0 kPa AND at least one of the following complications is present: pulmonary hypertension, polycythaemia, peripheral oedema, or nocturnal hypoxia. This patient's PaO2 of 7.8 kPa places him in that range, and he has both polycythaemia and peripheral oedema, satisfying the secondary indication. The primary indication (PaO2 below 7.3 kPa) does not require any co-morbidity — that threshold alone is sufficient when the patient is clinically stable and a non-smoker. FEV1 staging, exertional SpO2 testing, PaCO2 level, and exacerbation frequency are not components of the LTOT criteria as defined in this material."
+  }
+];
+
+const SUPPURATIVE_LUNG_Qs = [
+  // ─── Q1 ──────────────────────────────────────────────────────────────────
+  // FIX: Opt 4 (empyema) had a parenthetical definition making it trivially
+  // eliminable. Trimmed to match the register of the other options.
+  // FIX: Key (opt 1) was longest; other options padded slightly for balance.
+  {
+    q: "Which of the following best defines bronchiectasis?",
+    opts: [
+      "Reversible airway narrowing caused by smooth muscle hyperreactivity",
+      "Irreversible bronchial dilatation with destruction of the elastic and muscular wall components",
+      "Temporary cylindrical widening of bronchi following an episode of acute pneumonia",
+      "Progressive fibrosis of the bronchial wall resulting in restrictive physiology",
+      "Accumulation of pus within the pleural cavity from a bacterial source"
+    ],
+    ans: 1,
+    exp: "Bronchiectasis is defined as irreversible dilatation of one or more bronchi with destruction of their elastic and muscular wall components, resulting in chronic infection, impaired secretion clearance, and recurrent exacerbations. Reversible airway narrowing from smooth muscle hyperreactivity describes bronchospasm — the mechanism underlying asthma — not bronchiectasis. Temporary cylindrical widening of bronchi following acute pneumonia describes pseudobronchiectasis, which resolves within weeks to months and carries no surgical implications. Accumulation of pus within the pleural cavity defines empyema thoracis, a separate suppurative lung disease."
+  },
+
+  // ─── Q2 ──────────────────────────────────────────────────────────────────
+  // FIX: Options previously embedded parenthetical clues inside the text
+  // (e.g. "reversible…resolves" inside the pseudobronchiectasis distractor).
+  // All parenthetical aids removed; options now stand alone.
+  {
+    q: "Which morphological type of bronchiectasis is characterized by progressive airway dilatation ending in sac-like cystic structures, giving a cluster-of-grapes appearance on HRCT?",
+    opts: [
+      "Cystic bronchiectasis",
+      "Cylindrical bronchiectasis",
+      "Varicose bronchiectasis",
+      "Tubular bronchiectasis",
+      "Pseudobronchiectasis"
+    ],
+    ans: 0,
+    exp: "Cystic (saccular) bronchiectasis involves progressive dilatation of the airways terminating in sac-like cystic structures that cluster together, resembling a bunch of grapes on HRCT. It commonly results from bacterial pulmonary infection, foreign body obstruction, or bronchial stricture. Cylindrical (tubular) bronchiectasis shows dilated, non-tapering bronchi that communicate directly with lung parenchyma, typically seen after tuberculosis. Varicose bronchiectasis produces alternating areas of dilatation and constriction resembling varicose veins. Pseudobronchiectasis is temporary reversible cylindrical dilatation from acute pneumonia that resolves without surgical intervention."
+  },
+
+  // ─── Q3 ──────────────────────────────────────────────────────────────────
+  // FIX (major): Options previously contained two synonym pairs — cylindrical/
+  // tubular and cystic/saccular — making mutual exclusivity impossible and
+  // allowing elimination by recognising redundancy. Replaced with four
+  // genuinely distinct morphological options, each describing a real pattern.
+  {
+    q: "On HRCT, which type of bronchiectasis shows alternating areas of bronchial dilatation and constriction, producing a beaded appearance similar to varicose veins?",
+    opts: [
+      "Cystic bronchiectasis",
+      "Cylindrical bronchiectasis",
+      "Follicular bronchiectasis",
+      "Atelectatic bronchiectasis",
+      "Varicose bronchiectasis"
+    ],
+    ans: 4,
+    exp: "Varicose (mixed) bronchiectasis produces a beaded pattern on HRCT due to alternating dilatation and constriction of the bronchial lumen, closely resembling the irregular calibre of varicose veins. Cystic bronchiectasis produces sac-like clustered structures at the end of dilated airways, not alternating calibre change. Cylindrical bronchiectasis shows uniformly dilated, non-tapering bronchi producing the tram-track sign on plain CXR. Follicular bronchiectasis is characterised by lymphoid follicles along the bronchial wall and is seen in connective tissue disease — it does not produce a beaded pattern. Atelectatic bronchiectasis occurs in collapsed lung segments and is reversible when the underlying atelectasis resolves."
+  },
+
+  // ─── Q4 ── no changes ────────────────────────────────────────────────────
+  {
+    q: "A 10-year-old boy presents with recurrent respiratory infections, steatorrhoea, and failure to thrive. Sweat chloride testing returns at 74 meq/L. Which congenital condition is responsible for his bronchiectasis?",
+    opts: [
+      "Primary ciliary dyskinesia",
+      "Alpha-1 antitrypsin deficiency",
+      "Allergic bronchopulmonary aspergillosis",
+      "Cystic fibrosis",
+      "Hypogammaglobulinemia"
+    ],
+    ans: 3,
+    exp: "A sweat chloride level above 60 meq/L is the diagnostic threshold for cystic fibrosis (CF), which results from a defective CFTR protein — a chloride channel — causing viscous secretions in multiple organ systems. Respiratory consequences include chronic infection and severe bronchiectasis; gastrointestinal involvement causes pancreatic exocrine insufficiency with steatorrhoea and failure to thrive. Primary ciliary dyskinesia involves ciliary ultrastructural defects confirmed by specific ciliary motility testing, not sweat chloride. Alpha-1 antitrypsin deficiency primarily causes emphysema and does not present with gastrointestinal malabsorption. Hypogammaglobulinemia predisposes to infection through impaired humoral immunity without gastrointestinal manifestations."
+  },
+
+  // ─── Q5 ── no changes ────────────────────────────────────────────────────
+  {
+    q: "A 28-year-old woman presents with lifelong recurrent sinusitis, bilateral bronchiectasis on HRCT, and a sweat chloride of 38 meq/L. Her brother's semen analysis shows immotile spermatozoa. Which diagnosis best explains her condition?",
+    opts: [
+      "Cystic fibrosis",
+      "Allergic bronchopulmonary aspergillosis",
+      "Hypogammaglobulinemia",
+      "Alpha-1 antitrypsin deficiency",
+      "Primary ciliary dyskinesia"
+    ],
+    ans: 4,
+    exp: "The combination of lifelong sino-pulmonary disease, bilateral bronchiectasis, a normal sweat chloride (ruling out cystic fibrosis), and male infertility from immotile spermatozoa is classic for primary ciliary dyskinesia (PCD). Cilia and flagella share the same nine-plus-two microtubular ultrastructure with dynein arms — defective dynein arms impair both mucociliary clearance and sperm motility. Cystic fibrosis requires sweat chloride above 60 meq/L. Allergic bronchopulmonary aspergillosis produces central proximal bronchiectasis in asthmatic patients and is not associated with male infertility. Alpha-1 antitrypsin deficiency predominantly causes basal emphysema, not recurrent sinopulmonary infections from childhood."
+  },
+
+  // ─── Q6 ── no changes ────────────────────────────────────────────────────
+  {
+    q: "In bronchiectasis, which mechanism allows bacteria to perpetuate airway damage by preventing healing of the respiratory epithelium?",
+    opts: [
+      "Releasing endotoxins that activate mast cells and trigger IgE-mediated bronchoconstriction",
+      "Inducing type IV hypersensitivity reactions that progressively destroy bronchial cartilage",
+      "Stimulating excess mucin gene transcription leading to irreversible goblet cell hyperplasia",
+      "Binding fibronectin and integrin receptors, impairing epithelial cell migration and adhesion",
+      "Activating complement through the alternative pathway, causing direct epithelial cell lysis"
+    ],
+    ans: 3,
+    exp: "Bacteria perpetuate bronchial damage by binding to fibronectin — a protein essential for cell migration — and integrin — necessary for cell adhesion — thereby blocking repair of the damaged respiratory epithelium and sustaining the cycle of chronic infection and inflammation. IgE-mediated bronchoconstriction describes the mechanism of allergic asthma, not the bacterially driven chronic infection in bronchiectasis. Type IV hypersensitivity and complement-mediated lysis are immunological mechanisms not specific to the bacterial-epithelial interaction responsible for the progressive damage in bronchiectasis pathophysiology."
+  },
+
+  // ─── Q7 ──────────────────────────────────────────────────────────────────
+  // FIX: CD16 (Fc gamma receptor III) replaced with CXCR2, a closely related
+  // chemokine receptor the student might plausibly confuse with CXCR1.
+  // This makes the question test precision of knowledge rather than obscure
+  // receptor recall. CR3 and TLR4 retained as strong conceptually grounded
+  // distractors.
+  {
+    q: "Pseudomonas aeruginosa worsens outcomes in bronchiectasis by cleaving which receptor, resulting in impaired neutrophil recruitment and bacterial killing?",
+    opts: [
+      "TLR4 (toll-like receptor 4)",
+      "CXCR2 (chemokine receptor 2)",
+      "CXCR1 (chemokine receptor 1)",
+      "FcεRI (high-affinity IgE receptor)",
+      "CR3 (complement receptor 3)"
+    ],
+    ans: 2,
+    exp: "Pseudomonas aeruginosa proteases specifically cleave CXCR1 — the receptor through which IL-8 recruits neutrophils to infected tissue. Disabling CXCR1 reduces neutrophil influx, impairs phagocytic function, and allows Pseudomonas to evade killing. Alpha-1 antitrypsin counteracts this by restoring CXCR1 function and enhancing bacterial clearance. CXCR2 is the closely related IL-8 receptor that shares structural homology with CXCR1 but is not the target of Pseudomonas cleavage in this pathway. TLR4 is a pattern recognition receptor for bacterial lipopolysaccharide but is not specifically cleaved by Pseudomonas in this mechanism. FcεRI mediates IgE-dependent mast cell degranulation in allergic conditions. CR3 mediates complement-dependent phagocytosis and is not specifically targeted here."
+  },
+
+  // ─── Q8 ── no changes ────────────────────────────────────────────────────
+  {
+    q: "Which pair of clinical findings is most characteristic of established bronchiectasis?",
+    opts: [
+      "Dry persistent cough with bilateral fine end-inspiratory crackles",
+      "Copious purulent sputum production with bilateral coarse crackles on auscultation",
+      "Severe progressive dyspnoea with bilateral wheeze and a silent chest",
+      "Recurrent episodic wheeze with full recovery between attacks",
+      "Pleuritic chest pain with a friction rub and minimal sputum production"
+    ],
+    ans: 1,
+    exp: "Copious purulent sputum and coarse crackles are the hallmark features of bronchiectasis, reflecting pooled secretions in permanently dilated bronchi with ongoing infection. Fine end-inspiratory crackles with a dry cough are more consistent with pulmonary fibrosis or interstitial lung disease. Severe progressive wheeze with a silent chest suggests status asthmaticus. Episodic wheeze with full recovery between attacks characterizes asthma, not the chronic relentless nature of bronchiectasis. Pleuritic pain with a friction rub suggests pleuritis or pulmonary embolism."
+  },
+
+  // ─── Q9 ──────────────────────────────────────────────────────────────────
+  // FIX: Key (opt 0) carried the explanatory phrase "from thickened parallel
+  // bronchial walls" not present in any distractor — removed from option text
+  // (explanation still covers this). Opt 2 parenthetical "bat-wing" label
+  // removed; description left to stand alone as it does for other options.
+  {
+    q: "Which plain CXR finding is most characteristic of cylindrical bronchiectasis?",
+    opts: [
+      "Tram-track sign — parallel line opacities in the lung fields",
+      "Peripheral wedge-shaped opacity abutting the pleura",
+      "Bilateral perihilar infiltrates with a central distribution",
+      "Honeycomb pattern with basal subpleural involvement",
+      "Bilateral hilar lymphadenopathy with upper zone shadowing"
+    ],
+    ans: 0,
+    exp: "The tram-track sign — parallel line opacities representing thickened bronchial walls in longitudinal section — is the characteristic CXR finding of cylindrical bronchiectasis, reflecting bronchial wall inflammation and dilatation without normal tapering. A peripheral wedge-shaped opacity suggests pulmonary infarction. Bilateral perihilar infiltrates in a central distribution indicate pulmonary oedema from cardiac failure. Basal subpleural honeycombing characterizes pulmonary fibrosis. Bilateral hilar lymphadenopathy with upper zone shadowing suggests sarcoidosis or tuberculosis."
+  },
+
+  // ─── Q10 ─────────────────────────────────────────────────────────────────
+  // FIX: Opt 2 was significantly longer than others; trimmed. Opt 3 carried
+  // the qualifier "on coronal cuts" not present in other options; removed.
+  {
+    q: "HRCT is the gold standard for diagnosing bronchiectasis. Which specific HRCT finding confirms abnormal bronchial dilatation?",
+    opts: [
+      "A bronchus with a lumen wider than its accompanying artery",
+      "Airway diameter exceeding 1.5 times the adjacent pulmonary artery — the signet ring sign",
+      "A bronchus tapering less than 20% over a 5 cm length distally",
+      "A bronchus visible within 2 cm of the pleural surface",
+      "Bilateral bronchial wall thickening with mucus plugging across two or more lobes"
+    ],
+    ans: 1,
+    exp: "The signet ring sign — where the bronchial diameter exceeds 1.5 times the diameter of the adjacent pulmonary artery — is the primary HRCT criterion for diagnosing bronchiectasis, indicating pathological airway dilatation. HRCT achieves 97% sensitivity and 93–100% specificity for the diagnosis. A bronchoarterial ratio simply exceeding 1:1 is not the accepted threshold and can be seen transiently in infection. Loss of tapering and peripheral visualization of bronchi near the pleura are associated features but are not themselves the primary diagnostic criterion. Bilateral mucus plugging is nonspecific."
+  },
+
+  // ─── Q11 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which combination of investigations specifically identifies allergic bronchopulmonary aspergillosis as a cause of bronchiectasis?",
+    opts: [
+      "Quantitative IgA, IgG, and IgM levels with protein electrophoresis",
+      "Alpha-1 antitrypsin level and protease inhibitor phenotyping",
+      "Rheumatoid factor and antinuclear antibody titres",
+      "Sweat chloride test with CFTR gene mutation analysis",
+      "Aspergillus precipitins and total serum IgE"
+    ],
+    ans: 4,
+    exp: "ABPA is diagnosed by demonstrating Aspergillus-specific IgE and IgG antibodies (precipitins) alongside an elevated total serum IgE. It develops in patients with asthma due to an allergic reaction to Aspergillus fumigatus and causes central, proximal bronchiectasis. Quantitative immunoglobulins (IgA, IgG, IgM) screen for hypogammaglobulinemia as an underlying cause. Alpha-1 antitrypsin level and phenotyping identify alpha-1 AT deficiency. Rheumatoid factor and ANA titres investigate autoimmune and rheumatological causes. Sweat chloride with CFTR mutation analysis diagnoses cystic fibrosis."
+  },
+
+  // ─── Q12 ─────────────────────────────────────────────────────────────────
+  // FIX: "Beta-2 agonists and mucolytics for airway clearance alone" was too
+  // obviously incomplete — easily dismissed without any ABPA knowledge.
+  // Replaced with nebulised antifungal therapy, which a student might
+  // plausibly consider if they know antifungals are involved but miss the
+  // need for systemic corticosteroids.
+  {
+    q: "A patient with bronchiectasis is found to have allergic bronchopulmonary aspergillosis as the underlying cause. Which treatment regimen is most appropriate?",
+    opts: [
+      "Prolonged intravenous antibiotics targeting Pseudomonas aeruginosa",
+      "Intravenous immunoglobulin replacement therapy",
+      "Anti-tuberculosis therapy with four standard agents",
+      "Nebulised antifungal therapy without systemic immunosuppression",
+      "Oral corticosteroids combined with an azole antifungal agent"
+    ],
+    ans: 4,
+    exp: "Allergic bronchopulmonary aspergillosis is treated with oral corticosteroids to suppress the allergic inflammatory response combined with an azole antifungal such as itraconazole to reduce the Aspergillus burden in the airway. This dual approach addresses both the immunological and infective components of ABPA. IV antibiotics targeting Pseudomonas are appropriate for suppurative bacterial exacerbations, not for ABPA. IV immunoglobulin is the treatment for bronchiectasis caused by hypogammaglobulinemia. Anti-TB therapy is reserved for mycobacterial aetiology. Nebulised antifungal therapy alone cannot address the systemic hypersensitivity mechanism driving airway damage in ABPA — systemic corticosteroids are essential."
+  },
+
+  // ─── Q13 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which of the following is a recognized indication for surgical resection in a patient with bronchiectasis?",
+    opts: [
+      "Mild intermittent haemoptysis that resolves after outpatient antibiotic therapy",
+      "Bilateral disease affecting all pulmonary lobes with failure to respond to antibiotics",
+      "Massive haemoptysis from confirmed unilateral post-tuberculosis bronchiectasis",
+      "Progressive bilateral disease with FEV1 declining to below 1.0 litres",
+      "Rhinosinusitis refractory to nasal irrigation and intranasal corticosteroids"
+    ],
+    ans: 2,
+    exp: "Massive haemoptysis — particularly from unilateral post-tuberculosis bronchiectasis, where pulmonary artery laceration by cavitary disease causes life-threatening bleeding — is a recognized indication for surgical resection. Surgery is curative when disease is localized to a segment or lobe and is unilateral. Bilateral disease affecting all lobes contraindicates resection; lung transplantation is the only surgical option in that setting. FEV1 below 1.0 litres does not meet the threshold for safe lobectomy, which requires FEV1 greater than 1.5 litres. Mild haemoptysis responding to antibiotics and rhinosinusitis do not independently indicate resection."
+  },
+
+  // ─── Q14 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "What minimum preoperative FEV1 is required before a patient with localized bronchiectasis can safely undergo lobectomy?",
+    opts: [
+      "Greater than 0.8 litres",
+      "Greater than 1.0 litres",
+      "Greater than 1.2 litres",
+      "Greater than 1.5 litres",
+      "Greater than 2.0 litres"
+    ],
+    ans: 3,
+    exp: "A preoperative FEV1 greater than 1.5 litres is required for lobectomy, ensuring adequate postoperative ventilation from the remaining lung tissue. For pneumonectomy, the threshold is higher — FEV1 greater than 2.0 litres — reflecting the greater sacrifice of functional parenchyma. Values below these thresholds are associated with unacceptable risk of postoperative respiratory failure and prolonged ventilator dependence. Preoperative optimization includes chest physiotherapy for 10 days before surgery and cessation of smoking for 6 to 8 weeks in smokers."
+  },
+
+  // ─── Q15 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which clinical feature indicates a poor prognosis in established bronchiectasis?",
+    opts: [
+      "Localized unilateral disease with cylindrical changes on HRCT",
+      "Rhinosinusitis and anosmia with preserved FEV1",
+      "Intermittent haemoptysis controlled with outpatient antibiotics",
+      "Pseudomonas aeruginosa colonization with bilateral pulmonary involvement",
+      "Digital clubbing without recurrent hospitalizations or haemoptysis"
+    ],
+    ans: 3,
+    exp: "Colonization with Pseudomonas aeruginosa — alongside other specific pathogens such as Aspergillus and Mycobacterium avium complex — combined with bilateral pulmonary involvement are established poor prognostic factors in bronchiectasis, reflecting disease severity and immune compromise. Other poor prognostic features include life-threatening haemoptysis, associated lung abscess, malnutrition, chronic anaemia, and frequent exacerbations. Localized unilateral cylindrical disease is potentially curable with surgery. Rhinosinusitis with preserved FEV1 and controlled intermittent haemoptysis reflect milder disease burden with better prognosis."
+  },
+
+  // ─── Q16 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "A 48-year-old man with known bronchiectasis is admitted with increased sputum volume, fever, and worsening dyspnoea. Sputum culture grows Pseudomonas aeruginosa. He is started on intravenous antibiotics. Which additional intervention is most critical in his acute management?",
+    opts: [
+      "Urgent rigid bronchoscopy to obtain samples and relieve obstruction",
+      "Oral corticosteroids to reduce airway inflammation",
+      "Aggressive chest physiotherapy with postural drainage",
+      "Intravenous immunoglobulin to restore humoral immune defences",
+      "CT-guided percutaneous drainage of any cavitary lesion identified"
+    ],
+    ans: 2,
+    exp: "Aggressive chest physiotherapy and postural drainage are essential alongside antibiotics in acute bronchiectasis exacerbations, because retained purulent secretions in dilated bronchi maintain the infective environment even while antibiotics kill the organism. Clearing secretions interrupts the cycle of infection. Bronchoscopy is not routinely performed for infective exacerbations unless obstruction or a foreign body is suspected. Oral corticosteroids are indicated for ABPA or asthma-associated exacerbations, not for straightforward bacterial infection. IV immunoglobulin is reserved for underlying hypogammaglobulinemia as an aetiology. CT-guided drainage is not indicated for bronchiectasis without a discrete abscess."
+  },
+
+  // ─── Q17 ─────────────────────────────────────────────────────────────────
+  // FIX: Key "Lateral decubitus position" (5 words) was far shorter than all
+  // distractors (10–14 words each). Expanded to match the level of detail in
+  // surrounding options without adding content that aids identification.
+  {
+    q: "A 40-year-old woman with bronchiectasis confined to the right lower lobe is being prepared for elective lobectomy. Her preoperative FEV1 is 1.8 litres. In which position is she placed for the thoracotomy?",
+    opts: [
+      "Supine with the right arm raised overhead and a roll beneath the thorax",
+      "Prone with bilateral arm support at shoulder height",
+      "Trendelenburg with a 15-degree head-down tilt and lateral padding",
+      "Lateral decubitus with the operative side uppermost",
+      "Semi-recumbent reverse Trendelenburg with ipsilateral arm extended"
+    ],
+    ans: 3,
+    exp: "Thoracotomy for lung resection is performed in the lateral decubitus position, which places the operative lung uppermost, provides optimal access to the posterolateral chest wall, and allows gravity to displace abdominal contents away from the operative field. This position is standard for both open thoracotomy and VATS lung resection. The supine position is used for anterior mediastinal and bilateral procedures. The prone position is used for posterior spinal and selected thoracoscopic approaches. Trendelenburg and reverse Trendelenburg positions are used in abdominal and laparoscopic surgery and are not appropriate for thoracotomy."
+  },
+
+  // ─── Q18 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Lung abscess is distinguished from necrotizing pneumonia by the size of the cavitary lesion. At what minimum cavity diameter does pulmonary cavitation qualify as a lung abscess?",
+    opts: [
+      "Greater than 0.5 cm",
+      "Greater than 1 cm",
+      "Greater than 4 cm",
+      "Greater than 2 cm",
+      "Greater than 6 cm"
+    ],
+    ans: 3,
+    exp: "Lung abscess is defined as necrosis of pulmonary tissue with cavity formation exceeding 2 cm in diameter, containing necrotic debris or pus from microbial infection. When infection produces multiple smaller cavities less than 2 cm, the condition is termed necrotizing pneumonia or lung gangrene, which reflects widespread microvascular thrombosis and carries a worse prognosis than a single abscess. A cavity exceeding 6 cm after 8 weeks of treatment is an independent threshold for surgical intervention, but this size does not define the diagnosis of lung abscess itself."
+  },
+
+  // ─── Q19 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which antibiotic is most appropriate as initial empirical treatment for a community-acquired lung abscess?",
+    opts: [
+      "Ciprofloxacin",
+      "Clindamycin",
+      "Ceftriaxone",
+      "Vancomycin",
+      "Co-trimoxazole"
+    ],
+    ans: 1,
+    exp: "Community-acquired lung abscess is caused predominantly by anaerobic bacteria from the oropharynx, aspirated during episodes of impaired consciousness or in patients with poor dental hygiene. Clindamycin provides excellent anaerobic coverage and penetrates well into necrotic tissue; metronidazole is an equivalent alternative. Ciprofloxacin covers aerobic gram-negative organisms including Pseudomonas aeruginosa and is appropriate for hospital-acquired lung abscess, which involves aerobic pathogens. Ceftriaxone covers aerobic gram-positives and gram-negatives but has poor anaerobic activity. Vancomycin targets MRSA and has no role in community-acquired anaerobic abscess. Co-trimoxazole covers Pneumocystis and some enteric organisms but lacks reliable anaerobic activity."
+  },
+
+  // ─── Q20 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which mechanism directly explains the development of a primary lung abscess in a patient with poorly controlled epilepsy?",
+    opts: [
+      "Aspiration of oropharyngeal anaerobes during postictal loss of protective airway reflexes",
+      "Haematogenous seeding from a concurrent urinary tract infection",
+      "Impaired T-cell immunity from long-term anticonvulsant-induced bone marrow suppression",
+      "Recurrent pulmonary embolism causing parenchymal infarction with secondary infection",
+      "Aspergillus superinfection following repeated antibiotic courses for seizure prophylaxis"
+    ],
+    ans: 0,
+    exp: "During the postictal phase of an epileptic seizure, the patient is unconscious with loss of the gag reflex and protective laryngeal closure. Oropharyngeal secretions — particularly abundant anaerobes in patients with poor dental hygiene — are silently aspirated and seed the lung, establishing a primary abscess. This is the same mechanism underlying lung abscess in alcohol intoxication, general anaesthesia, and head injury: depression of consciousness with failure of airway protection. Haematogenous seeding produces secondary lung abscess, not primary aspiration-related disease. Anticonvulsants can cause blood dyscrasias but these do not directly produce lung abscess."
+  },
+
+  // ─── Q21 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which condition predisposes to lung abscess through a disturbance of swallowing rather than through depression of consciousness?",
+    opts: [
+      "Achalasia",
+      "Alcohol intoxication",
+      "General anaesthesia",
+      "Head injury causing coma",
+      "Epileptic seizures"
+    ],
+    ans: 0,
+    exp: "Achalasia is an oesophageal motility disorder in which impaired relaxation of the lower oesophageal sphincter causes food stasis and regurgitation, leading to chronic aspiration of oesophageal contents into the lungs without any alteration in consciousness. Other swallowing disturbances with the same mechanism include oesophageal stricture and GERD. Alcohol intoxication, general anaesthesia, head injury, and epileptic seizures all cause aspiration through a fundamentally different mechanism — depression of consciousness with loss of protective laryngeal reflexes — rather than a structural swallowing disorder."
+  },
+
+  // ─── Q22 ─────────────────────────────────────────────────────────────────
+  // FIX (validity): Opt C was "Superior segment of the left lower lobe" which
+  // the explanation itself cites as a second correct location for aspiration
+  // abscess in the recumbent patient. Two correct answers on one question is
+  // a validity error. Replaced with "Anterior segment of the left lower lobe"
+  // — genuinely non-dependent in the supine position and a strong distractor.
+  {
+    q: "A patient aspirates gastric contents while lying in bed and subsequently develops a lung abscess. In which bronchopulmonary segment is this abscess most likely located?",
+    opts: [
+      "Anterior segment of the right upper lobe",
+      "Medial segment of the right middle lobe",
+      "Anterior segment of the left lower lobe",
+      "Posterior segment of the right upper lobe",
+      "Lingular segment of the left upper lobe"
+    ],
+    ans: 3,
+    exp: "When a patient aspirates while recumbent, gravity directs aspirated material into the most dependent bronchopulmonary segments. In the supine position, the most dependent segments are the posterior segment of the upper lobes and the superior (apical) segment of the lower lobes. Approximately 95% of aspiration-related lung abscesses develop in the right side, favouring the posterior upper lobe segment, because the right main bronchus is more vertical and wider than the left. The anterior upper lobe, right middle lobe, lingular, and anterior lower lobe segments are not dependent in the recumbent position and are therefore rarely the site of aspiration-related abscess formation."
+  },
+
+  // ─── Q23 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "A patient is found to have a cavitary lung lesion. There is no fever, no leucocytosis, and no purulent sputum. What does the absence of systemic inflammatory features suggest about the aetiology of this lesion?",
+    opts: [
+      "Viral rather than bacterial aetiology requiring antiviral therapy",
+      "Immunosuppression causing an attenuated response to otherwise severe infection",
+      "Anaerobic infection with organisms that inherently suppress systemic inflammation",
+      "Successful early antibiotic treatment with resolution of the infective process",
+      "A non-infectious underlying cause such as malignancy or pulmonary infarction"
+    ],
+    ans: 4,
+    exp: "The absence of fever, leucocytosis, and purulent sputum in a patient with a cavitary lung lesion raises strong suspicion for a non-infectious aetiology — particularly underlying lung malignancy or pulmonary infarction with secondary cavitation, rather than primary infective abscess. Infective abscess, even from anaerobic organisms, typically produces at least some degree of systemic inflammatory response. Immunosuppression can blunt but does not completely abolish fever and leucocytosis. Viral cavitation is extremely rare. Successful early antibiotic treatment would not explain a cavitary lesion found without any preceding clinical history of infection or systemic illness."
+  },
+
+  // ─── Q24 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "Which CXR finding is most characteristic of a lung abscess?",
+    opts: [
+      "Bilateral perihilar infiltrates with a central distribution",
+      "Unilateral cavitary lesion with an air-fluid level in the posterior upper zone",
+      "Peripheral pleural-based opacity with blunting of the costophrenic angle",
+      "Bilateral reticular opacification with subpleural honeycombing",
+      "Mediastinal widening with an ipsilateral pleural effusion"
+    ],
+    ans: 1,
+    exp: "The classic plain CXR appearance of lung abscess is a unilateral, single, thick-walled cavitary lesion with an air-fluid level, typically in the posterior segment of the upper lobe or apical segment of the lower lobe. The air-fluid level forms when the abscess communicates with the bronchial tree, allowing partial drainage of pus and entry of air. Bilateral perihilar infiltrates suggest pulmonary oedema. A pleural-based opacity with a blunted costophrenic angle suggests pleural effusion or empyema, not a parenchymal abscess. Reticular opacification with honeycombing characterizes pulmonary fibrosis. Mediastinal widening suggests aortic dissection or a mediastinal mass."
+  },
+
+  // ─── Q25 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "On CT of the chest, which feature best distinguishes a lung abscess from an empyema?",
+    opts: [
+      "The lesion is confined within the lung parenchyma and does not cross lobar fissures",
+      "The presence of an air-fluid level within the cavitary lesion",
+      "Rim enhancement of the lesion wall following intravenous contrast",
+      "An irregular, thickened inner wall lining the cavity",
+      "Location in the posterior segment of the upper lobe"
+    ],
+    ans: 0,
+    exp: "A lung abscess does not cross lobar fissures — it is bounded within the lung parenchyma with a thick, irregular wall. An empyema occupies the pleural space, conforms to its contours, and can extend across fissures. On CT, an abscess typically has a round or oval shape and does not change shape with patient repositioning, unlike a pleural collection. An air-fluid level can be present in both conditions. Rim enhancement, irregular thick walls, and posterior upper lobe location are not reliably distinguishing features when considered in isolation."
+  },
+
+  // ─── Q26 ─────────────────────────────────────────────────────────────────
+  // FIX: Options had uneven lengths — some had explanatory parentheticals
+  // ("identical to standard community-acquired pneumonia"), others did not.
+  // All options trimmed to a uniform descriptor-only format.
+  {
+    q: "What is the recommended duration of antibiotic therapy as the mainstay of treatment for an uncomplicated lung abscess?",
+    opts: [
+      "3 to 5 days with clinical reassessment",
+      "10 to 14 days of targeted therapy",
+      "3 months with monthly sputum monitoring",
+      "Lifelong suppressive therapy after initial improvement",
+      "6 to 8 weeks of prolonged targeted therapy"
+    ],
+    ans: 4,
+    exp: "The mainstay of treatment for lung abscess is targeted, prolonged antibiotic therapy for 6 to 8 weeks. This extended duration is necessary because poor vascular supply to the necrotic cavity limits antibiotic penetration, requiring sustained tissue levels to eradicate the infective organisms. Approximately 90% of patients with aerobic lung abscess respond to antibiotics alone without surgical intervention. A 10 to 14-day course is appropriate for community-acquired pneumonia without cavitation but is insufficient for established abscess. Lifelong suppressive therapy is not standard practice for lung abscess."
+  },
+
+  // ─── Q27 ─────────────────────────────────────────────────────────────────
+  // FIX: Opt 3 ("CT-guided percutaneous drainage followed by a further
+  // 2 weeks of antibiotics") was notably longer than the others. Trimmed.
+  {
+    q: "A patient with a lung abscess has completed 8 weeks of appropriate antibiotic therapy. Follow-up CT shows a persistent cavitary lesion measuring 7 cm in diameter. What is the most appropriate next step?",
+    opts: [
+      "Extend antibiotic therapy for a further 4 weeks and reassess with repeat CT",
+      "Surgical resection, as a cavity exceeding 6 cm after 8 weeks indicates failure of medical therapy",
+      "Initiate anti-tuberculosis therapy for possible mycobacterial superinfection",
+      "CT-guided percutaneous drainage followed by additional antibiotics",
+      "Bronchoscopic lavage with endobronchial antibiotic instillation"
+    ],
+    ans: 1,
+    exp: "Persistence of an abscess cavity greater than 6 cm after 8 weeks of appropriate medical therapy is a recognized indication for surgical resection — at this point, continued antibiotics are unlikely to achieve cure and surgery becomes necessary. Anatomic lobectomy is the preferred option, via either open thoracotomy or VATS. Other surgical indications include failed medical therapy, persistent endobronchial obstruction, development of empyema or bronchopleural fistula, haemorrhage, and inability to exclude malignancy. CT-guided drainage and bronchoscopic lavage are earlier-step interventions to be considered before the 8-week threshold, not after demonstrated failure of medical therapy with a large residual cavity."
+  },
+
+  // ─── Q28 ── no changes ───────────────────────────────────────────────────
+  {
+    q: "A 55-year-old man with a right lower lobe lung abscess develops sudden profuse haemoptysis and right-sided pleuritic chest pain. CT confirms a bronchopleural fistula with right-sided empyema. He is haemodynamically stable. What is the most appropriate management?",
+    opts: [
+      "Prolonged intravenous antibiotics for a further 6 to 8 weeks",
+      "Urgent surgical resection with decortication of the empyema",
+      "CT-guided external drainage of the empyema alone",
+      "Bronchoscopic sealant application to close the bronchopleural fistula",
+      "Non-invasive ventilation to stabilize pending repeat CT in 72 hours"
+    ],
+    ans: 1,
+    exp: "Development of a bronchopleural fistula with empyema is an absolute indication for surgical intervention in lung abscess. Haemorrhage and empyema formation are acute-stage complications that mandate urgent resection of the necrotic lung tissue combined with decortication of the pleural pus. Prolonged antibiotics without surgical source control will not close an established bronchopleural fistula or eradicate pleural infection. CT-guided drainage addresses the pleural component but does not remove the necrotic source or close the fistula. Bronchoscopic sealants are not standard treatment for established bronchopleural fistula from lung abscess. Non-invasive ventilation is not appropriate primary management for a structural surgical complication."
+  }
+];
+
 const RESP_PH_Qs = [
   { q:"A 60-year-old man with heart failure with reduced ejection fraction develops progressive exertional dyspnoea. Right heart catheterisation confirms a mean pulmonary artery pressure of 28mmHg. To which WHO group does his pulmonary hypertension belong?", opts:["Group 1 — Pulmonary arterial hypertension", "Group 2 — Pulmonary hypertension due to left-sided heart disease", "Group 3 — Pulmonary hypertension due to lung disease or hypoxia", "Group 4 — Chronic thromboembolic pulmonary hypertension", "Group 5 — Pulmonary hypertension with unclear aetiology"], ans:1, exp:"WHO Group 2 pulmonary hypertension is caused by left-sided heart disease and is the most common form of PH clinically. Elevated left heart filling pressures are transmitted backwards into the pulmonary vasculature. Group 1 (PAH) refers to primary forms including idiopathic and connective tissue disease-associated PAH. Group 3 relates to chronic lung disease and hypoxia. Group 4 (CTEPH) results from unresolved pulmonary emboli." },
   { q:"A 35-year-old woman with progressive exertional dyspnoea and a loud pulmonic second heart sound undergoes an ECG. Which combination of findings would most support a diagnosis of pulmonary hypertension?", opts:["Left axis deviation, left bundle branch block, and ST elevation in V1-V3", "P pulmonale, right axis deviation, and right ventricular hypertrophy", "Prolonged QTc interval with prominent U waves", "Sinus tachycardia with generalised T-wave inversion and PR depression", "Delta waves, short PR interval, and widened QRS complex"], ans:1, exp:"Pulmonary hypertension causes right-sided pressure overload, producing characteristic ECG changes: P pulmonale (peaked P waves >2.5mm in lead II), right axis deviation, and right ventricular hypertrophy. Right bundle branch block and QTc prolongation may also occur. In advanced disease, supraventricular arrhythmias develop. A normal ECG does not exclude pulmonary hypertension." },
@@ -13868,7 +14907,7 @@ const IM_SENIOR_BLOCKS=[
   { id:"cardio_b2", name:"Block 2", questions:CARDIO_S2_Qs, available:true, topic:"Cardiology" },
   { id:"cardio_b3", name:"Block 3", questions:CARDIO_S3_Qs, available:true, topic:"Cardiology" },
   { id:"cardio_ihd", name:"Ischaemic Heart Disease", questions:IHD_Qs, available:true, topic:"Cardiology" },
-  { id:"resp", name:"Respiratory", questions:RESP_PH_Qs, available:true, topic:"Respiratory" },
+  { id:"resp", name:"Respiratory", questions:[...RESP_PH_Qs,...ASTHMA_Qs,...COPD_Qs,...SUPPURATIVE_LUNG_Qs], available:true, topic:"Respiratory" },
   { id:"gi", name:"Gastroenterology & Hepatology", questions:GI_MALABSORPTION_Qs, available:true, topic:"Gastroenterology" },
   { id:"endo", name:"Endocrinology", questions:[...ENDO_DM_Qs,...ENDO_ACUTE_DM_Qs,...ENDO_ADRENAL_Qs,...ENDO_THYROID_Qs,...ENDO_PITUITARY_Qs], available:true, topic:"Endocrinology" },
   { id:"haem", name:"Haematology", questions:HAEM_DVT_Qs, available:true, topic:"Haematology" },
