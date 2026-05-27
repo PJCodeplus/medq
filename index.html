@@ -21396,16 +21396,7 @@ function App(){
       const pct=docH>0?Math.min(100,(window.scrollY/docH)*100):0;
       const bar=document.getElementById("rdrProgressBar");
       if(bar) bar.style.width=pct+"%";
-      // Paywall reveal — measure from a stationary sentinel (no transform feedback)
-      const trigger=document.getElementById("rdrPwTrigger");
-      const pw=document.querySelector(".rdr-paywall.is-inline");
-      if(trigger&&pw&&!pw.classList.contains("pw-visible")){
-        const rect=trigger.getBoundingClientRect();
-        const windowH=window.innerHeight;
-        if(rect.top<windowH-80){
-          pw.classList.add("pw-visible");
-        }
-      }
+
     };
     window.addEventListener("scroll",onScroll,{passive:true});
     // Run once after layout settles so initial state is correct
@@ -21414,7 +21405,7 @@ function App(){
       window.removeEventListener("scroll",onScroll);
       cancelAnimationFrame(raf);
     };
-  },[view,physioUnlocked,psychUnlocked]);
+  },[view]);
 
   // Sub device check handled at block entry
 
@@ -21521,13 +21512,9 @@ function App(){
       ls.set(GB_FREE_KEY,String(newCount));
     }
     // Track sub free questions
-    if(isSub()&&!validSubAccess(subAccess)){
-      const nc=subFreeCount+1; setSubFreeCount(nc); ls.set(SUB_FREE_KEY,String(nc));
-    }
+
     // Track steeplechase free questions
-    if(isStp()&&!validStpAccess(stpAccess)){
-      const nc=stpFreeCount+1; setStpFreeCount(nc); ls.set(STP_FREE_KEY,String(nc));
-    }
+
     // Track TFL free questions (all Final Lap content when not unlocked)
     const tflUnlocked=courseRef.current?.id==="internal"?tflIntUnlocked:courseRef.current?.id==="surgery"?tflSurgUnlocked:courseRef.current?.id==="community"?tflCommUnlocked:true;
     if(inTflRef.current && !tflUnlocked){
@@ -21542,13 +21529,9 @@ function App(){
       return;
     }
     // Sub paywall — mirrors General Bank, triggers at 10
-    if(isSub()&&!validSubAccess(subAccess)&&subFreeCount>=10){
-      setShowSubPaywall(true); return;
-    }
+
     // Steeplechase paywall — triggers at 5
-    if(isStp()&&!validStpAccess(stpAccess)&&stpFreeCount>=5){
-      setShowStpPaywall(true); return;
-    }
+
     // TFL paywall — fires after 10 free questions across all Final Lap content
     if(inTflRef.current){
       const tflUnlocked=courseRef.current?.id==="internal"?tflIntUnlocked:courseRef.current?.id==="surgery"?tflSurgUnlocked:courseRef.current?.id==="community"?tflCommUnlocked:true;
@@ -21872,132 +21855,6 @@ function App(){
 
 
   // ═══════════ SUBSPECIALTIES PAYWALL (mirrors General Bank) ═══════════
-  if(showStpPaywall) return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
-    e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
-      e("div",{style:{background:"linear-gradient(135deg,#1b2f1b,#2e5038)",padding:"28px 28px 22px",textAlign:"center"}},
-        e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🦴"),
-        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free preview complete"),
-        e("p",{style:{color:"rgba(165,214,167,.8)",fontSize:".82rem",lineHeight:1.6}},"Unlock the full Steeplechase question bank to continue.")
-      ),
-      e("div",{style:{height:3,background:"linear-gradient(90deg,#4caf50,#a5d6a7,#4caf50)"}}),
-      e("div",{style:{padding:"24px 28px 32px"}},
-        e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:20}},
-          "Purchase access and send your receipt to WhatsApp to get your code."),
-        e("div",{style:{border:"2px solid #4caf50",borderRadius:8,padding:"16px 14px",textAlign:"center",background:"#f0faf0",marginBottom:20}},
-          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.7rem",fontWeight:900,color:"#1a2535"}},"₦3,000"),
-          e("div",{style:{fontSize:".72rem",color:th.textMuted,marginTop:4}},"30-day access")
-        ),
-        e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"14px 16px",marginBottom:20}},
-          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#8a6f30",marginBottom:8}},"Payment Details"),
-          e("div",{style:{fontSize:".88rem",color:"#333",lineHeight:2}},
-            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
-            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
-            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
-          ),
-          e("p",{style:{fontSize:".78rem",color:th.textMuted,marginTop:8,lineHeight:1.5}},
-            "Send receipt to WhatsApp: ",
-            e("strong",{style:{color:"#1a2535"}},"09161452645"),
-            ". Your access code will be sent to you.")
-        ),
-        e("div",{style:{marginBottom:16}},
-          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
-          e("div",{style:{display:"flex",gap:8}},
-            e("input",{type:"text",placeholder:"e.g. STP-XXXX-XXXX",value:stpCodeInput,
-              onChange:ev=>{setStpCodeInput(ev.target.value.toUpperCase());setStpCodeError("");},
-              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setStpCodeInput(clean);setStpCodeError("");},
-              onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("stp_redeem_btn")?.click();},
-              style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(stpCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
-            e("button",{id:"stp_redeem_btn",disabled:stpCodeLoading||!stpCodeInput.trim(),
-              onClick:async()=>{
-                if(!stpCodeInput.trim())return;
-                setStpCodeLoading(true); setStpCodeError("");
-                const res=await window._fbValidateCode(stpCodeInput.trim(),studentName||"Student");
-                setStpCodeLoading(false);
-                if(res.ok){
-                  const access={name:studentName||"Student",expiresAt:res.expiresAt,code:stpCodeInput.trim()};
-                  setStpAccess(access); ls.set(STP_ACCESS_KEY,JSON.stringify(access));
-                  setStpFreeCount(0); ls.set(STP_FREE_KEY,"0");
-                  setShowStpPaywall(false);
-                  setQIdx(q=>q); setPicked(null); setShowFb(false);
-                } else {
-                  setStpCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
-                }
-              },
-              style:{padding:"11px 18px",background:stpCodeLoading?"#aaa":"#1b2f1b",color:"#a5d6a7",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:stpCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-              stpCodeLoading?"…":"Redeem")
-          ),
-          stpCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},stpCodeError)
-        ),
-        e("button",{onClick:()=>{setShowStpPaywall(false);endQuiz(false);},
-          style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".85rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
-          "End session & see results")
-      )
-    )
-  );
-
-  if(showSubPaywall) return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
-    e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:420,overflow:"hidden"}},
-      e("div",{style:{background:"linear-gradient(135deg,#1a2535,#2e3f5c)",padding:"28px 28px 22px",textAlign:"center"}},
-        e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
-        e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#fff",marginBottom:6}},"Free limit reached"),
-        e("p",{style:{color:"rgba(144,202,249,.8)",fontSize:".82rem",lineHeight:1.6}},"You've answered 10 free Subspecialties questions.")
-      ),
-      e("div",{style:{height:3,background:"linear-gradient(90deg,#2196f3,#90caf9,#2196f3)"}}),
-      e("div",{style:{padding:"24px 28px 32px"}},
-        e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:20}},
-          "To continue, purchase access and send your payment receipt to WhatsApp."),
-        e("div",{style:{border:"2px solid #2196f3",borderRadius:8,padding:"16px 14px",textAlign:"center",background:"#f0f7ff",marginBottom:20}},
-          e("div",{style:{fontSize:".72rem",color:th.textMuted,letterSpacing:".08em",textTransform:"uppercase",marginBottom:6}},"Monthly"),
-          e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.7rem",fontWeight:900,color:"#1a2535"}},"₦1,000"),
-          e("div",{style:{fontSize:".72rem",color:th.textMuted,marginTop:4}},"30-day access")
-        ),
-        e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"14px 16px",marginBottom:20}},
-          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#8a6f30",marginBottom:8}},"Payment Details"),
-          e("div",{style:{fontSize:".88rem",color:"#333",lineHeight:2}},
-            e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
-            e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
-            e("div",null,"💳 ",e("strong",null,"Account:")," 9161452645")
-          ),
-          e("p",{style:{fontSize:".78rem",color:th.textMuted,marginTop:8,lineHeight:1.5}},
-            "After payment, send your receipt to WhatsApp: ",
-            e("strong",{style:{color:"#1a2535"}},"09161452645"),
-            ". Your access code will be sent to you.")
-        ),
-        e("div",{style:{marginBottom:16}},
-          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
-          e("div",{style:{display:"flex",gap:8}},
-            e("input",{type:"text",placeholder:"e.g. SUB-XXXX-XXXX",value:subCodeInput,
-              onChange:ev=>{setSubCodeInput(ev.target.value.toUpperCase());setSubCodeError("");},
-              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setSubCodeInput(clean);setSubCodeError("");},
-              onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("sub_redeem_btn")?.click();},
-              style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(subCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
-            e("button",{id:"sub_redeem_btn",disabled:subCodeLoading||!subCodeInput.trim(),
-              onClick:async()=>{
-                if(!subCodeInput.trim())return;
-                setSubCodeLoading(true); setSubCodeError("");
-                const res=await window._fbValidateCode(subCodeInput.trim(),studentName||"Student");
-                setSubCodeLoading(false);
-                if(res.ok){
-                  const access={name:studentName||"Student",expiresAt:res.expiresAt,code:subCodeInput.trim()};
-                  setSubAccess(access); ls.set(SUB_ACCESS_KEY,JSON.stringify(access));
-                  setSubFreeCount(0); ls.set(SUB_FREE_KEY,"0");
-                  setShowSubPaywall(false);
-                  setQIdx(q=>q); setPicked(null); setShowFb(false);
-                } else {
-                  setSubCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
-                }
-              },
-              style:{padding:"11px 18px",background:subCodeLoading?"#aaa":"#1a2535",color:"#90caf9",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:subCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-              subCodeLoading?"…":"Redeem")
-          ),
-          subCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},subCodeError)
-        ),
-        e("button",{onClick:()=>{setShowSubPaywall(false);endQuiz(false);},
-          style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".85rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
-          "End session & see results")
-      )
-    )
-  );
 
 
   if(view==="home") return e("div",{style:{minHeight:"100vh",background:th.pageBg}},
@@ -25474,21 +25331,21 @@ function App(){
     const physioTOC=[
       {section:"Section 1 — General Physiology",topics:[
         {num:"01",title:"The Cell"},{num:"02",title:"Cell Junctions"},
-        {num:"03",title:"Transport Through the Cell Membrane",locked:true},
-        {num:"04",title:"Homeostasis",locked:true},{num:"05",title:"Acid-Base Balance",locked:true}
+        {num:"03",title:"Transport Through the Cell Membrane"},
+        {num:"04",title:"Homeostasis"},{num:"05",title:"Acid-Base Balance"}
       ]},
       {section:"Section 2 — Blood and Body Fluids",topics:[
-        {num:"06",title:"Body Fluids",locked:true},{num:"07",title:"Blood",locked:true},
-        {num:"08",title:"Plasma Proteins",locked:true},{num:"09",title:"Red Blood Cells",locked:true},
-        {num:"10",title:"Erythropoiesis",locked:true},{num:"11",title:"Haemoglobin and Iron Metabolism",locked:true},
-        {num:"12",title:"Erythrocyte Sedimentation Rate",locked:true},{num:"13",title:"PCV and Blood Indices",locked:true},
-        {num:"14",title:"Anaemia",locked:true},{num:"15",title:"Haemolysis and Fragility",locked:true},
-        {num:"16",title:"White Blood Cells",locked:true},{num:"17",title:"Immunity",locked:true},
-        {num:"18",title:"Platelets",locked:true},{num:"19",title:"Haemostasis",locked:true},
-        {num:"20",title:"Coagulation of Blood",locked:true},{num:"21",title:"Blood Groups",locked:true},
-        {num:"22",title:"Blood Transfusion",locked:true},{num:"23",title:"Blood Volume",locked:true},
-        {num:"24",title:"Reticuloendothelial System",locked:true},{num:"25",title:"The Spleen",locked:true},
-        {num:"26",title:"Lymphatic System and Lymph",locked:true},{num:"27",title:"Tissue Fluid and Oedema",locked:true}
+        {num:"06",title:"Body Fluids"},{num:"07",title:"Blood"},
+        {num:"08",title:"Plasma Proteins"},{num:"09",title:"Red Blood Cells"},
+        {num:"10",title:"Erythropoiesis"},{num:"11",title:"Haemoglobin and Iron Metabolism"},
+        {num:"12",title:"Erythrocyte Sedimentation Rate"},{num:"13",title:"PCV and Blood Indices"},
+        {num:"14",title:"Anaemia"},{num:"15",title:"Haemolysis and Fragility"},
+        {num:"16",title:"White Blood Cells"},{num:"17",title:"Immunity"},
+        {num:"18",title:"Platelets"},{num:"19",title:"Haemostasis"},
+        {num:"20",title:"Coagulation of Blood"},{num:"21",title:"Blood Groups"},
+        {num:"22",title:"Blood Transfusion"},{num:"23",title:"Blood Volume"},
+        {num:"24",title:"Reticuloendothelial System"},{num:"25",title:"The Spleen"},
+        {num:"26",title:"Lymphatic System and Lymph"},{num:"27",title:"Tissue Fluid and Oedema"}
       ]}
     ];
     const psychTOC=[
