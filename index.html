@@ -57964,16 +57964,11 @@ function App(){
   const [paedsTflFreeCount,setPaedsTflFreeCount]=useState(()=>{ try{return parseInt(ls.get(PAEDS_TFL_FREE_KEY)||"0");}catch{return 0;} });
   const inPaedsTflRef=useRef(false); // true when quiz was launched from the paeds All Past Questions card (locked)
   const [mb3PaywallSubject,setMb3PaywallSubject]=useState("paeds"); // "paeds" | "obg" — which subject opened the shared MB III paywall
-  // ── Paeds OSPE state (single question set; continuous view/practice mode; MB III paywall at 10) ──
+  // ── Paeds OSPE state (single question set; continuous view/practice mode) ──
   const [showPaedsOspe,setShowPaedsOspe]=useState(false);
   const [paedsOspeBlock,setPaedsOspeBlock]=useState(null);
   const [paedsOspeMode,setPaedsOspeMode]=useState(null); // null=landing, "scroll"=continuous
   const [paedsOspeDropdown,setPaedsOspeDropdown]=useState("scroll");
-  const paedsOspeScrollSeenRef=useRef(0); // session total questions revealed in scroll view
-  const PAEDS_OSPE_FREE=10; // free preview size for OSPE — fixed at 10 (not tied to PD01 length)
-  const PAEDS_OSPE_TFL_FREE_KEY="medq_mb3_paeds_ospe_free_count";
-  const [paedsOspeTflFreeCount,setPaedsOspeTflFreeCount]=useState(()=>{ try{return parseInt(ls.get(PAEDS_OSPE_TFL_FREE_KEY)||"0");}catch{return 0;} });
-  const inPaedsOspeTflRef=useRef(false); // true when quiz was launched from the Paeds OSPE card (locked)
   const [showObgPastQ,setShowObgPastQ]=useState(false);
   const [obgPastQBlock,setObgPastQBlock]=useState(null);
   const [obgPastQMode,setObgPastQMode]=useState(null); // null=block list, "scroll"=continuous
@@ -58067,11 +58062,10 @@ function App(){
     inTflRef.current=inTflRef.current||!!(block && block._isTfl);
     inPaedsTflRef.current=inPaedsTflRef.current||!!(block && block._isPaedsTfl);
     inObgTflRef.current=inObgTflRef.current||!!(block && block._isObgTfl);
-    inPaedsOspeTflRef.current=inPaedsOspeTflRef.current||!!(block && block._isPaedsOspeTfl);
     const pool=retakeQs||(()=>{
       const all=block.questions;
-      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked));
-      const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
+      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked));
+      const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:PAEDS_PQ_FREE;
       const effQCount=forceFixedOrder?Math.min(qCount,mb3FreeLimit):qCount;
       if(shuffleOrder && !forceFixedOrder){
         return shuffleArr(all).slice(0,effQCount);
@@ -58150,10 +58144,6 @@ function App(){
     if(inObgTflRef.current && !paedsOgUnlocked){
       const nc=obgTflFreeCount+1; setObgTflFreeCount(nc); ls.set(OBG_TFL_FREE_KEY,String(nc));
     }
-    // Track MB III (Paeds OSPE) free questions
-    if(inPaedsOspeTflRef.current && !paedsUnlocked){
-      const nc=paedsOspeTflFreeCount+1; setPaedsOspeTflFreeCount(nc); ls.set(PAEDS_OSPE_TFL_FREE_KEY,String(nc));
-    }
   };
 
   const nextQ=()=>{
@@ -58178,10 +58168,6 @@ function App(){
     // MB III paywall — fires after 50 free questions on the O&G All Past Questions block
     if(inObgTflRef.current){
       if(!paedsOgUnlocked && obgTflFreeCount>=OBG_PQ_FREE){ setMb3PaywallSubject("obg"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
-    }
-    // MB III paywall — fires after 10 free questions on the Paeds OSPE block
-    if(inPaedsOspeTflRef.current){
-      if(!paedsUnlocked && paedsOspeTflFreeCount>=PAEDS_OSPE_FREE){ setMb3PaywallSubject("paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -60393,7 +60379,7 @@ function App(){
       const optLetters=["A","B","C","D","E"];
       const ospeAccent=course.accent||"#90caf9";
       const ospeAccentDark="#1565c0";
-      const OSPE_BLOCK={ id:"paeds_ospe", name:"OSPE", questions:PAED_OSPE_Qs, available:true, _isPaedsOspeTfl:true };
+      const OSPE_BLOCK={ id:"paeds_ospe", name:"OSPE", questions:PAED_OSPE_Qs, available:true };
 
       if(paedsOspeMode==="scroll" && paedsOspeBlock){
         const qs=paedsOspeBlock.questions;
@@ -60413,16 +60399,8 @@ function App(){
               e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
             ),
             (()=>{
-              const freeLimit=PAEDS_OSPE_FREE;
-              const sessionSeen=paedsOspeScrollSeenRef.current;
-              const visibleCount=paedsUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!paedsUnlocked && visibleCount>0){
-                paedsOspeScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
-              }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!paedsUnlocked&&visibleCount<qs.length;
               return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
+                qs.map((q,qi)=>
                   e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
                     q.img&&e("img",{src:q.img,style:{width:"100%",maxWidth:420,display:"block",margin:"0 auto 14px",borderRadius:8,border:"1px solid #e4e4e4"}}),
                     e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
@@ -60443,11 +60421,6 @@ function App(){
                       e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
                     )
                   )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#f0f7fd,#dcedfa)",border:"1.5px solid rgba(21,101,192,.3)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:ospeAccentDark,marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions in continuous view this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setPaedsTflCodeInput("");setPaedsTflCodeError("");setMb3PaywallSubject("paeds");setShowPaedsTflPaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock MB III →")
                 )
               );
             })()
@@ -60510,8 +60483,7 @@ function App(){
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
-                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"Paediatrics OSPE"),
-                    e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsUnlocked?"Unlocked":"Free preview")
+                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"Paediatrics OSPE")
                   ),
                   e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},PAED_OSPE_Qs.length+" picture MCQs total")
                 ),
@@ -60926,8 +60898,8 @@ function App(){
   if(view==="setup"){
     const maxQ=block.questions.length;
     const isFreeTierGen=currentSchool==="GENERAL"&&!validGbAccess(gbAccess);
-    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked)));
-    const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
+    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked)));
+    const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:PAEDS_PQ_FREE;
     const effectiveMax=isFreeTierGen?Math.min(maxQ,10):isPaedsLockedFree?Math.min(maxQ,mb3FreeLimit):maxQ;
     const clampedQ=Math.min(Math.max(qCount,10),effectiveMax);
     return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",flexDirection:"column",alignItems:"center",padding:"clamp(20px,4vw,48px) 20px"}},
