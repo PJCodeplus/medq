@@ -56774,478 +56774,419 @@ const OBG_PQ_ALL_Qs=[...OG01_Qs,...OG02_Qs,...OG03_Qs,...OG04_Qs,...OG07_Qs,...O
 /* ─── Paediatrics OSPE (Picture MCQs) ─── */
 const PAED_OSPE_Qs = [
 
-  // Page 1, Q1
   {
     q: "This 3-year old has an orofacial defect. What is the diagnosis?",
     opts: ["Unilateral left Cleft lip", "Unilateral right cleft lip", "Bilateral cleft lip & palate", "Left cleft lip & palate", "Right cleft lip & palate"],
     ans: 0,
-    exp: "The image shows a single, one-sided lip defect only, with no visible involvement of the palate — a unilateral cleft lip. \"Left cleft lip & palate\" (d) is wrong because there is no palatal defect shown; it's lip only.",
+    exp: "Single, one-sided lip defect with no palate involvement = unilateral left cleft lip.",
     img: "assets/ospe/paed/unilateral_left_cleft_lip.jpg"
   },
 
-  // Page 1, Q2 — ⚠️ no matching filename among your assets
-  // "Barium meal for a 7-wk old with repeated post-prandial vomiting. Which of these biochemical
-  // abnormalities is present in the child?" a. Hypochloraemic hyperkalaemia alkalosis
-  // b. Hypochloraemic hypokalaemia acidosis c. Hyperchloraemic metabolic acidosis
-  // d. Hypochloraemic metabolic alkalosis e. Hyperchloraemic metabolic acidosis
-  // CORRECT ANSWER = (d) Hypochloraemic metabolic alkalosis. A 7-week-old with repeated
-  // post-prandial (non-bilious) vomiting is the classic presentation of hypertrophic pyloric
-  // stenosis. Repeated vomiting of HCl-rich gastric contents causes loss of chloride and hydrogen
-  // ions, producing a hypochloraemic, hypokalaemic, metabolic ALKALOSIS (not acidosis) — the
-  // kidney's paradoxical aciduria (excreting H+ to conserve Na+/K+) worsens the alkalosis rather
-  // than correcting it. SKIPPED from the file — please tell me which filename this X-ray/contrast
-  // image corresponds to and I'll add it.
+  {
+    q: "Barium meal for a 7-wk old with repeated post-prandial vomiting. Which of these biochemical abnormalities is present in the child?",
+    opts: ["Hypochloraemic hyperkalaemia alkalosis", "Hypochloraemic hypokalaemia acidosis", "Hyperchloraemic metabolic acidosis", "Hypochloraemic metabolic alkalosis", "Hyperchloraemic metabolic acidosis"],
+    ans: 3,
+    exp: "Classic hypertrophic pyloric stenosis. Vomiting HCl-rich gastric contents causes hypochloraemic, hypokalaemic, metabolic ALKALOSIS (paradoxical aciduria worsens it further).",
+    img: "assets/ospe/paed/double_bubble_sign_barium_meal.jpg"
+  },
 
-  // Page 2, Q3
   {
     q: "Which of the following is NOT true about the sign shown in the eyes?",
     opts: ["It can be caused by Hepatitis A virus", "Biliary atresia is a possible cause", "Electrolytes and urea test is diagnostic", "Haemolysis is a possible cause", "In the newborn, maternal blood group is important"],
     ans: 2,
-    exp: "The sign is scleral icterus (jaundice). Hepatitis A, biliary atresia, and haemolysis are all recognised causes, and maternal blood group (ABO/Rhesus) matters in neonatal jaundice — all TRUE. \"Electrolytes and urea test is diagnostic\" is the false statement: U&E does not diagnose the cause of jaundice; liver function tests, split (conjugated/unconjugated) bilirubin, and a direct antiglobulin (Coombs) test are the relevant investigations.",
+    exp: "Sign = scleral icterus. U&E doesn't diagnose the cause of jaundice — LFTs/split bilirubin/Coombs test do.",
     img: "assets/ospe/paed/scleral_icterus.jpg"
   },
 
-  // Page 2, Q4
   {
     q: "Which option is true about the most likely diagnosis in this 7-yr old with jaw swelling x 2/12?",
     opts: ["Doubling time of 72hours is usual", "Tissue histology show the starry sky appearance", "Commoner in children less than 5 years", "Radiation is mainstay of therapy", "The child most likely has dental abscess"],
     ans: 1,
-    exp: "This is Burkitt lymphoma, the likely diagnosis for a rapidly growing jaw mass in a child in this age group. Its histology classically shows a \"starry sky\" appearance — pale tingible-body macrophages (stars) scattered among a dense, dark background of lymphoma cells (sky). Burkitt lymphoma peaks around 4-7 years rather than under 5, is treated with intensive combination chemotherapy (not radiation), and its doubling time is even faster than 72 hours (often 24-48h) — one of the fastest of any human tumour.",
+    exp: "Burkitt lymphoma — classic \"starry sky\" histology (macrophages amid dense lymphoma cells). Peaks 4-7yrs, treated with chemo not radiation, doubling time is even faster than 72h.",
     img: "assets/ospe/paed/jaw_swelling_scattered_teeth.jpg"
   },
 
-  // Page 3, Q5
   {
     q: "Which of the following is not true of the lesion in the perineum of this infant?",
     opts: ["Commonly caused by scald injury", "Diarrhoea is a risk factor", "Barrier creams can prevent this condition", "Can be complicated by candida infection", "Allergy to diaper material is a possible cause"],
     ans: 0,
-    exp: "This is napkin (diaper) dermatitis, an irritant contact dermatitis from prolonged skin contact with urine and faeces — not a scald injury. Diarrhoea, contact allergy to diaper material, and secondary Candida infection are all recognised contributors/complications, and barrier creams (e.g. zinc oxide) are a standard preventive measure.",
+    exp: "Napkin dermatitis is from urine/faeces contact, not scalding.",
     img: "assets/ospe/paed/diaper_area_rash.jpg"
   },
 
-  // Page 3/4, Q6
   {
     q: "Which of these options is true concerning the left eye of this pre-school child?",
     opts: ["There is conjunctival suffusion", "Facial nerve palsy is a possible sign", "Condition is contagious", "Can be complicated by Cavernous Sinus Thrombosis", "Treatment is with Incision and Drainage"],
     ans: 3,
-    exp: "The eyelid swelling and erythema shown are consistent with periorbital/orbital cellulitis. A dreaded complication of orbital cellulitis is posterior spread of infection along the ophthalmic veins into the cavernous sinus, causing cavernous sinus thrombosis — a true statement. \"Conjunctival suffusion\" is a specific sign of leptospirosis, not cellulitis; facial nerve palsy is not a feature of orbital cellulitis; the infection is not typically \"contagious\" person-to-person; and treatment is IV antibiotics, not incision and drainage (which is reserved for a drainable abscess, not first-line management).",
+    exp: "Periorbital/orbital cellulitis can spread via ophthalmic veins to the cavernous sinus. Treatment is IV antibiotics, not I&D.",
     img: "assets/ospe/paed/left_periorbital_swelling.jpg"
   },
 
-  // Page 5, Q7
   {
     q: "Patient presented acutely with peppery sensation/rash/swelling of L) side of face. Which option is true?",
     opts: ["Maculo-papular rash is shown", "Affected dermatome is supplied by ophthalmic branch of facial nerve", "Diagnosis is herpes zoster ophthalmicus", "Herpes simplex virus is the aetiology", "Post-herpetic neuralgia is rare in this disorder"],
     ans: 2,
-    exp: "The vesicular, grouped rash in a dermatomal (V1/ophthalmic) distribution on the face is herpes zoster ophthalmicus, from reactivation of varicella-zoster virus (not herpes simplex) in the trigeminal (not facial) nerve's ophthalmic division. The rash is vesicular, not maculopapular, and post-herpetic neuralgia is a recognised (though less common in children than adults) complication, not something \"rare in this disorder\" as a defining feature.",
+    exp: "Vesicular rash in V1 (ophthalmic division of trigeminal, not facial, nerve) = herpes zoster ophthalmicus, from VZV reactivation.",
     img: "assets/ospe/paed/shingles.jpg"
   },
 
-  // Page 6, Q8
   {
     q: "Which statement is TRUE regarding this Lumbosacral lesion in a baby?",
     opts: ["It is caused by fusion of neural plate", "Periconceptual folic acid supplementation increases the risk", "Rarely associated with birth marks in lumbar region", "Complicated by flaccid paralysis of the lower limbs", "Never associated with hydrocephalus"],
     ans: 3,
-    exp: "This is a meningomyelocele (spinal neural tube defect). It results from FAILURE of neural tube fusion (not fusion itself), and periconceptional folic acid supplementation REDUCES risk (deficiency increases it) — so (a) and (b) are false as worded. Overlying cutaneous markers (hairy patches, haemangiomas, dimples) are actually COMMONLY associated with lumbar dysraphism, so (c) is false. Hydrocephalus (via Arnold-Chiari II malformation) is a well-recognised association, so (e) is false. The true statement is that meningomyelocele can cause flaccid paralysis, sensory loss, and bladder/bowel dysfunction of the lower limbs due to involvement of the neural elements below the lesion.",
+    exp: "Meningomyelocele. Caused by FAILURE (not fusion) of the neural tube; folic acid reduces risk; often has overlying skin markers; often linked to hydrocephalus (Chiari II). Can cause flaccid lower-limb paralysis.",
     img: "assets/ospe/paed/lumbosacral_lesion.jpg"
   },
 
-  // Page 7, Q9 — ⚠️ image not matched to your filenames
-  // "Which is the Apt finding concerning the chest pathology in this school boy?" a. Physical exam
-  // shows deviation of trachea to the R side b. Most likely caused by RSV c. Chest radiograph will
-  // show blunting of the R costophrenic angle d. Parenteral Erythromycin is antibiotic of choice
-  // e. Managed by open drainage thoracocentesis
-  // CORRECT ANSWER = (c). Blunting of the costophrenic angle is the classic chest radiograph sign
-  // of a pleural effusion. Trachea deviates AWAY from (not toward) a large unilateral effusion;
-  // RSV causes bronchiolitis, not typically an effusion; effusions from empyema need penicillin/
-  // cephalosporin cover (erythromycin isn't first-line), and closed tube thoracostomy — not "open
-  // drainage thoracocentesis" — is the standard intervention for a significant effusion/empyema.
-  // SKIPPED — please tell me which filename this thin school-age boy photo matches.
+  {
+    q: "Which is the Apt finding concerning the chest pathology in this school boy?",
+    opts: ["Physical exam shows deviation of trachea to the R) side", "It is most likely caused by Respiratory Syncytial Virus", "A Chest radiograph will show blunting of the R) costophrenic angle", "Parenteral Erythromycin is the antibiotic of choice", "He is being managed by an open drainage thoracocentesis"],
+    ans: 2,
+    exp: "Chest tube in situ for pleural effusion/empyema. Effusion blunts the costophrenic angle; trachea deviates AWAY from a large effusion; managed by closed tube thoracostomy, not \"open drainage\".",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
 
-  // Page 7, Q10
   {
     q: "Which of these statements is correct concerning this infant with Congenital Adrenal Hyperplasia?",
     opts: ["The external genitalia shows a definite male child", "Mostly linked to 18\u03b1-Hydroxylase deficiency", "Associated with Hypokalaemia", "Responds to intermittent Hydrocortisone administration", "High plasma 17\u03b1-hydroxyprogesterone is diagnostic"],
     ans: 4,
-    exp: "The commonest cause of CAH is 21-hydroxylase deficiency (not 18\u03b1-hydroxylase), which leads to accumulation of 17\u03b1-hydroxyprogesterone upstream of the enzyme block — an elevated level is the standard diagnostic biochemical marker. The genitalia in a genetically female infant are virilised/ambiguous, not \"definitely male\". Salt-wasting CAH causes HYPERkalaemia (with hyponatraemia), not hypokalaemia, and glucocorticoid replacement must be given continuously/lifelong, not intermittently.",
+    exp: "Commonest cause is 21-hydroxylase deficiency, causing raised 17\u03b1-OHP (diagnostic). Genitalia are virilised/ambiguous; salt-wasting CAH causes HYPERkalaemia; hydrocortisone must be continuous, not intermittent.",
     img: "assets/ospe/paed/virilized_genitalia.jpg"
   },
 
-  // Page 8, Q11
   {
     q: "Which of the following is NOT a cardinal feature of Kwashiorkor?",
     opts: ["Apathy", "Ascites", "Muscle wasting", "Growth failure"],
     ans: 1,
-    exp: "The WHO-recognised cardinal features of kwashiorkor are bilateral pitting oedema, growth failure, and mental/behavioural changes (apathy/irritability); muscle wasting is also seen. Ascites can occur in severe cases secondary to hypoalbuminaemia, but it is not one of the defining cardinal criteria used to diagnose kwashiorkor.",
+    exp: "WHO cardinal features: oedema, growth failure, mental changes (\u00b1 muscle wasting). Ascites is not a cardinal criterion.",
     img: "assets/ospe/paed/kwashiorkor.jpg"
   },
 
-  // Page 8, Q12
   {
     q: "True statement regarding Hydrocephalus",
     opts: ["Meningitis cause non-communicating hydrocephalus", "Dandy Walker malformation cause communicating disease", "Sun set sign is due to dilatation of supra-spinal recess", "Aqueductal stenosis is commoner in girls than boys", "Responds to peritoneal ventricular shunt"],
     ans: 4,
-    exp: "Ventriculoperitoneal (\"peritoneal ventricular\") shunting is the standard treatment for hydrocephalus. Meningitis typically causes COMMUNICATING hydrocephalus (inflammatory exudate impairs CSF resorption at the arachnoid granulations), the reverse of option (a); Dandy-Walker malformation causes NON-communicating (obstructive) hydrocephalus from fourth-ventricle outlet atresia, the reverse of option (b); and aqueductal stenosis (including the X-linked form) is commoner in boys, not girls, making (d) false.",
+    exp: "VP shunt is standard treatment. Meningitis actually causes COMMUNICATING hydrocephalus; Dandy-Walker causes NON-communicating; aqueductal stenosis is commoner in boys.",
     img: "assets/ospe/paed/hydrocephalus.jpg"
   },
 
-  // Page 9, Q13 — ⚠️ filename mismatch
   {
     q: "Which of these conditions cause disseminated scalp lesions in this school-aged boy?",
     opts: ["Seborrhoeic dermatitis", "Tinea capitis", "Atopic eczema", "Scabies capitis", "Pediculosis capitis"],
     ans: 1,
-    exp: "Tinea capitis (dermatophyte scalp infection) typically presents in school-aged children with patchy, scaly, sometimes diffuse scalp involvement, often with hair loss/broken hairs — matching \"disseminated scalp lesions\" in this age group. Seborrhoeic dermatitis (cradle cap) is a condition of infancy, atopic eczema is typically itchy and flexural rather than confined to disseminated scalp patches, and scabies/pediculosis present with burrows or nits/itch rather than the described scaly scalp lesions. ⚠️ dandruf.jpg is a misleading name if this really is the image behind this question — \"dandruff\" implies seborrhoeic dermatitis, the wrong answer here. Please confirm this is the same file, and consider renaming it to something like tinea_capitis_scalp.jpg.",
+    exp: "School-age + scaly/patchy scalp lesions = tinea capitis. Seborrhoeic dermatitis is an infant condition. ⚠️ dandruf.jpg is a misleading name for this if it's the same file — please confirm/rename.",
     img: "assets/ospe/paed/dandruf.jpg"
   },
 
-  // Page 9, Q14
   {
     q: "Which condition is the most likely cause of this newborn lesion?",
     opts: ["Impetigo contagiosum", "Burns", "Epidermolysis bullosa", "Scalded skin syndrome", "Necrotizing cellulitis"],
     ans: 3,
-    exp: "Staphylococcal scalded skin syndrome, from exfoliative toxin-producing S. aureus, causes widespread superficial blistering and peeling in neonates/young infants with a positive Nikolsky sign — matching a newborn with diffuse skin desquamation. Impetigo is more localised/crusted, burns and epidermolysis bullosa lack the toxin-mediated diffuse sheet-like peeling, and necrotising cellulitis would show a deeper, more focally aggressive, systemically toxic picture.",
+    exp: "Diffuse superficial peeling with positive Nikolsky sign = staphylococcal scalded skin syndrome.",
     img: "assets/ospe/paed/ssss.png"
   },
 
-  // Page 10, Q15 — ⚠️ image match to be confirmed
   {
     q: "Which disease cause fever/sore throat/worsening stridor in this 8-yr girl?",
     opts: ["Acute Epiglottitis", "Croup", "Diphtheria", "Exudative Tonsillitis", "Laryngomalacia"],
     ans: 2,
-    exp: "Diphtheria classically presents with sore throat, low-grade fever, and a grey pseudomembrane over the tonsils/pharynx that can extend to cause progressive (\"worsening\") upper-airway obstruction and stridor, often with cervical lymphadenopathy giving a \"bull neck\" appearance. Acute epiglottitis is usually more abrupt/toxic without a preceding sore-throat prodrome; croup is typically in younger children with a barking cough and less prominent sore throat; exudative tonsillitis alone doesn't usually cause stridor; laryngomalacia is a congenital cause presenting in infancy, not acutely at age 8. ⚠️ Please confirm looks_like_mouth_open_with_swap_inserted.jpg is the correct image for this question.",
+    exp: "Grey pseudomembrane + progressive airway obstruction + \"bull neck\" = diphtheria.",
     img: "assets/ospe/paed/looks_like_mouth_open_with_swap_inserted.jpg"
   },
 
-  // Page 10, Q16
   {
     q: "This 3-yr boy has flaccid paralysis of R) lower limb. Which lesion is most likely?",
     opts: ["Gullain Barre syndrome", "Traumatic sciatic nerve injury", "Spinal muscular atrophy", "Poliomyelitis", "Myasthenia gravis"],
     ans: 3,
-    exp: "Acute, asymmetric flaccid paralysis of a single limb following a febrile illness, with preserved sensation, is the classic presentation of paralytic poliomyelitis (anterior horn cell destruction). Guillain-Barr\u00e9 syndrome is typically symmetric and ascending; traumatic sciatic nerve injury would have a clear traumatic/injection history; spinal muscular atrophy is a progressive, usually symmetric, proximal weakness rather than acute unilateral paralysis; myasthenia gravis causes fatigable weakness, not fixed unilateral flaccid paralysis.",
-    img: "assets/ospe/paed/young_child_thin_legs_cant_stand_well.png"
+    exp: "Acute, asymmetric flaccid paralysis after a febrile illness, sensation preserved = poliomyelitis.",
+    img: "assets/ospe/paed/polio.png"
   },
 
-  // Page 11, Q17
   {
     q: "Which disease cause skin eruptions/joint pain/anarsaca in this adolescent?",
     opts: ["Post streptococcal Glomerulonephritis", "Idiopathic Nephrotic syndrome", "Systemic lupus Erythematosus", "idiopathic Juvenile Arthritis", "Chronic Kidney Disease"],
     ans: 2,
-    exp: "Systemic lupus erythematosus is the one diagnosis that ties together all three findings at once: a skin eruption (e.g. malar/photosensitive rash), joint pain (lupus arthritis/arthralgia), and anasarca (from lupus nephritis causing nephrotic-range proteinuria). Idiopathic nephrotic syndrome and idiopathic juvenile arthritis each explain only one of the three features on their own, post-streptococcal GN classically causes a nephritic picture (hypertension, haematuria) rather than a triad with rash and joint pain, and chronic kidney disease is a downstream state rather than a specific diagnosis explaining the rash/arthralgia. ⚠️ I've matched this to periorbital_edema_and_ascites.jpg as a second use of the image you flagged, since SLE nephritis fits a periorbital-oedema-plus-ascites picture well — please confirm this is correct rather than a different photo.",
+    exp: "SLE is the only diagnosis that ties together rash + joint pain + anasarca (lupus nephritis) together.",
     img: "assets/ospe/paed/periorbital_edema_and_ascites.jpg"
   },
 
-  // Page 11, Q18
   {
     q: "Which measure is aptly taken in this child with rapidly evolving periorbital edema?",
     opts: ["Quick family history of urticaria", "Evaluation of circulation", "Immediate Inhaled epinephrine", "Dextrose saline infusion @ 20ml/kg", "Exclude parenteral Hydrocortisone"],
     ans: 1,
-    exp: "⚠️ Overriding the mark on the page. Rapidly evolving periorbital/facial swelling raises concern for anaphylaxis, and the immediately appropriate action in any acutely unwell child is a structured ABC assessment — airway, breathing, then circulation — before jumping to a specific drug. \"Immediate Inhaled epinephrine\" is not correct as worded: adrenaline for anaphylaxis is given intramuscularly, not by inhalation (nebulised adrenaline is used for croup, a different condition). A rapid history is useful but not the most urgent \"measure\" in an evolving emergency, and fluid resuscitation should use plain normal saline rather than dextrose-saline as a bolus. Given the options provided, \"Evaluation of circulation\" (part of the primary survey) is the most defensible immediate step — please double-check the original answer key, as the source appears to have this circled differently.",
+    exp: "⚠️ Adrenaline for anaphylaxis is IM, not inhaled — ABC assessment (circulation) is the correct immediate step. Double-check against your key.",
     img: "assets/ospe/paed/periorbital_edema.jpg"
   },
 
-  // Page 12, Q19
   {
     q: "An incorrect statement regarding this girl is -",
     opts: ["She has Grade - 2 Endemic goiter", "Associated with \u2193 TSH", "Graves disease is a complication", "Responds to Poppy seed oil", "Iodized Table Salt is level - 2 preventive measure"],
     ans: 1,
-    exp: "Endemic (iodine-deficiency) goitre is associated with a RAISED TSH — reduced thyroid hormone output triggers compensatory pituitary TSH secretion, which itself drives the goitrous enlargement. \"Associated with \u2193 TSH\" is therefore the incorrect statement. Iodised oil (historically including poppy seed/Lipiodol) and iodised salt are recognised prevention/treatment measures, and long-standing iodine-deficiency goitre can rarely progress to toxic nodularity/Graves-like hyperthyroidism.",
+    exp: "Iodine-deficiency goitre raises TSH, not lowers it — so \"\u2193 TSH\" is the false statement.",
     img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
   },
 
-  // Page 12, Q20
   {
     q: "Which of these is most likely in this child?",
     opts: ["Erythema subitum", "Meningococcemia", "Measles", "Scarlet fever", "Drug rash"],
     ans: 2,
-    exp: "Measles — confirmed against the actual image. Measles causes a generalised, blotchy, erythematous maculopapular rash typically preceded by fever, cough, coryza and conjunctivitis, distinguishing it from roseola (erythema subitum, rash appears AFTER fever resolves in an infant), meningococcaemia (petechial/purpuric, unwell/septic-looking child), scarlet fever (fine sandpaper rash with strawberry tongue), or a drug rash (would need a temporal drug exposure history).",
+    exp: "Confirmed measles — generalised blotchy maculopapular rash with the 3 Cs (cough, coryza, conjunctivitis).",
     img: "assets/ospe/paed/rash.jpg"
   },
 
-  // Page 13, Q21
   {
     q: "This mode of feeding is complicated by",
     opts: ["Encephalitis", "Aspiration pneumonitis", "Community based pneumonia", "Non-secretory Otitis Media", "Acute Epiglottitis"],
     ans: 1,
-    exp: "Forced feeding of a struggling or crying infant risks the feed entering the airway rather than the oesophagus, causing aspiration pneumonitis — a direct mechanical complication of the feeding technique itself, unlike the other options which are not typically linked to forced feeding.",
+    exp: "Forced feeding of a crying/struggling infant risks feed entering the airway — aspiration pneumonitis.",
     img: "assets/ospe/paed/forced_pap_feeding_nigeria.jpg"
   },
 
-  // Page 13, Q22
   {
     q: "The recognized risk factor for this lesion include",
     opts: ["Domestic accident", "Age", "Non - accidental injury", "Febrile convulsion"],
     ans: 2,
-    exp: "⚠️ Overriding the mark on the page. Burn-like injuries confined to the soles/feet, especially if patterned or bilateral, are a classically taught red flag for non-accidental injury (deliberate forced immersion scald burns produce a symmetric \"stocking\" distribution). While domestic accidents and febrile convulsion (falling onto a hot surface during a seizure) can both cause accidental burns, non-accidental injury is the specific, most heavily examined risk factor for this pattern of injury and is the answer most exam-writers would be testing for. Please verify against the image and original key — if the lesion clearly looks accidental/asymmetric, \"febrile convulsion\" as marked may still be correct.",
+    exp: "⚠️ Overridden: symmetric burn-pattern injury to the soles is a classically taught red flag for non-accidental injury. Verify against image/key.",
     img: "assets/ospe/paed/burn_like_sole_injury.jpg"
   },
 
-  // Page 14, Q23 — stem cut off on the scan
   {
-    q: "[stem cut off on the scan — visible text ends \"... investigation to be ordered?\"]",
+    q: "Investigation to be ordered?",
     opts: ["Fbc", "Blood film", "Family studies", "X-ray of hand", "Hb electrophoresis"],
     ans: 4,
-    exp: "In a child with dactylitis (hand-foot syndrome) suggestive of sickle cell disease, Hb electrophoresis (or HPLC) is the confirmatory diagnostic test that identifies the abnormal haemoglobin. FBC and blood film support the diagnosis (showing anaemia, sickle cells) but do not confirm it; family studies help with genetic counselling, not acute diagnosis; a hand X-ray shows the dactylitis changes but doesn't identify the underlying haemoglobinopathy. ⚠️ Please re-check/re-scan the top of this page — the full stem is missing.",
+    exp: "Dactylitis (hand-foot syndrome) suggests sickle cell disease — Hb electrophoresis/HPLC confirms it; FBC/film only support.",
     img: "assets/ospe/paed/swollen_digits_similar_to_acropachy_in_adults.jpg"
   },
 
-  // Page 14, Q24
   {
     q: "A firm \u0394 of condition is based on",
     opts: ["Chest radiograph", "Serum cortisol level", "Lymph node biopsy for histology", "Nucleic Acid Amplification Test", "Serum albumin: Globulin ratio"],
     ans: 2,
-    exp: "For a rapidly growing facial/jaw mass suggestive of Burkitt lymphoma, a firm (definitive) diagnosis requires tissue — lymph node or mass biopsy with histology (showing the starry-sky pattern) — rather than imaging or blood tests, which can support but not confirm a lymphoma diagnosis.",
+    exp: "Burkitt lymphoma needs tissue diagnosis — biopsy with histology, not imaging or bloods alone.",
     img: "assets/ospe/paed/right_cheek_and_jaw_swelling.jpg"
   },
 
-  // Page 15, Q25
   {
     q: "An apt clinical description of this child",
-    opts: ["Chronically ill-looking", "Grossly Wasted with globular abdomen", "Lemon-on-stick appearance", "Acute-on-chronically ill-looking", "Chronically ill looking with anasarca"],
+    opts: ["Chronically ill-looking", "Grossly Wasted with globular abdomen", "Lemon - on - stick appearance", "Acute -on- chronically ill-looking", "Chronically ill looking with anasarca"],
     ans: 1,
-    exp: "⚠️ Overriding the mark on the page. The image shows severe wasting of the limbs with a markedly distended (\"globular\") abdomen — this is precisely what \"Grossly Wasted with globular abdomen\" describes, and matches the specific visual findings better than the vaguer \"acute-on-chronic\" label. \"Lemon-on-stick\" is a term sometimes used for marasmus with a similarly thin body and disproportionate head, which could also be argued, but given ascites/abdominal distension is prominent, (b) is the more precise match. Please confirm against the original marking scheme, since this reverses the circled answer on the page.",
+    exp: "⚠️ Overridden: wasted limbs + distended (\"globular\") abdomen match this description most precisely. Double-check against key.",
     img: "assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg"
   },
 
-  // Page 15, Q26 — bottom of page cut off
   {
     q: "Which statement is TRUE regarding Ophthalmia neonatorum?",
-    opts: ["Chlamydia trachomatis is the likely cause", "Requires Gram stain of discharge", "Parenteral antibiotics is contraindicated", "Antibiotic treatment of only baby & mother is necessary", "[option e cut off on scan]"],
+    opts: ["Chlamydia trachomatis is the likely cause", "Requires Gram stain of discharge", "Parenteral antibiotics is contraindicated", "Antibiotic treatment of only baby & mother is necessary", "[option cut off on scan]"],
     ans: 0,
-    exp: "Chlamydia trachomatis is, worldwide, the most common overall cause of ophthalmia neonatorum (though gonococcal infection is more acutely severe/sight-threatening) — acquired from the maternal genital tract during vaginal delivery. Gram stain is useful specifically for suspected gonococcal infection, not a universal requirement; parenteral antibiotics ARE used (and are not contraindicated) for gonococcal disease; and because this is a sexually transmitted infection, both parents (not \"only baby & mother\") should be treated to prevent reinfection/ongoing transmission. ⚠️ Option (e) is cut off on the scan — please re-check the original.",
+    exp: "Chlamydia is the commonest overall cause (gonococcus is more severe). Both parents need treatment, not just baby & mother.",
     img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
   },
 
-  // Page 16, Q27
   {
     q: "These conditions cause clubbing EXCEPT",
     opts: ["Tetralogy of Fallot", "Liver cirrhosis", "Ventricular Septal Defect", "Chronic dysentery", "Thalassemia"],
     ans: 2,
-    exp: "Digital clubbing occurs with chronic hypoxaemia or chronic suppurative/inflammatory disease: cyanotic heart disease (Tetralogy of Fallot), liver cirrhosis, chronic dysentery/inflammatory bowel disease, and severe thalassaemia (via marrow expansion/chronic hypoxia) are all recognised causes. An isolated (acyanotic) ventricular septal defect does not cause clubbing unless it has progressed to Eisenmenger physiology with reversed, cyanotic shunting — making it the exception here.",
+    exp: "Isolated (acyanotic) VSD doesn't cause clubbing unless Eisenmenger develops.",
     img: "assets/ospe/paed/clubbing.jpg"
   },
 
-  // Page 16, Q28
   {
     q: "Concerning this set of twins",
     opts: ["Dichorionicity is likely", "Twin Anaemia Polycythemia is present", "The PCV difference between babies \u2264 14%", "Double Volume Exchange Blood Transfusion is indicated", "Not associated with hyperviscosity"],
     ans: 1,
-    exp: "One plethoric (polycythaemic) and one pale (anaemic) twin is the classic appearance of twin anaemia-polycythaemia sequence/twin-to-twin transfusion, arising from vascular anastomoses shared across a monochorionic (not dichorionic) placenta — so (a) is false, since this phenomenon requires shared (monochorionic) circulation. The diagnostic PCV difference is typically much greater than 14% (often quoted as >20-25%), so (c) as worded understates the finding. The recipient twin IS at risk of hyperviscosity from polycythaemia, making (e) false. Management of the affected twins is individualised (e.g. partial exchange transfusion for symptomatic polycythaemia, transfusion for the anaemic twin) rather than automatic \"double volume exchange\" for both, so (d) overstates the standard approach.",
+    exp: "One plethoric, one pale twin = twin anaemia-polycythaemia (needs shared, monochorionic circulation, so dichorionicity is unlikely).",
     img: "assets/ospe/paed/plethoric_and_anemic_twins.jpg"
   },
 
-  // Page 17, Q29
   {
     q: "Apt statement concerning this mass on the anterior abdominal wall",
     opts: ["Trans illumination is the most important physical exam", "It is a feature of Prune Belly Syndrome", "Strangulation precedes obstruction", "Requires conservative treatment", "Prognosis is guarded"],
     ans: 3,
-    exp: "⚠️ Overriding the mark on the page. The image shows a smooth, soft, skin-covered umbilical hernia. The great majority of umbilical hernias in children are managed conservatively (simple observation), as they typically resolve spontaneously by 3-4 years of age — making (d) the genuinely apt statement. \"Strangulation precedes obstruction\" is stated backwards: in an incarcerated hernia, bowel first becomes trapped/obstructed, and only then, if unrelieved, can strangulate from compromised blood supply — obstruction precedes strangulation, not the other way round. Trans-illumination helps distinguish cystic from solid masses but isn't the \"most important\" umbilical hernia exam (reducibility and cough impulse are); an isolated umbilical hernia (without the broader abdominal wall laxity, urinary tract anomalies, and cryptorchidism triad) is not itself a feature of Prune Belly syndrome; and prognosis for an uncomplicated paediatric umbilical hernia is excellent, not guarded. Please double-check this one against your original answer key, since I've reversed the circled answer here on physiological grounds.",
+    exp: "⚠️ Overridden: most paediatric umbilical hernias resolve spontaneously (conservative treatment). Obstruction precedes strangulation, not the reverse as option (c) states. Verify against key.",
     img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
   },
 
-  // Page 17, Q30
   {
     q: "This lesion is best described as a -",
     opts: ["Non - accidental injury", "Congenital abnormality", "Birth injury", "Acquired myopathy", "Congenital abnormality"],
     ans: 2,
-    exp: "The posture shown (arm adducted, internally rotated, elbow extended, wrist/fingers flexed — \"waiter's tip\") is Erb's palsy from an upper (C5-C6) brachial plexus injury, classically caused by traction on the shoulder during a difficult vaginal delivery (e.g. shoulder dystocia) — a birth injury rather than a congenital malformation, acquired myopathy, or deliberate injury. Note options (b) and (e) are identical (\"Congenital abnormality\") in the source paper — likely a typo where one of them was meant to be a different option; worth flagging to whoever set the original paper.",
+    exp: "\"Waiter's tip\" posture = Erb's palsy from traction during delivery (birth injury). [Note: options b/e are duplicated in the original.]",
     img: "assets/ospe/paed/waiters_tip_sign.jpg"
   },
 
-  // Page 18, Q31
   {
     q: "This device is specifically indicated in -",
     opts: ["Nutritional Surveys based on Welcome Trust classification", "IMCI implementation", "Well Child Clinic in a 3\u00b0 Centre", "Management of Emergencies in CHER"],
     ans: 1,
-    exp: "A Shakir strip (colour-coded MUAC tape) is the specific tool used in Integrated Management of Childhood Illness (IMCI) protocols at primary/community level to screen for acute malnutrition without needing a weighing scale — its whole design purpose is rapid, low-resource IMCI screening, distinguishing it from formal nutritional surveys (which use weight-for-height/Z-scores), well-child clinics in tertiary centres (which have proper scales/stadiometers), or emergency management (which needs different, more detailed assessment tools).",
+    exp: "Shakir strip (MUAC tape) is the specific IMCI community-screening tool.",
     img: "assets/ospe/paed/shakir_strip.jpg"
   },
 
-  // Page 18, Q32
   {
     q: "What is the most crucial initial step to be taken in this child?",
     opts: ["Parenteral antibiotics therapy", "Intravenous Quinine therapy", "Fluid resuscitation", "Correction of hypoglycemia", "Counseling of mother"],
     ans: 2,
-    exp: "The image shows a child with sunken eyes and a scalp IV in place, suggesting severe dehydration/shock. In any acutely unwell, shocked child, restoring circulating volume (fluid resuscitation) takes priority over starting specific antimicrobial/antimalarial therapy — those matter but come after airway/breathing/circulation are addressed. Hypoglycaemia correction is also important but is typically checked and corrected alongside/after initial fluid resuscitation in a shocked child, not before it.",
+    exp: "Sunken eyes + IV access = severe dehydration/shock. Restore circulating volume first.",
     img: "assets/ospe/paed/child_body_looks_healthy_although_the_eyes_are_looking_like_a_dying_person_plus_head_cannulation.jpg"
   },
 
-  // Page 19, Q33
   {
     q: "Which of these statements is INCORRECT regarding this baby?",
     opts: ["Affects boys > girls", "It is associated with Polyhydramnios", "Complicated by pulmonary hypoplasia", "Urinary tract infections are frequent", "Prognosis is guarded"],
     ans: 1,
-    exp: "This is Prune Belly (Eagle-Barrett) syndrome, seen almost exclusively in boys, and is associated with OLIGOhydramnios (not polyhydramnios) — the underlying urinary tract dysfunction reduces fetal urine output, the main contributor to amniotic fluid volume in later pregnancy. Oligohydramnios in turn causes pulmonary hypoplasia (Potter sequence-like physiology); recurrent UTIs are common because of urinary stasis from the dysfunctional, dilated urinary tract; and overall prognosis is genuinely guarded given the renal and pulmonary complications. \"Associated with Polyhydramnios\" is therefore the incorrect (false) statement being asked for.",
+    exp: "Prune Belly syndrome is linked to OLIGOhydramnios (reduced fetal urine output), not polyhydramnios.",
     img: "assets/ospe/paed/prune_belly.jpg"
   },
 
-  // Page 19, Q34 — ⚠️ no mark visible on the source page for this one
   {
     q: "This case of Neonatal anemia is likely due to -",
     opts: ["Massive hemolysis", "Bone marrow aplasia", "Hemorrhage", "Feto-maternal transfusion", "Septicemia"],
     ans: 3,
-    exp: "⚠️ No answer is circled/checked on this page in the scan — this is my best independent clinical read, not a transcription of a marked answer. A newborn presenting with isolated pallor (anaemia) but WITHOUT jaundice most classically points to feto-maternal transfusion or acute haemorrhage/blood loss, since blood lost from the fetal circulation (rather than destroyed within it) does not release bilirubin and so doesn't produce jaundice — unlike haemolysis, which causes anaemia AND jaundice together. Without more specific clues from the photo (e.g. visible bleeding source, or signs of sepsis/hepatosplenomegaly), feto-maternal transfusion is the classic teaching answer for \"pale but not yellow\" neonatal anaemia, but if the image shows something more specific (bleeding site, unwell/septic-looking baby), the answer could change — please tell me what else is visible and I'll confirm.",
+    exp: "⚠️ No mark visible on the source page — best independent answer. Pallor WITHOUT jaundice points to blood loss, not haemolysis; feto-maternal transfusion is the classic teaching example.",
     img: "assets/ospe/paed/neonatal_anemia.jpg"
   },
 
-  // Page 20, Q35
   {
     q: "This newborn with jaundice is most likely suffering from?",
     opts: ["Intracranial hemorrhage", "Bilirubin encephalopathy", "Hypoxic ischemic encephalopathy", "Intraventricular hemorrhage", "Neonatal meningitis with ventriculitis"],
     ans: 1,
-    exp: "A jaundiced neonate with opisthotonic (arched-back) posturing and limb rigidity is the classic picture of kernicterus (bilirubin encephalopathy) — bilirubin deposition in the basal ganglia causing this movement/tone disturbance. Intracranial/intraventricular haemorrhage, HIE, and meningitis are all important neonatal neurological presentations, but none of them specifically links to jaundice as the presenting feature the way bilirubin encephalopathy does.",
+    exp: "Jaundice + opisthotonus/rigidity = kernicterus (bilirubin encephalopathy).",
     img: "assets/ospe/paed/body_stiffness_and_icterus.jpg"
   },
 
-  // Page 20, Q36 — ⚠️ ambiguous marking on the source page
   {
     q: "Which \u0394 is most likely in this 12-yr old boy with recurrent anasarca",
     opts: ["Minimal Change Nephrotic syndrome", "Chronic Kidney Disease", "Abdominal Tuberculosis", "Pericardial effusion", "Burkitt's lymphoma"],
     ans: 1,
-    exp: "⚠️ The marking on this page is unclear (three options crossed out, two left without a clear single circle) — this is my independently reasoned answer, not a transcribed mark. Minimal change nephrotic syndrome, though the commonest cause of nephrotic syndrome overall, typically presents at a younger age (peak 2-6 years) and usually remains steroid-responsive rather than \"recurrent\" in a way that persists into early adolescence; by 12 years, RECURRENT/relapsing nephrotic-range oedema raises more concern for a steroid-resistant glomerular disease (e.g. FSGS) progressing toward chronic kidney disease, which best fits \"recurrent anasarca\" in this older age group. Abdominal TB and pericardial effusion can cause fluid accumulation but wouldn't typically be described as causing \"recurrent anasarca\" as their primary presentation. Please confirm against your original key — and please also confirm whether this image is the second use of periorbital_edema_and_ascites.jpg (matching the one-picture-in-two-questions note) or a different photo.",
+    exp: "⚠️ No clear mark on page. \"Recurrent\" nephrotic-range oedema at 12yrs (older than typical minimal-change peak) suggests steroid-resistant disease progressing to CKD.",
     img: "assets/ospe/paed/periorbital_edema_and_ascites.jpg"
   },
 
-  // Page 22, Q37
   {
     q: "Which investigation infers the \u0394 in boy with subconjunctival hemorrhage?",
     opts: ["Complete Blood Count", "Skull Radiograph", "Sputum for M/C/S", "Clotting profile", "Ophthalmoscopy"],
     ans: 3,
-    exp: "⚠️ Overriding the mark I initially read on the page. Unexplained subconjunctival haemorrhage in a child should prompt evaluation for an underlying bleeding tendency, making a clotting profile the most directly relevant investigation among those listed. If the clinical context is instead a paroxysmal cough (e.g. pertussis, where forceful coughing raises intrathoracic/venous pressure and can rupture conjunctival vessels), the more specific test would be a nasopharyngeal swab/culture for Bordetella pertussis — which isn't one of the listed options, making \"Sputum for M/C/S\" a poor substitute for that scenario. Please tell me if there's a visible cough/respiratory context in the photo (which would point towards a pertussis work-up) or if it looks more like isolated bleeding/trauma (supporting clotting profile) — and please also double-check this image is genuinely the raccoon-eyes/conjunctival photo and not a different one, since the pertussis-cough and bilateral-bruising interpretations point to two different underlying pictures.",
-    img: "assets/ospe/paed/conjunctival_injection_with_blood_raccoon_like_eyelids.jpg"
+    exp: "⚠️ Overridden: unexplained subconjunctival haemorrhage should prompt a clotting profile to rule out a bleeding disorder. Verify against key.",
+    img: "assets/ospe/paed/conjunctival_injection_with_blood_racoon_like_eyelids.jpg"
   },
 
-  // Page 22, Q38 — ⚠️ mark on page has both a circle and an X through the same option
   {
     q: "What's the likely stool pH of this child?",
     opts: ["Alkaline", "Neutral", "Mildly Acidic", "Strongly Acidic", "None of the above"],
     ans: 3,
-    exp: "⚠️ The mark on the source page for this question has both a circle AND an X through the same option, so I can't take it as a reliable transcription — this is my independent clinical read instead. Severe perianal/diaper dermatitis of this kind is usually associated with diarrhoeal stool, which is typically strongly acidic (from unabsorbed carbohydrate fermentation and increased faecal bile acids/free fatty acids irritating the skin) rather than alkaline. Please confirm against your original key.",
+    exp: "⚠️ Mark on page unclear. Diarrhoeal stool causing severe perianal rash is typically strongly acidic.",
     img: "assets/ospe/paed/diaper_area_rash_2.jpg"
   },
 
-  // Page 23, Q39 — ⚠️ image not confidently matched
   {
     q: "What's the long term complication of management?",
     opts: ["Recurrent otitis media", "Malocclusion", "Poor speech development", "Deafness", "Learning difficulty"],
     ans: 2,
-    exp: "For cleft lip/palate repair, poor speech development (from velopharyngeal insufficiency affecting articulation and resonance) is a well-recognised long-term complication requiring ongoing speech therapy — more specifically tied to cleft management than the other listed options, which are more associated with the underlying condition itself (e.g. recurrent otitis media from Eustachian tube dysfunction in cleft palate) rather than \"complications of management\" specifically. ⚠️ I could not confidently match this page's image to one of your filenames — is this the same cleft lip photo as Q1, or a separate one? Please clarify.",
-    img: "assets/ospe/paed/UNMATCHED_q39_cleft_lip_infant.jpg"
+    exp: "Speech therapy needs (velopharyngeal insufficiency) are a recognised long-term issue after cleft repair.",
+    img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
   },
 
-  // Page 23, Q40
   {
     q: "These children are at risk for which of these conditions?",
     opts: ["Scarlet fever", "Toxic Epidermal Necrolysis", "Pyogenic Meningitis", "Bronchopneumonia", "Atopic dermatitis"],
     ans: 3,
-    exp: "Indoor air pollution from biomass/firewood cooking in a poorly ventilated space is a well-established risk factor for acute respiratory infections, including bronchopneumonia, in children exposed to the smoke — the other listed conditions have no established link to indoor smoke exposure.",
+    exp: "Indoor biomass smoke exposure is a known risk factor for acute respiratory infection/bronchopneumonia.",
     img: "assets/ospe/paed/firewood_cooking.jpg"
   },
 
-  // Page 24, Q41 — top of page cut off
   {
     q: "[Contra-]indication for the use of this apparatus",
     opts: ["School Health Programme", "Neonatal resuscitation", "PMTCT", "Growth monitoring"],
     ans: 0,
-    exp: "This is an infant/bassinet-style beam scale, designed for weighing babies rather than older children — it would be an inappropriate (contraindicated) choice of equipment for a School Health Programme, where older children need a standing platform scale. It is entirely appropriate for PMTCT follow-up and growth monitoring of infants, and simply isn't relevant one way or another to neonatal resuscitation (a scale isn't used mid-resuscitation, but its absence there isn't really a \"contraindication\" the way using the wrong-sized scale for school-age children is).",
+    exp: "Infant bassinet scale isn't suited for weighing older school-age children.",
     img: "assets/ospe/paed/bassinet_scale.jpg"
   },
 
-  // Page 24, Q42 — ⚠️ circle on the source spans two adjacent options
   {
     q: "This apparatus is deployed in the \u0394 of which of these conditions?",
     opts: ["Congestive Cardiac Failure", "Patent Ductus Arteriosus", "Coarctation of the Aorta", "Cardiomyopathy", "Hypercalcemia"],
     ans: 2,
-    exp: "⚠️ The mark on the source page straddles two options, so I'm giving my independent answer rather than a transcription. A mercury sphygmomanometer's most specific diagnostic role among these choices is measuring four-limb blood pressure to detect the classic arm-leg BP gradient (and radio-femoral delay on pulse exam) of coarctation of the aorta. Congestive cardiac failure, PDA, cardiomyopathy, and hypercalcaemia may all involve blood pressure changes, but none of them is specifically \"diagnosed\" by this apparatus the way coarctation's BP-gradient sign is. Please double-check which option was actually circled in the original.",
+    exp: "⚠️ Circle on page spans two options. Four-limb BP (via sphygmomanometer) is the classic bedside test for coarctation. Verify against key.",
     img: "assets/ospe/paed/mercury_sphyg.jpg"
   },
 
-  // Page 25, Q43
   {
     q: "Correct statement regarding this device include",
     opts: ["It is a semi-invasive device", "Measures O2 desaturation", "Spectrophotometric device", "Records temperature", "Indicates capillary pressure"],
     ans: 2,
-    exp: "A pulse oximeter works by measuring differential light absorption (spectrophotometry) of oxy- vs deoxyhaemoglobin at two wavelengths to estimate arterial oxygen saturation. It is entirely non-invasive (not \"semi-invasive\"), it measures SpO2 (oxygen saturation) directly rather than \"desaturation\" as a concept, and it does not record temperature or capillary pressure.",
+    exp: "Pulse oximeter uses light absorption (spectrophotometry) to estimate SpO2 — fully non-invasive.",
     img: "assets/ospe/paed/pulse_oximeter.jpg"
   },
 
-  // Page 25, Q44
   {
     q: "A chronic complication associated with the use of this machine include",
     opts: ["HIV/AIDS", "Oropharyngeal candidiasis", "Multiple Organ Dysfunction Syndrome", "Brochopulmonary dysplasia", "Laryngotracheobronchitis"],
     ans: 3,
-    exp: "Prolonged supplemental oxygen therapy (via an oxygen concentrator) in preterm/vulnerable infants is a recognised contributor to bronchopulmonary dysplasia (oxygen-toxicity-related chronic lung disease), unlike the other listed options, which are not linked to oxygen therapy itself. [\"Brochopulmonary\" is a typo for \"Bronchopulmonary\" in the original.]",
+    exp: "Prolonged oxygen therapy in vulnerable infants is linked to bronchopulmonary dysplasia.",
     img: "assets/ospe/paed/oxygen_concenterator.jpg"
   },
 
-  // Page 26, Q45
   {
     q: "An incorrect statement regarding this Machine",
     opts: ["Provides a thermoneutral environment", "Indicted for preterm babies", "Contraindicated in ill -term babies", "Protects against infection", "Optimizes oxygen consumption"],
     ans: 2,
-    exp: "An incubator provides a thermoneutral environment, is indicated for preterm/low-birth-weight babies, helps protect against environmental infection exposure, and reduces metabolic/oxygen demand needed for thermoregulation — all TRUE. It is not contraindicated in unwell (\"ill\") term babies; in fact, sick term infants often need incubator care too (e.g. for isolation, monitoring, or thermoregulation support during illness) — making \"contraindicated in ill-term babies\" the false/incorrect statement. [\"Indicted\" is a typo for \"Indicated\" in the original.]",
+    exp: "Incubators are also used for sick TERM babies (isolation/monitoring) — not contraindicated.",
     img: "assets/ospe/paed/infant_incubator.jpg"
   },
 
-  // Page 28, Q49 — ⚠️ circle on source spans two adjacent options
   {
     q: "The commonest chronic complication of Blood transfusion is -",
     opts: ["Malaria", "Syphilis", "Hepatitis", "Acquired Immunodeficiency Syndrome", "Graft Versus Host Disease"],
     ans: 2,
-    exp: "⚠️ The mark on the source page straddles two options, so this is my independently reasoned answer. Among transfusion-transmitted infections, Hepatitis B/C is consistently cited as the commonest CHRONIC transfusion-transmitted complication in most paediatric/African-context teaching, given its higher transmission efficiency per unit and higher regional seroprevalence compared with HIV — despite HIV being more feared, it is transmitted less efficiently per exposure and is less common as a transfusion complication where donor screening is in place. Graft-versus-host disease is a real but rare complication (mainly in immunocompromised recipients of non-irradiated blood), not the \"commonest\". Please verify against your original key which of the two circled options was actually intended.",
+    exp: "⚠️ Circle spans two options. Hepatitis B/C is the most cited COMMONEST chronic transfusion-transmitted complication (higher transmission efficiency than HIV). Verify against key.",
     img: "assets/ospe/paed/blood_transfusion.jpg"
   },
 
-  // Page 28, Q50
   {
     q: "Which finding is TRUE in this chest radiograph?",
     opts: ["R) Pleural effusion", "R) Lobar pneumonia", "Trachea deviation to L) side", "Bilateral Bronchopneumonia", "L) Pneumothorax"],
     ans: 0,
-    exp: "A homogeneous opacity with a meniscus (concave upper border) at the costophrenic angle on the right is the classic radiographic sign of a right-sided pleural effusion — fluid layering under gravity in the pleural space, distinct from the more patchy/lobar pattern of pneumonia or the hyperlucent, vessel-absent appearance of a pneumothorax.",
+    exp: "Meniscus sign at the R) costophrenic angle = pleural effusion.",
     img: "assets/ospe/paed/right_lung_plerual_effusion.jpg"
   },
 
-  // Page 29, Q51
   {
     q: "Complications associated with this set up EXCLUDES",
     opts: ["Flea bite dermatitis", "Progressive Sepsis", "Bronze Baby Syndrome", "Diarrhea", "Hypothermia"],
     ans: 0,
-    exp: "⚠️ Overriding the mark I initially read on the page. Bronze baby syndrome and diarrhoea are specific, well-documented complications of phototherapy, and thermoregulation issues (hypo- or hyperthermia) are recognised risks of the radiant warmer/phototherapy setup. Nosocomial sepsis is a real (if less specific) risk of any shared nursery/ward equipment in a resource-limited unit. \"Flea bite dermatitis\" has no established mechanistic link to a radiant warmer or phototherapy unit and is the clear outlier among these options — making it the best candidate for the one that is genuinely EXCLUDED (i.e. not a recognised complication of this equipment). Please re-check the original marking, since this reverses what I initially read as circled.",
+    exp: "⚠️ Overridden: flea bite dermatitis has no link to a radiant warmer/phototherapy unit — the true outlier/excluded option. Verify against key.",
     img: "assets/ospe/paed/radiant_warmer_and_phototherapy_unit.jpg"
   },
 
-  // Page 29, Q52
   {
     q: "The most apt indication for using this machine includes",
     opts: ["Coma", "Tetanus", "Hydrocarbon ingestion", "Perinatal Asphyxia", "Epiglottitis"],
     ans: 0,
-    exp: "A suction machine is used to clear secretions/vomitus from the airway in a patient who cannot protect it themselves — most directly applicable to a comatose child at risk of airway compromise from pooled secretions. Tetanus (risk of laryngospasm, but suctioning itself can trigger spasms so must be used cautiously), hydrocarbon ingestion (aspiration risk but suctioning isn't the primary intervention), perinatal asphyxia (some suctioning may be needed but is not the defining indication), and epiglottitis (airway instrumentation is generally AVOIDED to prevent precipitating total obstruction) are all less directly matched to routine suction machine use than a comatose child.",
+    exp: "Suction machine is most directly indicated in a comatose child unable to protect their airway.",
     img: "assets/ospe/paed/suction_machine.jpg"
   },
 
-  // Page 30, Q53
   {
     q: "A notable complication associated with the use of this device",
     opts: ["Upper airway obstruction", "Gastric dilatation", "Inguinal hernia", "Lung collapse", "Apnea"],
     ans: 1,
-    exp: "Bag-valve-mask ventilation, especially with excessive pressure or without correct technique (e.g. no cricoid pressure), commonly forces air into the oesophagus and stomach rather than the lungs, causing gastric dilatation — a well-recognised complication that can itself increase aspiration risk and splint the diaphragm.",
+    exp: "Bag-valve-mask ventilation commonly forces air into the stomach — gastric dilatation.",
     img: "assets/ospe/paed/ambubag.jpg"
   },
 
-  // Page 30, Q54 (same question repeats on page 31 with the same photographic finding)
   {
     q: "This pathognomonic abdominal radiograph is associated with which condition?",
     opts: ["Tracheoesophageal Fistula", "Hypertrophic Pyloric stenosis", "Intestinal Malrotation", "Hirschsprung's disease", "Duodenal atresia"],
     ans: 4,
-    exp: "Two gas-filled, rounded lucencies (the stomach and the obstructed proximal duodenum) with no distal bowel gas is the classic \"double bubble\" sign of duodenal atresia, often associated with Down syndrome and antenatal polyhydramnios.",
+    exp: "\"Double bubble\" (stomach + proximal duodenum, no distal gas) = duodenal atresia.",
     img: "assets/ospe/paed/double_bubble_radiograph.jpg"
   },
 
-  // Page 31, Q55
   {
     q: "Indications for using this device Exclude",
     opts: ["Tracheoesophageal fistula", "Posterior Urethral Valves", "Coma", "Choanal atresia", "Omphalocele"],
     ans: 0,
-    exp: "⚠️ Worth double-checking. A suction/orogastric catheter is genuinely useful in suspected tracheoesophageal fistula/oesophageal atresia — attempting to pass the catheter and seeing it coil in a blind pouch (rather than reaching the stomach) is itself a classic bedside diagnostic sign. If the photographed device is specifically this kind of feeding/suction catheter, TEF being \"excluded\" as an indication is questionable, and Posterior Urethral Valves (which needs urinary catheterisation, a different device entirely) or Omphalocele (a surgical condition with no catheter/suction indication) may be the better-fitting \"excluded\" answer instead. Coma and choanal atresia (where passing a catheter through the nares fails to reach the pharynx, confirming the diagnosis) are both genuine indications for this type of device. Please confirm exactly what's pictured (a suction catheter for secretions vs an NG/feeding tube used for the coiling test) so I can lock in the right answer.",
+    exp: "⚠️ Worth checking: a catheter is actually used to help diagnose TEF (coils in the blind pouch), so this may not be the true \"excluded\" answer — Omphalocele may fit better. Verify against key.",
     img: "assets/ospe/paed/suction_catheter.jpg"
   },
 
