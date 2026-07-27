@@ -57764,6 +57764,24 @@ const PAED_OSPE_Qs = [
 ];
 
 const COURSES = [
+  { id:"paeds", name:"Paediatrics", emoji:"👶", bg:"linear-gradient(135deg,#1a2535,#263d5c)", accent:"#90caf9", school:"IU",
+    blocks:[
+      { id:"paeds_past_questions", name:"Past Questions", isPaedsPastQCard:true, available:true },
+      { id:"paeds_ospe", name:"OSPE", isPaedsOspeCard:true, available:true },
+      { id:"paeds_nephro", name:"Nephrology", questions:PAEDS_NEPHROLOGY_Qs, available:true, topic:"Junior & Senior Posting MCQs from Slides" },
+      { id:"paeds_gi", name:"Gastroenterology & Nutrition", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
+      { id:"paeds_resp", name:"Respiratory", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
+      { id:"paeds_neuro", name:"Neurology", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
+      { id:"paeds_infect", name:"Infectious Diseases", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
+      { id:"paeds_neonatal", name:"Neonatology", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
+    ]
+  },
+  { id:"obgyn", name:"Obs & Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"IU",
+    blocks:[
+      { id:"obgyn_past_questions", name:"Past Questions", isObgPastQCard:true, available:true },
+      {id:"og1",name:"Obs & Gynaecology",questions:[],available:false},
+    ]
+  },
   { id:"internal", name:"Internal Medicine", emoji:"🩺", bg:"linear-gradient(135deg,#0f2744,#1a3a5c)", accent:"#c9a84c", school:"IU",
     blocks:[
       { id:"final_lap_internal", name:"The Final Lap", isFinalLap:true, available:true, flType:"internal" },
@@ -57813,24 +57831,6 @@ const COURSES = [
       { id:"ortho_splints", name:"Splints & Traction", questions:ORTHO_SPLINTS_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. A.U. Nwokocha" },
       { id:"ortho_osteo", name:"Chronic Osteomyelitis", questions:SURG_OSTEOMYELITIS_Qs, available:true, topic:"Orthopaedics", lecturer:"Dr. Makelemi" },
       { id:"radio", name:"Radiology", questions:RADIOLOGY_Qs, available:true, topic:"Radiology" },
-    ]
-  },
-  { id:"paeds", name:"Paediatrics", emoji:"👶", bg:"linear-gradient(135deg,#1a2535,#263d5c)", accent:"#90caf9", school:"IU",
-    blocks:[
-      { id:"paeds_past_questions", name:"Past Questions", isPaedsPastQCard:true, available:true },
-      { id:"paeds_ospe", name:"OSPE", isPaedsOspeCard:true, available:true },
-      { id:"paeds_nephro", name:"Nephrology", questions:PAEDS_NEPHROLOGY_Qs, available:true, topic:"Junior & Senior Posting MCQs from Slides" },
-      { id:"paeds_gi", name:"Gastroenterology & Nutrition", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
-      { id:"paeds_resp", name:"Respiratory", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
-      { id:"paeds_neuro", name:"Neurology", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
-      { id:"paeds_infect", name:"Infectious Diseases", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
-      { id:"paeds_neonatal", name:"Neonatology", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
-    ]
-  },
-  { id:"obgyn", name:"Obs & Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"IU",
-    blocks:[
-      { id:"obgyn_past_questions", name:"Past Questions", isObgPastQCard:true, available:true },
-      {id:"og1",name:"Obs & Gynaecology",questions:[],available:false},
     ]
   },
   { id:"psychiatry", name:"Psychiatry", emoji:"🧠", bg:"linear-gradient(135deg,#1a1a2e,#2d2b55)", accent:"#ce93d8", school:"IU", blocks:[
