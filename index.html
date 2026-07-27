@@ -58471,6 +58471,7 @@ function App(){
   const [paedsPastQDropdown,setPaedsPastQDropdown]=useState("scroll");
   const paedsPqAllScrollSeenRef=useRef(0); // session total questions revealed in scroll view
   const PAEDS_PQ_FREE=PD01_Qs.length; // free preview size = number of questions in PD 01 (dynamic)
+  const PAEDS_PQ_PAYWALL_ENABLED=false; // TEMP: paywall disabled for Paeds Past Questions (MCQ). OSPE paywall is separate and unaffected — flip back to true to restore.
   const OBG_PQ_FREE=OG01_Qs.length; // free preview size = number of questions in OG 01 (dynamic)
   // ── MB III (Paeds Past Questions) unlock state ──
   const PAEDS_UNLOCKED_KEY="medq_mb3_paeds"; const PAEDS_OG_UNLOCKED_KEY="medq_mb3_paeds_og";
@@ -58591,7 +58592,7 @@ function App(){
     inPaedsOspeTflRef.current=inPaedsOspeTflRef.current||!!(block && block._isPaedsOspeTfl);
     const pool=retakeQs||(()=>{
       const all=block.questions;
-      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked));
+      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked));
       const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
       const effQCount=forceFixedOrder?Math.min(qCount,mb3FreeLimit):qCount;
       if(shuffleOrder && !forceFixedOrder){
@@ -58664,7 +58665,7 @@ function App(){
       const nc=tflFreeCount+1; setTflFreeCount(nc); ls.set(TFL_FREE_KEY,String(nc));
     }
     // Track MB III (Paeds Past Questions) free questions
-    if(inPaedsTflRef.current && !paedsUnlocked){
+    if(inPaedsTflRef.current && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED){
       const nc=paedsTflFreeCount+1; setPaedsTflFreeCount(nc); ls.set(PAEDS_TFL_FREE_KEY,String(nc));
     }
     // Track MB III (O&G Past Questions) free questions
@@ -58693,7 +58694,7 @@ function App(){
       if(!tflUnlocked && tflFreeCount>=10){ setTflPaywallFor(courseRef.current?.id==="internal"?"internal":courseRef.current?.id==="surgery"?"surgery":"community"); setTflCodeInput(""); setTflCodeError(""); setShowTflPaywall(true); return; }
     }
     // MB III paywall — fires after 50 free questions on the Paeds All Past Questions block
-    if(inPaedsTflRef.current){
+    if(inPaedsTflRef.current && PAEDS_PQ_PAYWALL_ENABLED){
       if(!paedsUnlocked && paedsTflFreeCount>=PAEDS_PQ_FREE){ setMb3PaywallSubject("paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
     }
     // MB III paywall — fires after 50 free questions on the O&G All Past Questions block
@@ -60760,12 +60761,13 @@ function App(){
               ? (()=>{
                   const freeLimit=PAEDS_PQ_FREE;
                   const sessionSeen=paedsPqAllScrollSeenRef.current;
-                  const visibleCount=paedsUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-                  if(!paedsUnlocked && visibleCount>0){
+                  const pqUnlockedEff=paedsUnlocked||!PAEDS_PQ_PAYWALL_ENABLED;
+                  const visibleCount=pqUnlockedEff?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
+                  if(!pqUnlockedEff && visibleCount>0){
                     paedsPqAllScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
                   }
                   const visibleQs=qs.slice(0,visibleCount);
-                  const hitLimit=!paedsUnlocked&&visibleCount<qs.length;
+                  const hitLimit=!pqUnlockedEff&&visibleCount<qs.length;
                   return e(React.Fragment,null,
                     visibleQs.map((q,qi)=>
                       e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
@@ -60877,7 +60879,7 @@ function App(){
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"All Paediatrics Past Questions"),
-                    e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsUnlocked?"Unlocked":"Free preview")
+                    e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},(paedsUnlocked||!PAEDS_PQ_PAYWALL_ENABLED)?"Unlocked":"Free preview")
                   ),
                   e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},PAEDS_PQ_ALL_Qs.length+" questions total")
                 ),
@@ -60885,7 +60887,7 @@ function App(){
               );
             })(),
             PAEDS_PQ_BLOCKS.map((b,bi)=>{
-              const unlocked=(paedsUnlocked||b.id==="pd01")&&b.available;
+              const unlocked=(paedsUnlocked||!PAEDS_PQ_PAYWALL_ENABLED||b.id==="pd01")&&b.available;
               return e("div",{key:bi,className:"fade-up",
                 style:{animationDelay:(bi+1)*40+"ms",
                   background:unlocked?th.surface:"#f4f2ee",
@@ -61457,7 +61459,7 @@ function App(){
   if(view==="setup"){
     const maxQ=block.questions.length;
     const isFreeTierGen=currentSchool==="GENERAL"&&!validGbAccess(gbAccess);
-    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked)));
+    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked)));
     const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
     const effectiveMax=isFreeTierGen?Math.min(maxQ,10):isPaedsLockedFree?Math.min(maxQ,mb3FreeLimit):maxQ;
     const clampedQ=Math.min(Math.max(qCount,10),effectiveMax);
