@@ -57758,608 +57758,901 @@ const PAED_OSPE_Qs = [
 // Path convention: assets/ospe/paed/<filename>
 
 const PAED_OSPE_Qs_2 = [
-  {
-    q: "Which associated foot deformity should be looked for in a child with spina bifida?",
-    opts: ["Hallux valgus", "Pes planus", "Talipes equinovarus", "Hammer toe", "Claw toe"],
-    ans: 2,
-    exp: "Talipes equinovarus (clubfoot) is a specifically associated abnormality to look for.",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "Which of the following is a recognised complication of thoracocentesis?",
-    opts: ["Cataract", "Tension pneumothorax", "Otitis media", "Acute glaucoma", "Splenic rupture"],
-    ans: 1,
-    exp: "Complications include infection, muscle damage, bleeding, tension pneumothorax and rib fracture.",
-    img: "assets/ospe/paed/chest_tube.jpg"
-  },
-  {
-    q: "The lesion shown is most consistent with:",
-    opts: ["Sacrococcygeal teratoma", "Spina bifida", "Pilonidal sinus", "Lipoma", "Omphalocele"],
-    ans: 1,
-    exp: "This is spina bifida in the lumbosacral region, from failure of closure of the lower neural tube.",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "Partial airway obstruction by meconium is most likely to result in:",
-    opts: ["Pulmonary fibrosis", "Air trapping", "Complete atelectasis", "Pleural effusion", "Pulmonary oedema"],
-    ans: 1,
-    exp: "Partial obstruction lets air in more easily than out, causing progressive air trapping, which can progress to rupture/emphysema/pneumothorax.",
-    img: "assets/ospe/paed/cyanosis.jpg"
-  },
-  {
-    q: "Which feature is most characteristic of meningococcaemia?",
-    opts: ["Rash beginning behind the ears", "Strawberry tongue", "Transient maculopapular rash over the trunk", "Nagayama spots", "Mouth ulcers with stomatitis"],
-    ans: 2,
-    exp: "Meningococcaemia can cause a transient maculopapular eruption on the trunk, especially noticeable in light-skinned individuals.",
-    img: "assets/ospe/paed/rash.jpg"
-  },
-  {
-    q: "A child with congenital adrenal hyperplasia is at immediate risk of:",
-    opts: ["Polycythaemia", "Dehydration", "Clubbing", "Hydrocephalus", "Retinoblastoma"],
-    ans: 1,
-    exp: "Salt-wasting crisis causes dehydration, vomiting and electrolyte imbalance — an immediate risk.",
-    img: "assets/ospe/paed/virilized_genitalia.jpg"
-  },
-  {
-    q: "The upper limit of haemoglobin at birth is:",
-    opts: ["14 g/dL", "16 g/dL", "18 g/dL", "21 g/dL", "24 g/dL"],
-    ans: 3,
-    exp: "Upper Hb limit at birth is 21 g/dL. Using PCV = Hb × 3, this gives an upper PCV of 63% (normal range 42–63%).",
-    img: "assets/ospe/paed/hb_graph.jpg"
-  },
-  {
-    q: "Which investigation is useful for monitoring bone marrow response to treatment in a child with haemolytic anaemia?",
-    opts: ["Serum ferritin", "Blood culture", "Reticulocyte count", "Coombs test", "Hb genotype"],
-    ans: 2,
-    exp: "Reticulocyte count assesses whether the bone marrow is responding appropriately during treatment.",
-    img: "assets/ospe/paed/scleral_icterus_2.jpg"
-  },
-  {
-    q: "Which condition is a haemorrhagic cause of anaemia in the newborn?",
-    opts: ["Vitamin K deficiency", "Down syndrome", "Bronchiolitis", "Croup", "Tetralogy of Fallot"],
-    ans: 0,
-    exp: "Vitamin K deficiency can cause haemorrhagic disease of the newborn and resulting anaemia.",
-    img: "assets/ospe/paed/anaemia.png"
-  },
-  {
-    q: "A goitre that is palpable but not visible is classified as:",
-    opts: ["Grade 0", "Grade 1", "Grade 2", "Grade 3", "Grade 4"],
-    ans: 1,
-    exp: "Grade 1 = palpable but not visible; Grade 2 = visible only with neck elevated; Grade 3 = visible without elevation.",
-    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
-  },
-  {
-    q: "Which complication is most likely to cause death within the first 24 hours in a child with kwashiorkor?",
-    opts: ["Iron deficiency", "Hypoglycaemia", "Hypertension", "Vitamin A deficiency", "Clubbing"],
-    ans: 1,
-    exp: "Hypoglycaemia, hypothermia and electrolyte derangement/dehydration are the major early life-threatening complications.",
-    img: "assets/ospe/paed/kwashiorkor.jpg"
-  },
-  {
-    q: "A recognised complication of omphalocele is:",
-    opts: ["Pulmonary fibrosis", "Intestinal obstruction", "Retinal detachment", "Hydrocephalus", "Nephrotic syndrome"],
-    ans: 1,
-    exp: "Herniated bowel can become trapped/strangulated, causing intestinal obstruction.",
-    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
-  },
-  {
-    q: "A rapidly enlarging jaw mass with malaligned teeth is most suggestive of:",
-    opts: ["Osteomyelitis", "Burkitt lymphoma", "Dentigerous cyst", "Fibrous dysplasia", "Ameloblastoma"],
-    ans: 1,
-    exp: "Rapidly enlarging jaw swelling with tooth malalignment/displacement is classic for Burkitt lymphoma.",
-    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
-  },
-  {
-    q: "Which physical finding is expected in an infant with hydrocephalus?",
-    opts: ["Depressed anterior fontanelle", "Widened anterior fontanelle", "Microcephaly", "Scaphocephaly", "Occipital encephalocele"],
-    ans: 1,
-    exp: "Globular head, widened anterior fontanelle, visible scalp veins and sun-setting eyes are characteristic.",
-    img: "assets/ospe/paed/hydrocephalus.jpg"
-  },
-  {
-    q: "The most important risk factor for this condition is:",
-    opts: ["Frequent bathing", "Early toilet training", "Failure to change diapers promptly", "Excess vitamin A intake", "Bottle feeding"],
-    ans: 2,
-    exp: "Delayed diaper changing and poor hygiene are the principal risk factors.",
-    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
-  },
-  {
+{
     q: "Initial management includes all of the following EXCEPT:",
     opts: ["Eye swab", "Eye irrigation", "Erythromycin", "Eye patching only", "Antimicrobial treatment"],
     ans: 3,
     exp: "Management: eye swab, irrigation, and erythromycin/antimicrobial treatment — not patching alone.",
     img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
   },
-  {
-    q: "The child shown is most likely to have which associated abnormality?",
-    opts: ["Macrocephaly", "Low-set ears", "Hepatomegaly", "Clubbing", "Polydactyly"],
-    ans: 1,
-    exp: "Associated features include low-set ears, small occiput, and flattened nasal bone; learning difficulty is also noted.",
-    img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
-  },
-  {
-    q: "Which feature best distinguishes neonatal tetanus from bilirubin encephalopathy?",
-    opts: ["Hypertonia", "Scissoring of the limbs", "Trismus", "Alert facial expression", "Jaundice"],
-    ans: 2,
-    exp: "Trismus (lock jaw) is the first symptom of neonatal tetanus, unlike bilirubin encephalopathy which presents with jaundice plus windmill movement/scissoring.",
-    img: "assets/ospe/paed/body_stiffness_and_icterus.jpg"
-  },
-  {
-    q: "The most likely cause of a waiter's tip deformity in a newborn is:",
-    opts: ["Septicaemia", "Birth-related brachial plexus injury", "Radial nerve palsy", "Neonatal stroke", "Osteomyelitis"],
-    ans: 1,
-    exp: "The deformity results from brachial plexus injury sustained during delivery, particularly with difficult obstetric manoeuvres.",
-    img: "assets/ospe/paed/waiters_tip_sign.jpg"
-  },
-  {
-    q: "Which investigation is most appropriate in a child with subconjunctival haemorrhage following trauma?",
-    opts: ["Skull X-ray", "Ophthalmoscopy", "Clotting profile", "ECG", "Sputum microscopy"],
-    ans: 2,
-    exp: "A clotting profile should be done since the bleeding may indicate an underlying coagulation abnormality.",
-    img: "assets/ospe/paed/subconjunctival_hemorrhage.jpg"
-  },
-  {
-    q: "The most appropriate initial management is:",
-    opts: ["IV quinine", "Broad-spectrum antibiotics", "Fluid resuscitation", "Correction of hypoglycaemia", "Blood transfusion"],
-    ans: 2,
-    exp: "A severely dehydrated child with impending shock needs immediate fluid resuscitation first.",
-    img: "assets/ospe/paed/severe_dehydration.jpg"
-  },
-  {
-    q: "Nebulization may be used in all of the following EXCEPT:",
-    opts: ["Bronchiolitis", "Croup", "Severe bronchopneumonia", "Hyperkalaemia", "Pulmonary tuberculosis"],
-    ans: 4,
-    exp: "Listed indications are acute severe asthma, bronchiolitis, severe bronchopneumonia, croup, and hyperkalaemia — TB is not one of them.",
-    img: "assets/ospe/paed/child_on_nebulizer.jpg"
-  },
-  {
-    q: "The child shown most likely has:",
-    opts: ["Marasmus", "Severe malnutrition", "Nephrotic syndrome", "Congenital ascites", "Hepatoblastoma"],
-    ans: 1,
-    exp: "Wasting with a globular, shiny, ascitic abdomen indicates severe malnutrition.",
-    img: "assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg"
-  },
-  {
-    q: "The earliest sign of retinoblastoma is:",
-    opts: ["Proptosis", "Leukocoria", "Diplopia", "Painful red eye", "Cataract"],
-    ans: 1,
-    exp: "Leukocoria (white eye reflex) is the earliest sign; advanced disease shows massive orbital/eye swelling.",
-    img: "assets/ospe/paed/retinoblastoma.png"
-  },
-  {
-    q: "Which additional radiographic finding supports the diagnosis of intestinal obstruction?",
-    opts: ["Free subdiaphragmatic air", "Gasless rectum", "Calcified lymph nodes", "Air bronchograms", "Ground-glass appearance"],
-    ans: 1,
-    exp: "Multiple air-fluid levels plus a gasless rectum together support intestinal obstruction.",
-    img: "assets/ospe/paed/multiple_air_fluid_level.png"
-  },
-  {
-    q: "A \"wizened old man\" appearance is characteristic of:",
-    opts: ["Marasmus", "Kwashiorkor", "Nephrotic syndrome", "Congenital hypothyroidism", "Severe dehydration"],
-    ans: 0,
-    exp: "Marasmus: wizened look + baggy pants sign, vs kwashiorkor's oedema and pigmentary skin changes.",
-    img: "assets/ospe/paed/marasmus.png"
-  },
-  {
-    q: "The yellow container shown is primarily used for the disposal of:",
-    opts: ["Food waste", "Paper waste", "Sharps", "Plastic bottles", "Linen"],
-    ans: 2,
-    exp: "The yellow box is a sharps disposal container for needles, scalpel blades, lancets etc.",
-    img: "assets/ospe/paed/yellow_box.jpg"
-  },
-  {
-    q: "Which combination forms the classical triad of Prune Belly syndrome?",
-    opts: ["Lax abdominal wall, cryptorchidism, urinary tract abnormality", "Hydrocephalus, cleft palate, clubfoot", "Macroglossia, omphalocele, gigantism", "Cleft lip, low-set ears, micrognathia", "Hypospadias, hydrocele, inguinal hernia"],
-    ans: 0,
-    exp: "Prune Belly syndrome triad: lax abdominal wall, cryptorchidism, urinary tract abnormality — also linked to hypoplastic lungs, oligohydramnios, and is commoner in boys.",
-    img: "assets/ospe/paed/prune_belly.jpg"
-  },
-  {
-    q: "The most likely cause of rapidly developing periorbital swelling is:",
-    opts: ["Nephrotic syndrome", "Acute glomerulonephritis", "Hypersensitivity reaction", "Congestive cardiac failure", "Severe anaemia"],
-    ans: 2,
-    exp: "Rapid-onset periorbital oedema (over minutes to hours) suggests a hypersensitivity/allergic reaction rather than the slower onset typical of nephrotic syndrome.",
-    img: "assets/ospe/paed/periorbital_edema.jpg"
-  },
-  {
-    q: "Which feature is characteristic of kwashiorkor rather than marasmus?",
-    opts: ["Baggy pants sign", "Wizened appearance", "Oedema", "Severe muscle wasting alone", "Loss of subcutaneous fat only"],
-    ans: 2,
-    exp: "Kwashiorkor is characterised by oedema plus hyper-/hypopigmentation, unlike marasmus's wizened wasting.",
-    img: "assets/ospe/paed/kwashiorkor_2.png"
-  },
-  {
-    q: "Which serum marker is typically increased in this condition?",
-    opts: ["β-hCG", "AFP", "CEA", "CA-125", "PSA"],
-    ans: 1,
-    exp: "Alpha-fetoprotein (AFP) is raised in neural tube defects (contrast: AFP is reduced in Down syndrome).",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "Thoracocentesis may be performed to drain all of the following EXCEPT:",
-    opts: ["Blood", "Air", "Pus", "Pleural fluid", "Cerebrospinal fluid"],
-    ans: 4,
-    exp: "Thoracocentesis drains blood, pleural fluid, air and pus — not CSF (that's a lumbar puncture).",
-    img: "assets/ospe/paed/chest_tube.jpg"
-  },
-  {
-    q: "Loss of the normal nail-bed angle occurs at which stage of clubbing?",
-    opts: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
-    ans: 2,
-    exp: "Stages: 1-Increased fluctuance, 2-Increased nail convexity, 3-Loss of nail-bed angle, 4-Drumstick appearance.",
-    img: "assets/ospe/paed/clubbing.jpg"
-  },
-  {
-    q: "Complete airway obstruction by meconium primarily causes:",
-    opts: ["Tension pneumothorax", "Pneumonitis", "Alveolar collapse", "Pleural effusion", "Bronchiectasis"],
-    ans: 2,
-    exp: "Complete obstruction prevents ventilation; trapped air is absorbed and alveoli collapse. Partial obstruction instead causes air trapping.",
-    img: "assets/ospe/paed/cyanosis.jpg"
-  },
-  {
-    q: "Nagayama spots are characteristic of:",
-    opts: ["Scarlet fever", "Measles", "Erythema subitum", "Drug eruption", "Meningococcaemia"],
-    ans: 2,
-    exp: "Erythema subitum (roseola) is associated with Nagayama spots on the palate and usually no conjunctivitis.",
-    img: "assets/ospe/paed/rash.jpg"
-  },
-  {
-    q: "Ambiguous genitalia with clitoromegaly is most suggestive of:",
-    opts: ["Turner syndrome", "Congenital adrenal hyperplasia", "Klinefelter syndrome", "Testicular torsion", "Androgen insensitivity syndrome"],
-    ans: 1,
-    exp: "Enlarged clitoris, rudimentary scrotum and enlarged labia suggest congenital adrenal hyperplasia (CAH).",
-    img: "assets/ospe/paed/virilized_genitalia.jpg"
-  },
-  {
-    q: "Using the relationship PCV = Hb × 3, an Hb of 21 g/dL corresponds to a PCV of:",
-    opts: ["42%", "48%", "54%", "60%", "63%"],
-    ans: 4,
-    exp: "21 × 3 = 63%.",
-    img: "assets/ospe/paed/hb_graph.jpg"
-  },
-  {
-    q: "A child presents with fever, jaundice and anaemia. Which investigation is most helpful?",
-    opts: ["Blood culture", "Serum bilirubin", "Peripheral blood film examination", "Hb genotype", "Direct Coombs test"],
-    ans: 2,
-    exp: "A peripheral blood film is the most useful single investigation in this setting for identifying the type of anaemia/haemolysis.",
-    img: "assets/ospe/paed/scleral_icterus_2.jpg"
-  },
-  {
-    q: "Which of the following is NOT listed as a cause of anaemia in the newborn?",
-    opts: ["Massive haemolysis", "Bone marrow aplasia", "Feto-maternal transfusion", "Septicaemia", "Iron deficiency"],
-    ans: 4,
-    exp: "Bone marrow aplasia, massive haemolysis, septicaemia, feto-maternal transfusion and haemorrhage are the listed causes; iron deficiency is not (it's not a typical neonatal-anaemia cause).",
-    img: "assets/ospe/paed/anaemia.png"
-  },
-  {
-    q: "Which measure is recommended for the prevention of endemic goitre?",
-    opts: ["Vitamin A supplementation", "Iron fortification", "Use of iodized salt", "Routine calcium supplementation", "Universal folic acid supplementation"],
-    ans: 2,
-    exp: "Prevention centres on health education and iodized products (salt, sugar, seasonings).",
-    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
-  },
-  {
-    q: "All of the following are early life-threatening complications of kwashiorkor EXCEPT:",
-    opts: ["Hypothermia", "Hypoglycaemia", "Electrolyte derangement", "Dehydration", "Polycythaemia"],
-    ans: 4,
-    exp: "The immediate dangers are hypoglycaemia, hypothermia, electrolyte derangement and dehydration — not polycythaemia.",
-    img: "assets/ospe/paed/kwashiorkor.jpg"
-  },
-  {
-    q: "A midline abdominal wall defect covered by normal skin is most consistent with:",
-    opts: ["Gastroschisis", "Omphalocele major", "Umbilical granuloma", "Patent urachus", "Exstrophy of the bladder"],
-    ans: 1,
-    exp: "Omphalocele major is a midline herniation covered by normal skin; gastroschisis is lateral to the umbilicus without skin covering.",
-    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
-  },
-  {
-    q: "Which drug is used to reduce the risk of tumour lysis syndrome?",
-    opts: ["Acetazolamide", "Allopurinol", "Mannitol", "Furosemide", "Prednisolone"],
-    ans: 1,
-    exp: "Prevention: hyperhydration, urine alkalinisation, and allopurinol to reduce uric acid production.",
-    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
-  },
-  {
-    q: "The sun-setting appearance in hydrocephalus results from:",
-    opts: ["Sixth cranial nerve palsy", "Paralysis of upward gaze", "Optic nerve atrophy", "Retinal detachment", "Third cranial nerve palsy"],
-    ans: 1,
-    exp: "Paralysis of upward gaze from pressure effects causes the sun-setting sign.",
-    img: "assets/ospe/paed/hydrocephalus.jpg"
-  },
-  {
-    q: "The skin lesion shown is most consistent with:",
-    opts: ["Atopic dermatitis", "Napkin rash", "Impetigo", "Tinea corporis", "Psoriasis"],
-    ans: 1,
-    exp: "Napkin rash (ammoniacal dermatitis) from poor hygiene and delayed diaper changing.",
-    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
-  },
-  {
-    q: "A newborn has copious purulent eye discharge causing the eyelids to stick together. What is the most likely diagnosis?",
-    opts: ["Congenital glaucoma", "Ophthalmia neonatorum", "Dacryocystitis", "Retinoblastoma", "Cataract"],
-    ans: 1,
-    exp: "Copious purulent discharge occluding the eye is typical of ophthalmia neonatorum (N. gonorrhoeae, C. trachomatis).",
-    img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
-  },
-  {
-    q: "Which facial feature is associated with this condition?",
-    opts: ["Prominent nasal bridge", "Flattened nasal bone", "Hypertelorism only", "Frontal bossing", "Macroglossia"],
-    ans: 1,
-    exp: "Flattened nasal bone, low-set ears and small occiput are associated features.",
-    img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
-  },
-  {
+
+{
     q: "Which neurological movement is characteristic of bilirubin encephalopathy?",
     opts: ["Trismus", "Windmill movement", "Chorea", "Hemiballismus", "Fasciculations"],
     ans: 1,
     exp: "Bilirubin encephalopathy causes windmill movement and scissoring of the limbs. Neonatal tetanus can also cause body stiffness but is distinguished by trismus (lock jaw).",
     img: "assets/ospe/paed/body_stiffness_and_icterus.jpg"
   },
-  {
-    q: "The \"waiter's tip\" deformity results from injury to which nerve roots?",
-    opts: ["C3–C4", "C5–C6", "C7–C8", "C8–T1", "T1–T2"],
+
+{
+    q: "Which serum marker is typically increased in this condition?",
+    opts: ["β-hCG", "AFP", "CEA", "CA-125", "PSA"],
     ans: 1,
-    exp: "Waiter's tip deformity is caused by C5–C6 brachial plexus injury, usually from traction during a difficult delivery.",
-    img: "assets/ospe/paed/waiters_tip_sign.jpg"
-  },
-  {
-    q: "The ocular lesion shown is:",
-    opts: ["Hyphaema", "Corneal ulcer", "Subconjunctival haemorrhage", "Cataract", "Hypopyon"],
-    ans: 2,
-    exp: "This is a subconjunctival haemorrhage. If it follows apparently minor trauma, an underlying bleeding disorder should be considered.",
-    img: "assets/ospe/paed/subconjunctival_hemorrhage.jpg"
-  },
-  {
-    q: "Skin tenting is a sign of:",
-    opts: ["Septicaemia", "Severe dehydration", "Nephrotic syndrome", "Congestive cardiac failure", "Acute glomerulonephritis"],
-    ans: 1,
-    exp: "Skin tenting is a classic sign of severe dehydration; sunken eyes indicate the child is approaching shock.",
-    img: "assets/ospe/paed/severe_dehydration.jpg"
-  },
-  {
-    q: "Which condition is commonly managed with nebulization?",
-    opts: ["Acute severe asthma", "Nephrotic syndrome", "Acute rheumatic fever", "Meningitis", "Tetanus"],
-    ans: 0,
-    exp: "Nebulization is used in acute severe asthma, bronchiolitis, severe bronchopneumonia, croup, and hyperkalaemia management.",
-    img: "assets/ospe/paed/child_on_nebulizer.jpg"
-  },
-  {
-    q: "Which feature best supports the diagnosis in this image?",
-    opts: ["Drumstick fingers", "Globular, shiny abdomen with wasting", "Bilateral proptosis", "Strawberry tongue", "Sun-setting eyes"],
-    ans: 1,
-    exp: "A globular, shiny abdomen together with severe wasting supports severe malnutrition.",
-    img: "assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg"
-  },
-  {
-    q: "Massive swelling of the eye and orbit is most suggestive of:",
-    opts: ["Congenital glaucoma", "Retinoblastoma", "Orbital cellulitis", "Dacryocystitis", "Cataract"],
-    ans: 1,
-    exp: "Advanced retinoblastoma can present with massive swelling of the eye/orbit; leukocoria is the earliest sign.",
-    img: "assets/ospe/paed/retinoblastoma.png"
-  },
-  {
-    q: "Multiple air-fluid levels on an abdominal radiograph are most suggestive of:",
-    opts: ["Paralytic ileus", "Intestinal obstruction", "Pneumoperitoneum", "Ascites", "Volvulus of the stomach"],
-    ans: 1,
-    exp: "Multiple air-fluid levels with a gasless rectum indicate intestinal obstruction.",
-    img: "assets/ospe/paed/multiple_air_fluid_level.png"
-  },
-  {
-    q: "Which feature is characteristic of marasmus?",
-    opts: ["Generalized oedema", "Baggy pants sign", "Flaky paint dermatosis", "Hyperpigmentation only", "Moon face"],
-    ans: 1,
-    exp: "Marasmus shows a wizened old appearance and the baggy pants sign (loose skin folds from fat/muscle loss), unlike kwashiorkor's oedema.",
-    img: "assets/ospe/paed/marasmus.png"
-  },
-  {
-    q: "Which of the following should be discarded into the yellow sharps container?",
-    opts: ["Used gauze", "Empty IV fluid bag", "Used syringe needle", "Surgical gloves", "Cotton wool"],
-    ans: 2,
-    exp: "Only sharp objects (needles, lancets, blades) go in the sharps box; non-sharp waste goes elsewhere.",
-    img: "assets/ospe/paed/yellow_box.jpg"
-  },
-  {
-    q: "Which complication may occur if the spinal lesion ruptures?",
-    opts: ["Cataract", "Meningitis", "Endocarditis", "Pancreatitis", "Peritonitis"],
-    ans: 1,
-    exp: "A ruptured lesion has increased risk of secondary infection leading to meningitis.",
+    exp: "Alpha-fetoprotein (AFP) is raised in neural tube defects (contrast: AFP is reduced in Down syndrome).",
     img: "assets/ospe/paed/lumbosacral_lesion.jpg"
   },
-  {
-    q: "Which percussion note is expected over a large pleural effusion?",
-    opts: ["Hyper-resonant", "Resonant", "Stony dull", "Tympanitic", "Dull with shifting dullness"],
-    ans: 2,
-    exp: "Pleural effusion gives stony dullness, reduced expansion, absent fremitus and diminished breath sounds.",
-    img: "assets/ospe/paed/chest_tube.jpg"
-  },
-  {
-    q: "Which congenital heart disease is associated with clubbing?",
-    opts: ["Atrial septal defect", "Tetralogy of Fallot", "Patent ductus arteriosus", "Ventricular septal defect", "Coarctation of the aorta"],
+
+{
+    q: "The child shown is most likely to have which associated abnormality?",
+    opts: ["Macrocephaly", "Low-set ears", "Hepatomegaly", "Clubbing", "Polydactyly"],
     ans: 1,
-    exp: "Cyanotic heart disease (e.g. Tetralogy of Fallot, TGA) causes clubbing; acyanotic lesions generally don't unless Eisenmenger develops.",
-    img: "assets/ospe/paed/clubbing.jpg"
-  },
-  {
-    q: "Fresh meconium staining is typically:",
-    opts: ["Brown", "Yellow", "Greenish", "Black", "White"],
-    ans: 2,
-    exp: "Fresh meconium is greenish; stale meconium is yellowish.",
-    img: "assets/ospe/paed/cyanosis.jpg"
-  },
-  {
-    q: "A child with a generalized rash and strawberry tongue most likely has:",
-    opts: ["Measles", "Scarlet fever", "Drug eruption", "Meningococcaemia", "Erythema subitum"],
-    ans: 1,
-    exp: "Scarlet fever classically presents with a generalized rash and strawberry tongue.",
-    img: "assets/ospe/paed/rash.jpg"
-  },
-  {
-    q: "The investigation of choice is:",
-    opts: ["Serum cortisol", "17-hydroxyprogesterone assay", "Serum testosterone", "Thyroid function test", "ACTH stimulation test"],
-    ans: 1,
-    exp: "17-hydroxyprogesterone assay is the key diagnostic test for CAH (21-hydroxylase deficiency).",
-    img: "assets/ospe/paed/virilized_genitalia.jpg"
-  },
-  {
-    q: "A newborn has a PCV of 68%. This is most consistent with:",
-    opts: ["Anaemia", "Polycythaemia", "Normal finding", "Acute haemorrhage", "Physiological jaundice"],
-    ans: 1,
-    exp: "PCV above 63% at birth is polycythaemia; 42–63% is the expected range.",
-    img: "assets/ospe/paed/hb_graph.jpg"
-  },
-  {
-    q: "Which of the following is a cause of haemolytic anaemia?",
-    opts: ["G6PD deficiency", "Chronic kidney disease", "Aplastic anaemia", "Nephrotic syndrome", "Congenital hypothyroidism"],
-    ans: 0,
-    exp: "Causes include G6PD deficiency, sickle cell disease, drug-induced haemolysis, megaloblastic anaemia, and abnormal red cell morphology.",
-    img: "assets/ospe/paed/scleral_icterus_2.jpg"
-  },
-  {
-    q: "A goitre that is visible only when the neck is elevated is classified as:",
-    opts: ["Grade 0", "Grade 1", "Grade 2", "Grade 3", "Grade 4"],
-    ans: 2,
-    exp: "Grade 0=not visible/palpable; Grade 1=palpable not visible; Grade 2=visible only with neck elevated; Grade 3=visible without elevation.",
-    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
-  },
-  {
-    q: "Which skin lesion is characteristic of kwashiorkor?",
-    opts: ["Café-au-lait spots", "Flaky paint dermatosis", "Vesiculobullous eruption", "Petechiae", "Target lesions"],
-    ans: 1,
-    exp: "Oedema and flaky paint dermatosis are characteristic. Immediate life-threats are hypoglycaemia, hypothermia, and electrolyte derangement/dehydration.",
-    img: "assets/ospe/paed/kwashiorkor.jpg"
-  },
-  {
-    q: "Which feature best distinguishes gastroschisis from omphalocele?",
-    opts: ["Presence of bowel within the defect", "Midline location", "Absence of normal skin covering", "Presence of intestinal obstruction", "Large abdominal swelling"],
-    ans: 2,
-    exp: "Gastroschisis has no normal skin covering and is lateral to the umbilicus; omphalocele is midline and skin-covered.",
-    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
-  },
-  {
-    q: "Which metabolic complication may occur following treatment of Burkitt lymphoma?",
-    opts: ["SIADH", "Tumour lysis syndrome", "Disseminated intravascular coagulation", "Hyperosmolar state", "Lactic acidosis"],
-    ans: 1,
-    exp: "Tumour lysis syndrome: hyperuricaemia, hyperkalaemia, hyperphosphataemia, hypocalcaemia.",
-    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
-  },
-  {
-    q: "Which ocular sign is classically seen in hydrocephalus?",
-    opts: ["Ptosis", "Sun-setting eyes", "Nystagmus", "Exophthalmos", "Arcus senilis"],
-    ans: 1,
-    exp: "Sun-setting eyes (upward-gaze palsy) is classic, along with globular head, scalp veins, and widened fontanelle.",
-    img: "assets/ospe/paed/hydrocephalus.jpg"
-  },
-  {
-    q: "Which of the following helps prevent the condition shown?",
-    opts: ["Restricting fluids", "Good diaper hygiene", "Routine antibiotics", "Daily antifungal prophylaxis", "Zinc supplementation"],
-    ans: 1,
-    exp: "Good hygiene and frequent diaper changes reduce prolonged skin contact with urine/faeces.",
-    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
-  },
-  {
-    q: "Which organism is commonly responsible for ophthalmia neonatorum?",
-    opts: ["Streptococcus pneumoniae", "Neisseria gonorrhoeae", "Escherichia coli", "Staphylococcus epidermidis", "Pseudomonas aeruginosa"],
-    ans: 1,
-    exp: "Neisseria gonorrhoeae and Chlamydia trachomatis are the key causative organisms.",
-    img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
-  },
-  {
-    q: "Which long-term problem is listed for this child?",
-    opts: ["Hearing loss", "Learning difficulty", "Blindness", "Cardiomyopathy", "Chronic kidney disease"],
-    ans: 1,
-    exp: "Learning difficulty is the long-term association noted.",
+    exp: "Associated features include low-set ears, small occiput, and flattened nasal bone; learning difficulty is also noted.",
     img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
   },
-  {
-    q: "Which vitamin reduces the risk of recurrence of this condition in a future pregnancy?",
-    opts: ["Vitamin A", "Vitamin C", "Vitamin D", "Folic acid", "Vitamin K"],
-    ans: 3,
-    exp: "Mothers with a previously affected child should take folic acid 5mg daily before and during early pregnancy.",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "The procedure being performed is:",
-    opts: ["Pericardiocentesis", "Thoracocentesis", "Lumbar puncture", "Paracentesis", "Cricothyrotomy"],
+
+{
+    q: "Which of the following is a recognised complication of thoracocentesis?",
+    opts: ["Cataract", "Tension pneumothorax", "Otitis media", "Acute glaucoma", "Splenic rupture"],
     ans: 1,
-    exp: "This is thoracocentesis, used to drain blood, fluid, air or pus from the pleural space.",
+    exp: "Complications include infection, muscle damage, bleeding, tension pneumothorax and rib fracture.",
     img: "assets/ospe/paed/chest_tube.jpg"
   },
-  {
-    q: "The drumstick appearance of the fingers corresponds to:",
-    opts: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
-    ans: 3,
-    exp: "Stage 4 clubbing is the classic drumstick appearance.",
-    img: "assets/ospe/paed/clubbing.jpg"
+
+{
+    q: "A goitre that is palpable but not visible is classified as:",
+    opts: ["Grade 0", "Grade 1", "Grade 2", "Grade 3", "Grade 4"],
+    ans: 1,
+    exp: "Grade 1 = palpable but not visible; Grade 2 = visible only with neck elevated; Grade 3 = visible without elevation.",
+    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
   },
-  {
+
+{
+    q: "The yellow container shown is primarily used for the disposal of:",
+    opts: ["Food waste", "Paper waste", "Sharps", "Plastic bottles", "Linen"],
+    ans: 2,
+    exp: "The yellow box is a sharps disposal container for needles, scalpel blades, lancets etc.",
+    img: "assets/ospe/paed/yellow_box.jpg"
+  },
+
+{
     q: "Stale meconium staining is typically:",
     opts: ["Black", "Greenish", "White", "Yellowish", "Brown"],
     ans: 3,
     exp: "Stale meconium is yellowish, fresh meconium is greenish.",
     img: "assets/ospe/paed/cyanosis.jpg"
   },
-  {
-    q: "A child has fever, conjunctivitis, stomatitis and a rash that began behind the ears. What is the most likely diagnosis?",
-    opts: ["Scarlet fever", "Erythema subitum", "Drug eruption", "Measles", "Meningococcaemia"],
-    ans: 3,
-    exp: "Measles typically begins behind the ears, is denser centrally, and is associated with conjunctivitis and mucosal involvement (stomatitis).",
-    img: "assets/ospe/paed/rash.jpg"
-  },
-  {
-    q: "Which electrolyte abnormality is associated with this condition?",
-    opts: ["Hypernatraemia", "Hyponatraemia", "Hypercalcaemia", "Hypermagnesaemia", "Hypophosphataemia"],
+
+{
+    q: "Which feature best supports the diagnosis in this image?",
+    opts: ["Drumstick fingers", "Globular, shiny abdomen with wasting", "Bilateral proptosis", "Strawberry tongue", "Sun-setting eyes"],
     ans: 1,
-    exp: "Salt-wasting CAH causes hyponatraemia (with dehydration and vomiting).",
-    img: "assets/ospe/paed/virilized_genitalia.jpg"
+    exp: "A globular, shiny abdomen together with severe wasting supports severe malnutrition.",
+    img: "assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg"
   },
-  {
-    q: "Hydrocephalus associated with spina bifida is attributed to:",
-    opts: ["Dandy-Walker malformation", "Arnold-Chiari malformation", "Aqueductal stenosis", "Holoprosencephaly", "Arachnoid cyst"],
-    ans: 1,
-    exp: "Hydrocephalus in spina bifida is due to Arnold-Chiari malformation — head examination is essential.",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "A large pleural effusion most commonly causes the trachea to deviate:",
-    opts: ["Towards the affected side", "Away from the affected side", "Inferiorly", "Superiorly", "It remains central"],
-    ans: 1,
-    exp: "A large effusion pushes the trachea away from the affected side; lung collapse pulls it towards the affected side.",
-    img: "assets/ospe/paed/chest_tube.jpg"
-  },
-  {
-    q: "Which gastrointestinal disease is listed as a cause of clubbing?",
-    opts: ["Ulcerative colitis", "Crohn disease", "Coeliac disease", "Hirschsprung disease", "Appendicitis"],
-    ans: 1,
-    exp: "Causes: cyanotic heart disease, respiratory disease, liver disease, and Crohn disease.",
-    img: "assets/ospe/paed/clubbing.jpg"
-  },
-  {
-    q: "A child with spina bifida should routinely be examined for:",
-    opts: ["Cataract", "Patulous anus", "Cleft palate", "Umbilical hernia", "Goitre"],
-    ans: 1,
-    exp: "Examine for patulous anus, talipes equinovarus (feet), and hydrocephalus (head) — associated abnormalities.",
-    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
-  },
-  {
-    q: "Which organism is identified as the most important cause of this pneumonia?",
-    opts: ["Streptococcus pyogenes", "Staphylococcus aureus", "Escherichia coli", "Klebsiella pneumoniae", "Pseudomonas aeruginosa"],
-    ans: 1,
-    exp: "Staphylococcus aureus is the most important cause of pneumonia complicated by empyema needing drainage; strep, H. influenzae and TB are also possible.",
-    img: "assets/ospe/paed/chest_tube.jpg"
-  },
-  {
+
+{
     q: "Spina bifida results from failure of closure of the:",
     opts: ["Foregut", "Neural tube", "Somites", "Branchial arches", "Neural crest"],
     ans: 1,
     exp: "Spina bifida is a neural tube defect from failure of fusion of the lower neural tube.",
     img: "assets/ospe/paed/lumbosacral_lesion.jpg"
   },
+
   {
+    q: "The white blood cell abnormality shown in the picture is called:",
+    opts: ["Neutropenia", "Bandemia", "Lymphocytosis", "Monocytosis", "Eosinophilia"],
+    ans: 1,
+    exp: "Bandemia refers to increased immature neutrophils (band forms) in peripheral blood, often with a left shift and toxic granulation.",
+    img: "assets/ospe/paed/bandemia_labs.png"
+  },
+
+{
+    q: "Which electrolyte abnormality is associated with this condition?",
+    opts: ["Hypernatraemia", "Hyponatraemia", "Hypercalcaemia", "Hypermagnesaemia", "Hypophosphataemia"],
+    ans: 1,
+    exp: "Salt-wasting CAH causes hyponatraemia (with dehydration and vomiting).",
+    img: "assets/ospe/paed/virilized_genitalia.jpg"
+  },
+
+  {
+    q: "Which finding makes the picture atypical?",
+    opts: ["Hypercholesterolaemia", "Massive proteinuria", "Hypoalbuminaemia", "Blood in the urine", "Generalized oedema"],
+    ans: 3,
+    exp: "Haematuria makes this atypical nephrotic syndrome, which may not respond to steroids, or may respond and then relapse.",
+    img: "assets/ospe/paed/nephrotic_syndrom_labs.png"
+  },
+
+  {
+    q: "The CSF glucose abnormality in the picture is best interpreted by comparing it with:",
+    opts: ["Serum albumin", "Blood glucose", "Serum sodium", "Serum protein", "Blood urea"],
+    ans: 1,
+    exp: "CSF glucose should normally be more than half of the blood glucose — a markedly reduced ratio supports bacterial meningitis.",
+    img: "assets/ospe/paed/bacterial_meningitis_labs.png"
+  },
+
+{
+    q: "Loss of the normal nail-bed angle occurs at which stage of clubbing?",
+    opts: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
+    ans: 2,
+    exp: "Stages: 1-Increased fluctuance, 2-Increased nail convexity, 3-Loss of nail-bed angle, 4-Drumstick appearance.",
+    img: "assets/ospe/paed/clubbing.jpg"
+  },
+
+{
+    q: "Which of the following should be discarded into the yellow sharps container?",
+    opts: ["Used gauze", "Empty IV fluid bag", "Used syringe needle", "Surgical gloves", "Cotton wool"],
+    ans: 2,
+    exp: "Only sharp objects (needles, lancets, blades) go in the sharps box; non-sharp waste goes elsewhere.",
+    img: "assets/ospe/paed/yellow_box.jpg"
+  },
+
+{
+    q: "A child with spina bifida should routinely be examined for:",
+    opts: ["Cataract", "Patulous anus", "Cleft palate", "Umbilical hernia", "Goitre"],
+    ans: 1,
+    exp: "Examine for patulous anus, talipes equinovarus (feet), and hydrocephalus (head) — associated abnormalities.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+{
+    q: "Which condition is a haemorrhagic cause of anaemia in the newborn?",
+    opts: ["Vitamin K deficiency", "Down syndrome", "Bronchiolitis", "Croup", "Tetralogy of Fallot"],
+    ans: 0,
+    exp: "Vitamin K deficiency can cause haemorrhagic disease of the newborn and resulting anaemia.",
+    img: "assets/ospe/paed/anaemia.png"
+  },
+
+{
+    q: "The ocular lesion shown is:",
+    opts: ["Hyphaema", "Corneal ulcer", "Subconjunctival haemorrhage", "Cataract", "Hypopyon"],
+    ans: 2,
+    exp: "This is a subconjunctival haemorrhage. If it follows apparently minor trauma, an underlying bleeding disorder should be considered.",
+    img: "assets/ospe/paed/subconjunctival_hemorrhage.jpg"
+  },
+
+{
+    q: "A midline abdominal wall defect covered by normal skin is most consistent with:",
+    opts: ["Gastroschisis", "Omphalocele major", "Umbilical granuloma", "Patent urachus", "Exstrophy of the bladder"],
+    ans: 1,
+    exp: "Omphalocele major is a midline herniation covered by normal skin; gastroschisis is lateral to the umbilicus without skin covering.",
+    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
+  },
+
+{
+    q: "Fresh meconium staining is typically:",
+    opts: ["Brown", "Yellow", "Greenish", "Black", "White"],
+    ans: 2,
+    exp: "Fresh meconium is greenish; stale meconium is yellowish.",
+    img: "assets/ospe/paed/cyanosis.jpg"
+  },
+
+{
+    q: "Which congenital heart disease is associated with clubbing?",
+    opts: ["Atrial septal defect", "Tetralogy of Fallot", "Patent ductus arteriosus", "Ventricular septal defect", "Coarctation of the aorta"],
+    ans: 1,
+    exp: "Cyanotic heart disease (e.g. Tetralogy of Fallot, TGA) causes clubbing; acyanotic lesions generally don't unless Eisenmenger develops.",
+    img: "assets/ospe/paed/clubbing.jpg"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Acute renal failure", "Tumour lysis syndrome", "Nephrotic syndrome", "Diabetic ketoacidosis", "Acute hepatitis"],
+    ans: 1,
+    exp: "Hyperuricaemia, hyperkalaemia and metabolic acidosis occurring together point to tumour lysis syndrome.",
+    img: "assets/ospe/paed/tumor_lysis_syndrome_labs.png"
+  },
+
+{
+    q: "Which metabolic complication may occur following treatment of Burkitt lymphoma?",
+    opts: ["SIADH", "Tumour lysis syndrome", "Disseminated intravascular coagulation", "Hyperosmolar state", "Lactic acidosis"],
+    ans: 1,
+    exp: "Tumour lysis syndrome: hyperuricaemia, hyperkalaemia, hyperphosphataemia, hypocalcaemia.",
+    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
+  },
+
+{
+    q: "Which long-term problem is listed for this child?",
+    opts: ["Hearing loss", "Learning difficulty", "Blindness", "Cardiomyopathy", "Chronic kidney disease"],
+    ans: 1,
+    exp: "Learning difficulty is the long-term association noted.",
+    img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
+  },
+
+{
+    q: "Which vitamin reduces the risk of recurrence of this condition in a future pregnancy?",
+    opts: ["Vitamin A", "Vitamin C", "Vitamin D", "Folic acid", "Vitamin K"],
+    ans: 3,
+    exp: "Mothers with a previously affected child should take folic acid 5mg daily before and during early pregnancy.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+{
+    q: "The investigation of choice is:",
+    opts: ["Serum cortisol", "17-hydroxyprogesterone assay", "Serum testosterone", "Thyroid function test", "ACTH stimulation test"],
+    ans: 1,
+    exp: "17-hydroxyprogesterone assay is the key diagnostic test for CAH (21-hydroxylase deficiency).",
+    img: "assets/ospe/paed/virilized_genitalia.jpg"
+  },
+
+  {
+    q: "The laboratory picture most strongly suggests:",
+    opts: ["Allergic disease", "Viral infection", "Severe bacterial infection", "Iron deficiency anaemia", "Megaloblastic anaemia"],
+    ans: 2,
+    exp: "Bandemia with toxic granulation points to severe bacterial infection or septicaemia — consider severe pneumonia, septicaemia, or meningitis.",
+    img: "assets/ospe/paed/bandemia_labs.png"
+  },
+
+{
+    q: "Nebulization may be used in all of the following EXCEPT:",
+    opts: ["Bronchiolitis", "Croup", "Severe bronchopneumonia", "Hyperkalaemia", "Pulmonary tuberculosis"],
+    ans: 4,
+    exp: "Listed indications are acute severe asthma, bronchiolitis, severe bronchopneumonia, croup, and hyperkalaemia — TB is not one of them.",
+    img: "assets/ospe/paed/child_on_nebulizer.jpg"
+  },
+
+{
+    q: "A child presents with fever, jaundice and anaemia. Which investigation is most helpful?",
+    opts: ["Blood culture", "Serum bilirubin", "Peripheral blood film examination", "Hb genotype", "Direct Coombs test"],
+    ans: 2,
+    exp: "A peripheral blood film is the most useful single investigation in this setting for identifying the type of anaemia/haemolysis.",
+    img: "assets/ospe/paed/scleral_icterus_2.jpg"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Disseminated intravascular coagulation", "Haemolytic uraemic syndrome", "Acute lymphoblastic leukaemia", "Iron deficiency anaemia", "Idiopathic thrombocytopenic purpura"],
+    ans: 1,
+    exp: "A microangiopathic haemolytic picture with renal failure, following bloody diarrhoea (E. coli), is classic for haemolytic uraemic syndrome.",
+    img: "assets/ospe/paed/hus_labs.jpg"
+  },
+
+{
+    q: "Which of the following is NOT listed as a cause of anaemia in the newborn?",
+    opts: ["Massive haemolysis", "Bone marrow aplasia", "Feto-maternal transfusion", "Septicaemia", "Iron deficiency"],
+    ans: 4,
+    exp: "Bone marrow aplasia, massive haemolysis, septicaemia, feto-maternal transfusion and haemorrhage are the listed causes; iron deficiency is not (it's not a typical neonatal-anaemia cause).",
+    img: "assets/ospe/paed/anaemia.png"
+  },
+
+{
+    q: "Which of the following helps prevent the condition shown?",
+    opts: ["Restricting fluids", "Good diaper hygiene", "Routine antibiotics", "Daily antifungal prophylaxis", "Zinc supplementation"],
+    ans: 1,
+    exp: "Good hygiene and frequent diaper changes reduce prolonged skin contact with urine/faeces.",
+    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
+  },
+
+{
+    q: "The child shown most likely has:",
+    opts: ["Marasmus", "Severe malnutrition", "Nephrotic syndrome", "Congenital ascites", "Hepatoblastoma"],
+    ans: 1,
+    exp: "Wasting with a globular, shiny, ascitic abdomen indicates severe malnutrition.",
+    img: "assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg"
+  },
+
+{
+    q: "Skin tenting is a sign of:",
+    opts: ["Septicaemia", "Severe dehydration", "Nephrotic syndrome", "Congestive cardiac failure", "Acute glomerulonephritis"],
+    ans: 1,
+    exp: "Skin tenting is a classic sign of severe dehydration; sunken eyes indicate the child is approaching shock.",
+    img: "assets/ospe/paed/severe_dehydration.jpg"
+  },
+
+{
+    q: "Which complication is most likely to cause death within the first 24 hours in a child with kwashiorkor?",
+    opts: ["Iron deficiency", "Hypoglycaemia", "Hypertension", "Vitamin A deficiency", "Clubbing"],
+    ans: 1,
+    exp: "Hypoglycaemia, hypothermia and electrolyte derangement/dehydration are the major early life-threatening complications.",
+    img: "assets/ospe/paed/kwashiorkor.jpg"
+  },
+
+{
+    q: "Which condition is commonly managed with nebulization?",
+    opts: ["Acute severe asthma", "Nephrotic syndrome", "Acute rheumatic fever", "Meningitis", "Tetanus"],
+    ans: 0,
+    exp: "Nebulization is used in acute severe asthma, bronchiolitis, severe bronchopneumonia, croup, and hyperkalaemia management.",
+    img: "assets/ospe/paed/child_on_nebulizer.jpg"
+  },
+
+{
+    q: "A child with a generalized rash and strawberry tongue most likely has:",
+    opts: ["Measles", "Scarlet fever", "Drug eruption", "Meningococcaemia", "Erythema subitum"],
+    ans: 1,
+    exp: "Scarlet fever classically presents with a generalized rash and strawberry tongue.",
+    img: "assets/ospe/paed/rash.jpg"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Septicaemia", "Severe malaria", "Diabetic ketoacidosis", "Acute liver failure", "Acute glomerulonephritis"],
+    ans: 1,
+    exp: "Profound hypoglycaemia together with severe metabolic acidosis in this context indicates severe malaria; affected patients often present prostrate or comatose.",
+    img: "assets/ospe/paed/severe_malaria_labs.png"
+  },
+
+{
+    q: "Which percussion note is expected over a large pleural effusion?",
+    opts: ["Hyper-resonant", "Resonant", "Stony dull", "Tympanitic", "Dull with shifting dullness"],
+    ans: 2,
+    exp: "Pleural effusion gives stony dullness, reduced expansion, absent fremitus and diminished breath sounds.",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
+
+{
+    q: "The upper limit of haemoglobin at birth is:",
+    opts: ["14 g/dL", "16 g/dL", "18 g/dL", "21 g/dL", "24 g/dL"],
+    ans: 3,
+    exp: "Upper Hb limit at birth is 21 g/dL. Using PCV = Hb × 3, this gives an upper PCV of 63% (normal range 42–63%).",
+    img: "assets/ospe/paed/hb_graph.jpg"
+  },
+
+{
+    q: "A goitre that is visible only when the neck is elevated is classified as:",
+    opts: ["Grade 0", "Grade 1", "Grade 2", "Grade 3", "Grade 4"],
+    ans: 2,
+    exp: "Grade 0=not visible/palpable; Grade 1=palpable not visible; Grade 2=visible only with neck elevated; Grade 3=visible without elevation.",
+    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
+  },
+
+  {
+    q: "The main purpose of the item shown in the picture is to:",
+    opts: ["Store sterile equipment", "Prevent needle-stick injuries", "Segregate recyclable waste", "Collect pharmaceutical tablets", "Dispose of food waste"],
+    ans: 1,
+    exp: "Proper sharps disposal protects staff, patients, and waste handlers from injury and blood-borne pathogen transmission.",
+    img: "assets/ospe/paed/33_yellow_sharps_disposal_box.jpg"
+  },
+
+{
+    q: "Which feature is characteristic of marasmus?",
+    opts: ["Generalized oedema", "Baggy pants sign", "Flaky paint dermatosis", "Hyperpigmentation only", "Moon face"],
+    ans: 1,
+    exp: "Marasmus shows a wizened old appearance and the baggy pants sign (loose skin folds from fat/muscle loss), unlike kwashiorkor's oedema.",
+    img: "assets/ospe/paed/marasmus.png"
+  },
+
+  {
+    q: "The item shown in the picture is primarily used for the disposal of:",
+    opts: ["Used gloves", "Soiled dressings", "Sharps", "Paper waste", "Food waste"],
+    ans: 2,
+    exp: "A yellow sharps container is puncture-resistant and is used for the safe disposal of needles, blades, lancets and similar items.",
+    img: "assets/ospe/paed/33_yellow_sharps_disposal_box.jpg"
+  },
+
+{
+    q: "Which drug is used to reduce the risk of tumour lysis syndrome?",
+    opts: ["Acetazolamide", "Allopurinol", "Mannitol", "Furosemide", "Prednisolone"],
+    ans: 1,
+    exp: "Prevention: hyperhydration, urine alkalinisation, and allopurinol to reduce uric acid production.",
+    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
+  },
+
+{
+    q: "The lesion shown is most consistent with:",
+    opts: ["Sacrococcygeal teratoma", "Spina bifida", "Pilonidal sinus", "Lipoma", "Omphalocele"],
+    ans: 1,
+    exp: "This is spina bifida in the lumbosacral region, from failure of closure of the lower neural tube.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+  {
+    q: "Which X-ray finding is classically associated with the picture?",
+    opts: ["Ground-glass appearance", "Double bubble sign", "Thumb-print sign", "Soap-bubble appearance", "Boot-shaped heart"],
+    ans: 1,
+    exp: "The double bubble sign on abdominal X-ray is classic; the condition is associated with Down syndrome, so associated VACTERL anomalies should also be checked for.",
+    img: "assets/ospe/paed/duodenal_atresia_labs.png"
+  },
+
+{
+    q: "Which skin lesion is characteristic of kwashiorkor?",
+    opts: ["Café-au-lait spots", "Flaky paint dermatosis", "Vesiculobullous eruption", "Petechiae", "Target lesions"],
+    ans: 1,
+    exp: "Oedema and flaky paint dermatosis are characteristic. Immediate life-threats are hypoglycaemia, hypothermia, and electrolyte derangement/dehydration.",
+    img: "assets/ospe/paed/kwashiorkor.jpg"
+  },
+
+{
+    q: "Which feature best distinguishes gastroschisis from omphalocele?",
+    opts: ["Presence of bowel within the defect", "Midline location", "Absence of normal skin covering", "Presence of intestinal obstruction", "Large abdominal swelling"],
+    ans: 2,
+    exp: "Gastroschisis has no normal skin covering and is lateral to the umbilicus; omphalocele is midline and skin-covered.",
+    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
+  },
+
+{
+    q: "Using the relationship PCV = Hb × 3, an Hb of 21 g/dL corresponds to a PCV of:",
+    opts: ["42%", "48%", "54%", "60%", "63%"],
+    ans: 4,
+    exp: "21 × 3 = 63%.",
+    img: "assets/ospe/paed/hb_graph.jpg"
+  },
+
+{
+    q: "The earliest sign of retinoblastoma is:",
+    opts: ["Proptosis", "Leukocoria", "Diplopia", "Painful red eye", "Cataract"],
+    ans: 1,
+    exp: "Leukocoria (white eye reflex) is the earliest sign; advanced disease shows massive orbital/eye swelling.",
+    img: "assets/ospe/paed/retinoblastoma.png"
+  },
+
+{
+    q: "Which measure is recommended for the prevention of endemic goitre?",
+    opts: ["Vitamin A supplementation", "Iron fortification", "Use of iodized salt", "Routine calcium supplementation", "Universal folic acid supplementation"],
+    ans: 2,
+    exp: "Prevention centres on health education and iodized products (salt, sugar, seasonings).",
+    img: "assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg"
+  },
+
+{
+    q: "All of the following are early life-threatening complications of kwashiorkor EXCEPT:",
+    opts: ["Hypothermia", "Hypoglycaemia", "Electrolyte derangement", "Dehydration", "Polycythaemia"],
+    ans: 4,
+    exp: "The immediate dangers are hypoglycaemia, hypothermia, electrolyte derangement and dehydration — not polycythaemia.",
+    img: "assets/ospe/paed/kwashiorkor.jpg"
+  },
+
+{
     q: "Which respiratory condition is associated with clubbing?",
     opts: ["Asthma", "Pulmonary tuberculosis", "Bronchiolitis", "Viral croup", "Pleural effusion"],
     ans: 1,
     exp: "Chronic suppurative disease e.g. pulmonary TB, lung abscess, lung cancer causes clubbing.",
     img: "assets/ospe/paed/clubbing.jpg"
   },
+
+{
+    q: "The most likely cause of a waiter's tip deformity in a newborn is:",
+    opts: ["Septicaemia", "Birth-related brachial plexus injury", "Radial nerve palsy", "Neonatal stroke", "Osteomyelitis"],
+    ans: 1,
+    exp: "The deformity results from brachial plexus injury sustained during delivery, particularly with difficult obstetric manoeuvres.",
+    img: "assets/ospe/paed/waiters_tip_sign.jpg"
+  },
+
+{
+    q: "The procedure being performed is:",
+    opts: ["Pericardiocentesis", "Thoracocentesis", "Lumbar puncture", "Paracentesis", "Cricothyrotomy"],
+    ans: 1,
+    exp: "This is thoracocentesis, used to drain blood, fluid, air or pus from the pleural space.",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
+
+{
+    q: "A newborn has a PCV of 68%. This is most consistent with:",
+    opts: ["Anaemia", "Polycythaemia", "Normal finding", "Acute haemorrhage", "Physiological jaundice"],
+    ans: 1,
+    exp: "PCV above 63% at birth is polycythaemia; 42–63% is the expected range.",
+    img: "assets/ospe/paed/hb_graph.jpg"
+  },
+
+{
+    q: "Which additional radiographic finding supports the diagnosis of intestinal obstruction?",
+    opts: ["Free subdiaphragmatic air", "Gasless rectum", "Calcified lymph nodes", "Air bronchograms", "Ground-glass appearance"],
+    ans: 1,
+    exp: "Multiple air-fluid levels plus a gasless rectum together support intestinal obstruction.",
+    img: "assets/ospe/paed/multiple_air_fluid_level.png"
+  },
+
+{
+    q: "Which investigation is useful for monitoring bone marrow response to treatment in a child with haemolytic anaemia?",
+    opts: ["Serum ferritin", "Blood culture", "Reticulocyte count", "Coombs test", "Hb genotype"],
+    ans: 2,
+    exp: "Reticulocyte count assesses whether the bone marrow is responding appropriately during treatment.",
+    img: "assets/ospe/paed/scleral_icterus_2.jpg"
+  },
+
+{
+    q: "Nagayama spots are characteristic of:",
+    opts: ["Scarlet fever", "Measles", "Erythema subitum", "Drug eruption", "Meningococcaemia"],
+    ans: 2,
+    exp: "Erythema subitum (roseola) is associated with Nagayama spots on the palate and usually no conjunctivitis.",
+    img: "assets/ospe/paed/rash.jpg"
+  },
+
+  {
+    q: "A child with the laboratory picture would most likely have had which preceding history?",
+    opts: ["Recurrent vomiting", "Bloody diarrhoea", "Persistent cough", "Generalized oedema", "Recurrent seizures"],
+    ans: 1,
+    exp: "Bloody diarrhoea roughly two weeks before presentation is the classic preceding history in E. coli-associated haemolytic uraemic syndrome.",
+    img: "assets/ospe/paed/hus_labs.jpg"
+  },
+
+{
+    q: "Which facial feature is associated with this condition?",
+    opts: ["Prominent nasal bridge", "Flattened nasal bone", "Hypertelorism only", "Frontal bossing", "Macroglossia"],
+    ans: 1,
+    exp: "Flattened nasal bone, low-set ears and small occiput are associated features.",
+    img: "assets/ospe/paed/bilateral_cleft_lip.jpg"
+  },
+
+{
+    q: "A child with congenital adrenal hyperplasia is at immediate risk of:",
+    opts: ["Polycythaemia", "Dehydration", "Clubbing", "Hydrocephalus", "Retinoblastoma"],
+    ans: 1,
+    exp: "Salt-wasting crisis causes dehydration, vomiting and electrolyte imbalance — an immediate risk.",
+    img: "assets/ospe/paed/virilized_genitalia.jpg"
+  },
+
+{
+    q: "Complete airway obstruction by meconium primarily causes:",
+    opts: ["Tension pneumothorax", "Pneumonitis", "Alveolar collapse", "Pleural effusion", "Bronchiectasis"],
+    ans: 2,
+    exp: "Complete obstruction prevents ventilation; trapped air is absorbed and alveoli collapse. Partial obstruction instead causes air trapping.",
+    img: "assets/ospe/paed/cyanosis.jpg"
+  },
+
+{
+    q: "The skin lesion shown is most consistent with:",
+    opts: ["Atopic dermatitis", "Napkin rash", "Impetigo", "Tinea corporis", "Psoriasis"],
+    ans: 1,
+    exp: "Napkin rash (ammoniacal dermatitis) from poor hygiene and delayed diaper changing.",
+    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
+  },
+
+{
+    q: "A newborn has copious purulent eye discharge causing the eyelids to stick together. What is the most likely diagnosis?",
+    opts: ["Congenital glaucoma", "Ophthalmia neonatorum", "Dacryocystitis", "Retinoblastoma", "Cataract"],
+    ans: 1,
+    exp: "Copious purulent discharge occluding the eye is typical of ophthalmia neonatorum (N. gonorrhoeae, C. trachomatis).",
+    img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
+  },
+
+{
+    q: "A rapidly enlarging jaw mass with malaligned teeth is most suggestive of:",
+    opts: ["Osteomyelitis", "Burkitt lymphoma", "Dentigerous cyst", "Fibrous dysplasia", "Ameloblastoma"],
+    ans: 1,
+    exp: "Rapidly enlarging jaw swelling with tooth malalignment/displacement is classic for Burkitt lymphoma.",
+    img: "assets/ospe/paed/burkitts_lymphoma_2.png"
+  },
+
+{
+    q: "The \"waiter's tip\" deformity results from injury to which nerve roots?",
+    opts: ["C3–C4", "C5–C6", "C7–C8", "C8–T1", "T1–T2"],
+    ans: 1,
+    exp: "Waiter's tip deformity is caused by C5–C6 brachial plexus injury, usually from traction during a difficult delivery.",
+    img: "assets/ospe/paed/waiters_tip_sign.jpg"
+  },
+
+  {
+    q: "The nutritional deficiency represented by the picture is due to a combination of:",
+    opts: ["Iron deficiency and vitamin B12/folate deficiency", "Iron deficiency and vitamin C deficiency", "Iron deficiency and chronic kidney disease", "Folate deficiency and haemolysis", "Vitamin B12 deficiency and thalassaemia"],
+    ans: 0,
+    exp: "Nutritional dimorphic anaemia results from combined iron deficiency and megaloblastic (vitamin B12 or folate) deficiency; hookworm infestation is a possible cause, and treatment is nutritional rehabilitation.",
+    img: "assets/ospe/paed/dimorphic_anaemia_labs.png"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Osteogenesis imperfecta", "Nutritional rickets", "Septic arthritis", "Renal osteodystrophy", "Osteomyelitis"],
+    ans: 1,
+    exp: "This picture is typical of nutritional rickets; clinical features include caput, rachitic rosary, Harrison's sulcus, and delayed fontanelle closure.",
+    img: "assets/ospe/paed/nutritional_ricket_labs.png"
+  },
+
+{
+    q: "A large pleural effusion most commonly causes the trachea to deviate:",
+    opts: ["Towards the affected side", "Away from the affected side", "Inferiorly", "Superiorly", "It remains central"],
+    ans: 1,
+    exp: "A large effusion pushes the trachea away from the affected side; lung collapse pulls it towards the affected side.",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
+
+  {
+    q: "The blood film shown in the picture is best described as:",
+    opts: ["Microcytic anaemia", "Macrocytic anaemia", "Dimorphic anaemia", "Haemolytic anaemia", "Normocytic anaemia"],
+    ans: 2,
+    exp: "Two red cell populations — macrocytosis plus microcytosis — with hypochromasia, poikilocytosis, target cells and low reticulocytes describe a dimorphic picture.",
+    img: "assets/ospe/paed/dimorphic_anaemia_labs.png"
+  },
+
+{
+    q: "Which investigation is most appropriate in a child with subconjunctival haemorrhage following trauma?",
+    opts: ["Skull X-ray", "Ophthalmoscopy", "Clotting profile", "ECG", "Sputum microscopy"],
+    ans: 2,
+    exp: "A clotting profile should be done since the bleeding may indicate an underlying coagulation abnormality.",
+    img: "assets/ospe/paed/subconjunctival_hemorrhage.jpg"
+  },
+
+{
+    q: "Hydrocephalus associated with spina bifida is attributed to:",
+    opts: ["Dandy-Walker malformation", "Arnold-Chiari malformation", "Aqueductal stenosis", "Holoprosencephaly", "Arachnoid cyst"],
+    ans: 1,
+    exp: "Hydrocephalus in spina bifida is due to Arnold-Chiari malformation — head examination is essential.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+{
+    q: "The sun-setting appearance in hydrocephalus results from:",
+    opts: ["Sixth cranial nerve palsy", "Paralysis of upward gaze", "Optic nerve atrophy", "Retinal detachment", "Third cranial nerve palsy"],
+    ans: 1,
+    exp: "Paralysis of upward gaze from pressure effects causes the sun-setting sign.",
+    img: "assets/ospe/paed/hydrocephalus.jpg"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Neonatal anaemia", "Neonatal polycythaemia", "Haemophilia", "Disseminated intravascular coagulation", "Iron deficiency"],
+    ans: 1,
+    exp: "A markedly elevated packed cell volume indicates neonatal polycythaemia; affected babies are plethoric or ruddy, sometimes macrosomic. Differentials include twin-to-twin transfusion syndrome, post-date delivery, and materno-fetal transfusion.",
+    img: "assets/ospe/paed/maternofetal_transfusion.png"
+  },
+
+{
+    q: "The most appropriate initial management is:",
+    opts: ["IV quinine", "Broad-spectrum antibiotics", "Fluid resuscitation", "Correction of hypoglycaemia", "Blood transfusion"],
+    ans: 2,
+    exp: "A severely dehydrated child with impending shock needs immediate fluid resuscitation first.",
+    img: "assets/ospe/paed/severe_dehydration.jpg"
+  },
+
+{
+    q: "Which associated foot deformity should be looked for in a child with spina bifida?",
+    opts: ["Hallux valgus", "Pes planus", "Talipes equinovarus", "Hammer toe", "Claw toe"],
+    ans: 2,
+    exp: "Talipes equinovarus (clubfoot) is a specifically associated abnormality to look for.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+  {
+    q: "Which drug is used specifically to lower the uric acid level?",
+    opts: ["Calcium gluconate", "Sodium polystyrene", "Salbutamol", "Allopurinol", "Insulin"],
+    ans: 3,
+    exp: "Allopurinol, or rasburicase, is used specifically to lower uric acid; the accompanying hyperkalaemia is managed separately with calcium gluconate, insulin/dextrose, salbutamol, sodium polystyrene, and ECG monitoring.",
+    img: "assets/ospe/paed/tumor_lysis_syndrome_labs.png"
+  },
+
+  {
+    q: "The recommended treatment for the condition shown in the picture is:",
+    opts: ["Iron supplementation", "Platelet transfusion", "Partial exchange blood transfusion", "Fresh frozen plasma", "Whole blood transfusion"],
+    ans: 2,
+    exp: "Partial exchange blood transfusion is the standard treatment for symptomatic neonatal polycythaemia.",
+    img: "assets/ospe/paed/maternofetal_transfusion.png"
+  },
+
+{
+    q: "Which complication may occur if the spinal lesion ruptures?",
+    opts: ["Cataract", "Meningitis", "Endocarditis", "Pancreatitis", "Peritonitis"],
+    ans: 1,
+    exp: "A ruptured lesion has increased risk of secondary infection leading to meningitis.",
+    img: "assets/ospe/paed/lumbosacral_lesion.jpg"
+  },
+
+  {
+    q: "Which is the most appropriate initial antimalarial treatment?",
+    opts: ["Quinine", "Artesunate", "Chloroquine", "Sulfadoxine-pyrimethamine", "Artemether-lumefantrine"],
+    ans: 1,
+    exp: "Artesunate is first-line for severe malaria; hypoglycaemia should be corrected with 10% dextrose 4 mL/kg IV push, and antibiotics added if septicaemia is suspected.",
+    img: "assets/ospe/paed/severe_malaria_labs.png"
+  },
+
+{
+    q: "Massive swelling of the eye and orbit is most suggestive of:",
+    opts: ["Congenital glaucoma", "Retinoblastoma", "Orbital cellulitis", "Dacryocystitis", "Cataract"],
+    ans: 1,
+    exp: "Advanced retinoblastoma can present with massive swelling of the eye/orbit; leukocoria is the earliest sign.",
+    img: "assets/ospe/paed/retinoblastoma.png"
+  },
+
+  {
+    q: "The organism identified on Gram stain in the picture is:",
+    opts: ["Escherichia coli", "Neisseria meningitidis", "Staphylococcus aureus", "Haemophilus influenzae", "Streptococcus pneumoniae"],
+    ans: 1,
+    exp: "Neisseria meningitidis is the organism identified on this Gram stain, alongside neutrophilic leukocytosis, raised protein and low glucose.",
+    img: "assets/ospe/paed/meningitis_labs_2.png"
+  },
+
+{
+    q: "Which organism is identified as the most important cause of this pneumonia?",
+    opts: ["Streptococcus pyogenes", "Staphylococcus aureus", "Escherichia coli", "Klebsiella pneumoniae", "Pseudomonas aeruginosa"],
+    ans: 1,
+    exp: "Staphylococcus aureus is the most important cause of pneumonia complicated by empyema needing drainage; strep, H. influenzae and TB are also possible.",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
+
+{
+    q: "A \"wizened old man\" appearance is characteristic of:",
+    opts: ["Marasmus", "Kwashiorkor", "Nephrotic syndrome", "Congenital hypothyroidism", "Severe dehydration"],
+    ans: 0,
+    exp: "Marasmus: wizened look + baggy pants sign, vs kwashiorkor's oedema and pigmentary skin changes.",
+    img: "assets/ospe/paed/marasmus.png"
+  },
+
+{
+    q: "Which organism is commonly responsible for ophthalmia neonatorum?",
+    opts: ["Streptococcus pneumoniae", "Neisseria gonorrhoeae", "Escherichia coli", "Staphylococcus epidermidis", "Pseudomonas aeruginosa"],
+    ans: 1,
+    exp: "Neisseria gonorrhoeae and Chlamydia trachomatis are the key causative organisms.",
+    img: "assets/ospe/paed/ophthalmia_neonatorum.jpg"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Acute glomerulonephritis", "Nephrotic syndrome", "Acute kidney injury", "Urinary tract infection", "Chronic kidney disease"],
+    ans: 1,
+    exp: "The classical triad of massive proteinuria, hypoalbuminaemia, and hypercholesterolaemia, with anasarca clinically, defines nephrotic syndrome.",
+    img: "assets/ospe/paed/nephrotic_syndrom_labs.png"
+  },
+
+{
+    q: "A child has fever, conjunctivitis, stomatitis and a rash that began behind the ears. What is the most likely diagnosis?",
+    opts: ["Scarlet fever", "Erythema subitum", "Drug eruption", "Measles", "Meningococcaemia"],
+    ans: 3,
+    exp: "Measles typically begins behind the ears, is denser centrally, and is associated with conjunctivitis and mucosal involvement (stomatitis).",
+    img: "assets/ospe/paed/rash.jpg"
+  },
+
+{
+    q: "Which of the following is a cause of haemolytic anaemia?",
+    opts: ["G6PD deficiency", "Chronic kidney disease", "Aplastic anaemia", "Nephrotic syndrome", "Congenital hypothyroidism"],
+    ans: 0,
+    exp: "Causes include G6PD deficiency, sickle cell disease, drug-induced haemolysis, megaloblastic anaemia, and abnormal red cell morphology.",
+    img: "assets/ospe/paed/scleral_icterus_2.jpg"
+  },
+
+{
+    q: "Which feature is characteristic of kwashiorkor rather than marasmus?",
+    opts: ["Baggy pants sign", "Wizened appearance", "Oedema", "Severe muscle wasting alone", "Loss of subcutaneous fat only"],
+    ans: 2,
+    exp: "Kwashiorkor is characterised by oedema plus hyper-/hypopigmentation, unlike marasmus's wizened wasting.",
+    img: "assets/ospe/paed/kwashiorkor_2.png"
+  },
+
+{
+    q: "Which combination forms the classical triad of Prune Belly syndrome?",
+    opts: ["Lax abdominal wall, cryptorchidism, urinary tract abnormality", "Hydrocephalus, cleft palate, clubfoot", "Macroglossia, omphalocele, gigantism", "Cleft lip, low-set ears, micrognathia", "Hypospadias, hydrocele, inguinal hernia"],
+    ans: 0,
+    exp: "Prune Belly syndrome triad: lax abdominal wall, cryptorchidism, urinary tract abnormality — also linked to hypoplastic lungs, oligohydramnios, and is commoner in boys.",
+    img: "assets/ospe/paed/prune_belly.jpg"
+  },
+
+  {
+    q: "The CSF picture is most consistent with:",
+    opts: ["Viral meningitis", "Bacterial meningitis", "Tuberculous meningitis", "Fungal meningitis", "Subarachnoid haemorrhage"],
+    ans: 1,
+    exp: "Turbid CSF with neutrophilic predominance, raised protein, and reduced glucose relative to blood together indicate acute pyogenic (bacterial) meningitis.",
+    img: "assets/ospe/paed/meningitis_labs_2.png"
+  },
+
+  {
+    q: "The abbreviation HPF in the picture stands for:",
+    opts: ["High-pressure filtration", "High protein fraction", "High-power field", "Hepatic perfusion factor", "Human plasma fraction"],
+    ans: 2,
+    exp: "HPF stands for high-power field on urine microscopy; the reported white cell count per HPF supports the diagnosis of urinary tract infection.",
+    img: "assets/ospe/paed/uti_labs.png"
+  },
+
+{
+    q: "Which feature is most characteristic of meningococcaemia?",
+    opts: ["Rash beginning behind the ears", "Strawberry tongue", "Transient maculopapular rash over the trunk", "Nagayama spots", "Mouth ulcers with stomatitis"],
+    ans: 2,
+    exp: "Meningococcaemia can cause a transient maculopapular eruption on the trunk, especially noticeable in light-skinned individuals.",
+    img: "assets/ospe/paed/rash.jpg"
+  },
+
+{
+    q: "Multiple air-fluid levels on an abdominal radiograph are most suggestive of:",
+    opts: ["Paralytic ileus", "Intestinal obstruction", "Pneumoperitoneum", "Ascites", "Volvulus of the stomach"],
+    ans: 1,
+    exp: "Multiple air-fluid levels with a gasless rectum indicate intestinal obstruction.",
+    img: "assets/ospe/paed/multiple_air_fluid_level.png"
+  },
+
+{
+    q: "The drumstick appearance of the fingers corresponds to:",
+    opts: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
+    ans: 3,
+    exp: "Stage 4 clubbing is the classic drumstick appearance.",
+    img: "assets/ospe/paed/clubbing.jpg"
+  },
+
+{
+    q: "A recognised complication of omphalocele is:",
+    opts: ["Pulmonary fibrosis", "Intestinal obstruction", "Retinal detachment", "Hydrocephalus", "Nephrotic syndrome"],
+    ans: 1,
+    exp: "Herniated bowel can become trapped/strangulated, causing intestinal obstruction.",
+    img: "assets/ospe/paed/smooth_massive_umbilicus.jpg"
+  },
+
+{
+    q: "Which ocular sign is classically seen in hydrocephalus?",
+    opts: ["Ptosis", "Sun-setting eyes", "Nystagmus", "Exophthalmos", "Arcus senilis"],
+    ans: 1,
+    exp: "Sun-setting eyes (upward-gaze palsy) is classic, along with globular head, scalp veins, and widened fontanelle.",
+    img: "assets/ospe/paed/hydrocephalus.jpg"
+  },
+
+  {
+    q: "Which treatment is recommended for the condition represented in the picture?",
+    opts: ["Oral iron therapy", "Calcium gluconate infusion", "Vitamin D with good nutrition", "Partial exchange transfusion", "Sodium bicarbonate"],
+    ans: 2,
+    exp: "Vitamin D supplementation together with good nutrition corrects the defective bone mineralisation seen in nutritional rickets.",
+    img: "assets/ospe/paed/nutritional_ricket_labs.png"
+  },
+
+  {
+    q: "The laboratory picture is most consistent with:",
+    opts: ["Viral meningitis", "Bacterial meningitis", "Fungal meningitis", "Tuberculous meningitis", "Brain abscess"],
+    ans: 1,
+    exp: "Cloudy CSF, raised protein, and CSF glucose less than half the blood glucose are classic for bacterial (pyogenic) meningitis.",
+    img: "assets/ospe/paed/bacterial_meningitis_labs.png"
+  },
+
+{
+    q: "Which physical finding is expected in an infant with hydrocephalus?",
+    opts: ["Depressed anterior fontanelle", "Widened anterior fontanelle", "Microcephaly", "Scaphocephaly", "Occipital encephalocele"],
+    ans: 1,
+    exp: "Globular head, widened anterior fontanelle, visible scalp veins and sun-setting eyes are characteristic.",
+    img: "assets/ospe/paed/hydrocephalus.jpg"
+  },
+
+  {
+    q: "The urine picture is most consistent with:",
+    opts: ["Acute glomerulonephritis", "Urinary tract infection", "Nephrotic syndrome", "Diabetes mellitus", "Chronic kidney disease"],
+    ans: 1,
+    exp: "Cloudy urine with positive nitrites, positive leukocyte esterase, and pyuria indicates a urinary tract infection.",
+    img: "assets/ospe/paed/uti_labs.png"
+  },
+
+{
+    q: "Which feature best distinguishes neonatal tetanus from bilirubin encephalopathy?",
+    opts: ["Hypertonia", "Scissoring of the limbs", "Trismus", "Alert facial expression", "Jaundice"],
+    ans: 2,
+    exp: "Trismus (lock jaw) is the first symptom of neonatal tetanus, unlike bilirubin encephalopathy which presents with jaundice plus windmill movement/scissoring.",
+    img: "assets/ospe/paed/body_stiffness_and_icterus.jpg"
+  },
+
+{
+    q: "The most likely cause of rapidly developing periorbital swelling is:",
+    opts: ["Nephrotic syndrome", "Acute glomerulonephritis", "Hypersensitivity reaction", "Congestive cardiac failure", "Severe anaemia"],
+    ans: 2,
+    exp: "Rapid-onset periorbital oedema (over minutes to hours) suggests a hypersensitivity/allergic reaction rather than the slower onset typical of nephrotic syndrome.",
+    img: "assets/ospe/paed/periorbital_edema.jpg"
+  },
+
+{
+    q: "Thoracocentesis may be performed to drain all of the following EXCEPT:",
+    opts: ["Blood", "Air", "Pus", "Pleural fluid", "Cerebrospinal fluid"],
+    ans: 4,
+    exp: "Thoracocentesis drains blood, pleural fluid, air and pus — not CSF (that's a lumbar puncture).",
+    img: "assets/ospe/paed/chest_tube.jpg"
+  },
+
+{
+    q: "Ambiguous genitalia with clitoromegaly is most suggestive of:",
+    opts: ["Turner syndrome", "Congenital adrenal hyperplasia", "Klinefelter syndrome", "Testicular torsion", "Androgen insensitivity syndrome"],
+    ans: 1,
+    exp: "Enlarged clitoris, rudimentary scrotum and enlarged labia suggest congenital adrenal hyperplasia (CAH).",
+    img: "assets/ospe/paed/virilized_genitalia.jpg"
+  },
+
+  {
+    q: "The electrolyte picture is most consistent with:",
+    opts: ["Hypertrophic pyloric stenosis", "Duodenal atresia", "Acute gastroenteritis", "Diabetic ketoacidosis", "Renal tubular acidosis"],
+    ans: 1,
+    exp: "Hypochloraemic metabolic alkalosis with repeated vomiting and dehydration in this context fits duodenal atresia; the classic X-ray shows the double bubble sign.",
+    img: "assets/ospe/paed/duodenal_atresia_labs.png"
+  },
+
+{
+    q: "Partial airway obstruction by meconium is most likely to result in:",
+    opts: ["Pulmonary fibrosis", "Air trapping", "Complete atelectasis", "Pleural effusion", "Pulmonary oedema"],
+    ans: 1,
+    exp: "Partial obstruction lets air in more easily than out, causing progressive air trapping, which can progress to rupture/emphysema/pneumothorax.",
+    img: "assets/ospe/paed/cyanosis.jpg"
+  },
+
+{
+    q: "The most important risk factor for this condition is:",
+    opts: ["Frequent bathing", "Early toilet training", "Failure to change diapers promptly", "Excess vitamin A intake", "Bottle feeding"],
+    ans: 2,
+    exp: "Delayed diaper changing and poor hygiene are the principal risk factors.",
+    img: "assets/ospe/paed/diaper_area_rash_2.jpg"
+  },
+
+{
+    q: "Which gastrointestinal disease is listed as a cause of clubbing?",
+    opts: ["Ulcerative colitis", "Crohn disease", "Coeliac disease", "Hirschsprung disease", "Appendicitis"],
+    ans: 1,
+    exp: "Causes: cyanotic heart disease, respiratory disease, liver disease, and Crohn disease.",
+    img: "assets/ospe/paed/clubbing.jpg"
+  }
 ];
 
 const COURSES = [
