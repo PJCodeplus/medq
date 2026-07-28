@@ -61999,7 +61999,14 @@ function App(){
                     transition:"transform .18s,box-shadow .18s"},
                   onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
                   onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
-                  onClick:()=>{ setPaedsOspeSection(c.key); setPaedsOspeMode(null); setPaedsOspeBlock(null); }
+                  onClick:()=>{
+                    if(c.key==="practice"){
+                      const blk={ id:"paeds_ospe_practice", name:c.title, questions:PAED_OSPE_Qs_2, available:true, _isPaedsOspeTfl:true };
+                      setBlock(blk); setQCount(Math.min(20,blk.questions.length)); pushView("setup");
+                    } else {
+                      setPaedsOspeSection(c.key); setPaedsOspeMode(null); setPaedsOspeBlock(null);
+                    }
+                  }
                 },
                   e("div",{style:{flex:1,minWidth:0}},
                     e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
