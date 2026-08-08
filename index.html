@@ -59713,6 +59713,7 @@ function App(){
   const PAEDS_PQ_FREE=PD01_Qs.length; // free preview size = number of questions in PD 01 (dynamic)
   const PAEDS_PQ_PAYWALL_ENABLED=false; // TEMP: paywall disabled for Paeds Past Questions (MCQ). OSPE paywall is separate and unaffected — flip back to true to restore.
   const OBG_PQ_FREE=OG01_Qs.length; // free preview size = number of questions in OG 01 (dynamic)
+  const OBG_PQ_PAYWALL_ENABLED=false; // TEMP: paywall disabled for O&G Past Questions (MCQ). OSPE paywall is separate and unaffected — flip back to true to restore.
   // ── MB III (Paeds Past Questions) unlock state ──
   const PAEDS_UNLOCKED_KEY="medq_mb3_paeds"; const PAEDS_OG_UNLOCKED_KEY="medq_mb3_paeds_og";
   const [paedsUnlocked,setPaedsUnlocked]=useState(()=>{ try{return !!localStorage.getItem(PAEDS_UNLOCKED_KEY);}catch{return false;} });
@@ -59729,9 +59730,6 @@ function App(){
   // ── Paeds OSPE state (two question sets: Past OSPE Questions / Practice Questions; continuous view/practice mode; MB III paywall at 10) ──
   const [showPaedsOspe,setShowPaedsOspe]=useState(false);
   const [paedsOspeSection,setPaedsOspeSection]=useState(null); // null=top selector, "past"=Past OSPE Questions, "practice"=Practice Questions
-  const [paedsOspeBlock,setPaedsOspeBlock]=useState(null);
-  const [paedsOspeMode,setPaedsOspeMode]=useState(null); // null=landing, "scroll"=continuous
-  const [paedsOspeDropdown,setPaedsOspeDropdown]=useState("scroll");
   const paedsOspeScrollSeenRef=useRef(0); // session total questions revealed in scroll view
   const PAEDS_OSPE_FREE=10; // free preview size for OSPE — fixed at 10 (shared across both OSPE sections)
   const PAEDS_OSPE_TFL_FREE_KEY="medq_mb3_paeds_ospe_free_count";
@@ -59747,9 +59745,21 @@ function App(){
   const inObgTflRef=useRef(false); // true when quiz was launched from the O&G All Past Questions card (locked)
   // ── O&G OSPE state (single question set; continuous view/practice mode; shares the O&G MB III paywall) ──
   const [showObgOspe,setShowObgOspe]=useState(false);
-  const [obgOspeBlock,setObgOspeBlock]=useState(null);
-  const [obgOspeMode,setObgOspeMode]=useState(null); // null=landing, "scroll"=continuous
-  const [obgOspeDropdown,setObgOspeDropdown]=useState("scroll");
+  const obgOspeScrollSeenRef=useRef(0); // (legacy, unused now that OSPE is quiz-only)
+  const OBG_OSPE_FREE=10; // free preview size for O&G OSPE
+  const OBG_OSPE_TFL_FREE_KEY="medq_ospe_obg_free_count";
+  const [obgOspeTflFreeCount,setObgOspeTflFreeCount]=useState(()=>{ try{return parseInt(ls.get(OBG_OSPE_TFL_FREE_KEY)||"0");}catch{return 0;} });
+  const inObgOspeTflRef=useRef(false); // true when quiz was launched from O&G OSPE (locked)
+  // ── OSPE paywall (dedicated; separate from MB III Past Questions paywall) ──
+  const PAEDS_OSPE_UNLOCKED_KEY="medq_ospe_paeds"; const OBG_OSPE_UNLOCKED_KEY="medq_ospe_obg";
+  const [paedsOspeUnlocked,setPaedsOspeUnlocked]=useState(()=>{ try{return !!localStorage.getItem(PAEDS_OSPE_UNLOCKED_KEY);}catch{return false;} });
+  const [obgOspeUnlocked,setObgOspeUnlocked]=useState(()=>{ try{return !!localStorage.getItem(OBG_OSPE_UNLOCKED_KEY);}catch{return false;} });
+  const [showOspePaywall,setShowOspePaywall]=useState(false);
+  const [ospePaywallSubject,setOspePaywallSubject]=useState("paeds"); // "paeds" | "obg"
+  const [ospeCodeInput,setOspeCodeInput]=useState("");
+  const [ospeCodeError,setOspeCodeError]=useState("");
+  const [ospeCodeLoading,setOspeCodeLoading]=useState(false);
+  const [ospePayCopied,setOspePayCopied]=useState(false);
   // ── IM OSPE state (mixed pool, no landing page — goes straight to setup) ──
 
   // ── School-based course filtering ──
@@ -59836,10 +59846,11 @@ function App(){
     inPaedsTflRef.current=inPaedsTflRef.current||!!(block && block._isPaedsTfl);
     inObgTflRef.current=inObgTflRef.current||!!(block && block._isObgTfl);
     inPaedsOspeTflRef.current=inPaedsOspeTflRef.current||!!(block && block._isPaedsOspeTfl);
+    inObgOspeTflRef.current=inObgOspeTflRef.current||!!(block && block._isObgOspeTfl);
     const pool=retakeQs||(()=>{
       const all=block.questions;
-      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked));
-      const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
+      const forceFixedOrder=block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked && OBG_PQ_PAYWALL_ENABLED) || (block._isPaedsOspeTfl && !paedsOspeUnlocked) || (block._isObgOspeTfl && !obgOspeUnlocked));
+      const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:block&&block._isObgOspeTfl?OBG_OSPE_FREE:PAEDS_PQ_FREE;
       const effQCount=forceFixedOrder?Math.min(qCount,mb3FreeLimit):qCount;
       if(shuffleOrder && !forceFixedOrder){
         return shuffleArr(all).slice(0,effQCount);
@@ -59915,12 +59926,16 @@ function App(){
       const nc=paedsTflFreeCount+1; setPaedsTflFreeCount(nc); ls.set(PAEDS_TFL_FREE_KEY,String(nc));
     }
     // Track MB III (O&G Past Questions) free questions
-    if(inObgTflRef.current && !paedsOgUnlocked){
+    if(inObgTflRef.current && !paedsOgUnlocked && OBG_PQ_PAYWALL_ENABLED){
       const nc=obgTflFreeCount+1; setObgTflFreeCount(nc); ls.set(OBG_TFL_FREE_KEY,String(nc));
     }
     // Track MB III (Paeds OSPE) free questions
-    if(inPaedsOspeTflRef.current && !paedsUnlocked){
+    if(inPaedsOspeTflRef.current && !paedsOspeUnlocked){
       const nc=paedsOspeTflFreeCount+1; setPaedsOspeTflFreeCount(nc); ls.set(PAEDS_OSPE_TFL_FREE_KEY,String(nc));
+    }
+    // Track O&G OSPE free questions
+    if(inObgOspeTflRef.current && !obgOspeUnlocked){
+      const nc=obgOspeTflFreeCount+1; setObgOspeTflFreeCount(nc); ls.set(OBG_OSPE_TFL_FREE_KEY,String(nc));
     }
   };
 
@@ -59944,12 +59959,16 @@ function App(){
       if(!paedsUnlocked && paedsTflFreeCount>=PAEDS_PQ_FREE){ setMb3PaywallSubject("paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
     }
     // MB III paywall — fires after 50 free questions on the O&G All Past Questions block
-    if(inObgTflRef.current){
+    if(inObgTflRef.current && OBG_PQ_PAYWALL_ENABLED){
       if(!paedsOgUnlocked && obgTflFreeCount>=OBG_PQ_FREE){ setMb3PaywallSubject("obg"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
     }
-    // MB III paywall — fires after 10 free questions on the Paeds OSPE block
+    // OSPE paywall — fires after 10 free questions on the Paeds OSPE block
     if(inPaedsOspeTflRef.current){
-      if(!paedsUnlocked && paedsOspeTflFreeCount>=PAEDS_OSPE_FREE){ setMb3PaywallSubject("paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
+      if(!paedsOspeUnlocked && paedsOspeTflFreeCount>=PAEDS_OSPE_FREE){ setOspePaywallSubject("paeds"); setOspeCodeInput(""); setOspeCodeError(""); setShowOspePaywall(true); return; }
+    }
+    // OSPE paywall — fires after 10 free questions on the O&G OSPE block
+    if(inObgOspeTflRef.current){
+      if(!obgOspeUnlocked && obgOspeTflFreeCount>=OBG_OSPE_FREE){ setOspePaywallSubject("obg"); setOspeCodeInput(""); setOspeCodeError(""); setShowOspePaywall(true); return; }
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
     setQIdx(q=>q+1); setPicked(null); setShowFb(false);
@@ -60191,7 +60210,7 @@ function App(){
     const mb3AccentDark="#1565c0";
     const isObgPaywall=mb3PaywallSubject==="obg";
     const mb3SubjectName=isObgPaywall?"Obstetrics & Gynaecology":"Paediatrics";
-    const mb3AllowedPfx=isObgPaywall?["MB3O","MB3B"]:["MB3P","MB3B","OSPD"];
+    const mb3AllowedPfx=isObgPaywall?["MB3O","MB3B"]:["MB3P","MB3B"];
     return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
       e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:440,overflow:"hidden"}},
         e("div",{style:{background:"linear-gradient(135deg,#0f2233,#1a3550)",padding:"28px 28px 22px",textAlign:"center"}},
@@ -60274,6 +60293,92 @@ function App(){
             paedsTflCodeError&&e("p",{style:{color:"#ef5350",fontSize:".72rem",marginTop:5}},paedsTflCodeError)
           ),
           e("button",{onClick:()=>{setShowPaedsTflPaywall(false);setPaedsTflCodeInput("");setPaedsTflCodeError("");},
+            style:{width:"100%",padding:"10px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".83rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
+            "← Back")
+        )
+      )
+    );
+  }
+
+  /* ══════════ OSPE PAYWALL (dedicated; Paeds OSPE / O&G OSPE / bundle) ══════════ */
+  if(showOspePaywall){
+    const ospeAccent="#90caf9";
+    const ospeAccentDark="#1565c0";
+    const isObg=ospePaywallSubject==="obg";
+    const subjName=isObg?"Obstetrics & Gynaecology":"Paediatrics";
+    const allowedPfx=isObg?["OSPG","OSBD"]:["OSPD","OSBD"];
+    return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
+      e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:440,overflow:"hidden"}},
+        e("div",{style:{background:"linear-gradient(135deg,#0f2233,#1a3550)",padding:"28px 28px 22px",textAlign:"center"}},
+          e("div",{style:{fontSize:"2.4rem",marginBottom:8}},"🔒"),
+          e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#fff",marginBottom:6}},"OSPE"),
+          e("p",{style:{color:"rgba(255,255,255,.7)",fontSize:".82rem",lineHeight:1.6}},subjName+" · Picture MCQs · Premium Access")
+        ),
+        e("div",{style:{height:3,background:"linear-gradient(90deg,"+ospeAccent+","+ospeAccent+"88,"+ospeAccent+")"}}),
+        e("div",{style:{padding:"24px 28px 32px"}},
+          e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:18}},
+            "You've reached the free preview limit of 10 questions. Get full access to all "+subjName+" OSPE picture MCQs."),
+          e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:18}},
+            e("div",{style:{border:"2px solid "+ospeAccent,borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f0f7fd"}},
+              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Individual"),
+              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},"₦1,500"),
+              e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},subjName+" OSPE only")
+            ),
+            e("div",{style:{border:"2px solid "+ospeAccentDark,borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f5fbff",position:"relative"}},
+              e("div",{style:{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:ospeAccentDark,color:"#fff",fontSize:".63rem",padding:"2px 8px",borderRadius:10,fontWeight:700,whiteSpace:"nowrap"}},"BEST VALUE"),
+              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Bundle"),
+              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},"₦2,500"),
+              e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},"Paeds + O&G OSPE")
+            )
+          ),
+          e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"12px 16px",marginBottom:18}},
+            e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#8a6f30",marginBottom:7}},"Payment Details"),
+            e("div",{style:{fontSize:".87rem",color:"#333",lineHeight:1.9}},
+              e("div",null,"🏦 ",e("strong",null,"Bank:")," Opay"),
+              e("div",null,"👤 ",e("strong",null,"Name:")," Mikhail Abubakar"),
+              e("div",{style:{display:"flex",alignItems:"center",gap:8}},
+                e("span",null,"💳 ",e("strong",null,"Acct:")," 9161452645"),
+                e("button",{onClick:()=>{navigator.clipboard?.writeText("9161452645").catch(()=>{});setOspePayCopied(true);setTimeout(()=>setOspePayCopied(false),2500);},
+                  style:{background:ospePayCopied?"#e8f5ee":"#f0f0f0",border:"none",borderRadius:3,padding:"2px 8px",fontSize:".7rem",cursor:"pointer",color:ospePayCopied?"#2e7d32":"#555",fontWeight:600,transition:"all .2s"}},
+                  ospePayCopied?"✓ Copied":"Copy")
+              )
+            ),
+            e("p",{style:{fontSize:".75rem",color:"#888",marginTop:6,lineHeight:1.5}},"Send payment receipt on WhatsApp · ",e("strong",{style:{color:"#1a1a2e"}},"09161452645"))
+          ),
+          e("div",{style:{marginBottom:14}},
+            e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:7}},"Have an access code?"),
+            e("div",{style:{display:"flex",gap:8}},
+              e("input",{type:"text",placeholder:"e.g. "+allowedPfx[0]+"-XXXX-XXXX",value:ospeCodeInput,
+                onChange:ev=>{setOspeCodeInput(ev.target.value.toUpperCase());setOspeCodeError("");},
+                onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setOspeCodeInput(clean);setOspeCodeError("");},
+                onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("ospe_redeem_btn")?.click();},
+                style:{flex:1,padding:"10px 12px",border:"1.5px solid "+(ospeCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
+              e("button",{id:"ospe_redeem_btn",disabled:ospeCodeLoading||!ospeCodeInput.trim(),
+                onClick:async()=>{
+                  const code=ospeCodeInput.trim().toUpperCase();
+                  if(code.length<6){setOspeCodeError("Enter a valid code");return;}
+                  const valid=allowedPfx.some(p=>code.startsWith(p));
+                  if(!valid){setOspeCodeError("This code is not valid for "+subjName+" OSPE");return;}
+                  setOspeCodeLoading(true);setOspeCodeError("");
+                  const res=window._fbValidateCode?await window._fbValidateCode(code,studentName||"Student"):{ok:false,error:"network"};
+                  setOspeCodeLoading(false);
+                  if(res.ok){
+                    const isBundle=code.startsWith("OSBD");
+                    if(isBundle||code.startsWith("OSPD")){ setPaedsOspeUnlocked(true); try{localStorage.setItem(PAEDS_OSPE_UNLOCKED_KEY,code);}catch{} }
+                    if(isBundle||code.startsWith("OSPG")){ setObgOspeUnlocked(true); try{localStorage.setItem(OBG_OSPE_UNLOCKED_KEY,code);}catch{} }
+                    setPaedsOspeTflFreeCount(0); try{ls.set(PAEDS_OSPE_TFL_FREE_KEY,"0");}catch{} paedsOspeScrollSeenRef.current=0;
+                    setObgOspeTflFreeCount(0); try{ls.set(OBG_OSPE_TFL_FREE_KEY,"0");}catch{} obgOspeScrollSeenRef.current=0;
+                    setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");
+                  } else {
+                    setOspeCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"Already used by someone else.":"Network error — please try again.");
+                  }
+                },
+                style:{padding:"10px 16px",background:ospeCodeLoading?"#aaa":ospeAccentDark,color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:ospeCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+                ospeCodeLoading?"…":"Unlock →")
+            ),
+            ospeCodeError&&e("p",{style:{color:"#ef5350",fontSize:".72rem",marginTop:5}},ospeCodeError)
+          ),
+          e("button",{onClick:()=>{setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");},
             style:{width:"100%",padding:"10px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".83rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
             "← Back")
         )
@@ -60812,7 +60917,7 @@ function App(){
           transition:"transform .18s,box-shadow .18s"},
         onMouseEnter:ev=>{if(b.available){ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 6px 20px rgba(15,39,68,.1)";}},
         onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
-        onClick:()=>{if(b.available){if(b.isPaedsPastQCard){setShowPaedsPastQ(true);setPaedsPastQMode(null);setPaedsPastQBlock(null);pushView("blocks");}else if(b.isPaedsOspeCard){setShowPaedsOspe(true);setPaedsOspeSection(null);setPaedsOspeMode(null);setPaedsOspeBlock(null);pushView("blocks");}else if(b.isObgPastQCard){setShowObgPastQ(true);setObgPastQMode(null);setObgPastQBlock(null);pushView("blocks");}else if(b.isObgOspeCard){setShowObgOspe(true);setObgOspeMode(null);setObgOspeBlock(null);pushView("blocks");}else if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);pushView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup")}}}},
+        onClick:()=>{if(b.available){if(b.isPaedsPastQCard){setShowPaedsPastQ(true);setPaedsPastQMode(null);setPaedsPastQBlock(null);pushView("blocks");}else if(b.isPaedsOspeCard){setShowPaedsOspe(true);setPaedsOspeSection(null);pushView("blocks");}else if(b.isObgPastQCard){setShowObgPastQ(true);setObgPastQMode(null);setObgPastQBlock(null);pushView("blocks");}else if(b.isObgOspeCard){setShowObgOspe(true);pushView("blocks");}else if(b.isPastQSection){setPqClassOpen({});setPqVotes({});setPqAiOpen({});setPastQExam(null);pushView("pastq_system");}else{setBlock(b);setQCount(Math.min(20,b.questions.length));pushView("setup")}}}},
         e("div",{style:{flex:1,minWidth:0}},
           e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}},
             e("span",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",color:th.text}},b.name),
@@ -62170,156 +62275,16 @@ function App(){
       );
     }
 
-    // ── PAEDS OSPE sub-view (Past OSPE Questions / Practice Questions; continuous view / practice mode; MB III paywall at 10) ──────
+    // ── PAEDS OSPE sub-view (Past OSPE Questions / Practice Questions; quiz-only, click and attempt; OSPE paywall at 10) ──────
     if(showPaedsOspe && course.id==="paeds"){
-      const optLetters=["A","B","C","D","E"];
       const ospeAccent=course.accent||"#90caf9";
       const ospeAccentDark="#1565c0";
-      const activeQs=paedsOspeSection==="practice"?PAED_OSPE_Qs_2:PAED_OSPE_Qs;
-      const activeLabel=paedsOspeSection==="practice"?"Practice Questions":"Past OSPE Questions";
-      const activeSubtitle=paedsOspeSection==="practice"?"Practice questions created from Provost's revision notes":"Past Provost's OSPE Questions";
-      const OSPE_BLOCK={ id:paedsOspeSection==="practice"?"paeds_ospe_practice":"paeds_ospe", name:activeLabel, questions:activeQs, available:true, _isPaedsOspeTfl:true };
-
-      if(paedsOspeMode==="scroll" && paedsOspeBlock){
-        const qs=paedsOspeBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setPaedsOspeMode(null); setPaedsOspeBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"OSPE"),
-                e("div",{className:"rdr-title"},paedsOspeBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-            (()=>{
-              const freeLimit=PAEDS_OSPE_FREE;
-              const sessionSeen=paedsOspeScrollSeenRef.current;
-              const visibleCount=paedsUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!paedsUnlocked && visibleCount>0){
-                paedsOspeScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
-              }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!paedsUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    q.img&&e("img",{src:q.img,style:{width:"100%",maxWidth:420,display:"block",margin:"0 auto 14px",borderRadius:8,border:"1px solid #e4e4e4"}}),
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:ospeAccentDark,marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid "+ospeAccent,borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:ospeAccentDark,marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#f0f7fd,#dcedfa)",border:"1.5px solid rgba(21,101,192,.3)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:ospeAccentDark,marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions in continuous view this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setPaedsTflCodeInput("");setPaedsTflCodeError("");setMb3PaywallSubject("paeds");setShowPaedsTflPaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock MB III →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
-      if(paedsOspeSection){
-        // ── SECTION LANDING (dropdown + single start card) ─────────────────
-        return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
-          e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
-            e("div",{style:{maxWidth:720,margin:"0 auto"}},
-              e("button",{onClick:()=>{ setPaedsOspeSection(null); setPaedsOspeMode(null); setPaedsOspeBlock(null); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
-              e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}},
-                e("div",{style:{display:"flex",alignItems:"center",gap:10}},
-                  e("div",{style:{width:4,height:28,borderRadius:2,background:ospeAccent,flexShrink:0}}),
-                  e("div",null,
-                    e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"OSPE"),
-                    e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},activeLabel)
-                  )
-                ),
-                paedsUnlocked
-                  ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".72rem",fontWeight:700,padding:"6px 14px",borderRadius:20,whiteSpace:"nowrap"}},"✓ Unlocked")
-                  : e("button",{onClick:()=>{ setPaedsTflCodeInput("");setPaedsTflCodeError("");setMb3PaywallSubject("paeds");setShowPaedsTflPaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
-              ),
-              e("p",{style:{color:th.textFaint,fontSize:".8rem",marginTop:6,marginLeft:14}},activeSubtitle),
-              paedsOspeSection==="past" && e("div",{style:{marginTop:14}},
-                e("select",{
-                  value:paedsOspeDropdown,
-                  onChange:ev=>setPaedsOspeDropdown(ev.target.value),
-                  style:{
-                    appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                    background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                    padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                    fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                    backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                    backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                  }},
-                  e("option",{value:"scroll"},"Continuous View"),
-                  e("option",{value:"practice"},"Practice Mode")
-                )
-              )
-            )
-          ),
-          e("div",{style:{height:2,background:"linear-gradient(90deg,"+ospeAccent+","+ospeAccent+"44)"}}),
-          e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px"}},
-            e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
-              (()=>{
-                const pqAccent=course.accent||"#90caf9";
-                return e("div",{key:"ospe-start",className:"fade-up",
-                  style:{animationDelay:"0ms",
-                    background:"linear-gradient(135deg,"+pqAccent+"18,"+pqAccent+"06)",
-                    borderRadius:8,padding:"20px 22px",display:"flex",alignItems:"center",
-                    justifyContent:"space-between",gap:12,
-                    boxShadow:"0 3px 16px rgba(15,39,68,.1)",cursor:"pointer",
-                    border:"1.5px solid "+pqAccent+"44",
-                    borderLeft:"4px solid "+pqAccent,
-                    transition:"transform .18s,box-shadow .18s"},
-                  onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
-                  onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
-                  onClick:()=>{
-                    if(paedsOspeSection==="past" && paedsOspeDropdown==="scroll"){
-                      setPaedsOspeBlock(OSPE_BLOCK); setPaedsOspeMode("scroll");
-                    } else {
-                      setBlock(OSPE_BLOCK); setQCount(Math.min(20,OSPE_BLOCK.questions.length)); pushView("setup");
-                    }
-                  }},
-                  e("div",{style:{flex:1,minWidth:0}},
-                    e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
-                      e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},activeLabel),
-                      e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsUnlocked?"Unlocked":"Free preview")
-                    ),
-                    e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},activeQs.length+" picture MCQs total")
-                  ),
-                  e("span",{style:{color:pqAccent,fontSize:"1.4rem"}},"→")
-                );
-              })()
-            )
-          )
-        );
-      }
 
       // ── TOP-LEVEL SELECTOR (Past OSPE Questions / Practice Questions) ────
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
           e("div",{style:{maxWidth:720,margin:"0 auto"}},
-            e("button",{onClick:()=>{ setShowPaedsOspe(false); setPaedsOspeSection(null); setPaedsOspeMode(null); setPaedsOspeBlock(null); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
+            e("button",{onClick:()=>{ setShowPaedsOspe(false); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
             e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}},
               e("div",{style:{display:"flex",alignItems:"center",gap:10}},
                 e("div",{style:{width:4,height:28,borderRadius:2,background:ospeAccent,flexShrink:0}}),
@@ -62328,9 +62293,9 @@ function App(){
                   e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
                 )
               ),
-              paedsUnlocked
+              paedsOspeUnlocked
                 ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".72rem",fontWeight:700,padding:"6px 14px",borderRadius:20,whiteSpace:"nowrap"}},"✓ Unlocked")
-                : e("button",{onClick:()=>{ setPaedsTflCodeInput("");setPaedsTflCodeError("");setMb3PaywallSubject("paeds");setShowPaedsTflPaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
+                : e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("paeds");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
             )
           )
         ),
@@ -62340,8 +62305,8 @@ function App(){
             (()=>{
               const pqAccent=course.accent||"#90caf9";
               const cards=[
-                {key:"past",title:"Past OSPE Questions",subtitle:"Past Provost's OSPE Questions",count:PAED_OSPE_Qs.length},
-                {key:"practice",title:"Practice Questions",subtitle:"Practice questions created from Provost's revision notes",count:PAED_OSPE_Qs_2.length}
+                {key:"past",title:"Past OSPE Questions",subtitle:"Past Provost's OSPE Questions",questions:PAED_OSPE_Qs},
+                {key:"practice",title:"Practice Questions",subtitle:"Practice questions created from Provost's revision notes",questions:PAED_OSPE_Qs_2}
               ];
               return cards.map((c,ci)=>
                 e("div",{key:c.key,className:"fade-up",
@@ -62356,20 +62321,17 @@ function App(){
                   onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
                   onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
                   onClick:()=>{
-                    if(c.key==="practice"){
-                      const blk={ id:"paeds_ospe_practice", name:c.title, questions:PAED_OSPE_Qs_2, available:true, _isPaedsOspeTfl:true };
-                      setBlock(blk); setQCount(Math.min(20,blk.questions.length)); pushView("setup");
-                    } else {
-                      setPaedsOspeSection(c.key); setPaedsOspeMode(null); setPaedsOspeBlock(null);
-                    }
+                    const blk={ id:c.key==="practice"?"paeds_ospe_practice":"paeds_ospe", name:c.title, questions:c.questions, available:true, _isPaedsOspeTfl:true };
+                    setBlock(blk); setQCount(Math.min(20,blk.questions.length)); pushView("setup");
                   }
                 },
                   e("div",{style:{flex:1,minWidth:0}},
                     e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
-                      e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},c.title)
+                      e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},c.title),
+                      e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsOspeUnlocked?"Unlocked":"Free preview")
                     ),
                     e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},c.subtitle),
-                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.count+" picture MCQs")
+                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.questions.length+" picture MCQs")
                   ),
                   e("span",{style:{color:pqAccent,fontSize:"1.4rem"}},"→")
                 )
@@ -62409,12 +62371,13 @@ function App(){
               ? (()=>{
                   const freeLimit=OBG_PQ_FREE;
                   const sessionSeen=obgPqAllScrollSeenRef.current;
-                  const visibleCount=paedsOgUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-                  if(!paedsOgUnlocked && visibleCount>0){
+                  const pqOgUnlockedEff=paedsOgUnlocked||!OBG_PQ_PAYWALL_ENABLED;
+                  const visibleCount=pqOgUnlockedEff?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
+                  if(!pqOgUnlockedEff && visibleCount>0){
                     obgPqAllScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
                   }
                   const visibleQs=qs.slice(0,visibleCount);
-                  const hitLimit=!paedsOgUnlocked&&visibleCount<qs.length;
+                  const hitLimit=!pqOgUnlockedEff&&visibleCount<qs.length;
                   return e(React.Fragment,null,
                     visibleQs.map((q,qi)=>
                       e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
@@ -62526,7 +62489,7 @@ function App(){
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"All Obstetrics & Gynaecology Past Questions"),
-                    e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsOgUnlocked?"Unlocked":"Free preview")
+                    e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},(paedsOgUnlocked||!OBG_PQ_PAYWALL_ENABLED)?"Unlocked":"Free preview")
                   ),
                   e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},OBG_PQ_ALL_Qs.length+" questions total")
                 ),
@@ -62534,7 +62497,7 @@ function App(){
               );
             })(),
             OBG_PQ_BLOCKS.map((b,bi)=>{
-              const unlocked=(paedsOgUnlocked||b.id==="og01")&&b.available;
+              const unlocked=(paedsOgUnlocked||!OBG_PQ_PAYWALL_ENABLED||b.id==="og01")&&b.available;
               return e("div",{key:bi,className:"fade-up",
                 style:{animationDelay:(bi+1)*40+"ms",
                   background:unlocked?th.surface:"#f4f2ee",
@@ -62568,83 +62531,28 @@ function App(){
       );
     }
 
-    // ── OBG OSPE sub-view (Picture MCQs; continuous view / practice mode) ──────
+    // ── OBG OSPE sub-view (Picture MCQs; quiz-only, click and attempt) ──────
     if(showObgOspe && course.id==="obgyn"){
-      const optLetters=["A","B","C","D","E"];
       const ospeAccent=course.accent||"#f48fb1";
       const ospeAccentDark="#ad1457";
-      const OBG_OSPE_BLOCK={ id:"obgyn_ospe", name:"OSPE", questions:OBG_OSPE_Qs, available:true };
+      const OBG_OSPE_BLOCK={ id:"obgyn_ospe", name:"OSPE", questions:OBG_OSPE_Qs, available:true, _isObgOspeTfl:true };
 
-      if(obgOspeMode==="scroll" && obgOspeBlock){
-        const qs=obgOspeBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setObgOspeMode(null); setObgOspeBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"OSPE"),
-                e("div",{className:"rdr-title"},obgOspeBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" picture MCQs · answers highlighted · explanations inline")
-            ),
-            qs.map((q,qi)=>
-              e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                q.img&&e("img",{src:q.img,style:{width:"100%",maxWidth:420,display:"block",margin:"0 auto 14px",borderRadius:8,border:"1px solid #e4e4e4"}}),
-                e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                  e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:ospeAccentDark,marginRight:8,verticalAlign:"middle"}},"Q"+(q.number||qi+1)),
-                  q.q
-                ),
-                e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                  q.opts.map((opt,oi)=>{
-                    const isCorrect=oi===q.ans;
-                    return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                      e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                      e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                    );
-                  })
-                ),
-                e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid "+ospeAccent,borderRadius:6,padding:"10px 14px"}},
-                  e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:ospeAccentDark,marginBottom:5}},"Explanation"),
-                  e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                )
-              )
-            )
-          )
-        );
-      }
-
-      // ── LANDING (dropdown + single start card) ──────────────────────────
+      // ── LANDING (single start card) ──────────────────────────
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
           e("div",{style:{maxWidth:720,margin:"0 auto"}},
-            e("button",{onClick:()=>{ setShowObgOspe(false); setObgOspeMode(null); setObgOspeBlock(null); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
-            e("div",{style:{display:"flex",alignItems:"center",gap:10}},
-              e("div",{style:{width:4,height:28,borderRadius:2,background:ospeAccent,flexShrink:0}}),
-              e("div",null,
-                e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Obs & Gynaecology"),
-                e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
-              )
-            ),
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:obgOspeDropdown,
-                onChange:ev=>setObgOspeDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                  padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                  fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
-              )
+            e("button",{onClick:()=>{ setShowObgOspe(false); popView(); },style:{background:"none",border:"none",color:th.textMuted,fontSize:".8rem",cursor:"pointer",padding:"0 0 12px",display:"flex",alignItems:"center",gap:4}},"← Back"),
+            e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}},
+              e("div",{style:{display:"flex",alignItems:"center",gap:10}},
+                e("div",{style:{width:4,height:28,borderRadius:2,background:ospeAccent,flexShrink:0}}),
+                e("div",null,
+                  e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Obs & Gynaecology"),
+                  e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
+                )
+              ),
+              obgOspeUnlocked
+                ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".72rem",fontWeight:700,padding:"6px 14px",borderRadius:20,whiteSpace:"nowrap"}},"✓ Unlocked")
+                : e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("obg");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
             )
           )
         ),
@@ -62665,15 +62573,12 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
                 onClick:()=>{
-                  if(obgOspeDropdown==="scroll"){
-                    setObgOspeBlock(OBG_OSPE_BLOCK); setObgOspeMode("scroll");
-                  } else {
-                    setBlock(OBG_OSPE_BLOCK); setQCount(Math.min(20,OBG_OSPE_BLOCK.questions.length)); pushView("setup");
-                  }
+                  setBlock(OBG_OSPE_BLOCK); setQCount(Math.min(20,OBG_OSPE_BLOCK.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
-                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"OSPE")
+                    e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},"OSPE"),
+                    e("span",{style:{background:pqAccent+"33",color:"#ad1457",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},obgOspeUnlocked?"Unlocked":"Free preview")
                   ),
                   e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},OBG_OSPE_Qs.length+" picture MCQs total")
                 ),
@@ -62900,8 +62805,8 @@ function App(){
   if(view==="setup"){
     const maxQ=block.questions.length;
     const isFreeTierGen=currentSchool==="GENERAL"&&!validGbAccess(gbAccess);
-    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked) || (block._isPaedsOspeTfl && !paedsUnlocked)));
-    const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:PAEDS_PQ_FREE;
+    const isPaedsLockedFree=!!(block && ((block._isPaedsTfl && !paedsUnlocked && PAEDS_PQ_PAYWALL_ENABLED) || (block._isObgTfl && !paedsOgUnlocked && OBG_PQ_PAYWALL_ENABLED) || (block._isPaedsOspeTfl && !paedsOspeUnlocked) || (block._isObgOspeTfl && !obgOspeUnlocked)));
+    const mb3FreeLimit=block&&block._isObgTfl?OBG_PQ_FREE:block&&block._isPaedsOspeTfl?PAEDS_OSPE_FREE:block&&block._isObgOspeTfl?OBG_OSPE_FREE:PAEDS_PQ_FREE;
     const effectiveMax=isFreeTierGen?Math.min(maxQ,10):isPaedsLockedFree?Math.min(maxQ,mb3FreeLimit):maxQ;
     const clampedQ=Math.min(Math.max(qCount,10),effectiveMax);
     return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",flexDirection:"column",alignItems:"center",padding:"clamp(20px,4vw,48px) 20px"}},
@@ -62933,7 +62838,10 @@ function App(){
             onChange:ev=>{
               const val=Number(ev.target.value);
               if(isFreeTierGen&&val>10){setShowGbPaywall(true);return;}
-              if(isPaedsLockedFree&&val>mb3FreeLimit){ setMb3PaywallSubject(block._isObgTfl?"obg":"paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return; }
+              if(isPaedsLockedFree&&val>mb3FreeLimit){
+                if(block._isPaedsOspeTfl||block._isObgOspeTfl){ setOspePaywallSubject(block._isObgOspeTfl?"obg":"paeds"); setOspeCodeInput(""); setOspeCodeError(""); setShowOspePaywall(true); return; }
+                setMb3PaywallSubject(block._isObgTfl?"obg":"paeds"); setPaedsTflCodeInput(""); setPaedsTflCodeError(""); setShowPaedsTflPaywall(true); return;
+              }
               setQCount(val);
             }}),
             e("div",{style:{display:"flex",justifyContent:"space-between",fontSize:".7rem",color:th.textFaint,marginTop:4}},
@@ -63417,7 +63325,9 @@ function App(){
                       e("option",{value:"MB3P"},"MB3P — MB III: Paediatrics Only"),
                       e("option",{value:"MB3B"},"MB3B — MB III: Paediatrics + O&G Bundle"),
                       e("option",{value:"MB3O"},"MB3O — MB III: O&G Only"),
-                      e("option",{value:"OSPD"},"OSPD — Paediatrics Bundle (Past Q + OSPE), ₦1,000"),
+                      e("option",{value:"OSPD"},"OSPD — Paediatrics OSPE (Pictures), ₦1,500"),
+                      e("option",{value:"OSPG"},"OSPG — O&G OSPE (Pictures), ₦1,500"),
+                      e("option",{value:"OSBD"},"OSBD — OSPE Bundle: Paeds + O&G Pictures, ₦2,500"),
                       e("option",{value:"DEMO"},"DEMO — Demo / Test")
                     )
                   ),
