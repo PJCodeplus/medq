@@ -58297,6 +58297,128 @@ const PAED_OSPE_Qs_2 = [
     img: "assets/ospe/paed/kwashiorkor.jpg"
   },
 
+// ============================================================
+// CLOSE MATCHES (NOT FOUND) — faithful reconstructions
+// ============================================================
+
+// Major criteria for PEM diagnosis — normal question, no image, kept inside the picture MCQ set
+{
+  q: "Which of the following is a major criterion for the diagnosis of Protein Energy Malnutrition?",
+  opts: ["Pitting oedema", "Flaky-paint dermatosis", "Flag sign of the hair", "Muscle wasting", "Hepatomegaly"],
+  ans: 0,
+  exp: "Pitting oedema is correct because, alongside growth failure, it is a major (cardinal) criterion for diagnosing Kwashiorkor/severe Protein Energy Malnutrition. Flaky-paint dermatosis, the flag sign of the hair, muscle wasting, and hepatomegaly are minor or associated features, not required for the diagnosis."
+},
+
+// Kerion
+{
+  q: "What is the most likely cause of the scalp lesion shown?",
+  opts: ["Tinea capitis", "Seborrhoeic dermatitis", "Pediculosis capitis", "Atopic dermatitis", "Psoriasis"],
+  ans: 0,
+  exp: "Tinea capitis is correct because a kerion is a boggy, pus-discharging scalp swelling from an exaggerated immune response to a dermatophyte infection. Seborrhoeic dermatitis causes greasy scaling rather than a boggy mass, and pediculosis capitis causes itching with nits rather than a fluctuant swelling.",
+  img: "assets/ospe/paed/scalp_lesion.jpg"
+},
+
+// Single palmar crease
+{
+  q: "Which of the following is an associated feature in a child with this palmar finding?",
+  opts: ["Generalized hypotonia", "Postaxial polydactyly", "Craniosynostosis", "Precocious puberty", "Hyperreflexia of the limbs"],
+  ans: 0,
+  exp: "Generalized hypotonia is correct because a single (simian) palmar crease is a classic Down syndrome finding, alongside generalised hypotonia and facial dysmorphism. Polydactyly, craniosynostosis, precocious puberty, and hyperreflexia are not typical features of Down syndrome, which instead causes reduced reflexes from hypotonia.",
+  img: "assets/ospe/paed/single_palmar_crease.jpg"
+},
+
+// ============================================================
+// NOT FOUND AT ALL — faithful reconstructions
+// ============================================================
+
+// 1. Double bubble radiograph
+{
+  q: "For the condition shown below, what is the most appropriate initial management?",
+  opts: ["Fluid resuscitation", "Immediate surgery", "Chromosomal abnormality testing", "Parental counseling", "Barium enema"],
+  ans: 0,
+  exp: "Fluid resuscitation is correct because the picture shows a double bubble sign, diagnostic of duodenal atresia, and initial management corrects dehydration and electrolytes before definitive surgery. Immediate surgery is wrong because the neonate must first be stabilised, and chromosomal testing or counseling, though relevant, do not address the acute problem.",
+  img: "assets/ospe/paed/double_bubble_radiograph.jpg"
+},
+
+// 2. Mercury sphygmomanometer
+{
+  q: "Measurement of blood pressure with this device is an important, if unconventional, part of the initial work-up when which of the following is found?",
+  opts: ["Hypokalemia", "Metabolic acidosis", "Hypochloremia", "Hypernatremia", "Hypercalcemia"],
+  ans: 0,
+  exp: "Hypokalaemia is correct because finding it should prompt a blood pressure check: hypokalaemia with hypertension raises suspicion for a secondary cause such as Conn's syndrome or renal artery stenosis, both driving excess aldosterone and renal potassium wasting. The other electrolyte abnormalities aren't linked to this work-up pathway.",
+  img: "assets/ospe/paed/mecury_sphyg.jpg"
+},
+
+// 3. Duodenal atresia labs
+{
+  q: "For the condition shown below, what is the most appropriate initial management?",
+  opts: ["Fluid resuscitation", "Exploratory laparotomy", "Barium meal study", "Chromosomal karyotyping", "Total parenteral nutrition"],
+  ans: 0,
+  exp: "Fluid resuscitation is correct because the labs show hyponatraemia and hypochloraemia, with potassium at the lower limit of normal (3.5 mmol/L), reflecting bilious vomiting in duodenal atresia. Correcting this deficit comes before definitive surgery, which is why laparotomy, chromosomal testing, and TPN are not the priority initial step.",
+  img: "assets/ospe/paed/duodenal_atresia_labs.png"
+},
+
+// 4. Right lung pleural effusion
+{
+  q: "Which of the following statements is true regarding this condition?",
+  opts: ["It can be caused by Staphylococcus aureus", "It leads to the development of pneumonia", "It is best treated with oral antibiotics alone", "Chest physiotherapy is contraindicated once diagnosed", "It never recurs after needle aspiration"],
+  ans: 0,
+  exp: "Staphylococcus aureus is a recognised cause of parapneumonic effusion and empyema in children, making this correct. Pleural effusion does not cause pneumonia, it is usually the reverse, and oral antibiotics alone are inadequate; drainage plus IV antibiotics is needed, and recurrence can occur, especially with loculated effusions.",
+  img: "assets/ospe/paed/right_lung_pleural_effusion.jpg"
+},
+
+// 5. Aspiration pneumonitis — normal question, no image, 2 options only
+{
+  q: "In Aspiration pneumonitis, which type of suction pressure is typically used during airway clearance?",
+  opts: ["Negative pressure", "Positive pressure"],
+  ans: 0,
+  exp: "Negative pressure suction is correct because clearing aspirated material from the airway is achieved by applying negative (suction) pressure to draw out secretions or aspirated content, not by pushing air or fluid in with positive pressure."
+},
+
+// 7. Adeloye-Odeku cyst
+{
+  q: "What is the most likely diagnosis of the lesion shown on this child's head?",
+  opts: ["Adeloye-Odeku cyst", "Cephalhaematoma", "Caput succedaneum", "Dermoid cyst", "Encephalocele"],
+  ans: 0,
+  exp: "An Adeloye-Odeku cyst is correct — it is the name given, in Nigerian children, to a congenital epidermoid inclusion cyst of the skull, presenting as a slow-growing, painless swelling over the frontal or parietal bone that can erode the skull table. Cephalhaematoma and caput succedaneum are birth-related swellings that resolve within weeks, unlike this slow-growing lesion, and a dermoid cyst instead arises near suture lines and contains dermal appendages like hair follicles.",
+  img: "assets/ospe/paed/adeloye_odeku_cyst.png"
+},
+
+// 8. Adducted eye — normal question, no image
+{
+  q: "An eye that is fixed in an adducted position and unable to abduct suggests palsy of which cranial nerve?",
+  opts: ["Abducens nerve", "Oculomotor nerve", "Trochlear nerve", "Facial nerve", "Trigeminal nerve"],
+  ans: 0,
+  exp: "The abducens nerve is correct because it supplies the lateral rectus, which abducts the eye; its palsy leaves the medial rectus unopposed, pulling the eye into fixed adduction. The oculomotor nerve instead causes a down-and-out eye with ptosis, and the trochlear, facial, and trigeminal nerves do not produce this pattern."
+},
+
+// 9. Omphalitis
+{
+  q: "Which of the following is the most likely complication of the condition shown around this infant's umbilicus?",
+  opts: ["Necrotising fasciitis", "Necrotising enterocolitis", "Intussusception", "Pyloric stenosis", "Meconium ileus"],
+  ans: 0,
+  exp: "Necrotising fasciitis is correct because infection of the umbilical stump can spread rapidly through the abdominal wall tissue planes in neonates. Necrotising enterocolitis is linked to prematurity and gut ischaemia rather than umbilical skin infection, and the remaining options are unrelated GI conditions.",
+  img: "assets/ospe/paed/omphalitis.png"
+},
+
+// 10. Kangaroo Mother Care
+{
+  q: "Which of the following is a recognised benefit of the practice shown in this picture?",
+  opts: ["Thermoregulation of the newborn", "Treatment of neonatal jaundice", "Stabilisation of cardiac arrhythmias", "Prevention of necrotising enterocolitis", "Correction of hypoglycaemia without feeding"],
+  ans: 0,
+  exp: "Thermoregulation of the newborn is correct because Kangaroo Mother Care uses skin-to-skin contact to help the infant maintain body temperature, alongside promoting breastfeeding and bonding. It does not treat jaundice, stabilise arrhythmias, prevent necrotising enterocolitis, or correct hypoglycaemia without feeding.",
+  img: "assets/ospe/paed/kangaroo_mother_care.png"
+},
+
+// 11. Scrotal mass
+{
+  q: "What is the most likely diagnosis of this scrotal swelling?",
+  opts: ["Hydrocele", "Inguinoscrotal hernia", "Testicular torsion", "Teratoma", "Varicocele"],
+  ans: 0,
+  exp: "Hydrocele is correct because it's the most common cause of painless scrotal swelling in infancy, from a patent processus vaginalis, and classically transilluminates. An inguinoscrotal hernia usually doesn't transilluminate and may be reducible, torsion presents acutely and tender, and teratoma and varicocele are rare at this age.",
+  img: "assets/ospe/paed/scrotal_mass.png"
+},
+
   {
     q: "Which finding would suggest progression to orbital rather than preseptal involvement?",
     img: "assets/ospe/paed/right_periorbital_swelling.png",
