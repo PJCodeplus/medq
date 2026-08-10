@@ -57758,6 +57758,693 @@ const PAED_OSPE_Qs = [
 // Path convention: assets/ospe/paed/<filename>
 
 const PAED_OSPE_Qs_2 = [
+
+  // 1. kangaroo_mother_care_1.png
+  {
+    q: "What is the main purpose of the intervention shown?",
+    img: "kangaroo_mother_care_1.png",
+    opts: [
+      "Reduce cross-infection in overcrowded nurseries",
+      "Prevent neonatal hypoglycaemia",
+      "Treat neonatal jaundice",
+      "Prevent congenital infection",
+      "Prevent neonatal seizures"
+    ],
+    ans: 0,
+    exp: "Kangaroo mother care (KMC) is intra-hospital maternal-infant skin-to-skin care. It was developed primarily to reduce cross-infection in overcrowded nurseries. It also reduces mortality and hospital stay, with the average stay decreasing from about three weeks to approximately 10 days."
+  },
+  {
+    q: "Which term best describes the intervention shown?",
+    img: "kangaroo_mother_care_1.png",
+    opts: [
+      "Kangaroo mother care",
+      "Rooming-in",
+      "Swaddling",
+      "Therapeutic hypothermia",
+      "Neonatal massage"
+    ],
+    ans: 0,
+    exp: "KMC involves the baby being naked except for a diaper and strapped to the mother's chest. It is particularly useful in extremely low birth weight infants. It reduces apnoeic episodes and improves heart rate, respiratory rate and oxygen consumption."
+  },
+  {
+    q: "Which additional benefit is associated with the intervention shown?",
+    img: "kangaroo_mother_care_1.png",
+    opts: [
+      "Improved gastric emptying",
+      "Increased gastro-oesophageal reflux",
+      "Reduced parental attachment",
+      "Increased apnoeic episodes",
+      "Reduced sleep quality"
+    ],
+    ans: 0,
+    exp: "KMC improves gastric emptying, reduces reflux and improves sleep quality. It also promotes bonding, parental attachment and parental confidence."
+  },
+
+  // 2. neonatal_jandice.png
+  {
+    q: "Which type of jaundice is most likely in this picture?",
+    img: "neonatal_jandice.png",
+    opts: [
+      "Physiological jaundice",
+      "Obstructive jaundice",
+      "Haemolytic crisis",
+      "Kernicterus",
+      "Conjugated hyperbilirubinaemia"
+    ],
+    ans: 0,
+    exp: "Physiological jaundice usually appears on day 2 to 3, peaks on days 3 to 5 and resolves by 7 to 10 days. Total serum bilirubin is generally below 12 mg/dL in term infants and below 15 mg/dL in preterm infants."
+  },
+  {
+    q: "Which finding indicates pathological neonatal jaundice?",
+    img: "neonatal_jandice.png",
+    opts: [
+      "Appearance within the first 24 hours",
+      "Appearance on day 3",
+      "Peak on day 4",
+      "Resolution by day 8",
+      "Mild facial jaundice"
+    ],
+    ans: 0,
+    exp: "Pathological jaundice includes jaundice appearing within the first 24 hours, a bilirubin rise greater than 5 mg/dL/day, unconjugated bilirubin above 15 mg/dL or conjugated bilirubin above 2 mg/dL. Causes include ABO/Rh incompatibility, G6PD deficiency, sepsis, galactosaemia, spherocytosis, hypothyroidism, biliary atresia and breast milk jaundice."
+  },
+  {
+    q: "Which stage of kernicterus is associated with hypertonia and seizures?",
+    img: "neonatal_jandice.png",
+    opts: [
+      "Stage 2",
+      "Stage 1",
+      "Stage 3",
+      "Recovery stage",
+      "Chronic stage"
+    ],
+    ans: 0,
+    exp: "Stage 1 causes lethargy and hypotonia. Stage 2 causes hypertonia, opisthotonus and seizures. Stage 3 is characterised by coma and irreversible brain injury. Sequelae include cerebral palsy, deafness and intellectual disability."
+  },
+  {
+    q: "What is the first-line treatment for significant neonatal jaundice?",
+    img: "neonatal_jandice.png",
+    opts: [
+      "Phototherapy",
+      "Exchange blood transfusion",
+      "Intravenous antibiotics",
+      "Oral iron",
+      "Intravenous fluids alone"
+    ],
+    ans: 0,
+    exp: "Phototherapy is first-line treatment. Exchange blood transfusion is indicated with total serum bilirubin above 20 mg/dL, a rapid rise or neurological symptoms. It uses whole blood and a double-volume exchange, and should be followed by phototherapy to manage rebound hyperbilirubinaemia."
+  },
+  {
+    q: "What does a Birth Weight-Bilirubin Index (BBI) greater than 1.0 indicate?",
+    img: "neonatal_jandice.png",
+    opts: [
+      "Severe jaundice requiring exchange blood transfusion",
+      "Safe bilirubin level",
+      "Moderate jaundice requiring observation",
+      "Mild jaundice requiring feeding only",
+      "Conjugated hyperbilirubinaemia"
+    ],
+    ans: 0,
+    exp: "BBI is calculated as birth weight in grams divided by serum bilirubin in micromol/L, multiplied by 10. A BBI below 0.5 is considered safe, 0.5 to 1 is moderate and above 1 is severe, with exchange blood transfusion indicated."
+  },
+
+  // 3. huge_neck_lesion.png
+  {
+    q: "What diagnosis should be strongly considered with this appearance?",
+    img: "huge_neck_lesion.png",
+    opts: [
+      "Malignancy",
+      "Simple lymphadenopathy",
+      "Torticollis",
+      "Thyroglossal duct cyst",
+      "Viral pharyngitis"
+    ],
+    ans: 0,
+    exp: "A large neck mass with a grotesque appearance and wasting raises suspicion for malignancy. Important differentials include non-Hodgkin lymphoma, Burkitt lymphoma, rhabdomyosarcoma, cystic hygroma, thyroid masses and neuroblastoma."
+  },
+  {
+    q: "Which laboratory finding is associated with neuroblastoma?",
+    img: "huge_neck_lesion.png",
+    opts: [
+      "Raised urinary VMA",
+      "Reduced urinary VMA",
+      "Raised conjugated bilirubin",
+      "Reduced serum uric acid",
+      "Raised TSH"
+    ],
+    ans: 0,
+    exp: "Neuroblastoma can arise from the cervical sympathetic chain and is associated with raised urinary VMA. Investigations may include full blood count, electrolytes/urea/creatinine, uric acid, imaging and biopsy/histology."
+  },
+  {
+    q: "Which complication may result from a large neck mass like this one?",
+    img: "huge_neck_lesion.png",
+    opts: [
+      "Airway compression",
+      "Retinal detachment",
+      "Hydrocephalus",
+      "Testicular torsion",
+      "Renal failure"
+    ],
+    ans: 0,
+    exp: "Large neck masses can cause airway compression, dysphagia and vessel compression, making prompt evaluation important."
+  },
+
+  // 4. prune_belly_syndrome.png
+  {
+    q: "Which triad is characteristic of this condition?",
+    img: "prune_belly_syndrome.png",
+    opts: [
+      "Absent abdominal muscles, cryptorchidism and urinary tract abnormalities",
+      "Cleft palate, polydactyly and hypotonia",
+      "Microcephaly, seizures and deafness",
+      "Hydrocephalus, spina bifida and clubfoot",
+      "Renal agenesis, cataracts and deafness"
+    ],
+    ans: 0,
+    exp: "The triad consists of deficient or absent anterior abdominal wall muscles, bilateral cryptorchidism and urinary tract abnormalities. These may include posterior urethral valves, obstruction, reflux and hydronephrosis."
+  },
+  {
+    q: "Which complication is associated with this condition?",
+    img: "prune_belly_syndrome.png",
+    opts: [
+      "Pulmonary hypoplasia",
+      "Hyperthyroidism",
+      "Retinal haemorrhage",
+      "Isolated deafness",
+      "Hydrocele"
+    ],
+    ans: 0,
+    exp: "Complications include oligohydramnios, pulmonary hypoplasia, obstructive uropathy, vesico-ureteric reflux and chronic kidney disease. Management may include catheterisation, valve ablation, orchidopexy and abdominal wall repair."
+  },
+
+  // 5. adeloye_odeku_cyst.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "adeloye_odeku_cyst.png",
+    opts: [
+      "Adeloye-Odeku cyst",
+      "Caput succedaneum",
+      "Cephalohaematoma",
+      "Subaponeurotic haemorrhage",
+      "Scalp abscess"
+    ],
+    ans: 0,
+    exp: "An Adeloye-Odeku cyst is a congenital epidermal/dermoid cyst occurring in the subgaleal region, commonly presenting over the anterior fontanelle. Treatment is excision."
+  },
+  {
+    q: "Where is the subgaleal space, where this cyst arises, located?",
+    img: "adeloye_odeku_cyst.png",
+    opts: [
+      "Between the periosteum and galeal aponeurosis",
+      "Between the dura and arachnoid",
+      "Between the epidermis and dermis",
+      "Between the dura and skull",
+      "Between the skull and brain"
+    ],
+    ans: 0,
+    exp: "The subgalea is the potential space between the skull periosteum and the galeal aponeurosis. Adeloye-Odeku cysts arise within this plane, most commonly over the anterior fontanelle."
+  },
+
+  // 6. craniocynostosis.png
+  {
+    q: "What is the underlying abnormality?",
+    img: "craniocynostosis.png",
+    opts: [
+      "Premature closure of cranial sutures",
+      "Delayed closure of cranial sutures",
+      "Excessive CSF production",
+      "Failure of skull formation",
+      "Enlargement of fontanelles"
+    ],
+    ans: 0,
+    exp: "Craniosynostosis is premature closure of cranial sutures and is associated with microcephaly. Findings include suture ridging, overriding sutures, early fontanelle closure and a small occipitofrontal circumference."
+  },
+  {
+    q: "Which finding is associated with craniosynostosis?",
+    img: "craniocynostosis.png",
+    opts: [
+      "Small occipitofrontal circumference",
+      "Widely separated sutures",
+      "Persistent large fontanelles",
+      "Progressive macrocephaly in every case",
+      "Generalised oedema"
+    ],
+    ans: 0,
+    exp: "Important findings include ridging over sutures, overriding sutures, early fontanelle closure and small occipitofrontal circumference. Causes may be congenital or secondary to abnormal brain growth."
+  },
+  {
+    q: "Which procedure is used when the brain is normal and the sutures close early?",
+    img: "craniocynostosis.png",
+    opts: [
+      "Craniectomy",
+      "Cranioplasty",
+      "Sistrunk procedure",
+      "Orchidopexy",
+      "Valve ablation"
+    ],
+    ans: 0,
+    exp: "Craniectomy is used when the brain is normal and sutures close early. Craniotomy is used instead when underlying skull bone disease is present. Assessment includes history, examination and imaging such as X-ray and CT, with early intervention recommended before two years of age."
+  },
+
+  // 7. hypopigmented_lesions_anterior_abdominal_wall.png
+  {
+    q: "Which investigation is useful in evaluating these lesions?",
+    img: "hypopigmented_lesions_anterior_abdominal_wall.png",
+    opts: [
+      "KOH mount",
+      "Mantoux test",
+      "Bone marrow aspiration",
+      "Lumbar puncture",
+      "Serum amylase"
+    ],
+    ans: 0,
+    exp: "The differential for hypopigmented patches like these includes tinea corporis, pityriasis alba, atopic eczema, post-inflammatory hypopigmentation and leprosy. Investigations include KOH mount, Wood's lamp and fungal culture."
+  },
+  {
+    q: "Which is an important differential diagnosis for these lesions?",
+    img: "hypopigmented_lesions_anterior_abdominal_wall.png",
+    opts: [
+      "Pityriasis alba",
+      "Cellulitis",
+      "Impetigo",
+      "Urticaria",
+      "Erysipelas"
+    ],
+    ans: 0,
+    exp: "The lesions here are satellite and confluent hypopigmented patches, mainly on the anterior abdominal wall. The general approach is to describe the lesion, identify the likely cause, consider differentials, investigate and treat."
+  },
+
+  // 8. tinea_capitis.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "tinea_capitis.png",
+    opts: [
+      "Tinea capitis",
+      "Alopecia areata",
+      "Seborrhoeic dermatitis",
+      "Psoriasis",
+      "Impetigo"
+    ],
+    ans: 0,
+    exp: "Tinea capitis is common in school children and is associated with poor hygiene. Features include patchy alopecia, scaly circumscribed lesions and itching."
+  },
+  {
+    q: "Which complication is associated with this condition?",
+    img: "tinea_capitis.png",
+    opts: [
+      "Kerion",
+      "Orbital cellulitis",
+      "Hydrocephalus",
+      "Nephrotic syndrome",
+      "Omphalitis"
+    ],
+    ans: 0,
+    exp: "A kerion is a boggy inflammatory mass of the scalp and is a recognised complication of tinea capitis."
+  },
+  {
+    q: "Which treatment is appropriate for this condition?",
+    img: "tinea_capitis.png",
+    opts: [
+      "Oral griseofulvin or terbinafine",
+      "Topical hydrocortisone alone",
+      "Oral acyclovir",
+      "IV ceftriaxone alone",
+      "Topical permethrin alone"
+    ],
+    ans: 0,
+    exp: "Treatment is with oral griseofulvin or terbinafine, together with hygiene measures."
+  },
+
+  // 9. scrotal_mass.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "scrotal_mass.png",
+    opts: [
+      "Hydrocele",
+      "Inguinoscrotal hernia",
+      "Testicular torsion",
+      "Epididymo-orchitis",
+      "Varicocele"
+    ],
+    ans: 0,
+    exp: "A hydrocele is a painless, non-tender, fluctuant scrotal swelling that transilluminates, resulting from fluid collection within the tunica vaginalis. Most congenital hydroceles communicate with the peritoneal cavity via a patent processus vaginalis and resolve spontaneously by 1 to 2 years of age."
+  },
+  {
+    q: "Which bedside examination finding confirms this diagnosis?",
+    img: "scrotal_mass.png",
+    opts: [
+      "Positive transillumination",
+      "Cough impulse",
+      "Severe testicular pain",
+      "Fixed, hard testicular mass",
+      "Absent cremasteric reflex"
+    ],
+    ans: 0,
+    exp: "A hydrocele transilluminates because it is a translucent fluid-filled sac around the testis. An inguinoscrotal hernia may instead show a cough impulse and be reducible. Testicular torsion presents with severe pain rather than a translucent swelling."
+  },
+  {
+    q: "Which feature would instead point away from a hydrocele towards testicular torsion as the cause of a scrotal mass?",
+    img: "scrotal_mass.png",
+    opts: [
+      "Sudden onset of severe pain with a surgical emergency",
+      "Painless, fluctuant, transilluminating swelling",
+      "Gradual painless enlargement over weeks",
+      "Swelling that reduces on lying flat",
+      "Bilateral, soft, non-tender enlargement"
+    ],
+    ans: 0,
+    exp: "Testicular torsion presents with sudden severe scrotal pain and is a surgical emergency requiring urgent exploration, unlike the painless, fluctuant, transilluminating swelling typical of a hydrocele. Any scrotal mass should be described, measured and assessed for transillumination, reducibility and pain to narrow the differential."
+  },
+
+  // 10. burns_2.png
+  {
+    q: "Which feature should be assessed when describing this lesion?",
+    img: "burns_2.png",
+    opts: [
+      "Burn depth",
+      "Blood group",
+      "Visual acuity",
+      "Head circumference",
+      "Urinary colour"
+    ],
+    ans: 0,
+    exp: "Burn assessment includes depth, percentage body surface area and distribution. The approach also considers the cause, treatment, fluid management and infection prevention."
+  },
+  {
+    q: "Which aspect of management is especially important in significant burns like this?",
+    img: "burns_2.png",
+    opts: [
+      "Fluid management",
+      "Phototherapy",
+      "Orchidopexy",
+      "Sistrunk procedure",
+      "Valve ablation"
+    ],
+    ans: 0,
+    exp: "The burn management framework includes description, identifying the cause, treatment, fluid management and infection prevention."
+  },
+
+  // 11. right_periorbital_swelling.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "right_periorbital_swelling.png",
+    opts: [
+      "Preseptal cellulitis",
+      "Nephrotic syndrome",
+      "Allergic reaction",
+      "Conjunctivitis",
+      "Acute glaucoma"
+    ],
+    ans: 0,
+    exp: "Preseptal cellulitis is an important cause of periorbital sepsis. Causes include ethmoid sinusitis, trauma, insect bites and local skin infection."
+  },
+  {
+    q: "Which finding would suggest progression to orbital rather than preseptal involvement?",
+    img: "right_periorbital_swelling.png",
+    opts: [
+      "Proptosis with painful eye movements",
+      "Bilateral itching",
+      "Pitting oedema",
+      "Isolated skin erythema",
+      "Absence of fever"
+    ],
+    ans: 0,
+    exp: "Proptosis and painful eye movements suggest orbital cellulitis rather than preseptal cellulitis, and should prompt urgent escalation of care."
+  },
+  {
+    q: "Which serious complication may follow untreated preseptal cellulitis?",
+    img: "right_periorbital_swelling.png",
+    opts: [
+      "Cavernous sinus thrombosis",
+      "Hydrocephalus",
+      "Testicular torsion",
+      "Vesico-ureteric reflux",
+      "Kerion"
+    ],
+    ans: 0,
+    exp: "Important complications of preseptal cellulitis include progression to orbital cellulitis, orbital abscess and cavernous sinus thrombosis. Allergic reaction and nephrotic syndrome are important differentials for periorbital swelling."
+  },
+
+  // 12. periorbital_swelling_3.png
+  {
+    q: "What condition is demonstrated in this picture?",
+    img: "periorbital_swelling_3.png",
+    opts: [
+      "Preseptal cellulitis",
+      "Nephrotic syndrome",
+      "Chronic renal failure",
+      "Orbital tumour",
+      "Congenital glaucoma"
+    ],
+    ans: 0,
+    exp: "The image demonstrates the appearance before and after treatment of preseptal cellulitis. Appropriate treatment, typically including IV antibiotics, can resolve the swelling and prevent progression to orbital cellulitis."
+  },
+  {
+    q: "What complication should be prevented by appropriately treating this condition?",
+    img: "periorbital_swelling_3.png",
+    opts: [
+      "Orbital cellulitis",
+      "Hydrocele",
+      "Omphalitis",
+      "Tinea capitis",
+      "Craniosynostosis"
+    ],
+    ans: 0,
+    exp: "Preseptal cellulitis can progress to orbital cellulitis. Proptosis and painful eye movements suggest orbital involvement and should prompt urgent treatment escalation."
+  },
+
+  // 13. neonatal_anaemia.png
+  {
+    q: "What are the major causes of neonatal anaemia?",
+    img: "neonatal_anaemia.png",
+    opts: [
+      "Haemolysis, haemorrhage and bone marrow failure",
+      "Infection, dehydration and obesity",
+      "Renal disease, liver disease and hypertension",
+      "Endocrine disease, trauma and allergy",
+      "Malignancy, burns and asthma"
+    ],
+    ans: 0,
+    exp: "The three major categories are haemolysis, haemorrhage and bone marrow failure. Examples include ABO/Rh incompatibility and G6PD deficiency for haemolysis; fetomaternal transfusion, birth trauma and twin-twin transfusion for haemorrhage; and Diamond-Blackfan anaemia, aplasia and infection for marrow failure."
+  },
+  {
+    q: "Which of the following is a cause of haemolytic neonatal anaemia?",
+    img: "neonatal_anaemia.png",
+    opts: [
+      "ABO incompatibility",
+      "Twin-twin transfusion",
+      "Diamond-Blackfan anaemia",
+      "Birth trauma",
+      "Bone marrow aplasia"
+    ],
+    ans: 0,
+    exp: "ABO incompatibility causes haemolysis, as does Rh incompatibility and G6PD deficiency. Twin-twin transfusion, birth trauma and fetomaternal transfusion are instead haemorrhagic causes of anaemia."
+  },
+  {
+    q: "What is appropriate management of severe neonatal anaemia?",
+    img: "neonatal_anaemia.png",
+    opts: [
+      "Stabilisation and PRBC transfusion",
+      "Phototherapy alone",
+      "Immediate craniotomy",
+      "Oral antifungal therapy",
+      "Sistrunk procedure"
+    ],
+    ans: 0,
+    exp: "Management involves stabilisation, packed red cell transfusion if severe, and treatment of the underlying cause. IVIG may be used for isoimmunisation, while folate or iron may be used for deficiency."
+  },
+
+  // 14. omphalitis.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "omphalitis.png",
+    opts: [
+      "Omphalitis",
+      "Umbilical granuloma",
+      "Umbilical hernia",
+      "Patent urachus",
+      "Omphalomesenteric fistula"
+    ],
+    ans: 0,
+    exp: "Omphalitis causes erythema, induration and pus around the umbilical cord. Risk factors include prematurity, poor cord hygiene and prolonged rupture of membranes."
+  },
+  {
+    q: "Which serious complication is associated with severe omphalitis like this?",
+    img: "omphalitis.png",
+    opts: [
+      "Necrotising fasciitis",
+      "Tinea capitis",
+      "Hydrocele",
+      "Craniosynostosis",
+      "Kerion"
+    ],
+    ans: 0,
+    exp: "Necrotising fasciitis causes rapidly spreading necrosis with systemic toxicity and is a feared complication of omphalitis. Other complications include sepsis, portal vein thrombosis and death."
+  },
+  {
+    q: "Which finding on this umbilicus supports omphalitis rather than a simple umbilical granuloma?",
+    img: "omphalitis.png",
+    opts: [
+      "Erythema, induration and purulent discharge",
+      "A small red moist nodule without systemic illness",
+      "Urine discharge from the umbilicus",
+      "Feculent discharge from the umbilicus",
+      "A soft, reducible swelling"
+    ],
+    ans: 0,
+    exp: "Omphalitis is marked by erythema, induration and purulent discharge with signs of systemic illness. An umbilical granuloma, by contrast, is a small red moist nodule without systemic illness. Urine or feculent discharge instead suggest a patent urachus or omphalomesenteric fistula, and a soft reducible swelling suggests an umbilical hernia."
+  },
+
+  // 15. thyroglossal_duct_cyst.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "thyroglossal_duct_cyst.png",
+    opts: [
+      "Thyroglossal duct cyst",
+      "Dermoid cyst",
+      "Enlarged lymph node",
+      "Cystic hygroma",
+      "Thyroid mass"
+    ],
+    ans: 0,
+    exp: "A thyroglossal duct cyst is a midline neck swelling that moves with tongue protrusion or swallowing. It results from persistence of the thyroglossal tract."
+  },
+  {
+    q: "Which procedure is used for definitive treatment of this lesion?",
+    img: "thyroglossal_duct_cyst.png",
+    opts: [
+      "Sistrunk procedure",
+      "Craniectomy",
+      "Orchidopexy",
+      "Valve ablation",
+      "Thoracotomy"
+    ],
+    ans: 0,
+    exp: "The Sistrunk procedure removes the cyst, its tract and the mid-portion of the hyoid bone, and is the standard treatment for thyroglossal duct cyst."
+  },
+  {
+    q: "Which finding distinguishes this lesion from a dermoid cyst?",
+    img: "thyroglossal_duct_cyst.png",
+    opts: [
+      "Movement with tongue protrusion",
+      "Cough impulse",
+      "Transillumination",
+      "Pitting oedema",
+      "Patchy alopecia"
+    ],
+    ans: 0,
+    exp: "Movement with tongue protrusion is characteristic of a thyroglossal duct cyst, since it is tethered to the tongue base via the thyroglossal tract. A dermoid cyst does not move with tongue protrusion. Other differentials include enlarged lymph nodes and goitre."
+  },
+
+  // 16. subaponeurotic_hemorrhage.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "subaponeurotic_hemorrhage.png",
+    opts: [
+      "Subaponeurotic haemorrhage",
+      "Cephalohaematoma",
+      "Caput succedaneum",
+      "Adeloye-Odeku cyst",
+      "Scalp abscess"
+    ],
+    ans: 0,
+    exp: "Subaponeurotic haemorrhage presents as a large, fluctuant swelling that crosses suture lines. It may follow birth injury and can be life-threatening."
+  },
+  {
+    q: "Which serious complication of this condition is particularly important to monitor for?",
+    img: "subaponeurotic_hemorrhage.png",
+    opts: [
+      "Hypovolaemic shock",
+      "Chronic eczema",
+      "Hydrocephalus",
+      "Kerion",
+      "Cryptorchidism"
+    ],
+    ans: 0,
+    exp: "Subaponeurotic haemorrhage can cause hypovolaemic shock, severe anaemia and jaundice, so affected infants need close haemodynamic monitoring."
+  },
+  {
+    q: "Which feature of this swelling helps distinguish it from a cephalohaematoma?",
+    img: "subaponeurotic_hemorrhage.png",
+    opts: [
+      "It crosses suture lines",
+      "It is firm and well-defined",
+      "It never causes anaemia",
+      "It resolves within a few days",
+      "It does not cause shock"
+    ],
+    ans: 0,
+    exp: "Subaponeurotic haemorrhage is large, fluctuant and crosses suture lines, unlike a cephalohaematoma, which is firm, well-defined and confined by suture attachments. This distinction matters because subaponeurotic haemorrhage can conceal a much larger volume of blood loss and lead to shock."
+  },
+
+  // 17. funny_looking_baby.png
+  {
+    q: "What is the most likely diagnosis?",
+    img: "funny_looking_baby.png",
+    opts: [
+      "Holoprosencephaly",
+      "Down syndrome",
+      "Edwards syndrome",
+      "Turner syndrome",
+      "Achondroplasia"
+    ],
+    ans: 0,
+    exp: "Holoprosencephaly is a midline developmental brain and facial anomaly. Features include hypotelorism, a midline facial cleft and proboscis. Severe forms may include cyclopia."
+  },
+  {
+    q: "Which facial finding is characteristic of holoprosencephaly?",
+    img: "funny_looking_baby.png",
+    opts: [
+      "Hypotelorism with a midline facial cleft",
+      "Polydactyly",
+      "Rocker-bottom feet",
+      "Epicanthal folds with a flat facial profile",
+      "Low-set ears alone"
+    ],
+    ans: 0,
+    exp: "Hypotelorism with a midline facial cleft is characteristic of holoprosencephaly, reflecting failure of the forebrain to divide properly in early development. Polydactyly and rocker-bottom feet point instead to trisomy 13 and trisomy 18 respectively, and epicanthal folds with a flat facial profile are typical of Down syndrome."
+  },
+  {
+    q: "Which finding may be seen in the most severe form of holoprosencephaly?",
+    img: "funny_looking_baby.png",
+    opts: [
+      "Cyclopia",
+      "Clenched fists",
+      "Webbed neck",
+      "Short stature",
+      "Simian crease"
+    ],
+    ans: 0,
+    exp: "Cyclopia, a single central eye or fused orbits, can occur in the most severe form of holoprosencephaly (alobar holoprosencephaly), reflecting the extreme end of failed forebrain division."
+  },
+
+  // 18. patient_monitor.png
+  {
+    q: "Which parameter is commonly displayed on this monitor?",
+    img: "patient_monitor.png",
+    opts: [
+      "Oxygen saturation",
+      "Serum bilirubin",
+      "Blood glucose",
+      "Serum sodium",
+      "Urinary VMA"
+    ],
+    ans: 0,
+    exp: "A handheld multiparameter monitor typically displays temperature, SpO2 and pulse rate/heart rate. Depending on the model, it may also display non-invasive blood pressure, respiratory rate and ECG."
+  },
+  {
+    q: "Which combination represents parameters commonly displayed on a monitor like this?",
+    img: "patient_monitor.png",
+    opts: [
+      "Temperature, SpO2 and pulse rate",
+      "Bilirubin, VMA and creatinine",
+      "Haemoglobin, bilirubin and glucose",
+      "Sodium, potassium and calcium",
+      "Urinary output, bilirubin and albumin"
+    ],
+    ans: 0,
+    exp: "The monitor commonly displays temperature, oxygen saturation and pulse rate/heart rate. Depending on the model, additional parameters include non-invasive blood pressure, respiratory rate and ECG."
+  },
+
 {
     q: "Initial management includes all of the following EXCEPT:",
     opts: ["Eye swab", "Eye irrigation", "Erythromycin", "Eye patching only", "Antimicrobial treatment"],
