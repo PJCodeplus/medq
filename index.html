@@ -84,7 +84,7 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 
 /* ══ READING VIEW ══ */
 @keyframes rdrFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.rdr-wrap{min-height:100vh;transition:background .25s,color .25s;animation:rdrFadeIn .35s ease both}
+.rdr-wrap{min-height:100vh;transition:background .25s,color .25s;animation:rdrFadeIn .35s ease backwards}
 /* Admin table: scrollbar at top */
 .admin-scroll-top{overflow-x:auto;transform:rotateX(180deg);-webkit-overflow-scrolling:touch}
 .admin-scroll-top table{transform:rotateX(180deg)}
@@ -132,9 +132,9 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 .rdr-plain{margin-bottom:40px;max-width:100%;overflow-wrap:break-word}
 .rdr-plain h3{font-size:1.1rem;font-weight:900;margin-bottom:12px;color:inherit;overflow-wrap:break-word}
 .rdr-plain img{display:block;max-width:100%;height:auto;margin:0 0 16px;border-radius:8px}
-.rdr-plain p{margin:0 0 8px;max-width:100%;word-wrap:break-word;overflow-wrap:break-word}
+.rdr-plain p{margin:0 0 8px;max-width:100%;word-wrap:break-word;overflow-wrap:break-word;text-align:justify}
 .rdr-plain ul{margin:0 0 14px;padding-left:20px;max-width:100%}
-.rdr-plain li{margin-bottom:6px;word-wrap:break-word;overflow-wrap:break-word}
+.rdr-plain li{margin-bottom:6px;word-wrap:break-word;overflow-wrap:break-word;text-align:justify}
 .rdr-plain hr{border:none;border-top:1px solid var(--rdr-subhead-line);margin:40px 0}
 
 /* Content elements */
@@ -66677,7 +66677,7 @@ function App(){
     const paedsOspeNotesContentHTML=`
       <div class="rdr-plain" id="paeds-ospe-note-01">
         <h3>1. Kangaroo Mother Care (KMC)</h3>
-        <img src="assets/ospe/paed/notes/kangaroo_mother_care_1.png" alt="Kangaroo mother care"/>
+        <img src="assets/ospe/paed/kangaroo_mother_care_1.png" alt="Kangaroo mother care"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li><strong>Definition</strong> (asked often, verbatim): KMC = <strong>&quot;intra-hospital maternal-infant skin-to-skin care&quot;</strong>; baby naked except diaper, strapped to mother&rsquo;s chest.</li>
@@ -66700,7 +66700,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-02">
         <h3>2. Neonatal Jaundice</h3>
-        <img src="assets/ospe/paed/notes/neonatal_jandice.png" alt="Neonatal jaundice"/>
+        <img src="assets/ospe/paed/neonatal_jandice.png" alt="Neonatal jaundice"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li><strong>Physiological</strong> jaundice: TSB &lt;12 mg/dL term / &lt;15 mg/dL preterm; appears day 2–3, peaks day 3–5, resolves by 7–10 days.</li>
@@ -66737,7 +66737,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-03">
         <h3>3. Childhood Neck Mass</h3>
-        <img src="assets/ospe/paed/notes/huge_neck_lesion.png" alt="Huge neck lesion"/>
+        <img src="assets/ospe/paed/huge_neck_lesion.png" alt="Huge neck lesion"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Key differentials for a childhood neck mass: <strong>Lymphoma (esp. Non-Hodgkin&rsquo;s)</strong>, <strong>Burkitt&rsquo;s lymphoma</strong> (jaw more than neck nodes), <strong>Rhabdomyosarcoma</strong>, <strong>Cystic hygroma</strong> (congenital, transilluminates), <strong>Goitre/thyroid mass</strong>, <strong>Neuroblastoma</strong> (arises from cervical sympathetic chain).</li>
@@ -66755,7 +66755,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-04">
         <h3>4. Prune Belly Syndrome</h3>
-        <img src="assets/ospe/paed/notes/prune_belly_syndrome.png" alt="Prune belly syndrome"/>
+        <img src="assets/ospe/paed/prune_belly_syndrome.png" alt="Prune belly syndrome"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li><strong>Triad</strong>: deficient/absent anterior abdominal wall muscles (wrinkled abdomen), bilateral cryptorchidism, urinary tract anomalies (posterior urethral valves → obstruction, reflux, hydronephrosis).</li>
@@ -66771,7 +66771,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-05">
         <h3>5. Adeloye–Odeku Cyst</h3>
-        <img src="assets/ospe/paed/notes/adeloye_odeku_cyst.png" alt="Adeloye-Odeku cyst"/>
+        <img src="assets/ospe/paed/adeloye_odeku_cyst.png" alt="Adeloye-Odeku cyst"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Swelling/mass over the <strong>anterior fontanelle</strong>.</li>
@@ -66789,7 +66789,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-06">
         <h3>6. Craniosynostosis</h3>
-        <img src="assets/ospe/paed/notes/craniocynostosis.png" alt="Craniosynostosis"/>
+        <img src="assets/ospe/paed/craniocynostosis.png" alt="Craniosynostosis"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li><strong>Craniosynostosis</strong> = premature closure of cranial sutures → <strong>microcephaly</strong>.</li>
@@ -66808,7 +66808,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-07">
         <h3>7. Hypopigmented Lesions — Anterior Abdominal Wall</h3>
-        <img src="assets/ospe/paed/notes/hypopigmented_lesions_anterior_abdominal_wall.png" alt="Hypopigmented lesions anterior abdominal wall"/>
+        <img src="assets/ospe/paed/hypopigmented_lesions_anterior_abdominal_wall.png" alt="Hypopigmented lesions anterior abdominal wall"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Satellite and confluent <strong>hypopigmented</strong> skin patches, mainly on the anterior abdominal wall.</li>
@@ -66824,7 +66824,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-08">
         <h3>8. Tinea Capitis</h3>
-        <img src="assets/ospe/paed/notes/tinea_capitis.png" alt="Tinea capitis"/>
+        <img src="assets/ospe/paed/tinea_capitis.png" alt="Tinea capitis"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Extensive, widespread scalp lesion with <strong>patchy alopecia</strong> and satellites of circumscribed lesions in a school-age child — classic for <strong>tinea capitis</strong>.</li>
@@ -66841,7 +66841,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-09">
         <h3>9. Scrotal Mass</h3>
-        <img src="assets/ospe/paed/notes/scrotal_mass.png" alt="Scrotal mass"/>
+        <img src="assets/ospe/paed/scrotal_mass.png" alt="Scrotal mass"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Key differentials: <strong>hydrocele</strong> (transilluminates), <strong>inguinoscrotal hernia</strong> (reducible, cough impulse), <strong>testicular torsion</strong> (painful, surgical emergency), <strong>epididymo-orchitis</strong>, <strong>tumor</strong> (e.g. yolk sac tumor).</li>
@@ -66857,7 +66857,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-10">
         <h3>10. Burns</h3>
-        <img src="assets/ospe/paed/notes/burns_2.png" alt="Burns"/>
+        <img src="assets/ospe/paed/burns_2.png" alt="Burns"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Framework for assessing a burn lesion: describe the lesion (depth, % body surface area, distribution), likely causes, treatment, fluid management, and infection prevention.</li>
@@ -66871,7 +66871,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-11">
         <h3>11. Right Periorbital Swelling</h3>
-        <img src="assets/ospe/paed/notes/right_periorbital_swelling.png" alt="Right periorbital swelling"/>
+        <img src="assets/ospe/paed/right_periorbital_swelling.png" alt="Right periorbital swelling"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Likely diagnosis for periorbital swelling with signs of sepsis: <strong>preseptal cellulitis</strong> (may progress to <strong>orbital cellulitis</strong>).</li>
@@ -66889,7 +66889,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-12">
         <h3>12. Periorbital Swelling 3</h3>
-        <img src="assets/ospe/paed/notes/periorbital_swelling_3.png" alt="Periorbital swelling 3"/>
+        <img src="assets/ospe/paed/periorbital_swelling_3.png" alt="Periorbital swelling 3"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Same core concept as above (preseptal cellulitis/peri-orbital sepsis), shown here as a <strong>pre- and post-treatment comparison</strong>.</li>
@@ -66904,7 +66904,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-13">
         <h3>13. Neonatal Anaemia</h3>
-        <img src="assets/ospe/paed/notes/neonatal_anaemia.png" alt="Neonatal anaemia"/>
+        <img src="assets/ospe/paed/neonatal_anaemia.png" alt="Neonatal anaemia"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Baby appears <strong>&quot;paper white&quot;</strong> with marked pallor.</li>
@@ -66920,7 +66920,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-14">
         <h3>14. Omphalitis</h3>
-        <img src="assets/ospe/paed/notes/omphalitis.png" alt="Omphalitis"/>
+        <img src="assets/ospe/paed/omphalitis.png" alt="Omphalitis"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li><strong>Omphalitis</strong>: erythema, induration, pus around the umbilical cord.</li>
@@ -66935,7 +66935,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-15">
         <h3>15. Thyroglossal Duct Cyst</h3>
-        <img src="assets/ospe/paed/notes/thyroglossal_duct_cyst.png" alt="Thyroglossal duct cyst"/>
+        <img src="assets/ospe/paed/thyroglossal_duct_cyst.png" alt="Thyroglossal duct cyst"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Classic description: <strong>midline</strong> neck swelling that <strong>moves with tongue protrusion/swallowing</strong>.</li>
@@ -66949,7 +66949,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-16">
         <h3>16. Subaponeurotic Hemorrhage</h3>
-        <img src="assets/ospe/paed/notes/subaponeurotic_hemorrhage.png" alt="Subaponeurotic hemorrhage"/>
+        <img src="assets/ospe/paed/subaponeurotic_hemorrhage.png" alt="Subaponeurotic hemorrhage"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Description: diffuse, boggy, <strong>fluctuant</strong> swelling that <strong>crosses suture lines</strong>.</li>
@@ -66968,7 +66968,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-17">
         <h3>17. Funny Looking Baby</h3>
-        <img src="assets/ospe/paed/notes/funny_looking_baby.png" alt="Funny looking baby"/>
+        <img src="assets/ospe/paed/funny_looking_baby.png" alt="Funny looking baby"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Likely diagnosis: <strong>holoprosencephaly</strong> — a midline developmental brain/facial anomaly.</li>
@@ -66986,7 +66986,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-18">
         <h3>18. Patient Monitor</h3>
-        <img src="assets/ospe/paed/notes/patient_monitor.png" alt="Patient monitor"/>
+        <img src="assets/ospe/paed/patient_monitor.png" alt="Patient monitor"/>
         <p><strong>High-yield testable concepts:</strong></p>
         <ul>
           <li>Handheld multiparameter monitor typically displays: <strong>Temperature, SpO&#8322;, PR (pulse/heart rate)</strong>, ± NIBP (non-invasive blood pressure), RR, ECG depending on the model.</li>
