@@ -129,6 +129,13 @@ body{background:#f0ece5;font-family:'Georgia',serif;-webkit-font-smoothing:antia
 .rdr-topic-num{width:36px;height:36px;border-radius:8px;flex-shrink:0;background:linear-gradient(135deg,#1a1a2e,#2d2b55);border:1.5px solid rgba(167,139,250,.3);color:#a78bfa;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.05em}
 .rdr-topic-title{font-size:clamp(1.05rem,2.5vw,1.3rem);font-weight:900;color:inherit}
 .rdr-topic-sub{font-size:.72rem;color:var(--rdr-muted);margin-top:3px;letter-spacing:.05em}
+.rdr-plain{margin-bottom:40px;max-width:100%;overflow-wrap:break-word}
+.rdr-plain h3{font-size:1.1rem;font-weight:900;margin-bottom:12px;color:inherit;overflow-wrap:break-word}
+.rdr-plain img{display:block;max-width:100%;height:auto;margin:0 0 16px;border-radius:8px}
+.rdr-plain p{margin:0 0 8px;max-width:100%;word-wrap:break-word;overflow-wrap:break-word}
+.rdr-plain ul{margin:0 0 14px;padding-left:20px;max-width:100%}
+.rdr-plain li{margin-bottom:6px;word-wrap:break-word;overflow-wrap:break-word}
+.rdr-plain hr{border:none;border-top:1px solid var(--rdr-subhead-line);margin:40px 0}
 
 /* Content elements */
 .rdr-section{margin-bottom:20px}
@@ -63902,7 +63909,8 @@ function App(){
               const pqAccent=course.accent||"#90caf9";
               const cards=[
                 {key:"past",title:"Past OSPE Questions",subtitle:"Past Provost's OSPE Questions",questions:PAED_OSPE_Qs},
-                {key:"practice",title:"Practice Questions",subtitle:"Practice questions created from Provost's revision notes",questions:PAED_OSPE_Qs_2}
+                {key:"practice",title:"Practice Questions",subtitle:"Practice questions created from Provost's revision notes",questions:PAED_OSPE_Qs_2},
+                {key:"notes",title:"Provost's OSPE Revision Notes",subtitle:"Picture-based revision notes — Prof Osaghae, Clinical Rounds",isNotes:true}
               ];
               return cards.map((c,ci)=>
                 e("div",{key:c.key,className:"fade-up",
@@ -63917,6 +63925,10 @@ function App(){
                   onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(3px)";ev.currentTarget.style.boxShadow="0 8px 26px rgba(15,39,68,.13)";},
                   onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 3px 16px rgba(15,39,68,.1)";},
                   onClick:()=>{
+                    if(c.isNotes){
+                      setReadingContext("paeds_ospe_notes"); paywallDismissedRef.current=false; setShowPayDetails(false); setReadingFontStep(1); pushView("reading_view");
+                      return;
+                    }
                     const blk={ id:c.key==="practice"?"paeds_ospe_practice":"paeds_ospe", name:c.title, questions:c.questions, available:true, _isPaedsOspeTfl:true };
                     setBlock(blk); setQCount(Math.min(20,blk.questions.length)); pushView("setup");
                   }
@@ -63924,10 +63936,10 @@ function App(){
                   e("div",{style:{flex:1,minWidth:0}},
                     e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
                       e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},c.title),
-                      e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsOspeUnlocked?"Unlocked":"Free preview")
+                      !c.isNotes&&e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsOspeUnlocked?"Unlocked":"Free preview")
                     ),
                     e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},c.subtitle),
-                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.questions.length+" picture MCQs")
+                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.isNotes?"18 topics":c.questions.length+" picture MCQs")
                   ),
                   e("span",{style:{color:pqAccent,fontSize:"1.4rem"}},"→")
                 )
@@ -65208,9 +65220,10 @@ function App(){
     const cycleFontSize=()=>setReadingFontStep(f=>(f+1)%3);
     const themeIcon=readingTheme==="dark"?"🌙":readingTheme==="sepia"?"☕":"☀️";
     const isPhysiology=readingContext==="physiology";
-    const rdrTopbarSubject=isPhysiology?"Preclinicals · Physiology":"Surgery · Final Lap";
-    const rdrTopbarTitle=isPhysiology?"Physiology Exam Notes":"Surgery of the Thyroid";
-    const rdrPaywallMsg=isPhysiology?"Unlock the full Physiology notes — all topics from Sembulingam.":"Unlock the full Surgery notes — all 8 topics.";
+    const isPaedsOspeNotes=readingContext==="paeds_ospe_notes";
+    const rdrTopbarSubject=isPhysiology?"Preclinicals · Physiology":isPaedsOspeNotes?"Paediatrics · OSPE":"Surgery · Final Lap";
+    const rdrTopbarTitle=isPhysiology?"Physiology Exam Notes":isPaedsOspeNotes?"Provost's OSPE Revision Notes":"Surgery of the Thyroid";
+    const rdrPaywallMsg=isPhysiology?"Unlock the full Physiology notes — all topics from Sembulingam.":isPaedsOspeNotes?"Unlock the full Provost's OSPE Revision Notes — all 18 topics.":"Unlock the full Surgery notes — all 8 topics.";
 
     const psychContentHTML=`
       <div class="rdr-topic">
@@ -66661,7 +66674,332 @@ function App(){
       </div>
     `;
 
-    const contentHTML=isPhysiology?physioContentHTML:psychContentHTML;
+    const paedsOspeNotesContentHTML=`
+      <div class="rdr-plain" id="paeds-ospe-note-01">
+        <h3>1. Kangaroo Mother Care (KMC)</h3>
+        <img src="assets/ospe/paed/notes/kangaroo_mother_care_1.png" alt="Kangaroo mother care"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li><strong>Definition</strong> (asked often, verbatim): KMC = <strong>&quot;intra-hospital maternal-infant skin-to-skin care&quot;</strong>; baby naked except diaper, strapped to mother&rsquo;s chest.</li>
+          <li><strong>Reason it was developed</strong> (highest-yield fact, frequently examined): devised <strong>to reduce cross-infection in overcrowded nurseries</strong>.</li>
+          <li>Reduces <strong>mortality</strong> and hospital stay (average drops from ~3 weeks to ~10 days).</li>
+          <li>Reduces <strong>apneic episodes</strong> in preterm babies.</li>
+          <li>Improves HR, RR, and oxygen consumption.</li>
+        </ul>
+        <p>💡 The location &quot;Bogotá, Colombia&quot; alone is low-yield trivia — the exam-relevant pairing is <em>definition</em> (&quot;intra-hospital maternal-infant skin-to-skin care&quot;) + <em>reason for origin</em> (reducing cross-infection in overcrowded nurseries).</p>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Also called Kangaroo Care (KC).</li>
+          <li>Particularly useful in ELBW (extremely low birth weight) babies.</li>
+          <li>Improves gastric emptying and reduces reflux.</li>
+          <li>Improves sleep quality.</li>
+          <li>Increases bonding between baby and parents; promotes parental attachment and confidence.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-02">
+        <h3>2. Neonatal Jaundice</h3>
+        <img src="assets/ospe/paed/notes/neonatal_jandice.png" alt="Neonatal jaundice"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li><strong>Physiological</strong> jaundice: TSB &lt;12 mg/dL term / &lt;15 mg/dL preterm; appears day 2–3, peaks day 3–5, resolves by 7–10 days.</li>
+          <li><strong>Pathological</strong> jaundice: appears within first <strong>24 hours</strong> OR bilirubin rises &gt;5 mg/dL/day; unconjugated &gt;15 or conjugated &gt;2 mg/dL.</li>
+          <li><strong>Kernicterus (bilirubin encephalopathy) staging</strong>:
+            <ul>
+              <li>Stage 1 — lethargy, hypotonia.</li>
+              <li>Stage 2 — hypertonia, opisthotonus, seizures.</li>
+              <li>Stage 3 — coma, irreversible brain injury.</li>
+            </ul>
+          </li>
+          <li><strong>Exchange Blood Transfusion (EBT)</strong> indications: TSB &gt;20 mg/dL, rapid rise, or neurological symptoms; must be followed by phototherapy (to manage rebound hyperbilirubinemia).</li>
+          <li><strong>Birth Weight–Bilirubin Index (BBI)</strong>: (birth weight in g ÷ serum bilirubin in µmol/L) × 10. BBI &gt;1.0 → severe → EBT indicated.</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Neonatal jaundice causes:</strong> ABO/Rh incompatibility, G6PD deficiency, sepsis, galactosemia, spherocytosis, hypothyroidism, biliary atresia, breast milk jaundice — know each cause; &quot;which of the following does NOT cause pathological jaundice&quot; style questions are common.</p>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Estimation of bilirubin level by body zone (cephalocaudal progression):
+            <ul>
+              <li>Head/neck → ~6 mg/dL</li>
+              <li>Chest → add ~6</li>
+              <li>Umbilical/suprapubic → ~12–15</li>
+              <li>Lower limbs/feet → ~18–20</li>
+              <li>Entire body deep yellow → &gt;20 mg/dL</li>
+            </ul>
+          </li>
+          <li>Sequelae of kernicterus: cerebral palsy, deafness, intellectual disability.</li>
+          <li>Phototherapy is first-line treatment.</li>
+          <li>EBT uses whole blood, double-volume transfusion; reduces unconjugated bilirubin and prevents kernicterus.</li>
+          <li>BBI interpretation: &lt;0.5 → safe; 0.5–1 → moderate (phototherapy); &gt;1 → severe (EBT).</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-03">
+        <h3>3. Childhood Neck Mass</h3>
+        <img src="assets/ospe/paed/notes/huge_neck_lesion.png" alt="Huge neck lesion"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Key differentials for a childhood neck mass: <strong>Lymphoma (esp. Non-Hodgkin&rsquo;s)</strong>, <strong>Burkitt&rsquo;s lymphoma</strong> (jaw more than neck nodes), <strong>Rhabdomyosarcoma</strong>, <strong>Cystic hygroma</strong> (congenital, transilluminates), <strong>Goitre/thyroid mass</strong>, <strong>Neuroblastoma</strong> (arises from cervical sympathetic chain).</li>
+          <li>Large size + grotesque appearance + wasting → raises suspicion for <strong>malignancy</strong>.</li>
+          <li>Neuroblastoma is associated with raised <strong>urinary VMA</strong>.</li>
+          <li>Complications: airway compression, dysphagia, vessel compression.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Investigations: FBC (anemia, leukocytosis, blasts), electrolytes/urea/creatinine (EUR), uric acid (tumor lysis syndrome risk), imaging (X-ray, skeletal survey, USS, CT, MRI), biopsy/histology (definitive diagnosis).</li>
+          <li>Thyroid lesion workup includes thyroid function tests.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-04">
+        <h3>4. Prune Belly Syndrome</h3>
+        <img src="assets/ospe/paed/notes/prune_belly_syndrome.png" alt="Prune belly syndrome"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li><strong>Triad</strong>: deficient/absent anterior abdominal wall muscles (wrinkled abdomen), bilateral cryptorchidism, urinary tract anomalies (posterior urethral valves → obstruction, reflux, hydronephrosis).</li>
+          <li>Complicated by: <strong>oligohydramnios</strong>, pulmonary hypoplasia, obstructive uropathy, vesico-ureteric reflux, chronic kidney disease (CKD)/chronic renal failure.</li>
+          <li>Prognosis is generally <strong>poor</strong>.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Management: catheterization for decompression; surgery (valve ablation, orchidopexy, abdominal wall repair).</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-05">
+        <h3>5. Adeloye–Odeku Cyst</h3>
+        <img src="assets/ospe/paed/notes/adeloye_odeku_cyst.png" alt="Adeloye-Odeku cyst"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Swelling/mass over the <strong>anterior fontanelle</strong>.</li>
+          <li>Most likely cause: <strong>subgaleal cyst — Adeloye–Odeku cyst</strong>, a congenital epidermal (dermoid) cyst.</li>
+          <li>Treatment = <strong>excision</strong>.</li>
+          <li>Subgalea = potential space between skull <strong>periosteum</strong> and scalp <strong>galeal aponeurosis</strong>.</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Scalp swelling differentials in a neonate:</strong> Subgaleal cyst (Adeloye–Odeku) vs. subgaleal hemorrhage vs. subgaleal hematoma vs. caput succedaneum vs. cephalohematoma — distinguish by whether the swelling crosses suture lines and its consistency.</p>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Differs from cephalohematoma (does not cross suture lines) and caput succedaneum (crosses sutures).</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-06">
+        <h3>6. Craniosynostosis</h3>
+        <img src="assets/ospe/paed/notes/craniocynostosis.png" alt="Craniosynostosis"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li><strong>Craniosynostosis</strong> = premature closure of cranial sutures → <strong>microcephaly</strong>.</li>
+          <li>Causes are <strong>congenital</strong> (craniofacial syndromes e.g. Apert, Crouzon; intrauterine TORCH infections — esp. rubella, CMV; bone diseases — achondroplasia, rickets, thalassemia major) or <strong>acquired/secondary</strong> (to abnormal brain growth, e.g. hydrocephalus resolves but brain fails to expand).</li>
+          <li>Exam findings: ridging over sutures, over-riding sutures, early closure of fontanelles, small OFC (occipitofrontal circumference).</li>
+          <li>Treatment: <strong>craniectomy</strong> if brain is normal and sutures close early; <strong>craniotomy</strong> if underlying skull bone disease.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Workup approach: history (antenatal history, infections, drug exposure), physical exam (dysmorphism, murmurs), imaging (X-ray, CT).</li>
+          <li>Early intervention recommended before age 2 years.</li>
+          <li>Management framework tested: History → Physical exam → Investigations → Treatment → Prevention.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-07">
+        <h3>7. Hypopigmented Lesions — Anterior Abdominal Wall</h3>
+        <img src="assets/ospe/paed/notes/hypopigmented_lesions_anterior_abdominal_wall.png" alt="Hypopigmented lesions anterior abdominal wall"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Satellite and confluent <strong>hypopigmented</strong> skin patches, mainly on the anterior abdominal wall.</li>
+          <li>Key differentials: <strong>tinea corporis</strong>, <strong>pityriasis alba</strong>, <strong>atopic eczema</strong>, <strong>post-inflammatory hypopigmentation</strong>, <strong>leprosy</strong> (rare in infants).</li>
+          <li>Workup: <strong>KOH mount</strong>, <strong>Wood&rsquo;s lamp</strong>, fungal culture.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Framework tested for approach: describe lesion → likely cause → differential diagnoses → investigation → treatment.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-08">
+        <h3>8. Tinea Capitis</h3>
+        <img src="assets/ospe/paed/notes/tinea_capitis.png" alt="Tinea capitis"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Extensive, widespread scalp lesion with <strong>patchy alopecia</strong> and satellites of circumscribed lesions in a school-age child — classic for <strong>tinea capitis</strong>.</li>
+          <li>Common in school children, associated with poor hygiene.</li>
+          <li>Complication: <strong>kerion</strong> (boggy inflammatory mass).</li>
+          <li>Treatment: oral <strong>griseofulvin/terbinafine</strong> + hygiene measures.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Features: patchy alopecia, scaly circumscribed lesions, itching.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-09">
+        <h3>9. Scrotal Mass</h3>
+        <img src="assets/ospe/paed/notes/scrotal_mass.png" alt="Scrotal mass"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Key differentials: <strong>hydrocele</strong> (transilluminates), <strong>inguinoscrotal hernia</strong> (reducible, cough impulse), <strong>testicular torsion</strong> (painful, surgical emergency), <strong>epididymo-orchitis</strong>, <strong>tumor</strong> (e.g. yolk sac tumor).</li>
+          <li>A roundish, shiny scrotal mass with a hanging penis + a midline abdominal wall mass requires <strong>transillumination</strong> to help differentiate causes.</li>
+          <li>Must always assess and document <strong>size</strong> and transillumination status.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Approach tested: describe mass → transilluminate → likely findings on exam → likely cause → other possibilities → complications → treatment.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-10">
+        <h3>10. Burns</h3>
+        <img src="assets/ospe/paed/notes/burns_2.png" alt="Burns"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Framework for assessing a burn lesion: describe the lesion (depth, % body surface area, distribution), likely causes, treatment, fluid management, and infection prevention.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>No additional source detail beyond the exam-framework bullet points (describe, causes, treatment, fluids, infection prevention) was provided in the source material — treat this as a prompt for standard pediatric burns management (fluid resuscitation formulas, wound care, and sepsis/infection surveillance) rather than lecturer-specific content.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-11">
+        <h3>11. Right Periorbital Swelling</h3>
+        <img src="assets/ospe/paed/notes/right_periorbital_swelling.png" alt="Right periorbital swelling"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Likely diagnosis for periorbital swelling with signs of sepsis: <strong>preseptal cellulitis</strong> (may progress to <strong>orbital cellulitis</strong>).</li>
+          <li>Causes: <strong>sinusitis</strong> (especially ethmoid sinusitis), trauma/insect bite, local skin infection.</li>
+          <li>Major complications: orbital cellulitis, abscess, <strong>cavernous sinus thrombosis</strong>.</li>
+          <li>Key differentiator from orbital cellulitis: <strong>proptosis and painful eye movements</strong> point to orbital (not preseptal) involvement.</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Differentials for periorbital swelling:</strong> Preseptal cellulitis vs. allergic reaction (bilateral, itching, no fever) vs. nephrotic syndrome (bilateral, pitting edema, systemic features) vs. orbital cellulitis (proptosis, painful eye movements) — these are commonly contrasted in &quot;distinguish the cause&quot; questions.</p>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>This is the &quot;Facial Pathology&quot; / peri-orbital sepsis slide (single child, red/swollen periorbital area).</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-12">
+        <h3>12. Periorbital Swelling 3</h3>
+        <img src="assets/ospe/paed/notes/periorbital_swelling_3.png" alt="Periorbital swelling 3"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Same core concept as above (preseptal cellulitis/peri-orbital sepsis), shown here as a <strong>pre- and post-treatment comparison</strong>.</li>
+          <li>Reinforces that with appropriate treatment (typically IV antibiotics for preseptal cellulitis), periorbital swelling resolves without progression to orbital cellulitis.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>This is the &quot;Periorbital Swelling: Pre &amp; Post Rx&quot; slide — see topic 11 above for the full differential and complication list.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-13">
+        <h3>13. Neonatal Anaemia</h3>
+        <img src="assets/ospe/paed/notes/neonatal_anaemia.png" alt="Neonatal anaemia"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Baby appears <strong>&quot;paper white&quot;</strong> with marked pallor.</li>
+          <li>Main causes fall into three categories: <strong>hemolysis</strong> (Rh/ABO incompatibility, G6PD deficiency), <strong>hemorrhage</strong> (fetomaternal transfusion, birth trauma, twin-twin transfusion), <strong>bone marrow failure</strong> (Diamond–Blackfan anemia, aplasia, infection).</li>
+          <li>Management: stabilize → transfuse PRBC if severe → treat underlying cause (IVIG for isoimmunization, folate/iron if deficiency).</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>Differentials for a &quot;pale neonate&quot; more broadly: shock (sepsis, hypovolemia), congenital heart disease (poor perfusion, cyanosis), severe malnutrition (if presenting at later age).</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-14">
+        <h3>14. Omphalitis</h3>
+        <img src="assets/ospe/paed/notes/omphalitis.png" alt="Omphalitis"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li><strong>Omphalitis</strong>: erythema, induration, pus around the umbilical cord.</li>
+          <li><strong>Necrotizing fasciitis</strong>: rapidly spreading necrosis with systemic toxicity — key complication of untreated/severe omphalitis.</li>
+          <li>Risk factors: prematurity, poor cord hygiene, prolonged rupture of membranes.</li>
+          <li>Complications: sepsis, portal vein thrombosis, death.</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Differentials for umbilical swelling/lesion:</strong> umbilical granuloma (small, red, moist nodule, no systemic illness) vs. umbilical polyp (persistent omphalomesenteric duct remnant, firm red nodule) vs. patent urachus (urine discharge from umbilicus) vs. omphalomesenteric fistula (feculent discharge) vs. umbilical hernia (soft, reducible swelling) — each has a distinguishing feature, high risk for &quot;match the finding&quot; or negative-stem questions.</p>
+        <p><strong>More info:</strong> None beyond the above.</p>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-15">
+        <h3>15. Thyroglossal Duct Cyst</h3>
+        <img src="assets/ospe/paed/notes/thyroglossal_duct_cyst.png" alt="Thyroglossal duct cyst"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Classic description: <strong>midline</strong> neck swelling that <strong>moves with tongue protrusion/swallowing</strong>.</li>
+          <li>Cause: persistence of the <strong>thyroglossal tract</strong>.</li>
+          <li>Treatment: <strong>Sistrunk procedure</strong> (removal of cyst + tract + mid-portion of hyoid bone).</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Differentials for a midline neck mass:</strong> thyroglossal duct cyst (moves with tongue protrusion) vs. dermoid cyst (does NOT move with tongue) vs. enlarged lymph node (usually lateral, firm) vs. goitre (diffuse, irregular) — the tongue-protrusion test is the classic distinguishing exam maneuver tested here.</p>
+        <p><strong>More info:</strong> None beyond the above.</p>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-16">
+        <h3>16. Subaponeurotic Hemorrhage</h3>
+        <img src="assets/ospe/paed/notes/subaponeurotic_hemorrhage.png" alt="Subaponeurotic hemorrhage"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Description: diffuse, boggy, <strong>fluctuant</strong> swelling that <strong>crosses suture lines</strong>.</li>
+          <li>May represent a <strong>birth injury</strong>.</li>
+          <li>Can be life-threatening — leads to <strong>shock</strong>, severe anemia, and jaundice.</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Neonatal scalp swelling differentials:</strong></p>
+        <ul>
+          <li><strong>Caput succedaneum</strong> — soft, pitting edema, crosses sutures, resolves within days.</li>
+          <li><strong>Cephalohematoma</strong> — firm, well-defined, does NOT cross sutures, may calcify.</li>
+          <li><strong>Subaponeurotic (subgaleal) hemorrhage</strong> — large, fluctuant, crosses sutures, life-threatening.</li>
+        </ul>
+        <p><strong>More info:</strong> None beyond the above.</p>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-17">
+        <h3>17. Funny Looking Baby</h3>
+        <img src="assets/ospe/paed/notes/funny_looking_baby.png" alt="Funny looking baby"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Likely diagnosis: <strong>holoprosencephaly</strong> — a midline developmental brain/facial anomaly.</li>
+          <li>Classic features: hypotelorism, midline cleft, proboscis, cyclopia (in severe forms).</li>
+        </ul>
+        <p>⚠️ <strong>EXAM TRAP — Differentials for a dysmorphic baby:</strong></p>
+        <ul>
+          <li><strong>Trisomy 13 (Patau syndrome)</strong> — microcephaly, cleft lip/palate, polydactyly.</li>
+          <li><strong>Trisomy 21 (Down syndrome)</strong> — flat facies, epicanthal folds, hypotonia.</li>
+          <li><strong>Trisomy 18 (Edwards syndrome)</strong> — rocker-bottom feet, clenched fists.</li>
+        </ul>
+        <p><strong>More info:</strong> None beyond the above.</p>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-18">
+        <h3>18. Patient Monitor</h3>
+        <img src="assets/ospe/paed/notes/patient_monitor.png" alt="Patient monitor"/>
+        <p><strong>High-yield testable concepts:</strong></p>
+        <ul>
+          <li>Handheld multiparameter monitor typically displays: <strong>Temperature, SpO&#8322;, PR (pulse/heart rate)</strong>, ± NIBP (non-invasive blood pressure), RR, ECG depending on the model.</li>
+          <li>Framework tested: describe the device → parameters displayed → indications for use → contraindications.</li>
+        </ul>
+        <p><strong>More info:</strong></p>
+        <ul>
+          <li>No further detail on specific indications/contraindications was given in the source — likely intended as a discussion/viva prompt during rounds rather than a fixed-answer fact.</li>
+        </ul>
+      </div>
+    `;
+
+    const contentHTML=isPhysiology?physioContentHTML:isPaedsOspeNotes?paedsOspeNotesContentHTML:psychContentHTML;
 
     const physioTOC=[
       {section:"Section 1 — General Physiology",topics:[
@@ -66695,11 +67033,35 @@ function App(){
         {num:"08",title:"Investigations & Clinical Examination"}
       ]}
     ];
-    const tocData=isPhysiology?physioTOC:psychTOC;
+    const paedsOspeNotesTOC=[
+      {section:"Provost's OSPE Revision Notes",topics:[
+        {num:"01",title:"Kangaroo Mother Care (KMC)"},
+        {num:"02",title:"Neonatal Jaundice"},
+        {num:"03",title:"Childhood Neck Mass"},
+        {num:"04",title:"Prune Belly Syndrome"},
+        {num:"05",title:"Adeloye–Odeku Cyst"},
+        {num:"06",title:"Craniosynostosis"},
+        {num:"07",title:"Hypopigmented Lesions — Abdominal Wall"},
+        {num:"08",title:"Tinea Capitis"},
+        {num:"09",title:"Scrotal Mass"},
+        {num:"10",title:"Burns"},
+        {num:"11",title:"Right Periorbital Swelling"},
+        {num:"12",title:"Periorbital Swelling 3"},
+        {num:"13",title:"Neonatal Anaemia"},
+        {num:"14",title:"Omphalitis"},
+        {num:"15",title:"Thyroglossal Duct Cyst"},
+        {num:"16",title:"Subaponeurotic Hemorrhage"},
+        {num:"17",title:"Funny Looking Baby"},
+        {num:"18",title:"Patient Monitor"}
+      ]}
+    ];
+    const tocData=isPhysiology?physioTOC:isPaedsOspeNotes?paedsOspeNotesTOC:psychTOC;
 
     const scrollToTopic=(num)=>{
       setTocOpen(false);
       setTimeout(()=>{
+        const plainEl=document.getElementById("paeds-ospe-note-"+num);
+        if(plainEl){ plainEl.scrollIntoView({behavior:"smooth",block:"start"}); return; }
         const els=document.querySelectorAll(".rdr-topic-num");
         for(const el of els){
           if(el.textContent.trim()===num){
@@ -66736,10 +67098,10 @@ function App(){
       e("div",{className:"rdr-toc"+(tocOpen?" open":""),style:{background:tocBg,color:tocColor}},
         e("div",{className:"rdr-toc-head",style:{background:tocBg}},
           e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between"}},
-            e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1rem"}},isPhysiology?"Physiology Notes":"Surgery Notes"),
+            e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1rem"}},isPhysiology?"Physiology Notes":isPaedsOspeNotes?"OSPE Revision Notes":"Surgery Notes"),
             e("button",{onClick:()=>setTocOpen(false),style:{background:"none",border:"none",color:tocColor,fontSize:"1.2rem",cursor:"pointer",padding:"0 2px",opacity:.6}},"×")
           ),
-          e("p",{style:{fontSize:".7rem",color:"var(--rdr-muted)",marginTop:3}},isPhysiology?"2 sections · Sembulingam":"Tap any topic to jump")
+          e("p",{style:{fontSize:".7rem",color:"var(--rdr-muted)",marginTop:3}},isPhysiology?"2 sections · Sembulingam":isPaedsOspeNotes?"18 topics · Prof Osaghae, Clinical Rounds":"Tap any topic to jump")
         ),
         tocData.map((sec,si)=>e("div",{key:si},
           e("div",{className:"rdr-toc-section"},sec.section),
