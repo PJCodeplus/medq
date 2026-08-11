@@ -63897,9 +63897,7 @@ function App(){
                   e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
                 )
               ),
-              paedsOspeUnlocked
-                ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".72rem",fontWeight:700,padding:"6px 14px",borderRadius:20,whiteSpace:"nowrap"}},"✓ Unlocked")
-                : e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("paeds");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
+              !paedsOspeUnlocked && e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("paeds");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
             )
           )
         ),
@@ -63937,10 +63935,10 @@ function App(){
                   e("div",{style:{flex:1,minWidth:0}},
                     e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
                       e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},c.title),
-                      !c.isNotes&&e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},paedsOspeUnlocked?"Unlocked":"Free preview")
+                      !c.isNotes&&!paedsOspeUnlocked&&e("span",{style:{background:pqAccent+"33",color:"#0d47a1",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Free preview")
                     ),
                     e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},c.subtitle),
-                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.isNotes?"18 topics":c.questions.length+" picture MCQs")
+                    e("p",{style:{color:th.textFaint,fontSize:".72rem",marginTop:2}},c.isNotes?"53 topics":c.questions.length+" picture MCQs")
                   ),
                   e("span",{style:{color:pqAccent,fontSize:"1.4rem"}},"→")
                 )
@@ -64160,9 +64158,7 @@ function App(){
                   e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
                 )
               ),
-              obgOspeUnlocked
-                ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",fontSize:".72rem",fontWeight:700,padding:"6px 14px",borderRadius:20,whiteSpace:"nowrap"}},"✓ Unlocked")
-                : e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("obg");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
+              !obgOspeUnlocked && e("button",{onClick:()=>{ setOspeCodeInput("");setOspeCodeError("");setOspePaywallSubject("obg");setShowOspePaywall(true); },style:{background:ospeAccentDark,color:"#fff",border:"none",borderRadius:20,padding:"7px 16px",fontSize:".78rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},"Unlock")
             )
           )
         ),
@@ -64191,7 +64187,7 @@ function App(){
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}},
                     e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.08rem",color:th.text}},card.title),
-                    e("span",{style:{background:pqAccent+"33",color:"#ad1457",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},obgOspeUnlocked?"Unlocked":"Free preview")
+                    !obgOspeUnlocked&&e("span",{style:{background:pqAccent+"33",color:"#ad1457",fontSize:".63rem",padding:"2px 8px",borderRadius:10,textTransform:"uppercase",letterSpacing:".07em"}},"Free preview")
                   ),
                   e("p",{style:{color:th.textFaint,fontSize:".76rem",marginTop:4}},card.subtitle),
                   e("p",{style:{color:th.textFaint,fontSize:".7rem",marginTop:2,opacity:.8}},card.count)
@@ -67193,6 +67189,854 @@ function App(){
           <li>Framework tested: describe the device → parameters displayed → indications for use → contraindications.</li>
         </ul>
       </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-19">
+        <h3>19. Body Stiffness and Icterus — Neonatal Tetanus vs Jaundice</h3>
+        <img src="assets/ospe/paed/body_stiffness_and_icterus.jpg" alt="Body stiffness and icterus"/>
+        <p><strong>What do you see in this patient?</strong></p>
+        <ul>
+          <li>Hypertonia</li>
+          <li>Pale baby</li>
+          <li>The face is very alert</li>
+          <li>Could have birth asphyxia</li>
+        </ul>
+        <p><strong>The question is on jaundice:</strong></p>
+        <ul>
+          <li>If it is neonatal tetanus, the child&rsquo;s mouth will be closed because they have trismus (lock jaw).
+            <ul>
+              <li>Onset time: the period between the first symptom and the first muscle spasm.</li>
+              <li>Incubation period: when you can identify the entry point to the first symptom.</li>
+              <li>The first symptom is (lock jaw).</li>
+            </ul>
+          </li>
+          <li>If it is neonatal jaundice, there will be windmill movement, which is a stage of bilirubin encephalopathy.
+            <ul>
+              <li>There will be scissoring of the limbs.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-20">
+        <h3>20. Waiter&rsquo;s Tip Sign — Brachial Plexus Injury</h3>
+        <img src="assets/ospe/paed/waiters_tip_sign.jpg" alt="Waiter's tip sign"/>
+        <p><strong>Can you notice any abnormality in this child?</strong></p>
+        <ul>
+          <li>Waiter&rsquo;s tip sign.</li>
+        </ul>
+        <p><strong>What are the causes?</strong></p>
+        <ul>
+          <li>Injury to the brachial plexus when manoeuvring the birth of the child.</li>
+          <li>It can happen when the birth attendant is not skilled.</li>
+        </ul>
+        <p><strong>Which nerve does it affect?</strong></p>
+        <ul>
+          <li>Nerves C5–C6</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-21">
+        <h3>21. Haemoglobin Reference Graph by Age</h3>
+        <img src="assets/ospe/paed/hb_graph.jpg" alt="Haemoglobin graph"/>
+        <ul>
+          <li>Shows the normal pattern of haemoglobin profile in different age groups.</li>
+          <li>Upper Limit and Lower Limit are the range.</li>
+          <li>Example, in this picture, at birth:
+            <ul>
+              <li>The upper limit Hb is 21. 21 × 3 = 63.</li>
+              <li>The upper limit PCV is 63. Greater than 63 is polycythaemia.</li>
+              <li>The upper limit Hb is 14. 14 × 3 = 42.</li>
+              <li>The upper limit PCV is 42. Lower than 42 is anaemia.</li>
+              <li>So, the range is 42–63 at birth.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-22">
+        <h3>22. Cyanosis — Meconium Aspiration Syndrome</h3>
+        <img src="assets/ospe/paed/cyanosis.jpg" alt="Cyanosis"/>
+        <p><strong>What do you notice?</strong></p>
+        <ul>
+          <li>A new-born.</li>
+          <li>Pallid child: when you look at the baby&rsquo;s skin and it&rsquo;s not red, but you look at the buccal mucosa and it&rsquo;s not pale, that means there&rsquo;s probably something wrong with the oxygenation level.</li>
+          <li>Meconium-stained umbilical cord.
+            <ul>
+              <li>Fresh meconium looks greenish.</li>
+              <li>Stale meconium looks yellowish.</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>What is the diagnosis?</strong></p>
+        <ul>
+          <li>Meconium aspiration syndrome:
+            <ul>
+              <li>The meconium is aspirated.</li>
+              <li>If meconium is passed in the perinatal stage, and the baby has severe foetal distress, the baby can pass meconium which can stain the liquor.</li>
+              <li>Meconium mixes with water but it gets thick.</li>
+              <li>The meconium enters the airway and does 3 things: blocks the airway partially, blocks the airway completely, or spreads into the airway and into the alveoli without blocking the airway.</li>
+            </ul>
+          </li>
+          <li>If it completely blocks the airway:
+            <ul>
+              <li>Air will not be able to pass.</li>
+              <li>After some time, when the lungs expand and contract, the air inside the alveoli will be used up and the alveoli will collapse completely.</li>
+            </ul>
+          </li>
+          <li>If the alveoli are partially blocked:
+            <ul>
+              <li>Air is forced through the partially obstructed alveoli.</li>
+              <li>When the air goes in, there is passive recoil of the air.</li>
+              <li>E.g., when 100 ml of air goes in, 30 ml will be trapped and 70 ml will go out; another 100 ml goes in, 50 ml will be trapped and 50 ml will go out.</li>
+              <li>The respiratory airways keep expanding because there will be accumulation of air.</li>
+              <li>After some time, the alveoli will burst and air will be released into the pleural space — there will be tension pneumothorax.</li>
+              <li>When it accumulates inside, it is called emphysema.</li>
+              <li>The area around the meconium will develop pneumonitis.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-23">
+        <h3>23. Scleral Icterus — Haemolytic Anaemia</h3>
+        <img src="assets/ospe/paed/scleral_icterus_2.jpg" alt="Scleral icterus"/>
+        <ul>
+          <li>This child is jaundiced and pale.</li>
+        </ul>
+        <p><strong>Causes of jaundice:</strong></p>
+        <ul>
+          <li>Haemolytic anaemia:
+            <ul>
+              <li>Sickle cell anaemia</li>
+              <li>Drug causes</li>
+              <li>G6PD deficiency</li>
+              <li>Megaloblastic anaemia</li>
+              <li>Microcytic anaemia</li>
+              <li>Abnormally shaped RBC (elliptocytes, poikilocytoses, spherocytes)</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>What are the tests that can be done for this child?</strong></p>
+        <ul>
+          <li>FBC</li>
+          <li>Thick and thin film</li>
+          <li>Reticulocyte: to see if the child is responding to treatment</li>
+          <li>Serum ferritin: to check for iron deficiency anaemia</li>
+          <li>Blood film: fragmented cells</li>
+          <li>Genotype</li>
+          <li>Direct and indirect Coomb&rsquo;s test</li>
+        </ul>
+        <p><strong>The most helpful test in a child with fever, jaundice and anaemia will be?</strong></p>
+        <ul>
+          <li>a. Hb genotype</li>
+          <li>b. Peripheral blood film examination</li>
+          <li>c. Blood culture</li>
+          <li>d. Coomb&rsquo;s test</li>
+          <li>e. Serum bilirubin</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-24">
+        <h3>24. Fever with Rash — Differential Diagnosis</h3>
+        <img src="assets/ospe/paed/rash.jpg" alt="Rash"/>
+        <p><strong>This child has fever and rash. Which is the most likely in this child?</strong></p>
+        <ul>
+          <li>a. Erythema subitum: usually doesn&rsquo;t cause conjunctivitis; usually an inflammation in the palate; you&rsquo;ll see some deposit in the palate — Nagayama spots.</li>
+          <li>b. Meningococcaemia: maculopapular eruptions found in the trunk; seen in light-skinned people; an evanescent rash that doesn&rsquo;t stay for a long time — within a day or two.</li>
+          <li>c. Scarlet fever: usually associated with a strawberry (red) tongue with generalized rash.</li>
+          <li>d. Drug rash: usually not erythematous maculopapular rashes.</li>
+          <li>e. Measles: dense in the centre and sparse in the periphery; usually starts behind the ear, to the centre and out; affects all the mucosa in the body. This child has conjunctivitis, mouth ulcers, stomatitis, and inflammation of the buccal mucosa and the skin.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-25">
+        <h3>25. Subconjunctival Haemorrhage</h3>
+        <img src="assets/ospe/paed/subconjunctival_hemorrhage.jpg" alt="Subconjunctival hemorrhage"/>
+        <p><strong>What can you see?</strong></p>
+        <ul>
+          <li>Subconjunctival haemorrhage.</li>
+          <li>Lower palpebral haemorrhage.</li>
+        </ul>
+        <p><strong>What can cause this kind of bleeding?</strong></p>
+        <ul>
+          <li>Trauma: if seen in an unintentional injury, think of something wrong with the clotting system.</li>
+        </ul>
+        <p><strong>Which investigation infers the diagnosis in this boy?</strong></p>
+        <ul>
+          <li>A. FBC</li>
+          <li>B. Skull x-ray</li>
+          <li>C. Sputum for MCS</li>
+          <li>D. Clotting profile: the child is bleeding.</li>
+          <li>E. Ophthalmoscopy</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-26">
+        <h3>26. Severe Dehydration</h3>
+        <img src="assets/ospe/paed/severe_dehydration.jpg" alt="Severe dehydration"/>
+        <p><strong>What can you see in this child?</strong></p>
+        <ul>
+          <li>Tenting</li>
+        </ul>
+        <p><strong>Look at the eyes:</strong></p>
+        <ul>
+          <li>The child is almost in shock</li>
+        </ul>
+        <p><strong>What is the most initial step to be taken in this child?</strong></p>
+        <ul>
+          <li>a. Parenteral antibiotics therapy</li>
+          <li>b. IV quinine therapy</li>
+          <li>c. Fluid resuscitation</li>
+          <li>d. Correction of hypoglycaemia</li>
+          <li>e. Counselling of patient</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-27">
+        <h3>27. Child on Nebulizer</h3>
+        <img src="assets/ospe/paed/child_on_nebulizer.jpg" alt="Child on nebulizer"/>
+        <p><strong>What is being demonstrated?</strong></p>
+        <ul>
+          <li>Use of nebulizer</li>
+        </ul>
+        <p><strong>What scenario can you use this?</strong></p>
+        <ul>
+          <li>Acute severe asthma</li>
+          <li>Bronchiolitis</li>
+          <li>Severe bronchopneumonia</li>
+          <li>Croup</li>
+          <li>Management in patient with hyperkalaemia</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-28">
+        <h3>28. Lumbosacral Lesion — Spina Bifida</h3>
+        <img src="assets/ospe/paed/lumbosacral_lesion.jpg" alt="Lumbosacral lesion"/>
+        <p><strong>Decide what you are seeing:</strong></p>
+        <ul>
+          <li>Spina bifida</li>
+        </ul>
+        <p><strong>Abnormality where?</strong></p>
+        <ul>
+          <li>Sacral area</li>
+        </ul>
+        <p><strong>Where else will you want to examine in this child?</strong></p>
+        <ul>
+          <li>Anus: patulous anus</li>
+          <li>Feet: clubbed feet (talipes equinovarus)</li>
+          <li>Head: hydrocephalus</li>
+        </ul>
+        <p><strong>What will you give a mother who has had a child with this abnormality?</strong></p>
+        <ul>
+          <li>Folic acid (5mg daily)</li>
+        </ul>
+        <ul>
+          <li>It is a result of failure of closure of the lower neural tube.</li>
+          <li>There is an increased alpha-foetal protein (AFP).</li>
+        </ul>
+        <p><strong>Reduced AFP are seen in what conditions?</strong></p>
+        <ul>
+          <li>Down syndrome</li>
+        </ul>
+        <ul>
+          <li>In the lumbo-sacral area, you find hair, or it may be hyperpigmented.</li>
+          <li>Can also find a dimple, sinus or lipoma.</li>
+          <li>Do x-ray of the lumbo-sacral area.</li>
+          <li>It is important to check the skull of the patient, because it may be associated with hydrocephalus, due to the possibility of congenital malformation, particularly Arnold Chiari.</li>
+          <li>VACTERYL</li>
+        </ul>
+        <p><strong>Treatment:</strong></p>
+        <ul>
+          <li>Surgery</li>
+        </ul>
+        <p><strong>Prognosis:</strong></p>
+        <ul>
+          <li>Depends on the associated lesions.</li>
+        </ul>
+        <ul>
+          <li>When they are brought to the hospital, they can be intact or ruptured.
+            <ul>
+              <li>Those that are ruptured have a risk of secondary infection, which can lead to meningitis.</li>
+            </ul>
+          </li>
+          <li>SB can be complicated by diastematomyelia.
+            <ul>
+              <li>With a defect in the SB, it can go up to the covering of the cord and pull on the nerve — this is called tethering of the cord.</li>
+              <li>This will cause paralysis of the bladder and the gut.</li>
+            </ul>
+          </li>
+          <li>Neural tube defects result from failed fusion of the neural plate.</li>
+        </ul>
+        <p><strong>How do you prevent neural tube defect?</strong></p>
+        <ul>
+          <li>Use of folic acid and adequate nutrition.</li>
+        </ul>
+        <p><strong>It can be complicated by:</strong></p>
+        <ul>
+          <li>Paralysis of the leg</li>
+          <li>Hip dislocation</li>
+          <li>Bladder dysfunction: neurogenic bladder</li>
+          <li>Bowel denervation: neurogenic bowel</li>
+          <li>Scoliosis</li>
+          <li>Talipes: clubbed foot</li>
+          <li>Hydrocephalus from Arnold Chiari malformation (due to cerebellar tonsil herniation near the foramen magnum)</li>
+        </ul>
+        <p><strong>Important lesions:</strong></p>
+        <ul>
+          <li>Omphalocele/exomphalos: the guts herniate into the spinal cord and come out of the skin</li>
+          <li>Gastroschisis</li>
+          <li>Hydrocephalus</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-29">
+        <h3>29. Chest Tube — Thoracocentesis &amp; Pleural Effusion</h3>
+        <img src="assets/ospe/paed/chest_tube.jpg" alt="Chest tube"/>
+        <p><strong>What is the procedure?</strong></p>
+        <ul>
+          <li>Thoracocentesis</li>
+        </ul>
+        <p><strong>What substances can be drained from the chest?</strong></p>
+        <ul>
+          <li>Blood</li>
+          <li>Fluid</li>
+          <li>Air</li>
+          <li>Pus</li>
+        </ul>
+        <p><strong>If you are examining this child, where will the location of the trachea be?</strong></p>
+        <ul>
+          <li>a. Central</li>
+          <li>b. Deviated away from the pathology</li>
+          <li>c. Deviated towards the pathology</li>
+          <li>Here, the trachea will be deviated to the contralateral side.</li>
+          <li>If there is lung collapse, it will deviate towards the side of the pathology.</li>
+          <li>If you do chest movement, the movement on the side with a pathology will be reduced, because the patient will protect that side because of pain.</li>
+          <li>Tactile vocal fremitus (hands) and vocal resonance (auscultate).</li>
+        </ul>
+        <p><strong>What are the risks/complications of the scars?</strong></p>
+        <ul>
+          <li>Infection</li>
+          <li>Stigma</li>
+          <li>Haemorrhage</li>
+          <li>Keloids</li>
+        </ul>
+        <p><strong>Complications of thoracocentesis:</strong></p>
+        <ul>
+          <li>Infections</li>
+          <li>Damage to muscles</li>
+          <li>Bleeding</li>
+          <li>Tension pneumothorax</li>
+          <li>Rib fracture</li>
+        </ul>
+        <p><strong>Know causes of hepatosplenomegaly:</strong></p>
+        <ul>
+          <li>Haemolytic causes</li>
+          <li>Infections: enteric fever, septicaemia, malaria</li>
+          <li>Leukaemia</li>
+        </ul>
+        <ul>
+          <li>The IV line shows the patient was on IV antibiotics.</li>
+          <li>The X-ray of this child will show:
+            <ul>
+              <li>Mediastinal shift from the right side to the left side; the heart will be shifted along.</li>
+              <li>Homogenous opacity with loss of the costophrenic and cardio-phrenic angles.</li>
+              <li>A meniscus sign.</li>
+              <li>Another cause of homogenous opacity is lobar pneumonia.</li>
+            </ul>
+          </li>
+          <li>Treatment is to let out the fluid by passing a thoracostomy tube.
+            <ul>
+              <li>This tube is attached, through the 7th or 8th intercostal space in the lateral clavicular line, to a bottle that contains sterile fluid.</li>
+              <li>The bottle is called a Winchester bottle.</li>
+            </ul>
+          </li>
+          <li>On examination, the child will have tachycardia, tachypnoea and hypoxia.
+            <ul>
+              <li>If you do chest expansion on this child, the chest expansion on the right side will be reduced.</li>
+              <li>On percussion, it will be stony dull, because this child might have pleural effusion — that is why the child will be in severe respiratory distress.</li>
+              <li>On percussion, you get stony dullness. Tactile fremitus is absent.</li>
+              <li>On auscultation, the breath sound will be diminished or absent. In lobar pneumonia (not this case), you get whispering pectoriloquy.</li>
+            </ul>
+          </li>
+          <li>The most important causative agent of this pneumonia is Staph aureus.
+            <ul>
+              <li>It may also result from Strep. influenzae or H. influenzae.</li>
+              <li>It can also be secondary to TB.</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Treatment:</strong></p>
+        <ul>
+          <li>Drain the fluid</li>
+          <li>Give antibiotics</li>
+          <li>Screen for TB</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-30">
+        <h3>30. Virilized Genitalia — Congenital Adrenal Hyperplasia</h3>
+        <img src="assets/ospe/paed/virilized_genitalia.jpg" alt="Virilized genitalia"/>
+        <p><strong>What do you see?</strong></p>
+        <ul>
+          <li>Enlarged clitoris</li>
+          <li>Micro-penis</li>
+          <li>Rudimentary scrotum</li>
+          <li>Enlarged labia</li>
+        </ul>
+        <p><strong>What is the diagnosis?</strong></p>
+        <ul>
+          <li>CAH (Congenital Adrenal Hyperplasia)</li>
+        </ul>
+        <p><strong>Test:</strong></p>
+        <ul>
+          <li>17-hydroxyprogesterone assay</li>
+        </ul>
+        <p><strong>Complications:</strong></p>
+        <ul>
+          <li>Dehydration</li>
+          <li>Vomiting</li>
+          <li>Electrolyte imbalance</li>
+          <li>Low sodium</li>
+          <li>Very dark skin: risk of Vitamin D deficiency</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-31">
+        <h3>31. Diffusely Enlarged Neck Swelling — Goitre</h3>
+        <img src="assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg" alt="Smooth diffusely enlarged neck swelling"/>
+        <p><strong>An incorrect statement regarding this child:</strong></p>
+        <ul>
+          <li>A. She has a grade 2 endemic goitre</li>
+          <li>B. <em>(option not specified in the source material)</em></li>
+        </ul>
+        <p><strong>Staging of goitre:</strong></p>
+        <ul>
+          <li>Grade 0: present, but cannot see or palpate it</li>
+          <li>Grade 1: present and can palpate it, but cannot see it</li>
+          <li>Grade 2: can see it if the neck is elevated</li>
+          <li>Grade 3: can see it without neck elevation</li>
+        </ul>
+        <p><strong>Treatment:</strong></p>
+        <ul>
+          <li>Surgery</li>
+          <li>Enzyme replacement</li>
+        </ul>
+        <p><strong>Prevention:</strong></p>
+        <ul>
+          <li>Stage 1: health education</li>
+          <li>Stage 2: use of iodized products, e.g. salt, sugar and seasonings</li>
+          <li>Stage 3: treatment</li>
+          <li>Stage 4: manage complications</li>
+          <li>Stage 5: rehabilitation</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-32">
+        <h3>32. Periorbital Oedema — Hypersensitivity</h3>
+        <img src="assets/ospe/paed/periorbital_edema.jpg" alt="Periorbital edema"/>
+        <p><strong>Rapid development of periorbital swelling:</strong></p>
+        <ul>
+          <li>Hypersensitivity reaction</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-33">
+        <h3>33. Kwashiorkor</h3>
+        <img src="assets/ospe/paed/kwashiorkor.jpg" alt="Kwashiorkor"/>
+        <p><strong>Findings:</strong></p>
+        <ul>
+          <li>Oedema</li>
+          <li>Flaky paint dermatosis</li>
+        </ul>
+        <p><strong>What will likely kill this child within 24 hours?</strong></p>
+        <ul>
+          <li>Hypoglycaemia</li>
+          <li>Hypothermia</li>
+          <li>Electrolyte derangement/dehydration</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-34">
+        <h3>34. Massive Umbilical Swelling — Omphalocele vs Gastroschisis</h3>
+        <img src="assets/ospe/paed/smooth_massive_umbilicus.jpg" alt="Smooth massive umbilicus"/>
+        <ul>
+          <li>Herniation from the anterior abdominal wall.</li>
+          <li>It is a midline herniation with a normal skin covering, which makes it an <strong>Omphalocele major</strong>.</li>
+          <li>If it is lateral to the umbilicus and does not have a normal skin covering, it is likely <strong>gastroschisis</strong>.</li>
+          <li>The site of the omphalocele determines what can enter into it.
+            <ul>
+              <li>A gut wall that can enter into it can get trapped, strangulated, and intestinal obstruction can occur.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-35">
+        <h3>35. Burkitt&rsquo;s Lymphoma</h3>
+        <img src="assets/ospe/paed/burkitts_lymphoma_2.png" alt="Burkitt's lymphoma"/>
+        <p><strong>What can you see?</strong></p>
+        <ul>
+          <li>Left-sided swelling involving the upper and lower jaw, with intra-oral extension.</li>
+          <li>The teeth are misaligned relative to the normal arrangement of the teeth.</li>
+        </ul>
+        <p><strong>What complications can the treatment of this disease cause?</strong></p>
+        <ul>
+          <li>Tumour lysis syndrome:
+            <ul>
+              <li>Hyperuricemia</li>
+              <li>Hyperkalaemia</li>
+              <li>Hyperphosphatemia</li>
+              <li>Hypocalcaemia</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>How do you prevent these complications?</strong></p>
+        <ul>
+          <li>Hyperhydration 2L/m²</li>
+          <li>Alkalinize the urine to facilitate excretion of uric acid</li>
+          <li>Allopurinol</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-36">
+        <h3>36. Skinny Body with Massive Ascites — Severe Malnutrition</h3>
+        <img src="assets/ospe/paed/skinny_body_and_limbs_with_massive_ascites.jpg" alt="Skinny body and limbs with massive ascites"/>
+        <p><strong>What do you see?</strong></p>
+        <ul>
+          <li>The abdomen is globular and shiny.</li>
+          <li>Severe malnutrition: evidence of wasting.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-37">
+        <h3>37. Hydrocephalus</h3>
+        <img src="assets/ospe/paed/hydrocephalus.jpg" alt="Hydrocephalus"/>
+        <p><strong>What do you see?</strong></p>
+        <ul>
+          <li>Globular head</li>
+          <li>Sunsetting appearance of the eye — seen in children with hydrocephalus; caused by paralysis of upward gaze.</li>
+          <li>Visible blood vessels</li>
+          <li>Widened anterior fontanelles</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-38">
+        <h3>38. Periorbital Oedema and Ascites — Nephrotic Syndrome</h3>
+        <img src="assets/ospe/paed/periorbital_edema_and_ascites.jpg" alt="Periorbital edema and ascites"/>
+        <p><strong>He has recurrent anasarca (generalized swelling). What will be the cause of the recurrent swelling?</strong></p>
+        <ul>
+          <li>Nephrotic syndrome</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-39">
+        <h3>39. Diaper Area Rash — Napkin Dermatitis</h3>
+        <img src="assets/ospe/paed/diaper_area_rash_2.jpg" alt="Diaper area rash"/>
+        <p><strong>What is this?</strong></p>
+        <ul>
+          <li>Napkin rash / ammoniacal dermatitis</li>
+        </ul>
+        <p><strong>Risk factors:</strong></p>
+        <ul>
+          <li>Not changing diapers early</li>
+          <li>Poor hygiene</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-40">
+        <h3>40. Ophthalmia Neonatorum</h3>
+        <img src="assets/ospe/paed/opthalmia_neonatorum.jpg" alt="Ophthalmia neonatorum"/>
+        <ul>
+          <li>Copious purulent discharge — it occludes the eye.</li>
+          <li>Diagnosis: Ophthalmia neonatorum.</li>
+          <li>Organisms: N. gonorrhoeae, Chlamydia trachomatis.</li>
+          <li>Treatment: eye swab, irrigate the eye, erythromycin.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-41">
+        <h3>41. Bilateral Cleft Lip</h3>
+        <img src="assets/ospe/paed/bilateral_cleft_lip.jpg" alt="Bilateral cleft lip"/>
+        <p><strong>Findings:</strong></p>
+        <ul>
+          <li>Cleft palate</li>
+          <li>Small occiput</li>
+          <li>Low-set ear</li>
+          <li>Flattened nasal bone</li>
+        </ul>
+        <p><strong>Problems likely to have:</strong></p>
+        <ul>
+          <li>Mental retardation</li>
+          <li>Difficulty in learning</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-42">
+        <h3>42. Lab Results — HUS (Haemolytic-Uraemic Syndrome)</h3>
+        <img src="assets/ospe/paed/hus_labs.jpg" alt="HUS labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>PCV: 21% (normal 33–42%)</li>
+          <li>Platelet count: 98,000/mm³ (normal 150–450/mm³)</li>
+          <li>Blood film: fragmented RBCs ++ (normally absent)</li>
+          <li>Na+: 125mmol/L (normal 130–150mmol/L)</li>
+          <li>K+: 6.5mmol/L (normal 3.5–5.0mmol/L)</li>
+          <li>HCO3: 15mmol/L (normal 22–28mmol/L)</li>
+          <li>Urea: 60mg/dl (normal 10–40mg/dl)</li>
+        </ul>
+        <p><strong>Diagnosis: HUS (Haemolytic-Uraemic Syndrome)</strong></p>
+        <ul>
+          <li>A microangiopathic picture; RBCs are haemolyzed.</li>
+          <li>Patient would have had bloody diarrhoea 2 weeks prior and presented with renal failure.</li>
+          <li>HUS is caused by E. coli and is seen in preschool children.</li>
+          <li>Clinical features: features of bloody diarrhoea, purpuric eruptions (because of thrombocytopenia), facial puffiness.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-43">
+        <h3>43. Lab Results — Severe Malaria</h3>
+        <img src="assets/ospe/paed/severe_malaria_labs.png" alt="Severe malaria labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>PCV: 15% (normal 33–42%)</li>
+          <li>RBS: 20mg/dl (normal 70–140mg/dl)</li>
+          <li>HCO3: 1mmol/L (normal 22–28mmol/L)</li>
+        </ul>
+        <p><strong>Diagnosis: Severe malaria</strong></p>
+        <ul>
+          <li>Presentation: prostration, coma.</li>
+          <li>Treatment: give artesunate; correct hypoglycaemia (give 10% dextrose in water; 4mls/kg IV push).</li>
+          <li>If there&rsquo;s septicaemia, give antibiotics.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-44">
+        <h3>44. Lab Results — Nutritional Rickets</h3>
+        <img src="assets/ospe/paed/nutritional_ricket_labs.png" alt="Nutritional rickets labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>Serum Ca++: 9mg/dl (normal 8.5–10.5mg/dl)</li>
+          <li>Serum Phosphate: 2mg/dl (normal 3.5–6.5mg/dl) ↓</li>
+          <li>Alkaline Phosphatase: 800u/l (normal 100–560u/l) ↑↑↑</li>
+        </ul>
+        <p><strong>Diagnosis: Nutritional rickets</strong></p>
+        <ul>
+          <li>Presentation: caput, rickety rosary, Harrison&rsquo;s sulcus, delayed closure of the fontanelle.</li>
+          <li>Treatment: Vitamin D, good nutrition.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-45">
+        <h3>45. Lab Results — Tumour Lysis Syndrome</h3>
+        <img src="assets/ospe/paed/tumor_lysis_syndrome_labs.png" alt="Tumor lysis syndrome labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>Serum uric acid: 10mg/dl (normal 2.5–7.0mg/dl) ↑</li>
+          <li>Serum potassium: 7mmol/dL (normal 3.5–5.0mmol/dL) ↑</li>
+          <li>Serum bicarbonate: 18mmol/dL (normal 22–28mmol/dL) ↓</li>
+        </ul>
+        <p><strong>Diagnosis: Tumour lysis syndrome</strong></p>
+        <ul>
+          <li>Hyperuricemia, hyperkalemia and acidosis are features of tumour lysis syndrome.</li>
+          <li>Differentials: renal failure, chronic renal failure.</li>
+          <li>Treatment:
+            <ul>
+              <li>Sodium polystyrene — 1ml/kg, given orally or rectally (note: can lead to hypernatremia).</li>
+              <li>Use insulin &amp; 50% dextrose in water — 1ml/kg (or soluble insulin — 0.1 unit/kg — put into infusion).</li>
+              <li>Salbutamol can also be used.</li>
+              <li>Monitor ECG for effect of K+ on the heart.</li>
+              <li>Hyperuricemia: give allopurinol or rasburicase.</li>
+              <li>Treatment of hyperkalemia: give cardio-protective treatment — 10% calcium gluconate.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-46">
+        <h3>46. Lab Results — UTI</h3>
+        <img src="assets/ospe/paed/uti_labs.png" alt="UTI labs"/>
+        <p><strong>Urine:</strong></p>
+        <ul>
+          <li>Appearance: cloudy</li>
+          <li>Nitrites: ++</li>
+          <li>Leukocyte esterase: +</li>
+          <li>Microscopy: 10 WBCs / HPF (HPF = high power field)</li>
+        </ul>
+        <p><strong>Diagnosis: UTI</strong></p>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-47">
+        <h3>47. Lab Results — Nephrotic Syndrome</h3>
+        <img src="assets/ospe/paed/nephrotic_syndrom_labs.png" alt="Nephrotic syndrome labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>Serum albumin: 2g/dl (normal 3.5–5.0g/dl) ↓</li>
+          <li>Serum cholesterol: 300mg/dl (normal &gt;200mg/dl) ↑</li>
+        </ul>
+        <p><strong>Urinalysis:</strong></p>
+        <ul>
+          <li>Protein: +++</li>
+          <li>Blood: +</li>
+        </ul>
+        <p><strong>Diagnosis: Atypical nephrotic syndrome</strong></p>
+        <ul>
+          <li>Due to the presence of blood, they may not respond to steroids, or might at first but relapse.</li>
+          <li>Presentation: oedema (anasarca).</li>
+          <li>Parameters: hypoalbuminemia, hypercholesterolemia, and massive proteinuria.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-48">
+        <h3>48. Lab Results — Materno-fetal Transfusion (Polycythaemia)</h3>
+        <img src="assets/ospe/paed/maternofetal_transfusion.png" alt="Maternofetal transfusion labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>PCV: 78% (normal 33–42%) ↑↑</li>
+          <li>Random Blood Sugar: 30mg/dl (normal 70–140mg/dl) ↓↓</li>
+        </ul>
+        <p><strong>Notes:</strong></p>
+        <ul>
+          <li>Baby would have been a macrosomic baby.</li>
+          <li>Presentation: skin will be plethoric &amp; ruddy (very red).</li>
+          <li>Treatment for polycythemia: partial exchange blood transfusion.</li>
+          <li>Differential diagnosis: twin-twin transfusion syndrome, post-date babies, materno-fetal transfusion syndrome.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-49">
+        <h3>49. Lab Results — Duodenal Atresia</h3>
+        <img src="assets/ospe/paed/duodenal_atresia_labs.png" alt="Duodenal atresia labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>Na+: 128mmol/L (normal 130–150mmol/L) ↓</li>
+          <li>K+: 3.5mmol/L (normal 3.5–5.0mmol/L) —</li>
+          <li>Chloride: 70mmol/L (normal 90–100mmol/L) ↓↓</li>
+          <li>Bicarbonate: 40mmol/L (normal 22–28mmol/L) ↑↑</li>
+          <li>Urea: 22mmol/L (normal 2.0–6.0mmol/L)</li>
+        </ul>
+        <p><strong>Diagnosis: Duodenal atresia → causing hypochloremic alkalosis</strong></p>
+        <ul>
+          <li>Presentation: repeated vomiting.</li>
+          <li>On examination: a dehydrated, malnourished child.</li>
+          <li>On X-ray: double bubble sign.</li>
+          <li>Marasmic-looking; 30% have a risk of Down syndrome; check VACTERYL.</li>
+          <li>Parameters: hyponatremia, K+ is normal, hypochloremia, alkalosis, urea is normal.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-50">
+        <h3>50. Lab Results — Bacterial Meningitis</h3>
+        <img src="assets/ospe/paed/bacterial_meningitis_labs.png" alt="Bacterial meningitis labs"/>
+        <p><strong>CSF:</strong></p>
+        <ul>
+          <li>Appearance: cloudy</li>
+          <li>Cell count: 30 cells/mm³ (normal 0–5 cells/mm³)</li>
+          <li>Glucose: 20mg/dl (normal 40–80mg/dl; should be ≥60% of blood glucose)</li>
+          <li>Protein: 105mg/dl (normal 15–45mg/dl)</li>
+          <li>Blood sugar: 80mg/dl (normal 70–140mg/dl)</li>
+        </ul>
+        <p>Note: normally, CSF sugar should be more than half of blood sugar.</p>
+        <p><strong>Diagnosis: Pyogenic/Bacterial meningitis</strong></p>
+        <ul>
+          <li>Presentation: fever, convulsion, coma.</li>
+          <li>On examination: signs of meningeal irritation.</li>
+          <li>Differential diagnosis: fungal, tuberculosis.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-51">
+        <h3>51. Lab Results — Dimorphic Anaemia</h3>
+        <img src="assets/ospe/paed/dimorphic_anaemia_labs.png" alt="Dimorphic anaemia labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>PCV: 26% (normal 33–42%)</li>
+          <li>Hb: 8.4g/dl (normal 12–15g/dl)</li>
+          <li>Blood film: macrocytosis, microcytosis, hypochromasia, poikilocytosis, target cells (mixed macrocytic/microcytic picture)</li>
+          <li>Reticulocyte count: 0.8% (normal 1–2%)</li>
+        </ul>
+        <p><strong>Diagnosis: Dimorphic anaemia</strong> (a dimorphic picture — two abnormalities)</p>
+        <ul>
+          <li>Diagnosis: nutritional anaemia (iron deficiency + megaloblastic anaemia).</li>
+          <li>Stool M/C/S → hookworm (sucks 0.3mls per worm).</li>
+          <li>Treatment: nutritional rehabilitation.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-52">
+        <h3>52. Lab Results — Bandemia</h3>
+        <img src="assets/ospe/paed/bandemia_labs.png" alt="Bandemia labs"/>
+        <p><strong>Blood:</strong></p>
+        <ul>
+          <li>PCV: 30% (normal 33–42%) ↓</li>
+          <li>WBC total: 15,000/mm³ (normal 4,000–11,000mm³) ↑</li>
+          <li>Neutrophil: 75% (normal 40–70%) ↑</li>
+          <li>Band: 5% (normal &lt;3%) ↑</li>
+          <li>Lymphocyte: 19% (normal 20–45%) ↓</li>
+          <li>Eosinophil: 1% (normal 1–6%) —</li>
+          <li>Blood film — RBC: normal</li>
+          <li>Blood film — WBC: shift to the left, with toxic granulation +++</li>
+        </ul>
+        <p><strong>Diagnosis: Bandemia</strong></p>
+        <ul>
+          <li>Increased bands in peripheral blood is an indication of severe infection/septicaemia; here you&rsquo;ll see toxic granulation.</li>
+          <li>Differential diagnosis: severe pneumonia, septicaemia, meningitis.</li>
+        </ul>
+      </div>
+      <hr/>
+
+      <div class="rdr-plain" id="paeds-ospe-note-53">
+        <h3>53. Lab Results — Meningitis (2)</h3>
+        <img src="assets/ospe/paed/meningitis_labs_2.png" alt="Meningitis labs 2"/>
+        <p><strong>Cerebrospinal Fluid / Blood:</strong></p>
+        <ul>
+          <li>Appearance: turbid</li>
+          <li>Cell count — WBC: 105/mm³ (normal &lt;5 cells/mm³) ↑↑↑</li>
+          <li>Neutrophil: 80% (normal &lt;10%) ↑</li>
+          <li>Lymphocyte: 20% (normal &lt;10%) ↑</li>
+          <li>Gram stain: negative bacilli</li>
+          <li>Protein: 150mg/dL (normal 15–45mg/dL) ↑↑↑</li>
+          <li>Sugar: 30mg/dL (normal 40–80mg/dL; ≥60% of blood glucose)</li>
+          <li>Blood sugar: 95mg/dL (normal 70–140mg/dL)</li>
+        </ul>
+        <p><strong>Diagnosis: Neutrophilic leukocytosis → meningitis</strong></p>
+        <ul>
+          <li>Gram stain will show Neisseria meningitidis.</li>
+        </ul>
+      </div>
     `;
     const contentHTML=isPhysiology?physioContentHTML:isPaedsOspeNotes?paedsOspeNotesFreeHTML:psychContentHTML;
 
@@ -67248,6 +68092,45 @@ function App(){
         {num:"16",title:"Subaponeurotic Hemorrhage",locked:!paedsOspeUnlocked},
         {num:"17",title:"Funny Looking Baby",locked:!paedsOspeUnlocked},
         {num:"18",title:"Patient Monitor",locked:!paedsOspeUnlocked}
+      ]},
+      {section:"Picture Revision",topics:[
+        {num:"19",title:"Body Stiffness and Icterus",locked:!paedsOspeUnlocked},
+        {num:"20",title:"Waiter's Tip Sign",locked:!paedsOspeUnlocked},
+        {num:"21",title:"Haemoglobin Reference Graph",locked:!paedsOspeUnlocked},
+        {num:"22",title:"Cyanosis — Meconium Aspiration",locked:!paedsOspeUnlocked},
+        {num:"23",title:"Scleral Icterus",locked:!paedsOspeUnlocked},
+        {num:"24",title:"Fever with Rash",locked:!paedsOspeUnlocked},
+        {num:"25",title:"Subconjunctival Haemorrhage",locked:!paedsOspeUnlocked},
+        {num:"26",title:"Severe Dehydration",locked:!paedsOspeUnlocked},
+        {num:"27",title:"Child on Nebulizer",locked:!paedsOspeUnlocked},
+        {num:"28",title:"Lumbosacral Lesion — Spina Bifida",locked:!paedsOspeUnlocked},
+        {num:"29",title:"Chest Tube — Thoracocentesis",locked:!paedsOspeUnlocked},
+        {num:"30",title:"Virilized Genitalia — CAH",locked:!paedsOspeUnlocked},
+        {num:"31",title:"Diffusely Enlarged Neck — Goitre",locked:!paedsOspeUnlocked},
+        {num:"32",title:"Periorbital Oedema",locked:!paedsOspeUnlocked},
+        {num:"33",title:"Kwashiorkor",locked:!paedsOspeUnlocked},
+        {num:"34",title:"Massive Umbilical Swelling",locked:!paedsOspeUnlocked},
+        {num:"35",title:"Burkitt's Lymphoma",locked:!paedsOspeUnlocked},
+        {num:"36",title:"Skinny Body with Massive Ascites",locked:!paedsOspeUnlocked},
+        {num:"37",title:"Hydrocephalus",locked:!paedsOspeUnlocked},
+        {num:"38",title:"Periorbital Oedema and Ascites",locked:!paedsOspeUnlocked},
+        {num:"39",title:"Diaper Area Rash",locked:!paedsOspeUnlocked},
+        {num:"40",title:"Ophthalmia Neonatorum",locked:!paedsOspeUnlocked},
+        {num:"41",title:"Bilateral Cleft Lip",locked:!paedsOspeUnlocked}
+      ]},
+      {section:"Lab Results",topics:[
+        {num:"42",title:"HUS Labs",locked:!paedsOspeUnlocked},
+        {num:"43",title:"Severe Malaria Labs",locked:!paedsOspeUnlocked},
+        {num:"44",title:"Nutritional Rickets Labs",locked:!paedsOspeUnlocked},
+        {num:"45",title:"Tumour Lysis Syndrome Labs",locked:!paedsOspeUnlocked},
+        {num:"46",title:"UTI Labs",locked:!paedsOspeUnlocked},
+        {num:"47",title:"Nephrotic Syndrome Labs",locked:!paedsOspeUnlocked},
+        {num:"48",title:"Materno-fetal Transfusion Labs",locked:!paedsOspeUnlocked},
+        {num:"49",title:"Duodenal Atresia Labs",locked:!paedsOspeUnlocked},
+        {num:"50",title:"Bacterial Meningitis Labs",locked:!paedsOspeUnlocked},
+        {num:"51",title:"Dimorphic Anaemia Labs",locked:!paedsOspeUnlocked},
+        {num:"52",title:"Bandemia Labs",locked:!paedsOspeUnlocked},
+        {num:"53",title:"Meningitis Labs 2",locked:!paedsOspeUnlocked}
       ]}
     ];
     const tocData=isPhysiology?physioTOC:isPaedsOspeNotes?paedsOspeNotesTOC:psychTOC;
@@ -67296,7 +68179,7 @@ function App(){
             e("span",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1rem"}},isPhysiology?"Physiology Notes":isPaedsOspeNotes?"OSPE Revision Notes":"Surgery Notes"),
             e("button",{onClick:()=>setTocOpen(false),style:{background:"none",border:"none",color:tocColor,fontSize:"1.2rem",cursor:"pointer",padding:"0 2px",opacity:.6}},"×")
           ),
-          e("p",{style:{fontSize:".7rem",color:"var(--rdr-muted)",marginTop:3}},isPhysiology?"2 sections · Sembulingam":isPaedsOspeNotes?"18 topics · Prof Osaghae, Clinical Rounds":"Tap any topic to jump")
+          e("p",{style:{fontSize:".7rem",color:"var(--rdr-muted)",marginTop:3}},isPhysiology?"2 sections · Sembulingam":isPaedsOspeNotes?"53 topics":"Tap any topic to jump")
         ),
         tocData.map((sec,si)=>e("div",{key:si},
           e("div",{className:"rdr-toc-section"},sec.section),
@@ -67320,10 +68203,9 @@ function App(){
             textAlign:"center"
           }},
           e("div",{style:{fontSize:"1.8rem",marginBottom:8}},"🔒"),
-          e("div",{style:{fontFamily:"Georgia,serif",fontWeight:900,fontSize:"1.05rem",marginBottom:6}},"Topics 6–18 are locked"),
-          e("p",{style:{fontSize:".82rem",color:"var(--rdr-muted,#888)",marginBottom:18,lineHeight:1.6}},"Unlock the full Provost's OSPE Revision Notes with your Paediatrics OSPE code (OSPD) to keep reading."),
+          e("p",{style:{fontSize:".9rem",fontFamily:"Georgia,serif",fontWeight:700,marginBottom:18}},"Unlock OSPE to continue reading."),
           e("button",{onClick:()=>{ setOspeCodeInput(""); setOspeCodeError(""); setOspePaywallSubject("paeds"); setShowOspePaywall(true); },
-            style:{background:"var(--rdr-accent,#7c3aed)",color:"#fff",border:"none",borderRadius:20,padding:"10px 26px",fontSize:".85rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Notes")
+            style:{background:"var(--rdr-accent,#7c3aed)",color:"#fff",border:"none",borderRadius:20,padding:"10px 26px",fontSize:".85rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock")
         ),
         isPaedsOspeNotes && paedsOspeUnlocked && e("div",{dangerouslySetInnerHTML:{__html:paedsOspeNotesLockedHTML}})
       )
