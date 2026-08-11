@@ -312,7 +312,7 @@ window._fbLoadFlags = async () => {
 const NOTES_PENDING_KEY = "medq_pending_notes";
 const saveNoteWithRetry = async (data, attempts=5, delay=3000) => {
   for(let i=0;i<attempts;i++){
-    try { await addDoc(collection(db,"note_activity"),data); return true; } catch(e){}
+    try { await addDoc(collection(db,"note_activity"),data); return true; } catch(e){ console.error("[MedQ note_activity write failed]",e); }
     if(i<attempts-1) await new Promise(r=>setTimeout(r, delay*(i+1)));
   }
   return false;
@@ -349,7 +349,7 @@ window._fbLoadNoteActivity = async () => {
     const q3=query(collection(db,"note_activity"),orderBy("ts","desc"));
     const snap=await getDocs(q3);
     return snap.docs.map(d=>({id:d.id,...d.data()}));
-  } catch(e){ return null; }
+  } catch(e){ console.error("[MedQ note_activity read failed]",e); return null; }
 };
 setTimeout(flushPendingNotes, 4500);
 // ── Past Questions poll voting ──
