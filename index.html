@@ -60619,11 +60619,11 @@ const COURSES = [
       { id:"paeds_neonatal", name:"Neonatology", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
     ]
   },
-  { id:"obgyn", name:"Obs & Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"IU",
+  { id:"obgyn", name:"Obstetrics and Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"IU",
     blocks:[
       { id:"obgyn_ospe", name:"OSPE", isObgOspeCard:true, available:true },
       { id:"obgyn_past_questions", name:"Past Questions", isObgPastQCard:true, available:true },
-      {id:"og1",name:"Obs & Gynaecology",questions:[],available:false},
+      {id:"og1",name:"Obstetrics and Gynaecology",questions:[],available:false},
     ]
   },
   { id:"internal", name:"Internal Medicine", emoji:"🩺", bg:"linear-gradient(135deg,#0f2744,#1a3a5c)", accent:"#c9a84c", school:"IU",
@@ -60945,9 +60945,9 @@ const EKO_COURSES = [
       { id:"eko_surg1", name:"Surgery", questions:[], available:false },
     ]
   },
-  { id:"eko_obgyn", name:"Obs & Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"EKO",
+  { id:"eko_obgyn", name:"Obstetrics and Gynaecology", emoji:"🌸", bg:"linear-gradient(135deg,#2d1a28,#4a2840)", accent:"#f48fb1", school:"EKO",
     blocks:[
-      { id:"eko_og1", name:"Obs & Gynaecology", questions:[], available:false },
+      { id:"eko_og1", name:"Obstetrics and Gynaecology", questions:[], available:false },
     ]
   },
   { id:"eko_psychiatry", name:"Psychiatry", emoji:"🧠", bg:"linear-gradient(135deg,#1a1a2e,#2d2b55)", accent:"#ce93d8", school:"EKO",
@@ -64154,7 +64154,7 @@ function App(){
               e("div",{style:{display:"flex",alignItems:"center",gap:10}},
                 e("div",{style:{width:4,height:28,borderRadius:2,background:ospeAccent,flexShrink:0}}),
                 e("div",null,
-                  e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Obs & Gynaecology"),
+                  e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Obstetrics and Gynaecology"),
                   e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"OSPE")
                 )
               ),
@@ -67220,7 +67220,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-20">
-        <h3>20. Waiter&rsquo;s Tip Sign — Brachial Plexus Injury</h3>
+        <h3>20. Erb&rsquo;s Palsy — Waiter&rsquo;s Tip Sign</h3>
         <img src="assets/ospe/paed/waiters_tip_sign.jpg" alt="Waiter's tip sign"/>
         <p><strong>Can you notice any abnormality in this child?</strong></p>
         <ul>
@@ -67303,7 +67303,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-23">
-        <h3>23. Scleral Icterus — Haemolytic Anaemia</h3>
+        <h3>23. Jaundice</h3>
         <img src="assets/ospe/paed/scleral_icterus_2.jpg" alt="Scleral icterus"/>
         <ul>
           <li>This child is jaundiced and pale.</li>
@@ -67343,7 +67343,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-24">
-        <h3>24. Fever with Rash — Differential Diagnosis</h3>
+        <h3>24. Fever with Rash — Measles</h3>
         <img src="assets/ospe/paed/rash.jpg" alt="Rash"/>
         <p><strong>This child has fever and rash. Which is the most likely in this child?</strong></p>
         <ul>
@@ -67615,7 +67615,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-31">
-        <h3>31. Diffusely Enlarged Neck Swelling — Goitre</h3>
+        <h3>31. Goitre</h3>
         <img src="assets/ospe/paed/smooth_diffusely_enlarged_neck_swelling.jpg" alt="Smooth diffusely enlarged neck swelling"/>
         <p><strong>An incorrect statement regarding this child:</strong></p>
         <ul>
@@ -67741,7 +67741,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-38">
-        <h3>38. Periorbital Oedema and Ascites — Nephrotic Syndrome</h3>
+        <h3>38. Anasarca</h3>
         <img src="assets/ospe/paed/periorbital_edema_and_ascites.jpg" alt="Periorbital edema and ascites"/>
         <p><strong>He has recurrent anasarca (generalized swelling). What will be the cause of the recurrent swelling?</strong></p>
         <ul>
@@ -67751,7 +67751,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-39">
-        <h3>39. Diaper Area Rash — Napkin Dermatitis</h3>
+        <h3>39. Ammoniacal Dermatitis/Nappy Rash</h3>
         <img src="assets/ospe/paed/diaper_area_rash_2.jpg" alt="Diaper area rash"/>
         <p><strong>What is this?</strong></p>
         <ul>
@@ -67767,7 +67767,7 @@ function App(){
 
       <div class="rdr-plain" id="paeds-ospe-note-40">
         <h3>40. Ophthalmia Neonatorum</h3>
-        <img src="assets/ospe/paed/opthalmia_neonatorum.jpg" alt="Ophthalmia neonatorum"/>
+        <img src="assets/ospe/paed/ophthamia_neonatorum.jpg" alt="Ophthalmia neonatorum"/>
         <ul>
           <li>Copious purulent discharge — it occludes the eye.</li>
           <li>Diagnosis: Ophthalmia neonatorum.</li>
@@ -67778,8 +67778,8 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-41">
-        <h3>41. Bilateral Cleft Lip</h3>
-        <img src="assets/ospe/paed/bilateral_cleft_lip.jpg" alt="Bilateral cleft lip"/>
+        <h3>41. Holoprosencephaly</h3>
+        <img src="assets/ospe/paed/bilateral_cleft_lip.jpg" alt="Holoprosencephaly"/>
         <p><strong>Findings:</strong></p>
         <ul>
           <li>Cleft palate</li>
@@ -67795,8 +67795,10 @@ function App(){
       </div>
       <hr/>
 
+      <div class="rdr-section-hdr" style="font-size:.85rem;margin:8px 0 20px">Laboratory Results</div>
+
       <div class="rdr-plain" id="paeds-ospe-note-42">
-        <h3>42. Lab Results — HUS (Haemolytic-Uraemic Syndrome)</h3>
+        <h3>42. Haemolytic-Uraemic Syndrome (HUS)</h3>
         <img src="assets/ospe/paed/hus_labs.jpg" alt="HUS labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67819,7 +67821,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-43">
-        <h3>43. Lab Results — Severe Malaria</h3>
+        <h3>43. Severe Malaria</h3>
         <img src="assets/ospe/paed/severe_malaria_labs.png" alt="Severe malaria labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67837,7 +67839,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-44">
-        <h3>44. Lab Results — Nutritional Rickets</h3>
+        <h3>44. Nutritional Rickets</h3>
         <img src="assets/ospe/paed/nutritional_ricket_labs.png" alt="Nutritional rickets labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67854,7 +67856,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-45">
-        <h3>45. Lab Results — Tumour Lysis Syndrome</h3>
+        <h3>45. Tumour Lysis Syndrome</h3>
         <img src="assets/ospe/paed/tumor_lysis_syndrome_labs.png" alt="Tumor lysis syndrome labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67881,7 +67883,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-46">
-        <h3>46. Lab Results — UTI</h3>
+        <h3>46. Urinary Tract Infection (UTI)</h3>
         <img src="assets/ospe/paed/uti_labs.png" alt="UTI labs"/>
         <p><strong>Urine:</strong></p>
         <ul>
@@ -67895,7 +67897,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-47">
-        <h3>47. Lab Results — Nephrotic Syndrome</h3>
+        <h3>47. Atypical Nephrotic Syndrome</h3>
         <img src="assets/ospe/paed/nephrotic_syndrom_labs.png" alt="Nephrotic syndrome labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67917,7 +67919,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-48">
-        <h3>48. Lab Results — Materno-fetal Transfusion (Polycythaemia)</h3>
+        <h3>48. Polycythaemia (Materno-fetal Transfusion)</h3>
         <img src="assets/ospe/paed/maternofetal_transfusion.png" alt="Maternofetal transfusion labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67935,7 +67937,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-49">
-        <h3>49. Lab Results — Duodenal Atresia</h3>
+        <h3>49. Duodenal Atresia</h3>
         <img src="assets/ospe/paed/duodenal_atresia_labs.png" alt="Duodenal atresia labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67957,7 +67959,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-50">
-        <h3>50. Lab Results — Bacterial Meningitis</h3>
+        <h3>50. Pyogenic/Bacterial Meningitis</h3>
         <img src="assets/ospe/paed/bacterial_meningitis_labs.png" alt="Bacterial meningitis labs"/>
         <p><strong>CSF:</strong></p>
         <ul>
@@ -67978,7 +67980,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-51">
-        <h3>51. Lab Results — Dimorphic Anaemia</h3>
+        <h3>51. Dimorphic Anaemia</h3>
         <img src="assets/ospe/paed/dimorphic_anaemia_labs.png" alt="Dimorphic anaemia labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -67997,7 +67999,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-52">
-        <h3>52. Lab Results — Bandemia</h3>
+        <h3>52. Bandemia</h3>
         <img src="assets/ospe/paed/bandemia_labs.png" alt="Bandemia labs"/>
         <p><strong>Blood:</strong></p>
         <ul>
@@ -68019,7 +68021,7 @@ function App(){
       <hr/>
 
       <div class="rdr-plain" id="paeds-ospe-note-53">
-        <h3>53. Lab Results — Meningitis (2)</h3>
+        <h3>53. Meningitis</h3>
         <img src="assets/ospe/paed/meningitis_labs_2.png" alt="Meningitis labs 2"/>
         <p><strong>Cerebrospinal Fluid / Blood:</strong></p>
         <ul>
@@ -68095,42 +68097,42 @@ function App(){
       ]},
       {section:"Picture Revision",topics:[
         {num:"19",title:"Body Stiffness and Icterus",locked:!paedsOspeUnlocked},
-        {num:"20",title:"Waiter's Tip Sign",locked:!paedsOspeUnlocked},
+        {num:"20",title:"Erb's Palsy",locked:!paedsOspeUnlocked},
         {num:"21",title:"Haemoglobin Reference Graph",locked:!paedsOspeUnlocked},
         {num:"22",title:"Cyanosis — Meconium Aspiration",locked:!paedsOspeUnlocked},
-        {num:"23",title:"Scleral Icterus",locked:!paedsOspeUnlocked},
-        {num:"24",title:"Fever with Rash",locked:!paedsOspeUnlocked},
+        {num:"23",title:"Jaundice",locked:!paedsOspeUnlocked},
+        {num:"24",title:"Fever with Rash — Measles",locked:!paedsOspeUnlocked},
         {num:"25",title:"Subconjunctival Haemorrhage",locked:!paedsOspeUnlocked},
         {num:"26",title:"Severe Dehydration",locked:!paedsOspeUnlocked},
         {num:"27",title:"Child on Nebulizer",locked:!paedsOspeUnlocked},
         {num:"28",title:"Lumbosacral Lesion — Spina Bifida",locked:!paedsOspeUnlocked},
         {num:"29",title:"Chest Tube — Thoracocentesis",locked:!paedsOspeUnlocked},
         {num:"30",title:"Virilized Genitalia — CAH",locked:!paedsOspeUnlocked},
-        {num:"31",title:"Diffusely Enlarged Neck — Goitre",locked:!paedsOspeUnlocked},
+        {num:"31",title:"Goitre",locked:!paedsOspeUnlocked},
         {num:"32",title:"Periorbital Oedema",locked:!paedsOspeUnlocked},
         {num:"33",title:"Kwashiorkor",locked:!paedsOspeUnlocked},
         {num:"34",title:"Massive Umbilical Swelling",locked:!paedsOspeUnlocked},
         {num:"35",title:"Burkitt's Lymphoma",locked:!paedsOspeUnlocked},
         {num:"36",title:"Skinny Body with Massive Ascites",locked:!paedsOspeUnlocked},
         {num:"37",title:"Hydrocephalus",locked:!paedsOspeUnlocked},
-        {num:"38",title:"Periorbital Oedema and Ascites",locked:!paedsOspeUnlocked},
-        {num:"39",title:"Diaper Area Rash",locked:!paedsOspeUnlocked},
+        {num:"38",title:"Anasarca",locked:!paedsOspeUnlocked},
+        {num:"39",title:"Ammoniacal Dermatitis/Nappy Rash",locked:!paedsOspeUnlocked},
         {num:"40",title:"Ophthalmia Neonatorum",locked:!paedsOspeUnlocked},
-        {num:"41",title:"Bilateral Cleft Lip",locked:!paedsOspeUnlocked}
+        {num:"41",title:"Holoprosencephaly",locked:!paedsOspeUnlocked}
       ]},
-      {section:"Lab Results",topics:[
-        {num:"42",title:"HUS Labs",locked:!paedsOspeUnlocked},
-        {num:"43",title:"Severe Malaria Labs",locked:!paedsOspeUnlocked},
-        {num:"44",title:"Nutritional Rickets Labs",locked:!paedsOspeUnlocked},
-        {num:"45",title:"Tumour Lysis Syndrome Labs",locked:!paedsOspeUnlocked},
-        {num:"46",title:"UTI Labs",locked:!paedsOspeUnlocked},
-        {num:"47",title:"Nephrotic Syndrome Labs",locked:!paedsOspeUnlocked},
-        {num:"48",title:"Materno-fetal Transfusion Labs",locked:!paedsOspeUnlocked},
-        {num:"49",title:"Duodenal Atresia Labs",locked:!paedsOspeUnlocked},
-        {num:"50",title:"Bacterial Meningitis Labs",locked:!paedsOspeUnlocked},
-        {num:"51",title:"Dimorphic Anaemia Labs",locked:!paedsOspeUnlocked},
-        {num:"52",title:"Bandemia Labs",locked:!paedsOspeUnlocked},
-        {num:"53",title:"Meningitis Labs 2",locked:!paedsOspeUnlocked}
+      {section:"Laboratory Results",topics:[
+        {num:"42",title:"Haemolytic-Uraemic Syndrome (HUS)",locked:!paedsOspeUnlocked},
+        {num:"43",title:"Severe Malaria",locked:!paedsOspeUnlocked},
+        {num:"44",title:"Nutritional Rickets",locked:!paedsOspeUnlocked},
+        {num:"45",title:"Tumour Lysis Syndrome",locked:!paedsOspeUnlocked},
+        {num:"46",title:"Urinary Tract Infection (UTI)",locked:!paedsOspeUnlocked},
+        {num:"47",title:"Atypical Nephrotic Syndrome",locked:!paedsOspeUnlocked},
+        {num:"48",title:"Polycythaemia (Materno-fetal Transfusion)",locked:!paedsOspeUnlocked},
+        {num:"49",title:"Duodenal Atresia",locked:!paedsOspeUnlocked},
+        {num:"50",title:"Pyogenic/Bacterial Meningitis",locked:!paedsOspeUnlocked},
+        {num:"51",title:"Dimorphic Anaemia",locked:!paedsOspeUnlocked},
+        {num:"52",title:"Bandemia",locked:!paedsOspeUnlocked},
+        {num:"53",title:"Meningitis",locked:!paedsOspeUnlocked}
       ]}
     ];
     const tocData=isPhysiology?physioTOC:isPaedsOspeNotes?paedsOspeNotesTOC:psychTOC;
