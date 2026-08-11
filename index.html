@@ -307,6 +307,51 @@ window._fbLoadFlags = async () => {
     return snap.docs.map(d=>({id:d.id,...d.data()}));
   } catch(e){ return null; }
 };
+
+// ── Notes reading activity (separate from MCQ attempts) ──
+const NOTES_PENDING_KEY = "medq_pending_notes";
+const saveNoteWithRetry = async (data, attempts=5, delay=3000) => {
+  for(let i=0;i<attempts;i++){
+    try { await addDoc(collection(db,"note_activity"),data); return true; } catch(e){}
+    if(i<attempts-1) await new Promise(r=>setTimeout(r, delay*(i+1)));
+  }
+  return false;
+};
+const flushPendingNotes = async () => {
+  try {
+    const raw = localStorage.getItem(NOTES_PENDING_KEY);
+    if(!raw) return;
+    const pending = JSON.parse(raw);
+    if(!pending.length) return;
+    const stillFailing = [];
+    for(const item of pending){
+      const ok = await saveNoteWithRetry(item, 2, 2000);
+      if(!ok) stillFailing.push(item);
+    }
+    localStorage.setItem(NOTES_PENDING_KEY, JSON.stringify(stillFailing));
+  } catch{}
+};
+window._fbSaveNoteActivity = async d => {
+  flushPendingNotes();
+  const ok = await saveNoteWithRetry(d);
+  if(!ok){
+    try {
+      const raw = localStorage.getItem(NOTES_PENDING_KEY)||"[]";
+      const pending = JSON.parse(raw);
+      pending.push(d);
+      localStorage.setItem(NOTES_PENDING_KEY, JSON.stringify(pending));
+    } catch{}
+  }
+  return ok;
+};
+window._fbLoadNoteActivity = async () => {
+  try {
+    const q3=query(collection(db,"note_activity"),orderBy("ts","desc"));
+    const snap=await getDocs(q3);
+    return snap.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e){ return null; }
+};
+setTimeout(flushPendingNotes, 4500);
 // ── Past Questions poll voting ──
 const _pqSanitize = s => s.replace(/[^a-zA-Z0-9]/g,'_').slice(0,100);
 window._fbPqVote = async (qId, newOpt, prevOpt) => {
@@ -60606,10 +60651,10 @@ const PAEDS_PROVOST_MCQ_Qs = [
 ];
 
 const COURSES = [
-  { id:"paeds", name:"Paediatrics", emoji:"👶", bg:"linear-gradient(135deg,#1a2535,#263d5c)", accent:"#90caf9", school:"IU",
+  { id:"paeds", name:"Paediatrics", emoji:"👶", bg:"linear-gradient(135deg,#1a2535,#263d5c)", accent:"#90caf9", school:"IU", hideUnifiedCard:true,
     blocks:[
-      { id:"paeds_provost_mcq", name:"Provost's MCQ Revision", questions:PAEDS_PROVOST_MCQ_Qs, available:true, subtitle:"52 MCQs revised by Provost" },
       { id:"paeds_ospe", name:"OSPE", isPaedsOspeCard:true, available:true },
+      { id:"paeds_provost_mcq", name:"Provost's MCQ Revision", questions:PAEDS_PROVOST_MCQ_Qs, available:true, subtitle:"52 MCQs revised by Provost" },
       { id:"paeds_past_questions", name:"Past Questions", isPaedsPastQCard:true, available:true },
       { id:"paeds_nephro", name:"Nephrology", questions:PAEDS_NEPHROLOGY_Qs, available:true, topic:"Junior & Senior Posting MCQs from Slides" },
       { id:"paeds_gi", name:"Gastroenterology & Nutrition", questions:[], available:false, topic:"Junior & Senior Posting MCQs from Slides" },
@@ -60981,7 +61026,7 @@ const getTopicCards = course => {
   const topicMap = {};
   // unified "All" card if multiple available question blocks (exclude pastq, finalLap, seniorPostingEntry)
   const qBlocks = available.filter(b=>!b.isPastQSection && !b.isFinalLap && !b.isSeniorPostingEntry);
-  if(qBlocks.length > 1){
+  if(qBlocks.length > 1 && !course.hideUnifiedCard){
     const allQs = qBlocks.filter(b=>b.id!=="mid_posting").flatMap(b=>b.questions||[]);
     if(allQs.length>0) cards.push({type:"unified", block:{id:"unified_"+course.id, name:"All "+course.name+" Questions", questions:allQs, available:true, isUnified:true}});
   }
@@ -61041,6 +61086,10 @@ const saveFlag = async data => {
 };
 const loadFlags = async () => {
   if(window._fbLoadFlags){ const r=await window._fbLoadFlags(); if(r!==null)return r; }
+  return [];
+};
+const loadNotesActivity = async () => {
+  if(window._fbLoadNoteActivity){ const r=await window._fbLoadNoteActivity(); if(r!==null)return r; }
   return [];
 };
 const loadAttempts = async () => {
@@ -61174,6 +61223,9 @@ function App(){
   const [flagDone,setFlagDone]=useState(false);
   const [flags,setFlags]=useState([]);
   const [loadingFlags,setLoadingFlags]=useState(false);
+  const [notesActivity,setNotesActivity]=useState([]);
+  const [loadingNotesActivity,setLoadingNotesActivity]=useState(false);
+  const [notesActivityFilter,setNotesActivityFilter]=useState("all");
   const [adminTab,setAdminTab]=useState("attempts");
 
   // ── General Bank free-tier state ──
@@ -61382,15 +61434,61 @@ function App(){
   const endQuizRef=useRef(null);
   const userAnswersRef=useRef([]); // stores {qIdx, picked} for review
 
-  // Reading view — progress bar + scroll-driven paywall reveal
+  // Reading view — progress bar + scroll-driven paywall reveal + reading activity tracking
+  const readingSessionRef=useRef(null); // {context,title,totalTopics,startedAt,maxPct,topicsSeen:Set,lastFlushed}
+  const flushReadingSession=useCallback((isFinal)=>{
+    const s=readingSessionRef.current;
+    if(!s || s.maxPct<1) return;
+    const topicsSeen=[...s.topicsSeen].sort((a,b)=>a-b);
+    const furthest=topicsSeen.length?topicsSeen[topicsSeen.length-1]:0;
+    const payload={
+      studentName:nameRef.current||"Unknown",
+      school:ls.get(SCHOOL_KEY)||"",
+      noteContext:s.context, noteTitle:s.title,
+      topicsSeen, furthestTopic:furthest, totalTopics:s.totalTopics,
+      maxScrollPct:Math.round(s.maxPct),
+      timeSpentSec:Math.round((Date.now()-s.startedAt)/1000),
+      final:!!isFinal,
+      ts:new Date().toISOString()
+    };
+    if(window._fbSaveNoteActivity) window._fbSaveNoteActivity(payload);
+    s.lastFlushed=Date.now();
+  },[]);
   useEffect(()=>{
+    // Flush and close out whatever session was previously active (covers both
+    // leaving reading_view entirely, and switching to a different note within it)
+    if(readingSessionRef.current){ flushReadingSession(true); readingSessionRef.current=null; }
     if(view!=="reading_view"){ return; }
+    const noteTitleMap={physiology:"Physiology Exam Notes",paeds_ospe_notes:"Provost's OSPE Revision Notes"};
+    const noteTotalMap={physiology:27,paeds_ospe_notes:53,psych:8};
+    const ctx=readingContext==="physiology"?"physiology":readingContext==="paeds_ospe_notes"?"paeds_ospe_notes":"psych";
+    readingSessionRef.current={
+      context:ctx, title:noteTitleMap[ctx]||"Surgery of the Thyroid",
+      totalTopics:noteTotalMap[ctx]||0,
+      startedAt:Date.now(), maxPct:0, topicsSeen:new Set(), lastFlushed:0
+    };
     const onScroll=()=>{
       const docH=document.documentElement.scrollHeight-window.innerHeight;
       const pct=docH>0?Math.min(100,(window.scrollY/docH)*100):0;
       const bar=document.getElementById("rdrProgressBar");
       if(bar) bar.style.width=pct+"%";
 
+      const s=readingSessionRef.current;
+      if(s){
+        if(pct>s.maxPct) s.maxPct=pct;
+        // Which topics have been scrolled to — a topic counts as "seen" once its
+        // heading has crossed into the upper 70% of the viewport.
+        const threshold=window.innerHeight*0.7;
+        document.querySelectorAll(".rdr-topic-num, [id^='paeds-ospe-note-']").forEach(el=>{
+          const top=el.getBoundingClientRect().top;
+          if(top<=threshold){
+            let num=el.id?parseInt(el.id.replace("paeds-ospe-note-",""),10):parseInt((el.textContent||"").trim(),10);
+            if(!isNaN(num)) s.topicsSeen.add(num);
+          }
+        });
+        // Periodic flush every ~20s of active scrolling so progress isn't lost
+        if(!s.lastFlushed || Date.now()-s.lastFlushed>20000) flushReadingSession(false);
+      }
     };
     window.addEventListener("scroll",onScroll,{passive:true});
     // Run once after layout settles so initial state is correct
@@ -61399,7 +61497,7 @@ function App(){
       window.removeEventListener("scroll",onScroll);
       cancelAnimationFrame(raf);
     };
-  },[view]);
+  },[view,readingContext,flushReadingSession]);
 
   // Sub device check handled at block entry
 
@@ -64881,7 +64979,7 @@ function App(){
         e("div",{style:{maxWidth:1100,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12}},
           e("div",null,
             e("p",{style:{color:"#c9a84c",fontSize:".7rem",letterSpacing:".15em",textTransform:"uppercase",marginBottom:3}},"Admin Dashboard"),
-            e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,3vw,1.6rem)",fontWeight:900,color:"#1a1a2e"}},(adminTab==="flags"?"Flagged Questions":adminTab==="codes"?"Access Code Manager":"Student Attempt Records"))
+            e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,3vw,1.6rem)",fontWeight:900,color:"#1a1a2e"}},(adminTab==="flags"?"Flagged Questions":adminTab==="codes"?"Access Code Manager":adminTab==="notes"?"Notes Reading Activity":"Student Attempt Records"))
           ),
           e("div",{style:{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}},
           e("button",{onClick:()=>{setAdminTab("attempts"),setFilterCourse("all")},
@@ -64895,6 +64993,12 @@ function App(){
               background:adminTab==="flags"?"#c9a84c":"transparent",
               color:adminTab==="flags"?"#fff":"#666",fontWeight:adminTab==="flags"?700:400}},
             "🚩 Flagged"+(flags.length?" ("+flags.length+")":"")),
+          e("button",{onClick:()=>{setAdminTab("notes");setLoadingNotesActivity(true);loadNotesActivity().then(r=>{setNotesActivity(r||[]);setLoadingNotesActivity(false);});},
+            style:{padding:"7px 14px",borderRadius:4,fontSize:".78rem",minHeight:36,
+              border:"1.5px solid "+(adminTab==="notes"?"#c9a84c":"#d5cfc4"),
+              background:adminTab==="notes"?"#c9a84c":"transparent",
+              color:adminTab==="notes"?"#fff":"#666",fontWeight:adminTab==="notes"?700:400}},
+            "📖 Notes"+(notesActivity.length?" ("+notesActivity.length+")":"")),
           e("button",{onClick:()=>{setAdminTab("codes");setLoadingCodes(true);if(window._fbLoadCodes)window._fbLoadCodes().then(r=>{setCodes(r||[]);setLoadingCodes(false);});else setLoadingCodes(false);},
             style:{padding:"7px 14px",borderRadius:4,fontSize:".78rem",minHeight:36,
               border:"1.5px solid "+(adminTab==="codes"?"#c9a84c":"#d5cfc4"),
@@ -65057,6 +65161,62 @@ function App(){
                     ))
                   )
             )
+          : adminTab==="notes"
+          ? (()=>{
+              const noteLabels={physiology:"Physiology Notes",paeds_ospe_notes:"Paeds OSPE Notes",psych:"Surgery (Thyroid) Notes"};
+              const filteredNotes=notesActivityFilter==="all"?notesActivity:notesActivity.filter(n=>n.noteContext===notesActivityFilter);
+              const uniqueReaders=[...new Set(filteredNotes.map(n=>n.studentName))].length;
+              const avgMaxScroll=filteredNotes.length?Math.round(filteredNotes.reduce((s,n)=>s+(n.maxScrollPct||0),0)/filteredNotes.length):0;
+              return loadingNotesActivity
+                ? e("div",{style:{textAlign:"center",padding:"60px 20px"}},e("div",{className:"spinner",style:{marginBottom:16}}),e("p",{style:{color:th.textMuted,fontSize:".9rem"}},"Loading reading activity..."))
+                : e(React.Fragment,null,
+                    e("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(155px,1fr))",gap:12,marginBottom:24}},
+                      [{label:"Reading Sessions",value:filteredNotes.length,icon:"📖"},
+                       {label:"Unique Readers",value:uniqueReaders,icon:"👥"},
+                       {label:"Avg Scroll Depth",value:avgMaxScroll+"%",icon:"📜"},
+                      ].map(s=>e("div",{key:s.label,style:{background:th.surface,borderRadius:6,padding:"14px 16px",boxShadow:"0 2px 8px rgba(15,39,68,.07)"}},
+                        e("p",{style:{fontSize:".68rem",color:th.textFaint,letterSpacing:".07em",textTransform:"uppercase",marginBottom:5}},s.icon+" "+s.label),
+                        e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"clamp(1.3rem,3vw,1.6rem)",color:th.text}},s.value)
+                      ))
+                    ),
+                    e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:16,flexWrap:"wrap"}},
+                      e("span",{style:{fontSize:".8rem",color:"#666",fontWeight:600}},"Filter:"),
+                      ["all","physiology","paeds_ospe_notes","psych"].map(f=>e("button",{key:f,onClick:()=>setNotesActivityFilter(f),
+                        style:{padding:"5px 12px",borderRadius:20,border:"1.5px solid",borderColor:notesActivityFilter===f?"#c9a84c":"#d5cfc4",background:notesActivityFilter===f?"#c9a84c":"transparent",color:notesActivityFilter===f?"#fff":"#666",fontSize:".76rem",transition:"all .15s",minHeight:34}},
+                        f==="all"?"All":noteLabels[f]
+                      ))
+                    ),
+                    filteredNotes.length===0
+                      ? e("div",{style:{background:th.surface,borderRadius:6,padding:"40px 20px",textAlign:"center",boxShadow:"0 2px 8px rgba(15,39,68,.07)"}},
+                          e("p",{style:{fontSize:"2rem",marginBottom:10}},"📭"),
+                          e("p",{style:{fontFamily:"Georgia,serif",fontSize:"1.05rem",color:"#ccc"}},"No reading activity yet"),
+                          e("p",{style:{fontSize:".83rem",marginTop:5,color:"#bbb",fontWeight:300}},"Records appear here as students read the notes")
+                        )
+                      : e("div",{style:{background:th.surface,borderRadius:6,overflow:"hidden",boxShadow:"0 2px 8px rgba(15,39,68,.07)"}},
+                          e("div",{className:"admin-scroll-top"},
+                            e("table",{style:{width:"100%",borderCollapse:"collapse",fontSize:"clamp(.76rem,1.5vw,.84rem)"}},
+                              e("thead",null,e("tr",{style:{background:"#f7f3ed",borderBottom:"2px solid #e0d8cc"}},
+                                ["Student","Notes","Topics Reached","Max Scroll","Time Spent","Date"].map(h=>e("th",{key:h,style:{padding:"11px 14px",textAlign:"left",color:"#555",fontFamily:"Georgia,serif",fontWeight:700,fontSize:".73rem",letterSpacing:".07em",textTransform:"uppercase",whiteSpace:"nowrap"}},h))
+                              )),
+                              e("tbody",null,filteredNotes.map((n,i)=>{
+                                const mins=Math.floor((n.timeSpentSec||0)/60), secs=(n.timeSpentSec||0)%60;
+                                return e("tr",{key:n.id||i,style:{borderBottom:"1px solid #f5f5f5",background:i%2===0?"#fff":"#faf8f5"}},
+                                  e("td",{style:{padding:"10px 14px",fontWeight:600,color:th.text,whiteSpace:"nowrap"}},n.studentName),
+                                  e("td",{style:{padding:"10px 14px",color:"#555",whiteSpace:"nowrap"}},noteLabels[n.noteContext]||n.noteTitle||"—"),
+                                  e("td",{style:{padding:"10px 14px",color:"#555",whiteSpace:"nowrap"}},
+                                    (n.furthestTopic?"Up to #"+String(n.furthestTopic).padStart(2,"0"):"—")+(n.totalTopics?" / "+n.totalTopics:"")+
+                                    (n.topicsSeen&&n.topicsSeen.length?"  ("+n.topicsSeen.length+" seen)":"")
+                                  ),
+                                  e("td",{style:{padding:"10px 14px",fontFamily:"Georgia,serif",fontWeight:700,color:th.text}},(n.maxScrollPct||0)+"%"),
+                                  e("td",{style:{padding:"10px 14px",color:"#555",whiteSpace:"nowrap"}},mins+"m "+secs+"s"),
+                                  e("td",{style:{padding:"10px 14px",color:"#999",whiteSpace:"nowrap",fontSize:".76rem"}},n.ts?new Date(n.ts).toLocaleString():"—")
+                                );
+                              }))
+                            )
+                          )
+                        )
+                  );
+            })()
           : loadingAdmin
           ? e("div",{style:{textAlign:"center",padding:"60px 20px"}},e("div",{className:"spinner",style:{marginBottom:16}}),e("p",{style:{color:th.textMuted,fontSize:".9rem"}},"Loading records..."))
           : e(React.Fragment,null,
