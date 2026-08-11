@@ -61431,6 +61431,8 @@ function App(){
   const blockRef=useRef(null);
   const topicRef=useRef(null);
   const nameRef=useRef("");
+  const studentNameRef=useRef(studentName); // kept in sync so reading-activity tracking has the name even when no quiz has started yet
+  useEffect(()=>{ studentNameRef.current=studentName; },[studentName]);
   const endQuizRef=useRef(null);
   const userAnswersRef=useRef([]); // stores {qIdx, picked} for review
 
@@ -61442,7 +61444,7 @@ function App(){
     const topicsSeen=[...s.topicsSeen].sort((a,b)=>a-b);
     const furthest=topicsSeen.length?topicsSeen[topicsSeen.length-1]:0;
     const payload={
-      studentName:nameRef.current||"Unknown",
+      studentName:studentNameRef.current||"Unknown",
       school:ls.get(SCHOOL_KEY)||"",
       noteContext:s.context, noteTitle:s.title,
       topicsSeen, furthestTopic:furthest, totalTopics:s.totalTopics,
