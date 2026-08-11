@@ -61509,15 +61509,23 @@ function App(){
             if(!isNaN(num)) s.topicsSeen.add(num);
           }
         });
-        // Periodic flush every ~20s of active scrolling so progress isn't lost
-        if(!s.lastFlushed || Date.now()-s.lastFlushed>20000) flushReadingSession(false);
+        // Progress (max scroll %, topics seen) accumulates locally in the ref as they
+        // read — intentionally NOT saved here. It's only written to the database once,
+        // when they leave this note (see the effect's flush-on-change/unmount above),
+        // so one reading session produces exactly one row instead of one every ~20s.
       }
     };
     window.addEventListener("scroll",onScroll,{passive:true});
     // Run once after layout settles so initial state is correct
     const raf=requestAnimationFrame(onScroll);
+    // Safety net: if the tab/browser is closed outright (rather than navigated back
+    // within the app), the normal cleanup below never runs — catch that here so the
+    // session still gets recorded once, rather than lost silently.
+    const onPageHide=()=>{ if(readingSessionRef.current){ flushReadingSession(true); readingSessionRef.current=null; } };
+    window.addEventListener("pagehide",onPageHide);
     return ()=>{
       window.removeEventListener("scroll",onScroll);
+      window.removeEventListener("pagehide",onPageHide);
       cancelAnimationFrame(raf);
     };
   },[view,readingContext,flushReadingSession]);
