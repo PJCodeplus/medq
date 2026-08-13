@@ -249,7 +249,7 @@ const PENDING_KEY = "medq_pending_attempts";
 
 // ── Admin auth (real Firebase Auth, replaces the old plaintext-password gate) ──
 // Set this to the email of the admin account you create in Firebase Console > Authentication.
-const ADMIN_EMAIL = "ndalimanmikhail@gmial.com"; // <-- CHANGE THIS to your real admin email
+const ADMIN_EMAIL = "ndalimanmikhail@gmail.com"; // <-- CHANGE THIS to your real admin email
 window._fbAdminEmail = ADMIN_EMAIL; // exposed so the app script can tell an admin session apart from a student session
 
 window._fbAdminLogin = async (password) => {
@@ -62315,9 +62315,7 @@ function App(){
           ),
           !studentEmail
             ? e("div",{style:{marginBottom:14}},
-                e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:7}},"Have an access code?"),
-                e("p",{style:{fontSize:".8rem",color:th.textMuted,marginBottom:10,lineHeight:1.5}},
-                  "First, verify your email — this is what your access gets tied to, so it follows you to any device."),
+                e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:7}},"Verify email"),
                 ospeEmailSent
                   ? e("div",{style:{background:"#eef6ee",border:"1px solid #bfe0bf",borderRadius:6,padding:"12px 14px"}},
                       e("p",{style:{fontSize:".82rem",color:"#2e7d32",fontWeight:700,marginBottom:4}},"Check your inbox 📬"),
@@ -62434,9 +62432,7 @@ function App(){
         // be redeemed by whoever actually controls that inbox.
         !studentEmail
           ? e("div",{style:{marginBottom:16}},
-              e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
-              e("p",{style:{fontSize:".82rem",color:th.textMuted,marginBottom:10,lineHeight:1.5}},
-                "First, verify your email — this is what your access gets tied to, so it follows you to any device."),
+              e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Verify email"),
               gbEmailSent
                 ? e("div",{style:{background:"#eef6ee",border:"1px solid #bfe0bf",borderRadius:6,padding:"14px 16px"}},
                     e("p",{style:{fontSize:".85rem",color:"#2e7d32",fontWeight:700,marginBottom:4}},"Check your inbox 📬"),
