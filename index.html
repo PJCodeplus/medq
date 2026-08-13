@@ -249,7 +249,7 @@ const PENDING_KEY = "medq_pending_attempts";
 
 // ── Admin auth (real Firebase Auth, replaces the old plaintext-password gate) ──
 // Set this to the email of the admin account you create in Firebase Console > Authentication.
-const ADMIN_EMAIL = "ndalimanmikhail@gmail.com"; // <-- CHANGE THIS to your real admin email
+const ADMIN_EMAIL = "you@example.com"; // <-- CHANGE THIS to your real admin email
 
 window._fbAdminLogin = async (password) => {
   try {
@@ -414,6 +414,22 @@ window._fbValidateCode = async (code, studentName) => {
       await updateDoc(ref, { activatedBy:studentName, activatedAt:new Date().toISOString(), status:"used" });
     }
     return { ok:true, school:data.school, expiresAt:data.expiresAt };
+  } catch(e) { return { ok:false, error:"network" }; }
+};
+// Read-only re-check of a code already stored locally — used to confirm an
+// "unlocked" flag in localStorage is actually backed by a real, activated
+// code in Firestore, rather than trusting local storage blindly (which
+// anyone can fabricate from the browser console).
+window._fbVerifyCode = async (code) => {
+  try {
+    if (!code) return { ok:false, error:"missing" };
+    const ref = doc(db, "codes", code.toUpperCase().trim());
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return { ok:false, error:"invalid" };
+    const data = snap.data();
+    if (!data.activatedBy) return { ok:false, error:"unused" }; // was never actually redeemed
+    if (data.expiresAt && new Date(data.expiresAt) < new Date()) return { ok:false, error:"expired" };
+    return { ok:true, expiresAt:data.expiresAt };
   } catch(e) { return { ok:false, error:"network" }; }
 };
 window._fbLoadCodes = async () => {
@@ -61473,6 +61489,39 @@ function App(){
   const nameRef=useRef("");
   const studentNameRef=useRef(studentName); // kept in sync so reading-activity tracking has the name even when no quiz has started yet
   useEffect(()=>{ studentNameRef.current=studentName; },[studentName]);
+
+  // ── Server-side re-check of "unlocked" flags ──
+  // Unlock state is cached in localStorage for speed, but localStorage can be
+  // edited directly from the browser console (e.g. `localStorage.setItem(...)`)
+  // to fake a paid unlock without ever having a real code. This effect
+  // re-confirms every locally "unlocked" flag against Firestore once on load,
+  // and reverts anything that isn't backed by a real, activated code.
+  useEffect(()=>{
+    const revalidate = async () => {
+      if(!window._fbVerifyCode) return;
+      if(gbAccess && gbAccess.code){
+        const r = await window._fbVerifyCode(gbAccess.code);
+        if(!r.ok){ setGbAccess(null); ls.set(GB_ACCESS_KEY,"null"); }
+      }
+      const checks = [
+        [tflIntUnlocked, TFL_INT_KEY, setTflIntUnlocked],
+        [tflSurgUnlocked, TFL_SURG_KEY, setTflSurgUnlocked],
+        [tflCommUnlocked, TFL_COMM_KEY, setTflCommUnlocked],
+        [paedsUnlocked, PAEDS_UNLOCKED_KEY, setPaedsUnlocked],
+        [paedsOgUnlocked, PAEDS_OG_UNLOCKED_KEY, setPaedsOgUnlocked],
+        [paedsOspeUnlocked, PAEDS_OSPE_UNLOCKED_KEY, setPaedsOspeUnlocked],
+        [obgOspeUnlocked, OBG_OSPE_UNLOCKED_KEY, setObgOspeUnlocked],
+      ];
+      for(const [isUnlocked, key, setter] of checks){
+        if(!isUnlocked) continue;
+        const storedCode = ls.get(key);
+        const r = await window._fbVerifyCode(storedCode);
+        if(!r.ok){ setter(false); try{ localStorage.removeItem(key); }catch{} }
+      }
+    };
+    if(window._fbReady) revalidate();
+    else window.addEventListener("fbReady", revalidate, {once:true});
+  },[]);
 
   // Name gate for entering notes — reuses the same name a student would use for test-taking,
   // so reading activity isn't logged as "Unknown" for students who read notes before ever starting a quiz
