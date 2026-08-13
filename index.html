@@ -234,6 +234,7 @@ input{font-family:'Georgia',serif}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, setDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 const app = initializeApp({
   apiKey:"AIzaSyAZQPCklqVhCwLtLb8Loc6vZAGp92jVQZ0",
   authDomain:"mcqs-platform-e74d3.firebaseapp.com",
@@ -243,7 +244,30 @@ const app = initializeApp({
   appId:"1:1004524287741:web:092f94a01804ff45e43094"
 });
 const db = getFirestore(app);
+const auth = getAuth(app);
 const PENDING_KEY = "medq_pending_attempts";
+
+// ── Admin auth (real Firebase Auth, replaces the old plaintext-password gate) ──
+// Set this to the email of the admin account you create in Firebase Console > Authentication.
+const ADMIN_EMAIL = "ndalimanmikhail@gmail.com"; // <-- CHANGE THIS to your real admin email
+
+window._fbAdminLogin = async (password) => {
+  try {
+    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
+    return { ok:true };
+  } catch(e) {
+    return { ok:false, error: e.code || "auth_error" };
+  }
+};
+window._fbAdminLogout = async () => {
+  try { await signOut(auth); return true; } catch(e){ return false; }
+};
+window._fbIsAdmin = () => !!auth.currentUser;
+// Keeps the app aware of login state (e.g. after a page refresh mid-session).
+onAuthStateChanged(auth, user => {
+  window._fbAdminSignedIn = !!user;
+  window.dispatchEvent(new Event("fbAdminAuthChanged"));
+});
 
 // Retry a single save up to 5 times with increasing delays
 const saveWithRetry = async (data, attempts=5, delay=3000) => {
@@ -417,7 +441,6 @@ window._fbCreateCodes = async (codes) => {
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 const e = React.createElement;
 const LETTERS = ["A","B","C","D","E"];
-const ADMIN_PW = "MedAdmin2024";
 const NAME_KEY = "medq_name";
 const LOCAL_KEY = "medq_attempts";
 const SCHOOL_KEY = "medq_school";
@@ -61206,6 +61229,7 @@ function App(){
   const [adminPw,setAdminPw]=useState("");
   const [adminOpen,setAdminOpen]=useState(false);
   const [adminErr,setAdminErr]=useState(false);
+  const [adminChecking,setAdminChecking]=useState(false);
   const [filterCourse,setFilterCourse]=useState("all");
   const [nameErr,setNameErr]=useState("");
   const [allAttempts,setAllAttempts]=useState(()=>{ try{ return JSON.parse(localStorage.getItem('medq_all_attempts')||'[]'); }catch{ return []; } });
@@ -65033,12 +65057,24 @@ function App(){
         ),
         e("input",{type:"password",placeholder:"Password",value:adminPw,
           onChange:ev=>{setAdminPw(ev.target.value);setAdminErr(false);},
-          onKeyDown:ev=>{if(ev.key==="Enter"){if(adminPw===ADMIN_PW){setAdminOpen(true);}else setAdminErr(true);}},
+          onKeyDown:ev=>{if(ev.key==="Enter"){
+            setAdminChecking(true);
+            window._fbAdminLogin(adminPw).then(res=>{
+              setAdminChecking(false);
+              if(res.ok){ setAdminOpen(true); } else { setAdminErr(true); }
+            });
+          }},
           style:{width:"100%",padding:"12px 16px",border:"1.5px solid "+(adminErr?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:"1rem",outline:"none",marginBottom:adminErr?6:10,background:th.inputBg,WebkitAppearance:"none"}}),
         adminErr&&e("p",{style:{color:"#c62828",fontSize:".8rem",marginBottom:10}},"Incorrect password"),
         e("div",{style:{display:"flex",gap:10}},
           e("button",{onClick:()=>setView("home"),style:{flex:1,padding:"12px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,color:"#666",minHeight:48}},"Cancel"),
-          e("button",{onClick:()=>{if(adminPw===ADMIN_PW){setAdminOpen(true);}else setAdminErr(true);},style:{flex:2,padding:"12px",background:"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48}},"Unlock")
+          e("button",{disabled:adminChecking,onClick:()=>{
+            setAdminChecking(true);
+            window._fbAdminLogin(adminPw).then(res=>{
+              setAdminChecking(false);
+              if(res.ok){ setAdminOpen(true); } else { setAdminErr(true); }
+            });
+          },style:{flex:2,padding:"12px",background:"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",minHeight:48,opacity:adminChecking?.6:1}},adminChecking?"Checking...":"Unlock")
         )
       )
     );
