@@ -234,7 +234,7 @@ input{font-family:'Georgia',serif}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, setDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 const app = initializeApp({
   apiKey:"AIzaSyAZQPCklqVhCwLtLb8Loc6vZAGp92jVQZ0",
   authDomain:"mcqs-platform-e74d3.firebaseapp.com",
@@ -249,7 +249,8 @@ const PENDING_KEY = "medq_pending_attempts";
 
 // ── Admin auth (real Firebase Auth, replaces the old plaintext-password gate) ──
 // Set this to the email of the admin account you create in Firebase Console > Authentication.
-const ADMIN_EMAIL = "ndalimanmikhail@gmail.com"; // <-- CHANGE THIS to your real admin email
+const ADMIN_EMAIL = "ndalimanmikhail@gmial.com"; // <-- CHANGE THIS to your real admin email
+window._fbAdminEmail = ADMIN_EMAIL; // exposed so the app script can tell an admin session apart from a student session
 
 window._fbAdminLogin = async (password) => {
   try {
@@ -268,6 +269,84 @@ onAuthStateChanged(auth, user => {
   window._fbAdminSignedIn = !!user;
   window.dispatchEvent(new Event("fbAdminAuthChanged"));
 });
+
+// ── Student email-link (passwordless) login ──
+// Used only to bind premium access to a real inbox a student controls,
+// so a redeemed code can't just be forwarded to someone else.
+const STUDENT_EMAIL_KEY = "medq_login_email";
+const LOGIN_URL = "https://pjcodeplus.github.io/medq/";
+
+window._fbSendLoginLink = async (email) => {
+  try {
+    const clean = (email||"").trim().toLowerCase();
+    if(!clean || !clean.includes("@")) return { ok:false, error:"invalid_email" };
+    await sendSignInLinkToEmail(auth, clean, { url: LOGIN_URL, handleCodeInApp: true });
+    try { localStorage.setItem(STUDENT_EMAIL_KEY, clean); } catch{}
+    return { ok:true };
+  } catch(e) { return { ok:false, error: e.code || "auth_error" }; }
+};
+
+window._fbCurrentStudentEmail = () => {
+  const u = auth.currentUser;
+  return u ? u.email : null;
+};
+
+// If this page load IS the click-through from the emailed link, complete
+// the sign-in automatically and clean the confirmation params out of the URL.
+(async () => {
+  try {
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let email = null;
+      try { email = localStorage.getItem(STUDENT_EMAIL_KEY); } catch{}
+      if (!email) {
+        // Different device/browser than where the link was requested —
+        // Firebase can't recover the email from the link alone, so ask.
+        email = window.prompt("Please confirm the email you used to request this login link:");
+      }
+      if (email) {
+        await signInWithEmailLink(auth, email.trim().toLowerCase(), window.location.href);
+        try { localStorage.setItem(STUDENT_EMAIL_KEY, email.trim().toLowerCase()); } catch{}
+      }
+      // Strip the sign-in query params so a refresh doesn't try to re-consume the link.
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  } catch(e) { console.error("[MedQ email-link sign-in failed]", e); }
+})();
+
+// Premium access, keyed by email. One doc per student, one boolean-ish
+// field per paywalled section (e.g. "general", "tflInt", "ospePaeds"...).
+window._fbGetPremiumStatus = async (email) => {
+  try {
+    const ref = doc(db, "premium_users", email);
+    const snap = await getDoc(ref);
+    return snap.exists() ? snap.data() : {};
+  } catch(e) { return null; }
+};
+
+// Redeems a code for the *signed-in* email and marks that section premium
+// for this email going forward, on any device.
+window._fbRedeemCodeForEmail = async (code, email, section) => {
+  try {
+    const codeUpper = code.toUpperCase().trim();
+    const ref = doc(db, "codes", codeUpper);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return { ok:false, error:"invalid" };
+    const data = snap.data();
+    if (data.expiresAt && new Date(data.expiresAt) < new Date()) return { ok:false, error:"expired" };
+    if (data.activatedBy && data.boundEmail && data.boundEmail !== email) return { ok:false, error:"used" };
+    if (!data.activatedBy) {
+      await updateDoc(ref, { activatedBy: email, boundEmail: email, activatedAt: new Date().toISOString(), status: "used" });
+    }
+    // section can be a single section name ("general") or an array
+    // (bundle codes that unlock more than one section at once, e.g. OSPE bundle).
+    const sections = Array.isArray(section) ? section : [section];
+    const premRef = doc(db, "premium_users", email);
+    const payload = { lastRedeemedCode: codeUpper };
+    for (const s of sections) payload[s] = { expiresAt: data.expiresAt||null, redeemedFrom: codeUpper };
+    await setDoc(premRef, payload, { merge:true });
+    return { ok:true, expiresAt: data.expiresAt };
+  } catch(e) { return { ok:false, error:"network" }; }
+};
 
 // Retry a single save up to 5 times with increasing delays
 const saveWithRetry = async (data, attempts=5, delay=3000) => {
@@ -61291,6 +61370,13 @@ function App(){
   const [gbCodeInput,setGbCodeInput]=useState("");
   const [gbCodeError,setGbCodeError]=useState("");
   const [gbCodeLoading,setGbCodeLoading]=useState(false);
+  // ── Student email login (used for premium binding, GB section first) ──
+  const [studentEmail,setStudentEmail]=useState(()=>{ try{return window._fbCurrentStudentEmail?window._fbCurrentStudentEmail():null;}catch{return null;} });
+  const [gbEmailInput,setGbEmailInput]=useState("");
+  const [gbEmailSent,setGbEmailSent]=useState(false);
+  const [gbEmailChecking,setGbEmailChecking]=useState(false);
+  const [gbEmailError,setGbEmailError]=useState("");
+  const [gbPremiumChecked,setGbPremiumChecked]=useState(false);
 
   // ── Subspecialties paywall (mirrors General Bank) ──
   const [subFreeCount,setSubFreeCount]=useState(()=>Number(ls.get(SUB_FREE_KEY)||0));
@@ -61469,6 +61555,10 @@ function App(){
   const [showOspePaywall,setShowOspePaywall]=useState(false);
   const [ospePaywallSubject,setOspePaywallSubject]=useState("paeds"); // "paeds" | "obg"
   const [ospeCodeInput,setOspeCodeInput]=useState("");
+  const [ospeEmailInput,setOspeEmailInput]=useState("");
+  const [ospeEmailSent,setOspeEmailSent]=useState(false);
+  const [ospeEmailChecking,setOspeEmailChecking]=useState(false);
+  const [ospeEmailError,setOspeEmailError]=useState("");
   const [ospeCodeError,setOspeCodeError]=useState("");
   const [ospeCodeLoading,setOspeCodeLoading]=useState(false);
   const [ospePayCopied,setOspePayCopied]=useState(false);
@@ -61522,6 +61612,62 @@ function App(){
     if(window._fbReady) revalidate();
     else window.addEventListener("fbReady", revalidate, {once:true});
   },[]);
+
+  // Keep studentEmail in sync with Firebase Auth state (student email-link
+  // sessions). Deliberately excludes the admin's own account, so testing
+  // while logged in as admin never accidentally grants yourself "premium".
+  useEffect(()=>{
+    const syncEmail = () => {
+      const current = window._fbCurrentStudentEmail ? window._fbCurrentStudentEmail() : null;
+      const adminEmail = window._fbAdminEmail;
+      setStudentEmail(current && current !== adminEmail ? current : null);
+    };
+    syncEmail();
+    window.addEventListener("fbAdminAuthChanged", syncEmail);
+    return ()=>window.removeEventListener("fbAdminAuthChanged", syncEmail);
+  },[]);
+
+  // When the General Bank paywall opens and a student is signed in, check
+  // whether they already own GB premium from another device — if so, skip
+  // the code step entirely and unlock immediately.
+  useEffect(()=>{
+    if(!showGbPaywall || !studentEmail || gbPremiumChecked) return;
+    let cancelled=false;
+    (async()=>{
+      const status = await window._fbGetPremiumStatus(studentEmail);
+      if(cancelled) return;
+      setGbPremiumChecked(true);
+      if(status && status.general && (!status.general.expiresAt || new Date(status.general.expiresAt) > new Date())){
+        const access={name:studentName||"Student",expiresAt:status.general.expiresAt,code:status.general.redeemedFrom};
+        setGbAccess(access);
+        ls.set(GB_ACCESS_KEY,JSON.stringify(access));
+        setGbFreeCount(0); ls.set(GB_FREE_KEY,"0");
+        setShowGbPaywall(false);
+      }
+    })();
+    return ()=>{cancelled=true;};
+  },[showGbPaywall,studentEmail,gbPremiumChecked]);
+  useEffect(()=>{ if(!showGbPaywall) setGbPremiumChecked(false); },[showGbPaywall]);
+
+  // Auto-unlock OSPE (Paeds and/or O&G) from a prior redemption on another
+  // device, as soon as we know who's signed in — not just when the paywall
+  // modal happens to be open, since a student might land straight into an
+  // OSPE quiz already in progress.
+  const ospePremiumCheckedRef=useRef(null);
+  useEffect(()=>{
+    if(!studentEmail || ospePremiumCheckedRef.current===studentEmail) return;
+    ospePremiumCheckedRef.current=studentEmail;
+    (async()=>{
+      const status=await window._fbGetPremiumStatus(studentEmail);
+      if(!status) return;
+      if(status.ospePaeds && (!status.ospePaeds.expiresAt || new Date(status.ospePaeds.expiresAt)>new Date()) && !paedsOspeUnlocked){
+        setPaedsOspeUnlocked(true); ls.set(PAEDS_OSPE_UNLOCKED_KEY, status.ospePaeds.redeemedFrom||"email-verified");
+      }
+      if(status.ospeObg && (!status.ospeObg.expiresAt || new Date(status.ospeObg.expiresAt)>new Date()) && !obgOspeUnlocked){
+        setObgOspeUnlocked(true); ls.set(OBG_OSPE_UNLOCKED_KEY, status.ospeObg.redeemedFrom||"email-verified");
+      }
+    })();
+  },[studentEmail]);
 
   // Name gate for entering notes — reuses the same name a student would use for test-taking,
   // so reading activity isn't logged as "Unknown" for students who read notes before ever starting a quiz
@@ -62167,39 +62313,72 @@ function App(){
             ),
             e("p",{style:{fontSize:".75rem",color:"#888",marginTop:6,lineHeight:1.5}},"Send payment receipt on WhatsApp · ",e("strong",{style:{color:"#1a1a2e"}},"09161452645"))
           ),
-          e("div",{style:{marginBottom:14}},
-            e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:7}},"Have an access code?"),
-            e("div",{style:{display:"flex",gap:8}},
-              e("input",{type:"text",placeholder:"e.g. "+allowedPfx[0]+"-XXXX-XXXX",value:ospeCodeInput,
-                onChange:ev=>{setOspeCodeInput(ev.target.value.toUpperCase());setOspeCodeError("");},
-                onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setOspeCodeInput(clean);setOspeCodeError("");},
-                onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("ospe_redeem_btn")?.click();},
-                style:{flex:1,padding:"10px 12px",border:"1.5px solid "+(ospeCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
-              e("button",{id:"ospe_redeem_btn",disabled:ospeCodeLoading||!ospeCodeInput.trim(),
-                onClick:async()=>{
-                  const code=ospeCodeInput.trim().toUpperCase();
-                  if(code.length<6){setOspeCodeError("Enter a valid code");return;}
-                  const valid=allowedPfx.some(p=>code.startsWith(p));
-                  if(!valid){setOspeCodeError("This code is not valid for "+subjName+" OSPE");return;}
-                  setOspeCodeLoading(true);setOspeCodeError("");
-                  const res=window._fbValidateCode?await window._fbValidateCode(code,studentName||"Student"):{ok:false,error:"network"};
-                  setOspeCodeLoading(false);
-                  if(res.ok){
-                    const isBundle=code.startsWith("OSBD");
-                    if(isBundle||code.startsWith("OSPD")){ setPaedsOspeUnlocked(true); try{localStorage.setItem(PAEDS_OSPE_UNLOCKED_KEY,code);}catch{} }
-                    if(isBundle||code.startsWith("OSPG")){ setObgOspeUnlocked(true); try{localStorage.setItem(OBG_OSPE_UNLOCKED_KEY,code);}catch{} }
-                    setPaedsOspeTflFreeCount(0); try{ls.set(PAEDS_OSPE_TFL_FREE_KEY,"0");}catch{} paedsOspeScrollSeenRef.current=0;
-                    setObgOspeTflFreeCount(0); try{ls.set(OBG_OSPE_TFL_FREE_KEY,"0");}catch{} obgOspeScrollSeenRef.current=0;
-                    setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");
-                  } else {
-                    setOspeCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"Already used by someone else.":"Network error — please try again.");
-                  }
-                },
-                style:{padding:"10px 16px",background:ospeCodeLoading?"#aaa":ospeAccentDark,color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:ospeCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-                ospeCodeLoading?"…":"Unlock →")
-            ),
-            ospeCodeError&&e("p",{style:{color:"#ef5350",fontSize:".72rem",marginTop:5}},ospeCodeError)
-          ),
+          !studentEmail
+            ? e("div",{style:{marginBottom:14}},
+                e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:7}},"Have an access code?"),
+                e("p",{style:{fontSize:".8rem",color:th.textMuted,marginBottom:10,lineHeight:1.5}},
+                  "First, verify your email — this is what your access gets tied to, so it follows you to any device."),
+                ospeEmailSent
+                  ? e("div",{style:{background:"#eef6ee",border:"1px solid #bfe0bf",borderRadius:6,padding:"12px 14px"}},
+                      e("p",{style:{fontSize:".82rem",color:"#2e7d32",fontWeight:700,marginBottom:4}},"Check your inbox 📬"),
+                      e("p",{style:{fontSize:".76rem",color:"#333",lineHeight:1.5}},"We sent a login link to ",e("strong",null,ospeEmailInput),". Open it on this device to continue."),
+                      e("button",{onClick:()=>{setOspeEmailSent(false);},style:{marginTop:6,background:"none",border:"none",color:th.textMuted,fontSize:".73rem",textDecoration:"underline",cursor:"pointer"}},"Use a different email")
+                    )
+                  : e("div",{style:{display:"flex",gap:8}},
+                      e("input",{type:"email",placeholder:"you@email.com",value:ospeEmailInput,
+                        onChange:ev=>{setOspeEmailInput(ev.target.value);setOspeEmailError("");},
+                        onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("ospe_send_link_btn")?.click();},
+                        style:{flex:1,padding:"10px 12px",border:"1.5px solid "+(ospeEmailError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif"}}),
+                      e("button",{id:"ospe_send_link_btn",disabled:ospeEmailChecking||!ospeEmailInput.trim(),
+                        onClick:async()=>{
+                          setOspeEmailChecking(true); setOspeEmailError("");
+                          const res=await window._fbSendLoginLink(ospeEmailInput.trim());
+                          setOspeEmailChecking(false);
+                          if(res.ok){ setOspeEmailSent(true); }
+                          else { setOspeEmailError(res.error==="invalid_email"?"Enter a valid email address.":"Couldn't send the link — try again."); }
+                        },
+                        style:{padding:"10px 16px",background:ospeEmailChecking?"#aaa":ospeAccentDark,color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:ospeEmailChecking?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+                        ospeEmailChecking?"…":"Send link")
+                    ),
+                ospeEmailError&&e("p",{style:{color:"#ef5350",fontSize:".72rem",marginTop:5}},ospeEmailError)
+              )
+            : e("div",{style:{marginBottom:14}},
+                e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:7}},
+                  e("p",{style:{fontWeight:700,fontSize:".75rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555"}},"Have an access code?"),
+                  e("p",{style:{fontSize:".68rem",color:th.textMuted}},"Signed in as ",e("strong",null,studentEmail))
+                ),
+                e("div",{style:{display:"flex",gap:8}},
+                  e("input",{type:"text",placeholder:"e.g. "+allowedPfx[0]+"-XXXX-XXXX",value:ospeCodeInput,
+                    onChange:ev=>{setOspeCodeInput(ev.target.value.toUpperCase());setOspeCodeError("");},
+                    onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setOspeCodeInput(clean);setOspeCodeError("");},
+                    onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("ospe_redeem_btn")?.click();},
+                    style:{flex:1,padding:"10px 12px",border:"1.5px solid "+(ospeCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
+                  e("button",{id:"ospe_redeem_btn",disabled:ospeCodeLoading||!ospeCodeInput.trim(),
+                    onClick:async()=>{
+                      const code=ospeCodeInput.trim().toUpperCase();
+                      if(code.length<6){setOspeCodeError("Enter a valid code");return;}
+                      const valid=allowedPfx.some(p=>code.startsWith(p));
+                      if(!valid){setOspeCodeError("This code is not valid for "+subjName+" OSPE");return;}
+                      setOspeCodeLoading(true);setOspeCodeError("");
+                      const isBundle=code.startsWith("OSBD");
+                      const sections=[]; if(isBundle||code.startsWith("OSPD"))sections.push("ospePaeds"); if(isBundle||code.startsWith("OSPG"))sections.push("ospeObg");
+                      const res=await window._fbRedeemCodeForEmail(code,studentEmail,sections);
+                      setOspeCodeLoading(false);
+                      if(res.ok){
+                        if(sections.includes("ospePaeds")){ setPaedsOspeUnlocked(true); ls.set(PAEDS_OSPE_UNLOCKED_KEY,code); }
+                        if(sections.includes("ospeObg")){ setObgOspeUnlocked(true); ls.set(OBG_OSPE_UNLOCKED_KEY,code); }
+                        setPaedsOspeTflFreeCount(0); try{ls.set(PAEDS_OSPE_TFL_FREE_KEY,"0");}catch{} paedsOspeScrollSeenRef.current=0;
+                        setObgOspeTflFreeCount(0); try{ls.set(OBG_OSPE_TFL_FREE_KEY,"0");}catch{} obgOspeScrollSeenRef.current=0;
+                        setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");
+                      } else {
+                        setOspeCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by a different email.":"Network error — please try again.");
+                      }
+                    },
+                    style:{padding:"10px 16px",background:ospeCodeLoading?"#aaa":ospeAccentDark,color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:ospeCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+                    ospeCodeLoading?"…":"Unlock →")
+                ),
+                ospeCodeError&&e("p",{style:{color:"#ef5350",fontSize:".72rem",marginTop:5}},ospeCodeError)
+              ),
           e("button",{onClick:()=>{setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");},
             style:{width:"100%",padding:"10px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".83rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
             "← Back")
@@ -62251,39 +62430,70 @@ function App(){
             e("strong",{style:{color:th.text}},"09161452645"),
             ". Your access code will be sent to you.")
         ),
-        // Code entry
-        e("div",{style:{marginBottom:16}},
-          e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
-          e("div",{style:{display:"flex",gap:8}},
-            e("input",{type:"text",placeholder:"e.g. GEN-XXXX-XXXX",value:gbCodeInput,
-              onChange:ev=>{setGbCodeInput(ev.target.value.toUpperCase());setGbCodeError("");},
-              onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setGbCodeInput(clean);setGbCodeError("");},
-              onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("gb_redeem_btn")?.click();},
-              style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(gbCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
-            e("button",{id:"gb_redeem_btn",disabled:gbCodeLoading||!gbCodeInput.trim(),
-              onClick:async()=>{
-                if(!gbCodeInput.trim())return;
-                setGbCodeLoading(true); setGbCodeError("");
-                const nameForCode=studentName||"General User";
-                const res=await window._fbValidateCode(gbCodeInput.trim(),nameForCode);
-                setGbCodeLoading(false);
-                if(res.ok){
-                  const access={name:nameForCode,expiresAt:res.expiresAt,code:gbCodeInput.trim()};
-                  setGbAccess(access);
-                  ls.set(GB_ACCESS_KEY,JSON.stringify(access));
-                  setGbFreeCount(0); ls.set(GB_FREE_KEY,"0");
-                  setShowGbPaywall(false);
-                  // Resume quiz where we left off
-                  setQIdx(q=>q); setPicked(null); setShowFb(false);
-                } else {
-                  setGbCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
-                }
-              },
-              style:{padding:"11px 18px",background:gbCodeLoading?"#aaa":"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:gbCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
-              gbCodeLoading?"…":"Redeem")
-          ),
-          gbCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},gbCodeError)
-        ),
+        // Code entry — now gated behind email login, so a code can only ever
+        // be redeemed by whoever actually controls that inbox.
+        !studentEmail
+          ? e("div",{style:{marginBottom:16}},
+              e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555",marginBottom:8}},"Have an access code?"),
+              e("p",{style:{fontSize:".82rem",color:th.textMuted,marginBottom:10,lineHeight:1.5}},
+                "First, verify your email — this is what your access gets tied to, so it follows you to any device."),
+              gbEmailSent
+                ? e("div",{style:{background:"#eef6ee",border:"1px solid #bfe0bf",borderRadius:6,padding:"14px 16px"}},
+                    e("p",{style:{fontSize:".85rem",color:"#2e7d32",fontWeight:700,marginBottom:4}},"Check your inbox 📬"),
+                    e("p",{style:{fontSize:".78rem",color:"#333",lineHeight:1.5}},"We sent a login link to ",e("strong",null,gbEmailInput),". Open it on this device to continue — or tap the link on your phone and come back here."),
+                    e("button",{onClick:()=>{setGbEmailSent(false);},style:{marginTop:8,background:"none",border:"none",color:th.textMuted,fontSize:".75rem",textDecoration:"underline",cursor:"pointer"}},"Use a different email")
+                  )
+                : e("div",{style:{display:"flex",gap:8}},
+                    e("input",{type:"email",placeholder:"you@email.com",value:gbEmailInput,
+                      onChange:ev=>{setGbEmailInput(ev.target.value);setGbEmailError("");},
+                      onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("gb_send_link_btn")?.click();},
+                      style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(gbEmailError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif"}}),
+                    e("button",{id:"gb_send_link_btn",disabled:gbEmailChecking||!gbEmailInput.trim(),
+                      onClick:async()=>{
+                        setGbEmailChecking(true); setGbEmailError("");
+                        const res=await window._fbSendLoginLink(gbEmailInput.trim());
+                        setGbEmailChecking(false);
+                        if(res.ok){ setGbEmailSent(true); }
+                        else { setGbEmailError(res.error==="invalid_email"?"Enter a valid email address.":"Couldn't send the link — check your connection and try again."); }
+                      },
+                      style:{padding:"11px 18px",background:gbEmailChecking?"#aaa":"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:gbEmailChecking?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+                      gbEmailChecking?"…":"Send link")
+                  ),
+              gbEmailError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},gbEmailError)
+            )
+          : e("div",{style:{marginBottom:16}},
+              e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}},
+                e("p",{style:{fontWeight:700,fontSize:".78rem",letterSpacing:".07em",textTransform:"uppercase",color:"#555"}},"Have an access code?"),
+                e("p",{style:{fontSize:".72rem",color:th.textMuted}},"Signed in as ",e("strong",null,studentEmail))
+              ),
+              e("div",{style:{display:"flex",gap:8}},
+                e("input",{type:"text",placeholder:"e.g. GEN-XXXX-XXXX",value:gbCodeInput,
+                  onChange:ev=>{setGbCodeInput(ev.target.value.toUpperCase());setGbCodeError("");},
+                  onPaste:ev=>{ev.preventDefault();const raw=ev.clipboardData.getData("text");const clean=raw.replace(/[^A-Za-z0-9\-]/g,"").toUpperCase();setGbCodeInput(clean);setGbCodeError("");},
+                  onKeyDown:ev=>{if(ev.key==="Enter")document.getElementById("gb_redeem_btn")?.click();},
+                  style:{flex:1,padding:"11px 14px",border:"1.5px solid "+(gbCodeError?"#ef5350":"#d5cfc4"),borderRadius:4,fontSize:".9rem",outline:"none",background:th.inputBg,fontFamily:"Georgia,serif",textTransform:"uppercase",letterSpacing:".05em"}}),
+                e("button",{id:"gb_redeem_btn",disabled:gbCodeLoading||!gbCodeInput.trim(),
+                  onClick:async()=>{
+                    if(!gbCodeInput.trim())return;
+                    setGbCodeLoading(true); setGbCodeError("");
+                    const res=await window._fbRedeemCodeForEmail(gbCodeInput.trim(),studentEmail,"general");
+                    setGbCodeLoading(false);
+                    if(res.ok){
+                      const access={name:studentName||"Student",expiresAt:res.expiresAt,code:gbCodeInput.trim()};
+                      setGbAccess(access);
+                      ls.set(GB_ACCESS_KEY,JSON.stringify(access));
+                      setGbFreeCount(0); ls.set(GB_FREE_KEY,"0");
+                      setShowGbPaywall(false);
+                      setQIdx(q=>q); setPicked(null); setShowFb(false);
+                    } else {
+                      setGbCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by a different email.":"Network error — please try again.");
+                    }
+                  },
+                  style:{padding:"11px 18px",background:gbCodeLoading?"#aaa":"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:gbCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
+                  gbCodeLoading?"…":"Redeem")
+              ),
+              gbCodeError&&e("p",{style:{color:"#c62828",fontSize:".78rem",marginTop:6}},gbCodeError)
+            ),
         e("button",{onClick:()=>{setShowGbPaywall(false);endQuiz(false);},
           style:{width:"100%",padding:"11px",background:"transparent",border:"1.5px solid #d5cfc4",borderRadius:4,fontSize:".85rem",color:th.textMuted,cursor:"pointer",fontFamily:"Georgia,serif"}},
           "End session & see results")
