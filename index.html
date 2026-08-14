@@ -426,7 +426,7 @@ window._fbValidateCode = async (code, studentName) => {
     }
     // Both slots already taken.
     return { ok:false, error:"used" };
-  } catch(e) { return { ok:false, error:"network" }; }
+  } catch(e) { console.error("[MedQ code redemption failed]", e); return { ok:false, error:"network" }; }
 };
 // Read-only re-check of a code already stored locally — used to confirm an
 // "unlocked" flag in localStorage is actually backed by a real, activated
@@ -62214,7 +62214,7 @@ function App(){
                     setObgOspeTflFreeCount(0); try{ls.set(OBG_OSPE_TFL_FREE_KEY,"0");}catch{} obgOspeScrollSeenRef.current=0;
                     setShowOspePaywall(false);setOspeCodeInput("");setOspeCodeError("");
                   } else {
-                    setOspeCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code isn't available for another device yet — ask your admin to enable a second use.":"Network error — please try again.");
+                    setOspeCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
                   }
                 },
                 style:{padding:"10px 16px",background:ospeCodeLoading?"#aaa":ospeAccentDark,color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".85rem",cursor:ospeCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
@@ -62297,7 +62297,7 @@ function App(){
                   setShowGbPaywall(false);
                   setQIdx(q=>q); setPicked(null); setShowFb(false);
                 } else {
-                  setGbCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code isn't available for another device yet — ask your admin to enable a second use.":"Network error — please try again.");
+                  setGbCodeError(res.error==="invalid"?"Code not found — check and try again.":res.error==="expired"?"This code has expired.":res.error==="used"?"This code has already been used by someone else.":"Network error — please try again.");
                 }
               },
               style:{padding:"11px 18px",background:gbCodeLoading?"#aaa":"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".88rem",cursor:gbCodeLoading?"not-allowed":"pointer",whiteSpace:"nowrap"}},
