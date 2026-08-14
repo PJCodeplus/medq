@@ -410,6 +410,7 @@ window._fbValidateCode = async (code, studentName) => {
     const snap = await getDoc(ref);
     if (!snap.exists()) return { ok:false, error:"invalid" };
     const data = snap.data();
+    if (data.killed) return { ok:false, error:"killed" };
     if (data.expiresAt && new Date(data.expiresAt) < new Date()) return { ok:false, error:"expired" };
     // Slot 1 — first device/person to use this code.
     if (!data.activatedBy) {
@@ -439,6 +440,7 @@ window._fbVerifyCode = async (code) => {
     const snap = await getDoc(ref);
     if (!snap.exists()) return { ok:false, error:"invalid" };
     const data = snap.data();
+    if (data.killed) return { ok:false, error:"killed" }; // admin has revoked this code — kick any device still using it
     if (!data.activatedBy) return { ok:false, error:"unused" }; // was never actually redeemed
     if (data.expiresAt && new Date(data.expiresAt) < new Date()) return { ok:false, error:"expired" };
     return { ok:true, expiresAt:data.expiresAt };
@@ -465,6 +467,18 @@ window._fbCreateCodes = async (codes) => {
 window._fbSetSecondUseAllowed = async (codeId, allowed) => {
   try {
     await updateDoc(doc(db,"codes",codeId), { secondUseAllowed: !!allowed });
+    return true;
+  } catch(e){ return false; }
+};
+// Admin-only: permanently kill a code. Once killed, _fbValidateCode refuses
+// any further redemption and _fbVerifyCode (which every device re-checks on
+// load, see the revalidate effect) starts failing, which automatically logs
+// out anyone currently "unlocked" via this code — no need to touch their
+// device. This is irreversible by design: issue the student a fresh code
+// instead of un-killing an old one.
+window._fbKillCode = async (codeId) => {
+  try {
+    await updateDoc(doc(db,"codes",codeId), { killed:true, killedAt:new Date().toISOString() });
     return true;
   } catch(e){ return false; }
 };
@@ -61421,6 +61435,7 @@ function App(){
   const [codes,setCodes]=useState([]);
   const [loadingCodes,setLoadingCodes]=useState(false);
   const [togglingSecondUse,setTogglingSecondUse]=useState(null); // codeId currently being toggled, or null
+  const [killingCode,setKillingCode]=useState(null); // codeId currently being killed, or null
   const [genSchool,setGenSchool]=useState("IU");
   const [genCount,setGenCount]=useState(5);
   const [genDays,setGenDays]=useState(365);
@@ -65425,22 +65440,26 @@ function App(){
                   : e("div",{style:{overflowX:"auto"}},
                       e("table",{style:{width:"100%",borderCollapse:"collapse",fontSize:".8rem"}},
                         e("thead",null,e("tr",{style:{background:"#f7f3ed"}},
-                          ["Code","School","Expires","Status","Activated By","2nd Device","Activated By (2nd)"].map(h=>e("th",{key:h,style:{padding:"10px 14px",textAlign:"left",color:th.textMuted,fontWeight:600,fontSize:".72rem",letterSpacing:".07em",textTransform:"uppercase",whiteSpace:"nowrap"}},h))
+                          ["Code","School","Expires","Status","Activated By","2nd Device","Activated By (2nd)","Kill"].map(h=>e("th",{key:h,style:{padding:"10px 14px",textAlign:"left",color:th.textMuted,fontWeight:600,fontSize:".72rem",letterSpacing:".07em",textTransform:"uppercase",whiteSpace:"nowrap"}},h))
                         )),
                         e("tbody",null,codes.map((c,i)=>{
                           const active=c.status==="active";
                           const codeId=c.id||c.code;
                           const secondSlotFilled=!!c.activatedBy2;
                           return e("tr",{key:codeId||i,style:{borderBottom:"1px solid #f5f0e8",background:i%2===0?"#fff":"#faf8f5"}},
-                            e("td",{style:{padding:"9px 14px",fontFamily:"'Courier New',monospace",fontWeight:600,color:active?"#0f2744":"#aaa",whiteSpace:"nowrap"}},c.id||c.code),
+                            e("td",{style:{padding:"9px 14px",fontFamily:"'Courier New',monospace",fontWeight:600,color:c.killed?"#c62828":active?"#0f2744":"#aaa",whiteSpace:"nowrap",textDecoration:c.killed?"line-through":"none"}},c.id||c.code),
                             e("td",{style:{padding:"9px 14px",color:"#666"}},c.school),
                             e("td",{style:{padding:"9px 14px",color:"#666",whiteSpace:"nowrap"}},new Date(c.expiresAt).toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})),
                             e("td",{style:{padding:"9px 14px"}},
-                              e("span",{style:{background:active?"#e8f5ee":"#f5f0e8",color:active?"#2e7d32":"#aaa",padding:"2px 9px",borderRadius:10,fontSize:".72rem",fontWeight:700}},active?"Active":"Used")
+                              c.killed
+                                ? e("span",{style:{background:"#fdecec",color:"#c62828",padding:"2px 9px",borderRadius:10,fontSize:".72rem",fontWeight:700}},"Killed")
+                                : e("span",{style:{background:active?"#e8f5ee":"#f5f0e8",color:active?"#2e7d32":"#aaa",padding:"2px 9px",borderRadius:10,fontSize:".72rem",fontWeight:700}},active?"Active":"Used")
                             ),
                             e("td",{style:{padding:"9px 14px",color:"#555"}},c.activatedBy||e("span",{style:{color:"#ccc"}},"—")),
                             e("td",{style:{padding:"9px 14px"}},
-                              !c.activatedBy
+                              c.killed
+                                ? e("span",{style:{color:"#ccc",fontSize:".72rem"}},"—")
+                                : !c.activatedBy
                                 ? e("span",{style:{color:"#ccc",fontSize:".72rem"}},"—")
                                 : secondSlotFilled
                                 ? e("span",{style:{background:"#e8f5ee",color:"#2e7d32",padding:"2px 9px",borderRadius:10,fontSize:".72rem",fontWeight:700}},"Used")
@@ -65457,7 +65476,26 @@ function App(){
                                     style:{padding:"3px 10px",fontSize:".72rem",fontWeight:700,borderRadius:10,border:"1.5px solid "+(c.secondUseAllowed?"#c9a84c":"#d5cfc4"),background:c.secondUseAllowed?"#c9a84c":"transparent",color:c.secondUseAllowed?"#fff":"#666",cursor:togglingSecondUse===codeId?"wait":"pointer",whiteSpace:"nowrap"}
                                   },togglingSecondUse===codeId?"…":c.secondUseAllowed?"Allowed ✓":"Allow 2nd use")
                             ),
-                            e("td",{style:{padding:"9px 14px",color:"#555"}},c.activatedBy2||e("span",{style:{color:"#ccc"}},"—"))
+                            e("td",{style:{padding:"9px 14px",color:"#555"}},c.activatedBy2||e("span",{style:{color:"#ccc"}},"—")),
+                            e("td",{style:{padding:"9px 14px"}},
+                              c.killed
+                                ? e("span",{style:{fontSize:".72rem",color:"#c62828"}},"☠ Killed")
+                                : e("button",{
+                                    disabled:killingCode===codeId,
+                                    onClick:async()=>{
+                                      if(!window.confirm("Kill code "+codeId+"? This is permanent — the student(s) using it will be logged out immediately and the code can never be used again. You'll need to issue a fresh code.")) return;
+                                      setKillingCode(codeId);
+                                      const ok=await window._fbKillCode(codeId);
+                                      if(ok){
+                                        setCodes(prev=>prev.map(x=>(x.id||x.code)===codeId?{...x,killed:true,killedAt:new Date().toISOString()}:x));
+                                      } else {
+                                        alert("Failed to kill code — check Firestore connection.");
+                                      }
+                                      setKillingCode(null);
+                                    },
+                                    style:{padding:"3px 10px",fontSize:".72rem",fontWeight:700,borderRadius:10,border:"1.5px solid #ef9a9a",background:"transparent",color:"#c62828",cursor:killingCode===codeId?"wait":"pointer",whiteSpace:"nowrap"}
+                                  },killingCode===codeId?"…":"Kill")
+                            )
                           );
                         }))
                       )
