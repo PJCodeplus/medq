@@ -62260,13 +62260,13 @@ function App(){
           e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:18}},
             e("div",{style:{border:"2px solid "+ospeAccent,borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f0f7fd"}},
               e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Individual"),
-              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},"₦1,500"),
+              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},isObg?"₦1,500":"₦2,500"),
               e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},subjName+" OSPE only")
             ),
             e("div",{style:{border:"2px solid "+ospeAccentDark,borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f5fbff",position:"relative"}},
               e("div",{style:{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:ospeAccentDark,color:"#fff",fontSize:".63rem",padding:"2px 8px",borderRadius:10,fontWeight:700,whiteSpace:"nowrap"}},"BEST VALUE"),
               e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Bundle"),
-              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},"₦2,500"),
+              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:ospeAccentDark}},"₦3,000"),
               e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},"Paeds + O&G OSPE")
             )
           ),
