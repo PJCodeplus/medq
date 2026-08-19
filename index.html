@@ -28423,6 +28423,190 @@ const PAIN_PALLIATIVE_Qs = [
 //     tramadol CI in epilepsy, OIC management, somatic vs visceral pain
 
 
+/* ═══════════ QUALITY REVIEW — COPD ═══════════ */
+const COPD_QUALITY_REVIEW_Qs = [
+  {
+    q: "Which histological finding defines emphysema?",
+    opts: [
+      "Destructive enlargement of distal airspaces",
+      "Goblet cell hyperplasia of the bronchial mucosa",
+      "Fibrosis of the alveolar interstitium",
+      "Granuloma formation with caseous necrosis",
+      "Hyaline membrane deposition in alveoli"
+    ],
+    ans: 0,
+    exp: "Emphysema is defined by damage to the walls of the alveoli, which causes the airspaces beyond the terminal bronchioles to become abnormally enlarged. This destruction is different from chronic bronchitis, which affects the airways rather than the alveoli. Goblet cell hyperplasia is the mucosal change seen in chronic bronchitis, interstitial fibrosis is seen in pulmonary fibrosis, caseating granulomas are seen in tuberculosis, and hyaline membrane deposition is seen in acute respiratory distress syndrome."
+  },
+  {
+    q: "A 68-year-old man with a 45-pack-year smoking history undergoes pulmonary function testing. Results show markedly reduced elastic recoil, increased total lung capacity, and premature airway closure during forced expiration, with a raised residual volume. Which underlying process best accounts for this pattern?",
+    opts: [
+      "Destruction of alveolar walls",
+      "Bronchial mucosal oedema",
+      "Alveolar-capillary membrane thickening",
+      "Pulmonary vascular remodeling",
+      "Diaphragmatic muscle weakness"
+    ],
+    ans: 0,
+    exp: "In emphysema, smoking damages and destroys the walls of the alveoli. This makes the lung less elastic, so it cannot spring back after a breath. Air gets trapped in the lungs, which raises total lung capacity and residual volume, matching this patient's test results. Mucosal oedema and membrane thickening do not produce this loss of elastic recoil, and vascular remodeling and diaphragmatic weakness do not explain the airway closure pattern described."
+  },
+  {
+    q: "A 60-year-old man presents with a productive cough that has occurred on most days for the past 4 months, and he reports a similar pattern over the preceding two winters as well. He has smoked 20 cigarettes daily for 30 years. Which diagnosis best fits this history?",
+    opts: [
+      "Chronic bronchitis",
+      "Bronchiectasis",
+      "Pulmonary tuberculosis",
+      "Asthma",
+      "Post-nasal drip syndrome"
+    ],
+    ans: 0,
+    exp: "Chronic bronchitis is diagnosed clinically when a patient has cough with sputum production on most days for at least 3 months, in each of 2 consecutive years. This patient's symptoms match that pattern exactly, and his long smoking history supports the diagnosis. Bronchiectasis, tuberculosis, asthma, and post-nasal drip do not fit this specific time-based clinical definition."
+  },
+  {
+    q: "In chronic bronchitis, what typically happens to symptoms when the patient stops smoking?",
+    opts: [
+      "Symptoms improve",
+      "Symptoms remain unchanged",
+      "Symptoms worsen",
+      "Symptoms progress regardless",
+      "Symptoms resolve with antibiotics"
+    ],
+    ans: 0,
+    exp: "In chronic bronchitis, ongoing exposure to cigarette smoke keeps irritating and damaging the airways. When a patient stops smoking, this irritation is removed, so symptoms such as cough and sputum production usually get better. This is one reason smoking cessation is central to management, rather than symptoms staying fixed, worsening, or requiring antibiotics to resolve."
+  },
+  {
+    q: "Increased airway resistance in chronic bronchitis directly produces which of the following?",
+    opts: [
+      "Reduced maximum expiratory flow",
+      "Increased diffusing capacity",
+      "Increased elastic recoil",
+      "Reduced residual volume",
+      "Increased forced vital capacity"
+    ],
+    ans: 0,
+    exp: "In chronic bronchitis, inflammation and mucus narrow the airways, increasing resistance to airflow. This narrowing makes it harder to push air out quickly, so the maximum expiratory flow rate falls. This reduced flow is part of what eventually leads to air trapping, rather than an increase in diffusing capacity, elastic recoil, or forced vital capacity, or a reduction in residual volume."
+  },
+  {
+    q: "What histological change occurs in the bronchial mucosa in chronic bronchitis?",
+    opts: [
+      "Goblet cell hyperplasia",
+      "Squamous metaplasia",
+      "Glandular atrophy",
+      "Ciliary loss",
+      "Submucosal granulomas"
+    ],
+    ans: 0,
+    exp: "In chronic bronchitis, the bronchial mucosa responds to long-term irritation by increasing the number of goblet cells and enlarging the mucus-secreting glands. This leads to the excess mucus production behind the productive cough seen in this condition, rather than squamous metaplasia, glandular atrophy, ciliary loss, or granuloma formation."
+  },
+  {
+    q: "A 64-year-old woman with long-standing chronic bronchitis has thick, tenacious sputum despite frequent coughing. She has had three chest infections in the past year. Which mechanism most directly explains her increased susceptibility to infection?",
+    opts: [
+      "Impaired mucus clearance",
+      "Reduced immunoglobulin levels",
+      "Macrophage depletion",
+      "Ciliary dyskinesia",
+      "Bronchial wall calcification"
+    ],
+    ans: 0,
+    exp: "This patient produces large amounts of thick mucus that her airways cannot clear effectively. When mucus builds up instead of being cleared, it creates a good environment for bacteria to grow, leading to repeated chest infections. This best explains her frequent infections, rather than a primary problem with immunoglobulin levels, macrophage numbers, ciliary structure, or bronchial wall calcification."
+  },
+  {
+    q: "Which two organisms are most commonly implicated in infective exacerbations of COPD?",
+    opts: [
+      "Haemophilus influenzae and Streptococcus pneumoniae",
+      "Staphylococcus aureus and Klebsiella pneumoniae",
+      "Pseudomonas aeruginosa and Escherichia coli",
+      "Mycoplasma pneumoniae and Legionella pneumophila",
+      "Moraxella catarrhalis and Mycobacterium tuberculosis"
+    ],
+    ans: 0,
+    exp: "Acute exacerbations of COPD are often triggered by bacterial infection. Haemophilus influenzae and Streptococcus pneumoniae are the two organisms most commonly responsible, so antibiotics targeting these are usually the first choice when infection is suspected. The other organism pairings are less typical causes of COPD exacerbations."
+  },
+  {
+    q: "A 58-year-old man with COPD is breathless on minimal exertion but is not cyanosed. His arterial blood gas shows a near-normal PaO2 and a low-normal PaCO2. His haematocrit is normal, and he produces minimal sputum. Which COPD phenotype does this presentation best fit?",
+    opts: [
+      "Pink puffer",
+      "Blue bloater",
+      "Asthma-COPD overlap",
+      "Alpha-1-antitrypsin deficiency phenotype",
+      "COPD-bronchiectasis overlap"
+    ],
+    ans: 0,
+    exp: "Pink puffers have emphysema as their main problem. They increase their breathing effort to keep oxygen levels near normal, so they appear breathless but stay pink rather than cyanosed. Their haematocrit stays normal because they are not chronically short of oxygen, unlike blue bloaters, who are cyanosed with an elevated haematocrit and copious sputum."
+  },
+  {
+    q: "Which complication is a \"pink puffer\" most likely to develop?",
+    opts: [
+      "Type 1 respiratory failure",
+      "Type 2 respiratory failure",
+      "Cor pulmonale",
+      "Polycythaemia",
+      "Pneumothorax"
+    ],
+    ans: 0,
+    exp: "Pink puffers work hard to keep oxygen levels near normal, so when their disease worsens, they tend to develop a low PaO2 with a normal or low PaCO2, the definition of type 1 respiratory failure. This differs from blue bloaters, whose pattern of poor ventilation makes type 2 respiratory failure, cor pulmonale, and polycythaemia more likely."
+  },
+  {
+    q: "A 61-year-old man with COPD is cyanosed but not notably breathless. Arterial blood gas shows a low PaO2 and a high PaCO2, and his haematocrit is elevated. He produces copious sputum daily. Which COPD phenotype does this presentation best fit?",
+    opts: [
+      "Blue bloater",
+      "Pink puffer",
+      "Asthma-COPD overlap",
+      "Alpha-1-antitrypsin deficiency phenotype",
+      "COPD-bronchiectasis overlap"
+    ],
+    ans: 0,
+    exp: "Blue bloaters have chronic bronchitis as their main problem, with reduced alveolar ventilation. Because their respiratory centres are relatively insensitive to carbon dioxide, they under-breathe, leading to low oxygen and high carbon dioxide levels. This pattern causes the cyanosis and raised haematocrit seen here, unlike pink puffers, who remain breathless but pink with near-normal blood gases."
+  },
+  {
+    q: "Which cardiac complication are \"blue bloaters\" most likely to develop?",
+    opts: [
+      "Cor pulmonale",
+      "Left ventricular hypertrophy",
+      "Dilated cardiomyopathy",
+      "Constrictive pericarditis",
+      "Mitral stenosis"
+    ],
+    ans: 0,
+    exp: "Blue bloaters have chronically low oxygen levels, which cause the pulmonary blood vessels to constrict and the pressure in the lung circulation to rise. Over time, this increased pressure strains the right side of the heart, leading to cor pulmonale, rather than a primary left-sided or valvular cardiac problem."
+  },
+  {
+    q: "How is COPD defined in terms of airway obstruction and reversibility?",
+    opts: [
+      "Irreversible progressive airway obstruction",
+      "Reversible episodic airway obstruction",
+      "Fixed childhood-onset obstruction",
+      "Allergen-triggered reversible obstruction",
+      "Bronchodilator-responsive progressive obstruction"
+    ],
+    ans: 0,
+    exp: "COPD is defined as a chronic, progressive disorder in which airway obstruction shows little or no reversibility. This is what separates it from asthma, where airway obstruction is largely reversible with treatment, and it is not defined as childhood-onset, allergen-triggered, or strongly bronchodilator-responsive."
+  },
+  {
+    q: "What is the approximate prevalence of COPD in people aged over 40 years?",
+    opts: [
+      "10-20%",
+      "1-5%",
+      "25-35%",
+      "40-50%",
+      "Less than 1%"
+    ],
+    ans: 0,
+    exp: "COPD is common in older adults, especially those with a significant smoking history. It is estimated to affect around 10 to 20% of people over the age of 40, a substantially higher figure than the lower ranges and a lower figure than the higher ranges listed."
+  },
+  {
+    q: "Which two conditions does COPD encompass?",
+    opts: [
+      "Chronic bronchitis and emphysema",
+      "Asthma and bronchiectasis",
+      "Emphysema and pulmonary fibrosis",
+      "Chronic bronchitis and bronchiectasis",
+      "Asthma and chronic bronchitis"
+    ],
+    ans: 0,
+    exp: "COPD is an umbrella term covering two overlapping conditions: chronic bronchitis, which mainly affects the airways, and emphysema, which mainly affects the alveoli. Most patients with COPD have features of both to some degree, whereas asthma, bronchiectasis, and pulmonary fibrosis are separate conditions not included under the COPD umbrella."
+  }
+];
+
 /* ── Senior Posting blocks (IM free content) ── */
 const IM_SENIOR_BLOCKS=[
   { id:"nephro_b1", name:"Block 1", questions:NEPHRO_B1_Qs, available:true, topic:"Nephrology" },
@@ -28449,6 +28633,7 @@ const IM_SENIOR_BLOCKS=[
   { id:"im_derm_skin_failure", questions:DERM_SKIN_FAILURE_Qs, available:true, countOnly:true },
   { id:"im_derm_lesions", questions:DERM_SKIN_LESIONS_Qs, available:true, countOnly:true },
   { id:"pain_palliative", name:"Pain Syndromes & Management", questions:PAIN_PALLIATIVE_Qs, available:true, topic:"Pain & Palliative Care" },
+  { id:"copd_quality_review", name:"Quality Review (COPD)", questions:COPD_QUALITY_REVIEW_Qs, available:true, topic:"Quality Review" },
 ];
 /* ── Surgery Final Lap blocks ── */
 const SURG_SENIOR_BLOCKS=[
