@@ -61684,6 +61684,7 @@ function App(){
   const [qs,setQs]=useState([]);
   const [qIdx,setQIdx]=useState(0);
   const [picked,setPicked]=useState(null);
+  const [pendingPick,setPendingPick]=useState(null); // tentative selection before Submit locks it in
   const [showFb,setShowFb]=useState(false);
   const [endConfirm,setEndConfirm]=useState(false);
   const [result,setResult]=useState(null);
@@ -61821,9 +61822,9 @@ function App(){
 
   // ── The Final Lap unlock state ──
   const TFL_INT_KEY="medq_tfl_int"; const TFL_SURG_KEY="medq_tfl_surg"; const TFL_COMM_KEY="medq_tfl_comm";
-  const [tflIntUnlocked,setTflIntUnlocked]=useState(true); // paywall removed — always unlocked
-  const [tflSurgUnlocked,setTflSurgUnlocked]=useState(true); // paywall removed — always unlocked
-  const [tflCommUnlocked,setTflCommUnlocked]=useState(true); // paywall removed — always unlocked
+  const [tflIntUnlocked,setTflIntUnlocked]=useState(true); // Internal Medicine Final Lap paywall removed — permanently unlocked
+  const [tflSurgUnlocked,setTflSurgUnlocked]=useState(true); // Surgery Final Lap paywall removed — permanently unlocked
+  const [tflCommUnlocked,setTflCommUnlocked]=useState(true); // starts true, re-validated against a real code on load (see revalidate effect) — paywall still active
   const [showTflPaywall,setShowTflPaywall]=useState(false);
   const [tflPaywallFor,setTflPaywallFor]=useState(null); // "internal"|"surgery"|"community"
   const [tflPaywallOnUnlock,setTflPaywallOnUnlock]=useState(null); // callback after unlock
@@ -61962,8 +61963,7 @@ function App(){
         if(!r.ok){ setGbAccess(null); ls.set(GB_ACCESS_KEY,"null"); }
       }
       const checks = [
-        [tflIntUnlocked, TFL_INT_KEY, setTflIntUnlocked],
-        [tflSurgUnlocked, TFL_SURG_KEY, setTflSurgUnlocked],
+        // Internal Medicine & Surgery Final Lap paywalls removed — fully accessible, no re-lock check.
         [tflCommUnlocked, TFL_COMM_KEY, setTflCommUnlocked],
         [paedsUnlocked, PAEDS_UNLOCKED_KEY, setPaedsUnlocked],
         [paedsOgUnlocked, PAEDS_OG_UNLOCKED_KEY, setPaedsOgUnlocked],
@@ -62142,7 +62142,7 @@ function App(){
     const shuffled=isOspeBlock?pool.map(shuffleOpts):pool; // OSPE (picture MCQs) shuffle option order per attempt; regular MCQs keep fixed option order. Question order still shuffles for all when shuffleOrder is on
     qsRef.current=shuffled; courseRef.current=course; blockRef.current=block; topicRef.current=topic; nameRef.current=name;
     userAnswersRef.current=[];
-    setQs(shuffled); setQIdx(0); setPicked(null); setShowFb(false); setEndConfirm(false);
+    setQs(shuffled); setQIdx(0); setPicked(null); setPendingPick(null); setShowFb(false); setEndConfirm(false);
     correctRef.current=0; answeredRef.current=0;
     setRetakeMode(!!retakeQs);
     examModeRef.current=examMode;
@@ -62176,9 +62176,23 @@ function App(){
   const validStpAccess = acc => true; // paywall removed — always unlocked
   const isStp = () => block?.isSteeplechase===true;
 
+  // Clicking an option only highlights it (tentative). It does not score or lock
+  // anything in — the person must press Submit to confirm, and can change their
+  // selection freely before doing so.
+  const selectOpt=i=>{
+    if(picked!==null)return; // already submitted — locked, no changes allowed
+    setPendingPick(i);
+  };
+
+  const submitAnswer=()=>{
+    if(picked!==null||pendingPick===null)return;
+    pickAnswer(pendingPick);
+  };
+
   const pickAnswer=i=>{
     if(picked!==null)return;
     setPicked(i);
+    setPendingPick(null);
     if(i===qs[qIdx].ans)correctRef.current++;
     answeredRef.current++;
     userAnswersRef.current.push({qIdx,picked:i,correct:i===qs[qIdx].ans});
@@ -62248,7 +62262,23 @@ function App(){
       if(!obgOspeUnlocked && obgOspeTflFreeCount>=OBG_OSPE_FREE){ setOspePaywallSubject("obg"); setOspeCodeInput(""); setOspeCodeError(""); setShowOspePaywall(true); return; }
     }
     if(qIdx+1>=qs.length){endQuiz(false);return;}
-    setQIdx(q=>q+1); setPicked(null); setShowFb(false);
+    const nIdx=qIdx+1;
+    const priorN=userAnswersRef.current.find(a=>a.qIdx===nIdx);
+    setQIdx(nIdx);
+    if(priorN){ setPicked(priorN.picked); setShowFb(!examModeRef.current); }
+    else { setPicked(null); setShowFb(false); }
+    setPendingPick(null);
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  const prevQ=()=>{
+    if(qIdx<=0)return;
+    const pIdx=qIdx-1;
+    const priorP=userAnswersRef.current.find(a=>a.qIdx===pIdx);
+    setQIdx(pIdx);
+    if(priorP){ setPicked(priorP.picked); setShowFb(!examModeRef.current); }
+    else { setPicked(null); setShowFb(false); }
+    setPendingPick(null);
     window.scrollTo({top:0,behavior:"smooth"});
   };
 
@@ -62373,14 +62403,13 @@ function App(){
 
   /* ══════════ TFL PAYWALL ══════════ */
   if(showTflPaywall){
-    const isInt=tflPaywallFor==="internal", isSurg=tflPaywallFor==="surgery", isComm=tflPaywallFor==="community";
-    const courseName=isInt?"Internal Medicine":isSurg?"Surgery":"Community Medicine";
-    const allowedPfx=isInt?["TFLI","TFLB"]:isSurg?["TFLS","TFLB"]:["TFLC","TFLB"];
-    const accentCol=isInt?"#c9a84c":isSurg?"#ef9a9a":"#a5d6a7";
-    const accentDark=isInt?"#8a6430":isSurg?"#c62828":"#2e7d32";
-    const gradBg=isInt?"linear-gradient(135deg,#0f2744,#1a3a5c)":isSurg?"linear-gradient(135deg,#2d1b1b,#4a2020)":"linear-gradient(135deg,#1a3020,#2e5038)";
-    const bundleName=isInt?"Internal Medicine":"Surgery + Community Medicine";
-    const bundlePrice=isInt?"₦3,500":"₦8,000";
+    // Internal Medicine & Surgery Final Lap paywalls have been removed (fully accessible).
+    // This modal now only ever opens for Community Medicine — flat price, no bundle.
+    const courseName="Community Medicine";
+    const allowedPfx=["TFLC"];
+    const accentCol="#a5d6a7";
+    const accentDark="#2e7d32";
+    const gradBg="linear-gradient(135deg,#1a3020,#2e5038)";
     return e("div",{style:{minHeight:"100vh",background:th.pageBg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}},
       e("div",{className:"scale-in",style:{background:th.surface,borderRadius:10,boxShadow:"0 12px 50px rgba(0,0,0,.22)",width:"100%",maxWidth:440,overflow:"hidden"}},
         e("div",{style:{background:gradBg,padding:"28px 28px 22px",textAlign:"center"}},
@@ -62391,23 +62420,11 @@ function App(){
         e("div",{style:{height:3,background:"linear-gradient(90deg,"+accentCol+","+accentCol+"88,"+accentCol+")"}}),
         e("div",{style:{padding:"24px 28px 32px"}},
           e("p",{style:{fontSize:".9rem",color:"#333",lineHeight:1.7,marginBottom:18}},"Get full access to all Final Lap content for "+courseName+"."),
-          e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:18}},
-            e("div",{style:{border:"2px solid "+accentCol,borderRadius:8,padding:"14px 12px",textAlign:"center",background:isInt?"#fdf9ef":isSurg?"#fff8f8":"#f4fbf5"}},
-              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Individual"),
-              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:accentDark}},"₦3,500"),
+          e("div",{style:{marginBottom:18}},
+            e("div",{style:{border:"2px solid "+accentCol,borderRadius:8,padding:"16px 12px",textAlign:"center",background:"#f4fbf5"}},
+              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Full Access"),
+              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.8rem",fontWeight:900,color:accentDark}},"₦5,000"),
               e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},courseName)
-            ),
-            !isInt&&e("div",{style:{border:"2px solid "+accentDark,borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f5fff5",position:"relative"}},
-              e("div",{style:{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:accentDark,color:"#fff",fontSize:".63rem",padding:"2px 8px",borderRadius:10,fontWeight:700,whiteSpace:"nowrap"}},"BEST VALUE"),
-              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Bundle"),
-              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:accentDark}},"₦8,000"),
-              e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},"IM + Surgery + Comm.")
-            ),
-            isInt&&e("div",{style:{border:"2px solid #0f2744",borderRadius:8,padding:"14px 12px",textAlign:"center",background:"#f0f6ff",position:"relative"}},
-              e("div",{style:{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:"#0f2744",color:"#c9a84c",fontSize:".63rem",padding:"2px 8px",borderRadius:10,fontWeight:700,whiteSpace:"nowrap"}},"BEST VALUE"),
-              e("div",{style:{fontSize:".7rem",color:"#888",letterSpacing:".08em",textTransform:"uppercase",marginBottom:5}},"Full Bundle"),
-              e("div",{style:{fontFamily:"Georgia,serif",fontSize:"1.5rem",fontWeight:900,color:"#0f2744"}},"₦8,000"),
-              e("div",{style:{fontSize:".7rem",color:"#999",marginTop:3}},"IM + Surgery + Comm.")
             )
           ),
           e("div",{style:{background:"#f5f0e8",borderRadius:6,padding:"12px 16px",marginBottom:18}},
@@ -62442,11 +62459,8 @@ function App(){
                   const res=window._fbValidateCode?await window._fbValidateCode(code,studentName||"Student"):{ok:false,error:"network"};
                   setTflCodeLoading(false);
                   if(res.ok){
-                    const isBundle=code.startsWith("TFLB");
-                    if(isInt||isBundle){setTflIntUnlocked(true);try{localStorage.setItem(TFL_INT_KEY,code);}catch{}}
-                    if(isSurg||isBundle){setTflSurgUnlocked(true);try{localStorage.setItem(TFL_SURG_KEY,code);}catch{}}
-                    if(isComm||isBundle){setTflCommUnlocked(true);try{localStorage.setItem(TFL_COMM_KEY,code);}catch{}}
-                    setTflFreeCount(0); try{ls.set(TFL_FREE_KEY,"0");}catch{} ohanakaScrollSeenRef.current=0;
+                    setTflCommUnlocked(true);try{localStorage.setItem(TFL_COMM_KEY,code);}catch{}
+                    setTflFreeCount(0); try{ls.set(TFL_FREE_KEY,"0");}catch{}
                     setShowTflPaywall(false);setTflCodeInput("");setTflCodeError("");
                     if(tflPaywallOnUnlock) tflPaywallOnUnlock();
                   } else {
@@ -63812,64 +63826,6 @@ function App(){
     if(showEboriemeView && course.id==="surgery"){
       const optLetters=["A","B","C","D","E"];
 
-      if(eboriemeMode==="scroll" && eboriemeBlock){
-        const qs=eboriemeBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setEboriemeMode(null); setEboriemeBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"Dr. Eborieme MCQs"),
-                e("div",{className:"rdr-title"},eboriemeBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-            (()=>{
-              const freeLimit=EBORIEME_SCROLL_FREE;
-              const sessionSeen=eboriemeScrollSeenRef.current;
-              const visibleCount=tflSurgUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!tflSurgUnlocked && visibleCount>0){ eboriemeScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount); }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!tflSurgUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid #ef9a9a",borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#fff8f8,#fdecec)",border:"1.5px solid rgba(239,154,154,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontSize:"1.6rem",marginBottom:8}},"🔒"),
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#c62828",marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions across all Dr. Eborieme blocks this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setTflPaywallFor("surgery");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:"#c62828",color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Surgery Final Lap →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
           e("div",{style:{maxWidth:720,margin:"0 auto"}},
@@ -63880,22 +63836,6 @@ function App(){
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Surgery · Revision Bank"),
                 e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Dr. Eborieme MCQs"),
                 e("p",{style:{fontSize:".75rem",color:th.textMuted,marginTop:2}},"Topic MCQs by Dr. Eborieme")
-              )
-            ),
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:eboriemeDropdown,
-                onChange:ev=>setEboriemeDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                  padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                  fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
               )
             )
           )
@@ -63909,12 +63849,8 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
                 onClick:()=>{
-                  if(eboriemeDropdown==="scroll"){
-                    setEboriemeBlock(b); setEboriemeMode("scroll");
-                  } else {
-                    inTflRef.current=true;
-                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
-                  }
+                  inTflRef.current=true;
+                  setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}},
@@ -63933,69 +63869,6 @@ function App(){
     if(showOhanakaView && course.id==="surgery"){
       const optLetters=["A","B","C","D","E"];
 
-      // ── SCROLL REVIEW: render questions for selected block ───────────────
-      if(ohanakaMode==="scroll" && ohanakaBlock){
-        const qs=ohanakaBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setOhanakaMode(null); setOhanakaBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"Ohanaka MCQs"),
-                e("div",{className:"rdr-title"},ohanakaBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-(()=>{
-              const freeLimit=OHANAKA_SCROLL_FREE;
-              // Track how many new questions this block reveals into the session total
-              const sessionSeen=ohanakaScrollSeenRef.current;
-              const visibleCount=tflSurgUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              // Update the session counter once per block open
-              if(!tflSurgUnlocked && visibleCount>0){
-                ohanakaScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
-              }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!tflSurgUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid #ef9a9a",borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#c62828",marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#fff8f8,#fdecec)",border:"1.5px solid rgba(239,154,154,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontSize:"1.6rem",marginBottom:8}},"🔒"),
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:"#c62828",marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions across all Ohanaka blocks this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setTflPaywallFor("surgery");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:"#c62828",color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Surgery Final Lap →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
       // ── BLOCK LIST: entry point ──────────────────────────────────────────
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
@@ -64007,32 +63880,6 @@ function App(){
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Surgery · Revision Bank"),
                 e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Ohanaka MCQs"),
                 e("p",{style:{fontSize:".75rem",color:th.textMuted,marginTop:2}},"Companion to Core Surgery by Ohanaka")
-              )
-            ),
-            /* ── Mode dropdown ── */
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:ohanakaDropdown,
-                onChange:ev=>setOhanakaDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,
-                  border:"1.5px solid #e0d8cc",
-                  borderRadius:6,
-                  padding:"7px 32px 7px 12px",
-                  fontSize:".82rem",
-                  fontFamily:"Georgia,serif",
-                  fontWeight:600,
-                  color:th.text,
-                  cursor:"pointer",
-                  outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",
-                  backgroundPosition:"right 10px center",
-                  minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
               )
             )
           )
@@ -64046,12 +63893,8 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.13)";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow="0 2px 10px rgba(15,39,68,.07)";},
                 onClick:()=>{
-                  if(ohanakaDropdown==="scroll"){
-                    setOhanakaBlock(b); setOhanakaMode("scroll");
-                  } else {
-                    inTflRef.current=true;
-                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
-                  }
+                  inTflRef.current=true;
+                  setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}},
@@ -64073,63 +63916,6 @@ function App(){
       const surgAccent="#ef9a9a";
       const surgAccentDark="#c62828";
 
-      if(surgPastQMode==="scroll" && surgPastQBlock){
-        const qs=surgPastQBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setSurgPastQMode(null); setSurgPastQBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"Past Questions"),
-                e("div",{className:"rdr-title"},surgPastQBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-            (()=>{
-              const freeLimit=SURG_PQ_SCROLL_FREE;
-              const sessionSeen=surgPastQScrollSeenRef.current;
-              const visibleCount=tflSurgUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!tflSurgUnlocked && visibleCount>0){ surgPastQScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount); }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!tflSurgUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:surgAccentDark,marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid "+surgAccent,borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:surgAccentDark,marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#fff8f8,#fdecec)",border:"1.5px solid rgba(239,154,154,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:surgAccentDark,marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions in continuous view this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setTflPaywallFor("surgery");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:surgAccentDark,color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Surgery Final Lap →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
           e("div",{style:{maxWidth:720,margin:"0 auto"}},
@@ -64139,22 +63925,6 @@ function App(){
               e("div",null,
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Surgery · Revision Bank"),
                 e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Past Questions")
-              )
-            ),
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:surgPastQDropdown,
-                onChange:ev=>setSurgPastQDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                  padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                  fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
               )
             )
           )
@@ -64171,12 +63941,8 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.11)";ev.currentTarget.style.borderColor="#f0c0c0";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow=th.shadow;ev.currentTarget.style.borderColor="#ebebeb";},
                 onClick:()=>{
-                  if(surgPastQDropdown==="scroll"){
-                    setSurgPastQBlock(b); setSurgPastQMode("scroll");
-                  } else {
-                    inTflRef.current=true;
-                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
-                  }
+                  inTflRef.current=true;
+                  setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}},
@@ -64198,66 +63964,6 @@ function App(){
       const imAccent="#c9a84c";
       const imAccentDark="#8a6430";
 
-      // ── CONTINUOUS VIEW: render questions for selected block ──────────
-      if(imPastQMode==="scroll" && imPastQBlock){
-        const qs=imPastQBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setImPastQMode(null); setImPastQBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"Past Questions"),
-                e("div",{className:"rdr-title"},imPastQBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-            (()=>{
-              const freeLimit=IM_PQ_SCROLL_FREE;
-              const sessionSeen=imPastQScrollSeenRef.current;
-              const visibleCount=tflIntUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!tflIntUnlocked && visibleCount>0){
-                imPastQScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
-              }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!tflIntUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:imAccentDark,marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid "+imAccent,borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:imAccentDark,marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#fdf9ef,#f5edcc)",border:"1.5px solid rgba(201,168,76,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:imAccentDark,marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions in continuous view this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setTflPaywallFor("internal");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:imAccentDark,color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Internal Medicine Final Lap →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
       // ── BLOCK LIST ──────────────────────────────────────────────────────
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
@@ -64268,22 +63974,6 @@ function App(){
               e("div",null,
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Internal Medicine · Revision Bank"),
                 e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Past Questions")
-              )
-            ),
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:imPastQDropdown,
-                onChange:ev=>setImPastQDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                  padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                  fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
               )
             )
           )
@@ -64300,12 +63990,8 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.11)";ev.currentTarget.style.borderColor="#d0c0a0";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow=th.shadow;ev.currentTarget.style.borderColor="#ebebeb";},
                 onClick:()=>{
-                  if(imPastQDropdown==="scroll"){
-                    setImPastQBlock(b); setImPastQMode("scroll");
-                  } else {
-                    inTflRef.current=true;
-                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
-                  }
+                  inTflRef.current=true;
+                  setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}},
@@ -64327,65 +64013,6 @@ function App(){
       const commAccent="#a5d6a7";
       const commAccentDark="#2e7d32";
 
-      if(commPastQMode==="scroll" && commPastQBlock){
-        const qs=commPastQBlock.questions;
-        return e("div",{style:{minHeight:"100vh",background:"#fafafa",color:"#222"}},
-          e("div",{className:"rdr-topbar"},
-            e("div",{className:"rdr-topbar-inner"},
-              e("button",{className:"rdr-back",onClick:()=>{ setCommPastQMode(null); setCommPastQBlock(null); }},"← Back"),
-              e("div",{className:"rdr-title-area"},
-                e("div",{className:"rdr-subject"},"Past Questions"),
-                e("div",{className:"rdr-title"},commPastQBlock.name)
-              )
-            ),
-            e("div",{className:"rdr-progress-wrap"})
-          ),
-          e("div",{style:{maxWidth:680,margin:"0 auto",padding:"28px 18px 60px"}},
-            e("div",{style:{marginBottom:24,paddingBottom:16,borderBottom:"1px solid #e4e4e4"}},
-              e("p",{style:{fontSize:".78rem",color:"#999",lineHeight:1.6}},qs.length+" questions · answers highlighted · explanations inline")
-            ),
-            (()=>{
-              const freeLimit=COMM_PQ_SCROLL_FREE;
-              const sessionSeen=commPastQScrollSeenRef.current;
-              const visibleCount=tflCommUnlocked?qs.length:Math.min(qs.length,Math.max(0,freeLimit-sessionSeen));
-              if(!tflCommUnlocked && visibleCount>0){
-                commPastQScrollSeenRef.current=Math.max(sessionSeen,sessionSeen+visibleCount);
-              }
-              const visibleQs=qs.slice(0,visibleCount);
-              const hitLimit=!tflCommUnlocked&&visibleCount<qs.length;
-              return e(React.Fragment,null,
-                visibleQs.map((q,qi)=>
-                  e("div",{key:qi,style:{marginBottom:32,paddingBottom:28,borderBottom:"1px solid #eeebe5"}},
-                    e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:".97rem",color:"#1a1a2e",lineHeight:1.7,marginBottom:12}},
-                      e("span",{style:{fontSize:".65rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:commAccentDark,marginRight:8,verticalAlign:"middle"}},"Q"+(qi+1)),
-                      q.q
-                    ),
-                    e("div",{style:{display:"flex",flexDirection:"column",gap:6,marginBottom:12}},
-                      q.opts.map((opt,oi)=>{
-                        const isCorrect=oi===q.ans;
-                        return e("div",{key:oi,style:{display:"flex",alignItems:"flex-start",gap:10,padding:"9px 13px",borderRadius:6,background:isCorrect?"#e8f5ee":"#f7f5f2",border:"1.5px solid "+(isCorrect?"#66bb6a":"#e8e3db")}},
-                          e("span",{style:{flexShrink:0,width:22,height:22,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:".65rem",fontWeight:700,background:isCorrect?"#2e7d32":"#e0d8cc",color:isCorrect?"#fff":"#888",marginTop:1}},optLetters[oi]),
-                          e("span",{style:{fontSize:".9rem",lineHeight:1.65,color:isCorrect?"#1b5e20":"#444",fontWeight:isCorrect?700:400}},opt)
-                        );
-                      })
-                    ),
-                    e("div",{style:{background:"#fff",border:"1px solid #e4e4e4",borderLeft:"3px solid "+commAccent,borderRadius:6,padding:"10px 14px"}},
-                      e("p",{style:{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:commAccentDark,marginBottom:5}},"Explanation"),
-                      e("p",{style:{fontSize:".87rem",lineHeight:1.75,color:"#333",margin:0}},q.exp)
-                    )
-                  )
-                ),
-                hitLimit&&e("div",{style:{background:"linear-gradient(135deg,#f4fbf5,#e5f7e6)",border:"1.5px solid rgba(165,214,167,.4)",borderRadius:10,padding:"24px 20px",marginTop:8,textAlign:"center"}},
-                  e("p",{style:{fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1.05rem",color:commAccentDark,marginBottom:6}},freeLimit+" free questions reached"),
-                  e("p",{style:{fontSize:".8rem",color:"#555",lineHeight:1.7,marginBottom:14,maxWidth:340,margin:"0 auto 14px"}},"You've previewed "+freeLimit+" questions in continuous view this session. Unlock full access to continue reading."),
-                  e("button",{onClick:()=>{ setTflPaywallFor("community");setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },style:{background:commAccentDark,color:"#fff",border:"none",borderRadius:5,padding:"10px 26px",fontSize:".88rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer"}},"Unlock Community Medicine Final Lap →")
-                )
-              );
-            })()
-          )
-        );
-      }
-
       return e("div",{style:{minHeight:"100vh",background:th.pageBg,position:"relative"}},
         e("div",{style:{background:th.surface,borderBottom:"1px solid #ebebeb",padding:"clamp(18px,4vw,28px) 20px"}},
           e("div",{style:{maxWidth:720,margin:"0 auto"}},
@@ -64395,22 +64022,6 @@ function App(){
               e("div",null,
                 e("p",{style:{color:th.textFaint,fontSize:".7rem",letterSpacing:".1em",textTransform:"uppercase",marginBottom:2}},"Community Medicine · Revision Bank"),
                 e("h2",{style:{fontFamily:"Georgia,serif",fontSize:"clamp(1.3rem,4vw,1.65rem)",fontWeight:900,color:th.text}},"Past Questions")
-              )
-            ),
-            e("div",{style:{marginTop:14}},
-              e("select",{
-                value:commPastQDropdown,
-                onChange:ev=>setCommPastQDropdown(ev.target.value),
-                style:{
-                  appearance:"none",WebkitAppearance:"none",MozAppearance:"none",
-                  background:th.surface,border:"1.5px solid #e0d8cc",borderRadius:6,
-                  padding:"7px 32px 7px 12px",fontSize:".82rem",fontFamily:"Georgia,serif",
-                  fontWeight:600,color:th.text,cursor:"pointer",outline:"none",
-                  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")",
-                  backgroundRepeat:"no-repeat",backgroundPosition:"right 10px center",minWidth:160
-                }},
-                e("option",{value:"scroll"},"Continuous View"),
-                e("option",{value:"practice"},"Practice Mode")
               )
             )
           )
@@ -64427,12 +64038,8 @@ function App(){
                 onMouseEnter:ev=>{ev.currentTarget.style.transform="translateX(4px)";ev.currentTarget.style.boxShadow="0 6px 22px rgba(15,39,68,.11)";ev.currentTarget.style.borderColor="#a5d6a7";},
                 onMouseLeave:ev=>{ev.currentTarget.style.transform="";ev.currentTarget.style.boxShadow=th.shadow;ev.currentTarget.style.borderColor="#ebebeb";},
                 onClick:()=>{
-                  if(commPastQDropdown==="scroll"){
-                    setCommPastQBlock(b); setCommPastQMode("scroll");
-                  } else {
-                    inTflRef.current=true;
-                    setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
-                  }
+                  inTflRef.current=true;
+                  setBlock({...b,_isTfl:true}); setQCount(Math.min(20,b.questions.length)); pushView("setup");
                 }},
                 e("div",{style:{flex:1,minWidth:0}},
                   e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}},
@@ -65476,8 +65083,11 @@ function App(){
                     else if(i===picked){bg="#fdecea";border="1.5px solid #ef9a9a";color="#b71c1c";circBg="#c62828";}
                     else{bg="#f7f3ed";color="#bbb";border="1.5px solid #ece6dc";circBg="#bbb";}
                   }
+                } else if(pendingPick===i){
+                  // Tentatively selected — not yet submitted, still changeable
+                  bg="#fdf7ef";border="1.5px solid #c9a84c";color="#1a1a2e";circBg="#c9a84c";
                 }
-                return e("button",{key:i,disabled:picked!==null,onClick:()=>pickAnswer(i),
+                return e("button",{key:i,disabled:picked!==null,onClick:()=>selectOpt(i),
                   style:{display:"flex",alignItems:"flex-start",gap:12,padding:"12px 16px",background:bg,border,borderRadius:4,cursor:picked===null?"pointer":"default",textAlign:"left",fontSize:"clamp(.88rem,2vw,.97rem)",color,lineHeight:1.6,transition:"all .15s",width:"100%",minHeight:52},
                   onMouseEnter:ev=>{if(picked===null){ev.currentTarget.style.background="#ede8df";ev.currentTarget.style.transform="translateX(2px)";}},
                   onMouseLeave:ev=>{if(picked===null){ev.currentTarget.style.background=bg;ev.currentTarget.style.transform="";}},
@@ -65497,12 +65107,18 @@ function App(){
                 q.exp
               )
             ),
-            /* Next button — shown after picking (feedback mode) or after picking (exam mode: immediate) */
-            (showFb||isExam&&picked!==null)&&e("button",{className:"fade-up",onClick:nextQ,
-              style:{width:"100%",marginTop:14,padding:"14px",background:(course&&course.accent)||"#c9a84c",color:"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:"1rem",letterSpacing:".04em",minHeight:52},
-              onMouseEnter:ev=>ev.currentTarget.style.opacity=".88",
-              onMouseLeave:ev=>ev.currentTarget.style.opacity="1"},
-              qIdx+1<qs.length?"Next Question →":"Finish Test ✓"
+            /* Prev / Submit / Next — always visible below the options. Fixed
+               widths + space-between so Prev/Next stay put when Submit hides. */
+            e("div",{className:"fade-up",style:{display:"flex",justifyContent:"space-between",marginTop:14}},
+              e("button",{onClick:prevQ,disabled:qIdx===0,
+                style:{flex:"0 0 28%",padding:"8px 4px",background:qIdx===0?"#f0ece5":"#fff",color:qIdx===0?"#bbb":"#555",border:"1.5px solid "+(qIdx===0?"#e5ded2":"#d5cfc4"),borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".78rem",cursor:qIdx===0?"default":"pointer",minHeight:36}},
+                "← Prev"),
+              picked===null&&e("button",{onClick:submitAnswer,disabled:pendingPick===null,
+                style:{flex:"0 0 28%",padding:"8px 4px",background:pendingPick===null?"#e9e3d6":((course&&course.accent)||"#c9a84c"),color:pendingPick===null?"#aaa":"#fff",border:"none",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".78rem",cursor:pendingPick===null?"default":"pointer",minHeight:36}},
+                "Submit"),
+              e("button",{onClick:nextQ,
+                style:{flex:"0 0 28%",padding:"8px 4px",background:"#1a1a2e",color:"#fff",border:"1.5px solid #1a1a2e",borderRadius:4,fontFamily:"Georgia,serif",fontWeight:700,fontSize:".78rem",cursor:"pointer",minHeight:36}},
+                qIdx+1<qs.length?"Next →":"Finish ✓")
             )
           )
         )
@@ -65728,10 +65344,7 @@ function App(){
                       e("option",{value:"SUB"},"SUB — Subspecialties (IU)"),
                       e("option",{value:"PEN"},"PEN — Physiology Exam Notes"),
                       e("option",{value:"STP"},"STP — Steeplechase"),
-                      e("option",{value:"TFLI"},"TFLI — The Final Lap: Internal Medicine"),
-                      e("option",{value:"TFLS"},"TFLS — The Final Lap: Surgery"),
-                      e("option",{value:"TFLC"},"TFLC — The Final Lap: Community Medicine"),
-                      e("option",{value:"TFLB"},"TFLB — The Final Lap: Full Bundle (IM + Surg + Comm)"),
+                      e("option",{value:"TFLC"},"TFLC — The Final Lap: Community Medicine, ₦5,000"),
                       e("option",{value:"MB3P"},"MB3P — MB III: Paediatrics Only"),
                       e("option",{value:"MB3B"},"MB3B — MB III: Paediatrics + O&G Bundle"),
                       e("option",{value:"MB3O"},"MB3O — MB III: O&G Only"),
@@ -66068,7 +65681,7 @@ function App(){
       e("div",{style:{maxWidth:720,margin:"0 auto",padding:"24px 20px 40px"}},
         !isUnlocked&&e("div",{className:"fade-up",style:{background:isInternal?"linear-gradient(135deg,#fdf9ef,#f5edcc)":isSurgery?"linear-gradient(135deg,#fff8f8,#fdecec)":"linear-gradient(135deg,#f4fbf5,#e5f7e6)",borderRadius:8,padding:"12px 16px",marginBottom:16,border:"1.5px solid "+accentCol+"44",display:"flex",alignItems:"center",gap:12}},
           e("div",{style:{flex:1}},
-            e("p",{style:{fontSize:".76rem",color:"#666",lineHeight:1.5}},"Unlock all Final Lap content for "+courseName+" at ₦3,500 or the full bundle (IM + Surgery + Comm. Med) for ₦8,000.")
+            e("p",{style:{fontSize:".76rem",color:"#666",lineHeight:1.5}},"Unlock all Final Lap content for "+courseName+" at ₦5,000.")
           ),
           e("button",{onClick:()=>{ setTflPaywallFor(forKey);setTflCodeInput("");setTflCodeError("");setShowTflPaywall(true); },
             style:{flexShrink:0,background:accentDark,color:"#fff",border:"none",borderRadius:4,padding:"7px 14px",fontSize:".76rem",fontFamily:"Georgia,serif",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}},
