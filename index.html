@@ -61619,7 +61619,7 @@ const UNIBEN_COURSES = [
   },
   { id:"uniben_physio", name:"Physiology", bg:"linear-gradient(135deg,#2d1b1b,#4a2020)", accent:"#ef9a9a", school:"UNIBEN",
     blocks:[
-      { id:"uniben_physio_intro", name:"Introductory (General) Physiology", questions:UNIBEN_PHYSIO_INTRO_Qs, available:true, topic:"Physiology Second CA Past Questions", lecturer:"Ahmed Umar", forceTopicList:true },
+      { id:"uniben_physio_intro", name:"Physiology Second CA", questions:UNIBEN_PHYSIO_INTRO_Qs, available:true, sectionHeader:"Past Questions", lecturer:"Ahmed Umar" },
     ]
   },
 ];
@@ -64691,6 +64691,16 @@ function App(){
         e("div",{style:{display:"flex",flexDirection:"column",gap:11}},
           topicCards.map((g,gi)=>{
             if(g.type==="unified") return blockCard(g.block,"unified",true,gi);
+            if(g.type==="block" && g.block.sectionHeader){
+              return e("div",{key:"sh-"+gi},
+                e("div",{style:{padding:"10px 4px 2px",marginTop:4,display:"flex",alignItems:"center",gap:6}},
+                  e("div",{style:{flex:1,height:1,background:"#e0d8cc"}}),
+                  e("span",{style:{fontSize:".68rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"#bbb",padding:"0 8px"}},g.block.sectionHeader),
+                  e("div",{style:{flex:1,height:1,background:"#e0d8cc"}})
+                ),
+                blockCard(g.block,g.block.id,false,gi)
+              );
+            }
             if(g.type==="block" && g.block.isFinalLap){
               const flType=g.block.flType;
               const accentCol=flType==="internal"?"#c9a84c":flType==="surgery"?"#ef9a9a":flType==="community"?"#a5d6a7":"#7c3aed";
